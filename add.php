@@ -289,6 +289,14 @@ if ($user->isLoggedIn()) {
                             'other_diseases' => Input::get('other_diseases'),
                             'diseases_medical' => Input::get('diseases_medical'),
                             'diseases_specify' => Input::get('diseases_specify'),
+                            'sputum_collected' => Input::get('sputum_collected'),
+                            'sample_date' => Input::get('sample_date'),
+                            'other_samples' => Input::get('other_samples'), 
+                            'sputum_samples' => Input::get('sputum_samples'),
+                            'sputum_samples_date' => Input::get('sputum_samples_date'),
+                            'chest_x_ray' => Input::get('chest_x_ray'),
+                            'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                            'enrollment_completed' => Input::get('enrollment_completed'),
                             'respondent' => 2,
                             'status' => 1,
                             'screened' => 0,
@@ -405,6 +413,14 @@ if ($user->isLoggedIn()) {
                             'other_diseases' => Input::get('other_diseases'),
                             'diseases_medical' => Input::get('diseases_medical'),
                             'diseases_specify' => Input::get('diseases_specify'),
+                            'sputum_collected' => Input::get('sputum_collected'),
+                            'sample_date' => Input::get('sample_date'),
+                            'other_samples' => Input::get('other_samples'), 
+                            'sputum_samples' => Input::get('sputum_samples'),
+                            'sputum_samples_date' => Input::get('sputum_samples_date'),
+                            'chest_x_ray' => Input::get('chest_x_ray'),
+                            'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                            'enrollment_completed' => Input::get('enrollment_completed'),
                             'respondent' => 2,
                             'status' => 1,
                             'screened' => 0,
@@ -3534,7 +3550,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="diseases_medical">
-                                                    <label>34. If yes,  Select relevant diseases/medical conditions</label>
+                                                    <label>34. If yes, Select relevant diseases/medical conditions</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -3550,6 +3566,127 @@ if ($user->isLoggedIn()) {
                                                             <input class="form-control" type="number" name="diseases_specify" id="diseases_specify" placeholder="Type here..." value="<?php if ($clients['diseases_specify']) {
                                                                                                                                                                                             print_r($clients['diseases_specify']);
                                                                                                                                                                                         }  ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Samples collected</h3>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>35. Were two sputum samples collected? </label>
+                                                            <select id="sputum_collected" name="sputum_collected" class="form-control">
+                                                                <?php $sputum_collected = $override->get('yes_no', 'id', $clients['sputum_collected'])[0]; ?>
+                                                                <option value="<?= $sputum_collected['id'] ?>"><?php if ($clients['sputum_collected']) {
+                                                                                                                    print_r($sputum_collected['name']);
+                                                                                                                } else {
+                                                                                                                    echo 'Select';
+                                                                                                                } ?>
+                                                                </option>
+                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4" id="sample_date">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>36. Date of respiratory sample collection </label>
+                                                            <input class="form-control" type="date" name="sample_date" id="sample_date" value="<?php if ($clients['sample_date']) {
+                                                                                                                                                    print_r($clients['sample_date']);
+                                                                                                                                                }  ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-4" id="other_samples">
+                                                    <label>37. Were any other diagnostic samples requested? </label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no_sample', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="other_samples" id="other_samples<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['other_samples'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="row">
+
+                                                <div class="col-sm-4" id="sputum_samples">
+                                                    <label>38. Tick all that apply and fill date for each sample ticked </label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('sputum_samples', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="sputum_samples" id="sputum_samples<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['other_samples'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked' . ' ' . 'required';
+                                                                                                                                                                                                            } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                            <label>38. Date</label>
+                                                            <input class="form-control" type="date" name="sputum_samples_date" id="sputum_samples_date" value="<?php if ($clients['sputum_samples_date']) {
+                                                                                                                                                                    print_r($clients['sputum_samples_date']);
+                                                                                                                                                                }  ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4" id="chest_x_ray">
+                                                    <label>39. Was chest X-ray requested? </label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="chest_x_ray" id="chest_x_ray<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['chest_x_ray'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked' . ' ' . 'required';
+                                                                                                                                                                                                        } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                            <label>38.If Specify Date</label>
+                                                            <input class="form-control" type="date" name="chest_x_ray_date" id="chest_x_ray_date" value="<?php if ($clients['chest_x_ray_date']) {
+                                                                                                                                                                print_r($clients['chest_x_ray_date']);
+                                                                                                                                                            }  ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4" id="enrollment_completed">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>40. This form was completed by (name) </label>
+                                                            <input class="form-control" type="text" name="enrollment_completed" id="enrollment_completed" value="<?php if ($clients['enrollment_completed']) {
+                                                                                                                                                                        print_r($clients['enrollment_completed']);
+                                                                                                                                                                    }  ?>" />
                                                         </div>
                                                     </div>
                                                 </div>
