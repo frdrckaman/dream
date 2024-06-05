@@ -1280,30 +1280,46 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
 
                                                             <?php if ($visit['visit_status'] == 1) { ?>
-                                                                <?php if ($visit['sequence'] >= 1) { ?>
+                                                                <?php if ($visit['sequence'] == 0) { ?>
                                                                     <?php if ($screening['eligible'] == 1) {
                                                                         $i = 1; ?>
                                                                         <?php if ($override->getNews('individual', 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
-                                                                            <a href="add.php?id=5&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update VL (follow up and enrollment) Data</a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=5&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Participant Enrolment Data</a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } else { ?>
-                                                                            <a href="add.php?id=5&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add VL (follow up and enrollment) Data </a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=5&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Participant Enrolment Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } ?>
 
                                                                         <?php if ($override->get3('costing', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
-                                                                            <a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Costing Data </a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Respiratory Sample Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } else { ?>
-                                                                            <a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Costing Data </a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Respiratory Sample Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } ?>
 
                                                                         <?php if ($override->get3('social_economic', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
-                                                                            <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Social-Economic Status Data </a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Diagnostic Test Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } else { ?>
-                                                                            <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Social-Economic Status Data </a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Diagnostic Test Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
+
+                                                                        <?php } ?>
+
+                                                                        <?php if ($override->get3('social_economic', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
+                                                                            <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Diagnostic Test DST Data </a>&nbsp;&nbsp; <br><br>
+
+                                                                        <?php } else { ?>
+                                                                            <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Diagnostic Test DST Data </a>&nbsp;&nbsp; <br><br>
+
+                                                                        <?php } ?>
+
+                                                                        <?php if ($override->get3('social_economic', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
+                                                                            <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Diagnosis Data </a>&nbsp;&nbsp; <br><br>
+
+                                                                        <?php } else { ?>
+                                                                            <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Diagnosis Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } ?>
                                                                     <?php } ?>
