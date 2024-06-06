@@ -5834,6 +5834,10 @@ if ($user->isLoggedIn()) {
                                                                                     } ?>" id="sample_number" name="sample_number" min="0" max="100000000" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
+                                            </div>
+
+                                            <hr>
+                                            <div class="row">
 
                                                 <div class="col-3">
                                                     <label for="appearance" class="form-label">54. Appearance</label>
@@ -5986,9 +5990,8 @@ if ($user->isLoggedIn()) {
 
                                             <hr>
                                             <div class="row">
-
                                                 <div class="col-sm-3" id="wrd_test">
-                                                    <label for="wrd_test" class="form-label">WRD test done</label>
+                                                    <label for="wrd_test" class="form-label">60. WRD test done</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -6009,7 +6012,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="sequence_done">
-                                                    <label for="sequence_done" class="form-label">If none at the facility has it been done at sequence lab?
+                                                    <label for="sequence_done" class="form-label">61. If none at the facility has it been done at sequence lab?
                                                     </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -6032,7 +6035,7 @@ if ($user->isLoggedIn()) {
 
 
                                                 <div class="col-sm-3" id="sequence_type">
-                                                    <label for="sequence_type" class="form-label">If yes (If Invalid/Error/No results skip next two qtn)</label>
+                                                    <label for="sequence_type" class="form-label">62. If yes (If Invalid/Error/No results skip next two qtn)</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -6053,7 +6056,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="mtb_detection">
-                                                    <label for="mtb_detection" class="form-label">If MTB detected </label>
+                                                    <label for="mtb_detection" class="form-label">63. If MTB detected </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -6069,8 +6072,12 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
+                                            </div>
+
+                                            <hr>
+                                            <div class="row">
                                                 <div class="col-sm-3" id="rif_resistance">
-                                                    <label for="rif_resistance" class="form-label">If MTB detected, RIF resistance </label>
+                                                    <label for="rif_resistance" class="form-label">64. If MTB detected, RIF resistance </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -6086,11 +6093,6 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-
-
-
-
-
                                                 <div class="col-3">
                                                     <div class="mb-3">
                                                         <label for="ct_value" class="form-label">65. Sample Cycle threshold (Ct) Value (number, two digits)</label>
@@ -6099,17 +6101,7 @@ if ($user->isLoggedIn()) {
                                                                                     } ?>" id="ct_value" name="ct_value" min="0" max="99" class="form-control" placeholder="Enter here" required />
                                                     </div>
                                                 </div>
-
-
-
-
-
-                                            </div>
-
-                                            <hr>
-                                            <div class="row">
-
-
+                          
                                                 <div class="col-sm-3" id="test_repeatition">
                                                     <label for="test_repeatition" class="form-label">66. If Invalid/Error/No result/Indeterminate, was the test repeated?
                                                     </label>
@@ -6182,16 +6174,16 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-6" id="cost_complete">
+                                                <div class="col-sm-6" id="respiratory_completness">
                                                     <label>Complete?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('respiratory_completness', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="cost_complete" id="cost_complete<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['cost_complete'] == $value['id']) {
-                                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                                            } ?> required>
+                                                                    <input class="form-check-input" type="radio" name="respiratory_completness" id="respiratory_completness<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['respiratory_completness'] == $value['id']) {
+                                                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                                                } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
