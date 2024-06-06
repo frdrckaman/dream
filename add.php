@@ -7069,14 +7069,14 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="moxifloxacin">
-                                                    <label for="moxifloxacin" class="form-label">Moxifloxacin</label>
+                                                <div class="col-sm-3" id="clofazimine">
+                                                    <label for="clofazimine" class="form-label">Moxifloxacin</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="moxifloxacin" id="moxifloxacin<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['moxifloxacin'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="clofazimine" id="clofazimine<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['clofazimine'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
                                                                                                                                                                                                         } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
