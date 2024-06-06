@@ -1280,9 +1280,9 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
 
                                                             <?php if ($visit['visit_status'] == 1) { ?>
-                                                                <?php if ($visit['sequence'] == 0) { ?>
+                                                                <?php if ($visit['sequence'] >= 0) { ?>
                                                                     <?php if ($screening['eligible'] == 1) {
-                                                                        $i = 1; ?>
+                                                                        $i = 0; ?>
                                                                         <?php if ($override->getNews('individual', 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
                                                                             <a href="add.php?id=5&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Participant Enrolment Data</a>&nbsp;&nbsp; <br><br>
 
@@ -1291,7 +1291,7 @@ if ($user->isLoggedIn()) {
 
                                                                         <?php } ?>
 
-                                                                        <?php if ($override->get3('costing', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
+                                                                        <?php if ($override->get3('respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
                                                                             <a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Respiratory Sample Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } else { ?>
@@ -1299,7 +1299,7 @@ if ($user->isLoggedIn()) {
 
                                                                         <?php } ?>
 
-                                                                        <?php if ($override->get3('social_economic', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
+                                                                        <?php if ($override->get3('non_respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
                                                                             <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Diagnostic Test Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } else { ?>

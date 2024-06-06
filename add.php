@@ -637,79 +637,107 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        } elseif (Input::get('add_costing')) {
+        } elseif (Input::get('add_respiratory')) {
             $validate = $validate->check($_POST, array(
                 'visit_date' => array(
                     'required' => true,
                 ),
-                'transport' => array(
+                'lab_name' => array(
                     'required' => true,
                 ),
-                'facility_change' => array(
+                'sample_amount' => array(
                     'required' => true,
                 ),
             ));
             if ($validate->passed()) {
                 $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid'])[0];
-                $costing = $override->get3('costing', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $_GET['sequence']);
+                $costing = $override->get3('respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $_GET['sequence']);
 
                 if ($costing) {
-                    $user->updateRecord('costing', array(
+                    $user->updateRecord('respiratory', array(
                         'visit_date' => Input::get('visit_date'),
-                        'distance_km' => Input::get('distance_km'),
-                        'distance_hours' => Input::get('distance_hours'),
-                        'distance_minutes' => Input::get('distance_minutes'),
-                        'transport' => Input::get('transport'),
-                        'facility_change' => Input::get('facility_change'),
-                        'reasons_facility' => Input::get('reasons_facility'),
-                        'accompany' => Input::get('accompany'),
-                        'relation' => Input::get('relation'),
-                        'occupation' => Input::get('occupation'),
-                        'pay_money' => Input::get('pay_money'),
-                        'pay_travel' => Input::get('pay_travel'),
-                        'pay_food' => Input::get('pay_food'),
-                        'pay_vl' => Input::get('pay_vl'),
-                        'pay_other' => Input::get('pay_other'),
-                        'pay_usajili' => Input::get('pay_usajili'),
-                        'pay_doctor' => Input::get('pay_doctor'),
-                        'pay_diagnostic' => Input::get('pay_diagnostic'),
-                        'pay_medications' => Input::get('pay_medications'),
-                        'pay_medical' => Input::get('pay_medical'),
-                        'cost_complete' => Input::get('cost_complete'),
+                        'lab_name' => Input::get('lab_name'),
+                        'sample_received' => Input::get('sample_received'),
+                        'sample_amount' => Input::get('sample_amount'),
+                        'sample_reason' => Input::get('sample_reason'),
+                        'test_rejected' => Input::get('test_rejected'),
+                        'test_reasons' => Input::get('test_reasons'),
+                        'test_reasons_other' => Input::get('test_reasons_other'),
+                        'sample_date' => Input::get('sample_date'),
+                        'sample_type' => Input::get('sample_type'),
+                        'sample_type_other' => Input::get('sample_type_other'),
+                        'sample_number' => Input::get('sample_number'),
+                        'appearance' => Input::get('appearance'),
+                        'sample_volume' => Input::get('sample_volume'),
+                        'sample_accession' => Input::get('sample_accession'),
+                        'afb_microscopy' => Input::get('afb_microscopy'),
+                        'afb_microscopy_date' => Input::get('afb_microscopy_date'),
+                        'zn_results_a' => Input::get('zn_results_a'),
+                        'zn_results_b' => Input::get('zn_results_b'),
+                        'fm_results_a' => Input::get('fm_results_a'),
+                        'fm_results_b' => Input::get('fm_results_b'),
+                        'wrd_test' => Input::get('wrd_test'),
+                        'wrd_test_date' => Input::get('wrd_test_date'),
+                        'sequence_done' => Input::get('sequence_done'),
+                        'sequence_date' => Input::get('sequence_date'),
+                        'sequence_type' => Input::get('sequence_type'),
+                        'sequence_number' => Input::get('sequence_number'),
+                        'mtb_detection' => Input::get('mtb_detection'),
+                        'rif_resistance' => Input::get('rif_resistance'),
+                        'ct_value' => Input::get('ct_value'),
+                        'test_repeatition' => Input::get('test_repeatition'),
+                        'microscopy_reason' => Input::get('microscopy_reason'),
+                        'microscopy_reason_other' => Input::get('microscopy_reason_other'),
+                        'non_respiratory_completness' => Input::get('non_respiratory_completness'),
+                        'comments' => Input::get('comments'),
                         'date_completed' => Input::get('date_completed'),
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
                     ), $costing[0]['id']);
 
-                    $successMessage = 'Costing Data  Successful Updated';
+                    $successMessage = 'Respiratory Data  Successful Updated';
                 } else {
-                    $user->createRecord('costing', array(
+                    $user->createRecord('respiratory', array(
                         'vid' => $_GET['vid'],
                         'sequence' => $_GET['sequence'],
                         'visit_code' => $_GET['visit_code'],
                         'pid' => $clients['study_id'],
                         'study_id' => $clients['study_id'],
                         'visit_date' => Input::get('visit_date'),
-                        'distance_km' => Input::get('distance_km'),
-                        'distance_hours' => Input::get('distance_hours'),
-                        'distance_minutes' => Input::get('distance_minutes'),
-                        'transport' => Input::get('transport'),
-                        'facility_change' => Input::get('facility_change'),
-                        'reasons_facility' => Input::get('reasons_facility'),
-                        'accompany' => Input::get('accompany'),
-                        'relation' => Input::get('relation'),
-                        'occupation' => Input::get('occupation'),
-                        'pay_money' => Input::get('pay_money'),
-                        'pay_travel' => Input::get('pay_travel'),
-                        'pay_food' => Input::get('pay_food'),
-                        'pay_vl' => Input::get('pay_vl'),
-                        'pay_other' => Input::get('pay_other'),
-                        'pay_usajili' => Input::get('pay_usajili'),
-                        'pay_doctor' => Input::get('pay_doctor'),
-                        'pay_diagnostic' => Input::get('pay_diagnostic'),
-                        'pay_medications' => Input::get('pay_medications'),
-                        'pay_medical' => Input::get('pay_medical'),
-                        'cost_complete' => Input::get('cost_complete'),
+                        'lab_name' => Input::get('lab_name'),
+                        'sample_received' => Input::get('sample_received'),
+                        'sample_amount' => Input::get('sample_amount'),
+                        'sample_reason' => Input::get('sample_reason'),
+                        'test_rejected' => Input::get('test_rejected'),
+                        'test_reasons' => Input::get('test_reasons'),
+                        'test_reasons_other' => Input::get('test_reasons_other'),
+                        'sample_date' => Input::get('sample_date'),
+                        'sample_type' => Input::get('sample_type'),
+                        'sample_type_other' => Input::get('sample_type_other'),
+                        'sample_number' => Input::get('sample_number'),
+                        'appearance' => Input::get('appearance'),
+                        'sample_volume' => Input::get('sample_volume'),
+                        'sample_accession' => Input::get('sample_accession'),
+                        'afb_microscopy' => Input::get('afb_microscopy'),
+                        'afb_microscopy_date' => Input::get('afb_microscopy_date'),
+                        'zn_results_a' => Input::get('zn_results_a'),
+                        'zn_results_b' => Input::get('zn_results_b'),
+                        'fm_results_a' => Input::get('fm_results_a'),
+                        'fm_results_b' => Input::get('fm_results_b'),
+                        'wrd_test' => Input::get('wrd_test'),
+                        'wrd_test_date' => Input::get('wrd_test_date'),
+                        'sequence_done' => Input::get('sequence_done'),
+                        'sequence_date' => Input::get('sequence_date'),
+                        'sequence_type' => Input::get('sequence_type'),
+                        'sequence_number' => Input::get('sequence_number'),
+                        'mtb_detection' => Input::get('mtb_detection'),
+                        'rif_resistance' => Input::get('rif_resistance'),
+                        'ct_value' => Input::get('ct_value'),
+                        'test_repeatition' => Input::get('test_repeatition'),
+                        'microscopy_reason' => Input::get('microscopy_reason'),
+                        'microscopy_reason_other' => Input::get('microscopy_reason_other'),
+                        'respiratory_completness' => Input::get('respiratory_completness'),
+                        'comments' => Input::get('comments'),
                         'date_completed' => Input::get('date_completed'),
                         'status' => 1,
                         'patient_id' => $clients['id'],
@@ -720,122 +748,80 @@ if ($user->isLoggedIn()) {
                         'site_id' => $clients['site_id'],
                     ));
 
-                    $successMessage = 'Costing Data  Successful Added';
+                    $successMessage = 'Respiratory Data  Successful Added';
                 }
 
                 Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
             } else {
                 $pageError = $validate->errors();
             }
-        } elseif (Input::get('add_social_economic')) {
+        } elseif (Input::get('add_non_respiratory')) {
             $validate = $validate->check($_POST, array(
                 'visit_date' => array(
-                    'required' => true,
-                ),
-                'own_house' => array(
-                    'required' => true,
-                ),
-                'living' => array(
                     'required' => true,
                 ),
             ));
             if ($validate->passed()) {
                 $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid'])[0];
-                $social_economic = $override->get3('social_economic', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $_GET['sequence']);
+                $costing = $override->get3('non_respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $_GET['sequence']);
 
-                if ($social_economic) {
-                    $user->updateRecord('social_economic', array(
+                if ($costing) {
+                    $user->updateRecord('non_respiratory', array(
                         'visit_date' => Input::get('visit_date'),
-                        'household_head' => Input::get('household_head'),
-                        'income_source' => Input::get('income_source'),
-                        'total_income' => Input::get('total_income'),
-                        'household_income' => Input::get('household_income'),
-                        'parents_status' => Input::get('parents_status'),
-                        'living' => Input::get('living'),
-                        'own_house' => Input::get('own_house'),
-                        'electricity' => Input::get('electricity'),
-                        'piped_water' => Input::get('piped_water'),
-                        'cement_floor' => Input::get('cement_floor'),
-                        'borehole' => Input::get('borehole'),
-                        'dirt_floor' => Input::get('dirt_floor'),
-                        'mud_walls' => Input::get('mud_walls'),
-                        'brick_walls' => Input::get('brick_walls'),
-                        'grass_thatched_roof' => Input::get('grass_thatched_roof'),
-                        'iron_tiled_roof' => Input::get('iron_tiled_roof'),
-                        'tv' => Input::get('tv'),
-                        'radio' => Input::get('radio'),
-                        'mobile_phone' => Input::get('mobile_phone'),
-                        'motor_bike' => Input::get('motor_bike'),
-                        'bicycle' => Input::get('bicycle'),
-                        'refrigerator' => Input::get('refrigerator'),
-                        'sofa' => Input::get('sofa'),
-                        'clock' => Input::get('clock'),
-                        'fan' => Input::get('fan'),
-                        'vcr_dvd' => Input::get('vcr_dvd'),
-                        'bank_acount' => Input::get('bank_acount'),
-                        'no_food' => Input::get('no_food'),
-                        'hungry' => Input::get('hungry'),
-                        'no_eating' => Input::get('no_eating'),
-                        'floor' => Input::get('floor'),
-                        'wall' => Input::get('wall'),
-                        'energy' => Input::get('energy'),
-                        'land' => Input::get('land'),
-                        'livestock' => Input::get('livestock'),
-                        'water_source' => Input::get('water_source'),
-                        'toilet' => Input::get('toilet'),
-                        'economic_complete' => Input::get('economic_complete'),
+                        'afb_microscopy' => Input::get('afb_microscopy'),
+                        'afb_microscopy_date' => Input::get('afb_microscopy_date'),
+                        'zn_results_a' => Input::get('zn_results_a'),
+                        'zn_results_b' => Input::get('zn_results_b'),
+                        'fm_results_a' => Input::get('fm_results_a'),
+                        'fm_results_b' => Input::get('fm_results_b'),
+                        'wrd_test' => Input::get('wrd_test'),
+                        'wrd_test_date' => Input::get('wrd_test_date'),
+                        'sequence_done' => Input::get('sequence_done'),
+                        'sequence_date' => Input::get('sequence_date'),
+                        'sequence_type' => Input::get('sequence_type'),
+                        'sequence_number' => Input::get('sequence_number'),
+                        'mtb_detection' => Input::get('mtb_detection'),
+                        'rif_resistance' => Input::get('rif_resistance'),
+                        'ct_value' => Input::get('ct_value'),
+                        'test_repeatition' => Input::get('test_repeatition'),
+                        'microscopy_reason' => Input::get('microscopy_reason'),
+                        'microscopy_reason_other' => Input::get('microscopy_reason_other'),
+                        'comments' => Input::get('comments'),
+                        'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
-                    ), $social_economic[0]['id']);
+                    ), $costing[0]['id']);
 
-                    $successMessage = 'Social Economic Data  Successful Updated';
+                    $successMessage = 'Non Respiratory Data  Successful Updated';
                 } else {
-                    $user->createRecord('social_economic', array(
+                    $user->createRecord('non_respiratory', array(
                         'vid' => $_GET['vid'],
                         'sequence' => $_GET['sequence'],
                         'visit_code' => $_GET['visit_code'],
                         'pid' => $clients['study_id'],
                         'study_id' => $clients['study_id'],
                         'visit_date' => Input::get('visit_date'),
-                        'household_head' => Input::get('household_head'),
-                        'income_source' => Input::get('income_source'),
-                        'total_income' => Input::get('total_income'),
-                        'household_income' => Input::get('household_income'),
-                        'parents_status' => Input::get('parents_status'),
-                        'living' => Input::get('living'),
-                        'own_house' => Input::get('own_house'),
-                        'electricity' => Input::get('electricity'),
-                        'piped_water' => Input::get('piped_water'),
-                        'cement_floor' => Input::get('cement_floor'),
-                        'borehole' => Input::get('borehole'),
-                        'dirt_floor' => Input::get('dirt_floor'),
-                        'mud_walls' => Input::get('mud_walls'),
-                        'brick_walls' => Input::get('brick_walls'),
-                        'grass_thatched_roof' => Input::get('grass_thatched_roof'),
-                        'iron_tiled_roof' => Input::get('iron_tiled_roof'),
-                        'tv' => Input::get('tv'),
-                        'radio' => Input::get('radio'),
-                        'mobile_phone' => Input::get('mobile_phone'),
-                        'motor_bike' => Input::get('motor_bike'),
-                        'bicycle' => Input::get('bicycle'),
-                        'refrigerator' => Input::get('refrigerator'),
-                        'sofa' => Input::get('sofa'),
-                        'clock' => Input::get('clock'),
-                        'fan' => Input::get('fan'),
-                        'vcr_dvd' => Input::get('vcr_dvd'),
-                        'bank_acount' => Input::get('bank_acount'),
-                        'no_food' => Input::get('no_food'),
-                        'hungry' => Input::get('hungry'),
-                        'no_eating' => Input::get('no_eating'),
-                        'floor' => Input::get('floor'),
-                        'wall' => Input::get('wall'),
-                        'energy' => Input::get('energy'),
-                        'land' => Input::get('land'),
-                        'livestock' => Input::get('livestock'),
-                        'water_source' => Input::get('water_source'),
-                        'toilet' => Input::get('toilet'),
-                        'economic_complete' => Input::get('economic_complete'),
+                        'afb_microscopy' => Input::get('afb_microscopy'),
+                        'afb_microscopy_date' => Input::get('afb_microscopy_date'),
+                        'zn_results_a' => Input::get('zn_results_a'),
+                        'zn_results_b' => Input::get('zn_results_b'),
+                        'fm_results_a' => Input::get('fm_results_a'),
+                        'fm_results_b' => Input::get('fm_results_b'),
+                        'wrd_test' => Input::get('wrd_test'),
+                        'wrd_test_date' => Input::get('wrd_test_date'),
+                        'sequence_done' => Input::get('sequence_done'),
+                        'sequence_date' => Input::get('sequence_date'),
+                        'sequence_type' => Input::get('sequence_type'),
+                        'sequence_number' => Input::get('sequence_number'),
+                        'mtb_detection' => Input::get('mtb_detection'),
+                        'rif_resistance' => Input::get('rif_resistance'),
+                        'ct_value' => Input::get('ct_value'),
+                        'test_repeatition' => Input::get('test_repeatition'),
+                        'microscopy_reason' => Input::get('microscopy_reason'),
+                        'microscopy_reason_other' => Input::get('microscopy_reason_other'),
+                        'comments' => Input::get('comments'),
+                        'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
                         'status' => 1,
                         'patient_id' => $clients['id'],
@@ -846,7 +832,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $clients['site_id'],
                     ));
 
-                    $successMessage = 'Social Economic Data  Successful Added';
+                    $successMessage = 'Non Respiratory Data  Successful Added';
                 }
 
                 Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
@@ -5705,16 +5691,16 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
 
-                                                <div class="col-sm-3" id="rs_received">
-                                                    <label for="rs_received" class="form-label">46. Is at least one respiratory sample received?</label>
+                                                <div class="col-sm-3" id="sample_received">
+                                                    <label for="sample_received" class="form-label">46. Is at least one respiratory sample received?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="rs_received" id="rs_received<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['rs_received'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
+                                                                    <input class="form-check-input" type="radio" name="sample_received" id="sample_received<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['sample_received'] == $value['id']) {
+                                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                                } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -6049,7 +6035,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                         <label for="sequence_number" class="form-label">(If error, what code/number??) </label>
-                                                        <input type="date" value="<?php if ($costing['sequence_number']) {
+                                                        <input type="text" value="<?php if ($costing['sequence_number']) {
                                                                                         print_r($costing['sequence_number']);
                                                                                     } ?>" id="sequence_number" name="sequence_number" class="form-control" placeholder="Enter here" />
                                                     </div>
@@ -6096,12 +6082,12 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-3">
                                                     <div class="mb-3">
                                                         <label for="ct_value" class="form-label">65. Sample Cycle threshold (Ct) Value (number, two digits)</label>
-                                                        <input type="number" value="<?php if ($costing['pay_other']) {
-                                                                                        print_r($costing['pay_other']);
+                                                        <input type="number" value="<?php if ($costing['ct_value']) {
+                                                                                        print_r($costing['ct_value']);
                                                                                     } ?>" id="ct_value" name="ct_value" min="0" max="99" class="form-control" placeholder="Enter here" required />
                                                     </div>
                                                 </div>
-                          
+
                                                 <div class="col-sm-3" id="test_repeatition">
                                                     <label for="test_repeatition" class="form-label">66. If Invalid/Error/No result/Indeterminate, was the test repeated?
                                                     </label>
@@ -6195,7 +6181,7 @@ if ($user->isLoggedIn()) {
                                                         <label for="date_completed" class="form-label">Date form completed</label>
                                                         <input type="date" value="<?php if ($costing['date_completed']) {
                                                                                         print_r($costing['date_completed']);
-                                                                                    } ?>" id="date_completed" name="date_completed" min="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
+                                                                                    } ?>" id="date_completed" name="date_completed" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -6204,7 +6190,7 @@ if ($user->isLoggedIn()) {
                                         <!-- /.card-body -->
                                         <div class="card-footer">
                                             <a href="info.php?id=4&cid=<?= $_GET['cid']; ?>&study_id=<?= $_GET['study_id']; ?>&status=<?= $_GET['status']; ?>" class="btn btn-default">Back</a>
-                                            <input type="submit" name="add_costing" value="Submit" class="btn btn-primary">
+                                            <input type="submit" name="add_respiratory" value="Submit" class="btn btn-primary">
                                         </div>
                                     </form>
                                 </div>
@@ -6220,7 +6206,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 12) { ?>
             <?php
-            $social_economic = $override->get3('social_economic', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $_GET['sequence'])[0];
+            $costing = $override->get3('non_respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $_GET['sequence'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -6229,10 +6215,10 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <?php if (!$social_economic) { ?>
-                                    <h1>Add Section 8: Social Economic Status Data</h1>
+                                <?php if (!$costing) { ?>
+                                    <h1>Add New Non Respiratory sample Data</h1>
                                 <?php } else { ?>
-                                    <h1>Update Section 8: Social Economic Status Data</h1>
+                                    <h1>Update Non Respiratory sample Data</h1>
                                 <?php } ?>
                             </div>
                             <div class="col-sm-6">
@@ -6244,10 +6230,10 @@ if ($user->isLoggedIn()) {
                                     <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status']; ?>">
                                             Go to screening list > </a>
                                     </li>&nbsp;&nbsp;
-                                    <?php if (!$social_economic) { ?>
-                                        <li class="breadcrumb-item active">Add New Section 8: Social Economic Status Data</li>
+                                    <?php if (!$costing) { ?>
+                                        <li class="breadcrumb-item active">Add New Non Respiratory sample Data</li>
                                     <?php } else { ?>
-                                        <li class="breadcrumb-item active">Update Section 8: Social Economic Status Data</li>
+                                        <li class="breadcrumb-item active">Update Non Respiratory sample Data</li>
                                     <?php } ?>
                                 </ol>
                             </div>
@@ -6264,89 +6250,60 @@ if ($user->isLoggedIn()) {
                                 <!-- general form elements disabled -->
                                 <div class="card card-warning">
                                     <div class="card-header">
-                                        <h3 class="card-title">Section 8: Social Economic Status Form</h3>
+                                        <h3 class="card-title">Diagnostic tests done for this participant on non-respiratory samples Form</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">
-                                                <div class="col-3">
+                                                <div class="col-6">
                                                     <div class="mb-2">
                                                         <label for="visit_date" class="form-label">Visit Date</label>
-                                                        <input type="date" value="<?php if ($social_economic['visit_date']) {
-                                                                                        print_r($social_economic['visit_date']);
+                                                        <input type="date" value="<?php if ($costing['visit_date']) {
+                                                                                        print_r($costing['visit_date']);
                                                                                     } ?>" id="visit_date" name="visit_date" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="household_head">
-                                                    <label for="household_head" class="form-label">Who is the head of your house hold?</label>
+                                                <div class="col-6">
+                                                    <label for="afb_microscopy" class="form-label">68. AFB microscopy</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('household', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('afb_microscopy', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="household_head" id="household_head<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['household_head'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="afb_microscopy" id="afb_microscopy<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
                                                                                                                                                                                                             } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
+                                                            <label for="afb_microscopy_date" class="form-label">what date ?</label>
+                                                            <input type="date" value="<?php if ($costing['afb_microscopy_date']) {
+                                                                                            print_r($costing['afb_microscopy_date']);
+                                                                                        } ?>" id="afb_microscopy_date" name="afb_microscopy_date" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3" id="income_source">
-                                                    <label for="income_source" class="form-label">Chanzo kikuu cha kipato cha mkuu wa kaya?</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('income_source', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="income_source" id="income_source<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['income_source'] == $value['id']) {
-                                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                                            } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-3">
-                                                    <div class="mb-3">
-                                                        <label for="total_income" class="form-label">Je, unaingiza shilingi ngapi kwa mwezi kutoka kwenye vyanzo vyako vyote vya fedha?</label>
-                                                        <input type="number" value="<?php if ($social_economic['total_income']) {
-                                                                                        print_r($social_economic['total_income']);
-                                                                                    } ?>" id="total_income" name="total_income" min="0" max="100000000" class="form-control" placeholder="Enter amount in TSHS" required />
-                                                    </div>
-                                                </div>
-
 
                                             </div>
 
                                             <hr>
+                                            <label for="zn" class="form-label text-center">69. If ZN </label>
+                                            <hr>
 
                                             <div class="row">
-                                                <div class="col-3">
-                                                    <div class="mb-3">
-                                                        <label for="household_income" class="form-label">Kwa mwezi, ni kiasi gani wanakaya wenzako wanaingiza kutoka kwenye vyanzo vyote vya fedha? (kwa ujumla)?</label>
-                                                        <input type="number" value="<?php if ($social_economic['household_income']) {
-                                                                                        print_r($social_economic['household_income']);
-                                                                                    } ?>" id="household_income" name="household_income" min="0" max="100000000" class="form-control" placeholder="Enter amount in TSHS" required />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="parents_status">
-                                                    <label for="parents_status" class="form-label"> What is the life status of the parents? <br><br>(Je, hali ya maisha ya wazazi ikoje?)</label>
+                                                <div class="col-sm-6" id="zn_results_a">
+                                                    <label for="zn_results_a" class="form-label">Results A </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('parents_status', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="parents_status" id="parents_status<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['parents_status'] == $value['id']) {
-                                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                                            } ?>>
+                                                                    <input class="form-check-input" type="radio" name="zn_results_a" id="zn_results_a<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['zn_results_a'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -6354,179 +6311,143 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="living">
-                                                    <label for="living" class="form-label">Whom does the participant live with? <br><br> (Je, mshiriki anaishi na nani?)</label>
+                                                <div class="col-sm-6" id="zn_results_b">
+                                                    <label for="zn_results_b" class="form-label">Results B </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('living', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="living" id="living<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['living'] == $value['id']) {
-                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                            } ?>>
+                                                                    <input class="form-check-input" type="radio" name="zn_results_b" id="zn_results_b<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['zn_results_b'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="own_house">
-                                                    <label for="own_house" class="form-label">Does the participant / their family or guardian own the house where they live? <br><br> (Je, mshiriki/familia au mlezi wake anamiliki nyumba anayoishi?)</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="own_house" id="own_house<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['own_house'] == $value['id']) {
-                                                                                                                                                                                                        echo 'checked';
-                                                                                                                                                                                                    } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
+                                                        <span>(Not mandatory)</span>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <hr>
-                                            <h1 class="text-center">What type of facilities exists in the household where you live?</h1>
+                                            <label for="zn" class="form-label text-center">70. If FM </label>
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-6" id="fm_results_a">
+                                                    <label for="fm_results_a" class="form-label">Results A </label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="fm_results_a" id="fm_results_a<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['fm_results_a'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6" id="fm_results_b">
+                                                    <label for="fm_results_b" class="form-label">Results B </label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="fm_results_b" id="fm_results_b<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['fm_results_b'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <span>(Not mandatory)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-3" id="electricity">
-                                                    <label for="electricity" class="form-label">Electricity/ Solar <br><br> (Umeme/ Sola)</label>
+                                                <div class="col-sm-3" id="wrd_test">
+                                                    <label for="wrd_test" class="form-label">71. WRD test done</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('wrd_test', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="electricity" id="electricity<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['electricity'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="piped_water">
-                                                    <label for="piped_water" class="form-label">Piped Water <br><br> (Maji ya bomba)</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="piped_water" id="piped_water<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['piped_water'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="cement_floor">
-                                                    <label for="cement_floor" class="form-label">Cement floor <br><br> ( sakafu ya saruji )</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="cement_floor" id="cement_floor<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['cement_floor'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="borehole">
-                                                    <label for="borehole" class="form-label">Borehole <br><br> (Kisima cha maji)</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="borehole" id="borehole<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['borehole'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="wrd_test" id="wrd_test<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['wrd_test'] == $value['id']) {
                                                                                                                                                                                                     echo 'checked';
                                                                                                                                                                                                 } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-3" id="dirt_floor">
-                                                    <label for="dirt_floor" class="form-label">Dirt floor <br><br> (sakafu ya uchafu)</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="dirt_floor" id="dirt_floor<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['dirt_floor'] == $value['id']) {
-                                                                                                                                                                                                        echo 'checked';
-                                                                                                                                                                                                    } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
+                                                            <label for="wrd_test_date" class="form-label">what date ?</label>
+                                                            <input type="date" value="<?php if ($costing['wrd_test_date']) {
+                                                                                            print_r($costing['wrd_test_date']);
+                                                                                        } ?>" id="wrd_test_date" name="wrd_test_date" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="mud_walls">
-                                                    <label for="mud_walls" class="form-label">Mud walls <br><br> (kuta za matope)</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="mud_walls" id="mud_walls<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['mud_walls'] == $value['id']) {
-                                                                                                                                                                                                        echo 'checked';
-                                                                                                                                                                                                    } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="brick_walls">
-                                                    <label for="brick_walls" class="form-label">Brick walls <br><br>(ukuta wa matofali)</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="brick_walls" id="brick_walls<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['brick_walls'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="grass_thatched_roof">
-                                                    <label for="grass_thatched_roof" class="form-label">Grass thatched roof <br><br> (Paa iliyoezekwa kwa nyasi)
+                                                <div class="col-sm-3" id="sequence_done">
+                                                    <label for="sequence_done" class="form-label">72. If none at the facility has it been done at sequence lab?
                                                     </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="grass_thatched_roof" id="grass_thatched_roof<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['grass_thatched_roof'] == $value['id']) {
-                                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                                        } ?>>
+                                                                    <input class="form-check-input" type="radio" name="sequence_done" id="sequence_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['sequence_done'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <label for="sequence_date" class="form-label">what date ?</label>
+                                                        <input type="date" value="<?php if ($costing['sequence_date']) {
+                                                                                        print_r($costing['sequence_date']);
+                                                                                    } ?>" id="sequence_date" name="sequence_date" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-3" id="sequence_type">
+                                                    <label for="sequence_type" class="form-label">73. If yes (If Invalid/Error/No results skip next two qtn)</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('sequence_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="sequence_type" id="sequence_type<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['sequence_type'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <label for="sequence_number" class="form-label">(If error, what code/number??) </label>
+                                                        <input type="text" value="<?php if ($costing['sequence_number']) {
+                                                                                        print_r($costing['sequence_number']);
+                                                                                    } ?>" id="sequence_number" name="sequence_number" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" id="mtb_detection">
+                                                    <label for="mtb_detection" class="form-label">74. If MTB detected </label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('mtb_detection', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="mtb_detection" id="mtb_detection<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mtb_detection'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -6538,15 +6459,41 @@ if ($user->isLoggedIn()) {
 
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-3" id="iron_tiled_roof">
-                                                    <label for="iron_tiled_roof" class="form-label">Iron sheet/tiled roof (Karatasi ya chuma/paa la vigae)
+                                                <div class="col-sm-3" id="rif_resistance">
+                                                    <label for="rif_resistance" class="form-label">75. If MTB detected, RIF resistance </label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="rif_resistance" id="rif_resistance<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['rif_resistance'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-3">
+                                                    <div class="mb-3">
+                                                        <label for="ct_value" class="form-label">76. Sample Cycle threshold (Ct) Value (number, two digits)</label>
+                                                        <input type="number" value="<?php if ($costing['ct_value']) {
+                                                                                        print_r($costing['ct_value']);
+                                                                                    } ?>" id="ct_value" name="ct_value" min="0" max="99" class="form-control" placeholder="Enter here" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" id="test_repeatition">
+                                                    <label for="test_repeatition" class="form-label">77. If Invalid/Error/No result/Indeterminate, was the test repeated?
                                                     </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="iron_tiled_roof" id="iron_tiled_roof<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['iron_tiled_roof'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="test_repeatition" id="test_repeatition<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['test_repeatition'] == $value['id']) {
                                                                                                                                                                                                                     echo 'checked';
                                                                                                                                                                                                                 } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
@@ -6556,410 +6503,26 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                            </div>
-
-                                            <hr>
-                                            <h1 class="text-center">Does your house hold have?</h1>
-
-                                            <hr>
-                                            <div class="row">
-
-                                                <div class="col-sm-3" id="tv">
-                                                    <label for="tv" class="form-label">TV
-                                                    </label>
+                                                <div class="col-sm-3" id="microscopy_reason">
+                                                    <label for="microscopy_reason" class="form-label">78. If no reason(s) </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('microscopy_reason', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="tv" id="tv<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['tv'] == $value['id']) {
-                                                                                                                                                                                        echo 'checked';
-                                                                                                                                                                                    } ?>>
+                                                                    <input class="form-check-input" type="radio" name="microscopy_reason" id="microscopy_reason<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['microscopy_reason'] == $value['id']) {
+                                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                                    } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
+                                                            <label for="microscopy_reason_other" class="form-label">If Other Mention</label>
+                                                            <input type="text" value="<?php if ($costing['microscopy_reason_other']) {
+                                                                                            print_r($costing['microscopy_reason_other']);
+                                                                                        } ?>" id="microscopy_reason_other" name="microscopy_reason_other" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <div class="col-sm-3" id="radio">
-                                                    <label for="radio" class="form-label">Radio
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="radio" id="radio<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['radio'] == $value['id']) {
-                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                            } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="mobile_phone">
-                                                    <label for="mobile_phone" class="form-label">Simu ya mkononi
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="mobile_phone" id="mobile_phone<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['mobile_phone'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="bicycle">
-                                                    <label for="bicycle" class="form-label">Baiskeli
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="bicycle" id="bicycle<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['bicycle'] == $value['id']) {
-                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <hr>
-                                            <div class="row">
-
-                                                <div class="col-sm-3" id="motor_bike">
-                                                    <label for="motor_bike" class="form-label">Pikipiki au bajaji
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="motor_bike" id="tv<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['motor_bike'] == $value['id']) {
-                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                            } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="refrigerator">
-                                                    <label for="refrigerator" class="form-label">Refrigerator/Jokufu
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="refrigerator" id="refrigerator<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['refrigerator'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="sofa">
-                                                    <label for="sofa" class="form-label">Sofa
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="sofa" id="sofa<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['sofa'] == $value['id']) {
-                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <hr>
-                                            <div class="row">
-
-                                                <div class="col-sm-3" id="clock">
-                                                    <label for="clock" class="form-label">Clock
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="clock" id="clock<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['clock'] == $value['id']) {
-                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                            } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="fan">
-                                                    <label for="fan" class="form-label">Fan
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="fan" id="fan<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['fan'] == $value['id']) {
-                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="vcr_dvd">
-                                                    <label for="vcr_dvd" class="form-label">VCR/DVD
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="vcr_dvd" id="vcr_dvd<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['vcr_dvd'] == $value['id']) {
-                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="bank_acount">
-                                                    <label for="bank_acount" class="form-label">Does any member of this household have a bank account?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="bank_acount" id="bank_acount<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['bank_acount'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-
-                                                <div class="col-sm-3" id="no_food">
-                                                    <label for="no_food" class="form-label">Was there ever no food at all in your household because there were not enough resources to get more?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="no_food" id="no_food<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['no_food'] == $value['id']) {
-                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="hungry">
-                                                    <label for="hungry" class="form-label">Did you or any household member go to sleep at night hungry because there was not enough food?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="hungry" id="hungry<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['hungry'] == $value['id']) {
-                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                            } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="no_eating">
-                                                    <label for="no_eating" class="form-label">Did you or any household member go a whole day without eating anything because there was not enough food?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="no_eating" id="no_eating<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['no_eating'] == $value['id']) {
-                                                                                                                                                                                                        echo 'checked';
-                                                                                                                                                                                                    } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-
-                                                <div class="col-sm-3" id="floor">
-                                                    <label for="floor" class="form-label">Nyenzo kuu iliyotumika kujenga sakafu ya makazi
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('floor', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="floor" id="floor<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['floor'] == $value['id']) {
-                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                            } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="wall">
-                                                    <label for="wall" class="form-label">Nyenzo iliyotumika kujenga kuta za nje za makazi ya kaya
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('wall', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="wall" id="wall<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['wall'] == $value['id']) {
-                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="energy">
-                                                    <label for="energy" class="form-label">Nishati gani inayotumiwa na kaya yako/yenu kwa ajili ya kupikia?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('energy', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="energy" id="energy<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['energy'] == $value['id']) {
-                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                            } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="land">
-                                                    <label for="land" class="form-label">Kuna mwanakaya yeyote anayemiliki ardhi inayoweza kutumika Kwa ajili ya kilimo?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="land" id="land<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['land'] == $value['id']) {
-                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-
-                                                <div class="col-sm-3" id="livestock">
-                                                    <label for="livestock" class="form-label">Je! Kaya yenu inamiliki mifugo, wanyama wengine wa shambani au ndege wa kufugwa?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="livestock" id="livestock<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['livestock'] == $value['id']) {
-                                                                                                                                                                                                        echo 'checked';
-                                                                                                                                                                                                    } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="water_source">
-                                                    <label for="water_source" class="form-label">Kipi chanzo kikuu cha maji ya kunywa kinachotumiwa na wanakaya?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('water_source', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="water_source" id="water_source<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['water_source'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="toilet">
-                                                    <label for="toilet" class="form-label">Ni aina gani ya choo ambacho kwa kawaida hutumiwa na wanakaya wako?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('toilet', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="toilet" id="toilet<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['toilet'] == $value['id']) {
-                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                            } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
                                             </div>
 
                                             <hr>
@@ -6976,8 +6539,8 @@ if ($user->isLoggedIn()) {
                                                         <!-- select -->
                                                         <div class="form-group">
                                                             <label>Remarks / Comments:</label>
-                                                            <textarea class="form-control" name="comments" rows="3" placeholder="Type comments here..."><?php if ($social_economic['comments']) {
-                                                                                                                                                            print_r($social_economic['comments']);
+                                                            <textarea class="form-control" name="comments" rows="3" placeholder="Type comments here..."><?php if ($costing['comments']) {
+                                                                                                                                                            print_r($costing['comments']);
                                                                                                                                                         }  ?>
                                                                 </textarea>
                                                         </div>
@@ -6994,16 +6557,16 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-6" id="cost_complete">
+                                                <div class="col-sm-6" id="form_completness">
                                                     <label>Complete?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="economic_complete" id="economic_complete<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($social_economic['economic_complete'] == $value['id']) {
-                                                                                                                                                                                                                        echo 'checked';
-                                                                                                                                                                                                                    } ?> required>
+                                                                    <input class="form-check-input" type="radio" name="form_completness" id="form_completness<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['form_completness'] == $value['id']) {
+                                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                                } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -7013,9 +6576,9 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-6">
                                                     <div class="mb-2">
                                                         <label for="date_completed" class="form-label">Date form completed</label>
-                                                        <input type="date" value="<?php if ($social_economic['date_completed']) {
-                                                                                        print_r($social_economic['date_completed']);
-                                                                                    } ?>" id="date_completed" name="date_completed" min="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
+                                                        <input type="date" value="<?php if ($costing['date_completed']) {
+                                                                                        print_r($costing['date_completed']);
+                                                                                    } ?>" id="date_completed" name="date_completed" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -7024,7 +6587,7 @@ if ($user->isLoggedIn()) {
                                         <!-- /.card-body -->
                                         <div class="card-footer">
                                             <a href="info.php?id=4&cid=<?= $_GET['cid']; ?>&study_id=<?= $_GET['study_id']; ?>&status=<?= $_GET['status']; ?>" class="btn btn-default">Back</a>
-                                            <input type="submit" name="add_social_economic" value="Submit" class="btn btn-primary">
+                                            <input type="submit" name="add_non_respiratory" value="Submit" class="btn btn-primary">
                                         </div>
                                     </form>
                                 </div>
