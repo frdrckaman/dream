@@ -913,24 +913,39 @@ if ($user->isLoggedIn()) {
                 if ($costing) {
                     $user->updateRecord('diagnosis', array(
                         'visit_date' => Input::get('visit_date'),
-                        'afb_microscopy' => Input::get('afb_microscopy'),
-                        'afb_microscopy_date' => Input::get('afb_microscopy_date'),
-                        'zn_results_a' => Input::get('zn_results_a'),
-                        'zn_results_b' => Input::get('zn_results_b'),
-                        'fm_results_a' => Input::get('fm_results_a'),
-                        'fm_results_b' => Input::get('fm_results_b'),
-                        'wrd_test' => Input::get('wrd_test'),
-                        'wrd_test_date' => Input::get('wrd_test_date'),
-                        'sequence_done' => Input::get('sequence_done'),
-                        'sequence_date' => Input::get('sequence_date'),
-                        'sequence_type' => Input::get('sequence_type'),
-                        'sequence_number' => Input::get('sequence_number'),
-                        'mtb_detection' => Input::get('mtb_detection'),
-                        'rif_resistance' => Input::get('rif_resistance'),
-                        'ct_value' => Input::get('ct_value'),
-                        'test_repeatition' => Input::get('test_repeatition'),
-                        'microscopy_reason' => Input::get('microscopy_reason'),
-                        'microscopy_reason_other' => Input::get('microscopy_reason_other'),
+                        'clinician_name' => Input::get('clinician_name'),
+                        'tb_diagnosis' => Input::get('tb_diagnosis'),
+                        'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
+                        'diagnosis_made_other' => Input::get('diagnosis_made_other'),
+                        'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
+                        'xpert_ultra_date' => Input::get('xpert_ultra_date'),
+                        'truenat_date' => Input::get('truenat_date'),
+                        'afb_microscope_date' => Input::get('afb_microscope_date'),
+                        'other_bacteriological_date' => Input::get('other_bacteriological_date'),
+                        'tb_diagnosed_clinically' => Input::get('tb_diagnosed_clinically'),
+                        'tb_clinically_other' => Input::get('tb_clinically_other'),
+                        'tb_treatment_date' => Input::get('tb_treatment_date'),
+                        'tb_facility' => Input::get('tb_facility'),
+                        'tb_reason' => Input::get('tb_reason'),
+                        'tb_regimen' => Input::get('tb_regimen'),
+                        'tb_regimen_other' => Input::get('tb_regimen_other'),
+                        'tb_regimen_based' => Input::get('tb_regimen_based'),
+                        'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
+                        'regimen_changed' => Input::get('regimen_changed'),
+                        'regimen_changed_other' => Input::get('regimen_changed_other'),
+                        'regimen_changed__date' => Input::get('regimen_changed__date'),
+                        'regimen_removed_name' => Input::get('regimen_removed_name'),
+                        'regimen_added_name' => Input::get('regimen_added_name'),
+                        'regimen_changed__reason' => Input::get('regimen_changed__reason'),
+                        'tb_otcome2' => Input::get('tb_otcome2'),
+                        'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
+                        'tb_other_specify' => Input::get('tb_other_specify'),
+                        'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
+                        'laboratory_test_used' => Input::get('laboratory_test_used'),
+                        'laboratory_test_used2' => Input::get('laboratory_test_used2'),
+                        'clinician_firstname' => Input::get('clinician_firstname'),
+                        'clinician_middlename' => Input::get('clinician_middlename'),
+                        'clinician_lastname' => Input::get('clinician_lastname'),
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
@@ -947,24 +962,39 @@ if ($user->isLoggedIn()) {
                         'pid' => $clients['study_id'],
                         'study_id' => $clients['study_id'],
                         'visit_date' => Input::get('visit_date'),
-                        'afb_microscopy' => Input::get('afb_microscopy'),
-                        'afb_microscopy_date' => Input::get('afb_microscopy_date'),
-                        'zn_results_a' => Input::get('zn_results_a'),
-                        'zn_results_b' => Input::get('zn_results_b'),
-                        'fm_results_a' => Input::get('fm_results_a'),
-                        'fm_results_b' => Input::get('fm_results_b'),
-                        'wrd_test' => Input::get('wrd_test'),
-                        'wrd_test_date' => Input::get('wrd_test_date'),
-                        'sequence_done' => Input::get('sequence_done'),
-                        'sequence_date' => Input::get('sequence_date'),
-                        'sequence_type' => Input::get('sequence_type'),
-                        'sequence_number' => Input::get('sequence_number'),
-                        'mtb_detection' => Input::get('mtb_detection'),
-                        'rif_resistance' => Input::get('rif_resistance'),
-                        'ct_value' => Input::get('ct_value'),
-                        'test_repeatition' => Input::get('test_repeatition'),
-                        'microscopy_reason' => Input::get('microscopy_reason'),
-                        'microscopy_reason_other' => Input::get('microscopy_reason_other'),
+                        'clinician_name' => Input::get('clinician_name'),
+                        'tb_diagnosis' => Input::get('tb_diagnosis'),
+                        'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
+                        'diagnosis_made_other' => Input::get('diagnosis_made_other'),
+                        'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
+                        'xpert_ultra_date' => Input::get('xpert_ultra_date'),
+                        'truenat_date' => Input::get('truenat_date'),
+                        'afb_microscope_date' => Input::get('afb_microscope_date'),
+                        'other_bacteriological_date' => Input::get('other_bacteriological_date'),
+                        'tb_diagnosed_clinically' => Input::get('tb_diagnosed_clinically'),
+                        'tb_clinically_other' => Input::get('tb_clinically_other'),
+                        'tb_treatment_date' => Input::get('tb_treatment_date'),
+                        'tb_facility' => Input::get('tb_facility'),
+                        'tb_reason' => Input::get('tb_reason'),
+                        'tb_regimen' => Input::get('tb_regimen'),
+                        'tb_regimen_other' => Input::get('tb_regimen_other'),
+                        'tb_regimen_based' => Input::get('tb_regimen_based'),
+                        'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
+                        'regimen_changed' => Input::get('regimen_changed'),
+                        'regimen_changed_other' => Input::get('regimen_changed_other'),
+                        'regimen_changed__date' => Input::get('regimen_changed__date'),
+                        'regimen_removed_name' => Input::get('regimen_removed_name'),
+                        'regimen_added_name' => Input::get('regimen_added_name'),
+                        'regimen_changed__reason' => Input::get('regimen_changed__reason'),
+                        'tb_otcome2' => Input::get('tb_otcome2'),
+                        'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
+                        'tb_other_specify' => Input::get('tb_other_specify'),
+                        'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
+                        'laboratory_test_used' => Input::get('laboratory_test_used'),
+                        'laboratory_test_used2' => Input::get('laboratory_test_used2'),
+                        'clinician_firstname' => Input::get('clinician_firstname'),
+                        'clinician_middlename' => Input::get('clinician_middlename'),
+                        'clinician_lastname' => Input::get('clinician_lastname'),
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
@@ -8467,16 +8497,16 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
 
 
-                                                <div class="col-sm-4" id="tb_regimen_based">
-                                                    <label for="tb_regimen_based" class="form-label">107. On what test result was the treatment regimen based and when did this test result become available to you? (dd / mm / yyyy)</label>
+                                                <div class="col-sm-4" id="laboratory_test_used">
+                                                    <label for="laboratory_test_used" class="form-label">107. On what test result was the treatment regimen based and when did this test result become available to you? (dd / mm / yyyy)</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('tb_regimen_based', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('laboratory_test_used', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="tb_regimen_based" id="tb_regimen_based<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_regimen_based'] == $value['id']) {
-                                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                                } ?>>
+                                                                    <input class="form-check-input" type="radio" name="laboratory_test_used" id="laboratory_test_used<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['laboratory_test_used'] == $value['id']) {
+                                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                                        } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
