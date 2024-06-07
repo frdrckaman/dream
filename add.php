@@ -8275,10 +8275,10 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-6">
                                                     <div class="mb-3">
-                                                        <label for="ct_value" class="form-label">96. Name of clinician</label>
-                                                        <input type="text" value="<?php if ($costing['ct_value']) {
-                                                                                        print_r($costing['ct_value']);
-                                                                                    } ?>" id="ct_value" name="ct_value" min="0" max="99" class="form-control" placeholder="Enter here" />
+                                                        <label for="clinician_name" class="form-label">96. Name of clinician</label>
+                                                        <input type="text" value="<?php if ($costing['clinician_name']) {
+                                                                                        print_r($costing['clinician_name']);
+                                                                                    } ?>" id="clinician_name" name="clinician_name" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
@@ -8294,14 +8294,14 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-4" id="zn_results_a">
-                                                    <label for="zn_results_a" class="form-label">101. Was a TB diagnosis made?</label>
+                                                <div class="col-sm-4" id="tb_diagnosis">
+                                                    <label for="tb_diagnosis" class="form-label">101. Was a TB diagnosis made?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="zn_results_a" id="zn_results_a<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['zn_results_a'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="tb_diagnosis" id="tb_diagnosis<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_diagnosis'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
                                                                                                                                                                                                         } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
@@ -8311,38 +8311,78 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="zn_results_b">
-                                                    <label for="zn_results_b" class="form-label">102. How was the TB diagnosis made? </label>
+                                                <div class="col-sm-4" id="tb_diagnosis_made">
+                                                    <label for="tb_diagnosis_made" class="form-label">102. How was the TB diagnosis made? </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('tb_diagnosis_made', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="zn_results_b" id="zn_results_b<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['zn_results_b'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
+                                                                    <input class="form-check-input" type="radio" name="tb_diagnosis_made" id="zn_results_b<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_diagnosis_made'] == $value['id']) {
+                                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                                } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
+                                                            <label for="diagnosis_made_other" class="form-label">what date ?</label>
+                                                            <input type="text" value="<?php if ($costing['diagnosis_made_other']) {
+                                                                                            print_r($costing['diagnosis_made_other']);
+                                                                                        } ?>" id="diagnosis_made_other" name="diagnosis_made_other" class="form-control" placeholder="Enter here" />
                                                         </div>
-                                                        <span>(Not mandatory)</span>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="fm_results_a">
-                                                    <label for="fm_results_a" class="form-label">103. On what test result(s) was the bacteriological diagnosis based?</label>
+                                                <div class="col-sm-4" id="bacteriological_diagnosis">
+                                                    <label for="bacteriological_diagnosis" class="form-label">103. On what test result(s) was the bacteriological diagnosis based?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('bacteriological_diagnosis', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="fm_results_a" id="fm_results_a<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['fm_results_a'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
+                                                                    <input class="form-check-input" type="radio" name="bacteriological_diagnosis" id="bacteriological_diagnosis<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['bacteriological_diagnosis'] == $value['id']) {
+                                                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                                                    } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+                                            <div class="row">
+
+                                                <div class="col-sm-3">
+                                                    <div class="mb-3">
+                                                        <label for="ct_value" class="form-label">103. If Xpert Ultra (Date?)</label>
+                                                        <input type="date" value="<?php if ($costing['bacteriological_diagnosis']) {
+                                                                                        print_r($costing['bacteriological_diagnosis']);
+                                                                                    } ?>" id="bacteriological_diagnosis" name="bacteriological_diagnosis" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="mb-3">
+                                                        <label for="ct_value" class="form-label">103. If Truenat (Date?)</label>
+                                                        <input type="date" value="<?php if ($costing['bacteriological_diagnosis']) {
+                                                                                        print_r($costing['bacteriological_diagnosis']);
+                                                                                    } ?>" id="bacteriological_diagnosis" name="bacteriological_diagnosis" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="mb-3">
+                                                        <label for="ct_value" class="form-label">103. If AFB Microscope (Date?)</label>
+                                                        <input type="date" value="<?php if ($costing['bacteriological_diagnosis']) {
+                                                                                        print_r($costing['bacteriological_diagnosis']);
+                                                                                    } ?>" id="bacteriological_diagnosis" name="bacteriological_diagnosis" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="mb-3">
+                                                        <label for="ct_value" class="form-label">103. If Other test(s),(Date?)</label>
+                                                        <input type="date" value="<?php if ($costing['bacteriological_diagnosis']) {
+                                                                                        print_r($costing['bacteriological_diagnosis']);
+                                                                                    } ?>" id="bacteriological_diagnosis" name="bacteriological_diagnosis" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -8367,7 +8407,7 @@ if ($user->isLoggedIn()) {
                                                         <span>(Not mandatory)</span>
                                                     </div>
                                                 </div>
-                                            
+
                                                 <div class="col-sm-4" id="wrd_test">
                                                     <label for="wrd_test" class="form-label">105. Was TB treatment started?</label>
                                                     <!-- radio -->
