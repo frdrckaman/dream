@@ -560,7 +560,7 @@ if ($user->isLoggedIn()) {
                         'capreomycin' => Input::get('capreomycin'),
                         'ethionamide2' => Input::get('ethionamide2'),
                         'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
-                        'nanopore_sequencing' => Input::get('nanopore_sequencing'), 
+                        'nanopore_sequencing' => Input::get('nanopore_sequencing'),
                         'rifampicin3' => Input::get('rifampicin3'),
                         'isoniazid3' => Input::get('isoniazid3'),
                         'levofloxacin3' => Input::get('levofloxacin3'),
@@ -581,6 +581,14 @@ if ($user->isLoggedIn()) {
                         'ethionamide3' => Input::get('ethionamide3'),
                         'prothionamide3' => Input::get('prothionamide3'),
                         'para_aminosalicylic_acid3' => Input::get('para_aminosalicylic_acid3'),
+                        '_1st_line_drugs' => Input::get('_1st_line_drugs'),
+                        '_2st_line_drugs' => Input::get('_2st_line_drugs'),
+                        'version_number' => Input::get('version_number'),
+                        'lot_number' => Input::get('lot_number'),
+                        'mutations_detected_list' => Input::get('mutations_detected_list'),
+                        'd_firstName' => Input::get('d_firstName'),
+                        'd_middleName' => Input::get('d_middleName'),
+                        'd_middleName' => Input::get('d_middleName'),
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
@@ -638,7 +646,7 @@ if ($user->isLoggedIn()) {
                         'capreomycin' => Input::get('capreomycin'),
                         'ethionamide2' => Input::get('ethionamide2'),
                         'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
-                        'nanopore_sequencing' => Input::get('nanopore_sequencing'), 
+                        'nanopore_sequencing' => Input::get('nanopore_sequencing'),
                         'rifampicin3' => Input::get('rifampicin3'),
                         'isoniazid3' => Input::get('isoniazid3'),
                         'levofloxacin3' => Input::get('levofloxacin3'),
@@ -659,6 +667,14 @@ if ($user->isLoggedIn()) {
                         'ethionamide3' => Input::get('ethionamide3'),
                         'prothionamide3' => Input::get('prothionamide3'),
                         'para_aminosalicylic_acid3' => Input::get('para_aminosalicylic_acid3'),
+                        '_1st_line_drugs' => Input::get('_1st_line_drugs'),
+                        '_2st_line_drugs' => Input::get('_2st_line_drugs'),
+                        'version_number' => Input::get('version_number'),
+                        'lot_number' => Input::get('lot_number'),
+                        'mutations_detected_list' => Input::get('mutations_detected_list'),
+                        'd_firstName' => Input::get('d_firstName'),
+                        'd_middleName' => Input::get('d_middleName'),
+                        'd_middleName' => Input::get('d_middleName'),
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
@@ -7918,6 +7934,121 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                             </div>
+
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-3" id="_1st_line_drugs">
+                                                    <label for="_1st_line_drugs" class="form-label">92. Line probe assay (1st line drugs). (GenoType MTBDRplus V2 )</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('_1st_line_drugs', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="_1st_line_drugs" id="_1st_line_drugs<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['_1st_line_drugs'] == $value['id']) {
+                                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" id="_2st_line_drugs">
+                                                    <label for="_1st_line_drugs" class="form-label">93. Line probe assay (2nd line drugs).
+                                                        (GenoType MTBDRsl V2).</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('_2st_line_drugs', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="_2st_line_drugs" id="_2st_line_drugs<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['_2st_line_drugs'] == $value['id']) {
+                                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <hr>
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">94. Nanopore sequencing</h3>
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <div class="mb-2">
+                                                        <label for="version_number" class="form-label">Version number:</label>
+                                                        <input type="text" value="<?php if ($costing['version_number']) {
+                                                                                        print_r($costing['version_number']);
+                                                                                    } ?>" id="version_number" name="version_number" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="mb-2">
+                                                        <label for="lot_number" class="form-label">Lot number:</label>
+                                                        <input type="text" value="<?php if ($costing['lot_number']) {
+                                                                                        print_r($costing['lot_number']);
+                                                                                    } ?>" id="lot_number" name="lot_number" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>List drug resistance mutations detected</label>
+                                                            <textarea class="form-control" name="mutations_detected_list" rows="3" placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
+                                                                                                                                                                    print_r($costing['mutations_detected_list']);
+                                                                                                                                                                }  ?>
+                                                                </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">95. This form was completed by (name)</h3>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="mb-2">
+                                                        <label for="d_firstName" class="form-label">First NAME</label>
+                                                        <input type="text" value="<?php if ($costing['d_firstName']) {
+                                                                                        print_r($costing['d_firstName']);
+                                                                                    } ?>" id="d_firstName" name="d_firstName" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="mb-2">
+                                                        <label for="d_middleName" class="form-label">Middle (Optional)</label>
+                                                        <input type="text" value="<?php if ($costing['d_middleName']) {
+                                                                                        print_r($costing['d_middleName']);
+                                                                                    } ?>" id="d_middleName" name="d_middleName" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="mb-2">
+                                                        <label for="d_surname" class="form-label">Surname:</label>
+                                                        <input type="text" value="<?php if ($costing['d_surname']) {
+                                                                                        print_r($costing['d_surname']);
+                                                                                    } ?>" id="d_surname" name="d_surname" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr>
 
 
 
