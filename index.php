@@ -87,7 +87,7 @@ if (!$user->isLoggedIn()) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pivlo Database | Log in</title>
+    <title>Dream Fund Sub-Studies Database | Log in</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -122,7 +122,7 @@ if (!$user->isLoggedIn()) {
 
     <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>PIVLO-TEST</b>&nbsp;Database</a>
+            <a href="#"><b>Dream Fund Sub-Studies</b>&nbsp;Database</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
