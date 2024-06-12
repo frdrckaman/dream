@@ -8754,95 +8754,784 @@ if ($user->isLoggedIn()) {
             </div>
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 16) { ?>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>Add Participant enrolment form</h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status']; ?>">
+                                            < Back</a>
+                                    </li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item">
+                                        <a href="info.php?id=3&status=<?= $_GET['status']; ?>">
+                                            <?php if ($_GET['status'] == 1) { ?>
+                                                Go to screening list >
+                                            <?php } elseif ($_GET['status'] == 2) { ?>
+                                                Go to eligible list >
+                                            <?php } elseif ($_GET['status'] == 3) { ?>
+                                                Go to enrollment list >
+                                            <?php } elseif ($_GET['status'] == 4) { ?>
+                                                Go to terminated / end study list >
+                                            <?php } elseif ($_GET['status'] == 5) { ?>
+                                                Go to registered list >
+                                            <?php } elseif ($_GET['status'] == 6) { ?>
+                                                Go to registered list >
+                                            <?php } elseif ($_GET['status'] == 7) { ?>
+                                                Go to registered list >
+                                            <?php } ?>
+                                        </a>
+                                    </li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item active">Add New Client</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <?php
+                            $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid'])[0];
+                            $relation = $override->get('relation', 'id', $clients['relation_patient'])[0];
+                            $sex = $override->get('sex', 'id', $clients['sex'])[0];
+                            $education = $override->get('education', 'id', $clients['education'])[0];
+                            $occupation = $override->get('occupation', 'id', $clients['occupation'])[0];
+                            $insurance = $override->get('insurance', 'id', $clients['health_insurance'])[0];
+                            $payments = $override->get('payments', 'id', $clients['pay_services'])[0];
+                            $household = $override->get('household', 'id', $clients['head_household'])[0];
+
+                            $regions = $override->get('regions', 'id', $clients['region'])[0];
+                            $districts = $override->get('districts', 'id', $clients['district'])[0];
+                            $wards = $override->get('wards', 'id', $clients['ward'])[0];
+                            $facility = $override->get('districts', 'id', $clients['facility_district'])[0];
+                            ?>
+                            <!-- right column -->
+                            <div class="col-md-12">
+                                <!-- general form elements disabled -->
+                                <div class="card card-warning">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Reason(s) for being regarded a presumptive TB patient at initial assessment (Multiple selection)</h3>
+                                    </div>
+                                </div>
+                                <!-- /.card-header -->
+                                <form id="clients" enctype="multipart/form-data" method="post" autocomplete="off">
+                                    <div class="card-body">
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="row-form clearfix">
+                                                    <!-- select -->
+                                                    <div class="form-group">
+                                                        <label>Date of Visit:</label>
+                                                        <input class="form-control" type="date" max="<?= date('Y-m-d'); ?>" name="visit_date" id="visit_date" value="<?php if ($clients['visit_date']) {
+                                                                                                                                                                            print_r($clients['visit_date']);
+                                                                                                                                                                        }  ?>" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>12. Cough of >2 weeks</label>
+                                                        <select id="cough2weeks" name="cough2weeks" class="form-control" required>
+                                                            <?php $cough2weeks = $override->get('yes_no', 'id', $clients['cough2weeks'])[0]; ?>
+                                                            <option value="<?= $cough2weeks['id'] ?>"><?php if ($clients['cough2weeks']) {
+                                                                                                            print_r($cough2weeks['name']);
+                                                                                                        } else {
+                                                                                                            echo 'Select';
+                                                                                                        } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
-        <?php } elseif ($_GET['id'] == 17) { ?>
+                                            <div class="col-sm-3">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>13. Cough any duration for PLHIV</label>
+                                                        <select id="cough_any" name="cough_any" class="form-control" required>
+                                                            <?php $cough_any = $override->get('yes_no', 'id', $clients['cough_any'])[0]; ?>
+                                                            <option value="<?= $cough_any['id'] ?>"><?php if ($clients['cough_any']) {
+                                                                                                        print_r($cough_any['name']);
+                                                                                                    } else {
+                                                                                                        echo 'Select';
+                                                                                                    } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-        <?php } elseif ($_GET['id'] == 18) { ?>
+                                            <div class="col-sm-3">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>14. Poor weight gain or loss of weight</label>
+                                                        <select id="poor_weight" name="poor_weight" class="form-control" required>
+                                                            <?php $poor_weight = $override->get('yes_no', 'id', $clients['poor_weight'])[0]; ?>
+                                                            <option value="<?= $poor_weight['id'] ?>"><?php if ($clients['poor_weight']) {
+                                                                                                            print_r($poor_weight['name']);
+                                                                                                        } else {
+                                                                                                            echo 'Select';
+                                                                                                        } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-        <?php } elseif ($_GET['id'] == 19) { ?>
+                                            <div class="col-sm-3">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>15. Coughing up blood</label>
+                                                        <select id="coughing_blood" name="coughing_blood" class="form-control" required>
+                                                            <?php $coughing_blood = $override->get('yes_no', 'id', $clients['coughing_blood'])[0]; ?>
+                                                            <option value="<?= $coughing_blood['id'] ?>"><?php if ($clients['coughing_blood']) {
+                                                                                                                print_r($coughing_blood['name']);
+                                                                                                            } else {
+                                                                                                                echo 'Select';
+                                                                                                            } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-        <?php } elseif ($_GET['id'] == 20) { ?>
+                                        <hr>
 
-        <?php } elseif ($_GET['id'] == 21) { ?>
 
-        <?php } elseif ($_GET['id'] == 22) { ?>
+                                        <div class="row">
 
-        <?php } elseif ($_GET['id'] == 23) { ?>
-        <?php } elseif ($_GET['id'] == 24) { ?>
-        <?php } elseif ($_GET['id'] == 25) { ?>
-        <?php } elseif ($_GET['id'] == 26) { ?>
-        <?php } elseif ($_GET['id'] == 27) { ?>
-        <?php } elseif ($_GET['id'] == 28) { ?>
+                                            <div class="col-sm-3">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>16. Unexplained fever</label>
+                                                        <select id="unexplained_fever" name="unexplained_fever" class="form-control" required>
+                                                            <?php $unexplained_fever = $override->get('yes_no', 'id', $clients['unexplained_fever'])[0]; ?>
+                                                            <option value="<?= $unexplained_fever['id'] ?>"><?php if ($clients['unexplained_fever']) {
+                                                                                                                print_r($unexplained_fever['name']);
+                                                                                                            } else {
+                                                                                                                echo 'Select';
+                                                                                                            } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-        <?php } ?>
 
-        <?php include 'footer.php'; ?>
+                                            <div class="col-sm-3">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>17. Drenching night sweats</label>
+                                                        <select id="night_sweats" name="night_sweats" class="form-control" required>
+                                                            <?php $night_sweats = $override->get('yes_no', 'id', $clients['night_sweats'])[0]; ?>
+                                                            <option value="<?= $night_sweats['id'] ?>"><?php if ($clients['night_sweats']) {
+                                                                                                            print_r($night_sweats['name']);
+                                                                                                        } else {
+                                                                                                            echo 'Select';
+                                                                                                        } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+                                            <div class="col-sm-3">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>18. Enlarged neck lymph nodes</label>
+                                                        <select id="neck_lymph" name="neck_lymph" class="form-control" required>
+                                                            <?php $neck_lymph = $override->get('yes_no', 'id', $clients['neck_lymph'])[0]; ?>
+                                                            <option value="<?= $neck_lymph['id'] ?>"><?php if ($clients['neck_lymph']) {
+                                                                                                            print_r($neck_lymph['name']);
+                                                                                                        } else {
+                                                                                                            echo 'Select';
+                                                                                                        } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>19. Contact history with infectious TB patient</label>
+                                                        <select id="history_tb" name="history_tb" class="form-control" required>
+                                                            <?php $history_tb = $override->get('yes_no', 'id', $clients['history_tb'])[0]; ?>
+                                                            <option value="<?= $history_tb['id'] ?>"><?php if ($clients['history_tb']) {
+                                                                                                            print_r($history_tb['name']);
+                                                                                                        } else {
+                                                                                                            echo 'Select';
+                                                                                                        } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+                                        <div class="card card-warning">
+                                            <div class="card-header">
+                                                <h3 class="card-title">History of TB and previous treatment</h3>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+
+                                        <div class="row">
+
+                                            <div class="col-sm-4">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>20. Was the participant treated for TB before?</label>
+                                                        <select id="tx_previous" name="tx_previous" class="form-control" required>
+                                                            <?php $tx_previous = $override->get('yes_no', 'id', $clients['tx_previous'])[0]; ?>
+                                                            <option value="<?= $tx_previous['id'] ?>"><?php if ($clients['tx_previous']) {
+                                                                                                            print_r($tx_previous['name']);
+                                                                                                        } else {
+                                                                                                            echo 'Select';
+                                                                                                        } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-sm-4">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>21. If yes, how many times</label>
+                                                        <input class="form-control" type="number" name="tx_number" id="tx_number" placeholder="Type how many ... " value="<?php if ($clients['tx_number']) {
+                                                                                                                                                                                print_r($clients['tx_number']);
+                                                                                                                                                                            }  ?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>22. Was it DR or DS TB (Multiple options)</label>
+                                                        <select id="dr_ds" name="dr_ds" class="form-control">
+                                                            <?php $dr_ds = $override->get('dr_ds', 'id', $clients['dr_ds'])[0]; ?>
+                                                            <option value="<?= $dr_ds['id'] ?>"><?php if ($clients['dr_ds']) {
+                                                                                                    print_r($dr_ds['name']);
+                                                                                                } else {
+                                                                                                    echo 'Select';
+                                                                                                } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('dr_ds', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="row">
+
+                                            <div class="col-sm-4">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>23. What category is the previously treated patient </label>
+                                                        <select id="tb_category" name="tb_category" class="form-control">
+                                                            <?php $tb_category = $override->get('tb_category', 'id', $clients['tb_category'])[0]; ?>
+                                                            <option value="<?= $tb_category['id'] ?>"><?php if ($clients['tb_category']) {
+                                                                                                            print_r($tb_category['name']);
+                                                                                                        } else {
+                                                                                                            echo 'Select';
+                                                                                                        } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('tb_category', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>24. If relapse how long ago was the participant treated for TB? (years)</label>
+                                                        <input class="form-control" type="number" name="relapse_years" id="relapse_years" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['relapse_years']) {
+                                                                                                                                                                                                            print_r($clients['relapse_years']);
+                                                                                                                                                                                                        }  ?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>25. If LTF for how long the participant received TB treatment? (months)</label>
+                                                        <input class="form-control" type="number" name="ltf_months" id="ltf_months" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['ltf_months']) {
+                                                                                                                                                                                                    print_r($clients['ltf_months']);
+                                                                                                                                                                                                }  ?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="row">
+
+                                            <div class="col-sm-4">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>26. Which treatment regimen was initiated </label>
+                                                        <select id="tb_regimen" name="tb_regimen" class="form-control">
+                                                            <?php $tb_regimen = $override->get('tb_regimen', 'id', $clients['tb_regimen'])[0]; ?>
+                                                            <option value="<?= $tb_regimen['id'] ?>"><?php if ($clients['tb_regimen']) {
+                                                                                                            print_r($tb_regimen['name']);
+                                                                                                        } else {
+                                                                                                            echo 'Select';
+                                                                                                        } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('tb_regimen', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>27. How long was the treatment regimen (months)</label>
+                                                        <input class="form-control" type="number" name="regimen_months" id="regimen_months" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['regimen_months']) {
+                                                                                                                                                                                                            print_r($clients['regimen_months']);
+                                                                                                                                                                                                        }  ?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>28. Was the regimen changed during treatment (individualized?)</label>
+                                                        <select id="regimen_changed" name="regimen_changed" class="form-control">
+                                                            <?php $regimen_changed = $override->get('yes_no', 'id', $clients['regimen_changed'])[0]; ?>
+                                                            <option value="<?= $regimen_changed['id'] ?>"><?php if ($clients['regimen_changed']) {
+                                                                                                                print_r($regimen_changed['name']);
+                                                                                                            } else {
+                                                                                                                echo 'Select';
+                                                                                                            } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="row">
+
+                                            <div class="col-sm-6">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>29. If yes, the treatment regimen was changed what was the new regimen</label>
+                                                        <input class="form-control" type="text" name="regimen_name" id="regimen_name" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['regimen_name']) {
+                                                                                                                                                                                                        print_r($clients['regimen_name']);
+                                                                                                                                                                                                    }  ?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>30. What was the treatment outcome?</label>
+                                                        <select id="tb_otcome" name="tb_otcome" class="form-control">
+                                                            <?php $tb_otcome = $override->get('tb_otcome', 'id', $clients['regimen_changed'])[0]; ?>
+                                                            <option value="<?= $tb_otcome['id'] ?>"><?php if ($clients['regimen_changed']) {
+                                                                                                        print_r($tb_otcome['name']);
+                                                                                                    } else {
+                                                                                                        echo 'Select';
+                                                                                                    } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('tb_otcome', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+                                        <div class="card card-warning">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Health-related conditions</h3>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>31. HIV status </label>
+                                                        <select id="hiv_status" name="hiv_status" class="form-control">
+                                                            <?php $hiv_status = $override->get('hiv_status', 'id', $clients['hiv_status'])[0]; ?>
+                                                            <option value="<?= $hiv_status['id'] ?>"><?php if ($clients['hiv_status']) {
+                                                                                                            print_r($hiv_status['name']);
+                                                                                                        } else {
+                                                                                                            echo 'Select';
+                                                                                                        } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('hiv_status', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3" id="immunosuppressive">
+                                                <label>32. Do you have other immunosuppressive diseases?</label>
+                                                <!-- radio -->
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <?php foreach ($override->get('yes_no_unknown', 'status', 1) as $value) { ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="immunosuppressive" id="immunosuppressive<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['immunosuppressive'] == $value['id']) {
+                                                                                                                                                                                                                    echo 'checked' . ' ' . 'required';
+                                                                                                                                                                                                                } ?>>
+                                                                <label class="form-check-label"><?= $value['name']; ?></label>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <label>33. If yes specify</label>
+                                                        <input class="form-control" type="number" name="immunosuppressive_specify" id="immunosuppressive_specify" placeholder="Type here..." value="<?php if ($clients['immunosuppressive_specify']) {
+                                                                                                                                                                                                        print_r($clients['immunosuppressive_specify']);
+                                                                                                                                                                                                    }  ?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3" id="other_diseases">
+                                                <label>34. Other relevant diseases/medical conditions</label>
+                                                <!-- radio -->
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <?php foreach ($override->get('yes_no_unknown', 'status', 1) as $value) { ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="other_diseases" id="other_diseases<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['other_diseases'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked' . ' ' . 'required';
+                                                                                                                                                                                                        } ?>>
+                                                                <label class="form-check-label"><?= $value['name']; ?></label>
+                                                            </div>
+                                                        <?php } ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3" id="diseases_medical">
+                                                <label>34. If yes, Select relevant diseases/medical conditions</label>
+                                                <!-- radio -->
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <?php foreach ($override->get('diseases_medical', 'status', 1) as $value) { ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="diseases_medical" id="diseases_medical<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['diseases_medical'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked' . ' ' . 'required';
+                                                                                                                                                                                                            } ?>>
+                                                                <label class="form-check-label"><?= $value['name']; ?></label>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <label>34. If Other specify</label>
+                                                        <input class="form-control" type="number" name="diseases_specify" id="diseases_specify" placeholder="Type here..." value="<?php if ($clients['diseases_specify']) {
+                                                                                                                                                                                        print_r($clients['diseases_specify']);
+                                                                                                                                                                                    }  ?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="card card-warning">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Samples collected</h3>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>35. Were two sputum samples collected? </label>
+                                                        <select id="sputum_collected" name="sputum_collected" class="form-control">
+                                                            <?php $sputum_collected = $override->get('yes_no', 'id', $clients['sputum_collected'])[0]; ?>
+                                                            <option value="<?= $sputum_collected['id'] ?>"><?php if ($clients['sputum_collected']) {
+                                                                                                                print_r($sputum_collected['name']);
+                                                                                                            } else {
+                                                                                                                echo 'Select';
+                                                                                                            } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4" id="sample_date">
+                                                <!-- radio -->
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>36. Date of respiratory sample collection </label>
+                                                        <input class="form-control" type="date" name="sample_date" id="sample_date" value="<?php if ($clients['sample_date']) {
+                                                                                                                                                print_r($clients['sample_date']);
+                                                                                                                                            }  ?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-sm-4" id="other_samples">
+                                                <label>37. Were any other diagnostic samples requested? </label>
+                                                <!-- radio -->
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <?php foreach ($override->get('yes_no_sample', 'status', 1) as $value) { ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="other_samples" id="other_samples<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['other_samples'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
+                                                                <label class="form-check-label"><?= $value['name']; ?></label>
+                                                            </div>
+                                                        <?php } ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="row">
+
+                                            <div class="col-sm-4" id="sputum_samples">
+                                                <label>38. Tick all that apply and fill date for each sample ticked </label>
+                                                <!-- radio -->
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <?php foreach ($override->get('sputum_samples', 'status', 1) as $value) { ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="sputum_samples" id="sputum_samples<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['other_samples'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked' . ' ' . 'required';
+                                                                                                                                                                                                        } ?>>
+                                                                <label class="form-check-label"><?= $value['name']; ?></label>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <label>38. Date</label>
+                                                        <input class="form-control" type="date" name="sputum_samples_date" id="sputum_samples_date" value="<?php if ($clients['sputum_samples_date']) {
+                                                                                                                                                                print_r($clients['sputum_samples_date']);
+                                                                                                                                                            }  ?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4" id="chest_x_ray">
+                                                <label>39. Was chest X-ray requested? </label>
+                                                <!-- radio -->
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="chest_x_ray" id="chest_x_ray<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['chest_x_ray'] == $value['id']) {
+                                                                                                                                                                                                        echo 'checked' . ' ' . 'required';
+                                                                                                                                                                                                    } ?>>
+                                                                <label class="form-check-label"><?= $value['name']; ?></label>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <label>38.If Specify Date</label>
+                                                        <input class="form-control" type="date" name="chest_x_ray_date" id="chest_x_ray_date" value="<?php if ($clients['chest_x_ray_date']) {
+                                                                                                                                                            print_r($clients['chest_x_ray_date']);
+                                                                                                                                                        }  ?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4" id="enrollment_completed">
+                                                <!-- radio -->
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>40. This form was completed by (name) </label>
+                                                        <input class="form-control" type="text" name="enrollment_completed" id="enrollment_completed" value="<?php if ($clients['enrollment_completed']) {
+                                                                                                                                                                    print_r($clients['enrollment_completed']);
+                                                                                                                                                                }  ?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <a href="info.php?id=3&status=<?= $_GET['status']; ?>" class="btn btn-default">Back</a>
+                                        <input type="submit" name="add_client" value="Submit" class="btn btn-primary">
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!--/.col (right) -->
+                    </div>
+                    <!-- /.row -->
+            </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
     </div>
-    <!-- ./wrapper -->
+    <!-- /.content-wrapper -->
 
-    <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Select2 -->
-    <script src="plugins/select2/js/select2.full.min.js"></script>
-    <!-- Bootstrap4 Duallistbox -->
-    <script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-    <!-- InputMask -->
-    <script src="plugins/moment/moment.min.js"></script>
-    <script src="plugins/inputmask/jquery.inputmask.min.js"></script>
-    <!-- date-range-picker -->
-    <script src="plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- bootstrap color picker -->
-    <script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Bootstrap Switch -->
-    <script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-    <!-- BS-Stepper -->
-    <script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
-    <!-- dropzonejs -->
-    <script src="plugins/dropzone/min/dropzone.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <!-- <script src="../../dist/js/demo.js"></script> -->
-    <!-- Page specific script -->
+<?php } elseif ($_GET['id'] == 17) { ?>
+
+<?php } elseif ($_GET['id'] == 18) { ?>
+
+<?php } elseif ($_GET['id'] == 19) { ?>
+
+<?php } elseif ($_GET['id'] == 20) { ?>
+
+<?php } elseif ($_GET['id'] == 21) { ?>
+
+<?php } elseif ($_GET['id'] == 22) { ?>
+
+<?php } elseif ($_GET['id'] == 23) { ?>
+<?php } elseif ($_GET['id'] == 24) { ?>
+<?php } elseif ($_GET['id'] == 25) { ?>
+<?php } elseif ($_GET['id'] == 26) { ?>
+<?php } elseif ($_GET['id'] == 27) { ?>
+<?php } elseif ($_GET['id'] == 28) { ?>
+
+<?php } ?>
+
+<?php include 'footer.php'; ?>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<!-- <script src="../../dist/js/demo.js"></script> -->
+<!-- Page specific script -->
 
 
-    <!-- clients Js -->
-    <script src="myjs/add/clients/insurance.js"></script>
-    <script src="myjs/add/clients/insurance_name.js"></script>
-    <script src="myjs/add/clients/relation_patient.js"></script>
-    <!-- <script src="myjs/add/clients/validate_hidden_with_values.js"></script>
+<!-- clients Js -->
+<script src="myjs/add/clients/insurance.js"></script>
+<script src="myjs/add/clients/insurance_name.js"></script>
+<script src="myjs/add/clients/relation_patient.js"></script>
+<!-- <script src="myjs/add/clients/validate_hidden_with_values.js"></script>
     <script src="myjs/add/clients/validate_required_attribute.js"></script>
     <script src="myjs/add/clients/validate_required_radio_checkboxes.js"></script> -->
 
-    <!-- SCREENING Js -->
-    <script src="myjs/add/screening/conset.js"></script>
-    <script src="myjs/add/screening/art.js"></script>
+<!-- SCREENING Js -->
+<script src="myjs/add/screening/conset.js"></script>
+<script src="myjs/add/screening/art.js"></script>
 
 
 
-    <!-- HISTORY Js -->
-    <script src="myjs/add/history/art_regimen.js"></script>
-    <script src="myjs/add/history/tb.js"></script>
-    <script src="myjs/add/history/first_line.js"></script>
-    <script src="myjs/add/history/second_line.js"></script>
-    <script src="myjs/add/history/third_line.js"></script>
-    <script src="myjs/add/history"></script>
+<!-- HISTORY Js -->
+<script src="myjs/add/history/art_regimen.js"></script>
+<script src="myjs/add/history/tb.js"></script>
+<script src="myjs/add/history/first_line.js"></script>
+<script src="myjs/add/history/second_line.js"></script>
+<script src="myjs/add/history/third_line.js"></script>
+<script src="myjs/add/history"></script>
 
 
 
-    <!-- economics format numbers Js -->
-    <!-- <script src="myjs/add/economics/format_thousands/consultation.js"></script>
+<!-- economics format numbers Js -->
+<!-- <script src="myjs/add/economics/format_thousands/consultation.js"></script>
     <script src="myjs/add/economics/format_thousands/days.js"></script>
     <script src="myjs/add/economics/format_thousands/diagnostic.js"></script>
     <script src="myjs/add/economics/format_thousands/food_drinks.js"></script>
@@ -8861,205 +9550,205 @@ if ($user->isLoggedIn()) {
 
 
 
-    <script>
-        $(function() {
-            //Initialize Select2 Elements
-            $('.select2').select2()
+<script>
+    $(function() {
+        //Initialize Select2 Elements
+        $('.select2').select2()
 
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            })
-
-            //Datemask dd/mm/yyyy
-            $('#datemask').inputmask('dd/mm/yyyy', {
-                'placeholder': 'dd/mm/yyyy'
-            })
-            //Datemask2 mm/dd/yyyy
-            $('#datemask2').inputmask('mm/dd/yyyy', {
-                'placeholder': 'mm/dd/yyyy'
-            })
-            //Money Euro
-            $('[data-mask]').inputmask()
-
-            //Date picker
-            $('#reservationdate').datetimepicker({
-                format: 'L'
-            });
-
-            //Date and time picker
-            $('#reservationdatetime').datetimepicker({
-                icons: {
-                    time: 'far fa-clock'
-                }
-            });
-
-            //Date range picker
-            $('#reservation').daterangepicker()
-            //Date range picker with time picker
-            $('#reservationtime').daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 30,
-                locale: {
-                    format: 'MM/DD/YYYY hh:mm A'
-                }
-            })
-            //Date range as a button
-            $('#daterange-btn').daterangepicker({
-                    ranges: {
-                        'Today': [moment(), moment()],
-                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                        'This Month': [moment().startOf('month'), moment().endOf('month')],
-                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                    },
-                    startDate: moment().subtract(29, 'days'),
-                    endDate: moment()
-                },
-                function(start, end) {
-                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-                }
-            )
-
-            //Timepicker
-            $('#timepicker').datetimepicker({
-                format: 'LT'
-            })
-
-            //Bootstrap Duallistbox
-            $('.duallistbox').bootstrapDualListbox()
-
-            //Colorpicker
-            $('.my-colorpicker1').colorpicker()
-            //color picker with addon
-            $('.my-colorpicker2').colorpicker()
-
-            $('.my-colorpicker2').on('colorpickerChange', function(event) {
-                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-            })
-
-            $("input[data-bootstrap-switch]").each(function() {
-                $(this).bootstrapSwitch('state', $(this).prop('checked'));
-            })
-
-            $('#regions_id').change(function() {
-                var region_id = $(this).val();
-                $.ajax({
-                    url: "process.php?content=region_id",
-                    method: "GET",
-                    data: {
-                        region_id: region_id
-                    },
-                    dataType: "text",
-                    success: function(data) {
-                        $('#districts_id').html(data);
-                    }
-                });
-            });
-
-            $('#region').change(function() {
-                var region = $(this).val();
-                $.ajax({
-                    url: "process.php?content=region_id",
-                    method: "GET",
-                    data: {
-                        region_id: region
-                    },
-                    dataType: "text",
-                    success: function(data) {
-                        $('#district').html(data);
-                    }
-                });
-            });
-
-            $('#district').change(function() {
-                var district_id = $(this).val();
-                $.ajax({
-                    url: "process.php?content=district_id",
-                    method: "GET",
-                    data: {
-                        district_id: district_id
-                    },
-                    dataType: "text",
-                    success: function(data) {
-                        $('#ward').html(data);
-                    }
-                });
-            });
-
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
         })
 
-        // BS-Stepper Init
-        document.addEventListener('DOMContentLoaded', function() {
-            window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+        //Datemask dd/mm/yyyy
+        $('#datemask').inputmask('dd/mm/yyyy', {
+            'placeholder': 'dd/mm/yyyy'
         })
-
-        // DropzoneJS Demo Code Start
-        Dropzone.autoDiscover = false
-
-        // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
-        var previewNode = document.querySelector("#template")
-        previewNode.id = ""
-        var previewTemplate = previewNode.parentNode.innerHTML
-        previewNode.parentNode.removeChild(previewNode)
-
-        var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-            url: "/target-url", // Set the url
-            thumbnailWidth: 80,
-            thumbnailHeight: 80,
-            parallelUploads: 20,
-            previewTemplate: previewTemplate,
-            autoQueue: false, // Make sure the files aren't queued until manually added
-            previewsContainer: "#previews", // Define the container to display the previews
-            clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+        //Datemask2 mm/dd/yyyy
+        $('#datemask2').inputmask('mm/dd/yyyy', {
+            'placeholder': 'mm/dd/yyyy'
         })
+        //Money Euro
+        $('[data-mask]').inputmask()
 
-        myDropzone.on("addedfile", function(file) {
-            // Hookup the start button
-            file.previewElement.querySelector(".start").onclick = function() {
-                myDropzone.enqueueFile(file)
+        //Date picker
+        $('#reservationdate').datetimepicker({
+            format: 'L'
+        });
+
+        //Date and time picker
+        $('#reservationdatetime').datetimepicker({
+            icons: {
+                time: 'far fa-clock'
+            }
+        });
+
+        //Date range picker
+        $('#reservation').daterangepicker()
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY hh:mm A'
             }
         })
+        //Date range as a button
+        $('#daterange-btn').daterangepicker({
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment()
+            },
+            function(start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+            }
+        )
 
-        // Update the total progress bar
-        myDropzone.on("totaluploadprogress", function(progress) {
-            document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+        //Timepicker
+        $('#timepicker').datetimepicker({
+            format: 'LT'
         })
 
-        myDropzone.on("sending", function(file) {
-            // Show the total progress bar when upload starts
-            document.querySelector("#total-progress").style.opacity = "1"
-            // And disable the start button
-            file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+        //Bootstrap Duallistbox
+        $('.duallistbox').bootstrapDualListbox()
+
+        //Colorpicker
+        $('.my-colorpicker1').colorpicker()
+        //color picker with addon
+        $('.my-colorpicker2').colorpicker()
+
+        $('.my-colorpicker2').on('colorpickerChange', function(event) {
+            $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
         })
 
-        // Hide the total progress bar when nothing's uploading anymore
-        myDropzone.on("queuecomplete", function(progress) {
-            document.querySelector("#total-progress").style.opacity = "0"
+        $("input[data-bootstrap-switch]").each(function() {
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
         })
 
-        // Setup the buttons for all transfers
-        // The "add files" button doesn't need to be setup because the config
-        // `clickable` has already been specified.
-        document.querySelector("#actions .start").onclick = function() {
-            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+        $('#regions_id').change(function() {
+            var region_id = $(this).val();
+            $.ajax({
+                url: "process.php?content=region_id",
+                method: "GET",
+                data: {
+                    region_id: region_id
+                },
+                dataType: "text",
+                success: function(data) {
+                    $('#districts_id').html(data);
+                }
+            });
+        });
+
+        $('#region').change(function() {
+            var region = $(this).val();
+            $.ajax({
+                url: "process.php?content=region_id",
+                method: "GET",
+                data: {
+                    region_id: region
+                },
+                dataType: "text",
+                success: function(data) {
+                    $('#district').html(data);
+                }
+            });
+        });
+
+        $('#district').change(function() {
+            var district_id = $(this).val();
+            $.ajax({
+                url: "process.php?content=district_id",
+                method: "GET",
+                data: {
+                    district_id: district_id
+                },
+                dataType: "text",
+                success: function(data) {
+                    $('#ward').html(data);
+                }
+            });
+        });
+
+    })
+
+    // BS-Stepper Init
+    document.addEventListener('DOMContentLoaded', function() {
+        window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+    })
+
+    // DropzoneJS Demo Code Start
+    Dropzone.autoDiscover = false
+
+    // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+    var previewNode = document.querySelector("#template")
+    previewNode.id = ""
+    var previewTemplate = previewNode.parentNode.innerHTML
+    previewNode.parentNode.removeChild(previewNode)
+
+    var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+        url: "/target-url", // Set the url
+        thumbnailWidth: 80,
+        thumbnailHeight: 80,
+        parallelUploads: 20,
+        previewTemplate: previewTemplate,
+        autoQueue: false, // Make sure the files aren't queued until manually added
+        previewsContainer: "#previews", // Define the container to display the previews
+        clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+    })
+
+    myDropzone.on("addedfile", function(file) {
+        // Hookup the start button
+        file.previewElement.querySelector(".start").onclick = function() {
+            myDropzone.enqueueFile(file)
         }
-        document.querySelector("#actions .cancel").onclick = function() {
-            myDropzone.removeAllFiles(true)
-        }
-        // DropzoneJS Demo Code End
+    })
+
+    // Update the total progress bar
+    myDropzone.on("totaluploadprogress", function(progress) {
+        document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+    })
+
+    myDropzone.on("sending", function(file) {
+        // Show the total progress bar when upload starts
+        document.querySelector("#total-progress").style.opacity = "1"
+        // And disable the start button
+        file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+    })
+
+    // Hide the total progress bar when nothing's uploading anymore
+    myDropzone.on("queuecomplete", function(progress) {
+        document.querySelector("#total-progress").style.opacity = "0"
+    })
+
+    // Setup the buttons for all transfers
+    // The "add files" button doesn't need to be setup because the config
+    // `clickable` has already been specified.
+    document.querySelector("#actions .start").onclick = function() {
+        myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+    }
+    document.querySelector("#actions .cancel").onclick = function() {
+        myDropzone.removeAllFiles(true)
+    }
+    // DropzoneJS Demo Code End
 
 
-        // $("#packs_per_day, #packs_per_day").on("input", function() {
-        //     setTimeout(function() {
-        //         var weight = $("#packs_per_day").val();
-        //         var height = $("#packs_per_day").val() / 100; // Convert cm to m
-        //         var bmi = weight / (height * height);
-        //         $("#packs_per_year").text(bmi.toFixed(2));
-        //     }, 1);
-        // });
-    </script>
+    // $("#packs_per_day, #packs_per_day").on("input", function() {
+    //     setTimeout(function() {
+    //         var weight = $("#packs_per_day").val();
+    //         var height = $("#packs_per_day").val() / 100; // Convert cm to m
+    //         var bmi = weight / (height * height);
+    //         $("#packs_per_year").text(bmi.toFixed(2));
+    //     }, 1);
+    // });
+</script>
 
 </body>
 
