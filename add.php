@@ -229,16 +229,15 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                // $date = date('Y-m-d', strtotime('+1 month', strtotime('2015-01-01')));
                 try {
                     $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid']);
 
-                    $years = $user->dateDiffYears(Input::get('date_registered'), Input::get('dob'));
-                    $age = $user->dateDiffYears(Input::get('date_registered'), Input::get('dob'));
+                    $years = $user->dateDiffYears(Input::get('date_enrolled'), Input::get('dob'));
+                    $age = $user->dateDiffYears(Input::get('date_enrolled'), Input::get('dob'));
 
                     if ($clients) {
                         $user->updateRecord('clients', array(
-                            'sequence' => -2,
+                            'sequence' => -1,
                             'visit_code' => 'RV',
                             'visit_name' => 'Registration Visit',
                             'clinician_firstname' => Input::get('clinician_firstname'),
@@ -274,13 +273,13 @@ if ($user->isLoggedIn()) {
                             'update_id' => $user->data()->id,
                         ), $_GET['cid']);
 
-                        $visit = $override->get3('visit', 'status', 1, 'patient_id', $clients[0]['id'], 'sequence', -2);
+                        $visit = $override->get3('visit', 'status', 1, 'patient_id', $clients[0]['id'], 'sequence', 0);
 
                         if ($visit) {
                             $user->updateRecord('visit', array(
-                                'sequence' => -2,
-                                'visit_code' => 'RV',
-                                'visit_name' => 'Registration Visit',
+                                'sequence' => 0,
+                                'visit_code' => 'SV',
+                                'visit_name' => 'Screening Visit',
                                 'respondent' => 2,
                                 'study_id' => $clients[0]['study_id'],
                                 'pid' => $clients[0]['study_id'],
@@ -300,9 +299,9 @@ if ($user->isLoggedIn()) {
                             ), $visit[0]['id']);
                         } else {
                             $user->createRecord('visit', array(
-                                'sequence' => -2,
-                                'visit_code' => 'RV',
-                                'visit_name' => 'Registration Visit',
+                                'sequence' => 0,
+                                'visit_code' => 'SV',
+                                'visit_name' => 'Screening Visit',
                                 'respondent' => 2,
                                 'study_id' => $clients[0]['study_id'],
                                 'pid' => $clients[0]['study_id'],
@@ -328,7 +327,7 @@ if ($user->isLoggedIn()) {
                         $std_id = $override->getNews('study_id', 'site_id', Input::get('site'), 'status', 0)[0];
 
                         $user->createRecord('clients', array(
-                            'sequence' => -2,
+                            'sequence' => -1,
                             'visit_code' => 'RV',
                             'visit_name' => 'Registration Visit',
                             'clinician_firstname' => Input::get('clinician_firstname'),
@@ -375,9 +374,9 @@ if ($user->isLoggedIn()) {
                         ), $std_id['id']);
 
                         $user->createRecord('visit', array(
-                            'sequence' => -2,
-                            'visit_code' => 'RV',
-                            'visit_name' => 'Registration Visit',
+                            'sequence' => 0,
+                            'visit_code' => 'SV',
+                            'visit_name' => 'Screening Visit',
                             'respondent' => 2,
                             'study_id' => $std_id['study_id'],
                             'pid' => $std_id['study_id'],
@@ -410,21 +409,15 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                // $date = date('Y-m-d', strtotime('+1 month', strtotime('2015-01-01')));
                 try {
                     $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid'])[0];
                     $enrollment_form = $override->getNews('enrollment_form', 'status', 1, 'patient_id', $_GET['cid']);
 
-                    $years = $user->dateDiffYears(Input::get('date_registered'), Input::get('dob'));
-                    $age = $user->dateDiffYears(Input::get('date_registered'), Input::get('dob'));
+                    $diseases_medical = implode(',', Input::get('diseases_medical'));
+                    $sputum_samples = implode(',', Input::get('sputum_samples'));
 
                     if ($enrollment_form) {
                         $user->updateRecord('enrollment_form', array(
-                            'vid' => $_GET['vid'],
-                            'sequence' => $_GET['sequence'],
-                            'visit_code' => $_GET['visit_code'],
-                            'pid' => $clients['study_id'],
-                            'study_id' => $clients['study_id'],
                             'visit_date' => Input::get('visit_date'),
                             'cough2weeks' => Input::get('cough2weeks'),
                             'cough_any' => Input::get('cough_any'),
@@ -449,18 +442,16 @@ if ($user->isLoggedIn()) {
                             'immunosuppressive' => Input::get('immunosuppressive'),
                             'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
                             'other_diseases' => Input::get('other_diseases'),
-                            'diseases_medical' => Input::get('diseases_medical'),
+                            'diseases_medical' => $diseases_medical,
                             'diseases_specify' => Input::get('diseases_specify'),
                             'sputum_collected' => Input::get('sputum_collected'),
                             'sample_date' => Input::get('sample_date'),
                             'other_samples' => Input::get('other_samples'),
-                            'sputum_samples' => Input::get('sputum_samples'),
+                            'sputum_samples' => $sputum_samples,
                             'sputum_samples_date' => Input::get('sputum_samples_date'),
                             'chest_x_ray' => Input::get('chest_x_ray'),
                             'chest_x_ray_date' => Input::get('chest_x_ray_date'),
                             'enrollment_completed' => Input::get('enrollment_completed'),
-                            'respondent' => 2,
-                            'status' => 1,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                         ), $_GET['cid']);
@@ -497,27 +488,29 @@ if ($user->isLoggedIn()) {
                             'immunosuppressive' => Input::get('immunosuppressive'),
                             'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
                             'other_diseases' => Input::get('other_diseases'),
-                            'diseases_medical' => Input::get('diseases_medical'),
+                            'diseases_medical' => $diseases_medical,
                             'diseases_specify' => Input::get('diseases_specify'),
                             'sputum_collected' => Input::get('sputum_collected'),
                             'sample_date' => Input::get('sample_date'),
                             'other_samples' => Input::get('other_samples'),
-                            'sputum_samples' => Input::get('sputum_samples'),
+                            'sputum_samples' => $sputum_samples,
                             'sputum_samples_date' => Input::get('sputum_samples_date'),
                             'chest_x_ray' => Input::get('chest_x_ray'),
                             'chest_x_ray_date' => Input::get('chest_x_ray_date'),
                             'enrollment_completed' => Input::get('enrollment_completed'),
                             'respondent' => 2,
+                            'patient_id' => $clients['id'],
                             'status' => 1,
                             'create_on' => date('Y-m-d H:i:s'),
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'site_id' => $clients['site_id'],
                         ));
 
                         $successMessage = 'Enrollment Form  Added Successful';
                     }
-                    Redirect::to('info.php?id=3&status=7');
+                    Redirect::to('info.php?id=4&cid=' . $_GET['sequence'] . '&status=7');
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -569,6 +562,11 @@ if ($user->isLoggedIn()) {
                     $enrolled = 1;
                 }
 
+                $genotyping_asay = implode(',', Input::get('genotyping_asay'));
+                $nanopore_sequencing = implode(',', Input::get('nanopore_sequencing'));
+                $_1st_line_drugs = implode(',', Input::get('_1st_line_drugs'));
+                $_2st_line_drugs = implode(',', Input::get('_2st_line_drugs'));
+
                 if ($individual) {
                     $user->updateRecord('diagnosis_test', array(
                         'visit_date' => Input::get('visit_date'),
@@ -605,7 +603,7 @@ if ($user->isLoggedIn()) {
                         'prothionamide' => Input::get('prothionamide'),
                         'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
                         'genotyping_done' => Input::get('genotyping_done'),
-                        'genotyping_asay' => Input::get('genotyping_asay'),
+                        'genotyping_asay' => $genotyping_asay,
                         'isoniazid2' => Input::get('isoniazid2'),
                         'fluoroquinolones' => Input::get('fluoroquinolones'),
                         'amikacin2' => Input::get('amikacin2'),
@@ -613,7 +611,7 @@ if ($user->isLoggedIn()) {
                         'capreomycin' => Input::get('capreomycin'),
                         'ethionamide2' => Input::get('ethionamide2'),
                         'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
-                        'nanopore_sequencing' => Input::get('nanopore_sequencing'),
+                        'nanopore_sequencing' => $nanopore_sequencing,
                         'rifampicin3' => Input::get('rifampicin3'),
                         'isoniazid3' => Input::get('isoniazid3'),
                         'levofloxacin3' => Input::get('levofloxacin3'),
@@ -634,8 +632,8 @@ if ($user->isLoggedIn()) {
                         'ethionamide3' => Input::get('ethionamide3'),
                         'prothionamide3' => Input::get('prothionamide3'),
                         'para_aminosalicylic_acid3' => Input::get('para_aminosalicylic_acid3'),
-                        '_1st_line_drugs' => Input::get('_1st_line_drugs'),
-                        '_2st_line_drugs' => Input::get('_2st_line_drugs'),
+                        '_1st_line_drugs' => $_1st_line_drugs,
+                        '_2st_line_drugs' => $_2st_line_drugs,
                         'version_number' => Input::get('version_number'),
                         'lot_number' => Input::get('lot_number'),
                         'mutations_detected_list' => Input::get('mutations_detected_list'),
@@ -691,7 +689,7 @@ if ($user->isLoggedIn()) {
                         'prothionamide' => Input::get('prothionamide'),
                         'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
                         'genotyping_done' => Input::get('genotyping_done'),
-                        'genotyping_asay' => Input::get('genotyping_asay'),
+                        'genotyping_asay' => $genotyping_asay,
                         'isoniazid2' => Input::get('isoniazid2'),
                         'fluoroquinolones' => Input::get('fluoroquinolones'),
                         'amikacin2' => Input::get('amikacin2'),
@@ -699,7 +697,7 @@ if ($user->isLoggedIn()) {
                         'capreomycin' => Input::get('capreomycin'),
                         'ethionamide2' => Input::get('ethionamide2'),
                         'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
-                        'nanopore_sequencing' => Input::get('nanopore_sequencing'),
+                        'nanopore_sequencing' => $nanopore_sequencing,
                         'rifampicin3' => Input::get('rifampicin3'),
                         'isoniazid3' => Input::get('isoniazid3'),
                         'levofloxacin3' => Input::get('levofloxacin3'),
@@ -720,8 +718,8 @@ if ($user->isLoggedIn()) {
                         'ethionamide3' => Input::get('ethionamide3'),
                         'prothionamide3' => Input::get('prothionamide3'),
                         'para_aminosalicylic_acid3' => Input::get('para_aminosalicylic_acid3'),
-                        '_1st_line_drugs' => Input::get('_1st_line_drugs'),
-                        '_2st_line_drugs' => Input::get('_2st_line_drugs'),
+                        '_1st_line_drugs' => $_1st_line_drugs,
+                        '_2st_line_drugs' => $_2st_line_drugs,
                         'version_number' => Input::get('version_number'),
                         'lot_number' => Input::get('lot_number'),
                         'mutations_detected_list' => Input::get('mutations_detected_list'),
@@ -759,7 +757,7 @@ if ($user->isLoggedIn()) {
                 'lab_name' => array(
                     'required' => true,
                 ),
-                'sample_amount' => array(
+                'sample_received' => array(
                     'required' => true,
                 ),
             ));
@@ -802,11 +800,12 @@ if ($user->isLoggedIn()) {
                         'test_repeatition' => Input::get('test_repeatition'),
                         'microscopy_reason' => Input::get('microscopy_reason'),
                         'microscopy_reason_other' => Input::get('microscopy_reason_other'),
-                        'non_respiratory_completness' => Input::get('non_respiratory_completness'),
+                        'respiratory_completness' => Input::get('respiratory_completness'),
                         'comments' => Input::get('comments'),
                         'date_completed' => Input::get('date_completed'),
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
+                        'site_id' => $clients['site_id'],
                     ), $costing[0]['id']);
 
                     $successMessage = 'Respiratory Data  Successful Updated';
@@ -872,6 +871,18 @@ if ($user->isLoggedIn()) {
         } elseif (Input::get('add_non_respiratory')) {
             $validate = $validate->check($_POST, array(
                 'visit_date' => array(
+                    'required' => true,
+                ),
+                'afb_microscopy' => array(
+                    'required' => true,
+                ),
+                'wrd_test' => array(
+                    'required' => true,
+                ),
+                'form_completness' => array(
+                    'required' => true,
+                ),
+                'date_completed' => array(
                     'required' => true,
                 ),
             ));
@@ -1104,7 +1115,7 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid']);
 
-                $screening = $override->get3('screening', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', -1);
+                $screening = $override->getNews('screening', 'status', 1, 'patient_id', $_GET['cid']);
                 $eligible = 0;
                 $pregnant = 0;
                 if ($clients[0]['sex'] == 2) {
@@ -1127,7 +1138,7 @@ if ($user->isLoggedIn()) {
 
                     if ($screening) {
                         $user->updateRecord('screening', array(
-                            'sequence' => -1,
+                            'sequence' => 0,
                             'visit_code' => 'Sv',
                             'visit_name' => 'Screening Visit',
                             'screening_date' => Input::get('screening_date'),
@@ -1146,58 +1157,61 @@ if ($user->isLoggedIn()) {
                             'update_id' => $user->data()->id,
                         ), $screening[0]['id']);
 
-                        $visit = $override->get3('visit', 'status', 1, 'patient_id', $clients[0]['id'], 'sequence', -1);
+                        $visit = $override->get3('visit', 'status', 1, 'patient_id', $clients[0]['id'], 'sequence', 1);
 
-                        if ($visit) {
-                            $user->updateRecord('visit', array(
-                                'sequence' => -1,
-                                'visit_code' => 'Sv',
-                                'visit_name' => 'Screening Visit',
-                                'respondent' => $clients[0]['respondent'],
-                                'study_id' => $clients[0]['study_id'],
-                                'pid' => $clients[0]['study_id'],
-                                'expected_date' => Input::get('screening_date'),
-                                'visit_date' => Input::get('screening_date'),
-                                'visit_status' => 1,
-                                'comments' => Input::get('comments'),
-                                'status' => 1,
-                                'facility_id' => $clients[0]['site_id'],
-                                'table_id' => $screening[0]['id'],
-                                'patient_id' => $clients[0]['id'],
-                                'create_on' => date('Y-m-d H:i:s'),
-                                'staff_id' => $user->data()->id,
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'site_id' => $clients[0]['site_id'],
-                            ), $visit[0]['id']);
-                        } else {
-                            $user->createRecord('visit', array(
-                                'sequence' => -1,
-                                'visit_code' => 'Sv',
-                                'visit_name' => 'Screening Visit',
-                                'respondent' => $clients[0]['respondent'],
-                                'study_id' => $clients[0]['study_id'],
-                                'pid' => $clients[0]['study_id'],
-                                'expected_date' => Input::get('screening_date'),
-                                'visit_date' => Input::get('screening_date'),
-                                'visit_status' => 1,
-                                'comments' => Input::get('comments'),
-                                'status' => 1,
-                                'facility_id' => $clients[0]['site_id'],
-                                'table_id' => $screening[0]['id'],
-                                'patient_id' => $clients[0]['id'],
-                                'create_on' => date('Y-m-d H:i:s'),
-                                'staff_id' => $user->data()->id,
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'site_id' => $clients[0]['site_id'],
-                            ));
+                        if ($eligible == 1) {
+                            if ($visit) {
+                                $user->updateRecord('visit', array(
+                                    'sequence' => 1,
+                                    'visit_code' => 'EV',
+                                    'visit_name' => 'Enrollment Visit',
+                                    'respondent' => $clients[0]['respondent'],
+                                    'study_id' => $clients[0]['study_id'],
+                                    'pid' => $clients[0]['study_id'],
+                                    'expected_date' => Input::get('screening_date'),
+                                    'visit_date' => Input::get('screening_date'),
+                                    'visit_status' => 1,
+                                    'comments' => Input::get('comments'),
+                                    'status' => 1,
+                                    'facility_id' => $clients[0]['site_id'],
+                                    'table_id' => $screening[0]['id'],
+                                    'patient_id' => $clients[0]['id'],
+                                    'create_on' => date('Y-m-d H:i:s'),
+                                    'staff_id' => $user->data()->id,
+                                    'update_on' => date('Y-m-d H:i:s'),
+                                    'update_id' => $user->data()->id,
+                                    'site_id' => $clients[0]['site_id'],
+                                ), $visit[0]['id']);
+                            } else {
+                                $user->createRecord('visit', array(
+                                    'sequence' => 1,
+                                    'visit_code' => 'EV',
+                                    'visit_name' => 'Enrollment Visit',
+                                    'respondent' => $clients[0]['respondent'],
+                                    'study_id' => $clients[0]['study_id'],
+                                    'pid' => $clients[0]['study_id'],
+                                    'expected_date' => Input::get('screening_date'),
+                                    'visit_date' => Input::get('screening_date'),
+                                    'visit_status' => 1,
+                                    'comments' => Input::get('comments'),
+                                    'status' => 1,
+                                    'facility_id' => $clients[0]['site_id'],
+                                    'table_id' => $screening[0]['id'],
+                                    'patient_id' => $clients[0]['id'],
+                                    'create_on' => date('Y-m-d H:i:s'),
+                                    'staff_id' => $user->data()->id,
+                                    'update_on' => date('Y-m-d H:i:s'),
+                                    'update_id' => $user->data()->id,
+                                    'site_id' => $clients[0]['site_id'],
+                                ));
+                            }
                         }
+
 
                         $successMessage = 'Screening  Successful Updated';
                     } else {
                         $user->createRecord('screening', array(
-                            'sequence' => -1,
+                            'sequence' => 0,
                             'visit_code' => 'Sv',
                             'visit_name' => 'Screening Visit',
                             'pid' => $clients[0]['study_id'],
@@ -1223,32 +1237,35 @@ if ($user->isLoggedIn()) {
                             'site_id' => $clients[0]['site_id'],
                         ));
 
-                        $last_row = $override->lastRow('screening', 'id')[0];
+                        if ($eligible == 1) {
 
-                        $user->createRecord('visit', array(
-                            'sequence' => -1,
-                            'visit_code' => 'Sv',
-                            'visit_name' => 'Screening Visit',
-                            'respondent' => $clients[0]['respondent'],
-                            'study_id' => $clients[0]['study_id'],
-                            'pid' => $clients[0]['study_id'],
-                            'expected_date' => Input::get('screening_date'),
-                            'visit_date' => Input::get('screening_date'),
-                            'visit_status' => 1,
-                            'comments' => Input::get('comments'),
-                            'status' => 1,
-                            'facility_id' => $clients[0]['site_id'],
-                            'table_id' => $last_row['id'],
-                            'patient_id' => $clients[0]['id'],
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'site_id' => $clients[0]['site_id'],
-                        ));
+                            $user->createRecord('visit', array(
+                                'sequence' => 1,
+                                'visit_code' => 'EV',
+                                'visit_name' => 'Enrollment Visit',
+                                'respondent' => $clients[0]['respondent'],
+                                'study_id' => $clients[0]['study_id'],
+                                'pid' => $clients[0]['study_id'],
+                                'expected_date' => Input::get('screening_date'),
+                                'visit_date' => Input::get('screening_date'),
+                                'visit_status' => 1,
+                                'comments' => Input::get('comments'),
+                                'status' => 1,
+                                'facility_id' => $clients[0]['site_id'],
+                                'table_id' => $last_row['id'],
+                                'patient_id' => $clients[0]['id'],
+                                'create_on' => date('Y-m-d H:i:s'),
+                                'staff_id' => $user->data()->id,
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'site_id' => $clients[0]['site_id'],
+                            ));
+                        }
+
 
                         $successMessage = 'Screening  Successful Added';
                     }
+
 
                     $user->updateRecord('clients', array(
                         'screened' => 1,
@@ -5718,7 +5735,7 @@ if ($user->isLoggedIn()) {
                                                         <label for="ct_value" class="form-label">65. Sample Cycle threshold (Ct) Value (number, two digits)</label>
                                                         <input type="number" value="<?php if ($costing['ct_value']) {
                                                                                         print_r($costing['ct_value']);
-                                                                                    } ?>" id="ct_value" name="ct_value" min="0" max="99" class="form-control" placeholder="Enter here" required />
+                                                                                    } ?>" id="ct_value" name="ct_value" min="0" max="99" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
@@ -5909,7 +5926,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="afb_microscopy" id="afb_microscopy<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
-                                                                                                                                                                                                            } ?>>
+                                                                                                                                                                                                            } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -6016,7 +6033,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="wrd_test" id="wrd_test<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['wrd_test'] == $value['id']) {
                                                                                                                                                                                                     echo 'checked';
-                                                                                                                                                                                                } ?>>
+                                                                                                                                                                                                } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -6115,7 +6132,7 @@ if ($user->isLoggedIn()) {
                                                         <label for="ct_value" class="form-label">76. Sample Cycle threshold (Ct) Value (number, two digits)</label>
                                                         <input type="number" value="<?php if ($costing['ct_value']) {
                                                                                         print_r($costing['ct_value']);
-                                                                                    } ?>" id="ct_value" name="ct_value" min="0" max="99" class="form-control" placeholder="Enter here" required />
+                                                                                    } ?>" id="ct_value" name="ct_value" min="0" max="99" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
@@ -6430,7 +6447,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="culture_done" id="culture_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['culture_done'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
-                                                                                                                                                                                                        } ?>>
+                                                                                                                                                                                                        } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -6968,9 +6985,11 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('genotyping_tests', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="genotyping_asay" id="genotyping_asay<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['genotyping_asay'] == $value['id']) {
-                                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                                } ?>>
+                                                                    <input class="form-check-input" type="checkbox" name="genotyping_asay[]" id="genotyping_asay<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['genotyping_asay']) as $values) {
+                                                                                                                                                                                                                        if ($values == $value['id']) {
+                                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                    } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -7129,9 +7148,11 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('nanopore_sequencing', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="nanopore_sequencing" id="nanopore_sequencing<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nanopore_sequencing'] == $value['id']) {
-                                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                                        } ?>>
+                                                                    <input class="form-check-input" type="checkbox" name="nanopore_sequencing[]" id="nanopore_sequencing<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['nanopore_sequencing']) as $values) {
+                                                                                                                                                                                                                                if ($values == $value['id']) {
+                                                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                            } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -7509,18 +7530,22 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
+                                            <label class="form-label text-center"> Indicate all bands visible on the strip:</label>
+                                            <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-3" id="_1st_line_drugs">
+                                                <div class="col-sm-6" id="_1st_line_drugs">
                                                     <label for="_1st_line_drugs" class="form-label">92. Line probe assay (1st line drugs). (GenoType MTBDRplus V2 )</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('_1st_line_drugs', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="_1st_line_drugs" id="_1st_line_drugs<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['_1st_line_drugs'] == $value['id']) {
-                                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                                } ?>>
+                                                                    <input class="form-check-input" type="checkbox" name="_1st_line_drugs[]" id="_1st_line_drugs<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['_1st_line_drugs']) as $values) {
+                                                                                                                                                                                                                        if ($values == $value['id']) {
+                                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                    } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -7528,7 +7553,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="_2st_line_drugs">
+                                                <div class="col-sm-6" id="_2st_line_drugs">
                                                     <label for="_1st_line_drugs" class="form-label">93. Line probe assay (2nd line drugs).
                                                         (GenoType MTBDRsl V2).</label>
                                                     <!-- radio -->
@@ -7536,9 +7561,11 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('_2st_line_drugs', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="_2st_line_drugs" id="_2st_line_drugs<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['_2st_line_drugs'] == $value['id']) {
-                                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                                } ?>>
+                                                                    <input class="form-check-input" type="checkbox" name="_2st_line_drugs[]" id="_2st_line_drugs<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['_2st_line_drugs']) as $values) {
+                                                                                                                                                                                                                        if ($values == $value['id']) {
+                                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                    } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -8257,7 +8284,7 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row">
                             <?php
-                            $clients = $override->get3('enrollmet_form', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $_GET['sequence'])[0];
+                            $clients = $override->get3('enrollment_form', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $_GET['sequence'])[0];
                             ?>
                             <!-- right column -->
                             <div class="col-md-12">
@@ -8673,7 +8700,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="row-form clearfix">
                                                     <div class="form-group">
                                                         <label>31. HIV status </label>
-                                                        <select id="hiv_status" name="hiv_status" class="form-control">
+                                                        <select id="hiv_status" name="hiv_status" class="form-control" required>
                                                             <?php $hiv_status = $override->get('hiv_status', 'id', $clients['hiv_status'])[0]; ?>
                                                             <option value="<?= $hiv_status['id'] ?>"><?php if ($clients['hiv_status']) {
                                                                                                             print_r($hiv_status['name']);
@@ -8734,9 +8761,11 @@ if ($user->isLoggedIn()) {
                                                     <div class="form-group">
                                                         <?php foreach ($override->get('diseases_medical', 'status', 1) as $value) { ?>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="diseases_medical" id="diseases_medical<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['diseases_medical'] == $value['id']) {
-                                                                                                                                                                                                                echo 'checked' . ' ' . 'required';
-                                                                                                                                                                                                            } ?>>
+                                                                <input class="form-check-input" type="checkbox" name="diseases_medical[]" id="diseases_medical<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $clients['diseases_medical']) as $values) {
+                                                                                                                                                                                                                        if ($values == $value['id']) {
+                                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                    } ?>>
                                                                 <label class="form-check-label"><?= $value['name']; ?></label>
                                                             </div>
                                                         <?php } ?>
@@ -8764,7 +8793,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="row-form clearfix">
                                                     <div class="form-group">
                                                         <label>35. Were two sputum samples collected? </label>
-                                                        <select id="sputum_collected" name="sputum_collected" class="form-control">
+                                                        <select id="sputum_collected" name="sputum_collected" class="form-control" required>
                                                             <?php $sputum_collected = $override->get('yes_no', 'id', $clients['sputum_collected'])[0]; ?>
                                                             <option value="<?= $sputum_collected['id'] ?>"><?php if ($clients['sputum_collected']) {
                                                                                                                 print_r($sputum_collected['name']);
@@ -8822,9 +8851,11 @@ if ($user->isLoggedIn()) {
                                                     <div class="form-group">
                                                         <?php foreach ($override->get('sputum_samples', 'status', 1) as $value) { ?>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="sputum_samples" id="sputum_samples<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['other_samples'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked' . ' ' . 'required';
-                                                                                                                                                                                                        } ?>>
+                                                                <input class="form-check-input" type="checkbox" name="sputum_samples[]" id="sputum_samples<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $clients['sputum_samples']) as $values) {
+                                                                                                                                                                                                                    if ($values == $value['id']) {
+                                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                } ?>>
                                                                 <label class="form-check-label"><?= $value['name']; ?></label>
                                                             </div>
                                                         <?php } ?>
@@ -8887,96 +8918,84 @@ if ($user->isLoggedIn()) {
             </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
+
+
+        <?php } elseif ($_GET['id'] == 17) { ?>
+        <?php } elseif ($_GET['id'] == 18) { ?>
+        <?php } elseif ($_GET['id'] == 19) { ?>
+        <?php } elseif ($_GET['id'] == 20) { ?>
+        <?php } elseif ($_GET['id'] == 21) { ?>
+        <?php } elseif ($_GET['id'] == 22) { ?>
+        <?php } elseif ($_GET['id'] == 23) { ?>
+        <?php } elseif ($_GET['id'] == 24) { ?>
+        <?php } elseif ($_GET['id'] == 25) { ?>
+        <?php } elseif ($_GET['id'] == 26) { ?>
+        <?php } elseif ($_GET['id'] == 27) { ?>
+        <?php } elseif ($_GET['id'] == 28) { ?>
+        <?php } ?>
+
+        <?php include 'footer.php'; ?>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
     </div>
-    <!-- /.content-wrapper -->
+    <!-- ./wrapper -->
 
-<?php } elseif ($_GET['id'] == 17) { ?>
-
-<?php } elseif ($_GET['id'] == 18) { ?>
-
-<?php } elseif ($_GET['id'] == 19) { ?>
-
-<?php } elseif ($_GET['id'] == 20) { ?>
-
-<?php } elseif ($_GET['id'] == 21) { ?>
-
-<?php } elseif ($_GET['id'] == 22) { ?>
-
-<?php } elseif ($_GET['id'] == 23) { ?>
-<?php } elseif ($_GET['id'] == 24) { ?>
-<?php } elseif ($_GET['id'] == 25) { ?>
-<?php } elseif ($_GET['id'] == 26) { ?>
-<?php } elseif ($_GET['id'] == 27) { ?>
-<?php } elseif ($_GET['id'] == 28) { ?>
-
-<?php } ?>
-
-<?php include 'footer.php'; ?>
-
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-</aside>
-<!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Select2 -->
-<script src="plugins/select2/js/select2.full.min.js"></script>
-<!-- Bootstrap4 Duallistbox -->
-<script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-<!-- InputMask -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/inputmask/jquery.inputmask.min.js"></script>
-<!-- date-range-picker -->
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
-<!-- bootstrap color picker -->
-<script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Bootstrap Switch -->
-<script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<!-- BS-Stepper -->
-<script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
-<!-- dropzonejs -->
-<script src="plugins/dropzone/min/dropzone.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<!-- <script src="../../dist/js/demo.js"></script> -->
-<!-- Page specific script -->
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Select2 -->
+    <script src="plugins/select2/js/select2.full.min.js"></script>
+    <!-- Bootstrap4 Duallistbox -->
+    <script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+    <!-- InputMask -->
+    <script src="plugins/moment/moment.min.js"></script>
+    <script src="plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap color picker -->
+    <script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Bootstrap Switch -->
+    <script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <!-- BS-Stepper -->
+    <script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <!-- dropzonejs -->
+    <script src="plugins/dropzone/min/dropzone.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <!-- <script src="../../dist/js/demo.js"></script> -->
+    <!-- Page specific script -->
 
 
-<!-- clients Js -->
-<script src="myjs/add/clients/insurance.js"></script>
-<script src="myjs/add/clients/insurance_name.js"></script>
-<script src="myjs/add/clients/relation_patient.js"></script>
-<!-- <script src="myjs/add/clients/validate_hidden_with_values.js"></script>
+    <!-- clients Js -->
+    <script src="myjs/add/clients/insurance.js"></script>
+    <script src="myjs/add/clients/insurance_name.js"></script>
+    <script src="myjs/add/clients/relation_patient.js"></script>
+    <!-- <script src="myjs/add/clients/validate_hidden_with_values.js"></script>
     <script src="myjs/add/clients/validate_required_attribute.js"></script>
     <script src="myjs/add/clients/validate_required_radio_checkboxes.js"></script> -->
 
-<!-- SCREENING Js -->
-<script src="myjs/add/screening/conset.js"></script>
-<script src="myjs/add/screening/art.js"></script>
+    <!-- SCREENING Js -->
+    <script src="myjs/add/screening/conset.js"></script>
+    <script src="myjs/add/screening/art.js"></script>
 
+    <!-- HISTORY Js -->
+    <script src="myjs/add/history/art_regimen.js"></script>
+    <script src="myjs/add/history/tb.js"></script>
+    <script src="myjs/add/history/first_line.js"></script>
+    <script src="myjs/add/history/second_line.js"></script>
+    <script src="myjs/add/history/third_line.js"></script>
+    <script src="myjs/add/history"></script>
 
-
-<!-- HISTORY Js -->
-<script src="myjs/add/history/art_regimen.js"></script>
-<script src="myjs/add/history/tb.js"></script>
-<script src="myjs/add/history/first_line.js"></script>
-<script src="myjs/add/history/second_line.js"></script>
-<script src="myjs/add/history/third_line.js"></script>
-<script src="myjs/add/history"></script>
-
-
-
-<!-- economics format numbers Js -->
-<!-- <script src="myjs/add/economics/format_thousands/consultation.js"></script>
+    <!-- economics format numbers Js -->
+    <!-- <script src="myjs/add/economics/format_thousands/consultation.js"></script>
     <script src="myjs/add/economics/format_thousands/days.js"></script>
     <script src="myjs/add/economics/format_thousands/diagnostic.js"></script>
     <script src="myjs/add/economics/format_thousands/food_drinks.js"></script>
@@ -8991,209 +9010,205 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/economics/format_thousands/support_earn.js"></script>
     <script src="myjs/add/economics/format_thousands/transport.js"></script> -->
 
+    <script>
+        $(function() {
+            //Initialize Select2 Elements
+            $('.select2').select2()
 
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
 
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', {
+                'placeholder': 'dd/mm/yyyy'
+            })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', {
+                'placeholder': 'mm/dd/yyyy'
+            })
+            //Money Euro
+            $('[data-mask]').inputmask()
 
+            //Date picker
+            $('#reservationdate').datetimepicker({
+                format: 'L'
+            });
 
-<script>
-    $(function() {
-        //Initialize Select2 Elements
-        $('.select2').select2()
-
-        //Initialize Select2 Elements
-        $('.select2bs4').select2({
-            theme: 'bootstrap4'
-        })
-
-        //Datemask dd/mm/yyyy
-        $('#datemask').inputmask('dd/mm/yyyy', {
-            'placeholder': 'dd/mm/yyyy'
-        })
-        //Datemask2 mm/dd/yyyy
-        $('#datemask2').inputmask('mm/dd/yyyy', {
-            'placeholder': 'mm/dd/yyyy'
-        })
-        //Money Euro
-        $('[data-mask]').inputmask()
-
-        //Date picker
-        $('#reservationdate').datetimepicker({
-            format: 'L'
-        });
-
-        //Date and time picker
-        $('#reservationdatetime').datetimepicker({
-            icons: {
-                time: 'far fa-clock'
-            }
-        });
-
-        //Date range picker
-        $('#reservation').daterangepicker()
-        //Date range picker with time picker
-        $('#reservationtime').daterangepicker({
-            timePicker: true,
-            timePickerIncrement: 30,
-            locale: {
-                format: 'MM/DD/YYYY hh:mm A'
-            }
-        })
-        //Date range as a button
-        $('#daterange-btn').daterangepicker({
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                startDate: moment().subtract(29, 'days'),
-                endDate: moment()
-            },
-            function(start, end) {
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-            }
-        )
-
-        //Timepicker
-        $('#timepicker').datetimepicker({
-            format: 'LT'
-        })
-
-        //Bootstrap Duallistbox
-        $('.duallistbox').bootstrapDualListbox()
-
-        //Colorpicker
-        $('.my-colorpicker1').colorpicker()
-        //color picker with addon
-        $('.my-colorpicker2').colorpicker()
-
-        $('.my-colorpicker2').on('colorpickerChange', function(event) {
-            $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-        })
-
-        $("input[data-bootstrap-switch]").each(function() {
-            $(this).bootstrapSwitch('state', $(this).prop('checked'));
-        })
-
-        $('#regions_id').change(function() {
-            var region_id = $(this).val();
-            $.ajax({
-                url: "process.php?content=region_id",
-                method: "GET",
-                data: {
-                    region_id: region_id
-                },
-                dataType: "text",
-                success: function(data) {
-                    $('#districts_id').html(data);
+            //Date and time picker
+            $('#reservationdatetime').datetimepicker({
+                icons: {
+                    time: 'far fa-clock'
                 }
             });
-        });
 
-        $('#region').change(function() {
-            var region = $(this).val();
-            $.ajax({
-                url: "process.php?content=region_id",
-                method: "GET",
-                data: {
-                    region_id: region
-                },
-                dataType: "text",
-                success: function(data) {
-                    $('#district').html(data);
+            //Date range picker
+            $('#reservation').daterangepicker()
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'MM/DD/YYYY hh:mm A'
                 }
-            });
-        });
-
-        $('#district').change(function() {
-            var district_id = $(this).val();
-            $.ajax({
-                url: "process.php?content=district_id",
-                method: "GET",
-                data: {
-                    district_id: district_id
+            })
+            //Date range as a button
+            $('#daterange-btn').daterangepicker({
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment()
                 },
-                dataType: "text",
-                success: function(data) {
-                    $('#ward').html(data);
+                function(start, end) {
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
                 }
+            )
+
+            //Timepicker
+            $('#timepicker').datetimepicker({
+                format: 'LT'
+            })
+
+            //Bootstrap Duallistbox
+            $('.duallistbox').bootstrapDualListbox()
+
+            //Colorpicker
+            $('.my-colorpicker1').colorpicker()
+            //color picker with addon
+            $('.my-colorpicker2').colorpicker()
+
+            $('.my-colorpicker2').on('colorpickerChange', function(event) {
+                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+            })
+
+            $("input[data-bootstrap-switch]").each(function() {
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            })
+
+            $('#regions_id').change(function() {
+                var region_id = $(this).val();
+                $.ajax({
+                    url: "process.php?content=region_id",
+                    method: "GET",
+                    data: {
+                        region_id: region_id
+                    },
+                    dataType: "text",
+                    success: function(data) {
+                        $('#districts_id').html(data);
+                    }
+                });
             });
-        });
 
-    })
+            $('#region').change(function() {
+                var region = $(this).val();
+                $.ajax({
+                    url: "process.php?content=region_id",
+                    method: "GET",
+                    data: {
+                        region_id: region
+                    },
+                    dataType: "text",
+                    success: function(data) {
+                        $('#district').html(data);
+                    }
+                });
+            });
 
-    // BS-Stepper Init
-    document.addEventListener('DOMContentLoaded', function() {
-        window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-    })
+            $('#district').change(function() {
+                var district_id = $(this).val();
+                $.ajax({
+                    url: "process.php?content=district_id",
+                    method: "GET",
+                    data: {
+                        district_id: district_id
+                    },
+                    dataType: "text",
+                    success: function(data) {
+                        $('#ward').html(data);
+                    }
+                });
+            });
 
-    // DropzoneJS Demo Code Start
-    Dropzone.autoDiscover = false
+        })
 
-    // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
-    var previewNode = document.querySelector("#template")
-    previewNode.id = ""
-    var previewTemplate = previewNode.parentNode.innerHTML
-    previewNode.parentNode.removeChild(previewNode)
+        // BS-Stepper Init
+        document.addEventListener('DOMContentLoaded', function() {
+            window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+        })
 
-    var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-        url: "/target-url", // Set the url
-        thumbnailWidth: 80,
-        thumbnailHeight: 80,
-        parallelUploads: 20,
-        previewTemplate: previewTemplate,
-        autoQueue: false, // Make sure the files aren't queued until manually added
-        previewsContainer: "#previews", // Define the container to display the previews
-        clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
-    })
+        // DropzoneJS Demo Code Start
+        Dropzone.autoDiscover = false
 
-    myDropzone.on("addedfile", function(file) {
-        // Hookup the start button
-        file.previewElement.querySelector(".start").onclick = function() {
-            myDropzone.enqueueFile(file)
+        // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+        var previewNode = document.querySelector("#template")
+        previewNode.id = ""
+        var previewTemplate = previewNode.parentNode.innerHTML
+        previewNode.parentNode.removeChild(previewNode)
+
+        var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+            url: "/target-url", // Set the url
+            thumbnailWidth: 80,
+            thumbnailHeight: 80,
+            parallelUploads: 20,
+            previewTemplate: previewTemplate,
+            autoQueue: false, // Make sure the files aren't queued until manually added
+            previewsContainer: "#previews", // Define the container to display the previews
+            clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+        })
+
+        myDropzone.on("addedfile", function(file) {
+            // Hookup the start button
+            file.previewElement.querySelector(".start").onclick = function() {
+                myDropzone.enqueueFile(file)
+            }
+        })
+
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function(progress) {
+            document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+        })
+
+        myDropzone.on("sending", function(file) {
+            // Show the total progress bar when upload starts
+            document.querySelector("#total-progress").style.opacity = "1"
+            // And disable the start button
+            file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+        })
+
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("queuecomplete", function(progress) {
+            document.querySelector("#total-progress").style.opacity = "0"
+        })
+
+        // Setup the buttons for all transfers
+        // The "add files" button doesn't need to be setup because the config
+        // `clickable` has already been specified.
+        document.querySelector("#actions .start").onclick = function() {
+            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
         }
-    })
-
-    // Update the total progress bar
-    myDropzone.on("totaluploadprogress", function(progress) {
-        document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
-    })
-
-    myDropzone.on("sending", function(file) {
-        // Show the total progress bar when upload starts
-        document.querySelector("#total-progress").style.opacity = "1"
-        // And disable the start button
-        file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
-    })
-
-    // Hide the total progress bar when nothing's uploading anymore
-    myDropzone.on("queuecomplete", function(progress) {
-        document.querySelector("#total-progress").style.opacity = "0"
-    })
-
-    // Setup the buttons for all transfers
-    // The "add files" button doesn't need to be setup because the config
-    // `clickable` has already been specified.
-    document.querySelector("#actions .start").onclick = function() {
-        myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
-    }
-    document.querySelector("#actions .cancel").onclick = function() {
-        myDropzone.removeAllFiles(true)
-    }
-    // DropzoneJS Demo Code End
+        document.querySelector("#actions .cancel").onclick = function() {
+            myDropzone.removeAllFiles(true)
+        }
+        // DropzoneJS Demo Code End
 
 
-    // $("#packs_per_day, #packs_per_day").on("input", function() {
-    //     setTimeout(function() {
-    //         var weight = $("#packs_per_day").val();
-    //         var height = $("#packs_per_day").val() / 100; // Convert cm to m
-    //         var bmi = weight / (height * height);
-    //         $("#packs_per_year").text(bmi.toFixed(2));
-    //     }, 1);
-    // });
-</script>
+        // $("#packs_per_day, #packs_per_day").on("input", function() {
+        //     setTimeout(function() {
+        //         var weight = $("#packs_per_day").val();
+        //         var height = $("#packs_per_day").val() / 100; // Convert cm to m
+        //         var bmi = weight / (height * height);
+        //         $("#packs_per_year").text(bmi.toFixed(2));
+        //     }, 1);
+        // });
+    </script>
 
 </body>
 
