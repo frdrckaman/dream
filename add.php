@@ -969,10 +969,27 @@ if ($user->isLoggedIn()) {
                 'visit_date' => array(
                     'required' => true,
                 ),
+                'tb_diagnosis' => array(
+                    'required' => true,
+                ),
+                'clinician_name' => array(
+                    'required' => true,
+                ),
+                'form_completness' => array(
+                    'required' => true,
+                ),
+                'date_completed' => array(
+                    'required' => true,
+                ),
             ));
             if ($validate->passed()) {
                 $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid'])[0];
                 $costing = $override->get3('diagnosis', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $_GET['sequence']);
+
+                $bacteriological_diagnosis = implode(',', Input::get('bacteriological_diagnosis'));
+                $tb_diagnosed_clinically = implode(',', Input::get('tb_diagnosed_clinically'));
+                $laboratory_test_used = implode(',', Input::get('laboratory_test_used'));
+                $laboratory_test_used2 = implode(',', Input::get('laboratory_test_used2'));
 
                 if ($costing) {
                     $user->updateRecord('diagnosis', array(
@@ -981,12 +998,12 @@ if ($user->isLoggedIn()) {
                         'tb_diagnosis' => Input::get('tb_diagnosis'),
                         'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
                         'diagnosis_made_other' => Input::get('diagnosis_made_other'),
-                        'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
+                        'bacteriological_diagnosis' => $bacteriological_diagnosis,
                         'xpert_ultra_date' => Input::get('xpert_ultra_date'),
                         'truenat_date' => Input::get('truenat_date'),
                         'afb_microscope_date' => Input::get('afb_microscope_date'),
                         'other_bacteriological_date' => Input::get('other_bacteriological_date'),
-                        'tb_diagnosed_clinically' => Input::get('tb_diagnosed_clinically'),
+                        'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
                         'tb_clinically_other' => Input::get('tb_clinically_other'),
                         'tb_treatment' => Input::get('tb_treatment'),
                         'tb_treatment_date' => Input::get('tb_treatment_date'),
@@ -1006,8 +1023,8 @@ if ($user->isLoggedIn()) {
                         'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
                         'tb_other_specify' => Input::get('tb_other_specify'),
                         'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
-                        'laboratory_test_used' => Input::get('laboratory_test_used'),
-                        'laboratory_test_used2' => Input::get('laboratory_test_used2'),
+                        'laboratory_test_used' => $laboratory_test_used,
+                        'laboratory_test_used2' => $laboratory_test_used2,
                         'clinician_firstname' => Input::get('clinician_firstname'),
                         'clinician_middlename' => Input::get('clinician_middlename'),
                         'clinician_lastname' => Input::get('clinician_lastname'),
@@ -1031,12 +1048,12 @@ if ($user->isLoggedIn()) {
                         'tb_diagnosis' => Input::get('tb_diagnosis'),
                         'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
                         'diagnosis_made_other' => Input::get('diagnosis_made_other'),
-                        'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
+                        'bacteriological_diagnosis' => $bacteriological_diagnosis,
                         'xpert_ultra_date' => Input::get('xpert_ultra_date'),
                         'truenat_date' => Input::get('truenat_date'),
                         'afb_microscope_date' => Input::get('afb_microscope_date'),
                         'other_bacteriological_date' => Input::get('other_bacteriological_date'),
-                        'tb_diagnosed_clinically' => Input::get('tb_diagnosed_clinically'),
+                        'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
                         'tb_clinically_other' => Input::get('tb_clinically_other'),
                         'tb_treatment' => Input::get('tb_treatment'),
                         'tb_treatment_date' => Input::get('tb_treatment_date'),
@@ -1056,8 +1073,8 @@ if ($user->isLoggedIn()) {
                         'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
                         'tb_other_specify' => Input::get('tb_other_specify'),
                         'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
-                        'laboratory_test_used' => Input::get('laboratory_test_used'),
-                        'laboratory_test_used2' => Input::get('laboratory_test_used2'),
+                        'laboratory_test_used' => $laboratory_test_used,
+                        'laboratory_test_used2' => $laboratory_test_used2,
                         'clinician_firstname' => Input::get('clinician_firstname'),
                         'clinician_middlename' => Input::get('clinician_middlename'),
                         'clinician_lastname' => Input::get('clinician_lastname'),
@@ -7794,7 +7811,7 @@ if ($user->isLoggedIn()) {
                                                         <label for="clinician_name" class="form-label">96. Name of clinician</label>
                                                         <input type="text" value="<?php if ($costing['clinician_name']) {
                                                                                         print_r($costing['clinician_name']);
-                                                                                    } ?>" id="clinician_name" name="clinician_name" class="form-control" placeholder="Enter here" />
+                                                                                    } ?>" id="clinician_name" name="clinician_name" class="form-control" placeholder="Enter here" required />
                                                     </div>
                                                 </div>
 
@@ -7819,7 +7836,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="tb_diagnosis" id="tb_diagnosis<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_diagnosis'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
-                                                                                                                                                                                                        } ?>>
+                                                                                                                                                                                                        } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -7855,9 +7872,11 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('bacteriological_diagnosis', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="bacteriological_diagnosis" id="bacteriological_diagnosis<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['bacteriological_diagnosis'] == $value['id']) {
-                                                                                                                                                                                                                                        echo 'checked';
-                                                                                                                                                                                                                                    } ?>>
+                                                                    <input class="form-check-input" type="checkbox" name="bacteriological_diagnosis[]" id="bacteriological_diagnosis<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['bacteriological_diagnosis']) as $values) {
+                                                                                                                                                                                                                                            if ($values == $value['id']) {
+                                                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                        } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -7913,9 +7932,11 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('tb_diagnosed_clinically', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="tb_diagnosed_clinically" id="tb_diagnosed_clinically<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_diagnosed_clinically'] == $value['id']) {
-                                                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                                                } ?>>
+                                                                    <input class="form-check-input" type="checkbox" name="tb_diagnosed_clinically[]" id="tb_diagnosed_clinically<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['tb_diagnosed_clinically']) as $values) {
+                                                                                                                                                                                                                                        if ($values == $value['id']) {
+                                                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                    } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -7990,9 +8011,11 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('laboratory_test_used', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="laboratory_test_used" id="laboratory_test_used<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['laboratory_test_used'] == $value['id']) {
-                                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                                        } ?>>
+                                                                    <input class="form-check-input" type="checkbox" name="laboratory_test_used[]" id="laboratory_test_used<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['laboratory_test_used']) as $values) {
+                                                                                                                                                                                                                                    if ($values == $value['id']) {
+                                                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -8071,11 +8094,11 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('tb_other_diagnosis', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="tb_other_diagnosis" id="tb_other_diagnosis<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_other_diagnosis'] == $value['id']) {
                                                                                                                                                                                                                         echo 'checked';
-                                                                                                                                                                                                                    } ?>>
+                                                                                                                                                                                                                    } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
