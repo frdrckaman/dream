@@ -8570,50 +8570,51 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <hr>
-
-                                    <div class="row" id="_23_25">
-
-                                        <div class="col-sm-4" id="tb_category1">
-                                            <div class="row-form clearfix">
-                                                <div class="form-group">
-                                                    <label>23. What category is the previously treated patient </label>
-                                                    <select id="tb_category" name="tb_category" class="form-control">
-                                                        <?php $tb_category = $override->get('tb_category', 'id', $clients['tb_category'])[0]; ?>
-                                                        <option value="<?= $tb_category['id'] ?>"><?php if ($clients['tb_category']) {
-                                                                                                        print_r($tb_category['name']);
-                                                                                                    } else {
-                                                                                                        echo 'Select';
-                                                                                                    } ?>
-                                                        </option>
-                                                        <?php foreach ($override->get('tb_category', 'status', 1) as $value) { ?>
-                                                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-                                                        <?php } ?>
-                                                    </select>
+                                    <div id="_23_25">
+                                        <div class="row">
+                                            <div class="col-sm-4" id="tb_category1">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>23. What category is the previously treated patient </label>
+                                                        <select id="tb_category" name="tb_category" class="form-control">
+                                                            <?php $tb_category = $override->get('tb_category', 'id', $clients['tb_category'])[0]; ?>
+                                                            <option value="<?= $tb_category['id'] ?>"><?php if ($clients['tb_category']) {
+                                                                                                            print_r($tb_category['name']);
+                                                                                                        } else {
+                                                                                                            echo 'Select';
+                                                                                                        } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('tb_category', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-sm-4" id="relapse_years1">
-                                            <div class="row-form clearfix">
-                                                <div class="form-group">
-                                                    <label>24. If relapse how long ago was the participant treated for TB? (years)</label>
-                                                    <input class="form-control" type="number" name="relapse_years" id="relapse_years" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['relapse_years']) {
-                                                                                                                                                                                                        print_r($clients['relapse_years']);
-                                                                                                                                                                                                    }  ?>" />
+                                            <div class="col-sm-4" id="relapse_years1">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>24. If relapse how long ago was the participant treated for TB? (years)</label>
+                                                        <input class="form-control" type="number" name="relapse_years" id="relapse_years" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['relapse_years']) {
+                                                                                                                                                                                                            print_r($clients['relapse_years']);
+                                                                                                                                                                                                        }  ?>" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-4" id="ltf_months1">
-                                            <div class="row-form clearfix">
-                                                <div class="form-group">
-                                                    <label>25. If LTF for how long the participant received TB treatment? (months)</label>
-                                                    <input class="form-control" type="number" name="ltf_months" id="ltf_months" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['ltf_months']) {
-                                                                                                                                                                                                print_r($clients['ltf_months']);
-                                                                                                                                                                                            }  ?>" />
+                                            <div class="col-sm-4" id="ltf_months1">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>25. If LTF for how long the participant received TB treatment? (months)</label>
+                                                        <input class="form-control" type="number" name="ltf_months" id="ltf_months" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['ltf_months']) {
+                                                                                                                                                                                                    print_r($clients['ltf_months']);
+                                                                                                                                                                                                }  ?>" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
 
                                     <hr>
 

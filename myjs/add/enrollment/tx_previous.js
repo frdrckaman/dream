@@ -30,7 +30,7 @@ function toggleElementVisibility() {
     tx_number.removeAttribute("required");
     dr_ds1.style.display = "none";
     dr_ds.removeAttribute("required");
-    _23_25.style.display = "none";
+    tb_category1.style.display = "none";
     tb_category.removeAttribute("required");
     relapse_years1.style.display = "none";
     relapse_years.removeAttribute("required");
