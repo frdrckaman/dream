@@ -8975,7 +8975,7 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <label>38.If Specify Date</label>
+                                                            <label>38.If yes,Specify Date</label>
                                                             <input class="form-control" type="date" name="chest_x_ray_date" id="chest_x_ray_date" value="<?php if ($clients['chest_x_ray_date']) {
                                                                                                                                                                 print_r($clients['chest_x_ray_date']);
                                                                                                                                                             }  ?>" />
