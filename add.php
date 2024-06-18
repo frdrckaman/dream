@@ -5524,8 +5524,6 @@ if ($user->isLoggedIn()) {
 
                                             <hr>
                                             <div class="row">
-
-
                                                 <div class="col-4">
                                                     <div class="mb-3">
                                                         <label for="sample_volume" class="form-label">55. Approximate volume sample (number, two digits)</label>
