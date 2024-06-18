@@ -5372,7 +5372,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
 
-                                                <div class="col-sm-4" id="sample_received">
+                                                <div class="col-sm-3" id="sample_received">
                                                     <label for="sample_received" class="form-label">46. Is at least one respiratory sample received?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5389,7 +5389,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="sample_amount">
+                                                <div class="col-sm-3" id="sample_amount">
                                                     <label for="sample_amount" class="form-label">47. If yes, how many;</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5406,7 +5406,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="sample_reason">
+                                                <div class="col-sm-3" id="sample_reason">
                                                     <label for="tested_this_month" class="form-label">48. If no give reason</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5423,7 +5423,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="test_rejected">
+                                                <div class="col-sm-3" id="test_rejected">
                                                     <label for="test_rejected" class="form-label">49. Was test rejected</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5439,10 +5439,6 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <hr>
-                                            <div class="row">
                                                 <div class="col-sm-3" id="test_reasons">
                                                     <label for="new_vl_date" class="form-label">50. If yes, reason (multiple selection)</label>
                                                     <!-- radio -->
@@ -5463,6 +5459,11 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+
+                                            <hr>
+                                            <div class="row">
+
 
                                                 <div class="col-3">
                                                     <div class="mb-3">
@@ -5501,10 +5502,6 @@ if ($user->isLoggedIn()) {
                                                                                     } ?>" id="sample_number" name="sample_number" min="0" max="100000000" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <hr>
-                                            <div class="row">
 
                                                 <div class="col-3">
                                                     <label for="appearance" class="form-label">54. Appearance</label>
@@ -5523,7 +5520,13 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3">
+                                            </div>
+
+                                            <hr>
+                                            <div class="row">
+
+
+                                                <div class="col-4">
                                                     <div class="mb-3">
                                                         <label for="sample_volume" class="form-label">55. Approximate volume sample (number, two digits)</label>
                                                         <input type="number" value="<?php if ($costing['sample_volume']) {
@@ -5533,7 +5536,7 @@ if ($user->isLoggedIn()) {
                                                     <span>mL</span>
                                                 </div>
 
-                                                <div class="col-3">
+                                                <div class="col-4">
                                                     <label for="sample_accession" class="form-label">56. Sample accession status</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5550,7 +5553,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3">
+                                                <div class="col-4">
                                                     <label for="afb_microscopy" class="form-label">57. AFB microscopy</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
