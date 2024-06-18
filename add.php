@@ -8997,10 +8997,10 @@ if ($user->isLoggedIn()) {
 <script src="myjs/add/screening/art.js"></script>
 
 <!-- Enrollment Js -->
+<script src="myjs/add/enrollment/other_diseases.js"></script>
 <script src="myjs/add/enrollment/regimen_changed.js"></script>
 <script src="myjs/add/enrollment/tb_category.js"></script>
 <script src="myjs/add/enrollment/tx_previous.js"></script>
-<script src="myjs/add/history/second_line.js"></script>
 <script src="myjs/add/history/third_line.js"></script>
 <script src="myjs/add/history"></script>
 
