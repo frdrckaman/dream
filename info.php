@@ -74,29 +74,6 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        } elseif (Input::get('add_facility_visit')) {
-            $validate = $validate->check($_POST, array(
-                'visit_date' => array(
-                    'required' => true,
-                ),
-                'visit_status' => array(
-                    'required' => true,
-                ),
-            ));
-
-            if ($validate->passed()) {
-                $user->updateRecord('facility', array(
-                    'visit_date' => Input::get('visit_date'),
-                    'comments' => Input::get('comments'),
-                    'visit_status' => Input::get('visit_status'),
-                    'update_on' => date('Y-m-d H:i:s'),
-                    'update_id' => $user->data()->id,
-                ), Input::get('id'));
-
-                $successMessage = 'Visit Updates  Successful';
-            } else {
-                $pageError = $validate->errors();
-            }
         } elseif (Input::get('add_enrollment')) {
             $validate = $validate->check($_POST, array(
                 'enrollment_date' => array(
@@ -105,16 +82,16 @@ if ($user->isLoggedIn()) {
             ));
 
             if ($validate->passed()) {
-                $clients = $override->get3('clients', 'status', 1, 'id', Input::get('cid'), 'sequence', -2);
-                $screening = $override->get3('screening', 'status', 1, 'patient_id', Input::get('cid'), 'sequence', -1);
-                $enrollment = $override->get3('enrollment', 'status', 1, 'patient_id', Input::get('cid'), 'sequence', 0);
+                $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid']);
+                $screening = $override->getNews('screening', 'status', 1, 'patient_id', Input::get('sid'));
+                $enrollment = $override->getNews('enrollment', 'status', 1, 'patient_id', $_GET['cid']);
 
                 if (Input::get('enrollment_date') < $screening['screening_date']) {
                     $errorMessage = 'Enrollment Date Can not be less than screaning date';
                 } else {
                     if ($enrollment) {
                         $user->updateRecord('enrollment', array(
-                            'sequence' => 0,
+                            'sequence' => 1,
                             'visit_code' => 'EV',
                             'visit_name' => 'Enrolment Visit',
                             'screening_id' => $screening[0]['id'],
@@ -132,7 +109,7 @@ if ($user->isLoggedIn()) {
 
                         if ($visit) {
                             $user->updateRecord('visit', array(
-                                'sequence' => 0,
+                                'sequence' => 1,
                                 'visit_code' => 'EV',
                                 'visit_name' => 'Enrolment Visit',
                                 'respondent' => $clients[0]['respondent'],
@@ -154,7 +131,7 @@ if ($user->isLoggedIn()) {
                             ), $visit[0]['id']);
                         } else {
                             $user->createRecord('visit', array(
-                                'sequence' => 0,
+                                'sequence' => 1,
                                 'visit_code' => 'EV',
                                 'visit_name' => 'Enrolment Visit',
                                 'respondent' => $clients[0]['respondent'],
@@ -176,13 +153,13 @@ if ($user->isLoggedIn()) {
                             ));
                         }
 
-                        $user->visit_delete1($clients[0]['id'], Input::get('enrollment_date'), $clients[0]['study_id'], $user->data()->id, $clients[0]['site_id'], $clients[0]['respondent'], $enrollment[0]['id']);
-
+                        // $user->visit_delete1($clients[0]['id'], Input::get('enrollment_date'), $clients[0]['study_id'], $user->data()->id, $clients[0]['site_id'], $clients[0]['respondent'], $enrollment[0]['id']);
 
                         $successMessage = 'Enrollment  Successful Updated';
                     } else {
+                        print_r($_GET['cid']);
                         $user->createRecord('enrollment', array(
-                            'sequence' => 0,
+                            'sequence' => 1,
                             'visit_code' => 'EV',
                             'visit_name' => 'Enrolment Visit',
                             'screening_id' => $screening[0]['id'],
@@ -202,7 +179,7 @@ if ($user->isLoggedIn()) {
                         $last_row = $override->lastRow('enrollment', 'id')[0];
 
                         $user->createRecord('visit', array(
-                            'sequence' => 0,
+                            'sequence' => 1,
                             'visit_code' => 'EV',
                             'visit_name' => 'Enrolment Visit',
                             'respondent' => $clients[0]['respondent'],
@@ -223,7 +200,7 @@ if ($user->isLoggedIn()) {
                             'site_id' => $clients[0]['site_id'],
                         ));
 
-                        $user->visit_delete1($clients[0]['id'], Input::get('enrollment_date'), $clients[0]['study_id'], $user->data()->id, $clients[0]['site_id'], $clients[0]['respondent'], $last_row['id']);
+                        // $user->visit_delete1($clients[0]['id'], Input::get('enrollment_date'), $clients[0]['study_id'], $user->data()->id, $clients[0]['site_id'], $clients[0]['respondent'], $last_row['id']);
 
 
                         $successMessage = 'Enrollment  Successful Added';
@@ -1224,7 +1201,7 @@ if ($user->isLoggedIn()) {
                                                 foreach ($override->getNews('visit', 'status', 1, 'patient_id', $_GET['cid']) as $visit) {
                                                     $clients = $override->getNews('clients', 'status', 1, 'id',  $_GET['cid'])[0];
                                                     $screening = $override->getNews('screening', 'status', 1, 'patient_id', $_GET['cid'])[0];
-                                                    $enrollment = $override->get3('enrollment', 'status', 1, 'patient_id', Input::get('id'), 'sequence', 0);
+                                                    $enrollment = $override->getNews('enrollment', 'status', 1, 'patient_id', $_GET['cid'])[0];
                                                     $site = $override->get('sites', 'id', $visit['site_id'])[0];
                                                 ?>
                                                     <tr>
@@ -1255,39 +1232,23 @@ if ($user->isLoggedIn()) {
 
                                                         <td>
                                                             <?php if ($visit['visit_status'] == 1) { ?>
-                                                                <?php if ($visit['sequence'] == -2) { ?>
-                                                                    <?php if ($clients['age'] >= 18) { ?>
-                                                                        <?php if ($override->getNews('screening', 'patient_id', $_GET['cid'], 'sequence', -1)) { ?>
-                                                                            <a href="add.php?id=7&cid=<?= $_GET['cid'] ?>&sequence=-1&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Screening Data </a>&nbsp;&nbsp; <br><br>
+                                                                <?php if ($visit['sequence'] == 0) { ?>
+                                                                    <?php if ($override->getNews('screening', 'patient_id', $_GET['cid'], 'status', 1)) { ?>
+                                                                        <a href="add.php?id=7&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Screening Data </a>&nbsp;&nbsp; <br><br>
 
-                                                                        <?php } else { ?>
-                                                                            <a href="add.php?id=7&cid=<?= $_GET['cid'] ?>&sequence=-1&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Screening Data</a>&nbsp;&nbsp; <br><br>
-                                                                        <?php } ?>
+                                                                    <?php } else { ?>
+                                                                        <a href="add.php?id=7&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Screening Data</a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
                                                                 <?php } ?>
-                                                            <?php } ?>
 
-                                                            <?php if ($visit['visit_status'] == 1) { ?>
-                                                                <?php if ($visit['sequence'] == -1) { ?>
-                                                                    <?php if ($screening['eligible'] == 1) { ?>
-                                                                        <?php if ($override->getNews('enrollment', 'patient_id', $_GET['cid'], 'sequence', 0)) { ?>
-                                                                            <a href="#editEnrollment<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Update Enrollment Data </a>&nbsp;&nbsp; <br><br>
-                                                                        <?php } else { ?>
-                                                                            <a href="#editEnrollment<?= $visit['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">Add Enrollment Data </a>&nbsp;&nbsp; <br><br>
-                                                                        <?php } ?>
-                                                                    <?php } ?>
-                                                                <?php } ?>
-                                                            <?php } ?>
-
-                                                            <?php if ($visit['visit_status'] == 1) { ?>
-                                                                <?php if ($visit['sequence'] >= 0) { ?>
+                                                                <?php if ($visit['sequence'] == 1) { ?>
                                                                     <?php if ($screening['eligible'] == 1) {
-                                                                        $i = 0; ?>
-                                                                        <?php if ($override->getNews('individual', 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
-                                                                            <a href="add.php?id=5&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Participant Enrolment Data</a>&nbsp;&nbsp; <br><br>
+                                                                        $i = 1; ?>
+                                                                        <?php if ($override->getNews('enrollment_form', 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
+                                                                            <a href="add.php?id=16&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Participant Enrolment Data</a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } else { ?>
-                                                                            <a href="add.php?id=5&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Participant Enrolment Data </a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=16&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Participant Enrolment Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } ?>
 
@@ -1417,8 +1378,8 @@ if ($user->isLoggedIn()) {
                                                                                     <!-- select -->
                                                                                     <div class="form-group">
                                                                                         <label>Enrollment Date</label>
-                                                                                        <input value="<?php if ($visit['visit_date']) {
-                                                                                                            echo $visit['visit_date'];
+                                                                                        <input value="<?php if ($enrollment['visit_date']) {
+                                                                                                            echo $enrollment['visit_date'];
                                                                                                         } ?>" class="form-control" max="<?= date('Y-m-d'); ?>" type="date" name="enrollment_date" id="enrollment_date" required />
                                                                                     </div>
                                                                                 </div>
@@ -1430,8 +1391,8 @@ if ($user->isLoggedIn()) {
                                                                                     <div class="form-group">
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control" name="comments" rows="3">
-                                                                                            <?php if ($visit['comments']) {
-                                                                                                echo $visit['comments'];
+                                                                                            <?php if ($enrollment['comments']) {
+                                                                                                echo $enrollment['comments'];
                                                                                             } ?>
                                                                                         </textarea>
                                                                                     </div>
@@ -1441,8 +1402,9 @@ if ($user->isLoggedIn()) {
                                                                         <div class="dr"><span></span></div>
                                                                     </div>
                                                                     <div class="modal-footer justify-content-between">
-                                                                        <input type="hidden" name="id" value="<?= $visit['id'] ?>">
-                                                                        <input type="hidden" name="cid" value="<?= $visit['patient_id'] ?>">
+                                                                        <input type="hidden" name="id" value="<?= $enrollment['id'] ?>">
+                                                                        <input type="hidden" name="cid" value="<?= $enrollment['patient_id'] ?>">
+                                                                        <input type="hidden" name="sid" value="<?= $screening['id'] ?>">
                                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                                         <input type="submit" name="add_enrollment" class="btn btn-primary" value="Submit">
                                                                     </div>
@@ -1455,7 +1417,6 @@ if ($user->isLoggedIn()) {
                                                     <!-- /.modal -->
                                                 <?php
                                                     $x++;
-                                                    $i++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>

@@ -38,17 +38,20 @@ if ($user->isLoggedIn()) {
 
     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
         if ($_GET['site_id'] != null) {
+            $registered = $override->countData('clients', 'status', 1, 'site_id', $_GET['site_id']);
             $screened = $override->countData2('clients', 'status', 1, 'screened', 1, 'site_id', $_GET['site_id']);
             $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $_GET['site_id']);
             $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $_GET['site_id']);
             $end = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $_GET['site_id']);
         } else {
+            $registered = $override->getCount('clients', 'status', 1);
             $screened = $override->countData('clients', 'status', 1, 'screened', 1);
             $eligible = $override->countData('clients', 'status', 1, 'eligible', 1);
             $enrolled = $override->countData('clients', 'status', 1, 'enrolled', 1);
             $end = $override->countData('clients', 'status', 1, 'end_study', 1);
         }
     } else {
+        $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
         $screened = $override->countData2('clients', 'status', 1, 'screened', 1, 'site_id', $user->data()->site_id);
         $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $user->data()->site_id);
         $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $user->data()->site_id);
