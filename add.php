@@ -5372,7 +5372,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
 
-                                                <div class="col-sm-3" id="sample_received">
+                                                <div class="col-sm-4" id="sample_received">
                                                     <label for="sample_received" class="form-label">46. Is at least one respiratory sample received?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5389,7 +5389,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="sample_amount">
+                                                <div class="col-sm-4" id="sample_amount">
                                                     <label for="sample_amount" class="form-label">47. If yes, how many;</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5406,7 +5406,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="sample_reason">
+                                                <div class="col-sm-4" id="sample_reason">
                                                     <label for="tested_this_month" class="form-label">48. If no give reason</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5423,7 +5423,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="test_rejected">
+                                                <div class="col-sm-4" id="test_rejected">
                                                     <label for="test_rejected" class="form-label">49. Was test rejected</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -8433,9 +8433,7 @@ if ($user->isLoggedIn()) {
 
                                             <hr>
 
-
                                             <div class="row">
-
                                                 <div class="col-sm-3">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8642,7 +8640,6 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-
                                                 <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8874,9 +8871,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <hr>
-
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="pleural_fluid_date1">
@@ -8996,7 +8991,6 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                             <hr>
-
                                         </div>
                                         <!-- /.card-body -->
 
@@ -9011,84 +9005,86 @@ if ($user->isLoggedIn()) {
                     </div><!-- /.container-fluid -->
                 </section>
                 <!-- /.content -->
-            <?php } elseif ($_GET['id'] == 17) { ?>
-            <?php } elseif ($_GET['id'] == 18) { ?>
-            <?php } elseif ($_GET['id'] == 19) { ?>
-            <?php } elseif ($_GET['id'] == 20) { ?>
-            <?php } elseif ($_GET['id'] == 21) { ?>
-            <?php } elseif ($_GET['id'] == 22) { ?>
-            <?php } elseif ($_GET['id'] == 23) { ?>
-            <?php } elseif ($_GET['id'] == 24) { ?>
-            <?php } elseif ($_GET['id'] == 25) { ?>
-            <?php } elseif ($_GET['id'] == 26) { ?>
-            <?php } elseif ($_GET['id'] == 27) { ?>
-            <?php } elseif ($_GET['id'] == 28) { ?>
-            <?php } ?>
-
-            <?php include 'footer.php'; ?>
-
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
             </div>
-            <!-- ./wrapper -->
+            <!-- /.content-wrapper -->
+        <?php } elseif ($_GET['id'] == 17) { ?>
+        <?php } elseif ($_GET['id'] == 18) { ?>
+        <?php } elseif ($_GET['id'] == 19) { ?>
+        <?php } elseif ($_GET['id'] == 20) { ?>
+        <?php } elseif ($_GET['id'] == 21) { ?>
+        <?php } elseif ($_GET['id'] == 22) { ?>
+        <?php } elseif ($_GET['id'] == 23) { ?>
+        <?php } elseif ($_GET['id'] == 24) { ?>
+        <?php } elseif ($_GET['id'] == 25) { ?>
+        <?php } elseif ($_GET['id'] == 26) { ?>
+        <?php } elseif ($_GET['id'] == 27) { ?>
+        <?php } elseif ($_GET['id'] == 28) { ?>
+        <?php } ?>
 
-            <!-- jQuery -->
-            <script src="plugins/jquery/jquery.min.js"></script>
-            <!-- Bootstrap 4 -->
-            <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <!-- Select2 -->
-            <script src="plugins/select2/js/select2.full.min.js"></script>
-            <!-- Bootstrap4 Duallistbox -->
-            <script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-            <!-- InputMask -->
-            <script src="plugins/moment/moment.min.js"></script>
-            <script src="plugins/inputmask/jquery.inputmask.min.js"></script>
-            <!-- date-range-picker -->
-            <script src="plugins/daterangepicker/daterangepicker.js"></script>
-            <!-- bootstrap color picker -->
-            <script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-            <!-- Tempusdominus Bootstrap 4 -->
-            <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-            <!-- Bootstrap Switch -->
-            <script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-            <!-- BS-Stepper -->
-            <script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
-            <!-- dropzonejs -->
-            <script src="plugins/dropzone/min/dropzone.min.js"></script>
-            <!-- AdminLTE App -->
-            <script src="dist/js/adminlte.min.js"></script>
-            <!-- AdminLTE for demo purposes -->
-            <!-- <script src="../../dist/js/demo.js"></script> -->
-            <!-- Page specific script -->
+        <?php include 'footer.php'; ?>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Select2 -->
+    <script src="plugins/select2/js/select2.full.min.js"></script>
+    <!-- Bootstrap4 Duallistbox -->
+    <script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+    <!-- InputMask -->
+    <script src="plugins/moment/moment.min.js"></script>
+    <script src="plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap color picker -->
+    <script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Bootstrap Switch -->
+    <script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <!-- BS-Stepper -->
+    <script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <!-- dropzonejs -->
+    <script src="plugins/dropzone/min/dropzone.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <!-- <script src="../../dist/js/demo.js"></script> -->
+    <!-- Page specific script -->
 
 
-            <!-- clients Js -->
-            <script src="myjs/add/clients/insurance.js"></script>
-            <script src="myjs/add/clients/insurance_name.js"></script>
-            <script src="myjs/add/clients/relation_patient.js"></script>
-            <!-- <script src="myjs/add/clients/validate_hidden_with_values.js"></script>
+    <!-- clients Js -->
+    <script src="myjs/add/clients/insurance.js"></script>
+    <script src="myjs/add/clients/insurance_name.js"></script>
+    <script src="myjs/add/clients/relation_patient.js"></script>
+    <!-- <script src="myjs/add/clients/validate_hidden_with_values.js"></script>
     <script src="myjs/add/clients/validate_required_attribute.js"></script>
     <script src="myjs/add/clients/validate_required_radio_checkboxes.js"></script> -->
 
-            <!-- SCREENING Js -->
-            <script src="myjs/add/screening/conset.js"></script>
-            <script src="myjs/add/screening/art.js"></script>
+    <!-- SCREENING Js -->
+    <script src="myjs/add/screening/conset.js"></script>
+    <script src="myjs/add/screening/art.js"></script>
 
-            <!-- Enrollment Js -->
-            <script src="myjs/add/enrollment/other_diseases.js"></script>
-            <script src="myjs/add/enrollment/other_samples.js"></script>
-            <script src="myjs/add/enrollment/regimen_changed.js"></script>
-            <script src="myjs/add/enrollment/sputum_collected.js"></script>
-            <script src="myjs/add/enrollment/sputum_samples.js"></script>
-            <script src="myjs/add/enrollment/tb_category.js"></script>
-            <script src="myjs/add/enrollment/tx_previous.js"></script>
+    <!-- Enrollment Js -->
+    <script src="myjs/add/enrollment/other_diseases.js"></script>
+    <script src="myjs/add/enrollment/other_samples.js"></script>
+    <script src="myjs/add/enrollment/regimen_changed.js"></script>
+    <script src="myjs/add/enrollment/sputum_collected.js"></script>
+    <script src="myjs/add/enrollment/sputum_samples.js"></script>
+    <script src="myjs/add/enrollment/tb_category.js"></script>
+    <script src="myjs/add/enrollment/tx_previous.js"></script>
 
 
-            <!-- economics format numbers Js -->
-            <!-- <script src="myjs/add/economics/format_thousands/consultation.js"></script>
+    <!-- RESPIRATORY format numbers Js -->
+    <script src="myjs/add/respiratory/sample_received.js"></script>
     <script src="myjs/add/economics/format_thousands/days.js"></script>
     <script src="myjs/add/economics/format_thousands/diagnostic.js"></script>
     <script src="myjs/add/economics/format_thousands/food_drinks.js"></script>
@@ -9101,207 +9097,207 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/economics/format_thousands/registration.js"></script>
     <script src="myjs/add/economics/format_thousands/registration.js"></script>
     <script src="myjs/add/economics/format_thousands/support_earn.js"></script>
-    <script src="myjs/add/economics/format_thousands/transport.js"></script> -->
+    <script src="myjs/add/economics/format_thousands/transport.js"></script>
 
-            <script>
-                $(function() {
-                    //Initialize Select2 Elements
-                    $('.select2').select2()
+    <script>
+        $(function() {
+            //Initialize Select2 Elements
+            $('.select2').select2()
 
-                    //Initialize Select2 Elements
-                    $('.select2bs4').select2({
-                        theme: 'bootstrap4'
-                    })
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
 
-                    //Datemask dd/mm/yyyy
-                    $('#datemask').inputmask('dd/mm/yyyy', {
-                        'placeholder': 'dd/mm/yyyy'
-                    })
-                    //Datemask2 mm/dd/yyyy
-                    $('#datemask2').inputmask('mm/dd/yyyy', {
-                        'placeholder': 'mm/dd/yyyy'
-                    })
-                    //Money Euro
-                    $('[data-mask]').inputmask()
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', {
+                'placeholder': 'dd/mm/yyyy'
+            })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', {
+                'placeholder': 'mm/dd/yyyy'
+            })
+            //Money Euro
+            $('[data-mask]').inputmask()
 
-                    //Date picker
-                    $('#reservationdate').datetimepicker({
-                        format: 'L'
-                    });
+            //Date picker
+            $('#reservationdate').datetimepicker({
+                format: 'L'
+            });
 
-                    //Date and time picker
-                    $('#reservationdatetime').datetimepicker({
-                        icons: {
-                            time: 'far fa-clock'
-                        }
-                    });
+            //Date and time picker
+            $('#reservationdatetime').datetimepicker({
+                icons: {
+                    time: 'far fa-clock'
+                }
+            });
 
-                    //Date range picker
-                    $('#reservation').daterangepicker()
-                    //Date range picker with time picker
-                    $('#reservationtime').daterangepicker({
-                        timePicker: true,
-                        timePickerIncrement: 30,
-                        locale: {
-                            format: 'MM/DD/YYYY hh:mm A'
-                        }
-                    })
-                    //Date range as a button
-                    $('#daterange-btn').daterangepicker({
-                            ranges: {
-                                'Today': [moment(), moment()],
-                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                            },
-                            startDate: moment().subtract(29, 'days'),
-                            endDate: moment()
-                        },
-                        function(start, end) {
-                            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-                        }
-                    )
+            //Date range picker
+            $('#reservation').daterangepicker()
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'MM/DD/YYYY hh:mm A'
+                }
+            })
+            //Date range as a button
+            $('#daterange-btn').daterangepicker({
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment()
+                },
+                function(start, end) {
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                }
+            )
 
-                    //Timepicker
-                    $('#timepicker').datetimepicker({
-                        format: 'LT'
-                    })
+            //Timepicker
+            $('#timepicker').datetimepicker({
+                format: 'LT'
+            })
 
-                    //Bootstrap Duallistbox
-                    $('.duallistbox').bootstrapDualListbox()
+            //Bootstrap Duallistbox
+            $('.duallistbox').bootstrapDualListbox()
 
-                    //Colorpicker
-                    $('.my-colorpicker1').colorpicker()
-                    //color picker with addon
-                    $('.my-colorpicker2').colorpicker()
+            //Colorpicker
+            $('.my-colorpicker1').colorpicker()
+            //color picker with addon
+            $('.my-colorpicker2').colorpicker()
 
-                    $('.my-colorpicker2').on('colorpickerChange', function(event) {
-                        $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-                    })
+            $('.my-colorpicker2').on('colorpickerChange', function(event) {
+                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+            })
 
-                    $("input[data-bootstrap-switch]").each(function() {
-                        $(this).bootstrapSwitch('state', $(this).prop('checked'));
-                    })
+            $("input[data-bootstrap-switch]").each(function() {
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            })
 
-                    $('#regions_id').change(function() {
-                        var region_id = $(this).val();
-                        $.ajax({
-                            url: "process.php?content=region_id",
-                            method: "GET",
-                            data: {
-                                region_id: region_id
-                            },
-                            dataType: "text",
-                            success: function(data) {
-                                $('#districts_id').html(data);
-                            }
-                        });
-                    });
-
-                    $('#region').change(function() {
-                        var region = $(this).val();
-                        $.ajax({
-                            url: "process.php?content=region_id",
-                            method: "GET",
-                            data: {
-                                region_id: region
-                            },
-                            dataType: "text",
-                            success: function(data) {
-                                $('#district').html(data);
-                            }
-                        });
-                    });
-
-                    $('#district').change(function() {
-                        var district_id = $(this).val();
-                        $.ajax({
-                            url: "process.php?content=district_id",
-                            method: "GET",
-                            data: {
-                                district_id: district_id
-                            },
-                            dataType: "text",
-                            success: function(data) {
-                                $('#ward').html(data);
-                            }
-                        });
-                    });
-
-                })
-
-                // BS-Stepper Init
-                document.addEventListener('DOMContentLoaded', function() {
-                    window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-                })
-
-                // DropzoneJS Demo Code Start
-                Dropzone.autoDiscover = false
-
-                // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
-                var previewNode = document.querySelector("#template")
-                previewNode.id = ""
-                var previewTemplate = previewNode.parentNode.innerHTML
-                previewNode.parentNode.removeChild(previewNode)
-
-                var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-                    url: "/target-url", // Set the url
-                    thumbnailWidth: 80,
-                    thumbnailHeight: 80,
-                    parallelUploads: 20,
-                    previewTemplate: previewTemplate,
-                    autoQueue: false, // Make sure the files aren't queued until manually added
-                    previewsContainer: "#previews", // Define the container to display the previews
-                    clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
-                })
-
-                myDropzone.on("addedfile", function(file) {
-                    // Hookup the start button
-                    file.previewElement.querySelector(".start").onclick = function() {
-                        myDropzone.enqueueFile(file)
+            $('#regions_id').change(function() {
+                var region_id = $(this).val();
+                $.ajax({
+                    url: "process.php?content=region_id",
+                    method: "GET",
+                    data: {
+                        region_id: region_id
+                    },
+                    dataType: "text",
+                    success: function(data) {
+                        $('#districts_id').html(data);
                     }
-                })
+                });
+            });
 
-                // Update the total progress bar
-                myDropzone.on("totaluploadprogress", function(progress) {
-                    document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
-                })
+            $('#region').change(function() {
+                var region = $(this).val();
+                $.ajax({
+                    url: "process.php?content=region_id",
+                    method: "GET",
+                    data: {
+                        region_id: region
+                    },
+                    dataType: "text",
+                    success: function(data) {
+                        $('#district').html(data);
+                    }
+                });
+            });
 
-                myDropzone.on("sending", function(file) {
-                    // Show the total progress bar when upload starts
-                    document.querySelector("#total-progress").style.opacity = "1"
-                    // And disable the start button
-                    file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
-                })
+            $('#district').change(function() {
+                var district_id = $(this).val();
+                $.ajax({
+                    url: "process.php?content=district_id",
+                    method: "GET",
+                    data: {
+                        district_id: district_id
+                    },
+                    dataType: "text",
+                    success: function(data) {
+                        $('#ward').html(data);
+                    }
+                });
+            });
 
-                // Hide the total progress bar when nothing's uploading anymore
-                myDropzone.on("queuecomplete", function(progress) {
-                    document.querySelector("#total-progress").style.opacity = "0"
-                })
+        })
 
-                // Setup the buttons for all transfers
-                // The "add files" button doesn't need to be setup because the config
-                // `clickable` has already been specified.
-                document.querySelector("#actions .start").onclick = function() {
-                    myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
-                }
-                document.querySelector("#actions .cancel").onclick = function() {
-                    myDropzone.removeAllFiles(true)
-                }
-                // DropzoneJS Demo Code End
+        // BS-Stepper Init
+        document.addEventListener('DOMContentLoaded', function() {
+            window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+        })
+
+        // DropzoneJS Demo Code Start
+        Dropzone.autoDiscover = false
+
+        // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+        var previewNode = document.querySelector("#template")
+        previewNode.id = ""
+        var previewTemplate = previewNode.parentNode.innerHTML
+        previewNode.parentNode.removeChild(previewNode)
+
+        var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+            url: "/target-url", // Set the url
+            thumbnailWidth: 80,
+            thumbnailHeight: 80,
+            parallelUploads: 20,
+            previewTemplate: previewTemplate,
+            autoQueue: false, // Make sure the files aren't queued until manually added
+            previewsContainer: "#previews", // Define the container to display the previews
+            clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+        })
+
+        myDropzone.on("addedfile", function(file) {
+            // Hookup the start button
+            file.previewElement.querySelector(".start").onclick = function() {
+                myDropzone.enqueueFile(file)
+            }
+        })
+
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function(progress) {
+            document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+        })
+
+        myDropzone.on("sending", function(file) {
+            // Show the total progress bar when upload starts
+            document.querySelector("#total-progress").style.opacity = "1"
+            // And disable the start button
+            file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+        })
+
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("queuecomplete", function(progress) {
+            document.querySelector("#total-progress").style.opacity = "0"
+        })
+
+        // Setup the buttons for all transfers
+        // The "add files" button doesn't need to be setup because the config
+        // `clickable` has already been specified.
+        document.querySelector("#actions .start").onclick = function() {
+            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+        }
+        document.querySelector("#actions .cancel").onclick = function() {
+            myDropzone.removeAllFiles(true)
+        }
+        // DropzoneJS Demo Code End
 
 
-                // $("#packs_per_day, #packs_per_day").on("input", function() {
-                //     setTimeout(function() {
-                //         var weight = $("#packs_per_day").val();
-                //         var height = $("#packs_per_day").val() / 100; // Convert cm to m
-                //         var bmi = weight / (height * height);
-                //         $("#packs_per_year").text(bmi.toFixed(2));
-                //     }, 1);
-                // });
-            </script>
+        // $("#packs_per_day, #packs_per_day").on("input", function() {
+        //     setTimeout(function() {
+        //         var weight = $("#packs_per_day").val();
+        //         var height = $("#packs_per_day").val() / 100; // Convert cm to m
+        //         var bmi = weight / (height * height);
+        //         $("#packs_per_year").text(bmi.toFixed(2));
+        //     }, 1);
+        // });
+    </script>
 
 </body>
 
