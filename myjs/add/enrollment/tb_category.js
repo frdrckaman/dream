@@ -33,3 +33,13 @@ tb_category3.addEventListener("change", toggleElementVisibility);
 
 // Initial check
 toggleElementVisibility();
+
+
+
+
+function unsetTb_category() {
+  var unsetTb_categorys = document.getElementsByName("tb_category");
+  unsetTb_categorys.forEach(function (unsetTb_category) {
+    unsetTb_category.checked = false;
+  });
+}

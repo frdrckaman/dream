@@ -28,3 +28,4 @@ tx_previous2.addEventListener("change", toggleElementVisibility);
 
 // Initial check
 toggleElementVisibility();
+

@@ -8586,6 +8586,7 @@ if ($user->isLoggedIn()) {
                                                     <?php } ?>
                                                 </div>
                                             </div>
+                                            <button onclick="unsetTb_category()">Unset</button>
                                         </div>
 
                                         <div class="col-sm-4" id="relapse_years1">
@@ -8633,8 +8634,6 @@ if ($user->isLoggedIn()) {
 
                                     <div class="row">
 
-
-
                                         <div class="col-sm-4">
                                             <div class="row-form clearfix">
                                                 <div class="form-group">
@@ -8646,7 +8645,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-4" id="tb_category">
+                                        <div class="col-sm-4" id="regimen_changed">
                                             <label>28. Was the regimen changed during treatment (individualized?)</label>
                                             <!-- radio -->
                                             <div class="row-form clearfix">
@@ -8661,8 +8660,9 @@ if ($user->isLoggedIn()) {
                                                     <?php } ?>
                                                 </div>
                                             </div>
+                                            <button onclick="unsetRegimen_changed()">Unset</button>
                                         </div>
-                                       
+
 
                                         <div class="col-sm-4" id="regimen_name1">
                                             <div class="row-form clearfix">
