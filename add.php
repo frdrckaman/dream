@@ -778,6 +778,8 @@ if ($user->isLoggedIn()) {
                 $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid'])[0];
                 $costing = $override->get3('respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $_GET['sequence']);
 
+                $test_reasons = implode(',', Input::get('test_reasons'));
+
                 if ($costing) {
                     $user->updateRecord('respiratory', array(
                         'visit_date' => Input::get('visit_date'),
@@ -786,7 +788,7 @@ if ($user->isLoggedIn()) {
                         'sample_amount' => Input::get('sample_amount'),
                         'sample_reason' => Input::get('sample_reason'),
                         'test_rejected' => Input::get('test_rejected'),
-                        'test_reasons' => Input::get('test_reasons'),
+                        'test_reasons' => $test_reasons,
                         'test_reasons_other' => Input::get('test_reasons_other'),
                         'sample_date' => Input::get('sample_date'),
                         'sample_type' => Input::get('sample_type'),
@@ -835,7 +837,7 @@ if ($user->isLoggedIn()) {
                         'sample_amount' => Input::get('sample_amount'),
                         'sample_reason' => Input::get('sample_reason'),
                         'test_rejected' => Input::get('test_rejected'),
-                        'test_reasons' => Input::get('test_reasons'),
+                        'test_reasons' => $test_reasons,
                         'test_reasons_other' => Input::get('test_reasons_other'),
                         'sample_date' => Input::get('sample_date'),
                         'sample_type' => Input::get('sample_type'),
@@ -5446,9 +5448,11 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('test_reasons', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="test_reasons" id="test_reasons<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['test_reasons'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
+                                                                    <input class="form-check-input" type="checkbox" name="test_reasons[]" id="test_reasons<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['test_reasons']) as $values) {
+                                                                                                                                                                                                                    if ($values == $value['id']) {
+                                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -5575,7 +5579,7 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-                                            <label for="zn" class="form-label text-center">58. If ZN </label>
+                                            <label for="zn" id="zn" class="form-label text-center">58. If ZN </label>
                                             <hr>
 
                                             <div class="row">
@@ -9086,11 +9090,11 @@ if ($user->isLoggedIn()) {
 
     <!-- RESPIRATORY format numbers Js -->
     <script src="myjs/add/respiratory/sample_received.js"></script>
-    <script src="myjs/add/economics/format_thousands/days.js"></script>
-    <script src="myjs/add/economics/format_thousands/diagnostic.js"></script>
-    <script src="myjs/add/economics/format_thousands/food_drinks.js"></script>
-    <script src="myjs/add/economics/format_thousands/hours.js"></script>
-    <script src="myjs/add/economics/format_thousands/medications.js"></script>
+    <script src="myjs/add/respiratory/test_rejected.js"></script>
+    <script src="myjs/add/respiratory/afb_microscopy.js"></script>
+    <script src="myjs/add/respiratory/wrd_test.js"></script>
+    <script src="myjs/add/respiratory/sequence_type.js"></script>
+    <script src="myjs/add/respiratory/test_repeatition.js"></script>
     <script src="myjs/add/economics/format_thousands/member_earn.js"></script>
     <script src="myjs/add/economics/format_thousands/monthly_earn.js"></script>
     <script src="myjs/add/economics/format_thousands/other_cost.js"></script>
