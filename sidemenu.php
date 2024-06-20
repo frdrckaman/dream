@@ -132,9 +132,8 @@ if ($user->isLoggedIn()) {
                         </li> -->
                     </ul>
                 </li>
-                <?php if ($user->data()->power == 1) {
+                <?php if ($user->data()->accessLevel == 1) {
                 ?>
-
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -180,6 +179,62 @@ if ($user->isLoggedIn()) {
                                     <i class="far fa-circle nav-icon"></i>
                                     <span class="badge badge-info right"><?= $staff_lock_inactive; ?></span>
                                     <p>Locked And Inactive</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <span class="badge badge-info right"><?= $Position; ?></span>
+                            <p>
+                                Positions <i class="fas fa-angle-left right"></i>
+
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="add.php?id=2" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Add
+                                        <span class="right badge badge-danger">New Position</span>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="info.php?id=2" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"><?= $Position; ?></span>
+                                    <p>List of Positions</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <span class="badge badge-info right"><?= $Site; ?></span>
+                            <p>
+                                Site <i class="fas fa-angle-left right"></i>
+
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="add.php?id=2" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Add
+                                        <span class="right badge badge-danger">New Site</span>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="info.php?id=2" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"><?= $Site; ?></span>
+                                    <p>List of Sites</p>
                                 </a>
                             </li>
                         </ul>
@@ -348,7 +403,7 @@ if ($user->isLoggedIn()) {
                         </ul> -->
                     </li>
                 <?php } ?>
-                <?php if ($user->data()->power == 1) {
+                <?php if ($user->data()->accessLevel == 1) {
                 ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">

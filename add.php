@@ -156,6 +156,33 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
+        } elseif (Input::get('add_sites')) {
+            $validate = $validate->check($_POST, array(
+                'name' => array(
+                    'required' => true,
+                ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $site = $override->getNews('sites', 'status', 1, 'id', $_GET['sit_id']);
+                    if ($site) {
+                        $user->updateRecord('sites', array(
+                            'name' => Input::get('name'),
+                        ), $_GET['sit_id']);
+                        $successMessage = 'Site Successful Updated';
+
+                    } else {
+                        $user->createRecord('sites', array(
+                            'name' => Input::get('name'),
+                        ));
+                        $successMessage = 'Site Successful Added';
+                    }
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
         } elseif (Input::get('add_site')) {
             $validate = $validate->check($_POST, array(
                 'name' => array(
@@ -2621,6 +2648,88 @@ if ($user->isLoggedIn()) {
             </div>
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 2) { ?>
+            <?php
+            $sites = $override->getNews('sites', 'status', 1, 'id', $_GET['sit_id'])[0];
+            ?>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <?php if ($sites) { ?>
+                                    <h1>Add New Site</h1>
+                                <?php } else { ?>
+                                    <h1>Update Site</h1>
+                                <?php } ?>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item">
+                                        <a href="info.php?id=12&site_id=<?= $_GET['site_id']; ?>&status=<?= $_GET['status']; ?>">
+                                            < Back</a>
+                                    </li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item">
+                                        <a href="index1.php">Home</a>
+                                    </li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item">
+                                        <a href="info.php?id=11&status=<?= $_GET['status']; ?>">
+                                            Go to sites list > </a>
+                                    </li>&nbsp;&nbsp;
+                                    <?php if ($sites) { ?>
+                                        <li class="breadcrumb-item active">Add New Site</li>
+                                    <?php } else { ?>
+                                        <li class="breadcrumb-item active">Update Site</li>
+                                    <?php } ?>
+                                </ol>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- right column -->
+                            <div class="col-md-12">
+                                <!-- general form elements disabled -->
+                                <div class="card card-warning">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Name</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                        <div class="card-body">
+                                            <div class="row">                                           
+                                                <div class="col-sm-6">
+                                                    <div class="mb-2">
+                                                        <label for="name" class="form-label">Name</label>
+                                                        <input type="text" value="<?php if ($sites['name']) {
+                                                                                        print_r($sites['name']);
+                                                                                    } ?>" id="name" name="name" class="form-control" placeholder="Enter here name" required />
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            <a href="info.php?id=2&status=<?= $_GET['status']; ?>" class="btn btn-default">Back</a>
+                                            <input type="submit" name="add_sites" value="Submit" class="btn btn-primary">
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!--/.col (right) -->
+                        </div>
+                        <!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </section>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 3) { ?>
             <?php
             $sites = $override->getNews('sites', 'status', 1, 'id', $_GET['site_id'])[0];
@@ -5620,7 +5729,7 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-                                            <label for="fm" id="fm"  class="form-label text-center">59. If FM </label>
+                                            <label for="fm" id="fm" class="form-label text-center">59. If FM </label>
                                             <hr>
 
                                             <div class="row">
