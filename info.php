@@ -40,6 +40,11 @@ if ($user->isLoggedIn()) {
                 'status' => 0,
             ), Input::get('id'));
             $successMessage = 'Site Deleted Successful';
+        } elseif (Input::get('delete_positions')) {
+            $user->updateRecord('position', array(
+                'status' => 0,
+            ), Input::get('id'));
+            $successMessage = 'Position Deleted Successful';
         } elseif (Input::get('delete_facility')) {
             $user->updateRecord('sites', array(
                 'status' => 0,
@@ -782,12 +787,12 @@ if ($user->isLoggedIn()) {
                                     <?php
                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                         if ($_GET['site_id'] != null) {
-                                            $clients = $override->getDataDesc2('sites', 'status', 1, 'site_id', $_GET['site_id'],  'id');
+                                            $clients = $override->getDataDesc2('sites', 'status', 1, 'id', $_GET['site_id'],  'id');
                                         } else {
                                             $clients = $override->getDataDesc1('sites', 'status', 1, 'id');
                                         }
                                     } else {
-                                        $clients = $override->getDataDesc2('sites', 'status', 1, 'site_id', $user->data()->site_id,  'id');
+                                        $clients = $override->getDataDesc2('sites', 'status', 1, 'id', $_GET['site_id'],  'id');
                                     } ?>
                                     results
                                 </h1>
@@ -1653,20 +1658,20 @@ if ($user->isLoggedIn()) {
                                     <?php
                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                         if ($_GET['site_id'] != null) {
-                                            $clients = $override->getDataDesc2('clients', 'status', 1, 'site_id', $_GET['site_id'],  'id');
+                                            $clients = $override->getDataDesc2('position', 'status', 1, 'id', $_GET['position_id'],  'id');
                                         } else {
-                                            $clients = $override->getDataDesc1('clients', 'status', 1, 'id');
+                                            $clients = $override->getDataDesc1('position', 'status', 1, 'id');
                                         }
                                     } else {
-                                        $clients = $override->getDataDesc2('clients', 'status', 1, 'site_id', $user->data()->site_id,  'id');
+                                        $clients = $override->getDataDesc2('position', 'status', 1, 'id', $_GET['position_id'],  'id');
                                     } ?>
-                                    Clients
+                                    position
                                 </h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
-                                    <li class="breadcrumb-item active">Clients</li>
+                                    <li class="breadcrumb-item active">position</li>
                                 </ol>
                             </div>
                         </div>
@@ -1684,56 +1689,11 @@ if ($user->isLoggedIn()) {
                                             <div class="row mb-2">
                                                 <div class="col-sm-3">
                                                     <div class="card-header">
-                                                        <h3 class="card-title">List of Clients</h3>&nbsp;&nbsp;
-                                                        <span class="badge badge-info right"><?= $registered; ?></span>
+                                                        <h3 class="card-title">List of Position</h3>&nbsp;&nbsp;
+                                                        <span class="badge badge-info right"><?= $results; ?></span>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3">
-                                                    <?php
-                                                    if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="form-group">
-                                                                            <select class="form-control" name="site_id" style="width: 100%;" autocomplete="off">
-                                                                                <option value="">Select Site</option>
-                                                                                <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                    <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
-                                                                                <?php } ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="form-group">
-                                                                            <input type="submit" name="search_by_site" value="Search" class="btn btn-primary">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    <?php } ?>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <?php
-                                                    if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="form-group">
-                                                                            <input type="submit" name="download_clients" value="Download" class="btn btn-info">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    <?php } ?>
-                                                </div>
+
                                                 <div class="col-sm-3">
                                                     <ol class="breadcrumb float-sm-right">
                                                         <li class="breadcrumb-item">
@@ -1756,11 +1716,8 @@ if ($user->isLoggedIn()) {
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Study Id</th>
-                                                    <th>Interview Type</th>
-                                                    <th>age</th>
-                                                    <th>sex</th>
-                                                    <th>Site</th>
+                                                    <th>N0</th>
+                                                    <th>Name</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
@@ -1773,52 +1730,47 @@ if ($user->isLoggedIn()) {
                                                 ?>
                                                     <tr>
                                                         <td class="table-user">
-                                                            <?= $value['study_id']; ?>
+                                                            <?= $x; ?>
                                                         </td>
-                                                        <?php if ($value['interview_type'] == 1) { ?>
-                                                            <td class="table-user">
-                                                                Kap & Screening
-                                                            </td>
-                                                        <?php } elseif ($value['interview_type'] == 2) { ?>
-                                                            <td class="table-user">
-                                                                Health Care Worker
-                                                            </td>
-                                                        <?php } else { ?>
-                                                            <td class="table-user">
-                                                                None
-                                                            </td>
-                                                        <?php } ?>
                                                         <td class="table-user">
-                                                            <?= $value['age']; ?>
-                                                        </td>
-                                                        <?php if ($value['sex'] == 1) { ?>
-                                                            <td class="table-user">
-                                                                Male
-                                                            </td>
-                                                        <?php } elseif ($value['sex'] == 2) { ?>
-                                                            <td class="table-user">
-                                                                Female
-                                                            </td>
-                                                        <?php } ?>
-                                                        <td class="table-user">
-                                                            <?= $sites['name']; ?>
+                                                            <?= $value['name']; ?>
                                                         </td>
                                                         <td class="table-user">
                                                             <a href="#" class="btn btn-success">Active</a>
                                                         </td>
                                                         <td class="table-user">
-                                                            <a href="add.php?id=4&cid=<?= $value['id'] ?>" class="btn btn-info">Update</a>
+                                                            <a href="add.php?id=2&sit_id=<?= $value['id'] ?>" class="btn btn-info">Update</a>
+                                                            <a href="#delete<?= $value['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
                                                         </td>
                                                     </tr>
+                                                    <div class="modal fade" id="delete<?= $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <form method="post">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <h4>Delete position</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <strong style="font-weight: bold;color: red">
+                                                                            <p>Are you sure you want to delete this position</p>
+                                                                        </strong>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                                                                        <input type="submit" name="delete_positions" value="Delete" class="btn btn-danger">
+                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
                                                     <th>Study Id</th>
-                                                    <th>Interview Type</th>
-                                                    <th>age</th>
-                                                    <th>sex</th>
                                                     <th>Site</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
@@ -1838,6 +1790,7 @@ if ($user->isLoggedIn()) {
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
+
         <?php } elseif ($_GET['id'] == 6) { ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
