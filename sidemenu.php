@@ -194,7 +194,7 @@ if ($user->isLoggedIn()) {
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="add.php?id=2" class="nav-link">
+                                <a href="add.php?id=5" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Add
@@ -203,7 +203,7 @@ if ($user->isLoggedIn()) {
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="info.php?id=2" class="nav-link">
+                                <a href="info.php?id=5" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <span class="badge badge-info right"><?= $Position; ?></span>
                                     <p>List of Positions</p>
