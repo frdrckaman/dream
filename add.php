@@ -2659,7 +2659,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 2) { ?>
             <?php
-            $sites = $override->getNews('sites', 'status', 1, 'id', $_GET['sit_id'])[0];
+            $sites = $override->getNews('sites', 'status', 1, 'id', $_GET['site_id'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
