@@ -178,12 +178,28 @@ if ($user->isLoggedIn()) {
                     if ($site) {
                         $user->updateRecord('sites', array(
                             'name' => Input::get('name'),
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
                         ), $_GET['site_id']);
                         $successMessage = 'Site Successful Updated';
 
                     } else {
                         $user->createRecord('sites', array(
                             'name' => Input::get('name'),
+                            'entry_date' => date('Y-m-d'),
+                            'arm' => 1,
+                            'level' => 1,
+                            'type' => 1,
+                            'category' => 1,
+                            'respondent' => 2,
+                            'region' => 1,
+                            'district' => 1,
+                            'ward' => 1,
+                            'status' => 1,
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
                         ));
                         $successMessage = 'Site Successful Added';
                     }
