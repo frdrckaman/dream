@@ -794,13 +794,13 @@ if ($user->isLoggedIn()) {
                                     } else {
                                         $clients = $override->getDataDesc2('sites', 'status', 1, 'id', $_GET['site_id'],  'id');
                                     } ?>
-                                    results
+                                    Sites
                                 </h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
-                                    <li class="breadcrumb-item active">results</li>
+                                    <li class="breadcrumb-item active">Sites</li>
                                 </ol>
                             </div>
                         </div>
@@ -821,53 +821,8 @@ if ($user->isLoggedIn()) {
                                                         <h3 class="card-title">List of Sites</h3>&nbsp;&nbsp;
                                                         <span class="badge badge-info right"><?= $results; ?></span>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <?php
-                                                    if ($user->data()->power == 1 || $user->data()->accessLevel == 1) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="form-group">
-                                                                            <select class="form-control" name="site_id" style="width: 100%;" autocomplete="off">
-                                                                                <option value="">Select Site</option>
-                                                                                <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                    <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
-                                                                                <?php } ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="form-group">
-                                                                            <input type="submit" name="search_by_site" value="Search" class="btn btn-primary">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    <?php } ?>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <?php
-                                                    if ($user->data()->power == 1 || $user->data()->accessLevel == 1) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="form-group">
-                                                                            <input type="submit" name="download_results" value="Download" class="btn btn-info">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    <?php } ?>
-                                                </div>
+                                                </div>                                              
+                                                
                                                 <div class="col-sm-3">
                                                     <ol class="breadcrumb float-sm-right">
                                                         <li class="breadcrumb-item">
@@ -913,7 +868,7 @@ if ($user->isLoggedIn()) {
                                                             <a href="#" class="btn btn-success">Active</a>
                                                         </td>
                                                         <td class="table-user">
-                                                            <a href="add.php?id=2&sit_id=<?= $value['id'] ?>" class="btn btn-info">Update</a>
+                                                            <a href="add.php?id=2&site_id=<?= $value['id'] ?>" class="btn btn-info">Update</a>
                                                             <a href="#delete<?= $value['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
                                                         </td>
                                                     </tr>

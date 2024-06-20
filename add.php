@@ -138,7 +138,7 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        } elseif (Input::get('add_position')) {
+        } elseif (Input::get('add_positions')) {
             $validate = $validate->check($_POST, array(
                 'name' => array(
                     'required' => true,
@@ -146,10 +146,20 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 try {
-                    $user->createRecord('position', array(
-                        'name' => Input::get('name'),
-                    ));
-                    $successMessage = 'Position Successful Added';
+                    $position = $override->getNews('position', 'status', 1, 'id', $_GET['position_id']);
+                    if ($position) {
+                        $user->createRecord('position', array(
+                            'name' => Input::get('name'),
+                        ), $_GET['position_id']);
+                        $successMessage = 'Position Successful Updated';
+                    } else {
+                        $user->createRecord('position', array(
+                            'name' => Input::get('name'),
+                        ));
+                        $successMessage = 'Position Successful Added';
+                    }
+
+
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -164,11 +174,11 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 try {
-                    $site = $override->getNews('sites', 'status', 1, 'id', $_GET['sit_id']);
+                    $site = $override->getNews('sites', 'status', 1, 'id', $_GET['site_id']);
                     if ($site) {
                         $user->updateRecord('sites', array(
                             'name' => Input::get('name'),
-                        ), $_GET['sit_id']);
+                        ), $_GET['site_id']);
                         $successMessage = 'Site Successful Updated';
 
                     } else {
