@@ -638,7 +638,8 @@ if ($user->isLoggedIn()) {
                                                             <a href="#lock<?= $staff['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">Lock</a>
                                                             <a href="#unlock<?= $staff['id'] ?>" role="button" class="btn btn-primary" data-toggle="modal">Unlock</a>
                                                             <a href="#delete<?= $staff['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
-                                                            <a href="#restore<?= $staff['id'] ?>" role="button" class="btn btn-secondary" data-toggle="modal">Restore</a>
+                                                            <a href="#restore<?= $staff['id'] ?>" role="button" class="btn btn-secondary" data-toggle="modal">Restore</a>&nbsp;&nbsp;&nbsp;
+                                                            <a href="profile.php?id=<?= $staff['id'] ?>&status=<?= $_GET['status'] ?>" class="btn btn-success">Change Password</a>
                                                         </td>
                                                     </tr>
                                                     <div class="modal fade" id="reset<?= $staff['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -821,8 +822,8 @@ if ($user->isLoggedIn()) {
                                                         <h3 class="card-title">List of Sites</h3>&nbsp;&nbsp;
                                                         <span class="badge badge-info right"><?= $results; ?></span>
                                                     </div>
-                                                </div>                                              
-                                                
+                                                </div>
+
                                                 <div class="col-sm-3">
                                                     <ol class="breadcrumb float-sm-right">
                                                         <li class="breadcrumb-item">
