@@ -97,10 +97,8 @@ if ($user->isLoggedIn()) {
                             'email_address' => Input::get('email_address'),
                             'sex' => Input::get('sex'),
                             'position' => Input::get('position'),
-                            'accessLevel' => $accessLevel,
+                            'accessLevel' => Input::get('accessLevel'),
                             'power' => Input::get('power'),
-                            'password' => Hash::make($password, $salt),
-                            'salt' => $salt,
                             'site_id' => Input::get('site_id'),
                         ), $_GET['staff_id']);
 
