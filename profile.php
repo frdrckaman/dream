@@ -34,7 +34,7 @@ if ($user->isLoggedIn()) {
                     $user->updateRecord('user', array(
                         'password' => Hash::make(Input::get('new_password'), $salt),
                         'salt' => $salt
-                    ), $user->data()->id);
+                    ), $_GET['id']);
                 } catch (Exception $e) {
                     $e->getMessage();
                 }
