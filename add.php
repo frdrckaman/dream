@@ -6082,8 +6082,9 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-
                                                         </div>
+                                                        <button onclick="unsetRadio('culture_done')">Unset</button>
+
                                                     </div>
                                                 </div>
 
@@ -6107,6 +6108,8 @@ if ($user->isLoggedIn()) {
                                                                                         } ?>" id="sample_type_other2_22" name="sample_type_other2" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
+                                                    <button onclick="unsetRadio('sample_type2')">Unset</button>
+
                                                 </div>
 
                                                 <div class="col-sm-3" id="sample_methods">
@@ -6155,6 +6158,8 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                        <button onclick="unsetRadio('lj_results')">Unset</button>
+
                                                     </div>
                                                 </div>
 
@@ -6172,6 +6177,8 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                        <button onclick="unsetRadio('mgit_results')">Unset</button>
+
                                                     </div>
                                                 </div>
 
@@ -6190,6 +6197,8 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
 
                                                         </div>
+                                                        <button onclick="unsetRadio('phenotypic_done')">Unset</button>
+
                                                     </div>
                                                 </div>
 
@@ -6216,7 +6225,10 @@ if ($user->isLoggedIn()) {
                                                                                         print_r($costing['mgit_date2']);
                                                                                     } ?>" id="mgit_date2" name="mgit_date2" class="form-control" placeholder="Enter here" />
                                                     </div>
+                                                    <button onclick="unsetRadio('phenotypic_method')">Unset</button>
+
                                                 </div>
+
                                             </div>
 
                                             <div id="phenotypic_done00">
@@ -6239,6 +6251,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('rifampicin')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6256,6 +6270,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('isoniazid')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6273,6 +6289,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('levofloxacin')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6290,6 +6308,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('moxifloxacin')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6311,6 +6331,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('bedaquiline')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6328,6 +6350,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('linezolid')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6345,6 +6369,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('clofazimine')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6362,6 +6388,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('cycloserine')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6384,6 +6412,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('terizidone')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6401,6 +6431,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('ethambutol')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6418,6 +6450,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('delamanid')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6435,6 +6469,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('pyrazinamide')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6457,6 +6493,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('imipenem')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6474,6 +6512,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('cilastatin')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6491,6 +6531,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('meropenem')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6508,6 +6550,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('amikacin')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6530,6 +6574,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('streptomycin')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6547,6 +6593,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('ethionamide')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6564,6 +6612,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('prothionamide')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6581,6 +6631,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('para_aminosalicylic_acid')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6611,6 +6663,8 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                        <button onclick="unsetRadio('genotyping_done')">Unset</button>
+
                                                     </div>
                                                 </div>
 
@@ -6631,6 +6685,8 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                        <button onclick="unsetRadio('genotyping_asay')">Unset</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -6657,6 +6713,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('isoniazid2')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6674,6 +6732,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('fluoroquinolones')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6691,6 +6751,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('amikacin2')">Unset</button>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6712,6 +6774,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('kanamycin')">Unset</button>
+
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4" id="capreomycin">
@@ -6728,6 +6792,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('capreomycin')">Unset</button>
+
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4" id="ethionamide2">
@@ -6744,6 +6810,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('ethionamide2')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6813,7 +6881,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="rifampicin3" id="rifampicin3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['rifampicin3'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -6830,7 +6898,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="isoniazid3" id="isoniazid3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['isoniazid3'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -6847,7 +6915,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="levofloxacin3" id="levofloxacin3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['levofloxacin3'] == $value['id']) {
                                                                                                                                                                                                                     echo 'checked';
@@ -6864,7 +6932,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="moxifloxacin3" id="moxifloxacin3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['moxifloxacin3'] == $value['id']) {
                                                                                                                                                                                                                     echo 'checked';
@@ -6885,7 +6953,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="bedaquiline3" id="bedaquiline3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['bedaquiline3'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -6902,7 +6970,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="linezolid3" id="linezolid3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['linezolid3'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -6919,7 +6987,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="clofazimine3" id="clofazimine3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['clofazimine3'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -6936,7 +7004,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="cycloserine3" id="cycloserine3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['cycloserine3'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -6958,7 +7026,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="terizidone3" id="terizidone3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['terizidone3'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -6975,7 +7043,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="ethambutol3" id="ethambutol3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['ethambutol3'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -6992,7 +7060,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="delamanid3" id="delamanid3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['delamanid3'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -7009,7 +7077,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="pyrazinamide3" id="pyrazinamide3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['pyrazinamide3'] == $value['id']) {
                                                                                                                                                                                                                     echo 'checked';
@@ -7031,7 +7099,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="imipenem3" id="imipenem3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['imipenem3'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -7048,7 +7116,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="cilastatin3" id="cilastatin3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['cilastatin3'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -7065,7 +7133,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="meropenem3" id="meropenem3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['meropenem3'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -7082,7 +7150,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="amikacin3" id="amikacin3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['amikacin3'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -7104,7 +7172,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="streptomycin3" id="streptomycin3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['streptomycin3'] == $value['id']) {
                                                                                                                                                                                                                     echo 'checked';
@@ -7121,7 +7189,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="ethionamide3" id="ethionamide3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['ethionamide3'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -7138,7 +7206,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="prothionamide3" id="prothionamide3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['prothionamide3'] == $value['id']) {
                                                                                                                                                                                                                     echo 'checked';
@@ -7155,7 +7223,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="para_aminosalicylic_acid3" id="para_aminosalicylic_acid3<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['para_aminosalicylic_acid3'] == $value['id']) {
                                                                                                                                                                                                                                             echo 'checked';

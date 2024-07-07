@@ -3,7 +3,10 @@ function checkRadioButtons1() {
     culture_done: ["sample_type2", "sample_methods"],
     phenotypic_done: ["phenotypic_method", "phenotypic_done00"],
     genotyping_done: ["genotyping_asay", "genotyping_done00"],
-    nanopore_sequencing_done: ["nanopore_sequencing"],
+    nanopore_sequencing_done: [
+      "nanopore_sequencing",
+      "nanopore_sequencing_done00",
+    ],
   };
 
   Object.keys(elementsToHide1).forEach((question) => {
