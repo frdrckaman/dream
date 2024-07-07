@@ -6076,9 +6076,9 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="culture_done" id="culture_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['culture_done'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?> required>
+                                                                    <input class="form-check-input" type="radio" name="culture_done" id="culture_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" onclick="hideRadios('culture_done<?= $value['id']; ?>')" <?php if ($costing['culture_done'] == $value['id']) {
+                                                                                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                                                                                    } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -6088,7 +6088,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
 
-                                                <div class="col-sm-3" id="sample_type2">
+                                                <div class="col-sm-3 hidden" id="sample_type2">
                                                     <label for="sample_type2" class="form-label">80.Sample type </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -8734,6 +8734,8 @@ if ($user->isLoggedIn()) {
 
 <script src="myjs/add/radio.js"></script>
 <script src="myjs/add/radios2.js"></script>
+<script src="myjs/add/radios3.js"></script>
+
 
 
 
