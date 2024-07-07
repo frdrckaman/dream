@@ -9,24 +9,22 @@ const tb_category = document.getElementById("tb_category");
 
 const tx_previous_hide1 = document.getElementById("tx_previous_hide1");
 
-const element = document.getElementById("tx_previous2");
-console.log(element.value); // Check if this logs 'null' or the actual element
+// const element = document.getElementById("tx_previous2");
+// console.log(element.value); // Check if this logs 'null' or the actual element
 
 function toggleElementVisibility() {
   if (tx_previous1.checked) {
     tx_number1.style.display = "block";
-    tx_number.setAttribute("required", "required");
+    // tx_number.setAttribute("required", "required");
     dr_ds1.style.display = "block";
-    dr_ds.setAttribute("required", "required");
+    // dr_ds.setAttribute("required", "required");
     tb_category.style.display = "block";
-    tx_previous_hide1.style.display = "block";
   } else {
     tx_number1.style.display = "none";
     tx_number.removeAttribute("required");
     dr_ds1.style.display = "none";
     dr_ds.removeAttribute("required");
     tb_category.style.display = "none";
-    tx_previous_hide1.style.display = "none";
   }
 }
 

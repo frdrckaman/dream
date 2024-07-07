@@ -466,7 +466,7 @@ if ($user->isLoggedIn()) {
                     $diseases_medical = implode(',', Input::get('diseases_medical'));
                     $sputum_samples = implode(',', Input::get('sputum_samples'));
                     $dr_ds = implode(',', Input::get('dr_ds'));
-
+                    print_r(Input::get('tb_otcome'));
                     if ($enrollment_form) {
                         $user->updateRecord('enrollment_form', array(
                             'visit_date' => Input::get('visit_date'),
@@ -573,7 +573,7 @@ if ($user->isLoggedIn()) {
 
                         $successMessage = 'Enrollment Form  Added Successful';
                     }
-                    Redirect::to('info.php?id=4&cid=' . $_GET['sequence'] . '&status=7');
+                    // Redirect::to('info.php?id=4&cid=' . $_GET['sequence'] . '&status=7');
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -8144,7 +8144,7 @@ if ($user->isLoggedIn()) {
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="tb_category" id="tb_category<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['tb_category'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
-                                                                                                                                                                                                            } ?> required>
+                                                                                                                                                                                                            } ?>>
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
@@ -8157,9 +8157,9 @@ if ($user->isLoggedIn()) {
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <label>24. If relapse how long ago was the participant treated for TB? (years)</label>
-                                                                <input class="form-control" type="number" name="relapse_years" id="relapse_years" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['relapse_years']) {
-                                                                                                                                                                                                                    print_r($clients['relapse_years']);
-                                                                                                                                                                                                                }  ?>" />
+                                                                <input class="form-control" type="number" name="relapse_years" id="relapse_years" placeholder="Type lastname..." value="<?php if ($clients['relapse_years']) {
+                                                                                                                                                                                            print_r($clients['relapse_years']);
+                                                                                                                                                                                        }  ?>" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -8167,9 +8167,9 @@ if ($user->isLoggedIn()) {
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <label>25. If LTF for how long the participant received TB treatment? (months)</label>
-                                                                <input class="form-control" type="number" name="ltf_months" id="ltf_months" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['ltf_months']) {
-                                                                                                                                                                                                            print_r($clients['ltf_months']);
-                                                                                                                                                                                                        }  ?>" />
+                                                                <input class="form-control" type="number" name="ltf_months" id="ltf_months" placeholder="Type lastname..." value="<?php if ($clients['ltf_months']) {
+                                                                                                                                                                                        print_r($clients['ltf_months']);
+                                                                                                                                                                                    }  ?>" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -8185,6 +8185,7 @@ if ($user->isLoggedIn()) {
                                                                                                                     echo 'Select';
                                                                                                                 } ?>
                                                                     </option>
+                                                                    <option value="">Select</option>
                                                                     <?php foreach ($override->get('tb_regimen', 'status', 1) as $value) { ?>
                                                                         <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
                                                                     <?php } ?>
@@ -8217,7 +8218,7 @@ if ($user->isLoggedIn()) {
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="regimen_changed" id="regimen_changed<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['regimen_changed'] == $value['id']) {
                                                                                                                                                                                                                         echo 'checked';
-                                                                                                                                                                                                                    } ?> required>
+                                                                                                                                                                                                                    } ?>>
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
@@ -8243,13 +8244,14 @@ if ($user->isLoggedIn()) {
                                                             <div class="form-group">
                                                                 <label>30. What was the treatment outcome?</label>
                                                                 <select id="tb_otcome" name="tb_otcome" class="form-control">
-                                                                    <?php $tb_otcome = $override->get('tb_otcome', 'id', $clients['regimen_changed'])[0]; ?>
-                                                                    <option value="<?= $tb_otcome['id'] ?>"><?php if ($clients['regimen_changed']) {
+                                                                    <?php $tb_otcome = $override->get('tb_otcome', 'id', $clients['tb_otcome'])[0]; ?>
+                                                                    <option value="<?= $tb_otcome['id'] ?>"><?php if ($clients['tb_otcome']) {
                                                                                                                 print_r($tb_otcome['name']);
                                                                                                             } else {
                                                                                                                 echo 'Select';
                                                                                                             } ?>
                                                                     </option>
+                                                                    <option value="">Select</option>
                                                                     <?php foreach ($override->get('tb_otcome', 'status', 1) as $value) { ?>
                                                                         <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
                                                                     <?php } ?>

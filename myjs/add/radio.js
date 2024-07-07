@@ -1,15 +1,3 @@
-// function hideElementOnRadioCheck(radio, elementId) {
-//   const element = document.getElementById(elementId);
-//   if (element) {
-//     if (radio.checked) {
-//       element.style.display = "none";
-//     }
-//   } else {
-//     console.error("Element not found");
-//   }
-// }
-
-
 function toggleElement(elementId, value) {
   const element = document.getElementById(elementId);
   if (element) {
@@ -22,3 +10,13 @@ function toggleElement(elementId, value) {
     console.error("Element not found");
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const yesRadio = document.getElementById("tx_previous1");
+  const noRadio = document.getElementById("tx_previous2");
+  if (yesRadio.checked) {
+    toggleElement("tx_previous_hide", yesRadio.value);
+  } else if (noRadio.checked) {
+    toggleElement("tx_previous_hide", noRadio.value);
+  }
+});
