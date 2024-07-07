@@ -7,6 +7,11 @@ function checkRadioButtons1() {
       "nanopore_sequencing",
       "nanopore_sequencing_done00",
     ],
+    tb_diagnosis: [
+      "tb_diagnosis_made",
+      "bacteriological_diagnosis",
+      "tb_diagnosis_hides",
+    ],
   };
 
   Object.keys(elementsToHide1).forEach((question) => {
