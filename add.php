@@ -8091,9 +8091,9 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="tx_previous" id="tx_previous<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['tx_previous'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?> required>
+                                                                    <input class="form-check-input" type="radio" name="tx_previous" id="tx_previous<?= $value['id']; ?>" value="<?= $value['id']; ?>" onchange="toggleElement('tx_previous_hide', this.value)" <?php if ($clients['tx_previous'] == $value['id']) {
+                                                                                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                                                                                } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -8133,130 +8133,133 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4" id="tb_category">
-                                                    <label>23. What category is the previously treated patient </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('tb_category', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="tb_category" id="tb_category<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['tb_category'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?> required>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
+                                            <div class="row" id="tx_previous_hide">
+                                                <div class="row">
+                                                    <div class="col-sm-4" id="tb_category">
+                                                        <label>23. What category is the previously treated patient </label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('tb_category', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="tb_category" id="tb_category<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['tb_category'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?> required>
+                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                        <button onclick="unsetTb_category()">Unset</button>
+                                                    </div>
+
+                                                    <div class="col-sm-4" id="relapse_years1">
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <label>24. If relapse how long ago was the participant treated for TB? (years)</label>
+                                                                <input class="form-control" type="number" name="relapse_years" id="relapse_years" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['relapse_years']) {
+                                                                                                                                                                                                                    print_r($clients['relapse_years']);
+                                                                                                                                                                                                                }  ?>" />
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <button onclick="unsetTb_category()">Unset</button>
+                                                    <div class="col-sm-4" id="ltf_months1">
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <label>25. If LTF for how long the participant received TB treatment? (months)</label>
+                                                                <input class="form-control" type="number" name="ltf_months" id="ltf_months" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['ltf_months']) {
+                                                                                                                                                                                                            print_r($clients['ltf_months']);
+                                                                                                                                                                                                        }  ?>" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <label>26. Which treatment regimen was initiated </label>
+                                                                <select id="tb_regimen" name="tb_regimen" class="form-control">
+                                                                    <?php $tb_regimen = $override->get('tb_regimen', 'id', $clients['tb_regimen'])[0]; ?>
+                                                                    <option value="<?= $tb_regimen['id'] ?>"><?php if ($clients['tb_regimen']) {
+                                                                                                                    print_r($tb_regimen['name']);
+                                                                                                                } else {
+                                                                                                                    echo 'Select';
+                                                                                                                } ?>
+                                                                    </option>
+                                                                    <?php foreach ($override->get('tb_regimen', 'status', 1) as $value) { ?>
+                                                                        <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="relapse_years1">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>24. If relapse how long ago was the participant treated for TB? (years)</label>
-                                                            <input class="form-control" type="number" name="relapse_years" id="relapse_years" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['relapse_years']) {
-                                                                                                                                                                                                                print_r($clients['relapse_years']);
+                                                <hr>
+
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <label>27. How long was the treatment regimen (months)</label>
+                                                                <input class="form-control" type="number" name="regimen_months" id="regimen_months" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['regimen_months']) {
+                                                                                                                                                                                                                    print_r($clients['regimen_months']);
+                                                                                                                                                                                                                }  ?>" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-4" id="regimen_changed">
+                                                        <label>28. Was the regimen changed during treatment (individualized?)</label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="regimen_changed" id="regimen_changed<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['regimen_changed'] == $value['id']) {
+                                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                                    } ?> required>
+                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                        <button onclick="unsetRegimen_changed()">Unset</button>
+                                                    </div>
+
+
+                                                    <div class="col-sm-4" id="regimen_name1">
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <label>29. If yes, the treatment regimen was changed what was the new regimen</label>
+                                                                <input class="form-control" type="text" name="regimen_name" id="regimen_name" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['regimen_name']) {
+                                                                                                                                                                                                                print_r($clients['regimen_name']);
                                                                                                                                                                                                             }  ?>" />
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4" id="ltf_months1">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>25. If LTF for how long the participant received TB treatment? (months)</label>
-                                                            <input class="form-control" type="number" name="ltf_months" id="ltf_months" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['ltf_months']) {
-                                                                                                                                                                                                        print_r($clients['ltf_months']);
-                                                                                                                                                                                                    }  ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>26. Which treatment regimen was initiated </label>
-                                                            <select id="tb_regimen" name="tb_regimen" class="form-control">
-                                                                <?php $tb_regimen = $override->get('tb_regimen', 'id', $clients['tb_regimen'])[0]; ?>
-                                                                <option value="<?= $tb_regimen['id'] ?>"><?php if ($clients['tb_regimen']) {
-                                                                                                                print_r($tb_regimen['name']);
+
+                                                    <div class="col-sm-4">
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <label>30. What was the treatment outcome?</label>
+                                                                <select id="tb_otcome" name="tb_otcome" class="form-control">
+                                                                    <?php $tb_otcome = $override->get('tb_otcome', 'id', $clients['regimen_changed'])[0]; ?>
+                                                                    <option value="<?= $tb_otcome['id'] ?>"><?php if ($clients['regimen_changed']) {
+                                                                                                                print_r($tb_otcome['name']);
                                                                                                             } else {
                                                                                                                 echo 'Select';
                                                                                                             } ?>
-                                                                </option>
-                                                                <?php foreach ($override->get('tb_regimen', 'status', 1) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-                                                                <?php } ?>
-                                                            </select>
+                                                                    </option>
+                                                                    <?php foreach ($override->get('tb_otcome', 'status', 1) as $value) { ?>
+                                                                        <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <hr>
-
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>27. How long was the treatment regimen (months)</label>
-                                                            <input class="form-control" type="number" name="regimen_months" id="regimen_months" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['regimen_months']) {
-                                                                                                                                                                                                                print_r($clients['regimen_months']);
-                                                                                                                                                                                                            }  ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4" id="regimen_changed">
-                                                    <label>28. Was the regimen changed during treatment (individualized?)</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="regimen_changed" id="regimen_changed<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['regimen_changed'] == $value['id']) {
-                                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                                } ?> required>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                    <button onclick="unsetRegimen_changed()">Unset</button>
-                                                </div>
-
-
-                                                <div class="col-sm-4" id="regimen_name1">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>29. If yes, the treatment regimen was changed what was the new regimen</label>
-                                                            <input class="form-control" type="text" name="regimen_name" id="regimen_name" placeholder="Type lastname..." onkeyup="fetchData()" value="<?php if ($clients['regimen_name']) {
-                                                                                                                                                                                                            print_r($clients['regimen_name']);
-                                                                                                                                                                                                        }  ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>30. What was the treatment outcome?</label>
-                                                            <select id="tb_otcome" name="tb_otcome" class="form-control">
-                                                                <?php $tb_otcome = $override->get('tb_otcome', 'id', $clients['regimen_changed'])[0]; ?>
-                                                                <option value="<?= $tb_otcome['id'] ?>"><?php if ($clients['regimen_changed']) {
-                                                                                                            print_r($tb_otcome['name']);
-                                                                                                        } else {
-                                                                                                            echo 'Select';
-                                                                                                        } ?>
-                                                                </option>
-                                                                <?php foreach ($override->get('tb_otcome', 'status', 1) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
 
                                             <hr>
                                             <div class="card card-warning">
@@ -8658,6 +8661,10 @@ if ($user->isLoggedIn()) {
 
     <!-- Diagnosis Test format numbers Js -->
     <script src="myjs/add/diagnosis_test/sample_methods.js"></script>
+
+
+    <script src="myjs/add/radio.js"></script>
+
 
 
 
