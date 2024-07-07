@@ -1,29 +1,21 @@
-// function checkRadioButtons2() {
-//   const elementsToControl2 = {
+// function checkRadioButtons4() {
+//   const elementsToControl = {
 //     phenotypic_method: {
-//       1: ["apm_date_1", "apm_date"],
-//       2: ["mgit_date2_1", "mgit_date2"],
+//       1: ["apm_date", "apm_date_1"],
+//       2: ["mgit_date2", "mgit_date2_1"],
 //     },
-//     // question2: {
-//     //     '1': ['element4'],
-//     //     '2': ['element5']
-//     // },
-//     // question3: {
-//     //     '1': [],
-//     //     '0': []
-//     // }
 //   };
 
-//   function handleVisibility2() {
+//   function handleVisibility4() {
 //     // Hide all controlled elements
-//     Object.values(elementsToControl2)
+//     Object.values(elementsToControl)
 //       .flatMap((condition) => Object.values(condition).flat())
 //       .forEach((elementId) => {
 //         document.getElementById(elementId).classList.add("hidden");
 //       });
 
 //     // Iterate through all questions
-//     Object.keys(elementsToControl2).forEach((question) => {
+//     Object.keys(elementsToControl).forEach((question) => {
 //       const radios = document.getElementsByName(question);
 //       let selectedValue = null;
 
@@ -35,13 +27,13 @@
 
 //         // Add event listener for changes
 //         radio.addEventListener("change", () => {
-//           handleVisibility2();
+//           handleVisibility4();
 //         });
 //       });
 
 //       // Show elements based on the selected value
-//       if (selectedValue && elementsToControl2[question][selectedValue]) {
-//         elementsToControl2[question][selectedValue].forEach((elementId) => {
+//       if (selectedValue && elementsToControl[question][selectedValue]) {
+//         elementsToControl[question][selectedValue].forEach((elementId) => {
 //           document.getElementById(elementId).classList.remove("hidden");
 //         });
 //       }
@@ -49,7 +41,7 @@
 //   }
 
 //   // Initial visibility check on page load
-//   window.onload = handleVisibility2;
+//   window.onload = handleVisibility4;
 // }
 
-// checkRadioButtons2();
+// checkRadioButtons4();
