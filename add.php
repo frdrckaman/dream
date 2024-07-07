@@ -6089,7 +6089,7 @@ if ($user->isLoggedIn()) {
 
 
                                                 <div class="col-sm-3" id="sample_type2">
-                                                    <label for="sample_type2" class="form-label">Sample type </label>
+                                                    <label for="sample_type2" class="form-label">80.Sample type </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -6110,7 +6110,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="sample_methods">
-                                                    <label for="sample_methods" class="form-label">If yes above, then method used (Multiple options) </label>
+                                                    <label for="sample_methods" class="form-label">81.If yes above, then method used (Multiple options) </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -6142,7 +6142,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="lj_results">
-                                                    <label for="lj_results" class="form-label">Results LJ (Only If was selected above) </label>
+                                                    <label for="lj_results" class="form-label">82.Results LJ (Only If was selected above) </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -6159,7 +6159,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="mgit_results">
-                                                    <label for="mgit_results" class="form-label">Results MGIT (Only If was selected above) </label>
+                                                    <label for="mgit_results" class="form-label">83.Results MGIT (Only If was selected above) </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
