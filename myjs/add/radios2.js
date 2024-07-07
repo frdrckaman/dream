@@ -1,34 +1,30 @@
-// document.addEventListener("DOMContentLoaded", function () {
+// Function to hide elements based on radio button value
+function hideElementOnRadioCheck(radioName, valueToCheck, elementId) {
+  const radios = document.getElementsByName(radioName);
+  const element = document.getElementById(elementId);
 
+  radios.forEach((radio) => {
+    if (radio.value === valueToCheck && radio.checked) {
+      element.classList.remove("hidden");
+    } else {
+      element.classList.add("hidden");
+    }
+  });
+}
 
-//     // const yesRadio = document.getElementById("tx_previous1");
-//     // const noRadio = document.getElementById("tx_previous2");
+// Function to check conditions on page load
+function checkConditionsOnLoad() {
+  // Example: Check condition for question 1
+  hideElementOnRadioCheck("sample_received", "1", "test_rejected");
 
-//   if (elementValue.checked) {
-//       toggleElement1(elementValue.value, elementToHide);
-//                 console.log(elementValue);
+  // Example: Check condition for question 2
+  hideElementOnRadioCheck("wrd_test", "3", "sequence_done");
 
-//     //   } else if (noRadio.checked) {
-//     //     toggleElement1(elementId.value, elementToHide);
-//     //   }
-//   }
-// });
+  // Example: Check condition for question 2
+  hideElementOnRadioCheck("sequence_done", "1", "sequence_type");
 
+  
+}
 
-
-
-//   function toggleElement1(elementValue, elementToHide) {
-//     const elementValue = document.getElementById(elementValue);
-//     const elementToHide = document.getElementById(elementToHide);
-//     if (elementValue) {
-//       if (elementValue.value === "1") {
-//         elementToHide.style.display = "block";
-//       } else if (elementValue.value === "2") {
-//         elementToHide.style.display = "none";
-//       } else {
-//         elementToHide.style.display = "none";
-//       }
-//     } else {
-//       console.error("Element not found");
-//     }
-//   }
+// Event listener for page load
+window.addEventListener("load", checkConditionsOnLoad);
