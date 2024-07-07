@@ -8875,6 +8875,8 @@ if ($user->isLoggedIn()) {
 <script src="myjs/add/radios2.js"></script>
 <script src="myjs/add/radios3.js"></script>
 <script src="myjs/add/radios4.js"></script>
+<script src="myjs/add/radios96.js"></script>
+
 
 <script src="myjs/add/checkbox1.js"></script>
 
