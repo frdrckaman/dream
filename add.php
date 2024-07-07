@@ -6845,6 +6845,8 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                        <button onclick="unsetRadio('nanopore_sequencing_done')">Unset</button>
+
                                                     </div>
                                                 </div>
 
@@ -6865,6 +6867,8 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                        <button onclick="unsetRadio('nanopore_sequencing')">Unset</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -6890,6 +6894,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('rifampicin3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6907,6 +6913,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('isoniazid3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6924,6 +6932,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('levofloxacin3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6941,6 +6951,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('moxifloxacin3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6962,6 +6974,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('bedaquiline3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6979,6 +6993,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('linezolid3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -6996,6 +7012,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('clofazimine3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -7013,6 +7031,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('cycloserine3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -7035,6 +7055,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('terizidone3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -7052,6 +7074,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('ethambutol3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -7069,6 +7093,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('delamanid3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -7086,6 +7112,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('pyrazinamide3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -7108,6 +7136,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('imipenem3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -7125,6 +7155,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('cilastatin3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -7142,6 +7174,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('meropenem3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -7159,6 +7193,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('amikacin3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -7181,6 +7217,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('streptomycin3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -7198,6 +7236,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('ethionamide3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -7215,6 +7255,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('prothionamide3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
@@ -7232,6 +7274,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
+                                                            <button onclick="unsetRadio('para_aminosalicylic_acid3')">Unset</button>
+
                                                         </div>
                                                     </div>
 
