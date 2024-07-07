@@ -1,5 +1,9 @@
 function checkRadioButtons1() {
   const elementsToHide1 = {
+    tx_previous: [
+      "tx_previous_hide1",
+      "tx_previous_hide2",
+    ],
     culture_done: ["sample_type2", "sample_methods"],
     phenotypic_done: ["phenotypic_method", "phenotypic_done00"],
     genotyping_done: ["genotyping_asay", "genotyping_done00"],
