@@ -6,6 +6,11 @@ function checkRadioButtons1() {
       "immunosuppressive_specify",
     ],
     chest_x_ray: ["chest_x_ray_date1", "chest_x_ray_date"],
+    sample_received: [
+      // "test_rejected",
+      "sample_received_hides1",
+      "sample_received_hides2",
+    ],
     culture_done: ["sample_type2", "sample_methods"],
     phenotypic_done: ["phenotypic_method", "phenotypic_done00"],
     genotyping_done: ["genotyping_asay", "genotyping_done00"],
