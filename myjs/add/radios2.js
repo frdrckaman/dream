@@ -1,18 +1,22 @@
 function checkRadioButtons2() {
-  const elementsToControl2 = {
-    phenotypic_method: {
-      1: ["apm_date_1", "apm_date"],
-      2: ["mgit_date2_1", "mgit_date2"],
-    },
-    // question2: {
-    //     '1': ['element4'],
-    //     '2': ['element5']
-    // },
-    // question3: {
-    //     '1': [],
-    //     '0': []
-    // }
-  };
+    const elementsToControl2 = {
+      afb_microscopy: {
+        1: ["afb_microscopy_date1", "afb_microscopy_date"],
+        2: ["afb_microscopy_date2", "afb_microscopy_date"],
+      },
+      // phenotypic_method: {
+      //   1: ["apm_date_1", "apm_date"],
+      //   2: ["mgit_date2_1", "mgit_date2"],
+      // },
+      // question2: {
+      //     '1': ['element4'],
+      //     '2': ['element5']
+      // },
+      // question3: {
+      //     '1': [],
+      //     '0': []
+      // }
+    };
 
   function handleVisibility2() {
     // Hide all controlled elements

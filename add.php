@@ -5134,7 +5134,8 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <label for="afb_microscopy_date" class="form-label">what date ?</label>
+                                                            <label for="afb_microscopy_date" id="afb_microscopy_date1" class="form-label">If ZN what date?</label>
+                                                            <label for="afb_microscopy_date" id="afb_microscopy_date2" class="form-label">If FM what date?</label>
                                                             <input type="date" value="<?php if ($costing['afb_microscopy_date']) {
                                                                                             print_r($costing['afb_microscopy_date']);
                                                                                         } ?>" id="afb_microscopy_date" name="afb_microscopy_date" class="form-control" placeholder="Enter here" />
