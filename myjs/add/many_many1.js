@@ -25,6 +25,10 @@ function checkRadioButtonsMany() {
     chest_x_ray: {
       1: ["chest_x_ray_date1"],
     },
+    // sample_received: {
+    //   1: ["sample_amount"],
+    //   2: ["sample_reason"],
+    // },
     // testrequest_reason: {
     //   3: ["follow_up_months1", "follow_up_months"],
     // },

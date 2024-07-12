@@ -23,7 +23,7 @@
 //     // afb_microscopy: {
 //     //   1: [
 //     //     "n_afb_microscopy_date1",
-//     // "n_zn_microscopy_date1",
+//         // "n_zn_microscopy_date1",
 //     //     "n_afb_microscopy_date",
 //     //   ],
 //     //   2: [
@@ -41,20 +41,20 @@
 //   function handleVisibilityMany2() {
 //     // Hide all controlled elements
 //     Object.values(elementsToControlMany2)
-//       .flatMap((condition2) => Object.values(condition2).flat())
-//       .forEach((elementId2) => {
-//         document.getElementById(elementId2).classList.add("hidden");
+//       .flatMap((condition) => Object.values(condition).flat())
+//       .forEach((elementId) => {
+//         document.getElementById(elementId).classList.add("hidden");
 //       });
 
 //     // Iterate through all questions
-//     Object.keys(elementsToControlMany2).forEach((question2) => {
-//       const radios2 = document.getElementsByName(question2);
-//       let selectedValue2 = null;
+//     Object.keys(elementsToControlMany2).forEach((question) => {
+//       const radios = document.getElementsByName(question);
+//       let selectedValue = null;
 
 //       // Find the checked radio button
-//       radios2.forEach((radio) => {
+//       radios.forEach((radio) => {
 //         if (radio.checked) {
-//           selectedValue2 = radio.value;
+//           selectedValue = radio.value;
 //         }
 
 //         // Add event listener for changes
@@ -64,9 +64,9 @@
 //       });
 
 //       // Show elements based on the selected value
-//       if (selectedValue2 && elementsToControlMany2[question2][selectedValue2]) {
-//         elementsToControlMany2[question2][selectedValue2].forEach((elementId2) => {
-//           document.getElementById(elementId2).classList.remove("hidden");
+//       if (selectedValue && elementsToControlMany2[question][selectedValue]) {
+//         elementsToControlMany2[question][selectedValue].forEach((elementId) => {
+//           document.getElementById(elementId).classList.remove("hidden");
 //         });
 //       }
 //     });

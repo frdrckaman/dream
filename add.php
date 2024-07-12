@@ -4510,7 +4510,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="sample_received" id="sample_received<?= $value['id']; ?>" value="<?= $value['id']; ?>" onchange="hideElementOnRadioCheck('sample_received','<?= $value['id']; ?>', 'test_rejected')" <?php if ($costing['sample_received'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="sample_received" id="sample_received<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['sample_received'] == $value['id']) {
                                                                                                                                                                                                                                                                                                                 echo 'checked';
                                                                                                                                                                                                                                                                                                             } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
@@ -4581,7 +4581,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('test_reasons', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" name="test_reasons[]" id="test_reasons<?= $value['id']; ?>" value="<?= $value['id']; ?>" onchange="toggleElement('test_reasons_other22', this.value)" <?php foreach (explode(',', $costing['test_reasons']) as $values) {
+                                                                    <input class="form-check-input" type="checkbox" name="test_reasons[]" id="test_reasons<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['test_reasons']) as $values) {
                                                                                                                                                                                                                                                                                 if ($values == $value['id']) {
                                                                                                                                                                                                                                                                                     echo 'checked';
                                                                                                                                                                                                                                                                                 }
@@ -4817,7 +4817,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('wrd_test', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="wrd_test" id="wrd_test<?= $value['id']; ?>" value="<?= $value['id']; ?>" onchange="hideElementOnRadioCheck('wrd_test','<?= $value['id']; ?>', 'sequence_done')" <?php if ($costing['wrd_test'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="wrd_test" id="wrd_test<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['wrd_test'] == $value['id']) {
                                                                                                                                                                                                                                                                                             echo 'checked';
                                                                                                                                                                                                                                                                                         } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
@@ -4841,7 +4841,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="sequence_done" id="sequence_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" onchange="hideElementOnRadioCheck('sequence_done','<?= $value['id']; ?>', 'sequence_type')" <?php if ($costing['sequence_done'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="sequence_done" id="sequence_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['sequence_done'] == $value['id']) {
                                                                                                                                                                                                                                                                                                             echo 'checked';
                                                                                                                                                                                                                                                                                                         } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
@@ -5126,7 +5126,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="afb_microscopy" id="n_afb_microscopy<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy'] == $value['id']) {
                                                                                                                                                                                                                     echo 'checked';
-                                                                                                                                                                                                                } ?> required onclick="hideElement('n_afb_microscopy_date1')">
+                                                                                                                                                                                                                } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -5218,7 +5218,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="fm_results_b" id="fm_results_b<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['fm_results_b'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
-                                                                                                                                                                                                        } ?> onclick="hideElement('fm_results_b<?= $value['id']; ?>')">
+                                                                                                                                                                                                        } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -5651,7 +5651,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="culture_done" id="culture_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" onclick="hideRadios('culture_done<?= $value['id']; ?>')" <?php if ($costing['culture_done'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="culture_done" id="culture_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['culture_done'] == $value['id']) {
                                                                                                                                                                                                                                                                         echo 'checked';
                                                                                                                                                                                                                                                                     } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
@@ -5673,7 +5673,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="sample_type2" id="sample_type2<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['sample_type2'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
-                                                                                                                                                                                                        } ?> onclick="hideElementOther('sample_type2<?= $value['id']; ?>','sample_type_other2_1','sample_type_other2_22')">
+                                                                                                                                                                                                        } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -5698,7 +5698,7 @@ if ($user->isLoggedIn()) {
                                                                                                                                                                                                                         if ($values == $value['id']) {
                                                                                                                                                                                                                             echo 'checked';
                                                                                                                                                                                                                         }
-                                                                                                                                                                                                                    } ?> onclick="hideElement('lj_date1')">
+                                                                                                                                                                                                                    } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -7854,7 +7854,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="tx_previous" id="tx_previous<?= $value['id']; ?>" value="<?= $value['id']; ?>" onchange="toggleElement('tx_previous_hide', this.value)" <?php if ($clients['tx_previous'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="tx_previous" id="tx_previous<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['tx_previous'] == $value['id']) {
                                                                                                                                                                                                                                                                     echo 'checked';
                                                                                                                                                                                                                                                                 } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
@@ -8060,7 +8060,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no_unknown', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="immunosuppressive" id="immunosuppressive<?= $value['id']; ?>" value="<?= $value['id']; ?>" onchange="toggleElement1(this,'immunosuppressive_specify1')" <?php if ($clients['immunosuppressive'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="immunosuppressive" id="immunosuppressive<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['immunosuppressive'] == $value['id']) {
                                                                                                                                                                                                                                                                                     echo 'checked' . ' ' . 'required';
                                                                                                                                                                                                                                                                                 } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
@@ -8287,7 +8287,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="chest_x_ray" id="chest_x_ray<?= $value['id']; ?>" value="<?= $value['id']; ?>" onchange="toggleElement('chest_x_ray_date1', this.value)" <?php if ($clients['chest_x_ray'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="chest_x_ray" id="chest_x_ray<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['chest_x_ray'] == $value['id']) {
                                                                                                                                                                                                                                                                     echo 'checked' . ' ' . 'required';
                                                                                                                                                                                                                                                                 } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
