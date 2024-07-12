@@ -9810,6 +9810,11 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/radios96.js"></script> -->
     <script src="myjs/add/checkbox1.js"></script>
     <script src="myjs/add/many_many.js"></script>
+    <script src="myjs/add/many_many1.js"></script>
+    <script src="myjs/add/many_many2.js"></script>
+    <script src="myjs/add/many_many3.js"></script>
+    <script src="myjs/add/many_many4.js"></script>
+    <script src="myjs/add/many_many5.js"></script>
     <script src="myjs/add/many_one.js"></script>
     <script src="myjs/add/one_many.js"></script>
 
