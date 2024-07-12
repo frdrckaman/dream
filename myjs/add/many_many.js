@@ -3,6 +3,13 @@ function checkRadioButtonsMany() {
     tx_previous: {
       1: ["tx_number1", "dr_ds1", "tx_previous_hide1", "tx_previous_hide2"],
     },
+    tb_category: {
+      1: ["relapse_years1"],
+      3: ["ltf_months1"],
+    },
+    regimen_changed: {
+      1: ["regimen_name1"],
+    },
     // testrequest_reason: {
     //   3: ["follow_up_months1", "follow_up_months"],
     // },

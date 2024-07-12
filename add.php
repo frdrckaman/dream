@@ -7919,7 +7919,7 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>24. If relapse how long ago was the participant treated for TB? (years)</label>
-                                                            <input class="form-control" type="number" name="relapse_years" id="relapse_years" placeholder="Type lastname..." value="<?php if ($clients['relapse_years']) {
+                                                            <input class="form-control" type="number" name="relapse_years" id="relapse_years" placeholder="Type years..." value="<?php if ($clients['relapse_years']) {
                                                                                                                                                                                         print_r($clients['relapse_years']);
                                                                                                                                                                                     }  ?>" />
                                                         </div>
@@ -7929,9 +7929,9 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>25. If LTF for how long the participant received TB treatment? (months)</label>
-                                                            <input class="form-control" type="number" name="ltf_months" id="ltf_months" placeholder="Type lastname..." value="<?php if ($clients['ltf_months']) {
-                                                                                                                                                                                    print_r($clients['ltf_months']);
-                                                                                                                                                                                }  ?>" />
+                                                            <input class="form-control" type="number" name="ltf_months" id="ltf_months" placeholder="Type years..." value="<?php if ($clients['ltf_months']) {
+                                                                                                                                                                                print_r($clients['ltf_months']);
+                                                                                                                                                                            }  ?>" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7956,7 +7956,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <hr>
 
                                             <div class="row" id="tx_previous_hide2">
