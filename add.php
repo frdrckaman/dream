@@ -8782,9 +8782,9 @@ if ($user->isLoggedIn()) {
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <?php if (!$costing) { ?>
-                                    <h1>Add New Diagnosis Data</h1>
+                                    <h1>Add New validations Data</h1>
                                 <?php } else { ?>
-                                    <h1>Update Diagnosis Data</h1>
+                                    <h1>Update validations Data</h1>
                                 <?php } ?>
                             </div>
                             <div class="col-sm-6">
@@ -8797,9 +8797,9 @@ if ($user->isLoggedIn()) {
                                             Go to screening list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
-                                        <li class="breadcrumb-item active">Add New Diagnosis Data</li>
+                                        <li class="breadcrumb-item active">Add New validations Data</li>
                                     <?php } else { ?>
-                                        <li class="breadcrumb-item active">Update Diagnosis Data</li>
+                                        <li class="breadcrumb-item active">Update validations Data</li>
                                     <?php } ?>
                                 </ol>
                             </div>
@@ -8816,7 +8816,7 @@ if ($user->isLoggedIn()) {
                                 <!-- general form elements disabled -->
                                 <div class="card card-warning">
                                     <div class="card-header">
-                                        <h3 class="card-title">Diagnosis Form</h3>
+                                        <h3 class="card-title">validations Form</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
