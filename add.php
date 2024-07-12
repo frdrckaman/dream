@@ -1163,6 +1163,250 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
+        } elseif (Input::get('add_validations')) {
+            $validate = $validate->check($_POST, array(
+                'date_collect' => array(
+                    'required' => true,
+                ),
+                'date_receictrl' => array(
+                    'required' => true,
+                ),
+                'lab_no' => array(
+                    'required' => true,
+                ),
+                'form_completness' => array(
+                    'required' => true,
+                ),
+                'transit_time' => array(
+                    'required' => true,
+                ),
+            ));
+            if ($validate->passed()) {
+                // print_r($_POST);
+                $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid'])[0];
+                $individual = $override->getNews('validations', 'status', 1, 'patient_id', $_GET['cid']);
+                $first_line = 0;
+                $second_line = 0;
+                $third_line = 0;
+                $sequence = '';
+                $visit_code = '';
+                $visit_name = '';
+
+                if (Input::get('first_line')) {
+                    $first_line = Input::get('first_line');
+                }
+
+                if (Input::get('second_line')) {
+                    $second_line = Input::get('second_line');
+                }
+
+                if (Input::get('third_line')) {
+                    $third_line = Input::get('third_line');
+                }
+
+                // $expected_date = date('Y-m-d', strtotime('+1 month', strtotime(Input::get('visit_date'))));
+
+                // $last_visit = $override->getlastRow1('visit', 'patient_id', $clients['id'], 'sequence', $_GET['sequence'], 'id')[0];
+                $sequence = intval($_GET['sequence']) + 1;
+                if ($sequence) {
+                    $visit_code = 'M' . $sequence;
+                    $visit_name = 'Month ' . $sequence;
+                }
+
+                $enrolled = 0;
+                $end_study = 0;
+                if (Input::get('next_appointment') == 1) {
+                    $enrolled = 1;
+                }
+
+                $sample_methods = implode(',', Input::get('sample_methods'));
+                $genotyping_asay = implode(',', Input::get('genotyping_asay'));
+                $nanopore_sequencing = implode(',', Input::get('nanopore_sequencing'));
+                $_1st_line_drugs = implode(',', Input::get('_1st_line_drugs'));
+                $_2st_line_drugs = implode(',', Input::get('_2st_line_drugs'));
+
+                if ($individual) {
+                    $user->updateRecord('validations', array(
+                        'date_collect' => Input::get('date_collect'),
+                        'date_receictrl' => Input::get('date_receictrl'),
+                        'lab_no' => Input::get('lab_no'),
+                        'transit_time' => Input::get('transit_time'),
+                        'sample_methods' => $sample_methods,
+                        'lj_date' => Input::get('lj_date'),
+                        'mgit_date' => Input::get('mgit_date'),
+                        'lj_results' => Input::get('lj_results'),
+                        'mgit_results' => Input::get('mgit_results'),
+                        'phenotypic_method' => Input::get('phenotypic_method'),
+                        'phenotypic_done' => Input::get('phenotypic_done'),
+                        'apm_date' => Input::get('apm_date'),
+                        'mgit_date2' => Input::get('mgit_date2'),
+                        'rifampicin' => Input::get('rifampicin'),
+                        'isoniazid' => Input::get('isoniazid'),
+                        'levofloxacin' => Input::get('levofloxacin'),
+                        'moxifloxacin' => Input::get('moxifloxacin'),
+                        'bedaquiline' => Input::get('bedaquiline'),
+                        'linezolid' => Input::get('linezolid'),
+                        'clofazimine' => Input::get('clofazimine'),
+                        'cycloserine' => Input::get('cycloserine'),
+                        'terizidone' => Input::get('terizidone'),
+                        'ethambutol' => Input::get('ethambutol'),
+                        'delamanid' => Input::get('delamanid'),
+                        'pyrazinamide' => Input::get('pyrazinamide'),
+                        'imipenem' => Input::get('imipenem'),
+                        'cilastatin' => Input::get('cilastatin'),
+                        'meropenem' => Input::get('meropenem'),
+                        'amikacin' => Input::get('amikacin'),
+                        'streptomycin' => Input::get('streptomycin'),
+                        'ethionamide' => Input::get('ethionamide'),
+                        'prothionamide' => Input::get('prothionamide'),
+                        'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
+                        'genotyping_done' => Input::get('genotyping_done'),
+                        'genotyping_asay' => $genotyping_asay,
+                        'isoniazid2' => Input::get('isoniazid2'),
+                        'fluoroquinolones' => Input::get('fluoroquinolones'),
+                        'amikacin2' => Input::get('amikacin2'),
+                        'kanamycin' => Input::get('kanamycin'),
+                        'capreomycin' => Input::get('capreomycin'),
+                        'ethionamide2' => Input::get('ethionamide2'),
+                        'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
+                        'nanopore_sequencing' => $nanopore_sequencing,
+                        'rifampicin3' => Input::get('rifampicin3'),
+                        'isoniazid3' => Input::get('isoniazid3'),
+                        'levofloxacin3' => Input::get('levofloxacin3'),
+                        'moxifloxacin3' => Input::get('moxifloxacin3'),
+                        'bedaquiline3' => Input::get('bedaquiline3'),
+                        'linezolid3' => Input::get('linezolid3'),
+                        'clofazimine3' => Input::get('clofazimine3'),
+                        'cycloserine3' => Input::get('cycloserine3'),
+                        'terizidone3' => Input::get('terizidone3'),
+                        'ethambutol3' => Input::get('ethambutol3'),
+                        'delamanid3' => Input::get('delamanid3'),
+                        'pyrazinamide3' => Input::get('pyrazinamide3'),
+                        'imipenem3' => Input::get('imipenem3'),
+                        'cilastatin3' => Input::get('cilastatin3'),
+                        'meropenem3' => Input::get('meropenem3'),
+                        'amikacin3' => Input::get('amikacin3'),
+                        'streptomycin3' => Input::get('streptomycin3'),
+                        'ethionamide3' => Input::get('ethionamide3'),
+                        'prothionamide3' => Input::get('prothionamide3'),
+                        'para_aminosalicylic_acid3' => Input::get('para_aminosalicylic_acid3'),
+                        '_1st_line_drugs' => $_1st_line_drugs,
+                        '_2st_line_drugs' => $_2st_line_drugs,
+                        'version_number' => Input::get('version_number'),
+                        'lot_number' => Input::get('lot_number'),
+                        'mutations_detected_list' => Input::get('mutations_detected_list'),
+                        'd_firstName' => Input::get('d_firstName'),
+                        'd_middleName' => Input::get('d_middleName'),
+                        'd_middleName' => Input::get('d_middleName'),
+                        'comments' => Input::get('comments'),
+                        'form_completness' => Input::get('form_completness'),
+                        'date_completed' => Input::get('date_completed'),
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                    ), $individual[0]['id']);
+
+                    $successMessage = 'Validations Data  Successful Updated';
+                } else {
+                    $user->createRecord('validations', array(
+                        'vid' => $_GET['vid'],
+                        'sequence' => $_GET['sequence'],
+                        'visit_code' => $_GET['visit_code'],
+                        'pid' => $clients['study_id'],
+                        'study_id' => $clients['study_id'],
+                        'date_collect' => Input::get('date_collect'),
+                        'date_receictrl' => Input::get('date_receictrl'),
+                        'lab_no' => Input::get('lab_no'),
+                        'transit_time' => Input::get('transit_time'),
+                        'sample_methods' => $sample_methods,
+                        'lj_date' => Input::get('lj_date'),
+                        'mgit_date' => Input::get('mgit_date'),
+                        'lj_results' => Input::get('lj_results'),
+                        'mgit_results' => Input::get('mgit_results'),
+                        'phenotypic_method' => Input::get('phenotypic_method'),
+                        'phenotypic_done' => Input::get('phenotypic_done'),
+                        'apm_date' => Input::get('apm_date'),
+                        'mgit_date2' => Input::get('mgit_date2'),
+                        'rifampicin' => Input::get('rifampicin'),
+                        'isoniazid' => Input::get('isoniazid'),
+                        'levofloxacin' => Input::get('levofloxacin'),
+                        'moxifloxacin' => Input::get('moxifloxacin'),
+                        'bedaquiline' => Input::get('bedaquiline'),
+                        'linezolid' => Input::get('linezolid'),
+                        'clofazimine' => Input::get('clofazimine'),
+                        'cycloserine' => Input::get('cycloserine'),
+                        'terizidone' => Input::get('terizidone'),
+                        'ethambutol' => Input::get('ethambutol'),
+                        'delamanid' => Input::get('delamanid'),
+                        'pyrazinamide' => Input::get('pyrazinamide'),
+                        'imipenem' => Input::get('imipenem'),
+                        'cilastatin' => Input::get('cilastatin'),
+                        'meropenem' => Input::get('meropenem'),
+                        'amikacin' => Input::get('amikacin'),
+                        'streptomycin' => Input::get('streptomycin'),
+                        'ethionamide' => Input::get('ethionamide'),
+                        'prothionamide' => Input::get('prothionamide'),
+                        'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
+                        'genotyping_done' => Input::get('genotyping_done'),
+                        'genotyping_asay' => $genotyping_asay,
+                        'isoniazid2' => Input::get('isoniazid2'),
+                        'fluoroquinolones' => Input::get('fluoroquinolones'),
+                        'amikacin2' => Input::get('amikacin2'),
+                        'kanamycin' => Input::get('kanamycin'),
+                        'capreomycin' => Input::get('capreomycin'),
+                        'ethionamide2' => Input::get('ethionamide2'),
+                        'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
+                        'nanopore_sequencing' => $nanopore_sequencing,
+                        'rifampicin3' => Input::get('rifampicin3'),
+                        'isoniazid3' => Input::get('isoniazid3'),
+                        'levofloxacin3' => Input::get('levofloxacin3'),
+                        'moxifloxacin3' => Input::get('moxifloxacin3'),
+                        'bedaquiline3' => Input::get('bedaquiline3'),
+                        'linezolid3' => Input::get('linezolid3'),
+                        'clofazimine3' => Input::get('clofazimine3'),
+                        'cycloserine3' => Input::get('cycloserine3'),
+                        'terizidone3' => Input::get('terizidone3'),
+                        'ethambutol3' => Input::get('ethambutol3'),
+                        'delamanid3' => Input::get('delamanid3'),
+                        'pyrazinamide3' => Input::get('pyrazinamide3'),
+                        'imipenem3' => Input::get('imipenem3'),
+                        'cilastatin3' => Input::get('cilastatin3'),
+                        'meropenem3' => Input::get('meropenem3'),
+                        'amikacin3' => Input::get('amikacin3'),
+                        'streptomycin3' => Input::get('streptomycin3'),
+                        'ethionamide3' => Input::get('ethionamide3'),
+                        'prothionamide3' => Input::get('prothionamide3'),
+                        'para_aminosalicylic_acid3' => Input::get('para_aminosalicylic_acid3'),
+                        '_1st_line_drugs' => $_1st_line_drugs,
+                        '_2st_line_drugs' => $_2st_line_drugs,
+                        'version_number' => Input::get('version_number'),
+                        'lot_number' => Input::get('lot_number'),
+                        'mutations_detected_list' => Input::get('mutations_detected_list'),
+                        'd_firstName' => Input::get('d_firstName'),
+                        'd_middleName' => Input::get('d_middleName'),
+                        'd_middleName' => Input::get('d_middleName'),
+                        'comments' => Input::get('comments'),
+                        'form_completness' => Input::get('form_completness'),
+                        'date_completed' => Input::get('date_completed'),
+                        'status' => 1,
+                        'patient_id' => $clients['id'],
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'site_id' => $clients['site_id'],
+                    ));
+
+                    $successMessage = 'Validations Data  Successful Added';
+                }
+
+                $user->updateRecord('clients', array(
+                    'enrolled' => 1,
+                ), $clients['id']);
+
+                Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
+            } else {
+                $pageError = $validate->errors();
+            }
         } elseif (Input::get('add_visit')) {
             $validate = $validate->check($_POST, array(
                 'visit_date' => array(
@@ -1488,681 +1732,6 @@ if ($user->isLoggedIn()) {
                 // $user->visit_delete1($clients['id'], Input::get('enrollment_date'), $clients['study_id'], $user->data()->id, $clients['site_id'], $eligible, 0, $visit_code, $visit_name, $clients['respondent'], 1, $clients['site_id']);
 
                 Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&sequence=' . $_GET['sequence'] . '&visit_code=' . $_GET['visit_code'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('add_facility')) {
-            $validate = $validate->check($_POST, array(
-                'extraction_date' => array(
-                    'required' => true,
-                ),
-                'month_name' => array(
-                    'required' => true,
-                ),
-            ));
-
-            if ($validate->passed()) {
-
-                $sites = $override->getNews('sites', 'status', 1, 'id', $_GET['site_id'])[0];
-
-                $facility0 = $override->get3('facility', 'status', 1, 'site_id', $_GET['site_id'], 'sequence', $_GET['sequence']);
-                $sequence = '';
-                $visit_code = '';
-                $visit_name = '';
-
-
-                // $last_visit = $override->getlastRow1('visit', 'patient_id', $clients['id'], 'sequence', $_GET['sequence'], 'id')[0];
-
-                // $sequence = intval($_GET['sequence']) + 1;
-
-                // if ($sequence) {
-                //     $visit_code = 'M' . $sequence;
-                //     $visit_name = 'Month ' . $sequence;
-                // }
-
-                if ($facility0) {
-                    $user->updateRecord('facility', array(
-                        'extraction_date' => Input::get('extraction_date'),
-                        'appointments' => Input::get('appointments'),
-                        'month_name' => Input::get('month_name'),
-                        'patients_tested' => Input::get('patients_tested'),
-                        'results_soft_copy' => Input::get('results_soft_copy'),
-                        'results_hard_copy' => Input::get('results_hard_copy'),
-                        'ltf' => Input::get('ltf'),
-                        'transferred_out' => Input::get('transferred_out'),
-                        'admitted' => Input::get('admitted'),
-                        'death' => Input::get('death'),
-                        'inability_transport' => Input::get('inability_transport'),
-                        'lack_accompany' => Input::get('lack_accompany'),
-                        'incompatibility_time' => Input::get('incompatibility_time'),
-                        'tosa' => Input::get('tosa'),
-                        'mourning' => Input::get('mourning'),
-                        'forgot' => Input::get('forgot'),
-                        'unknown' => Input::get('unknown'),
-                        'extra_pills' => Input::get('extra_pills'),
-                        'others' => Input::get('others'),
-                        'comments' => Input::get('comments'),
-                        'facility_completed' => Input::get('facility_completed'),
-                        'date_completed' => Input::get('date_completed'),
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                    ), $facility0[0]['id']);
-
-                    $successMessage = 'Facility  Successful Updated';
-                } else {
-
-                    $user->createRecord('facility', array(
-                        'sequence' => $_GET['sequence'],
-                        'vid' => $_GET['vid'],
-                        'visit_date' => Input::get('extraction_date'),
-                        'expected_date' => Input::get('extraction_date'),
-                        'extraction_date' => Input::get('extraction_date'),
-                        'visit_code' => $_GET['visit_code'],
-                        'facility_id' => Input::get('facility_id'),
-                        'facility_arm' => Input::get('facility_arm'),
-                        'facility_level' => Input::get('facility_level'),
-                        'facility_type' => Input::get('facility_type'),
-                        'appointments' => Input::get('appointments'),
-                        'month_name' => Input::get('month_name'),
-                        'patients_tested' => Input::get('patients_tested'),
-                        'results_soft_copy' => Input::get('results_soft_copy'),
-                        'results_hard_copy' => Input::get('results_hard_copy'),
-                        'ltf' => Input::get('ltf'),
-                        'transferred_out' => Input::get('transferred_out'),
-                        'admitted' => Input::get('admitted'),
-                        'death' => Input::get('death'),
-                        'inability_transport' => Input::get('inability_transport'),
-                        'lack_accompany' => Input::get('lack_accompany'),
-                        'incompatibility_time' => Input::get('incompatibility_time'),
-                        'tosa' => Input::get('tosa'),
-                        'mourning' => Input::get('mourning'),
-                        'forgot' => Input::get('forgot'),
-                        'unknown' => Input::get('unknown'),
-                        'extra_pills' => Input::get('extra_pills'),
-                        'others' => Input::get('others'),
-                        'comments' => Input::get('comments'),
-                        'respondent' => $_GET['respondent'],
-                        'facility_completed' => Input::get('facility_completed'),
-                        'date_completed' => Input::get('date_completed'),
-                        'status' => 1,
-                        'visit_status' => 1,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $_GET['site_id'],
-                    ));
-
-
-                    $last_row = $override->lastRow('facility', 'id')[0];
-
-                    $expected_date = date('Y-m-d', strtotime('+1 month', strtotime($last_row['expected_date'])));
-
-                    $user->createRecord('facility', array(
-                        'sequence' => 1,
-                        'vid' => $_GET['vid'],
-                        'expected_date' => $expected_date,
-                        'extraction_date' => '',
-                        'visit_code' => 'M1',
-                        'facility_id' => Input::get('facility_id'),
-                        'facility_arm' => Input::get('facility_arm'),
-                        'facility_level' => Input::get('facility_level'),
-                        'facility_type' => Input::get('facility_type'),
-                        'appointments' => 0,
-                        'month_name' => 0,
-                        'patients_tested' => 0,
-                        'results_soft_copy' => 0,
-                        'results_hard_copy' => 0,
-                        'ltf' => 0,
-                        'transferred_out' => 0,
-                        'admitted' => 0,
-                        'death' => 0,
-                        'inability_transport' => 0,
-                        'lack_accompany' => 0,
-                        'incompatibility_time' => 0,
-                        'tosa' => 0,
-                        'mourning' => 0,
-                        'forgot' => 0,
-                        'unknown' => 0,
-                        'extra_pills' => 0,
-                        'others' => 0,
-                        'comments' => '',
-                        'respondent' => $_GET['respondent'],
-                        'facility_completed' => 0,
-                        'date_completed' => '',
-                        'status' => 1,
-                        'visit_status' => 0,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $_GET['site_id'],
-                    ));
-
-                    $last_row = $override->lastRow('facility', 'id')[0];
-
-                    $expected_date = date('Y-m-d', strtotime('+1 month', strtotime($last_row['expected_date'])));
-
-                    $user->createRecord('facility', array(
-                        'sequence' => 2,
-                        'vid' => $_GET['vid'],
-                        'expected_date' => $expected_date,
-                        'extraction_date' => '',
-                        'visit_code' => 'M2',
-                        'facility_id' => Input::get('facility_id'),
-                        'facility_arm' => Input::get('facility_arm'),
-                        'facility_level' => Input::get('facility_level'),
-                        'facility_type' => Input::get('facility_type'),
-                        'appointments' => 0,
-                        'month_name' => 0,
-                        'patients_tested' => 0,
-                        'results_soft_copy' => 0,
-                        'results_hard_copy' => 0,
-                        'ltf' => 0,
-                        'transferred_out' => 0,
-                        'admitted' => 0,
-                        'death' => 0,
-                        'inability_transport' => 0,
-                        'lack_accompany' => 0,
-                        'incompatibility_time' => 0,
-                        'tosa' => 0,
-                        'mourning' => 0,
-                        'forgot' => 0,
-                        'unknown' => 0,
-                        'extra_pills' => 0,
-                        'others' => 0,
-                        'comments' => '',
-                        'respondent' => $_GET['respondent'],
-                        'facility_completed' => 0,
-                        'date_completed' => '',
-                        'status' => 1,
-                        'visit_status' => 0,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $_GET['site_id'],
-                    ));
-
-                    $last_row = $override->lastRow('facility', 'id')[0];
-
-                    $expected_date = date('Y-m-d', strtotime('+1 month', strtotime($last_row['expected_date'])));
-
-                    $user->createRecord('facility', array(
-                        'sequence' => 3,
-                        'vid' => $_GET['vid'],
-                        'expected_date' => $expected_date,
-                        'extraction_date' => '',
-                        'visit_code' => 'M3',
-                        'facility_id' => Input::get('facility_id'),
-                        'facility_arm' => Input::get('facility_arm'),
-                        'facility_level' => Input::get('facility_level'),
-                        'facility_type' => Input::get('facility_type'),
-                        'appointments' => 0,
-                        'month_name' => 0,
-                        'patients_tested' => 0,
-                        'results_soft_copy' => 0,
-                        'results_hard_copy' => 0,
-                        'ltf' => 0,
-                        'transferred_out' => 0,
-                        'admitted' => 0,
-                        'death' => 0,
-                        'inability_transport' => 0,
-                        'lack_accompany' => 0,
-                        'incompatibility_time' => 0,
-                        'tosa' => 0,
-                        'mourning' => 0,
-                        'forgot' => 0,
-                        'unknown' => 0,
-                        'extra_pills' => 0,
-                        'others' => 0,
-                        'comments' => '',
-                        'respondent' => $_GET['respondent'],
-                        'facility_completed' => 0,
-                        'date_completed' => '',
-                        'status' => 1,
-                        'visit_status' => 0,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $_GET['site_id'],
-                    ));
-
-                    $last_row = $override->lastRow('facility', 'id')[0];
-
-                    $expected_date = date('Y-m-d', strtotime('+1 month', strtotime($last_row['expected_date'])));
-
-                    $user->createRecord('facility', array(
-                        'sequence' => 4,
-                        'vid' => $_GET['vid'],
-                        'expected_date' => $expected_date,
-                        'extraction_date' => '',
-                        'visit_code' => 'M4',
-                        'facility_id' => Input::get('facility_id'),
-                        'facility_arm' => Input::get('facility_arm'),
-                        'facility_level' => Input::get('facility_level'),
-                        'facility_type' => Input::get('facility_type'),
-                        'appointments' => 0,
-                        'month_name' => 0,
-                        'patients_tested' => 0,
-                        'results_soft_copy' => 0,
-                        'results_hard_copy' => 0,
-                        'ltf' => 0,
-                        'transferred_out' => 0,
-                        'admitted' => 0,
-                        'death' => 0,
-                        'inability_transport' => 0,
-                        'lack_accompany' => 0,
-                        'incompatibility_time' => 0,
-                        'tosa' => 0,
-                        'mourning' => 0,
-                        'forgot' => 0,
-                        'unknown' => 0,
-                        'extra_pills' => 0,
-                        'others' => 0,
-                        'comments' => '',
-                        'respondent' => $_GET['respondent'],
-                        'facility_completed' => 0,
-                        'date_completed' => '',
-                        'status' => 1,
-                        'visit_status' => 0,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $_GET['site_id'],
-                    ));
-
-                    $last_row = $override->lastRow('facility', 'id')[0];
-
-                    $expected_date = date('Y-m-d', strtotime('+1 month', strtotime($last_row['expected_date'])));
-
-                    $user->createRecord('facility', array(
-                        'sequence' => 5,
-                        'vid' => $_GET['vid'],
-                        'expected_date' => $expected_date,
-                        'extraction_date' => '',
-                        'visit_code' => 'M5',
-                        'facility_id' => Input::get('facility_id'),
-                        'facility_arm' => Input::get('facility_arm'),
-                        'facility_level' => Input::get('facility_level'),
-                        'facility_type' => Input::get('facility_type'),
-                        'appointments' => 0,
-                        'month_name' => 0,
-                        'patients_tested' => 0,
-                        'results_soft_copy' => 0,
-                        'results_hard_copy' => 0,
-                        'ltf' => 0,
-                        'transferred_out' => 0,
-                        'admitted' => 0,
-                        'death' => 0,
-                        'inability_transport' => 0,
-                        'lack_accompany' => 0,
-                        'incompatibility_time' => 0,
-                        'tosa' => 0,
-                        'mourning' => 0,
-                        'forgot' => 0,
-                        'unknown' => 0,
-                        'extra_pills' => 0,
-                        'others' => 0,
-                        'comments' => '',
-                        'respondent' => $_GET['respondent'],
-                        'facility_completed' => 0,
-                        'date_completed' => '',
-                        'status' => 1,
-                        'visit_status' => 0,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $_GET['site_id'],
-                    ));
-
-                    $last_row = $override->lastRow('facility', 'id')[0];
-
-                    $expected_date = date('Y-m-d', strtotime('+1 month', strtotime($last_row['expected_date'])));
-
-                    $user->createRecord('facility', array(
-                        'sequence' => 6,
-                        'vid' => $_GET['vid'],
-                        'expected_date' => $expected_date,
-                        'extraction_date' => '',
-                        'visit_code' => 'M6',
-                        'facility_id' => Input::get('facility_id'),
-                        'facility_arm' => Input::get('facility_arm'),
-                        'facility_level' => Input::get('facility_level'),
-                        'facility_type' => Input::get('facility_type'),
-                        'appointments' => 0,
-                        'month_name' => 0,
-                        'patients_tested' => 0,
-                        'results_soft_copy' => 0,
-                        'results_hard_copy' => 0,
-                        'ltf' => 0,
-                        'transferred_out' => 0,
-                        'admitted' => 0,
-                        'death' => 0,
-                        'inability_transport' => 0,
-                        'lack_accompany' => 0,
-                        'incompatibility_time' => 0,
-                        'tosa' => 0,
-                        'mourning' => 0,
-                        'forgot' => 0,
-                        'unknown' => 0,
-                        'extra_pills' => 0,
-                        'others' => 0,
-                        'comments' => '',
-                        'respondent' => $_GET['respondent'],
-                        'facility_completed' => 0,
-                        'date_completed' => '',
-                        'status' => 1,
-                        'visit_status' => 0,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $_GET['site_id'],
-                    ));
-
-                    $last_row = $override->lastRow('facility', 'id')[0];
-
-                    $expected_date = date('Y-m-d', strtotime('+1 month', strtotime($last_row['expected_date'])));
-
-                    $user->createRecord('facility', array(
-                        'sequence' => 7,
-                        'vid' => $_GET['vid'],
-                        'expected_date' => $expected_date,
-                        'extraction_date' => '',
-                        'visit_code' => 'M7',
-                        'facility_id' => Input::get('facility_id'),
-                        'facility_arm' => Input::get('facility_arm'),
-                        'facility_level' => Input::get('facility_level'),
-                        'facility_type' => Input::get('facility_type'),
-                        'appointments' => 0,
-                        'month_name' => 0,
-                        'patients_tested' => 0,
-                        'results_soft_copy' => 0,
-                        'results_hard_copy' => 0,
-                        'ltf' => 0,
-                        'transferred_out' => 0,
-                        'admitted' => 0,
-                        'death' => 0,
-                        'inability_transport' => 0,
-                        'lack_accompany' => 0,
-                        'incompatibility_time' => 0,
-                        'tosa' => 0,
-                        'mourning' => 0,
-                        'forgot' => 0,
-                        'unknown' => 0,
-                        'extra_pills' => 0,
-                        'others' => 0,
-                        'comments' => '',
-                        'respondent' => $_GET['respondent'],
-                        'facility_completed' => 0,
-                        'date_completed' => '',
-                        'status' => 1,
-                        'visit_status' => 0,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $_GET['site_id'],
-                    ));
-
-                    $last_row = $override->lastRow('facility', 'id')[0];
-
-                    $expected_date = date('Y-m-d', strtotime('+1 month', strtotime($last_row['expected_date'])));
-
-                    $user->createRecord('facility', array(
-                        'sequence' => 8,
-                        'vid' => $_GET['vid'],
-                        'expected_date' => $expected_date,
-                        'extraction_date' => '',
-                        'visit_code' => 'M8',
-                        'facility_id' => Input::get('facility_id'),
-                        'facility_arm' => Input::get('facility_arm'),
-                        'facility_level' => Input::get('facility_level'),
-                        'facility_type' => Input::get('facility_type'),
-                        'appointments' => 0,
-                        'month_name' => 0,
-                        'patients_tested' => 0,
-                        'results_soft_copy' => 0,
-                        'results_hard_copy' => 0,
-                        'ltf' => 0,
-                        'transferred_out' => 0,
-                        'admitted' => 0,
-                        'death' => 0,
-                        'inability_transport' => 0,
-                        'lack_accompany' => 0,
-                        'incompatibility_time' => 0,
-                        'tosa' => 0,
-                        'mourning' => 0,
-                        'forgot' => 0,
-                        'unknown' => 0,
-                        'extra_pills' => 0,
-                        'others' => 0,
-                        'comments' => '',
-                        'respondent' => $_GET['respondent'],
-                        'facility_completed' => 0,
-                        'date_completed' => '',
-                        'status' => 1,
-                        'visit_status' => 0,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $_GET['site_id'],
-                    ));
-
-                    $last_row = $override->lastRow('facility', 'id')[0];
-
-                    $expected_date = date('Y-m-d', strtotime('+1 month', strtotime($last_row['expected_date'])));
-
-                    $user->createRecord('facility', array(
-                        'sequence' => 9,
-                        'vid' => $_GET['vid'],
-                        'expected_date' => $expected_date,
-                        'extraction_date' => '',
-                        'visit_code' => 'M9',
-                        'facility_id' => Input::get('facility_id'),
-                        'facility_arm' => Input::get('facility_arm'),
-                        'facility_level' => Input::get('facility_level'),
-                        'facility_type' => Input::get('facility_type'),
-                        'appointments' => 0,
-                        'month_name' => 0,
-                        'patients_tested' => 0,
-                        'results_soft_copy' => 0,
-                        'results_hard_copy' => 0,
-                        'ltf' => 0,
-                        'transferred_out' => 0,
-                        'admitted' => 0,
-                        'death' => 0,
-                        'inability_transport' => 0,
-                        'lack_accompany' => 0,
-                        'incompatibility_time' => 0,
-                        'tosa' => 0,
-                        'mourning' => 0,
-                        'forgot' => 0,
-                        'unknown' => 0,
-                        'extra_pills' => 0,
-                        'others' => 0,
-                        'comments' => '',
-                        'respondent' => $_GET['respondent'],
-                        'facility_completed' => 0,
-                        'date_completed' => '',
-                        'status' => 1,
-                        'visit_status' => 0,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $_GET['site_id'],
-                    ));
-
-                    $last_row = $override->lastRow('facility', 'id')[0];
-
-                    $expected_date = date('Y-m-d', strtotime('+1 month', strtotime($last_row['expected_date'])));
-
-                    $user->createRecord('facility', array(
-                        'sequence' => 10,
-                        'vid' => $_GET['vid'],
-                        'expected_date' => $expected_date,
-                        'extraction_date' => '',
-                        'visit_code' => 'M10',
-                        'facility_id' => Input::get('facility_id'),
-                        'facility_arm' => Input::get('facility_arm'),
-                        'facility_level' => Input::get('facility_level'),
-                        'facility_type' => Input::get('facility_type'),
-                        'appointments' => 0,
-                        'month_name' => 0,
-                        'patients_tested' => 0,
-                        'results_soft_copy' => 0,
-                        'results_hard_copy' => 0,
-                        'ltf' => 0,
-                        'transferred_out' => 0,
-                        'admitted' => 0,
-                        'death' => 0,
-                        'inability_transport' => 0,
-                        'lack_accompany' => 0,
-                        'incompatibility_time' => 0,
-                        'tosa' => 0,
-                        'mourning' => 0,
-                        'forgot' => 0,
-                        'unknown' => 0,
-                        'extra_pills' => 0,
-                        'others' => 0,
-                        'comments' => '',
-                        'respondent' => $_GET['respondent'],
-                        'facility_completed' => 0,
-                        'date_completed' => '',
-                        'status' => 1,
-                        'visit_status' => 0,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $_GET['site_id'],
-                    ));
-
-                    $last_row = $override->lastRow('facility', 'id')[0];
-
-                    $expected_date = date('Y-m-d', strtotime('+1 month', strtotime($last_row['expected_date'])));
-
-                    $user->createRecord('facility', array(
-                        'sequence' => 11,
-                        'vid' => $_GET['vid'],
-                        'expected_date' => $expected_date,
-                        'extraction_date' => '',
-                        'visit_code' => 'M11',
-                        'facility_id' => Input::get('facility_id'),
-                        'facility_arm' => Input::get('facility_arm'),
-                        'facility_level' => Input::get('facility_level'),
-                        'facility_type' => Input::get('facility_type'),
-                        'appointments' => 0,
-                        'month_name' => 0,
-                        'patients_tested' => 0,
-                        'results_soft_copy' => 0,
-                        'results_hard_copy' => 0,
-                        'ltf' => 0,
-                        'transferred_out' => 0,
-                        'admitted' => 0,
-                        'death' => 0,
-                        'inability_transport' => 0,
-                        'lack_accompany' => 0,
-                        'incompatibility_time' => 0,
-                        'tosa' => 0,
-                        'mourning' => 0,
-                        'forgot' => 0,
-                        'unknown' => 0,
-                        'extra_pills' => 0,
-                        'others' => 0,
-                        'comments' => '',
-                        'respondent' => $_GET['respondent'],
-                        'facility_completed' => 0,
-                        'date_completed' => '',
-                        'status' => 1,
-                        'visit_status' => 0,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $_GET['site_id'],
-                    ));
-
-                    $last_row = $override->lastRow('facility', 'id')[0];
-
-                    $expected_date = date('Y-m-d', strtotime('+1 month', strtotime($last_row['expected_date'])));
-
-                    $user->createRecord('facility', array(
-                        'sequence' => 12,
-                        'vid' => $_GET['vid'],
-                        'expected_date' => $expected_date,
-                        'extraction_date' => '',
-                        'visit_code' => 'M12',
-                        'facility_id' => Input::get('facility_id'),
-                        'facility_arm' => Input::get('facility_arm'),
-                        'facility_level' => Input::get('facility_level'),
-                        'facility_type' => Input::get('facility_type'),
-                        'appointments' => 0,
-                        'month_name' => 0,
-                        'patients_tested' => 0,
-                        'results_soft_copy' => 0,
-                        'results_hard_copy' => 0,
-                        'ltf' => 0,
-                        'transferred_out' => 0,
-                        'admitted' => 0,
-                        'death' => 0,
-                        'inability_transport' => 0,
-                        'lack_accompany' => 0,
-                        'incompatibility_time' => 0,
-                        'tosa' => 0,
-                        'mourning' => 0,
-                        'forgot' => 0,
-                        'unknown' => 0,
-                        'extra_pills' => 0,
-                        'others' => 0,
-                        'comments' => '',
-                        'respondent' => $_GET['respondent'],
-                        'facility_completed' => 0,
-                        'date_completed' => '',
-                        'status' => 1,
-                        'visit_status' => 0,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $_GET['site_id'],
-                    ));
-
-                    $successMessage = 'Facility  Successful Added';
-                }
-
-                // $user->visit_schedule($_GET['site_id'], Input::get('visit_date'), $_GET['site_id'], $user->data()->id, $_GET['site_id'], $eligible, $sequence, $visit_code, $visit_name);
-
-
-                // Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&sequence=' . $_GET['sequence'] . '&visit_code=' . $_GET['visit_code'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('add_facility_visit')) {
-            $validate = $validate->check($_POST, array(
-                'visit_date' => array(
-                    'required' => true,
-                ),
-            ));
-
-            if ($validate->passed()) {
-                $user->updateRecord('visit', array(
-                    'visit_date' => Input::get('visit_date'),
-                    'visit_status' => Input::get('visit_status'),
-                    'comments' => Input::get('comments'),
-                    'status' => 1,
-                    'patient_id' => Input::get('cid'),
-                    'update_on' => date('Y-m-d H:i:s'),
-                    'update_id' => $user->data()->id,
-                ), Input::get('id'));
-
-                $successMessage = 'Visit Updates  Successful';
             } else {
                 $pageError = $validate->errors();
             }
@@ -8823,293 +8392,216 @@ if ($user->isLoggedIn()) {
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-3">
                                                     <div class="mb-2">
-                                                        <label for="visit_date" class="form-label">Visit Date</label>
-                                                        <input type="date" value="<?php if ($costing['visit_date']) {
-                                                                                        print_r($costing['visit_date']);
-                                                                                    } ?>" id="visit_date" name="visit_date" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
+                                                        <label for="date_collect" class="form-label">Collection Date</label>
+                                                        <input type="date" value="<?php if ($costing['date_collect']) {
+                                                                                        print_r($costing['date_collect']);
+                                                                                    } ?>" id="date_collect" name="date_collect" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
                                                     </div>
                                                 </div>
 
-                                                <div class="col-6">
+                                                <div class="col-3">
                                                     <div class="mb-3">
-                                                        <label for="clinician_name" class="form-label">96. Name of clinician</label>
-                                                        <input type="text" value="<?php if ($costing['clinician_name']) {
-                                                                                        print_r($costing['clinician_name']);
-                                                                                    } ?>" id="clinician_name" name="clinician_name" class="form-control" placeholder="Enter here" required />
+                                                        <label for="date_receictrl" class="form-label">Date CTRL Received</label>
+                                                        <input type="date" value="<?php if ($costing['date_receictrl']) {
+                                                                                        print_r($costing['date_receictrl']);
+                                                                                    } ?>" id="date_receictrl" name="date_receictrl" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
                                                     </div>
                                                 </div>
 
-                                            </div>
-
-                                            <hr>
-                                            <div class="card card-warning">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Final diagnosis</h3>
+                                                <div class="col-3">
+                                                    <div class="mb-3">
+                                                        <label for="lab_no" class="form-label">lab_no</label>
+                                                        <input type="text" value="<?php if ($costing['lab_no']) {
+                                                                                        print_r($costing['lab_no']);
+                                                                                    } ?>" id="lab_no" name="lab_no" class="form-control" placeholder="Enter here" required />
+                                                    </div>
                                                 </div>
+
+                                                <div class="col-3">
+                                                    <div class="mb-3">
+                                                        <label for="transit_time" class="form-label">transit_time (If N / A Put '99')</label>
+                                                        <input type="number" value="<?php if ($costing['transit_time']) {
+                                                                                        print_r($costing['transit_time']);
+                                                                                    } ?>" id="transit_time" name="transit_time" min="0" max="100" class="form-control" placeholder="Enter here" required />
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-4">
-                                                    <label for="tb_diagnosis" class="form-label">101. Was a TB diagnosis made?</label>
+                                                <div class="col-sm-3">
+                                                    <label for="samplae_type" class="form-label">Samplae type</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('sample_type2', 'status2', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="tb_diagnosis" id="tb_diagnosis<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_diagnosis'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="samplae_type" id="samplae_type<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['samplae_type'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
                                                                                                                                                                                                         } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('tb_diagnosis')">Unset</button>
+                                                        <button onclick="unsetRadio('samplae_type')">Unset</button>
 
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="tb_diagnosis_made">
-                                                    <label for="tb_diagnosis_made" class="form-label">102. How was the TB diagnosis made? </label>
+                                                <div class="col-sm-3" id="pat_category">
+                                                    <label for="pat_category" class="form-label">Patient Category</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('tb_diagnosis_made', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('patient_category', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="tb_diagnosis_made" id="zn_results_b<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_diagnosis_made'] == $value['id']) {
-                                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                                } ?>>
+                                                                    <input class="form-check-input" type="radio" name="pat_category" id="pat_category<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['pat_category'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <label for="diagnosis_made_other" class="form-label">what date ?</label>
-                                                            <input type="text" value="<?php if ($costing['diagnosis_made_other']) {
-                                                                                            print_r($costing['diagnosis_made_other']);
-                                                                                        } ?>" id="diagnosis_made_other" name="diagnosis_made_other" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
-                                                    <button onclick="unsetRadio('tb_diagnosis_made')">Unset</button>
-
+                                                    <button onclick="unsetRadio('pat_category')">Unset</button>
                                                 </div>
 
-                                                <div class="col-sm-4" id="bacteriological_diagnosis">
-                                                    <label for="bacteriological_diagnosis" class="form-label">103. On what test result(s) was the bacteriological diagnosis based?</label>
+                                                <div class="col-sm-3" id="testrequest_reason">
+                                                    <label for="testrequest_reason" class="form-label">Testrequest Reason</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('bacteriological_diagnosis', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('testrequest_reason', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" name="bacteriological_diagnosis[]" id="bacteriological_diagnosis<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['bacteriological_diagnosis']) as $values) {
-                                                                                                                                                                                                                                            if ($values == $value['id']) {
-                                                                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                        } ?>>
+                                                                    <input class="form-check-input" type="radio" name="testrequest_reason" id="testrequest_reason<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['testrequest_reason'] == $value['id']) {
+                                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                                    } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                    </div>
+                                                    <button onclick="unsetRadio('testrequest_reason')">Unset</button>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="mb-3">
+                                                        <label for="follow_up_months" class="form-label">Follow up at months ?</label>
+                                                        <input type="number" value="<?php if ($costing['follow_up_months']) {
+                                                                                        print_r($costing['follow_up_months']);
+                                                                                    } ?>" id="follow_up_months" name="follow_up_months" min="1" max="20" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div id="tb_diagnosis_hides">
+                                            <div id="tb_diagnosis_hides2222">
                                                 <hr>
                                                 <div class="row">
 
                                                     <div class="col-sm-3">
                                                         <div class="mb-3">
-                                                            <label for="xpert_ultra_date" class="form-label">103. If Xpert Ultra (Date?)</label>
-                                                            <input type="date" value="<?php if ($costing['xpert_ultra_date']) {
-                                                                                            print_r($costing['xpert_ultra_date']);
-                                                                                        } ?>" id="xpert_ultra_date" name="xpert_ultra_date" class="form-control" placeholder="Enter here" />
+                                                            <label for="treatment_month" class="form-label">Treatment Month (If N/A put '99' ,If Not provided put '98')</label>
+                                                            <input type="number" value="<?php if ($costing['treatment_month']) {
+                                                                                            print_r($costing['treatment_month']);
+                                                                                        } ?>" id="treatment_month" name="treatment_month" min="1" max="20" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-3">
-                                                        <div class="mb-3">
-                                                            <label for="truenat_date" class="form-label">103. If Truenat (Date?)</label>
-                                                            <input type="date" value="<?php if ($costing['truenat_date']) {
-                                                                                            print_r($costing['truenat_date']);
-                                                                                        } ?>" id="truenat_date" name="truenat_date" class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <div class="mb-3">
-                                                            <label for="afb_microscope_date" class="form-label">103. If AFB Microscope (Date?)</label>
-                                                            <input type="date" value="<?php if ($costing['afb_microscope_date']) {
-                                                                                            print_r($costing['afb_microscope_date']);
-                                                                                        } ?>" id="afb_microscope_date" name="afb_microscope_date" class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <div class="mb-3">
-                                                            <label for="other_bacteriological_date" class="form-label">103. If Other test(s),(Date?)</label>
-                                                            <input type="date" value="<?php if ($costing['other_bacteriological_date']) {
-                                                                                            print_r($costing['other_bacteriological_date']);
-                                                                                        } ?>" id="other_bacteriological_date" name="other_bacteriological_date" class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <hr>
-                                                <div class="row">
-
-                                                    <div class="col-sm-4" id="tb_diagnosed_clinically">
-                                                        <label for="tb_diagnosed_clinically" class="form-label">104. In case TB was diagnosed clinically, based on what information was the diagnosis made? </label>
+                                                    <div class="col-sm-3" id="hiv_status">
+                                                        <label for="hiv_status" class="form-label">Hiv Status</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('tb_diagnosed_clinically', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('hiv_status2', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="checkbox" name="tb_diagnosed_clinically[]" id="tb_diagnosed_clinically<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['tb_diagnosed_clinically']) as $values) {
-                                                                                                                                                                                                                                            if ($values == $value['id']) {
-                                                                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                        } ?>>
-                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                                <label for="tb_clinically_other" class="form-label">Other Specify ?</label>
-                                                                <input type="text" value="<?php if ($costing['tb_clinically_other']) {
-                                                                                                print_r($costing['tb_clinically_other']);
-                                                                                            } ?>" id="tb_clinically_other" name="tb_clinically_other" class="form-control" placeholder="Enter here" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4" id="tb_treatment">
-                                                        <label for="tb_treatment" class="form-label">105. Was TB treatment started?</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('tb_treatment', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="tb_treatment" id="tb_treatment<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_treatment'] == $value['id']) {
-                                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                                            } ?>>
-                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                                <label for="tb_treatment_date" class="form-label">What was treatment start date ?</label>
-                                                                <input type="date" value="<?php if ($costing['tb_treatment_date']) {
-                                                                                                print_r($costing['tb_treatment_date']);
-                                                                                            } ?>" id="tb_treatment_date" name="tb_treatment_date" class="form-control" placeholder="Enter here" />
-                                                                <label for="tb_facility" class="form-label">(Name health facility):</label>
-                                                                <input type="text" value="<?php if ($costing['tb_facility']) {
-                                                                                                print_r($costing['tb_facility']);
-                                                                                            } ?>" id="tb_facility" name="tb_facility" class="form-control" placeholder="Enter here" />
-                                                                <label for="tb_reason" class="form-label">reason (specify):</label>
-                                                                <input type="text" value="<?php if ($costing['tb_reason']) {
-                                                                                                print_r($costing['tb_reason']);
-                                                                                            } ?>" id="tb_reason" name="tb_reason" class="form-control" placeholder="Enter here" />
-
-                                                            </div>
-                                                        </div>
-                                                        <button onclick="unsetRadio('tb_treatment')">Unset</button>
-
-                                                    </div>
-
-                                                    <div class="col-sm-4" id="tb_regimen">
-                                                        <label for="tb_regimen" class="form-label">106. What treatment regimen was prescribed? </label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('tb_regimen2', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="tb_regimen" id="tb_regimen<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_regimen'] == $value['id']) {
+                                                                        <input class="form-check-input" type="radio" name="hiv_status" id="hiv_status<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['hiv_status'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
                                                                                                                                                                                                         } ?>>
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <label for="tb_regimen_other" class="form-label">Regimens specify</label>
-                                                            <input type="text" value="<?php if ($costing['tb_regimen_other']) {
-                                                                                            print_r($costing['tb_regimen_other']);
-                                                                                        } ?>" id="tb_regimen_other" name="tb_regimen_other" class="form-control" placeholder="Enter here" />
                                                         </div>
-                                                        <button onclick="unsetRadio('tb_regimen')">Unset</button>
+                                                        <button onclick="unsetRadio('hiv_status')">Unset</button>
 
                                                     </div>
+
+                                                    <div class="col-2">
+                                                        <div class="mb-2">
+                                                            <label for="gx_results" class="form-label">gx_results</label>
+                                                            <input type="text" value="<?php if ($costing['gx_results']) {
+                                                                                            print_r($costing['gx_results']);
+                                                                                        } ?>" id="gx_results" name="gx_results" class="form-control" placeholder="Enter here" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-2">
+                                                        <div class="mb-2">
+                                                            <label for="gxmtb_ct" class="form-label">gxmtb_ct</label>
+                                                            <input type="text" value="<?php if ($costing['gxmtb_ct']) {
+                                                                                            print_r($costing['gxmtb_ct']);
+                                                                                        } ?>" id="gxmtb_ct" name="gxmtb_ct" class="form-control" placeholder="Enter here" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="mb-2">
+                                                            <label for="gx_mtbamount" class="form-label">gx_mtbamount</label>
+                                                            <input type="text" value="<?php if ($costing['gx_mtbamount']) {
+                                                                                            print_r($costing['gx_mtbamount']);
+                                                                                        } ?>" id="gx_mtbamount" name="gx_mtbamount" class="form-control" placeholder="Enter here" />
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                                 <hr>
                                                 <div class="row">
 
-
-                                                    <div class="col-sm-4" id="laboratory_test_used">
-                                                        <label for="laboratory_test_used" class="form-label">107. On what test result was the treatment regimen based and when did this test result become available to you? (dd / mm / yyyy)</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('laboratory_test_used', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="checkbox" name="laboratory_test_used[]" id="laboratory_test_used<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['laboratory_test_used']) as $values) {
-                                                                                                                                                                                                                                        if ($values == $value['id']) {
-                                                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    } ?>>
-                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4" id="regimen_changed">
-                                                        <label for="regimen_changed" class="form-label">108. Was the regimen changed during the treatment and if so, what were the changes?</label>
+                                                    <div class="col-sm-3" id="fm_done">
+                                                        <label for="fm_done" class="form-label">Fm done ?</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="regimen_changed" id="regimen_changed<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['regimen_changed'] == $value['id']) {
-                                                                                                                                                                                                                        echo 'checked';
-                                                                                                                                                                                                                    } ?>>
+                                                                        <input class="form-check-input" type="radio" name="fm_done" id="fm_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['fm_done'] == $value['id']) {
+                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                    } ?>>
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                                <label for="regimen_changed__date" class="form-label">1st (Date??), </label>
-                                                                <input type="text" value="<?php if ($costing['regimen_changed__date']) {
-                                                                                                print_r($costing['regimen_changed__date']);
-                                                                                            } ?>" id="regimen_changed__date" name="regimen_changed__date" class="form-control" placeholder="Enter here" />
-                                                                <label for="regimen_removed_name" class="form-label">Drug(s) removed </label>
-                                                                <input type="text" value="<?php if ($costing['regimen_removed_name']) {
-                                                                                                print_r($costing['regimen_removed_name']);
-                                                                                            } ?>" id="regimen_removed_name" name="regimen_removed_name" class="form-control" placeholder="Enter here" />
-                                                                <label for="regimen_added_name" class="form-label">Drugs added </label>
-                                                                <input type="text" value="<?php if ($costing['regimen_added_name']) {
-                                                                                                print_r($costing['regimen_added_name']);
-                                                                                            } ?>" id="regimen_added_name" name="regimen_added_name" class="form-control" placeholder="Enter here" />
-                                                                <label for="regimen_changed__reason" class="form-label">Reason for change </label>
-                                                                <input type="text" value="<?php if ($costing['regimen_changed__reason']) {
-                                                                                                print_r($costing['regimen_changed__reason']);
-                                                                                            } ?>" id="regimen_changed__reason" name="regimen_changed__reason" class="form-control" placeholder="Enter here" />
                                                             </div>
-                                                            <button onclick="unsetRadio('regimen_changed')">Unset</button>
+                                                            <button onclick="unsetRadio('fm_done')">Unset</button>
 
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-4" id="tb_otcome2">
-                                                        <label for="tb_otcome2" class="form-label">109. Treatment outcome at the end of treatment</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('tb_otcome2', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="tb_otcome2" id="tb_otcome2<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_otcome2'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
-                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button onclick="unsetRadio('tb_otcome2')">Unset</button>
+                                                    <div class="col-3">
+                                                        <div class="mb-2">
+                                                            <label for="fm_date" class="form-label">Fm date</label>
+                                                            <input type="date" value="<?php if ($costing['fm_date']) {
+                                                                                            print_r($costing['fm_date']);
+                                                                                        } ?>" id="fm_date" name="fm_date" class="form-control" placeholder="Enter here" />
+                                                        </div>
+                                                    </div>
 
+                                                    <div class="col-3">
+                                                        <div class="mb-2">
+                                                            <label for="fm_results" class="form-label">Fm results</label>
+                                                            <input type="text" value="<?php if ($costing['fm_results']) {
+                                                                                            print_r($costing['fm_results']);
+                                                                                        } ?>" id="fm_results" name="fm_results" class="form-control" placeholder="Enter here" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-3">
+                                                        <div class="mb-2">
+                                                            <label for="dec_date" class="form-label">dec_date</label>
+                                                            <input type="date" value="<?php if ($costing['dec_date']) {
+                                                                                            print_r($costing['dec_date']);
+                                                                                        } ?>" id="dec_date" name="dec_date" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
 
