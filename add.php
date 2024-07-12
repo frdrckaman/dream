@@ -5108,7 +5108,7 @@ if ($user->isLoggedIn()) {
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-4">
                                                     <div class="mb-2">
                                                         <label for="visit_date" class="form-label">Visit Date</label>
                                                         <input type="date" value="<?php if ($costing['visit_date']) {
@@ -5117,7 +5117,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-6">
+                                                <div class="col-4">
                                                     <label for="afb_microscopy" class="form-label">68. AFB microscopy</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5130,11 +5130,17 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <label for="n_afb_microscopy_date" id="n_afb_microscopy_date1" class="form-label">what date ?</label>
-                                                            <input type="date" value="<?php if ($costing['afb_microscopy_date']) {
-                                                                                            print_r($costing['afb_microscopy_date']);
-                                                                                        } ?>" id="n_afb_microscopy_date" name="afb_microscopy_date" class="form-control" placeholder="Enter here" />
                                                         </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4" id="n_afb_microscopy_date1">
+                                                    <div class="mb-2">
+                                                        <label for="n_afb_microscopy_date" id="n_zn_microscopy_date1" class="form-label">If ZN what date?</label>
+                                                        <label for="n_afb_microscopy_date" id="n_fm_microscopy_date1" class="form-label">If FM what date?</label>
+                                                        <input type="date" value="<?php if ($costing['afb_microscopy_date']) {
+                                                                                        print_r($costing['afb_microscopy_date']);
+                                                                                    } ?>" id="n_afb_microscopy_date" name="afb_microscopy_date" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
 

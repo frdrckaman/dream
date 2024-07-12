@@ -17,6 +17,19 @@ function checkRadioButtonsMany() {
         "lpa2dstag_lowkan",
       ],
     },
+
+    afb_microscopy: {
+      1: [
+        "n_afb_microscopy_date1",
+        "n_zn_microscopy_date1",
+        "n_afb_microscopy_date",
+      ],
+      2: [
+        "n_afb_microscopy_date1",
+        "n_fm_microscopy_date1",
+        "n_afb_microscopy_date",
+      ],
+    },
     // qn68: {
     //   1: ["qn69"],
     // },
