@@ -4827,7 +4827,7 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <label for="wrd_test_date" class="form-label">what date ?</label>
+                                                            <label id="wrd_test_date1" for="wrd_test_date" class="form-label">what date ?</label>
                                                             <input type="date" value="<?php if ($costing['wrd_test_date']) {
                                                                                             print_r($costing['wrd_test_date']);
                                                                                         } ?>" id="wrd_test_date" name="wrd_test_date" class="form-control" placeholder="Enter here" />
@@ -4852,7 +4852,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <label for="sequence_date" class="form-label">what date ?</label>
+                                                        <label for="sequence_date" id="sequence_date1" class="form-label">what date ?</label>
                                                         <input type="date" value="<?php if ($costing['sequence_date']) {
                                                                                         print_r($costing['sequence_date']);
                                                                                     } ?>" id="sequence_date" name="sequence_date" class="form-control" placeholder="Enter here" />
@@ -4876,7 +4876,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <label for="sequence_number" class="form-label">(If error, what code/number??) </label>
+                                                        <label for="sequence_number" id="sequence_number1" class="form-label">(If error, what code/number??) </label>
                                                         <input type="text" value="<?php if ($costing['sequence_number']) {
                                                                                         print_r($costing['sequence_number']);
                                                                                     } ?>" id="sequence_number" name="sequence_number" class="form-control" placeholder="Enter here" />
@@ -4904,10 +4904,6 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                            </div>
-
-                                            <hr>
-                                            <div class="row">
                                                 <div class="col-sm-3" id="rif_resistance">
                                                     <label for="rif_resistance" class="form-label">64. If MTB detected, RIF resistance </label>
                                                     <!-- radio -->
@@ -4927,7 +4923,12 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3">
+                                            </div>
+
+                                            <hr>
+                                            <div class="row">
+
+                                                <div class="col-4">
                                                     <div class="mb-3">
                                                         <label for="ct_value" class="form-label">65. Sample Cycle threshold (Ct) Value (number, two digits)</label>
                                                         <input type="number" value="<?php if ($costing['ct_value']) {
@@ -4936,7 +4937,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="test_repeatition">
+                                                <div class="col-sm-4" id="test_repeatition">
                                                     <label for="test_repeatition" class="form-label">66. If Invalid/Error/No result/Indeterminate, was the test repeated?
                                                     </label>
                                                     <!-- radio -->
@@ -4956,7 +4957,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="microscopy_reason">
+                                                <div class="col-sm-4" id="microscopy_reason">
                                                     <label for="microscopy_reason" class="form-label">67. If no reason(s) </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4969,7 +4970,7 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <label for="microscopy_reason_other" class="form-label">If Other Mention</label>
+                                                            <label for="microscopy_reason_other" id="microscopy_reason_other1" class="form-label">If Other Mention</label>
                                                             <input type="text" value="<?php if ($costing['microscopy_reason_other']) {
                                                                                             print_r($costing['microscopy_reason_other']);
                                                                                         } ?>" id="microscopy_reason_other" name="microscopy_reason_other" class="form-control" placeholder="Enter here" />

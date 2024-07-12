@@ -48,6 +48,50 @@ document.addEventListener("DOMContentLoaded", function () {
         "fm",
       ],
     },
+
+    wrd_test: {
+      1: ["wrd_test_date1", "wrd_test_date"],
+      2: ["wrd_test_date1", "wrd_test_date"],
+      3: ["sequence_done"],
+    },
+
+    sequence_done: {
+      1: ["sequence_date1", "sequence_date", "sequence_type"],
+    },
+
+    sequence_type: {
+      1: ["mtb_detection"],
+      2: ["rif_resistance"],
+      3: ["test_repeatition"],
+      4: ["sequence_number1", "sequence_number", "test_repeatition"],
+      5: ["test_repeatition"],
+    },
+
+    test_repeatition: {
+      2: ["microscopy_reason"],
+    },
+
+    microscopy_reason: {
+      96: ["microscopy_reason_other1", "microscopy_reason_other"],
+    },
+
+    // TOOL 6
+    testrequest_reason: {
+      3: ["follow_up_months1", "follow_up_months"],
+    },
+    fm_done: {
+      1: ["fm_date", "fm_results", "dec_date"],
+    },
+    lpa2_done: {
+      1: [
+        "lpa2_date1",
+        "lpa2_date",
+        "lpa2_mtbdetected",
+        "lpa2dst_lfx",
+        "lpa2dst_ag_cp",
+        "lpa2dstag_lowkan",
+      ],
+    },
   };
 
   // Load dynamic content from files and append to the document
