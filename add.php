@@ -9573,7 +9573,7 @@ if ($user->isLoggedIn()) {
 
                                             </div>
 
-
+                                            <hr>
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
