@@ -1231,6 +1231,10 @@ if ($user->isLoggedIn()) {
                         'date_receictrl' => Input::get('date_receictrl'),
                         'lab_no' => Input::get('lab_no'),
                         'transit_time' => Input::get('transit_time'),
+                        'resid_distr' => Input::get('resid_distr'),
+                        'h_facil' => Input::get('h_facil'),
+                        'hf_district' => Input::get('hf_district'),
+                        'tb_region' => Input::get('tb_region'),
                         'samplae_type' => Input::get('samplae_type'),
                         'pat_category' => Input::get('pat_category'),
                         'testrequest_reason' => Input::get('testrequest_reason'),
@@ -1314,6 +1318,10 @@ if ($user->isLoggedIn()) {
                         'date_receictrl' => Input::get('date_receictrl'),
                         'lab_no' => Input::get('lab_no'),
                         'transit_time' => Input::get('transit_time'),
+                        'resid_distr' => Input::get('resid_distr'),
+                        'h_facil' => Input::get('h_facil'),
+                        'hf_district' => Input::get('hf_district'),
+                        'tb_region' => Input::get('tb_region'),
                         'samplae_type' => Input::get('samplae_type'),
                         'pat_category' => Input::get('pat_category'),
                         'testrequest_reason' => Input::get('testrequest_reason'),
@@ -8419,6 +8427,47 @@ if ($user->isLoggedIn()) {
                                                         <input type="number" value="<?php if ($costing['transit_time']) {
                                                                                         print_r($costing['transit_time']);
                                                                                     } ?>" id="transit_time" name="transit_time" min="0" max="100" class="form-control" placeholder="Enter here" required />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <div class="mb-2">
+                                                        <label for="date_collect" class="form-label">resid_distr</label>
+                                                        <input type="text" value="<?php if ($costing['resid_distr']) {
+                                                                                        print_r($costing['resid_distr']);
+                                                                                    } ?>" id="resid_distr" name="resid_distr" class="form-control" placeholder="Enter date" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-3">
+                                                    <div class="mb-3">
+                                                        <label for="h_facil" class="form-label">h_facil</label>
+                                                        <input type="text" value="<?php if ($costing['h_facil']) {
+                                                                                        print_r($costing['h_facil']);
+                                                                                    } ?>" id="h_facil" name="h_facil" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-3">
+                                                    <div class="mb-3">
+                                                        <label for="hf_district" class="form-label">hf_district</label>
+                                                        <input type="text" value="<?php if ($costing['hf_district']) {
+                                                                                        print_r($costing['hf_district']);
+                                                                                    } ?>" id="hf_district" name="hf_district" class="form-control" placeholder="Enter here" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-3">
+                                                    <div class="mb-3">
+                                                        <label for="tb_region" class="form-label">tb_region</label>
+                                                        <input type="text" value="<?php if ($costing['tb_region']) {
+                                                                                        print_r($costing['tb_region']);
+                                                                                    } ?>" id="tb_region" name="tb_region" class="form-control" placeholder="Enter here" required />
                                                     </div>
                                                 </div>
 
