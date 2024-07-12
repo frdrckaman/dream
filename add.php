@@ -8108,7 +8108,7 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <label>34. If Other specify</label>
+                                                            <label id="diseases_specify1">34. If Other specify</label>
                                                             <input class="form-control" type="number" name="diseases_specify" id="diseases_specify" placeholder="Type here..." value="<?php if ($clients['diseases_specify']) {
                                                                                                                                                                                             print_r($clients['diseases_specify']);
                                                                                                                                                                                         }  ?>" />
@@ -9760,67 +9760,58 @@ if ($user->isLoggedIn()) {
 
 
     <!-- clients Js -->
-    <script src="myjs/add/clients/insurance.js"></script>
+    <!-- <script src="myjs/add/clients/insurance.js"></script>
     <script src="myjs/add/clients/insurance_name.js"></script>
-    <script src="myjs/add/clients/relation_patient.js"></script>
+    <script src="myjs/add/clients/relation_patient.js"></script> -->
     <!-- <script src="myjs/add/clients/validate_hidden_with_values.js"></script>
     <script src="myjs/add/clients/validate_required_attribute.js"></script>
     <script src="myjs/add/clients/validate_required_radio_checkboxes.js"></script> -->
 
     <!-- SCREENING Js -->
-    <script src="myjs/add/screening/conset.js"></script>
-    <script src="myjs/add/screening/art.js"></script>
+    <!-- <script src="myjs/add/screening/conset.js"></script>
+    <script src="myjs/add/screening/art.js"></script> -->
 
     <!-- Enrollment Js -->
-    <script src="myjs/add/enrollment/other_diseases.js"></script>
+    <!-- <script src="myjs/add/enrollment/other_diseases.js"></script>
     <script src="myjs/add/enrollment/other_samples.js"></script>
     <script src="myjs/add/enrollment/regimen_changed.js"></script>
     <script src="myjs/add/enrollment/sputum_collected.js"></script>
     <script src="myjs/add/enrollment/sputum_samples.js"></script>
     <script src="myjs/add/enrollment/tb_category.js"></script>
-    <script src="myjs/add/enrollment/tx_previous.js"></script>
+    <script src="myjs/add/enrollment/tx_previous.js"></script> -->
 
 
     <!-- RESPIRATORY format numbers Js -->
-    <script src="myjs/add/respiratory/sample_received.js"></script>
+    <!-- <script src="myjs/add/respiratory/sample_received.js"></script>
     <script src="myjs/add/respiratory/test_rejected.js"></script>
     <script src="myjs/add/respiratory/afb_microscopy.js"></script>
     <script src="myjs/add/respiratory/wrd_test.js"></script>
     <script src="myjs/add/respiratory/sequence_type.js"></script>
-    <script src="myjs/add/respiratory/test_repeatition.js"></script>
+    <script src="myjs/add/respiratory/test_repeatition.js"></script> -->
 
     <!-- NON RESPIRATORY format numbers Js -->
-    <script src="myjs/add/non_respiratory/n_sample_received.js"></script>
+    <!-- <script src="myjs/add/non_respiratory/n_sample_received.js"></script>
     <script src="myjs/add/non_respiratory/n_test_rejected.js"></script>
     <script src="myjs/add/non_respiratory/n_afb_microscopy.js"></script>
     <script src="myjs/add/non_respiratory/n_wrd_test.js"></script>
     <script src="myjs/add/non_respiratory/n_sequence_type.js"></script>
     <script src="myjs/add/non_respiratory/n_test_repeatition.js"></script>
-    <script src="myjs/add/non_respiratory/afb.js"></script>
+    <script src="myjs/add/non_respiratory/afb.js"></script> -->
 
     <!-- Diagnosis Test format numbers Js -->
-    <script src="myjs/add/diagnosis_test/sample_methods.js"></script>
+    <!-- <script src="myjs/add/diagnosis_test/sample_methods.js"></script> -->
 
 
     <script src="myjs/add/radio.js"></script>
-    <script src="myjs/add/radios1.js"></script>
+    <!-- <script src="myjs/add/radios1.js"></script>
     <script src="myjs/add/radios2.js"></script>
     <script src="myjs/add/radios3.js"></script>
     <script src="myjs/add/radios4.js"></script>
-    <script src="myjs/add/radios96.js"></script>
+    <script src="myjs/add/radios96.js"></script> -->
     <script src="myjs/add/checkbox1.js"></script>
     <script src="myjs/add/many_many.js"></script>
     <script src="myjs/add/many_one.js"></script>
     <script src="myjs/add/one_many.js"></script>
-
-
-
-
-
-
-
-
-
 
 
     <script>

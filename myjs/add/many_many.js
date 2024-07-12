@@ -10,6 +10,23 @@ function checkRadioButtonsMany() {
     regimen_changed: {
       1: ["regimen_name1"],
     },
+    immunosuppressive: {
+      1: ["immunosuppressive_specify1"],
+    },
+    other_diseases: {
+      1: ["diseases_medical"],
+    },
+    // diseases_medical: {
+    //   1: ["diseases_specify1", "diseases_specify"],
+    // },
+    other_samples: {
+      1: ["sputum_samples"],
+    },
+    chest_x_ray: {
+      1: [
+        "chest_x_ray_date1",
+      ],
+    },
     // testrequest_reason: {
     //   3: ["follow_up_months1", "follow_up_months"],
     // },
