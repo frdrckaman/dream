@@ -9179,20 +9179,407 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-                              
-                                                    <div class="col-4">
-                                                        <div class="mb-2">
-                                                            <label for="nanopseq_date" class="form-label">nanopseq_date</label>
-                                                            <input type="date" value="<?php if ($costing['nanopseq_date']) {
-                                                                                            print_r($costing['nanopseq_date']);
-                                                                                        } ?>" id="nanopseq_date" name="nanopseq_date" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" />
+
+                                                <div class="col-4">
+                                                    <div class="mb-2">
+                                                        <label for="nanopseq_date" class="form-label">nanopseq_date</label>
+                                                        <input type="date" value="<?php if ($costing['nanopseq_date']) {
+                                                                                        print_r($costing['nanopseq_date']);
+                                                                                    } ?>" id="nanopseq_date" name="nanopseq_date" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-3" id="myco_results">
+                                                    <label for="myco_results" class="form-label">myco_results</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('mtb_detected_not_faled', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="myco_results" id="myco_results<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['myco_results'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
                                                         </div>
+                                                        <button onclick="unsetRadio('myco_results')">Unset</button>
+
                                                     </div>
                                                 </div>
 
 
+                                                <div class="col-sm-3" id="myco_type">
+                                                    <label for="myco_type" class="form-label">myco_type</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('myco_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="myco_type" id="myco_type<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['myco_type'] == $value['id']) {
+                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                    } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('myco_type')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" id="myco_spp">
+                                                    <label for="myco_spp" class="form-label">myco_spp</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('myco_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="myco_spp" id="myco_spp<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['myco_spp'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('myco_spp')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-3">
+                                                    <div class="mb-2">
+                                                        <label for="myco_lineage" class="form-label">myco_lineage</label>
+                                                        <input type="text" value="<?php if ($costing['myco_lineage']) {
+                                                                                        print_r($costing['myco_lineage']);
+                                                                                    } ?>" id="myco_lineage" name="myco_lineage" class="form-control" placeholder="Enter date" />
+                                                    </div>
+                                                </div>
                                             </div>
                                             <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-3" id="nano_rif">
+                                                    <label for="nano_rif" class="form-label">nano_rif</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_rif" id="nano_rif<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_rif'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_rif')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-3" id="nano_inh">
+                                                    <label for="nano_inh" class="form-label">nano_inh</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_inh" id="nano_inh<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_inh'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_inh')">Unset</button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3" id="nano_kan">
+                                                    <label for="nano_kan" class="form-label">nano_kan</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_kan" id="nano_kan<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_kan'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_kan')">Unset</button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3" id="nano_mxf">
+                                                    <label for="nano_mxf" class="form-label">nano_mxf</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_mxf" id="nano_mxf<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_mxf'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_mxf')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-3" id="nano_cap">
+                                                    <label for="nano_cap" class="form-label">nano_cap</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_cap" id="nano_cap<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_cap'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_cap')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" id="nano_emb">
+                                                    <label for="nano_emb" class="form-label">nano_emb</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_emb" id="nano_emb<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_emb'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_emb')">Unset</button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3" id="nano_pza">
+                                                    <label for="nano_pza" class="form-label">nano_pza</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_pza" id="nano_pza<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_pza'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_pza')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" id="nano_amk">
+                                                    <label for="nano_amk" class="form-label">nano_amk</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_amk" id="nano_amk<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_amk'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_amk')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-3" id="nano_bdq">
+                                                    <label for="nano_bdq" class="form-label">nano_bdq</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_bdq" id="nano_bdq<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_bdq'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_bdq')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-3" id="nano_cfz">
+                                                    <label for="nano_cfz" class="form-label">nano_inh</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_cfz" id="nano_cfz<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_cfz'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_cfz')">Unset</button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3" id="nano_dlm">
+                                                    <label for="nano_dlm" class="form-label">nano_dlm</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_dlm" id="nano_dlm<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_dlm'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_dlm')">Unset</button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3" id="nano_eto">
+                                                    <label for="nano_eto" class="form-label">nano_eto</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_eto" id="nano_eto<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_eto'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_eto')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-3" id="nano_lfx">
+                                                    <label for="nano_lfx" class="form-label">nano_lfx</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_lfx" id="nano_lfx<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_lfx'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_lfx')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-3" id="nano_lzd">
+                                                    <label for="nano_lzd" class="form-label">nano_lzd</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_lzd" id="nano_lzd<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_lzd'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_lzd')">Unset</button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3" id="nano_pmd">
+                                                    <label for="nano_pmd" class="form-label">nano_kan</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_pmd" id="nano_pmd<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_pmd'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_pmd')">Unset</button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3" id="nano_stm">
+                                                    <label for="nano_stm" class="form-label">nano_mxf</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('nano_type', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nano_stm" id="nano_stm<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nano_stm'] == $value['id']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nano_stm')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
