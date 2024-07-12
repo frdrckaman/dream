@@ -8981,7 +8981,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="mb-2">
-                                                        <label for="lpa2_date" class="form-label">lpa2_date</label>
+                                                        <label for="lpa2_date" id="lpa2_date1" class="form-label">lpa2_date</label>
                                                         <input type="date" value="<?php if ($costing['lpa2_date']) {
                                                                                         print_r($costing['lpa2_date']);
                                                                                     } ?>" id="lpa2_date" name="lpa2_date" class="form-control" placeholder="Enter here" />

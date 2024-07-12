@@ -1,18 +1,22 @@
 function checkRadioButtonsMany() {
   const elementsToControlMany = {
     testrequest_reason: {
-      1: [],
-      2: [],
       3: ["follow_up_months1", "follow_up_months"],
     },
 
-    // tb_dawa: {
-    //   1: ["tb_dawa_tarehe1", "tb_dawa_tarehe"],
-    //   2: ["mgit_date2_1", "mgit_date2"],
-    // },
-    // qn66: {
-    //   1: ["qn67"],
-    // },
+    fm_done: {
+      1: ["fm_date", "fm_results", "dec_date"],
+    },
+    lpa2_done: {
+      1: [
+        "lpa2_date1",
+        "lpa2_date",
+        "lpa2_mtbdetected",
+        "lpa2dst_lfx",
+        "lpa2dst_ag_cp",
+        "lpa2dstag_lowkan",
+      ],
+    },
     // qn68: {
     //   1: ["qn69"],
     // },
