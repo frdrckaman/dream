@@ -9078,6 +9078,122 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
 
+                                            <div class="row">
+                                                <div class="col-sm-4" id="nanop_done">
+                                                    <label for="nanop_done" class="form-label">nanop_done</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="nanop_done" id="nanop_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['nanop_done'] == $value['id']) {
+                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                    } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('nanop_done')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-4" id="posnegcontrol">
+                                                    <label for="posnegcontrol" class="form-label">posnegcontrol</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('pass_fails', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="posnegcontrol" id="posnegcontrol<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['posnegcontrol'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('posnegcontrol')">Unset</button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4" id="sample_control">
+                                                    <label for="sample_control" class="form-label">sample_control</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('pass_fails', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="sample_control" id="sample_control<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['sample_control'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('sample_control')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-4" id="internalcontrol">
+                                                    <label for="internalcontrol" class="form-label">internalcontrol</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('pass_fails', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="internalcontrol" id="internalcontrol<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['internalcontrol'] == $value['id']) {
+                                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('internalcontrol')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-4" id="hsp65">
+                                                    <label for="hsp65" class="form-label">hsp65</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('pass_fails', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="hsp65" id="hsp65<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['hsp65'] == $value['id']) {
+                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                            } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('hsp65')">Unset</button>
+
+                                                    </div>
+                                                </div>
+                              
+                                                    <div class="col-4">
+                                                        <div class="mb-2">
+                                                            <label for="nanopseq_date" class="form-label">nanopseq_date</label>
+                                                            <input type="date" value="<?php if ($costing['nanopseq_date']) {
+                                                                                            print_r($costing['nanopseq_date']);
+                                                                                        } ?>" id="nanopseq_date" name="nanopseq_date" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <hr>
+
                                             <div class="card card-warning">
                                                 <div class="card-header">
                                                     <h3 class="card-title">ANY COMENT OR REMARKS</h3>
