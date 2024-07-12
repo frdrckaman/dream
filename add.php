@@ -4511,8 +4511,8 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="sample_received" id="sample_received<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['sample_received'] == $value['id']) {
-                                                                                                                                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                                                                                                                                            } ?>>
+                                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                                } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -4535,7 +4535,6 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                         <button onclick="unsetRadio('sample_amount')">Unset</button>
-
                                                     </div>
                                                 </div>
 
@@ -4582,10 +4581,10 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('test_reasons', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="checkbox" name="test_reasons[]" id="test_reasons<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['test_reasons']) as $values) {
-                                                                                                                                                                                                                                                                                if ($values == $value['id']) {
-                                                                                                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                            } ?>>
+                                                                                                                                                                                                                    if ($values == $value['id']) {
+                                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -4600,7 +4599,7 @@ if ($user->isLoggedIn()) {
 
                                             <hr>
                                             <div class="row" id="sample_received_hides1">
-                                                <div class="col-3">
+                                                <div class="col-4">
                                                     <div class="mb-3">
                                                         <label for="sample_date" class="form-label">51. Date sample(s) received in the laboratory</label>
                                                         <input type="date" value="<?php if ($costing['sample_date']) {
@@ -4609,7 +4608,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="sample_type">
+                                                <div class="col-sm-4" id="sample_type">
                                                     <label for="sample_type" class="form-label">52. Type of sample(s) received (multiple selection)</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4631,7 +4630,7 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-                                                <div class="col-3">
+                                                <div class="col-4">
                                                     <div class="mb-3">
                                                         <label for="sample_number" class="form-label">53. Number of samples received</label>
                                                         <input type="number" value="<?php if ($costing['sample_number']) {
@@ -4639,8 +4638,11 @@ if ($user->isLoggedIn()) {
                                                                                     } ?>" id="sample_number" name="sample_number" min="0" max="100000000" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div class="col-3">
+                                            <hr>
+                                            <div class="row" id="sample_received_hides2">
+                                                <div class="col-4">
                                                     <label for="appearance" class="form-label">54. Appearance</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4659,10 +4661,6 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                            </div>
-
-                                            <hr>
-                                            <div class="row" id="sample_received_hides2">
                                                 <div class="col-4">
                                                     <div class="mb-3">
                                                         <label for="sample_volume" class="form-label">55. Approximate volume sample (number, two digits)</label>
@@ -4691,8 +4689,11 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div class="col-4">
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-6">
                                                     <label for="afb_microscopy" class="form-label">57. AFB microscopy</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4705,24 +4706,27 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <label for="afb_microscopy_date" id="afb_microscopy_date1" class="form-label">If ZN what date?</label>
-                                                            <label for="afb_microscopy_date" id="afb_microscopy_date2" class="form-label">If FM what date?</label>
-                                                            <input type="date" value="<?php if ($costing['afb_microscopy_date']) {
-                                                                                            print_r($costing['afb_microscopy_date']);
-                                                                                        } ?>" id="afb_microscopy_date" name="afb_microscopy_date" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
                                                     <button onclick="unsetRadio('afb_microscopy')">Unset</button>
-
                                                 </div>
 
+                                                <div class="col-6" id="afb_microscopy_date0">
+                                                    <div class="mb-3">
+                                                        <label for="afb_microscopy_date" id="afb_microscopy_date1" class="form-label">If ZN what date?</label>
+                                                        <label for="afb_microscopy_date" id="afb_microscopy_date2" class="form-label">If FM what date?</label>
+                                                        <input type="date" value="<?php if ($costing['afb_microscopy_date']) {
+                                                                                        print_r($costing['afb_microscopy_date']);
+                                                                                    } ?>" id="afb_microscopy_date" name="afb_microscopy_date" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <hr>
                                             <label for="zn" id="zn" class="form-label text-center">58. If ZN </label>
                                             <hr>
 
-                                            <div class="row">
+                                            <div class="row" id="zn_results">
                                                 <div class="col-sm-6" id="zn_results_a">
                                                     <label for="zn_results_a" class="form-label">Results A </label>
                                                     <!-- radio -->
@@ -4767,7 +4771,7 @@ if ($user->isLoggedIn()) {
                                             <label for="fm" id="fm" class="form-label text-center">59. If FM </label>
                                             <hr>
 
-                                            <div class="row">
+                                            <div class="row" id="fm_results">
                                                 <div class="col-sm-6" id="fm_results_a">
                                                     <label for="fm_results_a" class="form-label">Results A </label>
                                                     <!-- radio -->
@@ -4818,8 +4822,8 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('wrd_test', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="wrd_test" id="wrd_test<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['wrd_test'] == $value['id']) {
-                                                                                                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                                                                                                        } ?>>
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -4842,8 +4846,8 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="sequence_done" id="sequence_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['sequence_done'] == $value['id']) {
-                                                                                                                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                                                                                                                        } ?>>
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -5652,8 +5656,8 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="culture_done" id="culture_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['culture_done'] == $value['id']) {
-                                                                                                                                                                                                                                                                        echo 'checked';
-                                                                                                                                                                                                                                                                    } ?> required>
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -7855,8 +7859,8 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="tx_previous" id="tx_previous<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['tx_previous'] == $value['id']) {
-                                                                                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                                                                                } ?> required>
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -8061,8 +8065,8 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('yes_no_unknown', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="immunosuppressive" id="immunosuppressive<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['immunosuppressive'] == $value['id']) {
-                                                                                                                                                                                                                                                                                    echo 'checked' . ' ' . 'required';
-                                                                                                                                                                                                                                                                                } ?>>
+                                                                                                                                                                                                                        echo 'checked' . ' ' . 'required';
+                                                                                                                                                                                                                    } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -8288,8 +8292,8 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="chest_x_ray" id="chest_x_ray<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['chest_x_ray'] == $value['id']) {
-                                                                                                                                                                                                                                                                    echo 'checked' . ' ' . 'required';
-                                                                                                                                                                                                                                                                } ?>>
+                                                                                                                                                                                                            echo 'checked' . ' ' . 'required';
+                                                                                                                                                                                                        } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>

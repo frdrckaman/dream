@@ -4,38 +4,6 @@
 //       1: ["sample_amount"],
 //       2: ["sample_reason"],
 //     },
-//     // testrequest_reason: {
-//     //   3: ["follow_up_months1", "follow_up_months"],
-//     // },
-//     // fm_done: {
-//     //   1: ["fm_date", "fm_results", "dec_date"],
-//     // },
-//     // lpa2_done: {
-//     //   1: [
-//     //     "lpa2_date1",
-//     //     "lpa2_date",
-//     //     "lpa2_mtbdetected",
-//     //     "lpa2dst_lfx",
-//     //     "lpa2dst_ag_cp",
-//     //     "lpa2dstag_lowkan",
-//     //   ],
-//     // },
-//     // afb_microscopy: {
-//     //   1: [
-//     //     "n_afb_microscopy_date1",
-//     // "n_zn_microscopy_date1",
-//     //     "n_afb_microscopy_date",
-//     //   ],
-//     //   2: [
-//     //     "n_afb_microscopy_date1",
-//     //     "n_fm_microscopy_date1",
-//     //     "n_afb_microscopy_date",
-//     //   ],
-//     // },
-//     // question3: {
-//     //     '1': [],
-//     //     '0': []
-//     // }
 //   };
 
 //   function handleVisibilityMany2() {
@@ -65,9 +33,11 @@
 
 //       // Show elements based on the selected value
 //       if (selectedValue2 && elementsToControlMany2[question2][selectedValue2]) {
-//         elementsToControlMany2[question2][selectedValue2].forEach((elementId2) => {
-//           document.getElementById(elementId2).classList.remove("hidden");
-//         });
+//         elementsToControlMany2[question2][selectedValue2].forEach(
+//           (elementId2) => {
+//             document.getElementById(elementId2).classList.remove("hidden");
+//           }
+//         );
 //       }
 //     });
 //   }

@@ -1,104 +1,112 @@
-function checkRadioButtonsMany() {
-  const elementsToControlMany = {
-    tx_previous: {
-      1: ["tx_number1", "dr_ds1", "tx_previous_hide1", "tx_previous_hide2"],
-    },
-    tb_category: {
-      1: ["relapse_years1"],
-      3: ["ltf_months1"],
-    },
-    regimen_changed: {
-      1: ["regimen_name1"],
-    },
-    immunosuppressive: {
-      1: ["immunosuppressive_specify1"],
-    },
-    other_diseases: {
-      1: ["diseases_medical"],
-    },
-    // diseases_medical: {
-    //   1: ["diseases_specify1", "diseases_specify"],
-    // },
-    other_samples: {
-      1: ["sputum_samples"],
-    },
-    chest_x_ray: {
-      1: ["chest_x_ray_date1"],
-    },
-    // sample_received: {
-    //   1: ["sample_amount"],
-    //   2: ["sample_reason"],
-    // },
-    // testrequest_reason: {
-    //   3: ["follow_up_months1", "follow_up_months"],
-    // },
-    // fm_done: {
-    //   1: ["fm_date", "fm_results", "dec_date"],
-    // },
-    // lpa2_done: {
-    //   1: [
-    //     "lpa2_date1",
-    //     "lpa2_date",
-    //     "lpa2_mtbdetected",
-    //     "lpa2dst_lfx",
-    //     "lpa2dst_ag_cp",
-    //     "lpa2dstag_lowkan",
-    //   ],
-    // },
-    // afb_microscopy: {
-    //   1: [
-    //     "n_afb_microscopy_date1",
-    //     "n_zn_microscopy_date1",
-    //     "n_afb_microscopy_date",
-    //   ],
-    //   2: [
-    //     "n_afb_microscopy_date1",
-    //     "n_fm_microscopy_date1",
-    //     "n_afb_microscopy_date",
-    //   ],
-    // },
-    // question3: {
-    //     '1': [],
-    //     '0': []
-    // }
-  };
+// function checkRadioButtonsMany() {
+//   const elementsToControlMany = {
+//     tx_previous: {
+//       1: ["tx_number1", "dr_ds1", "tx_previous_hide1", "tx_previous_hide2"],
+//     },
+//     tb_category: {
+//       1: ["relapse_years1"],
+//       3: ["ltf_months1"],
+//     },
+//     regimen_changed: {
+//       1: ["regimen_name1"],
+//     },
+//     immunosuppressive: {
+//       1: ["immunosuppressive_specify1"],
+//     },
+//     other_diseases: {
+//       1: ["diseases_medical"],
+//     },
+//     // diseases_medical: {
+//     //   1: ["diseases_specify1", "diseases_specify"],
+//     // },
+//     other_samples: {
+//       1: ["sputum_samples"],
+//     },
+//     chest_x_ray: {
+//       1: ["chest_x_ray_date1"],
+//     },
+//     // sample_received: {
+//     //   1: ["sample_amount"],
+//     //   2: ["sample_reason"],
+//     // },
+//     // testrequest_reason: {
+//     //   3: ["follow_up_months1", "follow_up_months"],
+//     // },
+//     // fm_done: {
+//     //   1: ["fm_date", "fm_results", "dec_date"],
+//     // },
+//     // lpa2_done: {
+//     //   1: [
+//     //     "lpa2_date1",
+//     //     "lpa2_date",
+//     //     "lpa2_mtbdetected",
+//     //     "lpa2dst_lfx",
+//     //     "lpa2dst_ag_cp",
+//     //     "lpa2dstag_lowkan",
+//     //   ],
+//     // },
+//     // afb_microscopy: {
+//     //   1: [
+//     //     "n_afb_microscopy_date1",
+//     //     "n_zn_microscopy_date1",
+//     //     "n_afb_microscopy_date",
+//     //   ],
+//     //   2: [
+//     //     "n_afb_microscopy_date1",
+//     //     "n_fm_microscopy_date1",
+//     //     "n_afb_microscopy_date",
+//     //   ],
+//     // },
+//     // question3: {
+//     //     '1': [],
+//     //     '0': []
+//     // }
+//   };
 
-  function handleVisibilityMany() {
-    // Hide all controlled elements
-    Object.values(elementsToControlMany)
-      .flatMap((condition) => Object.values(condition).flat())
-      .forEach((elementId) => {
-        document.getElementById(elementId).classList.add("hidden");
-      });
+//   const elementsToControlMany2 = {
+//     sample_received: {
+//       1: ["sample_amount"],
+//       2: ["sample_reason"],
+//     },
+//   };
 
-    // Iterate through all questions
-    Object.keys(elementsToControlMany).forEach((question) => {
-      const radios = document.getElementsByName(question);
-      let selectedValue = null;
+//   function handleVisibilityMany() {
+//     // Hide all controlled elements
+//     Object.values(elementsToControlMany)
+//       .flatMap((condition) => Object.values(condition).flat())
+//       .forEach((elementId) => {
+//         document.getElementById(elementId).classList.add("hidden");
+//       });
 
-      // Find the checked radio button
-      radios.forEach((radio) => {
-        if (radio.checked) {
-          selectedValue = radio.value;
-        }
+//     // Iterate through all questions
+//     Object.keys(elementsToControlMany).forEach((question) => {
+//       const radios = document.getElementsByName(question);
+//       let selectedValue = null;
 
-        // Add event listener for changes
-        radio.addEventListener("change", () => {
-          handleVisibilityMany();
-        });
-      });
+//       // Find the checked radio button
+//       radios.forEach((radio) => {
+//         if (radio.checked) {
+//           selectedValue = radio.value;
+//         }
 
-      // Show elements based on the selected value
-      if (selectedValue && elementsToControlMany[question][selectedValue]) {
-        elementsToControlMany[question][selectedValue].forEach((elementId) => {
-          document.getElementById(elementId).classList.remove("hidden");
-        });
-      }
-    });
-  }
+//         // Add event listener for changes
+//         radio.addEventListener("change", () => {
+//           handleVisibilityMany();
+//         });
+//       });
 
-  // Initial visibility check on page load
-  window.onload = handleVisibilityMany;
-}
+//       // Show elements based on the selected value
+//       if (selectedValue && elementsToControlMany[question][selectedValue]) {
+//         elementsToControlMany[question][selectedValue].forEach((elementId) => {
+//           document.getElementById(elementId).classList.remove("hidden");
+//         });
+//       }
+//     });
+//   }
 
-checkRadioButtonsMany();
+
+//   // Initial visibility check on page load
+//   window.onload = handleVisibilityMany;
+// }
+
+// checkRadioButtonsMany();
