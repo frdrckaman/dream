@@ -8481,7 +8481,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                     <button onclick="unsetRadio('testrequest_reason')">Unset</button>
                                                 </div>
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-3" id="follow_up_months1">
                                                     <div class="mb-3">
                                                         <label for="follow_up_months" class="form-label">Follow up at months ?</label>
                                                         <input type="number" value="<?php if ($costing['follow_up_months']) {
@@ -9753,9 +9753,13 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/radios3.js"></script>
     <script src="myjs/add/radios4.js"></script>
     <script src="myjs/add/radios96.js"></script>
-
-
     <script src="myjs/add/checkbox1.js"></script>
+    <script src="myjs/add/many_many.js"></script>
+    <script src="myjs/add/many_one.js"></script>
+    <script src="myjs/add/one_many.js"></script>
+
+
+
 
 
 
