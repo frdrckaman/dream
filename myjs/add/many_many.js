@@ -1,7 +1,7 @@
 function checkRadioButtonsMany() {
   const elementsToControlMany = {
     tx_previous: {
-      1: ["tx_number1", "dr_ds1", "tx_previous_hide1"],
+      1: ["tx_number1", "dr_ds1", "tx_previous_hide1", "tx_previous_hide2"],
     },
     // testrequest_reason: {
     //   3: ["follow_up_months1", "follow_up_months"],
