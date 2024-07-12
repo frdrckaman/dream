@@ -1,5 +1,8 @@
 function checkRadioButtonsMany() {
   const elementsToControlMany = {
+    tx_previous: {
+      1: ["tx_number1"],
+    },
     testrequest_reason: {
       3: ["follow_up_months1", "follow_up_months"],
     },
@@ -30,9 +33,6 @@ function checkRadioButtonsMany() {
         "n_afb_microscopy_date",
       ],
     },
-    // qn68: {
-    //   1: ["qn69"],
-    // },
     // question3: {
     //     '1': [],
     //     '0': []
