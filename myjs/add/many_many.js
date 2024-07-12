@@ -1,38 +1,36 @@
 function checkRadioButtonsMany() {
   const elementsToControlMany = {
     tx_previous: {
-      1: ["tx_number1"],
+      1: ["tx_number1", "dr_ds1", "tx_previous_hide1"],
     },
-    testrequest_reason: {
-      3: ["follow_up_months1", "follow_up_months"],
-    },
-
-    fm_done: {
-      1: ["fm_date", "fm_results", "dec_date"],
-    },
-    lpa2_done: {
-      1: [
-        "lpa2_date1",
-        "lpa2_date",
-        "lpa2_mtbdetected",
-        "lpa2dst_lfx",
-        "lpa2dst_ag_cp",
-        "lpa2dstag_lowkan",
-      ],
-    },
-
-    afb_microscopy: {
-      1: [
-        "n_afb_microscopy_date1",
-        "n_zn_microscopy_date1",
-        "n_afb_microscopy_date",
-      ],
-      2: [
-        "n_afb_microscopy_date1",
-        "n_fm_microscopy_date1",
-        "n_afb_microscopy_date",
-      ],
-    },
+    // testrequest_reason: {
+    //   3: ["follow_up_months1", "follow_up_months"],
+    // },
+    // fm_done: {
+    //   1: ["fm_date", "fm_results", "dec_date"],
+    // },
+    // lpa2_done: {
+    //   1: [
+    //     "lpa2_date1",
+    //     "lpa2_date",
+    //     "lpa2_mtbdetected",
+    //     "lpa2dst_lfx",
+    //     "lpa2dst_ag_cp",
+    //     "lpa2dstag_lowkan",
+    //   ],
+    // },
+    // afb_microscopy: {
+    //   1: [
+    //     "n_afb_microscopy_date1",
+    //     "n_zn_microscopy_date1",
+    //     "n_afb_microscopy_date",
+    //   ],
+    //   2: [
+    //     "n_afb_microscopy_date1",
+    //     "n_fm_microscopy_date1",
+    //     "n_afb_microscopy_date",
+    //   ],
+    // },
     // question3: {
     //     '1': [],
     //     '0': []

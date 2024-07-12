@@ -7956,7 +7956,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            
                                             <hr>
 
                                             <div class="row" id="tx_previous_hide2">
