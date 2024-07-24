@@ -1120,7 +1120,6 @@ if ($user->isLoggedIn()) {
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                                     ?>
-                                                        <th>Interview Type</th>
                                                         <th>Site</th>
                                                     <?php } ?>
                                                     <th>Status</th>
@@ -1182,16 +1181,6 @@ if ($user->isLoggedIn()) {
                                                         <?php
                                                         if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                                         ?>
-                                                            <?php if ($value['respondent'] == 1) { ?>
-                                                                <td class="table-user">
-                                                                    Fcility
-                                                                </td>
-                                                            <?php } elseif ($value['respondent'] == 2) { ?>
-                                                                <td class="table-user">
-                                                                    Patient
-                                                                </td>
-                                                            <?php } ?>
-
                                                             <td class="table-user">
                                                                 <?= $sites['name']; ?>
                                                             </td>
@@ -1238,7 +1227,6 @@ if ($user->isLoggedIn()) {
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                                     ?>
-                                                        <th>Interview Type</th>
                                                         <th>Site</th>
                                                     <?php } ?>
                                                     <th>Status</th>
@@ -1267,12 +1255,12 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Participant Schedules</h1>
+                                <h1>Participant Forms</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
-                                    <li class="breadcrumb-item active">Participant Schedules</li>
+                                    <li class="breadcrumb-item active">Participant Forms</li>
                                 </ol>
                             </div>
                         </div>
@@ -1318,7 +1306,7 @@ if ($user->isLoggedIn()) {
                                                 <h4><?= $name ?></h4>
                                                 <h4><?= $age ?></h4>
                                                 <h4><?= $gender ?></h4>
-                                                <h4><?= $cat ?></h4>
+                                                <!-- <h4><?= $cat ?></h4> -->
                                             </div>
                                             <div class="col-sm-6">
                                                 <ol class="breadcrumb float-sm-right">
@@ -3263,11 +3251,9 @@ if ($user->isLoggedIn()) {
                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                         if ($_GET['site_id'] != null) {
                                             $clients = $override->get('validations', 'status',  1);
-
                                         } else {
 
                                             $clients = $override->get('validations', 'status',  1);
-
                                         }
                                     } else {
                                         $clients = $override->get('validations', 'status',  1);
