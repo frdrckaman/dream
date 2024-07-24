@@ -1183,8 +1183,8 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 // print_r($_POST);
-                $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid'])[0];
-                $individual = $override->getNews('validations', 'status', 1, 'patient_id', $_GET['cid']);
+                // $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid'])[0];
+                $individual = $override->getNews('validations', 'status', 1, 'id', $_GET['cid'])[0];
                 $first_line = 0;
                 $second_line = 0;
                 $third_line = 0;
@@ -1227,6 +1227,8 @@ if ($user->isLoggedIn()) {
 
                 if ($individual) {
                     $user->updateRecord('validations', array(
+                        'pid' => $individual['study_id'],
+                        'study_id' => $individual['study_id'],
                         'date_collect' => Input::get('date_collect'),
                         'date_receictrl' => Input::get('date_receictrl'),
                         'lab_no' => Input::get('lab_no'),
@@ -1304,16 +1306,19 @@ if ($user->isLoggedIn()) {
                         'date_completed' => Input::get('date_completed'),
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
-                    ), $individual[0]['id']);
+                    ), $individual['id']);
 
                     $successMessage = 'Validations Data  Successful Updated';
                 } else {
+
+                    $std_id = $override->getNews('study_id', 'site_id', Input::get('h_facil'), 'status', 0)[0];
+
                     $user->createRecord('validations', array(
-                        'vid' => $_GET['vid'],
-                        'sequence' => $_GET['sequence'],
-                        'visit_code' => $_GET['visit_code'],
-                        'pid' => $clients['study_id'],
-                        'study_id' => $clients['study_id'],
+                        // 'vid' => $_GET['vid'],
+                        // 'sequence' => $_GET['sequence'],
+                        // 'visit_code' => $_GET['visit_code'],
+                        'pid' => $std_id['study_id'],
+                        'study_id' => $std_id['study_id'],
                         'date_collect' => Input::get('date_collect'),
                         'date_receictrl' => Input::get('date_receictrl'),
                         'lab_no' => Input::get('lab_no'),
@@ -1390,22 +1395,22 @@ if ($user->isLoggedIn()) {
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
                         'status' => 1,
-                        'patient_id' => $clients['id'],
+                        // 'patient_id' => $individual['id'],
                         'create_on' => date('Y-m-d H:i:s'),
                         'staff_id' => $user->data()->id,
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
-                        'site_id' => $clients['site_id'],
+                        'site_id' => Input::get('h_facil'),
                     ));
 
                     $successMessage = 'Validations Data  Successful Added';
                 }
 
-                $user->updateRecord('clients', array(
-                    'enrolled' => 1,
-                ), $clients['id']);
-
-                Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
+                // $user->updateRecord('clients', array(
+                //     'enrolled' => 1,
+                // ), $clients['id']);
+                Redirect::to('info.php?id=16' . '&status=' . $_GET['status']);
+                // Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
             } else {
                 $pageError = $validate->errors();
             }
@@ -8376,7 +8381,9 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 17) { ?>
             <?php
-            $costing = $override->get3('validations', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $_GET['sequence'])[0];
+            $costing = $override->getNews('validations', 'status', 1, 'id', $_GET['cid'])[0];
+            $facility = $override->get('sites', 'id', $costing['site_id'])[0];
+            
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -8477,14 +8484,25 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3">
-                                                    <div class="mb-3">
-                                                        <label for="h_facil" class="form-label">h_facil</label>
-                                                        <input type="text" value="<?php if ($costing['h_facil']) {
-                                                                                        print_r($costing['h_facil']);
-                                                                                    } ?>" id="h_facil" name="h_facil" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
+                                                <div class="col-sm-3">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>h_facil</label>
+                                                            <select id="h_facil" name="h_facil" class="form-control" required>
+                                                                <option value="<?= $facility['id'] ?>"><?php if ($costing['h_facil']) {
+                                                                                                            print_r($facility['name']);
+                                                                                                        } else {
+                                                                                                            echo 'Select region';
+                                                                                                        } ?>
+                                                                </option>
+                                                                <?php foreach ($override->get('sites', 'status', 1) as $region) { ?>
+                                                                    <option value="<?= $region['id'] ?>"><?= $region['name'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
+
 
                                                 <div class="col-3">
                                                     <div class="mb-3">
