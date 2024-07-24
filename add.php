@@ -6423,7 +6423,6 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                         <button onclick="unsetRadio('nanopore_sequencing_done')">Unset</button>
-
                                                     </div>
                                                 </div>
 
@@ -9804,6 +9803,8 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/diagnosis_test/sample_methods.js"></script>
     <script src="myjs/add/diagnosis_test/qn87.js"></script>
     <script src="myjs/add/diagnosis_test/qn88.js"></script>
+    <script src="myjs/add/diagnosis_test/qn89.js"></script>
+    <script src="myjs/add/diagnosis_test/qn90.js"></script>
     <script src="myjs/add/diagnosis_test/qn91.js"></script>
 
 

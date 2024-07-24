@@ -1,21 +1,23 @@
-const genotyping_asay1 = document.getElementById("genotyping_asay1");
-const genotyping_asay2 = document.getElementById("genotyping_asay2");
-const genotyping_asay3 = document.getElementById("genotyping_asay3");
-const genotyping_asay4 = document.getElementById("genotyping_asay4");
+const nanopore_sequencing1 = document.getElementById("nanopore_sequencing1");
+const nanopore_sequencing2 = document.getElementById("nanopore_sequencing2");
+const nanopore_sequencing3 = document.getElementById("nanopore_sequencing3");
+const nanopore_sequencing4 = document.getElementById("nanopore_sequencing4");
 
-const genotyping_done00 = document.getElementById("genotyping_done00");
+const nanopore_sequencing_done00 = document.getElementById(
+  "nanopore_sequencing_done00"
+);
 
-genotyping_asay1.addEventListener("change", function () {
+nanopore_sequencing2.addEventListener("change", function () {
   if (this.checked) {
-    genotyping_done00.style.display = "block";
+    nanopore_sequencing_done00.style.display = "block";
   } else {
-    genotyping_done00.style.display = "none";
+    nanopore_sequencing_done00.style.display = "none";
   }
 });
 
 // Initial check
-if (genotyping_asay1.checked) {
-  genotyping_done00.style.display = "block";
+if (nanopore_sequencing2.checked) {
+  nanopore_sequencing_done00.style.display = "block";
 } else {
-  genotyping_done00.style.display = "none";
+  nanopore_sequencing_done00.style.display = "none";
 }
