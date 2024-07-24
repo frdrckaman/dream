@@ -5708,15 +5708,6 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <label for="lj_date" id="lj_date1" class="form-label">LJ Date?</label>
-                                                        <input type="date" value="<?php if ($costing['lj_date']) {
-                                                                                        print_r($costing['lj_date']);
-                                                                                    } ?>" id="lj_date" name="lj_date" class="form-control" placeholder="Enter here" />
-
-                                                        <label for="mgit_date" id="mgit_date1" class="form-label">MGIT Date?</label>
-                                                        <input type="date" value="<?php if ($costing['mgit_date']) {
-                                                                                        print_r($costing['mgit_date']);
-                                                                                    } ?>" id="mgit_date" name="mgit_date" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -5724,6 +5715,15 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
+                                                <div class="col-3" id="lj_date1">
+                                                    <div class="mb-2">
+                                                        <label for="lj_date" class="form-label">LJ Date?</label>
+                                                        <input type="date" value="<?php if ($costing['lj_date']) {
+                                                                                        print_r($costing['lj_date']);
+                                                                                    } ?>" id="lj_date" name="lj_date" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-sm-3" id="lj_results">
                                                     <label for="lj_results" class="form-label">82.Results LJ (Only If was selected above) </label>
                                                     <!-- radio -->
@@ -5743,6 +5743,16 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
+                                                <div class="col-3" id="mgit_date1">
+                                                    <div class="mb-2">
+                                                        <label for="mgit_date" class="form-label">MGIT Date?</label>
+                                                        <input type="date" value="<?php if ($costing['mgit_date']) {
+                                                                                        print_r($costing['mgit_date']);
+                                                                                    } ?>" id="mgit_date" name="mgit_date" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+
+
                                                 <div class="col-sm-3" id="mgit_results">
                                                     <label for="mgit_results" class="form-label">83.Results MGIT (Only If was selected above) </label>
                                                     <!-- radio -->
@@ -5761,8 +5771,13 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div class="col-sm-3" id="phenotypic_done">
+                                            <hr>
+
+                                            <div class="row">
+
+                                                <div class="col-sm-4" id="phenotypic_done">
                                                     <label for="phenotypic_done" class="form-label">84. Phenotypic DST was done?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5782,7 +5797,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="phenotypic_method">
+                                                <div class="col-sm-4" id="phenotypic_method">
                                                     <label for="phenotypic_method" class="form-label">85. If yes above, then method used? </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5796,17 +5811,27 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <label for="apm_date" id="apm_date_1" class="form-label">APM date ?</label>
+                                                    </div>
+                                                    <button onclick="unsetRadio('phenotypic_method')">Unset</button>
+
+                                                </div>
+
+                                                <div class="col-4" id="apm_date_1">
+                                                    <div class="mb-2">
+                                                        <label for="apm_date" class="form-label">APM date ?</label>
                                                         <input type="date" value="<?php if ($costing['apm_date']) {
                                                                                         print_r($costing['apm_date']);
                                                                                     } ?>" id="apm_date" name="apm_date" class="form-control" placeholder="Enter here" />
-                                                        <label for="mgit_date2" id="mgit_date2_1" class="form-label">MGIT date ?</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4" id="mgit_date2_1">
+                                                    <div class="mb-2">
+                                                        <label for="mgit_date2" class="form-label">MGIT date ?</label>
                                                         <input type="date" value="<?php if ($costing['mgit_date2']) {
                                                                                         print_r($costing['mgit_date2']);
                                                                                     } ?>" id="mgit_date2" name="mgit_date2" class="form-control" placeholder="Enter here" />
                                                     </div>
-                                                    <button onclick="unsetRadio('phenotypic_method')">Unset</button>
-
                                                 </div>
 
                                             </div>
@@ -6219,6 +6244,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
 
+                                            <hr>
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
@@ -9801,11 +9827,22 @@ if ($user->isLoggedIn()) {
 
     <!-- Diagnosis Test format numbers Js -->
     <script src="myjs/add/diagnosis_test/sample_methods.js"></script>
+    <script src="myjs/add/diagnosis_test/qn79.js"></script>
+    <script src="myjs/add/diagnosis_test/qn80.js"></script>
+    <script src="myjs/add/diagnosis_test/qn81.js"></script>
+    <script src="myjs/add/diagnosis_test/qn82.js"></script>
+    <script src="myjs/add/diagnosis_test/qn83.js"></script>
+    <script src="myjs/add/diagnosis_test/qn84.js"></script>
+    <script src="myjs/add/diagnosis_test/qn85.js"></script>
+    <script src="myjs/add/diagnosis_test/qn86.js"></script>
     <script src="myjs/add/diagnosis_test/qn87.js"></script>
     <script src="myjs/add/diagnosis_test/qn88.js"></script>
     <script src="myjs/add/diagnosis_test/qn89.js"></script>
     <script src="myjs/add/diagnosis_test/qn90.js"></script>
     <script src="myjs/add/diagnosis_test/qn91.js"></script>
+    <script src="myjs/add/diagnosis_test/qn92.js"></script>
+    <script src="myjs/add/diagnosis_test/qn93.js"></script>
+
 
 
 
