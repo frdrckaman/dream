@@ -1432,13 +1432,13 @@ if ($user->isLoggedIn()) {
 
                                                                         <?php } ?>
 
-                                                                        <?php if ($override->get3('validations', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
+                                                                        <!-- <?php if ($override->get3('validations', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
                                                                             <a href="add.php?id=17&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Validation Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } else { ?>
                                                                             <a href="add.php?id=17&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Validation Data </a>&nbsp;&nbsp; <br><br>
 
-                                                                        <?php } ?>
+                                                                        <?php } ?> -->
                                                                     <?php } ?>
                                                                 <?php } ?>
                                                             <?php } ?>
