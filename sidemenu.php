@@ -43,12 +43,14 @@ if ($user->isLoggedIn()) {
             $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $_GET['site_id']);
             $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $_GET['site_id']);
             $end = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $_GET['site_id']);
+            $validations = $override->getCount('validations', 'status', 1);            
         } else {
             $registered = $override->getCount('clients', 'status', 1);
             $screened = $override->countData('clients', 'status', 1, 'screened', 1);
             $eligible = $override->countData('clients', 'status', 1, 'eligible', 1);
             $enrolled = $override->countData('clients', 'status', 1, 'enrolled', 1);
             $end = $override->countData('clients', 'status', 1, 'end_study', 1);
+            $validations = $override->getCount('validations', 'status', 1);            
         }
     } else {
         $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
@@ -56,6 +58,7 @@ if ($user->isLoggedIn()) {
         $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $user->data()->site_id);
         $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $user->data()->site_id);
         $end = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $user->data()->site_id);
+        $validations = $override->getCount('validations', 'status', 1);            
     }
 } else {
     Redirect::to('index.php');
@@ -263,6 +266,33 @@ if ($user->isLoggedIn()) {
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $registered; ?></span>
                                 <p>Total Patients</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <span class="badge badge-info right"><?= $validations; ?></span>
+                        <p>
+                            Validation Tool <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="add.php?id=17&status=1" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Add
+                                    <span class="right badge badge-danger">New Validation</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="info.php?id=16&status=1" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <span class="badge badge-info right"><?= $validations; ?></span>
+                                <p>Total Validations</p>
                             </a>
                         </li>
                     </ul>
