@@ -2834,9 +2834,10 @@ if ($user->isLoggedIn()) {
                                                         <!-- select -->
                                                         <div class="form-group">
                                                             <label>Patient Phone Number</label>
-                                                            <input class="form-control" type="tel" pattern=[0]{1}[0-9]{9} minlength="10" maxlength="10" name="patient_phone" id="patient_phone" value="<?php if ($clients['patient_phone']) {
-                                                                                                                                                                                                            print_r($clients['patient_phone']);
-                                                                                                                                                                                                        }  ?>" required /> <span>Example: 0700 000 111</span>
+                                                            <input class="form-control" type="tel" name="patient_phone" id="patient_phone" value="<?php if ($clients['patient_phone']) {
+                                                                                                                                                        print_r($clients['patient_phone']);
+                                                                                                                                                    }  ?>" /> <span>Example: 0700 000 111</span>
+                                                            <!-- <input class="form-control" type="tel" pattern=[0]{1}[0-9]{9} minlength="10" maxlength="10" name="patient_phone" id="patient_phone" value="" required /> <span>Example: 0700 000 111</span> -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8383,7 +8384,7 @@ if ($user->isLoggedIn()) {
             <?php
             $costing = $override->getNews('validations', 'status', 1, 'id', $_GET['cid'])[0];
             $facility = $override->get('sites', 'id', $costing['site_id'])[0];
-            
+
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
