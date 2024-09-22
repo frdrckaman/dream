@@ -374,7 +374,9 @@ if ($user->isLoggedIn()) {
                         $successMessage = 'Client Updated Successful';
                     } else {
 
-                        $std_id = $override->getNews('study_id', 'site_id', Input::get('site'), 'status', 0)[0];
+                        // $std_id = $override->getNews('study_id', 'site_id', Input::get('site'), 'status', 0)[0];
+                        $std_id = $override->get('study_id', 'status', 0)[0];
+
 
                         $user->createRecord('clients', array(
                             'sequence' => -1,
@@ -1311,7 +1313,9 @@ if ($user->isLoggedIn()) {
                     $successMessage = 'Validations Data  Successful Updated';
                 } else {
 
-                    $std_id = $override->getNews('study_id', 'site_id', Input::get('h_facil'), 'status', 0)[0];
+                    // $std_id = $override->getNews('study_id', 'site_id', Input::get('h_facil'), 'status', 0)[0];
+                    $std_id = $override->get('study_id', 'status', 0)[0];
+
 
                     $user->createRecord('validations', array(
                         // 'vid' => $_GET['vid'],
