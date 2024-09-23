@@ -374,7 +374,9 @@ if ($user->isLoggedIn()) {
                         $successMessage = 'Client Updated Successful';
                     } else {
 
-                        $std_id = $override->getNews('study_id', 'site_id', Input::get('site'), 'status', 0)[0];
+                        // $std_id = $override->getNews('study_id', 'site_id', Input::get('site'), 'status', 0)[0];
+                        $std_id = $override->get('study_id', 'status', 0)[0];
+
 
                         $user->createRecord('clients', array(
                             'sequence' => -1,
@@ -1267,6 +1269,8 @@ if ($user->isLoggedIn()) {
                         'mgitdst_2dlm' => Input::get('mgitdst_2dlm'),
                         'mgitdst_2levo' => Input::get('mgitdst_2levo'),
                         'mgitdst_2lzd' => Input::get('mgitdst_2lzd'),
+                        'lpa1_done' => Input::get('lpa1_done'),
+                        'lpa1_date1' => Input::get('lpa1_date1'),
                         'lpa1_mtbdetected' => Input::get('lpa1_mtbdetected'),
                         'lpaa1dst_rif' => Input::get('lpaa1dst_rif'),
                         'lpa1dst_inh' => Input::get('lpa1dst_inh'),
@@ -1277,14 +1281,15 @@ if ($user->isLoggedIn()) {
                         'lpa2dst_ag_cp' => Input::get('lpa2dst_ag_cp'),
                         'lpa2dstag_lowkan' => Input::get('lpa2dstag_lowkan'),
                         'nanop_done' => Input::get('nanop_done'),
-                        'posnegcontrol' => Input::get('posnegcontrol'),
+                        'pos_control' => Input::get('pos_control'),
+                        'neg_control' => Input::get('neg_control'),
                         'sample_control' => Input::get('sample_control'),
                         'internalcontrol' => Input::get('internalcontrol'),
                         'hsp65' => Input::get('hsp65'),
                         'nanopseq_date' => Input::get('nanopseq_date'),
                         'myco_results' => Input::get('myco_results'),
                         'myco_type' => Input::get('myco_type'),
-                        'myco_spp' => Input::get('myco_spp'),
+                        'ntm_spp' => Input::get('ntm_spp'),
                         'myco_lineage' => Input::get('myco_lineage'),
                         'nano_rif' => Input::get('nano_rif'),
                         'nano_inh' => Input::get('nano_inh'),
@@ -1311,7 +1316,9 @@ if ($user->isLoggedIn()) {
                     $successMessage = 'Validations Data  Successful Updated';
                 } else {
 
-                    $std_id = $override->getNews('study_id', 'site_id', Input::get('h_facil'), 'status', 0)[0];
+                    // $std_id = $override->getNews('study_id', 'site_id', Input::get('h_facil'), 'status', 0)[0];
+                    $std_id = $override->get('study_id', 'status', 0)[0];
+
 
                     $user->createRecord('validations', array(
                         // 'vid' => $_GET['vid'],
@@ -1357,6 +1364,8 @@ if ($user->isLoggedIn()) {
                         'mgitdst_2dlm' => Input::get('mgitdst_2dlm'),
                         'mgitdst_2levo' => Input::get('mgitdst_2levo'),
                         'mgitdst_2lzd' => Input::get('mgitdst_2lzd'),
+                        'lpa1_done' => Input::get('lpa1_done'),
+                        'lpa1_date1' => Input::get('lpa1_date1'),
                         'lpa1_mtbdetected' => Input::get('lpa1_mtbdetected'),
                         'lpaa1dst_rif' => Input::get('lpaa1dst_rif'),
                         'lpa1dst_inh' => Input::get('lpa1dst_inh'),
@@ -1367,14 +1376,15 @@ if ($user->isLoggedIn()) {
                         'lpa2dst_ag_cp' => Input::get('lpa2dst_ag_cp'),
                         'lpa2dstag_lowkan' => Input::get('lpa2dstag_lowkan'),
                         'nanop_done' => Input::get('nanop_done'),
-                        'posnegcontrol' => Input::get('posnegcontrol'),
+                        'pos_control' => Input::get('pos_control'),
+                        'neg_control' => Input::get('neg_control'),
                         'sample_control' => Input::get('sample_control'),
                         'internalcontrol' => Input::get('internalcontrol'),
                         'hsp65' => Input::get('hsp65'),
                         'nanopseq_date' => Input::get('nanopseq_date'),
                         'myco_results' => Input::get('myco_results'),
                         'myco_type' => Input::get('myco_type'),
-                        'myco_spp' => Input::get('myco_spp'),
+                        'ntm_spp' => Input::get('ntm_spp'),
                         'myco_lineage' => Input::get('myco_lineage'),
                         'nano_rif' => Input::get('nano_rif'),
                         'nano_inh' => Input::get('nano_inh'),
@@ -2714,9 +2724,9 @@ if ($user->isLoggedIn()) {
                                                         <!-- select -->
                                                         <div class="form-group">
                                                             <label>Clinician Phone Number</label>
-                                                            <input class="form-control" type="tel" pattern=[0]{1}[0-9]{9} minlength="10" maxlength="10" name="clinician_phone" id="clinician_phone" value="<?php if ($clients['clinician_phone']) {
-                                                                                                                                                                                                                print_r($clients['clinician_phone']);
-                                                                                                                                                                                                            }  ?>" required /> <span>Example: 0700 000 111</span>
+                                                            <input class="form-control" type="text" name="clinician_phone" id="clinician_phone" value="<?php if ($clients['clinician_phone']) {
+                                                                                                                                                            print_r($clients['clinician_phone']);
+                                                                                                                                                        }  ?>" /> <span>Example: 0700 000 111</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2834,9 +2844,10 @@ if ($user->isLoggedIn()) {
                                                         <!-- select -->
                                                         <div class="form-group">
                                                             <label>Patient Phone Number</label>
-                                                            <input class="form-control" type="tel" pattern=[0]{1}[0-9]{9} minlength="10" maxlength="10" name="patient_phone" id="patient_phone" value="<?php if ($clients['patient_phone']) {
-                                                                                                                                                                                                            print_r($clients['patient_phone']);
-                                                                                                                                                                                                        }  ?>" required /> <span>Example: 0700 000 111</span>
+                                                            <input class="form-control" type="text" name="patient_phone" id="patient_phone" value="<?php if ($clients['patient_phone']) {
+                                                                                                                                                        print_r($clients['patient_phone']);
+                                                                                                                                                    }  ?>" /> <span>Example: 0700 000 111</span>
+                                                            <!-- <input class="form-control" type="tel" pattern=[0]{1}[0-9]{9} minlength="10" maxlength="10" name="patient_phone" id="patient_phone" value="" required /> <span>Example: 0700 000 111</span> -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8383,7 +8394,7 @@ if ($user->isLoggedIn()) {
             <?php
             $costing = $override->getNews('validations', 'status', 1, 'id', $_GET['cid'])[0];
             $facility = $override->get('sites', 'id', $costing['site_id'])[0];
-            
+
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -8436,7 +8447,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
                                                 <div class="col-3">
                                                     <div class="mb-2">
-                                                        <label for="date_collect" class="form-label">Collection Date</label>
+                                                        <label for="date_collect" class="form-label">1. Collection Date</label>
                                                         <input type="date" value="<?php if ($costing['date_collect']) {
                                                                                         print_r($costing['date_collect']);
                                                                                     } ?>" id="date_collect" name="date_collect" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
@@ -8445,7 +8456,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-3">
-                                                        <label for="date_receictrl" class="form-label">Date CTRL Received</label>
+                                                        <label for="date_receictrl" class="form-label">2. Date CTRL Received</label>
                                                         <input type="date" value="<?php if ($costing['date_receictrl']) {
                                                                                         print_r($costing['date_receictrl']);
                                                                                     } ?>" id="date_receictrl" name="date_receictrl" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
@@ -8454,7 +8465,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-3">
-                                                        <label for="lab_no" class="form-label">lab_no</label>
+                                                        <label for="lab_no" class="form-label">3. lab_no</label>
                                                         <input type="text" value="<?php if ($costing['lab_no']) {
                                                                                         print_r($costing['lab_no']);
                                                                                     } ?>" id="lab_no" name="lab_no" class="form-control" placeholder="Enter here" required />
@@ -8463,7 +8474,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-3">
-                                                        <label for="transit_time" class="form-label">transit_time (If N / A Put '99')</label>
+                                                        <label for="transit_time" class="form-label">4. transit_time (If N / A Put '99')</label>
                                                         <input type="number" value="<?php if ($costing['transit_time']) {
                                                                                         print_r($costing['transit_time']);
                                                                                     } ?>" id="transit_time" name="transit_time" min="0" max="100" class="form-control" placeholder="Enter here" required />
@@ -8477,7 +8488,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
                                                 <div class="col-3">
                                                     <div class="mb-2">
-                                                        <label for="date_collect" class="form-label">resid_distr</label>
+                                                        <label for="date_collect" class="form-label">5. resid_distr</label>
                                                         <input type="text" value="<?php if ($costing['resid_distr']) {
                                                                                         print_r($costing['resid_distr']);
                                                                                     } ?>" id="resid_distr" name="resid_distr" class="form-control" placeholder="Enter date" required />
@@ -8487,7 +8498,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>h_facil</label>
+                                                            <label>6. h_facil</label>
                                                             <select id="h_facil" name="h_facil" class="form-control" required>
                                                                 <option value="<?= $facility['id'] ?>"><?php if ($costing['h_facil']) {
                                                                                                             print_r($facility['name']);
@@ -8506,7 +8517,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-3">
-                                                        <label for="hf_district" class="form-label">hf_district</label>
+                                                        <label for="hf_district" class="form-label">7. hf_district</label>
                                                         <input type="text" value="<?php if ($costing['hf_district']) {
                                                                                         print_r($costing['hf_district']);
                                                                                     } ?>" id="hf_district" name="hf_district" class="form-control" placeholder="Enter here" required />
@@ -8515,7 +8526,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-3">
-                                                        <label for="tb_region" class="form-label">tb_region</label>
+                                                        <label for="tb_region" class="form-label">8. tb_region</label>
                                                         <input type="text" value="<?php if ($costing['tb_region']) {
                                                                                         print_r($costing['tb_region']);
                                                                                     } ?>" id="tb_region" name="tb_region" class="form-control" placeholder="Enter here" required />
@@ -8528,7 +8539,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <label for="samplae_type" class="form-label">Samplae type</label>
+                                                    <label for="samplae_type" class="form-label">9. Sample type</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8547,7 +8558,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="pat_category">
-                                                    <label for="pat_category" class="form-label">Patient Category</label>
+                                                    <label for="pat_category" class="form-label">10. Patient Category</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8622,13 +8633,23 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
 
-                                                    <div class="col-2">
-                                                        <div class="mb-2">
-                                                            <label for="gx_results" class="form-label">gx_results</label>
-                                                            <input type="text" value="<?php if ($costing['gx_results']) {
-                                                                                            print_r($costing['gx_results']);
-                                                                                        } ?>" id="gx_results" name="gx_results" class="form-control" placeholder="Enter here" />
+                                                    <div class="col-sm-2" id="gx_results">
+                                                        <label for="gx_results" class="form-label">GX results</label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('gx_results', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="gx_results" id="gx_results<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['gx_results'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
+                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
                                                         </div>
+                                                        <button onclick="unsetRadio('gx_results')">Unset</button>
+
                                                     </div>
 
                                                     <div class="col-2">
@@ -8636,18 +8657,28 @@ if ($user->isLoggedIn()) {
                                                             <label for="gxmtb_ct" class="form-label">gxmtb_ct</label>
                                                             <input type="text" value="<?php if ($costing['gxmtb_ct']) {
                                                                                             print_r($costing['gxmtb_ct']);
-                                                                                        } ?>" id="gxmtb_ct" name="gxmtb_ct" class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-2">
-                                                        <div class="mb-2">
-                                                            <label for="gx_mtbamount" class="form-label">gx_mtbamount</label>
-                                                            <input type="text" value="<?php if ($costing['gx_mtbamount']) {
-                                                                                            print_r($costing['gx_mtbamount']);
-                                                                                        } ?>" id="gx_mtbamount" name="gx_mtbamount" class="form-control" placeholder="Enter here" />
+                                                                                        } ?>" id="gxmtb_ct" name="gxmtb_ct" min="0" max="40" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-sm-2" id="gx_mtbamount">
+                                                        <label for="gx_mtbamount" class="form-label">GX MTB Amount</label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('gxmtbamount', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="gx_mtbamount" id="gx_mtbamount<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['gx_mtbamount'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
+                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                        <button onclick="unsetRadio('gx_mtbamount')">Unset</button>
+
+                                                    </div>
                                                 </div>
 
                                                 <hr>
@@ -8733,13 +8764,23 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-2">
-                                                    <div class="mb-2">
-                                                        <label for="ljcul_results" class="form-label">ljcul_results</label>
-                                                        <input type="text" value="<?php if ($costing['ljcul_results']) {
-                                                                                        print_r($costing['ljcul_results']);
-                                                                                    } ?>" id="ljcul_results" name="ljcul_results" class="form-control" placeholder="Enter here" />
+                                                <div class="col-sm-2" id="ljcul_results">
+                                                    <label for="ljcul_results" class="form-label">ljcul_results</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('ljcul_results', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="ljcul_results" id="ljcul_results<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['ljcul_results'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
                                                     </div>
+                                                    <button onclick="unsetRadio('ljcul_results')">Unset</button>
+
                                                 </div>
 
                                                 <div class="col-2">
@@ -8756,7 +8797,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('positive_negative', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('mgitcul_resul', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitcul_resul" id="mgitcul_resul<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitcul_resul'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -8765,7 +8806,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('cult_done')">Unset</button>
+                                                        <button onclick="unsetRadio('mgitcul_resul')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -8779,7 +8820,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="ljdst_rif" id="ljdst_rif<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['ljdst_rif'] == $value['id']) {
                                                                                                                                                                                                         echo 'checked';
@@ -8797,7 +8838,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="ljdst_iso" id="ljdst_iso<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['ljdst_iso'] == $value['id']) {
                                                                                                                                                                                                         echo 'checked';
@@ -8815,7 +8856,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="ljdst_ethamb" id="ljdst_ethamb<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['ljdst_ethamb'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -8833,7 +8874,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance_na_not', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_stm" id="mgitdst_stm<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_stm'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -8855,7 +8896,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_rif" id="mgitdst_rif<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_rif'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -8873,7 +8914,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_iso" id="ljdst_iso<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_iso'] == $value['id']) {
                                                                                                                                                                                                         echo 'checked';
@@ -8891,7 +8932,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_ethamb" id="mgitdst_ethamb<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_ethamb'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -8909,7 +8950,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_bed" id="mgitdst_bed<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_bed'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -8931,7 +8972,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_2cfz" id="mgitdst_2cfz<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_2cfz'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -8949,7 +8990,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_2dlm" id="mgitdst_2dlm<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_2dlm'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -8967,7 +9008,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_2levo" id="mgitdst_2levo<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_2levo'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -8985,7 +9026,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_2lzd" id="mgitdst_2lzd<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_2lzd'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -9002,7 +9043,33 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-4" id="lpa1_mtbdetected">
+                                                <div class="col-sm-3" id="lpa1_done">
+                                                    <label for="lpa1_done" class="form-label">lpa1_done</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no_na_np', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="lpa1_done" id="lpa1_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['lpa1_done'] == $value['id']) {
+                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                    } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('lpa1_done')">Unset</button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="mb-2">
+                                                        <label for="lpa1_date1" id="lpa1_date1" class="form-label">lpa1_date</label>
+                                                        <input type="date" value="<?php if ($costing['lpa1_date1']) {
+                                                                                        print_r($costing['lpa1_date1']);
+                                                                                    } ?>" id="lpa1_date1" name="lpa1_date1" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2" id="lpa1_mtbdetected">
                                                     <label for="lpa1_mtbdetected" class="form-label">lpa1_mtbdetected</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -9020,12 +9087,12 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4" id="lpaa1dst_rif">
+                                                <div class="col-sm-2" id="lpaa1dst_rif">
                                                     <label for="lpaa1dst_rif" class="form-label">lpaa1dst_rif</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="lpaa1dst_rif" id="lpaa1dst_rif<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['lpaa1dst_rif'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -9038,12 +9105,12 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4" id="lpa1dst_inh">
+                                                <div class="col-sm-2" id="lpa1dst_inh">
                                                     <label for="lpa1dst_inh" class="form-label">mgitdst_2levo</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance_not', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="lpa1dst_inh" id="lpa1dst_inh<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['lpa1dst_inh'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -9066,7 +9133,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('yes_no_na_np', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="lpa2_done" id="lpa2_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['lpa2_done'] == $value['id']) {
                                                                                                                                                                                                         echo 'checked';
@@ -9173,7 +9240,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-4" id="nanop_done">
+                                                <div class="col-sm-3" id="nanop_done">
                                                     <label for="nanop_done" class="form-label">nanop_done</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -9193,25 +9260,43 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
 
-                                                <div class="col-sm-4" id="posnegcontrol">
-                                                    <label for="posnegcontrol" class="form-label">posnegcontrol</label>
+                                                <div class="col-sm-3" id="pos_control">
+                                                    <label for="pos_control" class="form-label">pos_control</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('pass_fails', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="posnegcontrol" id="posnegcontrol<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['posnegcontrol'] == $value['id']) {
-                                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                                            } ?>>
+                                                                    <input class="form-check-input" type="radio" name="pos_control" id="pos_control<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['pos_control'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('posnegcontrol')">Unset</button>
+                                                        <button onclick="unsetRadio('pos_control')">Unset</button>
 
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4" id="sample_control">
+                                                <div class="col-sm-3" id="neg_control">
+                                                    <label for="neg_control" class="form-label">neg_control</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('pass_fails', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="neg_control" id="neg_control<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['neg_control'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('neg_control')">Unset</button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3" id="sample_control">
                                                     <label for="sample_control" class="form-label">sample_control</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -9229,8 +9314,6 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-
-
                                             </div>
                                             <hr>
 
@@ -9325,22 +9408,12 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="myco_spp">
-                                                    <label for="myco_spp" class="form-label">myco_spp</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('myco_type', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="myco_spp" id="myco_spp<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['myco_spp'] == $value['id']) {
-                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button onclick="unsetRadio('myco_spp')">Unset</button>
-
+                                                <div class="col-3">
+                                                    <div class="mb-2">
+                                                        <label for="ntm_spp" class="form-label">NTM spp</label>
+                                                        <input type="text" value="<?php if ($costing['ntm_spp']) {
+                                                                                        print_r($costing['ntm_spp']);
+                                                                                    } ?>" id="ntm_spp" name="ntm_spp" class="form-control" placeholder="Enter HERE" />
                                                     </div>
                                                 </div>
 
