@@ -9119,7 +9119,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2" id="lpaa1dst_rif">
-                                                    <label for="lpaa1dst_rif" class="form-label">lpaa1dst_rif</label>
+                                                    <label for="lpaa1dst_rif" class="form-label">44. lpaa1dst_rif</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9137,7 +9137,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2" id="lpa1dst_inh">
-                                                    <label for="lpa1dst_inh" class="form-label">mgitdst_2levo</label>
+                                                    <label for="lpa1dst_inh" class="form-label">45. mgitdst_2levo</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9160,7 +9160,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-4" id="lpa2_done">
-                                                    <label for="lpa2_done" class="form-label">lpa2_done</label>
+                                                    <label for="lpa2_done" class="form-label">46. lpa2_done</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9179,14 +9179,14 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="mb-2">
-                                                        <label for="lpa2_date" id="lpa2_date1" class="form-label">lpa2_date</label>
+                                                        <label for="lpa2_date" id="lpa2_date1" class="form-label">47. lpa2_date</label>
                                                         <input type="date" value="<?php if ($costing['lpa2_date']) {
                                                                                         print_r($costing['lpa2_date']);
                                                                                     } ?>" id="lpa2_date" name="lpa2_date" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4" id="lpa2_mtbdetected">
-                                                    <label for="lpa2_mtbdetected" class="form-label">lpa2_mtbdetected</label>
+                                                    <label for="lpa2_mtbdetected" class="form-label">48. lpa2_mtbdetected</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9210,7 +9210,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-4" id="lpa2dst_lfx">
-                                                    <label for="lpa2dst_lfx" class="form-label">lpa2dst_lfx</label>
+                                                    <label for="lpa2dst_lfx" class="form-label">49. lpa2dst_lfx</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9230,7 +9230,7 @@ if ($user->isLoggedIn()) {
 
 
                                                 <div class="col-sm-4" id="lpa2dst_ag_cp">
-                                                    <label for="lpa2dst_ag_cp" class="form-label">lpa2dst_ag_cp</label>
+                                                    <label for="lpa2dst_ag_cp" class="form-label">50. lpa2dst_ag_cp</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9248,7 +9248,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4" id="lpa2dstag_lowkan">
-                                                    <label for="lpa2dstag_lowkan" class="form-label">lpa2dstag_lowkan</label>
+                                                    <label for="lpa2dstag_lowkan" class="form-label">51. lpa2dstag_lowkan</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9272,7 +9272,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="nanop_done">
-                                                    <label for="nanop_done" class="form-label">nanop_done</label>
+                                                    <label for="nanop_done" class="form-label">52. nanop_done</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9292,7 +9292,7 @@ if ($user->isLoggedIn()) {
 
 
                                                 <div class="col-sm-3" id="pos_control">
-                                                    <label for="pos_control" class="form-label">pos_control</label>
+                                                    <label for="pos_control" class="form-label">53. pos_control</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9310,7 +9310,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="neg_control">
-                                                    <label for="neg_control" class="form-label">neg_control</label>
+                                                    <label for="neg_control" class="form-label">54. neg_control</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9328,7 +9328,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="sample_control">
-                                                    <label for="sample_control" class="form-label">sample_control</label>
+                                                    <label for="sample_control" class="form-label">55. sample_control</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9350,7 +9350,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-4" id="internalcontrol">
-                                                    <label for="internalcontrol" class="form-label">internalcontrol</label>
+                                                    <label for="internalcontrol" class="form-label">56. internalcontrol</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9370,7 +9370,7 @@ if ($user->isLoggedIn()) {
 
 
                                                 <div class="col-sm-4" id="hsp65">
-                                                    <label for="hsp65" class="form-label">hsp65</label>
+                                                    <label for="hsp65" class="form-label">57. hsp65</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9390,7 +9390,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-4">
                                                     <div class="mb-2">
-                                                        <label for="nanopseq_date" class="form-label">nanopseq_date</label>
+                                                        <label for="nanopseq_date" class="form-label">58. nanopseq_date</label>
                                                         <input type="date" value="<?php if ($costing['nanopseq_date']) {
                                                                                         print_r($costing['nanopseq_date']);
                                                                                     } ?>" id="nanopseq_date" name="nanopseq_date" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" />
@@ -9401,7 +9401,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="myco_results">
-                                                    <label for="myco_results" class="form-label">myco_results</label>
+                                                    <label for="myco_results" class="form-label">59. myco_results</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9421,7 +9421,7 @@ if ($user->isLoggedIn()) {
 
 
                                                 <div class="col-sm-3" id="myco_type">
-                                                    <label for="myco_type" class="form-label">myco_type</label>
+                                                    <label for="myco_type" class="form-label">60. myco_type</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9441,7 +9441,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-2">
-                                                        <label for="ntm_spp" class="form-label">NTM spp</label>
+                                                        <label for="ntm_spp" class="form-label">61. NTM spp</label>
                                                         <input type="text" value="<?php if ($costing['ntm_spp']) {
                                                                                         print_r($costing['ntm_spp']);
                                                                                     } ?>" id="ntm_spp" name="ntm_spp" class="form-control" placeholder="Enter HERE" />
@@ -9450,7 +9450,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-2">
-                                                        <label for="myco_lineage" class="form-label">myco_lineage</label>
+                                                        <label for="myco_lineage" class="form-label">62. myco_lineage</label>
                                                         <input type="text" value="<?php if ($costing['myco_lineage']) {
                                                                                         print_r($costing['myco_lineage']);
                                                                                     } ?>" id="myco_lineage" name="myco_lineage" class="form-control" placeholder="Enter date" />
@@ -9461,7 +9461,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="nano_rif">
-                                                    <label for="nano_rif" class="form-label">nano_rif</label>
+                                                    <label for="nano_rif" class="form-label">63. nano_rif</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9481,7 +9481,7 @@ if ($user->isLoggedIn()) {
 
 
                                                 <div class="col-sm-3" id="nano_inh">
-                                                    <label for="nano_inh" class="form-label">nano_inh</label>
+                                                    <label for="nano_inh" class="form-label">64. nano_inh</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9499,7 +9499,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="nano_kan">
-                                                    <label for="nano_kan" class="form-label">nano_kan</label>
+                                                    <label for="nano_kan" class="form-label">65. nano_kan</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9517,7 +9517,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="nano_mxf">
-                                                    <label for="nano_mxf" class="form-label">nano_mxf</label>
+                                                    <label for="nano_mxf" class="form-label">66. nano_mxf</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9541,7 +9541,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="nano_cap">
-                                                    <label for="nano_cap" class="form-label">nano_cap</label>
+                                                    <label for="nano_cap" class="form-label">67. nano_cap</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9560,7 +9560,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="nano_emb">
-                                                    <label for="nano_emb" class="form-label">nano_emb</label>
+                                                    <label for="nano_emb" class="form-label">68. nano_emb</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9578,7 +9578,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="nano_pza">
-                                                    <label for="nano_pza" class="form-label">nano_pza</label>
+                                                    <label for="nano_pza" class="form-label">69. nano_pza</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9597,7 +9597,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="nano_amk">
-                                                    <label for="nano_amk" class="form-label">nano_amk</label>
+                                                    <label for="nano_amk" class="form-label">70. nano_amk</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9621,7 +9621,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="nano_bdq">
-                                                    <label for="nano_bdq" class="form-label">nano_bdq</label>
+                                                    <label for="nano_bdq" class="form-label">71. nano_bdq</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9641,7 +9641,7 @@ if ($user->isLoggedIn()) {
 
 
                                                 <div class="col-sm-3" id="nano_cfz">
-                                                    <label for="nano_cfz" class="form-label">nano_inh</label>
+                                                    <label for="nano_cfz" class="form-label">72. nano_inh</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9659,7 +9659,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="nano_dlm">
-                                                    <label for="nano_dlm" class="form-label">nano_dlm</label>
+                                                    <label for="nano_dlm" class="form-label">73. nano_dlm</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9677,7 +9677,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="nano_eto">
-                                                    <label for="nano_eto" class="form-label">nano_eto</label>
+                                                    <label for="nano_eto" class="form-label">74. nano_eto</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9701,7 +9701,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="nano_lfx">
-                                                    <label for="nano_lfx" class="form-label">nano_lfx</label>
+                                                    <label for="nano_lfx" class="form-label">75. nano_lfx</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9721,7 +9721,7 @@ if ($user->isLoggedIn()) {
 
 
                                                 <div class="col-sm-3" id="nano_lzd">
-                                                    <label for="nano_lzd" class="form-label">nano_lzd</label>
+                                                    <label for="nano_lzd" class="form-label">76. nano_lzd</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9739,7 +9739,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="nano_pmd">
-                                                    <label for="nano_pmd" class="form-label">nano_kan</label>
+                                                    <label for="nano_pmd" class="form-label">77. nano_kan</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9757,7 +9757,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="nano_stm">
-                                                    <label for="nano_stm" class="form-label">nano_mxf</label>
+                                                    <label for="nano_stm" class="form-label">78. nano_mxf</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
