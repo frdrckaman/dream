@@ -8447,7 +8447,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
                                                 <div class="col-3">
                                                     <div class="mb-2">
-                                                        <label for="date_collect" class="form-label">Collection Date</label>
+                                                        <label for="date_collect" class="form-label">1. Collection Date</label>
                                                         <input type="date" value="<?php if ($costing['date_collect']) {
                                                                                         print_r($costing['date_collect']);
                                                                                     } ?>" id="date_collect" name="date_collect" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
@@ -8456,7 +8456,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-3">
-                                                        <label for="date_receictrl" class="form-label">Date CTRL Received</label>
+                                                        <label for="date_receictrl" class="form-label">2. Date CTRL Received</label>
                                                         <input type="date" value="<?php if ($costing['date_receictrl']) {
                                                                                         print_r($costing['date_receictrl']);
                                                                                     } ?>" id="date_receictrl" name="date_receictrl" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
@@ -8465,7 +8465,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-3">
-                                                        <label for="lab_no" class="form-label">lab_no</label>
+                                                        <label for="lab_no" class="form-label">3. lab_no</label>
                                                         <input type="text" value="<?php if ($costing['lab_no']) {
                                                                                         print_r($costing['lab_no']);
                                                                                     } ?>" id="lab_no" name="lab_no" class="form-control" placeholder="Enter here" required />
@@ -8474,7 +8474,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-3">
-                                                        <label for="transit_time" class="form-label">transit_time (If N / A Put '99')</label>
+                                                        <label for="transit_time" class="form-label">4. transit_time (If N / A Put '99')</label>
                                                         <input type="number" value="<?php if ($costing['transit_time']) {
                                                                                         print_r($costing['transit_time']);
                                                                                     } ?>" id="transit_time" name="transit_time" min="0" max="100" class="form-control" placeholder="Enter here" required />
@@ -8488,7 +8488,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
                                                 <div class="col-3">
                                                     <div class="mb-2">
-                                                        <label for="date_collect" class="form-label">resid_distr</label>
+                                                        <label for="date_collect" class="form-label">5. resid_distr</label>
                                                         <input type="text" value="<?php if ($costing['resid_distr']) {
                                                                                         print_r($costing['resid_distr']);
                                                                                     } ?>" id="resid_distr" name="resid_distr" class="form-control" placeholder="Enter date" required />
@@ -8498,7 +8498,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>h_facil</label>
+                                                            <label>6. h_facil</label>
                                                             <select id="h_facil" name="h_facil" class="form-control" required>
                                                                 <option value="<?= $facility['id'] ?>"><?php if ($costing['h_facil']) {
                                                                                                             print_r($facility['name']);
@@ -8517,7 +8517,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-3">
-                                                        <label for="hf_district" class="form-label">hf_district</label>
+                                                        <label for="hf_district" class="form-label">7. hf_district</label>
                                                         <input type="text" value="<?php if ($costing['hf_district']) {
                                                                                         print_r($costing['hf_district']);
                                                                                     } ?>" id="hf_district" name="hf_district" class="form-control" placeholder="Enter here" required />
@@ -8526,7 +8526,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-3">
-                                                        <label for="tb_region" class="form-label">tb_region</label>
+                                                        <label for="tb_region" class="form-label">8. tb_region</label>
                                                         <input type="text" value="<?php if ($costing['tb_region']) {
                                                                                         print_r($costing['tb_region']);
                                                                                     } ?>" id="tb_region" name="tb_region" class="form-control" placeholder="Enter here" required />
@@ -8539,7 +8539,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <label for="samplae_type" class="form-label">Sample type</label>
+                                                    <label for="samplae_type" class="form-label">9. Sample type</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8558,7 +8558,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="pat_category">
-                                                    <label for="pat_category" class="form-label">Patient Category</label>
+                                                    <label for="pat_category" class="form-label">10. Patient Category</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
