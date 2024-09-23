@@ -8797,7 +8797,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
 
                                                 <div class="col-sm-3" id="mgitcul_done">
-                                                    <label for="mgitcul_done" class="form-label">22. mgitcul_done</label>
+                                                    <label for="mgitcul_done" class="form-label">26. mgitcul_done</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8817,7 +8817,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-2">
-                                                        <label for="mgitcul_date" class="form-label">23. inno_date</label>
+                                                        <label for="mgitcul_date" class="form-label">27. mgitcul_date</label>
                                                         <input type="date" value="<?php if ($costing['mgitcul_date']) {
                                                                                         print_r($costing['mgitcul_date']);
                                                                                     } ?>" id="mgitcul_date" name="mgitcul_date" class="form-control" placeholder="Enter here" />
@@ -8825,7 +8825,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="mgitcul_resul">
-                                                    <label for="mgitcul_resul" class="form-label">26. mgitcul_resul</label>
+                                                    <label for="mgitcul_resul" class="form-label">28. mgitcul_resul</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8847,7 +8847,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-3" id="ljdst_rif">
-                                                    <label for="ljdst_rif" class="form-label">ljdst_rif</label>
+                                                    <label for="ljdst_rif" class="form-label">29. ljdst_rif</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8865,7 +8865,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="ljdst_iso">
-                                                    <label for="ljdst_iso" class="form-label">ljdst_iso</label>
+                                                    <label for="ljdst_iso" class="form-label">30. ljdst_iso</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8883,7 +8883,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="ljdst_ethamb">
-                                                    <label for="ljdst_ethamb" class="form-label">ljdst_ethamb</label>
+                                                    <label for="ljdst_ethamb" class="form-label">31. ljdst_ethamb</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8901,7 +8901,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="mgitdst_stm">
-                                                    <label for="mgitdst_stm" class="form-label">mgitdst_stm</label>
+                                                    <label for="mgitdst_stm" class="form-label">32. mgitdst_stm</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8923,7 +8923,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="mgitdst_rif">
-                                                    <label for="mgitdst_rif" class="form-label">mgitdst_rif</label>
+                                                    <label for="mgitdst_rif" class="form-label">33. mgitdst_rif</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8941,7 +8941,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="mgitdst_iso">
-                                                    <label for="mgitdst_iso" class="form-label">ljdst_iso</label>
+                                                    <label for="mgitdst_iso" class="form-label">34. ljdst_iso</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8959,7 +8959,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="mgitdst_ethamb">
-                                                    <label for="mgitdst_ethamb" class="form-label">mgitcul_resul</label>
+                                                    <label for="mgitdst_ethamb" class="form-label">35. mgitcul_resul</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8977,7 +8977,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="mgitdst_bed">
-                                                    <label for="mgitdst_bed" class="form-label">mgitdst_stm</label>
+                                                    <label for="mgitdst_bed" class="form-label">36. mgitdst_stm</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8999,7 +8999,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="mgitdst_2cfz">
-                                                    <label for="mgitdst_2cfz" class="form-label">mgitdst_2cfz</label>
+                                                    <label for="mgitdst_2cfz" class="form-label">37. mgitdst_2cfz</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9017,7 +9017,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="mgitdst_2dlm">
-                                                    <label for="mgitdst_2dlm" class="form-label">mgitdst_2dlm</label>
+                                                    <label for="mgitdst_2dlm" class="form-label">38. mgitdst_2dlm</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9035,7 +9035,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="mgitdst_2levo">
-                                                    <label for="mgitdst_2levo" class="form-label">mgitdst_2levo</label>
+                                                    <label for="mgitdst_2levo" class="form-label">39. mgitdst_2levo</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9053,7 +9053,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="mgitdst_2lzd">
-                                                    <label for="mgitdst_2lzd" class="form-label">mgitdst_2lzd</label>
+                                                    <label for="mgitdst_2lzd" class="form-label">40. mgitdst_2lzd</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9075,7 +9075,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="lpa1_done">
-                                                    <label for="lpa1_done" class="form-label">lpa1_done</label>
+                                                    <label for="lpa1_done" class="form-label">41. lpa1_done</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9094,14 +9094,14 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                                 <div class="col-3">
                                                     <div class="mb-2">
-                                                        <label for="lpa1_date1" id="lpa1_date1" class="form-label">lpa1_date</label>
+                                                        <label for="lpa1_date1" id="lpa1_date1" class="form-label">42. lpa1_date</label>
                                                         <input type="date" value="<?php if ($costing['lpa1_date1']) {
                                                                                         print_r($costing['lpa1_date1']);
                                                                                     } ?>" id="lpa1_date1" name="lpa1_date1" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2" id="lpa1_mtbdetected">
-                                                    <label for="lpa1_mtbdetected" class="form-label">lpa1_mtbdetected</label>
+                                                    <label for="lpa1_mtbdetected" class="form-label">43. lpa1_mtbdetected</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
