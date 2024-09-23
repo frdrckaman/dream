@@ -8556,7 +8556,8 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('samplae_type')">Unset</button>
+
+                                                        <button type="button" onclick="unsetRadio('samplae_type')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -8576,7 +8577,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
-                                                    <button onclick="unsetRadio('pat_category')">Unset</button>
+                                                    <button type="button" onclick="unsetRadio('pat_category')">Unset</button>
                                                 </div>
 
                                                 <div class="col-sm-3" id="testrequest_reason">
@@ -8594,7 +8595,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
-                                                    <button onclick="unsetRadio('testrequest_reason')">Unset</button>
+                                                    <button type="button" onclick="unsetRadio('testrequest_reason')">Unset</button>
                                                 </div>
                                                 <div class="col-sm-3" id="follow_up_months1">
                                                     <div class="mb-3">
@@ -8633,7 +8634,7 @@ if ($user->isLoggedIn()) {
                                                                 <?php } ?>
                                                             </div>
                                                         </div>
-                                                        <button onclick="unsetRadio('hiv_status')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('hiv_status')">Unset</button>
 
                                                     </div>
 
@@ -8652,7 +8653,7 @@ if ($user->isLoggedIn()) {
                                                                 <?php } ?>
                                                             </div>
                                                         </div>
-                                                        <button onclick="unsetRadio('gx_results')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('gx_results')">Unset</button>
 
                                                     </div>
 
@@ -8680,7 +8681,7 @@ if ($user->isLoggedIn()) {
                                                                 <?php } ?>
                                                             </div>
                                                         </div>
-                                                        <button onclick="unsetRadio('gx_mtbamount')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('gx_mtbamount')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -8702,7 +8703,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('fm_done')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('fm_done')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -8754,7 +8755,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('cult_done')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('cult_done')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -8783,7 +8784,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
-                                                    <button onclick="unsetRadio('ljcul_results')">Unset</button>
+                                                    <button type="button" onclick="unsetRadio('ljcul_results')">Unset</button>
 
                                                 </div>
 
@@ -8800,7 +8801,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
                                             <div class="row">
 
-                                                <div class="col-sm-3" id="mgitcul_done">
+                                                <div class="col-sm-4" id="mgitcul_done">
                                                     <label for="mgitcul_done" class="form-label">26. mgitcul_done</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -8814,12 +8815,12 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('mgitcul_done')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('mgitcul_done')">Unset</button>
 
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3">
+                                                <div class="col-4">
                                                     <div class="mb-2">
                                                         <label for="mgitcul_date" class="form-label">27. mgitcul_date</label>
                                                         <input type="date" value="<?php if ($costing['mgitcul_date']) {
@@ -8828,7 +8829,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="mgitcul_resul">
+                                                <div class="col-sm-4" id="mgitcul_resul">
                                                     <label for="mgitcul_resul" class="form-label">28. mgitcul_resul</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -8842,7 +8843,9 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('mgitcul_resul')">Unset</button>
+                                                        <!-- <button onclick="unsetRadio('mgitcul_resul')">Unset</button> -->
+                                                        <button type="button" type="button" onclick="unsetRadio('mgitcul_resul')">Unset</button>
+
 
                                                     </div>
                                                 </div>
@@ -8864,7 +8867,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('ljdst_rif')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('ljdst_rif')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -8882,7 +8885,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('ljdst_iso')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('ljdst_iso')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -8900,7 +8903,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('ljdst_ethamb')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('ljdst_ethamb')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -8918,7 +8921,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('mgitdst_stm')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('mgitdst_stm')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -8940,7 +8943,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('mgitdst_rif')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('mgitdst_rif')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -8958,7 +8961,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('mgitdst_iso')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('mgitdst_iso')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -8976,7 +8979,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('mgitdst_ethamb')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('mgitdst_ethamb')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -8994,7 +8997,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('mgitdst_bed')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('mgitdst_bed')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9016,7 +9019,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('mgitdst_2cfz')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('mgitdst_2cfz')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9034,7 +9037,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('mgitdst_2dlm')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('mgitdst_2dlm')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9052,7 +9055,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('mgitdst_2levo')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('mgitdst_2levo')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9070,7 +9073,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('mgitdst_2lzd')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('mgitdst_2lzd')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9092,7 +9095,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('lpa1_done')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('lpa1_done')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9118,7 +9121,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('lpa1_mtbdetected')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('lpa1_mtbdetected')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9136,7 +9139,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('lpaa1dst_rif')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('lpaa1dst_rif')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9154,7 +9157,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('lpa1dst_inh')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('lpa1dst_inh')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9177,7 +9180,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('lpa2_done')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('lpa2_done')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9203,7 +9206,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('lpa2_mtbdetected')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('lpa2_mtbdetected')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9227,7 +9230,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('lpa2dst_lfx')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('lpa2dst_lfx')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9247,7 +9250,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('lpa2dst_ag_cp')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('lpa2dst_ag_cp')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9265,7 +9268,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('lpa2dstag_lowkan')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('lpa2dstag_lowkan')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9289,7 +9292,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nanop_done')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nanop_done')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9309,7 +9312,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('pos_control')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('pos_control')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9327,7 +9330,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('neg_control')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('neg_control')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9345,7 +9348,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('sample_control')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('sample_control')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9367,7 +9370,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('internalcontrol')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('internalcontrol')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9387,7 +9390,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('hsp65')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('hsp65')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9418,7 +9421,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('myco_results')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('myco_results')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9438,7 +9441,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('myco_type')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('myco_type')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9478,7 +9481,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_rif')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_rif')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9498,7 +9501,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_inh')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_inh')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9516,7 +9519,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_kan')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_kan')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9534,7 +9537,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_mxf')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_mxf')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9558,7 +9561,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_cap')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_cap')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9577,7 +9580,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_emb')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_emb')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9595,7 +9598,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_pza')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_pza')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9614,7 +9617,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_amk')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_amk')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9638,7 +9641,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_bdq')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_bdq')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9658,7 +9661,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_cfz')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_cfz')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9676,7 +9679,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_dlm')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_dlm')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9694,7 +9697,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_eto')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_eto')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9718,7 +9721,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_lfx')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_lfx')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9738,7 +9741,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_lzd')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_lzd')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9756,7 +9759,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_pmd')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_pmd')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9774,7 +9777,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nano_stm')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nano_stm')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9826,7 +9829,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('form_completness')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('form_completness')">Unset</button>
 
                                                     </div>
                                                 </div>
