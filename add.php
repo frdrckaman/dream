@@ -5159,6 +5159,8 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
+                                                    <button type="button" onclick="unsetRadio('afb_microscopy')">Unset</button>
+
                                                 </div>
 
                                                 <div class="col-4" id="n_afb_microscopy_date1">
@@ -5191,8 +5193,11 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
+                                                            <button type="button" onclick="unsetRadio('zn_results_a')">Unset</button>
+
                                                         </div>
                                                     </div>
+
                                                 </div>
 
                                                 <div class="col-sm-6" id="zn_results_b">
@@ -5208,10 +5213,13 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
+                                                            <button type="button" onclick="unsetRadio('zn_results_b')">Unset</button>
+
                                                         </div>
                                                         <span>(Not mandatory)</span>
                                                     </div>
                                                 </div>
+
                                             </div>
 
                                             <hr>
@@ -5232,8 +5240,11 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
+                                                            <button type="button" onclick="unsetRadio('fm_results_a')">Unset</button>
+
                                                         </div>
                                                     </div>
+
                                                 </div>
 
                                                 <div class="col-sm-6" id="fm_results_b">
@@ -5249,10 +5260,13 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
+                                                            <button type="button" onclick="unsetRadio('fm_results_b')">Unset</button>
+
                                                         </div>
                                                         <span>(Not mandatory)</span>
                                                     </div>
                                                 </div>
+
                                             </div>
 
                                             <hr>
@@ -5270,12 +5284,15 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
+                                                            <button type="button" onclick="unsetRadio('wrd_test')">Unset</button>
+
                                                             <label for="wrd_test_date" class="form-label">what date ?</label>
                                                             <input type="date" value="<?php if ($costing['wrd_test_date']) {
                                                                                             print_r($costing['wrd_test_date']);
                                                                                         } ?>" id="wrd_test_date" name="wrd_test_date" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
+
                                                 </div>
 
                                                 <div class="col-sm-3" id="sequence_done">
@@ -5293,11 +5310,14 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                        <button type="button" onclick="unsetRadio('sequence_done')">Unset</button>
+
                                                         <label for="sequence_date" class="form-label">what date ?</label>
                                                         <input type="date" value="<?php if ($costing['sequence_date']) {
                                                                                         print_r($costing['sequence_date']);
                                                                                     } ?>" id="sequence_date" name="sequence_date" class="form-control" placeholder="Enter here" />
                                                     </div>
+
                                                 </div>
 
 
@@ -5314,12 +5334,15 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
+                                                            <button type="button" onclick="unsetRadio('sequence_type')">Unset</button>
+
                                                         </div>
                                                         <label for="sequence_number" class="form-label">(If error, what code/number??) </label>
                                                         <input type="text" value="<?php if ($costing['sequence_number']) {
                                                                                         print_r($costing['sequence_number']);
                                                                                     } ?>" id="sequence_number" name="sequence_number" class="form-control" placeholder="Enter here" />
                                                     </div>
+
                                                 </div>
 
                                                 <div class="col-sm-3" id="mtb_detection">
@@ -5337,6 +5360,8 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
+                                                    <button type="button" onclick="unsetRadio('mtb_detection')">Unset</button>
+
                                                 </div>
 
                                             </div>
@@ -5358,6 +5383,8 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
+                                                    <button type="button" onclick="unsetRadio('rif_resistance')">Unset</button>
+
                                                 </div>
 
                                                 <div class="col-3">
@@ -5385,6 +5412,8 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
+                                                    <button type="button" onclick="unsetRadio('test_repeatition')">Unset</button>
+
                                                 </div>
 
                                                 <div class="col-sm-3" id="microscopy_reason">
@@ -5400,6 +5429,8 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
+                                                            <button type="button" onclick="unsetRadio('microscopy_reason')">Unset</button>
+
                                                             <label for="microscopy_reason_other" class="form-label">If Other Mention</label>
                                                             <input type="text" value="<?php if ($costing['microscopy_reason_other']) {
                                                                                             print_r($costing['microscopy_reason_other']);
@@ -5407,6 +5438,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
 
                                             <hr>
@@ -5456,6 +5488,8 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
+                                                    <button type="button" onclick="unsetRadio('form_completness')">Unset</button>
+
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-2">
@@ -5685,7 +5719,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('culture_done')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('culture_done')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -5710,7 +5744,7 @@ if ($user->isLoggedIn()) {
                                                                                         } ?>" id="sample_type_other2_22" name="sample_type_other2" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
-                                                    <button onclick="unsetRadio('sample_type2')">Unset</button>
+                                                    <button type="button" onclick="unsetRadio('sample_type2')">Unset</button>
 
                                                 </div>
 
@@ -5760,7 +5794,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('lj_results')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('lj_results')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -5789,7 +5823,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('mgit_results')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('mgit_results')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -5814,7 +5848,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
 
                                                         </div>
-                                                        <button onclick="unsetRadio('phenotypic_done')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('phenotypic_done')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -5834,7 +5868,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
-                                                    <button onclick="unsetRadio('phenotypic_method')">Unset</button>
+                                                    <button type="button" onclick="unsetRadio('phenotypic_method')">Unset</button>
 
                                                 </div>
 
@@ -5878,7 +5912,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('rifampicin')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('rifampicin')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -5897,7 +5931,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('isoniazid')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('isoniazid')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -5916,7 +5950,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('levofloxacin')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('levofloxacin')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -5935,7 +5969,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('moxifloxacin')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('moxifloxacin')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -5958,7 +5992,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('bedaquiline')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('bedaquiline')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -5977,7 +6011,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('linezolid')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('linezolid')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -5996,7 +6030,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('clofazimine')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('clofazimine')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6015,7 +6049,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('cycloserine')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('cycloserine')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6039,7 +6073,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('terizidone')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('terizidone')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6058,7 +6092,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('ethambutol')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('ethambutol')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6077,7 +6111,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('delamanid')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('delamanid')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6096,7 +6130,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('pyrazinamide')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('pyrazinamide')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6120,7 +6154,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('imipenem')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('imipenem')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6139,7 +6173,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('cilastatin')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('cilastatin')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6158,7 +6192,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('meropenem')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('meropenem')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6177,7 +6211,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('amikacin')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('amikacin')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6201,7 +6235,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('streptomycin')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('streptomycin')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6220,7 +6254,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('ethionamide')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('ethionamide')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6239,7 +6273,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('prothionamide')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('prothionamide')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6258,7 +6292,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('para_aminosalicylic_acid')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('para_aminosalicylic_acid')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6291,7 +6325,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('genotyping_done')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('genotyping_done')">Unset</button>
                                                     </div>
                                                 </div>
 
@@ -6311,7 +6345,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('genotyping_asay')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('genotyping_asay')">Unset</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -6338,7 +6372,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('isoniazid2')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('isoniazid2')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6357,7 +6391,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('fluoroquinolones')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('fluoroquinolones')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6376,7 +6410,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('amikacin2')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('amikacin2')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6399,7 +6433,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('kanamycin')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('kanamycin')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6417,7 +6451,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('capreomycin')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('capreomycin')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6435,7 +6469,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('ethionamide2')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('ethionamide2')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6470,7 +6504,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nanopore_sequencing_done')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nanopore_sequencing_done')">Unset</button>
                                                     </div>
                                                 </div>
 
@@ -6491,7 +6525,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('nanopore_sequencing')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('nanopore_sequencing')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -6518,7 +6552,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('rifampicin3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('rifampicin3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6537,7 +6571,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('isoniazid3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('isoniazid3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6556,7 +6590,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('levofloxacin3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('levofloxacin3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6575,7 +6609,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('moxifloxacin3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('moxifloxacin3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6598,7 +6632,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('bedaquiline3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('bedaquiline3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6617,7 +6651,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('linezolid3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('linezolid3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6636,7 +6670,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('clofazimine3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('clofazimine3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6655,7 +6689,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('cycloserine3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('cycloserine3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6679,7 +6713,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('terizidone3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('terizidone3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6698,7 +6732,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('ethambutol3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('ethambutol3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6717,7 +6751,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('delamanid3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('delamanid3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6736,7 +6770,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('pyrazinamide3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('pyrazinamide3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6760,7 +6794,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('imipenem3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('imipenem3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6779,7 +6813,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('cilastatin3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('cilastatin3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6798,7 +6832,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('meropenem3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('meropenem3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6817,7 +6851,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('amikacin3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('amikacin3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6841,7 +6875,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('streptomycin3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('streptomycin3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6860,7 +6894,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('ethionamide3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('ethionamide3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6879,7 +6913,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('prothionamide3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('prothionamide3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -6898,7 +6932,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('para_aminosalicylic_acid3')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('para_aminosalicylic_acid3')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -7073,7 +7107,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('form_completness')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('form_completness')">Unset</button>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -7202,7 +7236,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('tb_diagnosis')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('tb_diagnosis')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -7226,7 +7260,7 @@ if ($user->isLoggedIn()) {
                                                                                         } ?>" id="diagnosis_made_other" name="diagnosis_made_other" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
-                                                    <button onclick="unsetRadio('tb_diagnosis_made')">Unset</button>
+                                                    <button type="button" onclick="unsetRadio('tb_diagnosis_made')">Unset</button>
 
                                                 </div>
 
@@ -7342,7 +7376,7 @@ if ($user->isLoggedIn()) {
 
                                                             </div>
                                                         </div>
-                                                        <button onclick="unsetRadio('tb_treatment')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('tb_treatment')">Unset</button>
 
                                                     </div>
 
@@ -7365,7 +7399,7 @@ if ($user->isLoggedIn()) {
                                                                                             print_r($costing['tb_regimen_other']);
                                                                                         } ?>" id="tb_regimen_other" name="tb_regimen_other" class="form-control" placeholder="Enter here" />
                                                         </div>
-                                                        <button onclick="unsetRadio('tb_regimen')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('tb_regimen')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -7424,7 +7458,7 @@ if ($user->isLoggedIn()) {
                                                                                                 print_r($costing['regimen_changed__reason']);
                                                                                             } ?>" id="regimen_changed__reason" name="regimen_changed__reason" class="form-control" placeholder="Enter here" />
                                                             </div>
-                                                            <button onclick="unsetRadio('regimen_changed')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('regimen_changed')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -7443,7 +7477,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button onclick="unsetRadio('tb_otcome2')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('tb_otcome2')">Unset</button>
 
                                                         </div>
                                                     </div>
@@ -7481,7 +7515,7 @@ if ($user->isLoggedIn()) {
                                                                                         } ?>" id="tb_other_specify" name="tb_other_specify" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
-                                                    <button onclick="unsetRadio('tb_other_diagnosis')">Unset</button>
+                                                    <button type="button" onclick="unsetRadio('tb_other_diagnosis')">Unset</button>
 
                                                 </div>
 
@@ -7500,7 +7534,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
-                                                    <button onclick="unsetRadio('tb_diagnosis_made2')">Unset</button>
+                                                    <button type="button" onclick="unsetRadio('tb_diagnosis_made2')">Unset</button>
 
                                                 </div>
 
@@ -7524,7 +7558,7 @@ if ($user->isLoggedIn()) {
                                                                                         } ?>" id="microscopy_reason_other" name="microscopy_reason_other" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
-                                                    <button onclick="unsetRadio('laboratory_test_used2')">Unset</button>
+                                                    <button type="button" onclick="unsetRadio('laboratory_test_used2')">Unset</button>
 
                                                 </div>
 
@@ -7609,7 +7643,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('form_completness')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('form_completness')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -7945,71 +7979,75 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-                                            <div class="row" id="tx_previous_hide1">
-                                                <div class="col-sm-4" id="tb_category">
-                                                    <label>23. What category is the previously treated patient </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('tb_category', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="tb_category" id="tb_category<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['tb_category'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                    <button type="button" onclick="unsetRadio('tb_category')">Unset</button>
-                                                </div>
+                                            <div id="HIDES1_REARS">
 
-                                                <div class="col-sm-4" id="relapse_years1">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>24. If relapse how long ago was the participant treated for TB? (years)</label>
-                                                            <input class="form-control" type="number" name="relapse_years" id="relapse_years" placeholder="Type years..." value="<?php if ($clients['relapse_years']) {
-                                                                                                                                                                                        print_r($clients['relapse_years']);
-                                                                                                                                                                                    }  ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4" id="ltf_months1">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>25. If LTF for how long the participant received TB treatment? (months)</label>
-                                                            <input class="form-control" type="number" name="ltf_months" id="ltf_months" placeholder="Type years..." value="<?php if ($clients['ltf_months']) {
-                                                                                                                                                                                print_r($clients['ltf_months']);
-                                                                                                                                                                            }  ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>26. Which treatment regimen was initiated </label>
-                                                            <select id="tb_regimen" name="tb_regimen" class="form-control">
-                                                                <?php $tb_regimen = $override->get('tb_regimen', 'id', $clients['tb_regimen'])[0]; ?>
-                                                                <option value="<?= $tb_regimen['id'] ?>"><?php if ($clients['tb_regimen']) {
-                                                                                                                print_r($tb_regimen['name']);
-                                                                                                            } else {
-                                                                                                                echo 'Select';
-                                                                                                            } ?>
-                                                                </option>
-                                                                <option value="">Select</option>
-                                                                <?php foreach ($override->get('tb_regimen', 'status', 1) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                <div class="row">
+                                                    <div class="col-sm-4" id="tb_category">
+                                                        <label>23. What category is the previously treated patient </label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('tb_category', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="tb_category" id="tb_category<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['tb_category'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
+                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
                                                                 <?php } ?>
-                                                            </select>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" onclick="unsetRadio('tb_category')">Unset</button>
+                                                    </div>
+
+                                                    <div class="col-sm-4" id="relapse_years1">
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <label>24. If relapse how long ago was the participant treated for TB? (years)</label>
+                                                                <input class="form-control" type="number" name="relapse_years" id="relapse_years" placeholder="Type years..." value="<?php if ($clients['relapse_years']) {
+                                                                                                                                                                                            print_r($clients['relapse_years']);
+                                                                                                                                                                                        }  ?>" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4" id="ltf_months1">
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <label>25. If LTF for how long the participant received TB treatment? (months)</label>
+                                                                <input class="form-control" type="number" name="ltf_months" id="ltf_months" placeholder="Type years..." value="<?php if ($clients['ltf_months']) {
+                                                                                                                                                                                    print_r($clients['ltf_months']);
+                                                                                                                                                                                }  ?>" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4" id="tb_regimen1">
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <label>26. Which treatment regimen was initiated </label>
+                                                                <select id="tb_regimen" name="tb_regimen" class="form-control">
+                                                                    <?php $tb_regimen = $override->get('tb_regimen', 'id', $clients['tb_regimen'])[0]; ?>
+                                                                    <option value="<?= $tb_regimen['id'] ?>"><?php if ($clients['tb_regimen']) {
+                                                                                                                    print_r($tb_regimen['name']);
+                                                                                                                } else {
+                                                                                                                    echo 'Select';
+                                                                                                                } ?>
+                                                                    </option>
+                                                                    <option value="">Select</option>
+                                                                    <?php foreach ($override->get('tb_regimen', 'status', 1) as $value) { ?>
+                                                                        <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
+
                                             <hr>
 
-                                            <div class="row" id="tx_previous_hide2">
-                                                <div class="col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-3" id="regimen_months1">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>27. How long was the treatment regimen (months)</label>
@@ -8050,7 +8088,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-3" id="tb_otcome1">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>30. What was the treatment outcome?</label>
