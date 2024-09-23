@@ -8576,7 +8576,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="testrequest_reason">
-                                                    <label for="testrequest_reason" class="form-label">Testrequest Reason</label>
+                                                    <label for="testrequest_reason" class="form-label">11. Testrequest Reason</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8594,7 +8594,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                                 <div class="col-sm-3" id="follow_up_months1">
                                                     <div class="mb-3">
-                                                        <label for="follow_up_months" class="form-label">Follow up at months ?</label>
+                                                        <label for="follow_up_months" class="form-label">12. Follow up at months ?</label>
                                                         <input type="number" value="<?php if ($costing['follow_up_months']) {
                                                                                         print_r($costing['follow_up_months']);
                                                                                     } ?>" id="follow_up_months" name="follow_up_months" min="1" max="20" class="form-control" placeholder="Enter here" />
@@ -8608,14 +8608,14 @@ if ($user->isLoggedIn()) {
 
                                                     <div class="col-sm-3">
                                                         <div class="mb-3">
-                                                            <label for="treatment_month" class="form-label">Treatment Month (If N/A put '99' ,If Not provided put '98')</label>
+                                                            <label for="treatment_month" class="form-label">13. Treatment Month (If N/A put '99' ,If Not provided put '98')</label>
                                                             <input type="number" value="<?php if ($costing['treatment_month']) {
                                                                                             print_r($costing['treatment_month']);
                                                                                         } ?>" id="treatment_month" name="treatment_month" min="1" max="20" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3" id="hiv_status">
-                                                        <label for="hiv_status" class="form-label">Hiv Status</label>
+                                                        <label for="hiv_status" class="form-label">14. Hiv Status</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -8634,7 +8634,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-2" id="gx_results">
-                                                        <label for="gx_results" class="form-label">GX results</label>
+                                                        <label for="gx_results" class="form-label">15. GX results</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -8654,7 +8654,7 @@ if ($user->isLoggedIn()) {
 
                                                     <div class="col-2">
                                                         <div class="mb-2">
-                                                            <label for="gxmtb_ct" class="form-label">gxmtb_ct</label>
+                                                            <label for="gxmtb_ct" class="form-label">16. gxmtb_ct</label>
                                                             <input type="text" value="<?php if ($costing['gxmtb_ct']) {
                                                                                             print_r($costing['gxmtb_ct']);
                                                                                         } ?>" id="gxmtb_ct" name="gxmtb_ct" min="0" max="40" class="form-control" placeholder="Enter here" />
@@ -8662,7 +8662,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-2" id="gx_mtbamount">
-                                                        <label for="gx_mtbamount" class="form-label">GX MTB Amount</label>
+                                                        <label for="gx_mtbamount" class="form-label">17. GX MTB Amount</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -8685,7 +8685,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="row">
 
                                                     <div class="col-sm-3" id="fm_done">
-                                                        <label for="fm_done" class="form-label">Fm done ?</label>
+                                                        <label for="fm_done" class="form-label">18. Fm done ?</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -8705,7 +8705,7 @@ if ($user->isLoggedIn()) {
 
                                                     <div class="col-3">
                                                         <div class="mb-2">
-                                                            <label for="fm_date" class="form-label">Fm date</label>
+                                                            <label for="fm_date" class="form-label">19. Fm date</label>
                                                             <input type="date" value="<?php if ($costing['fm_date']) {
                                                                                             print_r($costing['fm_date']);
                                                                                         } ?>" id="fm_date" name="fm_date" class="form-control" placeholder="Enter here" />
@@ -8714,7 +8714,7 @@ if ($user->isLoggedIn()) {
 
                                                     <div class="col-3">
                                                         <div class="mb-2">
-                                                            <label for="fm_results" class="form-label">Fm results</label>
+                                                            <label for="fm_results" class="form-label">20. Fm results</label>
                                                             <input type="text" value="<?php if ($costing['fm_results']) {
                                                                                             print_r($costing['fm_results']);
                                                                                         } ?>" id="fm_results" name="fm_results" class="form-control" placeholder="Enter here" />
@@ -8723,7 +8723,7 @@ if ($user->isLoggedIn()) {
 
                                                     <div class="col-3">
                                                         <div class="mb-2">
-                                                            <label for="dec_date" class="form-label">dec_date</label>
+                                                            <label for="dec_date" class="form-label">21. dec_date</label>
                                                             <input type="date" value="<?php if ($costing['dec_date']) {
                                                                                             print_r($costing['dec_date']);
                                                                                         } ?>" id="dec_date" name="dec_date" class="form-control" placeholder="Enter here" />
@@ -8737,11 +8737,11 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
 
                                                 <div class="col-sm-3" id="cult_done">
-                                                    <label for="cult_done" class="form-label">cult_done</label>
+                                                    <label for="cult_done" class="form-label">22. cult_done</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('yes_no_np', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="cult_done" id="cult_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['cult_done'] == $value['id']) {
                                                                                                                                                                                                         echo 'checked';
@@ -8757,7 +8757,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-2">
-                                                        <label for="inno_date" class="form-label">inno_date</label>
+                                                        <label for="inno_date" class="form-label">23. inno_date</label>
                                                         <input type="date" value="<?php if ($costing['inno_date']) {
                                                                                         print_r($costing['inno_date']);
                                                                                     } ?>" id="inno_date" name="inno_date" class="form-control" placeholder="Enter here" />
@@ -8765,7 +8765,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-2" id="ljcul_results">
-                                                    <label for="ljcul_results" class="form-label">ljcul_results</label>
+                                                    <label for="ljcul_results" class="form-label">24. ljcul_results</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
