@@ -8533,7 +8533,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <label for="samplae_type" class="form-label">Samplae type</label>
+                                                    <label for="samplae_type" class="form-label">Sample type</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8627,13 +8627,23 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
 
-                                                    <div class="col-2">
-                                                        <div class="mb-2">
-                                                            <label for="gx_results" class="form-label">gx_results</label>
-                                                            <input type="text" value="<?php if ($costing['gx_results']) {
-                                                                                            print_r($costing['gx_results']);
-                                                                                        } ?>" id="gx_results" name="gx_results" class="form-control" placeholder="Enter here" />
+                                                    <div class="col-sm-2" id="gx_results">
+                                                        <label for="gx_results" class="form-label">GX results</label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('gx_results', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="gx_results" id="gx_results<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['gx_results'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
+                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
                                                         </div>
+                                                        <button onclick="unsetRadio('gx_results')">Unset</button>
+
                                                     </div>
 
                                                     <div class="col-2">
@@ -8641,18 +8651,28 @@ if ($user->isLoggedIn()) {
                                                             <label for="gxmtb_ct" class="form-label">gxmtb_ct</label>
                                                             <input type="text" value="<?php if ($costing['gxmtb_ct']) {
                                                                                             print_r($costing['gxmtb_ct']);
-                                                                                        } ?>" id="gxmtb_ct" name="gxmtb_ct" class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-2">
-                                                        <div class="mb-2">
-                                                            <label for="gx_mtbamount" class="form-label">gx_mtbamount</label>
-                                                            <input type="text" value="<?php if ($costing['gx_mtbamount']) {
-                                                                                            print_r($costing['gx_mtbamount']);
-                                                                                        } ?>" id="gx_mtbamount" name="gx_mtbamount" class="form-control" placeholder="Enter here" />
+                                                                                        } ?>" id="gxmtb_ct" name="gxmtb_ct" min="0" max="40" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-sm-2" id="gx_mtbamount">
+                                                        <label for="gx_mtbamount" class="form-label">GX MTB Amount</label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('gxmtbamount', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="gx_mtbamount" id="gx_mtbamount<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['gx_mtbamount'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
+                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                        <button onclick="unsetRadio('gx_mtbamount')">Unset</button>
+
+                                                    </div>
                                                 </div>
 
                                                 <hr>
