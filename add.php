@@ -9408,22 +9408,12 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="myco_spp">
-                                                    <label for="myco_spp" class="form-label">myco_spp</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('myco_type', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="myco_spp" id="myco_spp<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['myco_spp'] == $value['id']) {
-                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button onclick="unsetRadio('myco_spp')">Unset</button>
-
+                                                <div class="col-3">
+                                                    <div class="mb-2">
+                                                        <label for="myco_spp" class="form-label">NTM spp</label>
+                                                        <input type="text" value="<?php if ($costing['myco_spp']) {
+                                                                                        print_r($costing['myco_spp']);
+                                                                                    } ?>" id="myco_spp" name="myco_spp" class="form-control" placeholder="Enter HERE" />
                                                     </div>
                                                 </div>
 
