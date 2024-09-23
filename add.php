@@ -9240,7 +9240,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-4" id="nanop_done">
+                                                <div class="col-sm-3" id="nanop_done">
                                                     <label for="nanop_done" class="form-label">nanop_done</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -9260,7 +9260,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
 
-                                                <div class="col-sm-2" id="pos_control">
+                                                <div class="col-sm-3" id="pos_control">
                                                     <label for="pos_control" class="form-label">pos_control</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -9278,7 +9278,7 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-2" id="neg_control">
+                                                <div class="col-sm-3" id="neg_control">
                                                     <label for="neg_control" class="form-label">neg_control</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -9296,7 +9296,7 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4" id="sample_control">
+                                                <div class="col-sm-3" id="sample_control">
                                                     <label for="sample_control" class="form-label">sample_control</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -9314,8 +9314,6 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-
-
                                             </div>
                                             <hr>
 
