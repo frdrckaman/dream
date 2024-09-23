@@ -8783,17 +8783,49 @@ if ($user->isLoggedIn()) {
 
                                                 </div>
 
-                                                <div class="col-2">
+                                                <div class="col-3">
                                                     <div class="mb-2">
-                                                        <label for="ljculres_date" class="form-label">ljculres_date</label>
+                                                        <label for="ljculres_date" class="form-label">25. ljculres_date</label>
                                                         <input type="date" value="<?php if ($costing['ljculres_date']) {
                                                                                         print_r($costing['ljculres_date']);
                                                                                     } ?>" id="ljculres_date" name="ljculres_date" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div class="col-sm-2" id="mgitcul_resul">
-                                                    <label for="mgitcul_resul" class="form-label">mgitcul_resul</label>
+                                            <hr>
+                                            <div class="row">
+
+                                                <div class="col-sm-3" id="mgitcul_done">
+                                                    <label for="mgitcul_done" class="form-label">22. mgitcul_done</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no_np', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="mgitcul_done" id="mgitcul_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitcul_done'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('mgitcul_done')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-3">
+                                                    <div class="mb-2">
+                                                        <label for="mgitcul_date" class="form-label">23. inno_date</label>
+                                                        <input type="date" value="<?php if ($costing['mgitcul_date']) {
+                                                                                        print_r($costing['mgitcul_date']);
+                                                                                    } ?>" id="mgitcul_date" name="mgitcul_date" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" id="mgitcul_resul">
+                                                    <label for="mgitcul_resul" class="form-label">26. mgitcul_resul</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8810,7 +8842,6 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-
                                             </div>
 
                                             <hr>
