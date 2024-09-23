@@ -1269,6 +1269,8 @@ if ($user->isLoggedIn()) {
                         'mgitdst_2dlm' => Input::get('mgitdst_2dlm'),
                         'mgitdst_2levo' => Input::get('mgitdst_2levo'),
                         'mgitdst_2lzd' => Input::get('mgitdst_2lzd'),
+                        'lpa1_done' => Input::get('lpa1_done'),
+                        'lpa1_date1' => Input::get('lpa1_date1'),
                         'lpa1_mtbdetected' => Input::get('lpa1_mtbdetected'),
                         'lpaa1dst_rif' => Input::get('lpaa1dst_rif'),
                         'lpa1dst_inh' => Input::get('lpa1dst_inh'),
@@ -1361,6 +1363,8 @@ if ($user->isLoggedIn()) {
                         'mgitdst_2dlm' => Input::get('mgitdst_2dlm'),
                         'mgitdst_2levo' => Input::get('mgitdst_2levo'),
                         'mgitdst_2lzd' => Input::get('mgitdst_2lzd'),
+                        'lpa1_done' => Input::get('lpa1_done'),
+                        'lpa1_date1' => Input::get('lpa1_date1'),
                         'lpa1_mtbdetected' => Input::get('lpa1_mtbdetected'),
                         'lpaa1dst_rif' => Input::get('lpaa1dst_rif'),
                         'lpa1dst_inh' => Input::get('lpa1dst_inh'),
@@ -9037,7 +9041,33 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-4" id="lpa1_mtbdetected">
+                                                <div class="col-sm-3" id="lpa1_done">
+                                                    <label for="lpa1_done" class="form-label">lpa1_done</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="lpa1_done" id="lpa1_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['lpa1_done'] == $value['id']) {
+                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                    } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('lpa1_done')">Unset</button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="mb-2">
+                                                        <label for="lpa1_date1" id="lpa1_date1" class="form-label">lpa1_date</label>
+                                                        <input type="date" value="<?php if ($costing['lpa1_date1']) {
+                                                                                        print_r($costing['lpa1_date1']);
+                                                                                    } ?>" id="lpa1_date1" name="lpa1_date1" class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2" id="lpa1_mtbdetected">
                                                     <label for="lpa1_mtbdetected" class="form-label">lpa1_mtbdetected</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -9055,7 +9085,7 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4" id="lpaa1dst_rif">
+                                                <div class="col-sm-2" id="lpaa1dst_rif">
                                                     <label for="lpaa1dst_rif" class="form-label">lpaa1dst_rif</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -9073,7 +9103,7 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4" id="lpa1dst_inh">
+                                                <div class="col-sm-2" id="lpa1dst_inh">
                                                     <label for="lpa1dst_inh" class="form-label">mgitdst_2levo</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
