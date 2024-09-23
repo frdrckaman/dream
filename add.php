@@ -1289,7 +1289,7 @@ if ($user->isLoggedIn()) {
                         'nanopseq_date' => Input::get('nanopseq_date'),
                         'myco_results' => Input::get('myco_results'),
                         'myco_type' => Input::get('myco_type'),
-                        'myco_spp' => Input::get('myco_spp'),
+                        'ntm_spp' => Input::get('ntm_spp'),
                         'myco_lineage' => Input::get('myco_lineage'),
                         'nano_rif' => Input::get('nano_rif'),
                         'nano_inh' => Input::get('nano_inh'),
@@ -1384,7 +1384,7 @@ if ($user->isLoggedIn()) {
                         'nanopseq_date' => Input::get('nanopseq_date'),
                         'myco_results' => Input::get('myco_results'),
                         'myco_type' => Input::get('myco_type'),
-                        'myco_spp' => Input::get('myco_spp'),
+                        'ntm_spp' => Input::get('ntm_spp'),
                         'myco_lineage' => Input::get('myco_lineage'),
                         'nano_rif' => Input::get('nano_rif'),
                         'nano_inh' => Input::get('nano_inh'),
@@ -9410,10 +9410,10 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3">
                                                     <div class="mb-2">
-                                                        <label for="myco_spp" class="form-label">NTM spp</label>
-                                                        <input type="text" value="<?php if ($costing['myco_spp']) {
-                                                                                        print_r($costing['myco_spp']);
-                                                                                    } ?>" id="myco_spp" name="myco_spp" class="form-control" placeholder="Enter HERE" />
+                                                        <label for="ntm_spp" class="form-label">NTM spp</label>
+                                                        <input type="text" value="<?php if ($costing['ntm_spp']) {
+                                                                                        print_r($costing['ntm_spp']);
+                                                                                    } ?>" id="ntm_spp" name="ntm_spp" class="form-control" placeholder="Enter HERE" />
                                                     </div>
                                                 </div>
 
