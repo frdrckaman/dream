@@ -7959,7 +7959,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
-                                                    <button onclick="unsetTb_category()">Unset</button>
+                                                    <button type="button" onclick="unsetRadio('tb_category')">Unset</button>
                                                 </div>
 
                                                 <div class="col-sm-4" id="relapse_years1">
@@ -8033,7 +8033,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
-                                                    <button onclick="unsetRegimen_changed()">Unset</button>
+                                                    <button type="button" onclick="unsetRadio('regimen_changed')">Unset</button>
                                                 </div>
 
 
@@ -8121,6 +8121,8 @@ if ($user->isLoggedIn()) {
                                                                                                                                                                                                         }  ?>" />
                                                         </div>
                                                     </div>
+                                                    <button type="button" onclick="unsetRadio('immunosuppressive')">Unset</button>
+
                                                 </div>
 
                                                 <div class="col-sm-3" id="other_diseases">
@@ -8138,6 +8140,8 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
+                                                    <button type="button" onclick="unsetRadio('other_diseases')">Unset</button>
+
                                                 </div>
 
                                                 <div class="col-sm-3" id="diseases_medical">
@@ -8161,6 +8165,8 @@ if ($user->isLoggedIn()) {
                                                                                                                                                                                         }  ?>" />
                                                         </div>
                                                     </div>
+                                                    <!-- <button type="button" onclick="unsetRadio('other_diseases')">Unset</button> -->
+
                                                 </div>
                                             </div>
 
@@ -8190,6 +8196,8 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
+                                                    <button type="button" onclick="unsetRadio('sputum_collected')">Unset</button>
+
                                                 </div>
 
                                                 <div class="col-sm-3" id="sample_date1">
@@ -8220,6 +8228,8 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
+                                                    <button type="button" onclick="unsetRadio('other_samples')">Unset</button>
+
                                                 </div>
 
                                                 <div class="col-sm-3" id="sputum_samples">
@@ -8254,6 +8264,8 @@ if ($user->isLoggedIn()) {
                                                                                                                                                                 }  ?>" />
                                                         </div>
                                                     </div>
+                                                    <button type="button" onclick="unsetRadio('pleural_fluid_date')">Unset</button>
+
                                                 </div>
                                                 <div class="col-sm-3" id="csf_date1">
                                                     <!-- radio -->
@@ -8342,6 +8354,8 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
 
                                                         </div>
+                                                        <button type="button" onclick="unsetRadio('chest_x_ray')">Unset</button>
+
                                                     </div>
                                                 </div>
 
@@ -8375,6 +8389,8 @@ if ($user->isLoggedIn()) {
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <button type="button" onclick="unsetRadio('enrollment_completed')">Unset</button>
+
                                                 </div>
                                             </div>
                                             <hr>
