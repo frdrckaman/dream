@@ -8758,13 +8758,23 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-2">
-                                                    <div class="mb-2">
-                                                        <label for="ljcul_results" class="form-label">ljcul_results</label>
-                                                        <input type="text" value="<?php if ($costing['ljcul_results']) {
-                                                                                        print_r($costing['ljcul_results']);
-                                                                                    } ?>" id="ljcul_results" name="ljcul_results" class="form-control" placeholder="Enter here" />
+                                                <div class="col-sm-2" id="ljcul_results">
+                                                    <label for="ljcul_results" class="form-label">ljcul_results</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('ljcul_results', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="ljcul_results" id="ljcul_results<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['ljcul_results'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
                                                     </div>
+                                                    <button onclick="unsetRadio('ljcul_results')">Unset</button>
+
                                                 </div>
 
                                                 <div class="col-2">
@@ -8781,7 +8791,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('positive_negative', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('mgitcul_resul', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitcul_resul" id="mgitcul_resul<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitcul_resul'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -8790,7 +8800,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('cult_done')">Unset</button>
+                                                        <button onclick="unsetRadio('mgitcul_resul')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -8804,7 +8814,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="ljdst_rif" id="ljdst_rif<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['ljdst_rif'] == $value['id']) {
                                                                                                                                                                                                         echo 'checked';
@@ -8822,7 +8832,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="ljdst_iso" id="ljdst_iso<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['ljdst_iso'] == $value['id']) {
                                                                                                                                                                                                         echo 'checked';
@@ -8840,7 +8850,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="ljdst_ethamb" id="ljdst_ethamb<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['ljdst_ethamb'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -8858,7 +8868,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance_na_not', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_stm" id="mgitdst_stm<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_stm'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -8880,7 +8890,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_rif" id="mgitdst_rif<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_rif'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -8898,7 +8908,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_iso" id="ljdst_iso<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_iso'] == $value['id']) {
                                                                                                                                                                                                         echo 'checked';
@@ -8916,7 +8926,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_ethamb" id="mgitdst_ethamb<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_ethamb'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -8934,7 +8944,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_bed" id="mgitdst_bed<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_bed'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -8956,7 +8966,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_2cfz" id="mgitdst_2cfz<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_2cfz'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -8974,7 +8984,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_2dlm" id="mgitdst_2dlm<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_2dlm'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -8992,7 +9002,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_2levo" id="mgitdst_2levo<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_2levo'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -9010,7 +9020,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="mgitdst_2lzd" id="mgitdst_2lzd<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgitdst_2lzd'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -9050,7 +9060,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="lpaa1dst_rif" id="lpaa1dst_rif<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['lpaa1dst_rif'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
@@ -9068,7 +9078,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sensitive_resistance_not', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dst', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="lpa1dst_inh" id="lpa1dst_inh<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['lpa1dst_inh'] == $value['id']) {
                                                                                                                                                                                                             echo 'checked';
