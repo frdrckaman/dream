@@ -1281,7 +1281,8 @@ if ($user->isLoggedIn()) {
                         'lpa2dst_ag_cp' => Input::get('lpa2dst_ag_cp'),
                         'lpa2dstag_lowkan' => Input::get('lpa2dstag_lowkan'),
                         'nanop_done' => Input::get('nanop_done'),
-                        'posnegcontrol' => Input::get('posnegcontrol'),
+                        'pos_control' => Input::get('pos_control'),
+                        'neg_control' => Input::get('neg_control'),
                         'sample_control' => Input::get('sample_control'),
                         'internalcontrol' => Input::get('internalcontrol'),
                         'hsp65' => Input::get('hsp65'),
@@ -1375,7 +1376,8 @@ if ($user->isLoggedIn()) {
                         'lpa2dst_ag_cp' => Input::get('lpa2dst_ag_cp'),
                         'lpa2dstag_lowkan' => Input::get('lpa2dstag_lowkan'),
                         'nanop_done' => Input::get('nanop_done'),
-                        'posnegcontrol' => Input::get('posnegcontrol'),
+                        'pos_control' => Input::get('pos_control'),
+                        'neg_control' => Input::get('neg_control'),
                         'sample_control' => Input::get('sample_control'),
                         'internalcontrol' => Input::get('internalcontrol'),
                         'hsp65' => Input::get('hsp65'),
@@ -9258,21 +9260,39 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
 
-                                                <div class="col-sm-4" id="posnegcontrol">
-                                                    <label for="posnegcontrol" class="form-label">posnegcontrol</label>
+                                                <div class="col-sm-2" id="pos_control">
+                                                    <label for="pos_control" class="form-label">pos_control</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('pass_fails', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="posnegcontrol" id="posnegcontrol<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['posnegcontrol'] == $value['id']) {
-                                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                                            } ?>>
+                                                                    <input class="form-check-input" type="radio" name="pos_control" id="pos_control<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['pos_control'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button onclick="unsetRadio('posnegcontrol')">Unset</button>
+                                                        <button onclick="unsetRadio('pos_control')">Unset</button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2" id="neg_control">
+                                                    <label for="neg_control" class="form-label">neg_control</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('pass_fails', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="neg_control" id="neg_control<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['neg_control'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button onclick="unsetRadio('neg_control')">Unset</button>
 
                                                     </div>
                                                 </div>
