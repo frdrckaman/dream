@@ -1256,6 +1256,8 @@ if ($user->isLoggedIn()) {
                         'inno_date' => Input::get('inno_date'),
                         'ljcul_results' => Input::get('ljcul_results'),
                         'ljculres_date' => Input::get('ljculres_date'),
+                        // 'mgitcul_done' => Input::get('mgitcul_done'),
+                        // 'mgitcul_date' => Input::get('mgitcul_date'),
                         'mgitcul_resul' => Input::get('mgitcul_resul'),
                         'ljdst_rif' => Input::get('ljdst_rif'),
                         'ljdst_iso' => Input::get('ljdst_iso'),
@@ -1351,6 +1353,8 @@ if ($user->isLoggedIn()) {
                         'inno_date' => Input::get('inno_date'),
                         'ljcul_results' => Input::get('ljcul_results'),
                         'ljculres_date' => Input::get('ljculres_date'),
+                        // 'mgitcul_done' => Input::get('mgitcul_done'),
+                        // 'mgitcul_date' => Input::get('mgitcul_date'),
                         'mgitcul_resul' => Input::get('mgitcul_resul'),
                         'ljdst_rif' => Input::get('ljdst_rif'),
                         'ljdst_iso' => Input::get('ljdst_iso'),
@@ -9774,7 +9778,6 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-
                                             </div>
 
                                             <hr>
