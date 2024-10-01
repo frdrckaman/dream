@@ -2686,7 +2686,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
 
-                                            <div class="row">
+                                            <!-- <div class="row">
                                                 <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -2720,7 +2720,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
 
-                                            <hr>
+                                            <hr> -->
 
                                             <div class="row">
                                                 <div class="col-sm-4">
@@ -2956,7 +2956,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Patient Adress</h3>
+                                                    <h3 class="card-title">Patient’s Residence address </h3>
                                                 </div>
                                             </div>
 
@@ -2964,7 +2964,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Patient’s Residence address (Region)</label>
+                                                            <label>Region</label>
                                                             <select id="region" name="region" class="form-control" required>
                                                                 <option value="<?= $regions['id'] ?>"><?php if ($clients['region']) {
                                                                                                             print_r($regions['name']);
@@ -2983,7 +2983,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Patient’s Residence address (District)</label>
+                                                            <label>District</label>
                                                             <select id="district" name="district" class="form-control" required>
                                                                 <option value="<?= $districts['id'] ?>"><?php if ($clients['district']) {
                                                                                                             print_r($districts['name']);
@@ -2999,7 +2999,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Patient’s Residence address (Ward)</label>
+                                                            <label>Ward</label>
                                                             <select id="ward" name="ward" class="form-control" required>
                                                                 <option value="<?= $wards['id'] ?>"><?php if ($clients['ward']) {
                                                                                                         print_r($wards['name']);
@@ -3020,7 +3020,7 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <!-- select -->
                                                         <div class="form-group">
-                                                            <label>Residence street</label>
+                                                            <label>Street</label>
                                                             <input class="form-control" type="text" name="street" id="street" value="<?php if ($clients['street']) {
                                                                                                                                             print_r($clients['street']);
                                                                                                                                         }  ?>" />
@@ -3031,7 +3031,7 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <!-- select -->
                                                         <div class="form-group">
-                                                            <label>Physical Address ( Location )</label>
+                                                            <label>Location</label>
                                                             <textarea class="form-control" id="location" placeholder="Type physical address here" name="location" rows="3" style="width: 100%;">
                                                                     <?php if ($clients['location']) {
                                                                         print_r($clients['location']);
