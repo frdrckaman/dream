@@ -10054,6 +10054,14 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/diagnosis/tb_diagnosed_clinically.js"></script>
     <script src="myjs/add/diagnosis/tb_treatment.js"></script>
     <script src="myjs/add/diagnosis/tb_regimen.js"></script>
+        <script src="myjs/add/diagnosis/laboratory_test_used2.js"></script>
+            <script src="myjs/add/diagnosis/regimen_changed.js"></script>
+    <script src="myjs/add/diagnosis/tb_diagnosis_made2.js"></script>
+    <script src="myjs/add/diagnosis/tb_other_diagnosis.js"></script>
+    <script src="myjs/add/diagnosis/"></script>
+    <script src="myjs/add/diagnosis"></script>
+
+
 
 
 
@@ -10062,20 +10070,7 @@ if ($user->isLoggedIn()) {
 
 
     <script src="myjs/add/radio.js"></script>
-    <!-- <script src="myjs/add/radios1.js"></script>
-    <script src="myjs/add/radios2.js"></script>
-    <script src="myjs/add/radios3.js"></script>
-    <script src="myjs/add/radios4.js"></script>
-    <script src="myjs/add/radios96.js"></script> -->
-    <script src="myjs/add/checkbox1.js"></script>
-    <script src="myjs/add/many_many.js"></script>
-    <script src="myjs/add/many_many1.js"></script>
-    <script src="myjs/add/many_many2.js"></script>
-    <script src="myjs/add/many_many3.js"></script>
-    <script src="myjs/add/many_many4.js"></script>
-    <script src="myjs/add/many_many5.js"></script>
-    <script src="myjs/add/many_one.js"></script>
-    <script src="myjs/add/one_many.js"></script>
+
 
 
     <script>
