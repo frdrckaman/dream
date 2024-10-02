@@ -7439,6 +7439,11 @@ if ($user->isLoggedIn()) {
                                                                 <?php } ?>
                                                             </div>
 
+                                                            <label for="laboratory_test_used_other" id="laboratory_test_used_other1" class="form-label">Other Specify </label>
+                                                            <input type="text" value="<?php if ($costing['laboratory_test_used_other']) {
+                                                                                            print_r($costing['laboratory_test_used_other']);
+                                                                                        } ?>" id="laboratory_test_used_other" name="laboratory_test_used_other" class="form-control" placeholder="Enter here" />
+
                                                         </div>
                                                     </div>
 
@@ -7521,7 +7526,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="tb_other_diagnosis" id="tb_other_diagnosis<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_other_diagnosis'] == $value['id']) {
                                                                                                                                                                                                                         echo 'checked';
-                                                                                                                                                                                                                    } ?> >
+                                                                                                                                                                                                                    } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -10059,7 +10064,7 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/diagnosis/regimen_changed.js"></script>
     <script src="myjs/add/diagnosis/tb_diagnosis_made2.js"></script>
     <script src="myjs/add/diagnosis/tb_other_diagnosis.js"></script>
-    <script src="myjs/add/diagnosis/"></script>
+    <script src="myjs/add/diagnosis/laboratory_test_used.js"></script>
     <script src="myjs/add/diagnosis"></script>
 
 
