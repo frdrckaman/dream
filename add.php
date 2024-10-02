@@ -8154,6 +8154,8 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                        <button type="button" onclick="unsetRadio('immunosuppressive')">Unset</button>
+
                                                         <div id="immunosuppressive_specify1">
                                                             <label>33. If yes specify</label>
                                                             <input class="form-control" type="number" name="immunosuppressive_specify" id="immunosuppressive_specify" placeholder="Type here..." value="<?php if ($clients['immunosuppressive_specify']) {
@@ -8161,7 +8163,6 @@ if ($user->isLoggedIn()) {
                                                                                                                                                                                                         }  ?>" />
                                                         </div>
                                                     </div>
-                                                    <button type="button" onclick="unsetRadio('immunosuppressive')">Unset</button>
 
                                                 </div>
 
@@ -8205,7 +8206,6 @@ if ($user->isLoggedIn()) {
                                                                                                                                                                                         }  ?>" />
                                                         </div>
                                                     </div>
-                                                    <!-- <button type="button" onclick="unsetRadio('other_diseases')">Unset</button> -->
 
                                                 </div>
                                             </div>
@@ -9990,6 +9990,9 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/enrollment/sputum_samples.js"></script>
     <script src="myjs/add/enrollment/tb_category.js"></script>
     <script src="myjs/add/enrollment/tx_previous.js"></script>
+    <script src="myjs/add/enrollment/immunosuppressive.js"></script>
+    <script src="myjs/add/enrollment/diseases_medical.js"></script>
+
 
 
     <!-- RESPIRATORY format numbers Js -->
