@@ -10266,16 +10266,7 @@ if ($user->isLoggedIn()) {
             myDropzone.removeAllFiles(true)
         }
         // DropzoneJS Demo Code End
-
-
-        // $("#packs_per_day, #packs_per_day").on("input", function() {
-        //     setTimeout(function() {
-        //         var weight = $("#packs_per_day").val();
-        //         var height = $("#packs_per_day").val() / 100; // Convert cm to m
-        //         var bmi = weight / (height * height);
-        //         $("#packs_per_year").text(bmi.toFixed(2));
-        //     }, 1);
-        // });
+        
     </script>
 
 </body>
