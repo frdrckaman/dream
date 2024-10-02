@@ -7351,7 +7351,7 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                                <label for="tb_clinically_other" class="form-label">Other Specify ?</label>
+                                                                <label for="tb_clinically_other" id="tb_clinically_other1" class="form-label">Other Specify ?</label>
                                                                 <input type="text" value="<?php if ($costing['tb_clinically_other']) {
                                                                                                 print_r($costing['tb_clinically_other']);
                                                                                             } ?>" id="tb_clinically_other" name="tb_clinically_other" class="form-control" placeholder="Enter here" />
@@ -10046,6 +10046,9 @@ if ($user->isLoggedIn()) {
     <!-- Diagnosis Js -->
     <script src="myjs/add/diagnosis/tb_diagnosis_made.js"></script>
     <script src="myjs/add/diagnosis/bacteriological_diagnosis.js"></script>
+    <script src="myjs/add/diagnosis/tb_diagnosed_clinically.js"></script>
+
+
 
 
 
