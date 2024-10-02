@@ -7525,13 +7525,14 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <label for="tb_other_specify" id="tb_other_specify1" class="form-label">If Other Mention</label>
-                                                            <input type="text" value="<?php if ($costing['tb_other_specify']) {
-                                                                                            print_r($costing['tb_other_specify']);
-                                                                                        } ?>" id="tb_other_specify" name="tb_other_specify" class="form-control" placeholder="Enter here" />
                                                         </div>
+                                                        <button type="button" onclick="unsetRadio('tb_other_diagnosis')">Unset</button>
                                                     </div>
-                                                    <button type="button" onclick="unsetRadio('tb_other_diagnosis')">Unset</button>
+
+                                                    <label for="tb_other_specify" id="tb_other_specify1" class="form-label">If Other Mention</label>
+                                                    <input type="text" value="<?php if ($costing['tb_other_specify']) {
+                                                                                    print_r($costing['tb_other_specify']);
+                                                                                } ?>" id="tb_other_specify" name="tb_other_specify" class="form-control" placeholder="Enter here" />
 
                                                 </div>
 
@@ -10054,8 +10055,8 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/diagnosis/tb_diagnosed_clinically.js"></script>
     <script src="myjs/add/diagnosis/tb_treatment.js"></script>
     <script src="myjs/add/diagnosis/tb_regimen.js"></script>
-        <script src="myjs/add/diagnosis/laboratory_test_used2.js"></script>
-            <script src="myjs/add/diagnosis/regimen_changed.js"></script>
+    <script src="myjs/add/diagnosis/laboratory_test_used2.js"></script>
+    <script src="myjs/add/diagnosis/regimen_changed.js"></script>
     <script src="myjs/add/diagnosis/tb_diagnosis_made2.js"></script>
     <script src="myjs/add/diagnosis/tb_other_diagnosis.js"></script>
     <script src="myjs/add/diagnosis/"></script>
