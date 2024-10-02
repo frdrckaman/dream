@@ -11,16 +11,20 @@ const laboratory_test_used210 = document.getElementById("laboratory_test_used210
 const laboratory_test_used296 = document.getElementById("laboratory_test_used296");
 
 
-const tb_other_specify1 = document.getElementById("tb_other_specify1");
-const tb_other_specify = document.getElementById("tb_other_specify");
+const microscopy_reason_other1 = document.getElementById(
+  "microscopy_reason_other1"
+);
+const microscopy_reason_other = document.getElementById(
+  "microscopy_reason_other"
+);
 
 function toggleElementVisibility() {
   if (laboratory_test_used296.checked) {
-    tb_other_specify1.style.display = "block";
-    tb_other_specify.style.display = "block";
+    microscopy_reason_other1.style.display = "block";
+    microscopy_reason_other.style.display = "block";
   } else {
-    tb_other_specify.style.display = "none";
-    tb_other_specify1.style.display = "none";
+    microscopy_reason_other1.style.display = "none";
+    microscopy_reason_other.style.display = "none";
   }
 }
 
