@@ -468,7 +468,7 @@ if ($user->isLoggedIn()) {
                     $diseases_medical = implode(',', Input::get('diseases_medical'));
                     $sputum_samples = implode(',', Input::get('sputum_samples'));
                     $dr_ds = implode(',', Input::get('dr_ds'));
-                    print_r(Input::get('tb_otcome'));
+                    // print_r(Input::get('tb_otcome'));
                     if ($enrollment_form) {
                         $user->updateRecord('enrollment_form', array(
                             'visit_date' => Input::get('visit_date'),
@@ -2686,7 +2686,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
 
-                                            <div class="row">
+                                            <!-- <div class="row">
                                                 <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -2720,7 +2720,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
 
-                                            <hr>
+                                            <hr> -->
 
                                             <div class="row">
                                                 <div class="col-sm-4">
@@ -2956,7 +2956,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Patient Adress</h3>
+                                                    <h3 class="card-title">Patient’s Residence address </h3>
                                                 </div>
                                             </div>
 
@@ -2964,7 +2964,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Patient’s Residence address (Region)</label>
+                                                            <label>Region</label>
                                                             <select id="region" name="region" class="form-control" required>
                                                                 <option value="<?= $regions['id'] ?>"><?php if ($clients['region']) {
                                                                                                             print_r($regions['name']);
@@ -2983,7 +2983,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Patient’s Residence address (District)</label>
+                                                            <label>District</label>
                                                             <select id="district" name="district" class="form-control" required>
                                                                 <option value="<?= $districts['id'] ?>"><?php if ($clients['district']) {
                                                                                                             print_r($districts['name']);
@@ -2999,7 +2999,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Patient’s Residence address (Ward)</label>
+                                                            <label>Ward</label>
                                                             <select id="ward" name="ward" class="form-control" required>
                                                                 <option value="<?= $wards['id'] ?>"><?php if ($clients['ward']) {
                                                                                                         print_r($wards['name']);
@@ -3020,7 +3020,7 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <!-- select -->
                                                         <div class="form-group">
-                                                            <label>Residence street</label>
+                                                            <label>Street</label>
                                                             <input class="form-control" type="text" name="street" id="street" value="<?php if ($clients['street']) {
                                                                                                                                             print_r($clients['street']);
                                                                                                                                         }  ?>" />
@@ -3031,7 +3031,7 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <!-- select -->
                                                         <div class="form-group">
-                                                            <label>Physical Address ( Location )</label>
+                                                            <label>Location</label>
                                                             <textarea class="form-control" id="location" placeholder="Type physical address here" name="location" rows="3" style="width: 100%;">
                                                                     <?php if ($clients['location']) {
                                                                         print_r($clients['location']);
@@ -7945,6 +7945,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
+                                                    <button type="button" onclick="unsetRadio('tx_previous')">Unset</button>
                                                 </div>
 
                                                 <div class="col-sm-4" id="tx_number1">
@@ -7979,70 +7980,69 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-                                            <div id="HIDES1_REARS">
 
-                                                <div class="row">
-                                                    <div class="col-sm-4" id="tb_category">
-                                                        <label>23. What category is the previously treated patient </label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('tb_category', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="tb_category" id="tb_category<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['tb_category'] == $value['id']) {
-                                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                                            } ?>>
-                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
+                                            <div class="row">
+
+                                                <div class="col-sm-4" id="tb_category">
+                                                    <label>23. What category is the previously treated patient </label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('tb_category', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="tb_category" id="tb_category<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['tb_category'] == $value['id']) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" onclick="unsetRadio('tb_category')">Unset</button>
+                                                </div>
+
+
+                                                <div class="col-sm-4" id="relapse_years1">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>24. If relapse how long ago was the participant treated for TB? (years)</label>
+                                                            <input class="form-control" type="number" name="relapse_years" id="relapse_years" placeholder="Type years..." value="<?php if ($clients['relapse_years']) {
+                                                                                                                                                                                        print_r($clients['relapse_years']);
+                                                                                                                                                                                    }  ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4" id="ltf_months1">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>25. If LTF for how long the participant received TB treatment? (months)</label>
+                                                            <input class="form-control" type="number" name="ltf_months" id="ltf_months" placeholder="Type years..." value="<?php if ($clients['ltf_months']) {
+                                                                                                                                                                                print_r($clients['ltf_months']);
+                                                                                                                                                                            }  ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4" id="tb_regimen1">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>26. Which treatment regimen was initiated </label>
+                                                            <select id="tb_regimen" name="tb_regimen" class="form-control">
+                                                                <?php $tb_regimen = $override->get('tb_regimen', 'id', $clients['tb_regimen'])[0]; ?>
+                                                                <option value="<?= $tb_regimen['id'] ?>"><?php if ($clients['tb_regimen']) {
+                                                                                                                print_r($tb_regimen['name']);
+                                                                                                            } else {
+                                                                                                                echo 'Select';
+                                                                                                            } ?>
+                                                                </option>
+                                                                <option value="">Select</option>
+                                                                <?php foreach ($override->get('tb_regimen', 'status', 1) as $value) { ?>
+                                                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
                                                                 <?php } ?>
-                                                            </div>
-                                                        </div>
-                                                        <button type="button" onclick="unsetRadio('tb_category')">Unset</button>
-                                                    </div>
-
-                                                    <div class="col-sm-4" id="relapse_years1">
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>24. If relapse how long ago was the participant treated for TB? (years)</label>
-                                                                <input class="form-control" type="number" name="relapse_years" id="relapse_years" placeholder="Type years..." value="<?php if ($clients['relapse_years']) {
-                                                                                                                                                                                            print_r($clients['relapse_years']);
-                                                                                                                                                                                        }  ?>" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4" id="ltf_months1">
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>25. If LTF for how long the participant received TB treatment? (months)</label>
-                                                                <input class="form-control" type="number" name="ltf_months" id="ltf_months" placeholder="Type years..." value="<?php if ($clients['ltf_months']) {
-                                                                                                                                                                                    print_r($clients['ltf_months']);
-                                                                                                                                                                                }  ?>" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4" id="tb_regimen1">
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>26. Which treatment regimen was initiated </label>
-                                                                <select id="tb_regimen" name="tb_regimen" class="form-control">
-                                                                    <?php $tb_regimen = $override->get('tb_regimen', 'id', $clients['tb_regimen'])[0]; ?>
-                                                                    <option value="<?= $tb_regimen['id'] ?>"><?php if ($clients['tb_regimen']) {
-                                                                                                                    print_r($tb_regimen['name']);
-                                                                                                                } else {
-                                                                                                                    echo 'Select';
-                                                                                                                } ?>
-                                                                    </option>
-                                                                    <option value="">Select</option>
-                                                                    <?php foreach ($override->get('tb_regimen', 'status', 1) as $value) { ?>
-                                                                        <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
 
                                             <hr>
 
@@ -8154,6 +8154,8 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                        <button type="button" onclick="unsetRadio('immunosuppressive')">Unset</button>
+
                                                         <div id="immunosuppressive_specify1">
                                                             <label>33. If yes specify</label>
                                                             <input class="form-control" type="number" name="immunosuppressive_specify" id="immunosuppressive_specify" placeholder="Type here..." value="<?php if ($clients['immunosuppressive_specify']) {
@@ -8161,7 +8163,6 @@ if ($user->isLoggedIn()) {
                                                                                                                                                                                                         }  ?>" />
                                                         </div>
                                                     </div>
-                                                    <button type="button" onclick="unsetRadio('immunosuppressive')">Unset</button>
 
                                                 </div>
 
@@ -8205,7 +8206,6 @@ if ($user->isLoggedIn()) {
                                                                                                                                                                                         }  ?>" />
                                                         </div>
                                                     </div>
-                                                    <!-- <button type="button" onclick="unsetRadio('other_diseases')">Unset</button> -->
 
                                                 </div>
                                             </div>
@@ -9990,6 +9990,11 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/enrollment/sputum_samples.js"></script>
     <script src="myjs/add/enrollment/tb_category.js"></script>
     <script src="myjs/add/enrollment/tx_previous.js"></script>
+    <script src="myjs/add/enrollment/immunosuppressive.js"></script>
+    <script src="myjs/add/enrollment/diseases_medical.js"></script>
+    <script src="myjs/add/enrollment/chest_x_ray.js"></script>
+
+
 
 
     <!-- RESPIRATORY format numbers Js -->
