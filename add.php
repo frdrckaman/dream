@@ -7287,22 +7287,17 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3" id="other_bacteriological1">
-                                                    <div class="mb-3">
-                                                        <label for="other_bacteriological" class="form-label">103. Specify</label>
-                                                        <input type="text" value="<?php if ($costing['other_bacteriological']) {
-                                                                                        print_r($costing['other_bacteriological']);
-                                                                                    } ?>" id="other_bacteriological" name="other_bacteriological" class="form-control" placeholder="Enter here" />
-
-                                                    </div>
-                                                </div>
-
                                                 <div class="col-sm-3" id="other_bacteriological_date1">
                                                     <div class="mb-3">
-                                                        <label for="other_bacteriological_date" class="form-label">103. Date</label>
+                                                        <label for="other_bacteriological" class="form-label">103. Specify and Date</label>
+                                                        <input type="text" value="<?php if ($costing['other_bacteriological']) {
+                                                                                        print_r($costing['other_bacteriological']);
+                                                                                    } ?>" id="other_bacteriological" name="other_bacteriological" class="form-control" placeholder="Speficy here" />
+                                                        <br>
                                                         <input type="date" value="<?php if ($costing['other_bacteriological_date']) {
                                                                                         print_r($costing['other_bacteriological_date']);
                                                                                     } ?>" id="other_bacteriological_date" name="other_bacteriological_date" class="form-control" placeholder="Enter here" />
+
                                                     </div>
                                                 </div>
                                             </div>
