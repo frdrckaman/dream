@@ -1087,7 +1087,7 @@ if ($user->isLoggedIn()) {
                         'regimen_changed__date' => Input::get('regimen_changed__date'),
                         'regimen_removed_name' => Input::get('regimen_removed_name'),
                         'regimen_added_name' => Input::get('regimen_added_name'),
-                        'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),                        
+                        'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
                         'regimen_changed__reason' => Input::get('regimen_changed__reason'),
                         'tb_otcome2' => Input::get('tb_otcome2'),
                         'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
@@ -1139,7 +1139,7 @@ if ($user->isLoggedIn()) {
                         'regimen_changed__date' => Input::get('regimen_changed__date'),
                         'regimen_removed_name' => Input::get('regimen_removed_name'),
                         'regimen_added_name' => Input::get('regimen_added_name'),
-                                                'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),                        
+                        'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
                         'regimen_changed__reason' => Input::get('regimen_changed__reason'),
                         'tb_otcome2' => Input::get('tb_otcome2'),
                         'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
@@ -7289,10 +7289,20 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                                 <div class="col-sm-3" id="other_bacteriological1">
                                                     <div class="mb-3">
-                                                        <label for="other_bacteriological" class="form-label">103. If Other test(s),(Specify?)</label>
-                                                        <input type="date" value="<?php if ($costing['other_bacteriological']) {
+                                                        <label for="other_bacteriological" class="form-label">103. Specify</label>
+                                                        <input type="text" value="<?php if ($costing['other_bacteriological']) {
                                                                                         print_r($costing['other_bacteriological']);
                                                                                     } ?>" id="other_bacteriological" name="other_bacteriological" class="form-control" placeholder="Enter here" />
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" id="other_bacteriological_date1">
+                                                    <div class="mb-3">
+                                                        <label for="other_bacteriological_date" class="form-label">103. Date</label>
+                                                        <input type="date" value="<?php if ($costing['other_bacteriological_date']) {
+                                                                                        print_r($costing['other_bacteriological_date']);
+                                                                                    } ?>" id="other_bacteriological_date" name="other_bacteriological_date" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -7301,7 +7311,7 @@ if ($user->isLoggedIn()) {
                                                 <hr>
                                                 <div class="row">
 
-                                                    <div class="col-sm-3" id="xpert_ultra_date1">
+                                                    <div class="col-sm-4" id="xpert_ultra_date1">
                                                         <div class="mb-3">
                                                             <label for="xpert_ultra_date" class="form-label">103. If Xpert Ultra (Date?)</label>
                                                             <input type="date" value="<?php if ($costing['xpert_ultra_date']) {
@@ -7309,7 +7319,7 @@ if ($user->isLoggedIn()) {
                                                                                         } ?>" id="xpert_ultra_date" name="xpert_ultra_date" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-3" id="truenat_date1">
+                                                    <div class="col-sm-4" id="truenat_date1">
                                                         <div class="mb-3">
                                                             <label for="truenat_date" class="form-label">103. If Truenat (Date?)</label>
                                                             <input type="date" value="<?php if ($costing['truenat_date']) {
@@ -7317,20 +7327,12 @@ if ($user->isLoggedIn()) {
                                                                                         } ?>" id="truenat_date" name="truenat_date" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-3" id="afb_microscope_date1">
+                                                    <div class="col-sm-4" id="afb_microscope_date1">
                                                         <div class="mb-3">
                                                             <label for="afb_microscope_date" class="form-label">103. If AFB Microscope (Date?)</label>
                                                             <input type="date" value="<?php if ($costing['afb_microscope_date']) {
                                                                                             print_r($costing['afb_microscope_date']);
                                                                                         } ?>" id="afb_microscope_date" name="afb_microscope_date" class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3" id="other_bacteriological_date1">
-                                                        <div class="mb-3">
-                                                            <label for="other_bacteriological_date" class="form-label">103. If Other test(s),(Date?)</label>
-                                                            <input type="date" value="<?php if ($costing['other_bacteriological_date']) {
-                                                                                            print_r($costing['other_bacteriological_date']);
-                                                                                        } ?>" id="other_bacteriological_date" name="other_bacteriological_date" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
                                                 </div>
