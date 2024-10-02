@@ -9992,6 +9992,8 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/enrollment/tx_previous.js"></script>
     <script src="myjs/add/enrollment/immunosuppressive.js"></script>
     <script src="myjs/add/enrollment/diseases_medical.js"></script>
+    <script src="myjs/add/enrollment/chest_x_ray.js"></script>
+
 
 
 
