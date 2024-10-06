@@ -34,7 +34,7 @@ function toggleElementVisibility() {
     tb_otcome2_date_completed.style.display = "none";
     tb_otcome2_date_died.style.display = "none";
     tb_otcome2_date_ltf.style.display = "none";
-    tb_otcome2_date.style.display = "block";
+    tb_otcome2_date.style.display = "none";
     tb_otcome2_date.removeAttribute("required");
   }
 }

@@ -1104,6 +1104,7 @@ if ($user->isLoggedIn()) {
                         'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
                         'regimen_changed__reason' => Input::get('regimen_changed__reason'),
                         'tb_otcome2' => Input::get('tb_otcome2'),
+                        'tb_otcome2_date' => Input::get('tb_otcome2_date'),                        
                         'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
                         'tb_other_specify' => Input::get('tb_other_specify'),
                         'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
@@ -1156,6 +1157,7 @@ if ($user->isLoggedIn()) {
                         'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
                         'regimen_changed__reason' => Input::get('regimen_changed__reason'),
                         'tb_otcome2' => Input::get('tb_otcome2'),
+                        'tb_otcome2_date' => Input::get('tb_otcome2_date'),                        
                         'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
                         'tb_other_specify' => Input::get('tb_other_specify'),
                         'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
@@ -10169,7 +10171,7 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/radio.js"></script>
 
 
-    
+
 
     <script>
         $(function() {
