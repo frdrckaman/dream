@@ -7552,7 +7552,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-4" id="tb_otcome2">
-                                                        <label for="tb_otcome2" class="form-label">109. Treatment outcome at the end of treatment</label>
+                                                        <label for="tb_otcome2" class="form-label">109. Treatment outcomes</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7566,8 +7566,14 @@ if ($user->isLoggedIn()) {
                                                                 <?php } ?>
                                                             </div>
                                                             <button type="button" onclick="unsetRadio('tb_otcome2')">Unset</button>
-
                                                         </div>
+                                                        <br>
+                                                        <label for="tb_otcome2_date_completed" id="tb_otcome2_date_completed" class="form-label">Date Completed</label>
+                                                        <label for="tb_otcome2_date_died" id="tb_otcome2_date_died" class="form-label">Date Of Deathn</label>
+                                                        <label for="tb_otcome2_date_ltf" id="tb_otcome2_date_ltf" class="form-label">Last date Known to be alive</label>
+                                                        <input type="date" value="<?php if ($costing['tb_otcome2_date']) {
+                                                                                        print_r($costing['tb_otcome2_date']);
+                                                                                    } ?>" id="tb_otcome2_date" name="tb_otcome2_date" class="form-control" />
                                                     </div>
 
                                                 </div>
@@ -10156,19 +10162,14 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/diagnosis/tb_diagnosis_made2.js"></script>
     <script src="myjs/add/diagnosis/tb_other_diagnosis.js"></script>
     <script src="myjs/add/diagnosis/laboratory_test_used.js"></script>
-    <script src="myjs/add/diagnosis"></script>
-
-
-
-
-
-
+    <script src="myjs/add/diagnosis/tb_otcome2.js"></script>
 
 
 
     <script src="myjs/add/radio.js"></script>
 
 
+    
 
     <script>
         $(function() {
