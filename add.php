@@ -673,11 +673,17 @@ if ($user->isLoggedIn()) {
                         'genotyping_done' => Input::get('genotyping_done'),
                         'genotyping_asay' => $genotyping_asay,
                         'isoniazid2' => Input::get('isoniazid2'),
+                        'isoniazid2_error_code' => Input::get('isoniazid2_error_code'),                        
                         'fluoroquinolones' => Input::get('fluoroquinolones'),
+                        'fluoroquinolones_error_code' => Input::get('fluoroquinolones_error_code'),                        
                         'amikacin2' => Input::get('amikacin2'),
+                        'amikacin2_error_code' => Input::get('amikacin2_error_code'),                        
                         'kanamycin' => Input::get('kanamycin'),
+                        'kanamycin_error_code' => Input::get('kanamycin_error_code'),                        
                         'capreomycin' => Input::get('capreomycin'),
+                        'capreomycin_error_code' => Input::get('capreomycin_error_code'),                        
                         'ethionamide2' => Input::get('ethionamide2'),
+                        'ethionamide2_error_code' => Input::get('ethionamide2_error_code'),                        
                         'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
                         'nanopore_sequencing' => $nanopore_sequencing,
                         'rifampicin3' => Input::get('rifampicin3'),
@@ -759,11 +765,17 @@ if ($user->isLoggedIn()) {
                         'genotyping_done' => Input::get('genotyping_done'),
                         'genotyping_asay' => $genotyping_asay,
                         'isoniazid2' => Input::get('isoniazid2'),
+                        'isoniazid2_error_code' => Input::get('isoniazid2_error_code'),
                         'fluoroquinolones' => Input::get('fluoroquinolones'),
+                        'fluoroquinolones_error_code' => Input::get('fluoroquinolones_error_code'),
                         'amikacin2' => Input::get('amikacin2'),
+                        'amikacin2_error_code' => Input::get('amikacin2_error_code'),
                         'kanamycin' => Input::get('kanamycin'),
+                        'kanamycin_error_code' => Input::get('kanamycin_error_code'),
                         'capreomycin' => Input::get('capreomycin'),
+                        'capreomycin_error_code' => Input::get('capreomycin_error_code'),
                         'ethionamide2' => Input::get('ethionamide2'),
+                        'ethionamide2_error_code' => Input::get('ethionamide2_error_code'), 
                         'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
                         'nanopore_sequencing' => $nanopore_sequencing,
                         'rifampicin3' => Input::get('rifampicin3'),
@@ -6410,12 +6422,12 @@ if ($user->isLoggedIn()) {
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-4" id="isoniazid2_error_code1">
+                                                        <div class="col-4" id="fluoroquinolones_error_code1">
                                                             <div class="mb-2">
-                                                                <label for="isoniazid2_error_code" class="form-label">Specify Error Code</label>
-                                                                <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
-                                                                                                print_r($costing['isoniazid2_error_code']);
-                                                                                            } ?>" id="isoniazid2_error_code" name="isoniazid2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                                <label for="fluoroquinolones_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['fluoroquinolones_error_code']) {
+                                                                                                print_r($costing['fluoroquinolones_error_code']);
+                                                                                            } ?>" id="fluoroquinolones_error_code" name="fluoroquinolones_error_code" class="form-control" placeholder="Enter here Error Code" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -6437,12 +6449,12 @@ if ($user->isLoggedIn()) {
 
                                                             </div>
                                                         </div>
-                                                        <div class="col-4" id="isoniazid2_error_code1">
+                                                        <div class="col-4" id="amikacin2_error_code1">
                                                             <div class="mb-2">
-                                                                <label for="isoniazid2_error_code" class="form-label">Specify Error Code</label>
-                                                                <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
-                                                                                                print_r($costing['isoniazid2_error_code']);
-                                                                                            } ?>" id="isoniazid2_error_code" name="isoniazid2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                                <label for="amikacin2_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['amikacin2_error_code']) {
+                                                                                                print_r($costing['amikacin2_error_code']);
+                                                                                            } ?>" id="amikacin2_error_code" name="amikacin2_error_code" class="form-control" placeholder="Enter here Error Code" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -6470,12 +6482,12 @@ if ($user->isLoggedIn()) {
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-4" id="isoniazid2_error_code1">
+                                                        <div class="col-4" id="kanamycin_error_code1">
                                                             <div class="mb-2">
-                                                                <label for="isoniazid2_error_code" class="form-label">Specify Error Code</label>
-                                                                <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
-                                                                                                print_r($costing['isoniazid2_error_code']);
-                                                                                            } ?>" id="isoniazid2_error_code" name="isoniazid2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                                <label for="kanamycin_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['kanamycin_error_code']) {
+                                                                                                print_r($costing['kanamycin_error_code']);
+                                                                                            } ?>" id="kanamycin_error_code" name="kanamycin_error_code" class="form-control" placeholder="Enter here Error Code" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -6497,12 +6509,12 @@ if ($user->isLoggedIn()) {
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-4" id="isoniazid2_error_code1">
+                                                        <div class="col-4" id="capreomycin_error_code1">
                                                             <div class="mb-2">
-                                                                <label for="isoniazid2_error_code" class="form-label">Specify Error Code</label>
-                                                                <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
-                                                                                                print_r($costing['isoniazid2_error_code']);
-                                                                                            } ?>" id="isoniazid2_error_code" name="isoniazid2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                                <label for="capreomycin_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['capreomycin_error_code']) {
+                                                                                                print_r($costing['capreomycin_error_code']);
+                                                                                            } ?>" id="capreomycin_error_code" name="capreomycin_error_code" class="form-control" placeholder="Enter here Error Code" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -6524,12 +6536,12 @@ if ($user->isLoggedIn()) {
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-4" id="isoniazid2_error_code1">
+                                                        <div class="col-4" id="ethionamide2_error_code1">
                                                             <div class="mb-2">
-                                                                <label for="isoniazid2_error_code" class="form-label">Specify Error Code</label>
-                                                                <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
-                                                                                                print_r($costing['isoniazid2_error_code']);
-                                                                                            } ?>" id="isoniazid2_error_code" name="isoniazid2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                                <label for="ethionamide2_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['ethionamide2_error_code']) {
+                                                                                                print_r($costing['ethionamide2_error_code']);
+                                                                                            } ?>" id="ethionamide2_error_code" name="ethionamide2_error_code" class="form-control" placeholder="Enter here Error Code" />
                                                             </div>
                                                         </div>
                                                     </div>
