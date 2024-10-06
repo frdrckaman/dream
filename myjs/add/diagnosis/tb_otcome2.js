@@ -16,21 +16,25 @@ function toggleElementVisibility() {
     tb_otcome2_date_completed.style.display = "block";
     tb_otcome2_date_died.style.display = "none";
     tb_otcome2_date_ltf.style.display = "none";
+    tb_otcome2_date.style.display = "block";
     tb_otcome2_date.setAttribute("required", "required");
   } else if (tb_otcome24.checked) {
     tb_otcome2_date_completed.style.display = "none";
     tb_otcome2_date_died.style.display = "none";
     tb_otcome2_date_ltf.style.display = "block";
+    tb_otcome2_date.style.display = "block";
     tb_otcome2_date.setAttribute("required", "required");
   } else if (tb_otcome25.checked) {
     tb_otcome2_date_completed.style.display = "none";
     tb_otcome2_date_died.style.display = "block";
     tb_otcome2_date_ltf.style.display = "none";
+    tb_otcome2_date.style.display = "block";
     tb_otcome2_date.setAttribute("required", "required");
   } else {
     tb_otcome2_date_completed.style.display = "none";
     tb_otcome2_date_died.style.display = "none";
     tb_otcome2_date_ltf.style.display = "none";
+    tb_otcome2_date.style.display = "block";
     tb_otcome2_date.removeAttribute("required");
   }
 }
