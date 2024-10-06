@@ -19,10 +19,3 @@ regimen_changed2.addEventListener("change", toggleElementVisibility);
 
 // Initial check
 toggleElementVisibility();
-
-function unsetRegimen_changed() {
-  var unsetRegimen_changes = document.getElementsByName("regimen_changed");
-  unsetRegimen_changes.forEach(function (unsetRegimen_changed) {
-    unsetRegimen_changed.checked = false;
-  });
-}

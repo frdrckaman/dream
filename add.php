@@ -507,6 +507,7 @@ if ($user->isLoggedIn()) {
                             'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
                             'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
                             'stool_date' => Input::get('stool_date'),
+                            'sputum_samples_other' => Input::get('sputum_samples_other'),
                             'sputum_samples_date' => Input::get('sputum_samples_date'),
                             'chest_x_ray' => Input::get('chest_x_ray'),
                             'chest_x_ray_date' => Input::get('chest_x_ray_date'),
@@ -559,6 +560,7 @@ if ($user->isLoggedIn()) {
                             'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
                             'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
                             'stool_date' => Input::get('stool_date'),
+                            'sputum_samples_other' => Input::get('sputum_samples_other'),
                             'sputum_samples_date' => Input::get('sputum_samples_date'),
                             'chest_x_ray' => Input::get('chest_x_ray'),
                             'chest_x_ray_date' => Input::get('chest_x_ray_date'),
@@ -671,11 +673,17 @@ if ($user->isLoggedIn()) {
                         'genotyping_done' => Input::get('genotyping_done'),
                         'genotyping_asay' => $genotyping_asay,
                         'isoniazid2' => Input::get('isoniazid2'),
+                        'isoniazid2_error_code' => Input::get('isoniazid2_error_code'),
                         'fluoroquinolones' => Input::get('fluoroquinolones'),
+                        'fluoroquinolones_error_code' => Input::get('fluoroquinolones_error_code'),
                         'amikacin2' => Input::get('amikacin2'),
+                        'amikacin2_error_code' => Input::get('amikacin2_error_code'),
                         'kanamycin' => Input::get('kanamycin'),
+                        'kanamycin_error_code' => Input::get('kanamycin_error_code'),
                         'capreomycin' => Input::get('capreomycin'),
+                        'capreomycin_error_code' => Input::get('capreomycin_error_code'),
                         'ethionamide2' => Input::get('ethionamide2'),
+                        'ethionamide2_error_code' => Input::get('ethionamide2_error_code'),
                         'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
                         'nanopore_sequencing' => $nanopore_sequencing,
                         'rifampicin3' => Input::get('rifampicin3'),
@@ -757,11 +765,17 @@ if ($user->isLoggedIn()) {
                         'genotyping_done' => Input::get('genotyping_done'),
                         'genotyping_asay' => $genotyping_asay,
                         'isoniazid2' => Input::get('isoniazid2'),
+                        'isoniazid2_error_code' => Input::get('isoniazid2_error_code'),
                         'fluoroquinolones' => Input::get('fluoroquinolones'),
+                        'fluoroquinolones_error_code' => Input::get('fluoroquinolones_error_code'),
                         'amikacin2' => Input::get('amikacin2'),
+                        'amikacin2_error_code' => Input::get('amikacin2_error_code'),
                         'kanamycin' => Input::get('kanamycin'),
+                        'kanamycin_error_code' => Input::get('kanamycin_error_code'),
                         'capreomycin' => Input::get('capreomycin'),
+                        'capreomycin_error_code' => Input::get('capreomycin_error_code'),
                         'ethionamide2' => Input::get('ethionamide2'),
+                        'ethionamide2_error_code' => Input::get('ethionamide2_error_code'),
                         'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
                         'nanopore_sequencing' => $nanopore_sequencing,
                         'rifampicin3' => Input::get('rifampicin3'),
@@ -1087,8 +1101,10 @@ if ($user->isLoggedIn()) {
                         'regimen_changed__date' => Input::get('regimen_changed__date'),
                         'regimen_removed_name' => Input::get('regimen_removed_name'),
                         'regimen_added_name' => Input::get('regimen_added_name'),
+                        'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
                         'regimen_changed__reason' => Input::get('regimen_changed__reason'),
                         'tb_otcome2' => Input::get('tb_otcome2'),
+                        'tb_otcome2_date' => Input::get('tb_otcome2_date'),                        
                         'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
                         'tb_other_specify' => Input::get('tb_other_specify'),
                         'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
@@ -1138,8 +1154,10 @@ if ($user->isLoggedIn()) {
                         'regimen_changed__date' => Input::get('regimen_changed__date'),
                         'regimen_removed_name' => Input::get('regimen_removed_name'),
                         'regimen_added_name' => Input::get('regimen_added_name'),
+                        'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
                         'regimen_changed__reason' => Input::get('regimen_changed__reason'),
                         'tb_otcome2' => Input::get('tb_otcome2'),
+                        'tb_otcome2_date' => Input::get('tb_otcome2_date'),                        
                         'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
                         'tb_other_specify' => Input::get('tb_other_specify'),
                         'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
@@ -6373,9 +6391,18 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                            </div>
-                                                            <button type="button" onclick="unsetRadio('isoniazid2')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('isoniazid2')">Unset</button>
 
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-4" id="isoniazid2_error_code1">
+                                                            <div class="mb-2">
+                                                                <label for="isoniazid2_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
+                                                                                                print_r($costing['isoniazid2_error_code']);
+                                                                                            } ?>" id="isoniazid2_error_code" name="isoniazid2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -6392,9 +6419,18 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                            </div>
-                                                            <button type="button" onclick="unsetRadio('fluoroquinolones')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('fluoroquinolones')">Unset</button>
 
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-4" id="fluoroquinolones_error_code1">
+                                                            <div class="mb-2">
+                                                                <label for="fluoroquinolones_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['fluoroquinolones_error_code']) {
+                                                                                                print_r($costing['fluoroquinolones_error_code']);
+                                                                                            } ?>" id="fluoroquinolones_error_code" name="fluoroquinolones_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -6411,11 +6447,20 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                            </div>
-                                                            <button type="button" onclick="unsetRadio('amikacin2')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('amikacin2')">Unset</button>
 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4" id="amikacin2_error_code1">
+                                                            <div class="mb-2">
+                                                                <label for="amikacin2_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['amikacin2_error_code']) {
+                                                                                                print_r($costing['amikacin2_error_code']);
+                                                                                            } ?>" id="amikacin2_error_code" name="amikacin2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                            </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
 
                                                 <hr>
@@ -6434,9 +6479,18 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                            </div>
-                                                            <button type="button" onclick="unsetRadio('kanamycin')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('kanamycin')">Unset</button>
 
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-4" id="kanamycin_error_code1">
+                                                            <div class="mb-2">
+                                                                <label for="kanamycin_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['kanamycin_error_code']) {
+                                                                                                print_r($costing['kanamycin_error_code']);
+                                                                                            } ?>" id="kanamycin_error_code" name="kanamycin_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4" id="capreomycin">
@@ -6452,9 +6506,18 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                            </div>
-                                                            <button type="button" onclick="unsetRadio('capreomycin')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('capreomycin')">Unset</button>
 
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-4" id="capreomycin_error_code1">
+                                                            <div class="mb-2">
+                                                                <label for="capreomycin_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['capreomycin_error_code']) {
+                                                                                                print_r($costing['capreomycin_error_code']);
+                                                                                            } ?>" id="capreomycin_error_code" name="capreomycin_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4" id="ethionamide2">
@@ -6470,9 +6533,18 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                            </div>
-                                                            <button type="button" onclick="unsetRadio('ethionamide2')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('ethionamide2')">Unset</button>
 
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-4" id="ethionamide2_error_code1">
+                                                            <div class="mb-2">
+                                                                <label for="ethionamide2_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['ethionamide2_error_code']) {
+                                                                                                print_r($costing['ethionamide2_error_code']);
+                                                                                            } ?>" id="ethionamide2_error_code" name="ethionamide2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -7285,12 +7357,17 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3" id="other_bacteriological1">
+                                                <div class="col-sm-3" id="other_bacteriological_date1">
                                                     <div class="mb-3">
-                                                        <label for="other_bacteriological" class="form-label">103. If Other test(s),(Specify?)</label>
-                                                        <input type="date" value="<?php if ($costing['other_bacteriological']) {
+                                                        <label for="other_bacteriological" class="form-label">103. Specify and Date</label>
+                                                        <input type="text" value="<?php if ($costing['other_bacteriological']) {
                                                                                         print_r($costing['other_bacteriological']);
-                                                                                    } ?>" id="other_bacteriological" name="other_bacteriological" class="form-control" placeholder="Enter here" />
+                                                                                    } ?>" id="other_bacteriological" name="other_bacteriological" class="form-control" placeholder="Speficy here" />
+                                                        <br>
+                                                        <input type="date" value="<?php if ($costing['other_bacteriological_date']) {
+                                                                                        print_r($costing['other_bacteriological_date']);
+                                                                                    } ?>" id="other_bacteriological_date" name="other_bacteriological_date" class="form-control" placeholder="Enter here" />
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -7299,7 +7376,7 @@ if ($user->isLoggedIn()) {
                                                 <hr>
                                                 <div class="row">
 
-                                                    <div class="col-sm-3" id="xpert_ultra_date1">
+                                                    <div class="col-sm-4" id="xpert_ultra_date1">
                                                         <div class="mb-3">
                                                             <label for="xpert_ultra_date" class="form-label">103. If Xpert Ultra (Date?)</label>
                                                             <input type="date" value="<?php if ($costing['xpert_ultra_date']) {
@@ -7307,7 +7384,7 @@ if ($user->isLoggedIn()) {
                                                                                         } ?>" id="xpert_ultra_date" name="xpert_ultra_date" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-3" id="truenat_date1">
+                                                    <div class="col-sm-4" id="truenat_date1">
                                                         <div class="mb-3">
                                                             <label for="truenat_date" class="form-label">103. If Truenat (Date?)</label>
                                                             <input type="date" value="<?php if ($costing['truenat_date']) {
@@ -7315,20 +7392,12 @@ if ($user->isLoggedIn()) {
                                                                                         } ?>" id="truenat_date" name="truenat_date" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-3" id="afb_microscope_date1">
+                                                    <div class="col-sm-4" id="afb_microscope_date1">
                                                         <div class="mb-3">
                                                             <label for="afb_microscope_date" class="form-label">103. If AFB Microscope (Date?)</label>
                                                             <input type="date" value="<?php if ($costing['afb_microscope_date']) {
                                                                                             print_r($costing['afb_microscope_date']);
                                                                                         } ?>" id="afb_microscope_date" name="afb_microscope_date" class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3" id="other_bacteriological_date1">
-                                                        <div class="mb-3">
-                                                            <label for="other_bacteriological_date" class="form-label">103. If Other test(s),(Date?)</label>
-                                                            <input type="date" value="<?php if ($costing['other_bacteriological_date']) {
-                                                                                            print_r($costing['other_bacteriological_date']);
-                                                                                        } ?>" id="other_bacteriological_date" name="other_bacteriological_date" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7439,6 +7508,11 @@ if ($user->isLoggedIn()) {
                                                                 <?php } ?>
                                                             </div>
 
+                                                            <label for="laboratory_test_used_other" id="laboratory_test_used_other1" class="form-label">Other Specify </label>
+                                                            <input type="text" value="<?php if ($costing['laboratory_test_used_other']) {
+                                                                                            print_r($costing['laboratory_test_used_other']);
+                                                                                        } ?>" id="laboratory_test_used_other" name="laboratory_test_used_other" class="form-control" placeholder="Enter here" />
+
                                                         </div>
                                                     </div>
 
@@ -7480,7 +7554,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-4" id="tb_otcome2">
-                                                        <label for="tb_otcome2" class="form-label">109. Treatment outcome at the end of treatment</label>
+                                                        <label for="tb_otcome2" class="form-label">109. Treatment outcomes</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7494,8 +7568,14 @@ if ($user->isLoggedIn()) {
                                                                 <?php } ?>
                                                             </div>
                                                             <button type="button" onclick="unsetRadio('tb_otcome2')">Unset</button>
-
                                                         </div>
+                                                        <br>
+                                                        <label for="tb_otcome2_date_completed" id="tb_otcome2_date_completed" class="form-label">Date Completed</label>
+                                                        <label for="tb_otcome2_date_died" id="tb_otcome2_date_died" class="form-label">Date Of Deathn</label>
+                                                        <label for="tb_otcome2_date_ltf" id="tb_otcome2_date_ltf" class="form-label">Last date Known to be alive</label>
+                                                        <input type="date" value="<?php if ($costing['tb_otcome2_date']) {
+                                                                                        print_r($costing['tb_otcome2_date']);
+                                                                                    } ?>" id="tb_otcome2_date" name="tb_otcome2_date" class="form-control" />
                                                     </div>
 
                                                 </div>
@@ -7521,7 +7601,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="tb_other_diagnosis" id="tb_other_diagnosis<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_other_diagnosis'] == $value['id']) {
                                                                                                                                                                                                                         echo 'checked';
-                                                                                                                                                                                                                    } ?> required>
+                                                                                                                                                                                                                    } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
@@ -7556,7 +7636,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
 
-                                                <div class="col-sm-4" id="laboratory_test_used2">
+                                                <div class="col-sm-4" id="laboratory_test_used221111">
                                                     <label for="microscopy_reason" class="form-label">112. If laboratory, which test used </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -8275,7 +8355,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_sample', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="other_samples" id="other_samples<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($clients['other_samples'] == $value['id']) {
                                                                                                                                                                                                                 echo 'checked';
@@ -8307,11 +8387,32 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="col-sm-3" id="sputum_samples_date1">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>38. Specify Other and Date</label>
+                                                            <input class="form-control" type="text" name="sputum_samples_other" id="sputum_samples_other" value="<?php if ($clients['sputum_samples_other']) {
+                                                                                                                                                                        print_r($clients['sputum_samples_other']);
+                                                                                                                                                                    }  ?>" placeholder="Write here..." />
+
+                                                            <br>
+
+                                                            <input class="form-control" type="date" name="sputum_samples_date" id="sputum_samples_date" value="<?php if ($clients['sputum_samples_date']) {
+                                                                                                                                                                    print_r($clients['sputum_samples_date']);
+                                                                                                                                                                }  ?>" />
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-3" id="pleural_fluid_date1">
+                                                <div class="col-sm-4" id="pleural_fluid_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8321,10 +8422,9 @@ if ($user->isLoggedIn()) {
                                                                                                                                                                 }  ?>" />
                                                         </div>
                                                     </div>
-                                                    <button type="button" onclick="unsetRadio('pleural_fluid_date')">Unset</button>
 
                                                 </div>
-                                                <div class="col-sm-3" id="csf_date1">
+                                                <div class="col-sm-4" id="csf_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8335,7 +8435,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3" id="peritoneal_fluid_date1">
+                                                <div class="col-sm-4" id="peritoneal_fluid_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8346,8 +8446,12 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <hr>
 
-                                                <div class="col-sm-3" id="pericardial_fluid_date1">
+                                            <div class="row">
+
+                                                <div class="col-sm-4" id="pericardial_fluid_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8359,7 +8463,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="lymph_node_aspirate_date1">
+                                                <div class="col-sm-4" id="lymph_node_aspirate_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8370,7 +8474,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3" id="stool_date1">
+                                                <div class="col-sm-4" id="stool_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8378,17 +8482,7 @@ if ($user->isLoggedIn()) {
                                                             <input class="form-control" type="date" name="stool_date" id="stool_date" value="<?php if ($clients['stool_date']) {
                                                                                                                                                     print_r($clients['stool_date']);
                                                                                                                                                 }  ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3" id="sputum_samples_date1">
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>38. Other, specify Date</label>
-                                                            <input class="form-control" type="date" name="sputum_samples_date" id="sputum_samples_date" value="<?php if ($clients['sputum_samples_date']) {
-                                                                                                                                                                    print_r($clients['sputum_samples_date']);
-                                                                                                                                                                }  ?>" />
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10048,6 +10142,16 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/diagnosis_test/qn91.js"></script>
     <script src="myjs/add/diagnosis_test/qn92.js"></script>
     <script src="myjs/add/diagnosis_test/qn93.js"></script>
+    <script src="myjs/add/diagnosis_test/amikacin2.js"></script>
+    <script src="myjs/add/diagnosis_test/capreomycin.js"></script>
+    <script src="myjs/add/diagnosis_test/ethionamide2.js"></script>
+    <script src="myjs/add/diagnosis_test/fluoroquinolones.js"></script>
+    <script src="myjs/add/diagnosis_test/isoniazid2.js"></script>
+    <script src="myjs/add/diagnosis_test/kanamycin.js"></script>
+    <script src="myjs/add/diagnosis_test/"></script>
+    <script src="myjs/add/diagnosis_test"></script>
+
+
 
     <!-- Diagnosis Js -->
     <script src="myjs/add/diagnosis/tb_diagnosis_made.js"></script>
@@ -10059,18 +10163,13 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/diagnosis/regimen_changed.js"></script>
     <script src="myjs/add/diagnosis/tb_diagnosis_made2.js"></script>
     <script src="myjs/add/diagnosis/tb_other_diagnosis.js"></script>
-    <script src="myjs/add/diagnosis/"></script>
-    <script src="myjs/add/diagnosis"></script>
-
-
-
-
-
-
+    <script src="myjs/add/diagnosis/laboratory_test_used.js"></script>
+    <script src="myjs/add/diagnosis/tb_otcome2.js"></script>
 
 
 
     <script src="myjs/add/radio.js"></script>
+
 
 
 
@@ -10262,16 +10361,6 @@ if ($user->isLoggedIn()) {
             myDropzone.removeAllFiles(true)
         }
         // DropzoneJS Demo Code End
-
-
-        // $("#packs_per_day, #packs_per_day").on("input", function() {
-        //     setTimeout(function() {
-        //         var weight = $("#packs_per_day").val();
-        //         var height = $("#packs_per_day").val() / 100; // Convert cm to m
-        //         var bmi = weight / (height * height);
-        //         $("#packs_per_year").text(bmi.toFixed(2));
-        //     }, 1);
-        // });
     </script>
 
 </body>
