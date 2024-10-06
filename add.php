@@ -673,17 +673,17 @@ if ($user->isLoggedIn()) {
                         'genotyping_done' => Input::get('genotyping_done'),
                         'genotyping_asay' => $genotyping_asay,
                         'isoniazid2' => Input::get('isoniazid2'),
-                        'isoniazid2_error_code' => Input::get('isoniazid2_error_code'),                        
+                        'isoniazid2_error_code' => Input::get('isoniazid2_error_code'),
                         'fluoroquinolones' => Input::get('fluoroquinolones'),
-                        'fluoroquinolones_error_code' => Input::get('fluoroquinolones_error_code'),                        
+                        'fluoroquinolones_error_code' => Input::get('fluoroquinolones_error_code'),
                         'amikacin2' => Input::get('amikacin2'),
-                        'amikacin2_error_code' => Input::get('amikacin2_error_code'),                        
+                        'amikacin2_error_code' => Input::get('amikacin2_error_code'),
                         'kanamycin' => Input::get('kanamycin'),
-                        'kanamycin_error_code' => Input::get('kanamycin_error_code'),                        
+                        'kanamycin_error_code' => Input::get('kanamycin_error_code'),
                         'capreomycin' => Input::get('capreomycin'),
-                        'capreomycin_error_code' => Input::get('capreomycin_error_code'),                        
+                        'capreomycin_error_code' => Input::get('capreomycin_error_code'),
                         'ethionamide2' => Input::get('ethionamide2'),
-                        'ethionamide2_error_code' => Input::get('ethionamide2_error_code'),                        
+                        'ethionamide2_error_code' => Input::get('ethionamide2_error_code'),
                         'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
                         'nanopore_sequencing' => $nanopore_sequencing,
                         'rifampicin3' => Input::get('rifampicin3'),
@@ -775,7 +775,7 @@ if ($user->isLoggedIn()) {
                         'capreomycin' => Input::get('capreomycin'),
                         'capreomycin_error_code' => Input::get('capreomycin_error_code'),
                         'ethionamide2' => Input::get('ethionamide2'),
-                        'ethionamide2_error_code' => Input::get('ethionamide2_error_code'), 
+                        'ethionamide2_error_code' => Input::get('ethionamide2_error_code'),
                         'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
                         'nanopore_sequencing' => $nanopore_sequencing,
                         'rifampicin3' => Input::get('rifampicin3'),
@@ -10134,6 +10134,16 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/diagnosis_test/qn91.js"></script>
     <script src="myjs/add/diagnosis_test/qn92.js"></script>
     <script src="myjs/add/diagnosis_test/qn93.js"></script>
+    <script src="myjs/add/diagnosis_test/amikacin2.js"></script>
+    <script src="myjs/add/diagnosis_test/capreomycin.js"></script>
+    <script src="myjs/add/diagnosis_test/ethionamide2.js"></script>
+    <script src="myjs/add/diagnosis_test/fluoroquinolones.js"></script>
+    <script src="myjs/add/diagnosis_test/isoniazid2.js"></script>
+    <script src="myjs/add/diagnosis_test/kanamycin.js"></script>
+    <script src="myjs/add/diagnosis_test/"></script>
+    <script src="myjs/add/diagnosis_test"></script>
+
+
 
     <!-- Diagnosis Js -->
     <script src="myjs/add/diagnosis/tb_diagnosis_made.js"></script>
