@@ -507,6 +507,7 @@ if ($user->isLoggedIn()) {
                             'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
                             'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
                             'stool_date' => Input::get('stool_date'),
+                            'sputum_samples_other' => Input::get('sputum_samples_other'),
                             'sputum_samples_date' => Input::get('sputum_samples_date'),
                             'chest_x_ray' => Input::get('chest_x_ray'),
                             'chest_x_ray_date' => Input::get('chest_x_ray_date'),
@@ -559,6 +560,7 @@ if ($user->isLoggedIn()) {
                             'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
                             'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
                             'stool_date' => Input::get('stool_date'),
+                            'sputum_samples_other' => Input::get('sputum_samples_other'),
                             'sputum_samples_date' => Input::get('sputum_samples_date'),
                             'chest_x_ray' => Input::get('chest_x_ray'),
                             'chest_x_ray_date' => Input::get('chest_x_ray_date'),
@@ -8311,11 +8313,32 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="col-sm-3" id="sputum_samples_date1">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>38. Specify Other and Date</label>
+                                                            <input class="form-control" type="text" name="sputum_samples_other" id="sputum_samples_other" value="<?php if ($clients['sputum_samples_other']) {
+                                                                                                                                                                        print_r($clients['sputum_samples_other']);
+                                                                                                                                                                    }  ?>" placeholder="Write here..." />
+
+                                                            <br>
+
+                                                            <input class="form-control" type="date" name="sputum_samples_date" id="sputum_samples_date" value="<?php if ($clients['sputum_samples_date']) {
+                                                                                                                                                                    print_r($clients['sputum_samples_date']);
+                                                                                                                                                                }  ?>" />
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-3" id="pleural_fluid_date1">
+                                                <div class="col-sm-4" id="pleural_fluid_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8325,10 +8348,9 @@ if ($user->isLoggedIn()) {
                                                                                                                                                                 }  ?>" />
                                                         </div>
                                                     </div>
-                                                    <button type="button" onclick="unsetRadio('pleural_fluid_date')">Unset</button>
 
                                                 </div>
-                                                <div class="col-sm-3" id="csf_date1">
+                                                <div class="col-sm-4" id="csf_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8339,7 +8361,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3" id="peritoneal_fluid_date1">
+                                                <div class="col-sm-4" id="peritoneal_fluid_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8350,8 +8372,12 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <hr>
 
-                                                <div class="col-sm-3" id="pericardial_fluid_date1">
+                                            <div class="row">
+
+                                                <div class="col-sm-4" id="pericardial_fluid_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8363,7 +8389,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="lymph_node_aspirate_date1">
+                                                <div class="col-sm-4" id="lymph_node_aspirate_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8374,7 +8400,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3" id="stool_date1">
+                                                <div class="col-sm-4" id="stool_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8382,17 +8408,7 @@ if ($user->isLoggedIn()) {
                                                             <input class="form-control" type="date" name="stool_date" id="stool_date" value="<?php if ($clients['stool_date']) {
                                                                                                                                                     print_r($clients['stool_date']);
                                                                                                                                                 }  ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3" id="sputum_samples_date1">
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>38. Other, specify Date</label>
-                                                            <input class="form-control" type="date" name="sputum_samples_date" id="sputum_samples_date" value="<?php if ($clients['sputum_samples_date']) {
-                                                                                                                                                                    print_r($clients['sputum_samples_date']);
-                                                                                                                                                                }  ?>" />
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10266,7 +10282,6 @@ if ($user->isLoggedIn()) {
             myDropzone.removeAllFiles(true)
         }
         // DropzoneJS Demo Code End
-        
     </script>
 
 </body>

@@ -4,7 +4,7 @@ const sputum_samples3 = document.getElementById("sputum_samples3");
 const sputum_samples4 = document.getElementById("sputum_samples4");
 const sputum_samples5 = document.getElementById("sputum_samples5");
 const sputum_samples6 = document.getElementById("sputum_samples6");
-const sputum_samples7 = document.getElementById("sputum_samples96");
+const sputum_samples96 = document.getElementById("sputum_samples96");
 
 const pleural_fluid1 = document.getElementById("pleural_fluid_date1");
 const pleural_fluid = document.getElementById("pleural_fluid_date");
@@ -91,7 +91,7 @@ sputum_samples6.addEventListener("change", function () {
   }
 });
 
-sputum_samples7.addEventListener("change", function () {
+sputum_samples96.addEventListener("change", function () {
   if (this.checked) {
     sputum_samples_date1.style.display = "block";
     sputum_samples_date.setAttribute("required", "required");
@@ -150,7 +150,7 @@ if (sputum_samples6.checked) {
   stool_date.removeAttribute("required");
 }
 
-if (sputum_samples7.checked) {
+if (sputum_samples96.checked) {
   sputum_samples_date1.style.display = "block";
   sputum_samples_date.setAttribute("required", "required");
 } else {
