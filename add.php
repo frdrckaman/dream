@@ -6377,9 +6377,18 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                            </div>
-                                                            <button type="button" onclick="unsetRadio('isoniazid2')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('isoniazid2')">Unset</button>
 
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-4" id="isoniazid2_error_code1">
+                                                            <div class="mb-2">
+                                                                <label for="isoniazid2_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
+                                                                                                print_r($costing['isoniazid2_error_code']);
+                                                                                            } ?>" id="isoniazid2_error_code" name="isoniazid2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -6396,9 +6405,18 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                            </div>
-                                                            <button type="button" onclick="unsetRadio('fluoroquinolones')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('fluoroquinolones')">Unset</button>
 
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-4" id="isoniazid2_error_code1">
+                                                            <div class="mb-2">
+                                                                <label for="isoniazid2_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
+                                                                                                print_r($costing['isoniazid2_error_code']);
+                                                                                            } ?>" id="isoniazid2_error_code" name="isoniazid2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -6415,11 +6433,20 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                            </div>
-                                                            <button type="button" onclick="unsetRadio('amikacin2')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('amikacin2')">Unset</button>
 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4" id="isoniazid2_error_code1">
+                                                            <div class="mb-2">
+                                                                <label for="isoniazid2_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
+                                                                                                print_r($costing['isoniazid2_error_code']);
+                                                                                            } ?>" id="isoniazid2_error_code" name="isoniazid2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                            </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
 
                                                 <hr>
@@ -6438,9 +6465,18 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                            </div>
-                                                            <button type="button" onclick="unsetRadio('kanamycin')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('kanamycin')">Unset</button>
 
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-4" id="isoniazid2_error_code1">
+                                                            <div class="mb-2">
+                                                                <label for="isoniazid2_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
+                                                                                                print_r($costing['isoniazid2_error_code']);
+                                                                                            } ?>" id="isoniazid2_error_code" name="isoniazid2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4" id="capreomycin">
@@ -6456,9 +6492,18 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                            </div>
-                                                            <button type="button" onclick="unsetRadio('capreomycin')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('capreomycin')">Unset</button>
 
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-4" id="isoniazid2_error_code1">
+                                                            <div class="mb-2">
+                                                                <label for="isoniazid2_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
+                                                                                                print_r($costing['isoniazid2_error_code']);
+                                                                                            } ?>" id="isoniazid2_error_code" name="isoniazid2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4" id="ethionamide2">
@@ -6474,9 +6519,18 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                            </div>
-                                                            <button type="button" onclick="unsetRadio('ethionamide2')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('ethionamide2')">Unset</button>
 
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-4" id="isoniazid2_error_code1">
+                                                            <div class="mb-2">
+                                                                <label for="isoniazid2_error_code" class="form-label">Specify Error Code</label>
+                                                                <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
+                                                                                                print_r($costing['isoniazid2_error_code']);
+                                                                                            } ?>" id="isoniazid2_error_code" name="isoniazid2_error_code" class="form-control" placeholder="Enter here Error Code" />
+                                                            </div>
                                                         </div>
                                                     </div>
 
