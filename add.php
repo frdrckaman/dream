@@ -1104,7 +1104,7 @@ if ($user->isLoggedIn()) {
                         'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
                         'regimen_changed__reason' => Input::get('regimen_changed__reason'),
                         'tb_otcome2' => Input::get('tb_otcome2'),
-                        'tb_otcome2_date' => Input::get('tb_otcome2_date'),                        
+                        'tb_otcome2_date' => Input::get('tb_otcome2_date'),
                         'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
                         'tb_other_specify' => Input::get('tb_other_specify'),
                         'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
@@ -1157,7 +1157,7 @@ if ($user->isLoggedIn()) {
                         'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
                         'regimen_changed__reason' => Input::get('regimen_changed__reason'),
                         'tb_otcome2' => Input::get('tb_otcome2'),
-                        'tb_otcome2_date' => Input::get('tb_otcome2_date'),                        
+                        'tb_otcome2_date' => Input::get('tb_otcome2_date'),
                         'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
                         'tb_other_specify' => Input::get('tb_other_specify'),
                         'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
@@ -2743,18 +2743,18 @@ if ($user->isLoggedIn()) {
                                             <hr> -->
 
                                             <div class="row">
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <!-- select -->
-                                                        <div class="form-group">
+                                                <!-- <div class="col-sm-4">
+                                                    <div class="row-form clearfix"> -->
+                                                <!-- select -->
+                                                <!-- <div class="form-group">
                                                             <label>Clinician Phone Number</label>
                                                             <input class="form-control" type="text" name="clinician_phone" id="clinician_phone" value="<?php if ($clients['clinician_phone']) {
                                                                                                                                                             print_r($clients['clinician_phone']);
                                                                                                                                                         }  ?>" /> <span>Example: 0700 000 111</span>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4" id="site">
+                                                </div> -->
+                                                <div class="col-sm-6" id="site">
                                                     <label>Name of Health facility:</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -2770,7 +2770,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-6">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Facility District</label>
@@ -2826,8 +2826,8 @@ if ($user->isLoggedIn()) {
 
                                             <hr>
 
-                                            <div class="row">
-                                                <div class="col-sm-4">
+                                            <!-- <div class="row"> -->
+                                                <!-- <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>First Name</label>
@@ -2858,25 +2858,25 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
 
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <!-- select -->
-                                                        <div class="form-group">
+                                                <!-- <hr> -->
+                                                <!-- <div class="row"> -->
+                                                    <!-- <div class="col-sm-4">
+                                                    <div class="row-form clearfix"> -->
+                                                    <!-- select -->
+                                                    <!-- <div class="form-group">
                                                             <label>Patient Phone Number</label>
                                                             <input class="form-control" type="text" name="patient_phone" id="patient_phone" value="<?php if ($clients['patient_phone']) {
                                                                                                                                                         print_r($clients['patient_phone']);
-                                                                                                                                                    }  ?>" /> <span>Example: 0700 000 111</span>
-                                                            <!-- <input class="form-control" type="tel" pattern=[0]{1}[0-9]{9} minlength="10" maxlength="10" name="patient_phone" id="patient_phone" value="" required /> <span>Example: 0700 000 111</span> -->
-                                                        </div>
+                                                                                                                                                    }  ?>" /> <span>Example: 0700 000 111</span> -->
+                                                    <!-- <input class="form-control" type="tel" pattern=[0]{1}[0-9]{9} minlength="10" maxlength="10" name="patient_phone" id="patient_phone" value="" required /> <span>Example: 0700 000 111</span> -->
+                                                    <!-- </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
 
-                                                <div class="col-sm-4">
+                                                    <!-- <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Level of education</label>
@@ -2893,12 +2893,12 @@ if ($user->isLoggedIn()) {
                                                             </select>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
 
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <!-- select -->
-                                                        <div class="form-group">
+                                                    <!-- <div class="col-sm-4">
+                                                    <div class="row-form clearfix"> -->
+                                                    <!-- select -->
+                                                    <!-- <div class="form-group">
                                                             <label>Occupation</label>
                                                             <select id="occupation" name="occupation" class="form-control" required>
                                                                 <option value="<?= $occupation['id'] ?>"><?php if ($clients) {
@@ -2913,144 +2913,144 @@ if ($user->isLoggedIn()) {
                                                             </select>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
 
 
 
-                                            </div>
+                                                <!-- </div> -->
 
-                                            <hr>
+                                                <hr>
 
-                                            <div class="row">
+                                                <div class="row">
 
 
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <!-- select -->
-                                                        <div class="form-group">
-                                                            <label>Date of birth:</label>
-                                                            <input class="form-control" max="<?= date('Y-m-d'); ?>" type="date" name="dob" id="dob" style="width: 100%;" value="<?php if ($clients['dob']) {
-                                                                                                                                                                                    print_r($clients['dob']);
-                                                                                                                                                                                }  ?>" required />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <!-- select -->
-                                                        <div class="form-group">
-                                                            <label>Age</label>
-                                                            <input class="form-control" type="number" name="age" value="<?php if ($clients['age']) {
-                                                                                                                            print_r($clients['age']);
-                                                                                                                        }  ?>" readonly />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <label>SEX</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="sex" id="sex" value="1" <?php if ($clients['sex'] == 1) {
-                                                                                                                                                echo 'checked';
-                                                                                                                                            } ?> required>
-                                                                <label class="form-check-label">Male</label>
-                                                            </div>
-
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="sex" id="sex" value="2" <?php if ($clients['sex'] == 2) {
-                                                                                                                                                echo 'checked';
-                                                                                                                                            } ?>>
-                                                                <label class="form-check-label">Female</label>
+                                                    <div class="col-sm-4">
+                                                        <div class="row-form clearfix">
+                                                            <!-- select -->
+                                                            <div class="form-group">
+                                                                <label>Date of birth:</label>
+                                                                <input class="form-control" max="<?= date('Y-m-d'); ?>" type="date" name="dob" id="dob" style="width: 100%;" value="<?php if ($clients['dob']) {
+                                                                                                                                                                                        print_r($clients['dob']);
+                                                                                                                                                                                    }  ?>" required />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
 
+                                                    <div class="col-sm-4">
+                                                        <div class="row-form clearfix">
+                                                            <!-- select -->
+                                                            <div class="form-group">
+                                                                <label>Age</label>
+                                                                <input class="form-control" type="number" name="age" value="<?php if ($clients['age']) {
+                                                                                                                                print_r($clients['age']);
+                                                                                                                            }  ?>" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
+                                                    <div class="col-sm-4">
+                                                        <label>SEX</label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="sex" id="sex" value="1" <?php if ($clients['sex'] == 1) {
+                                                                                                                                                    echo 'checked';
+                                                                                                                                                } ?> required>
+                                                                    <label class="form-check-label">Male</label>
+                                                                </div>
 
-
-                                            <div class="card card-warning">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Patient’s Residence address </h3>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>Region</label>
-                                                            <select id="region" name="region" class="form-control" required>
-                                                                <option value="<?= $regions['id'] ?>"><?php if ($clients['region']) {
-                                                                                                            print_r($regions['name']);
-                                                                                                        } else {
-                                                                                                            echo 'Select region';
-                                                                                                        } ?>
-                                                                </option>
-                                                                <?php foreach ($override->get('regions', 'status', 1) as $region) { ?>
-                                                                    <option value="<?= $region['id'] ?>"><?= $region['name'] ?></option>
-                                                                <?php } ?>
-                                                            </select>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="sex" id="sex" value="2" <?php if ($clients['sex'] == 2) {
+                                                                                                                                                    echo 'checked';
+                                                                                                                                                } ?>>
+                                                                    <label class="form-check-label">Female</label>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>District</label>
-                                                            <select id="district" name="district" class="form-control" required>
-                                                                <option value="<?= $districts['id'] ?>"><?php if ($clients['district']) {
-                                                                                                            print_r($districts['name']);
+
+
+
+                                                <div class="card card-warning">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Patient’s Residence address </h3>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <label>Region</label>
+                                                                <select id="region" name="region" class="form-control" required>
+                                                                    <option value="<?= $regions['id'] ?>"><?php if ($clients['region']) {
+                                                                                                                print_r($regions['name']);
+                                                                                                            } else {
+                                                                                                                echo 'Select region';
+                                                                                                            } ?>
+                                                                    </option>
+                                                                    <?php foreach ($override->get('regions', 'status', 1) as $region) { ?>
+                                                                        <option value="<?= $region['id'] ?>"><?= $region['name'] ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <label>District</label>
+                                                                <select id="district" name="district" class="form-control" required>
+                                                                    <option value="<?= $districts['id'] ?>"><?php if ($clients['district']) {
+                                                                                                                print_r($districts['name']);
+                                                                                                            } else {
+                                                                                                                echo 'Select district';
+                                                                                                            } ?>
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <label>Ward</label>
+                                                                <select id="ward" name="ward" class="form-control" required>
+                                                                    <option value="<?= $wards['id'] ?>"><?php if ($clients['ward']) {
+                                                                                                            print_r($wards['name']);
                                                                                                         } else {
                                                                                                             echo 'Select district';
                                                                                                         } ?>
-                                                                </option>
-                                                            </select>
+                                                                    </option>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>Ward</label>
-                                                            <select id="ward" name="ward" class="form-control" required>
-                                                                <option value="<?= $wards['id'] ?>"><?php if ($clients['ward']) {
-                                                                                                        print_r($wards['name']);
-                                                                                                    } else {
-                                                                                                        echo 'Select district';
-                                                                                                    } ?>
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                <hr>
 
-                                            <hr>
-
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <!-- select -->
-                                                        <div class="form-group">
+                                                <!-- <div class="row"> -->
+                                                    <!-- <div class="col-sm-4">
+                                                    <div class="row-form clearfix"> -->
+                                                    <!-- select -->
+                                                    <!-- <div class="form-group">
                                                             <label>Street</label>
                                                             <input class="form-control" type="text" name="street" id="street" value="<?php if ($clients['street']) {
                                                                                                                                             print_r($clients['street']);
                                                                                                                                         }  ?>" />
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <!-- select -->
-                                                        <div class="form-group">
+                                                </div> -->
+                                                    <!-- <div class="col-sm-4">
+                                                    <div class="row-form clearfix"> -->
+                                                    <!-- select -->
+                                                    <!-- <div class="form-group">
                                                             <label>Location</label>
                                                             <textarea class="form-control" id="location" placeholder="Type physical address here" name="location" rows="3" style="width: 100%;">
                                                                     <?php if ($clients['location']) {
@@ -3059,52 +3059,52 @@ if ($user->isLoggedIn()) {
                                                                 </textarea>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
 
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <!-- select -->
-                                                        <div class="form-group">
+                                                    <!-- <div class="col-sm-4">
+                                                    <div class="row-form clearfix"> -->
+                                                    <!-- select -->
+                                                    <!-- <div class="form-group">
                                                             <label>House number, if any</label>
                                                             <input class="form-control" type="text" name="house_number" id="house_number" value="<?php if ($clients['house_number']) {
                                                                                                                                                         print_r($clients['house_number']);
                                                                                                                                                     }  ?>" />
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                </div>-->
+                                                <!-- </div> -->
 
-                                            <div class="row">
+                                                <div class="row">
 
-                                                <div class="col-md-12">
-                                                    <div class="card card-warning">
-                                                        <div class="card-header">
-                                                            <h3 class="card-title">ANY OTHER COMENT OR REMARKS</h3>
+                                                    <div class="col-md-12">
+                                                        <div class="card card-warning">
+                                                            <div class="card-header">
+                                                                <h3 class="card-title">ANY OTHER COMENT OR REMARKS</h3>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
+                                                <div class="row">
 
-                                                <div class="col-sm-12">
-                                                    <div class="row-form clearfix">
-                                                        <!-- select -->
-                                                        <div class="form-group">
-                                                            <label>Remarks / Comments:</label>
-                                                            <textarea class="form-control" name="comments" rows="3" placeholder="Type comments here..."><?php if ($clients['comments']) {
-                                                                                                                                                            print_r($clients['comments']);
-                                                                                                                                                        }  ?></textarea>
+                                                    <div class="col-sm-12">
+                                                        <div class="row-form clearfix">
+                                                            <!-- select -->
+                                                            <div class="form-group">
+                                                                <label>Remarks / Comments:</label>
+                                                                <textarea class="form-control" name="comments" rows="3" placeholder="Type comments here..."><?php if ($clients['comments']) {
+                                                                                                                                                                print_r($clients['comments']);
+                                                                                                                                                            }  ?></textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <hr>
                                             </div>
-                                            <hr>
-                                        </div>
-                                        <!-- /.card-body -->
-                                        <div class="card-footer">
-                                            <a href="info.php?id=3&status=<?= $_GET['status']; ?>" class="btn btn-default">Back</a>
-                                            <input type="submit" name="add_client" value="Submit" class="btn btn-primary">
-                                        </div>
+                                            <!-- /.card-body -->
+                                            <div class="card-footer">
+                                                <a href="info.php?id=3&status=<?= $_GET['status']; ?>" class="btn btn-default">Back</a>
+                                                <input type="submit" name="add_client" value="Submit" class="btn btn-primary">
+                                            </div>
                                     </form>
                                 </div>
                                 <!-- /.card -->
