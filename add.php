@@ -265,12 +265,6 @@ if ($user->isLoggedIn()) {
                 'date_enrolled' => array(
                     'required' => true,
                 ),
-                'firstname' => array(
-                    'required' => true,
-                ),
-                'lastname' => array(
-                    'required' => true,
-                ),
                 'sex' => array(
                     'required' => true,
                 ),
@@ -310,8 +304,6 @@ if ($user->isLoggedIn()) {
                             'street' => Input::get('street'),
                             'location' => Input::get('location'),
                             'house_number' => Input::get('house_number'),
-                            'education' => Input::get('education'),
-                            'occupation' => Input::get('occupation'),
                             'comments' => Input::get('comments'),
                             'respondent' => 2,
                             'status' => 1,
@@ -403,8 +395,6 @@ if ($user->isLoggedIn()) {
                             'street' => Input::get('street'),
                             'location' => Input::get('location'),
                             'house_number' => Input::get('house_number'),
-                            'education' => Input::get('education'),
-                            'occupation' => Input::get('occupation'),
                             'comments' => Input::get('comments'),
                             'respondent' => 2,
                             'status' => 1,
