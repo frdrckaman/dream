@@ -4849,7 +4849,7 @@ if ($user->isLoggedIn()) {
 
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-3" id="wrd_test">
+                                                <div class="col-sm-4" id="wrd_test">
                                                     <label for="wrd_test" class="form-label">60. WRD test done</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4873,7 +4873,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="sequence_done">
+                                                <div class="col-sm-4" id="sequence_done">
                                                     <label for="sequence_done" class="form-label">61. If none at the facility has it been done at sequence lab?
                                                     </label>
                                                     <!-- radio -->
@@ -4898,7 +4898,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
 
-                                                <div class="col-sm-3" id="sequence_type">
+                                                <div class="col-sm-4" id="sequence_type">
                                                     <label for="sequence_type" class="form-label">62. If yes (If Invalid/Error/No results skip next two qtn)</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4921,7 +4921,10 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                 </div>
+                                            </div>
 
+                                            <hr>
+                                            <div class="row">
                                                 <div class="col-sm-3" id="mtb_detection">
                                                     <label for="mtb_detection" class="form-label">63. If MTB detected </label>
                                                     <!-- radio -->
@@ -4960,12 +4963,9 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                            </div>
 
-                                            <hr>
-                                            <div class="row">
 
-                                                <div class="col-4" id="ct_value1">
+                                                <div class="col-3" id="ct_value1">
                                                     <div class="mb-3">
                                                         <label for="ct_value" class="form-label">65. Sample Cycle threshold (Ct) Value (number, two digits)</label>
                                                         <input type="number" value="<?php if ($costing['ct_value']) {
@@ -4974,7 +4974,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="test_repeatition">
+                                                <div class="col-sm-3" id="test_repeatition">
                                                     <label for="test_repeatition" class="form-label">66. If Invalid/Error/No result/Indeterminate, was the test repeated?
                                                     </label>
                                                     <!-- radio -->
@@ -4994,7 +4994,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="microscopy_reason">
+                                                <div class="col-sm-3" id="microscopy_reason">
                                                     <label for="microscopy_reason" class="form-label">67. If no reason(s) </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -10402,14 +10402,17 @@ if ($user->isLoggedIn()) {
 
 
     <!-- RESPIRATORY format numbers Js -->
+         <script src="myjs/add/respiratory/afb_microscopy.js"></script>
+             <script src="myjs/add/respiratory/microscopy_reason.js"></script>
     <script src="myjs/add/respiratory/sample_received.js"></script>
+        <script src="myjs/add/respiratory/sample_type.js"></script>
+            <script src="myjs/add/respiratory/sequence_done.js"></script>
+                <script src="myjs/add/respiratory/sequence_type.js"></script>
+                    <script src="myjs/add/respiratory/test_reasons.js"></script>
     <script src="myjs/add/respiratory/test_rejected.js"></script>
-    <script src="myjs/add/respiratory/afb_microscopy.js"></script>
+        <script src="myjs/add/respiratory/test_repeatition.js"></script>
     <script src="myjs/add/respiratory/wrd_test.js"></script>
-    <script src="myjs/add/respiratory/sequence_type.js"></script>
-    <script src="myjs/add/respiratory/test_repeatition.js"></script>
-    <script src="myjs/add/respiratory/sample_type.js"></script>
-    <script src="myjs/add/respiratory/test_reasons.js"></script>
+
 
 
 
