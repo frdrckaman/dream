@@ -4,8 +4,10 @@ const sequence_type3 = document.getElementById("sequence_type3");
 const sequence_type4 = document.getElementById("sequence_type4");
 const sequence_type5 = document.getElementById("sequence_type5");
 
-// const sequence_done111 = document.getElementById("sequence_done1");
-// const sequence_done222 = document.getElementById("sequence_done2");
+const test_repeatition1111111111111111 =
+  document.getElementById("test_repeatition1");
+const test_repeatition2222222222222222 =
+  document.getElementById("test_repeatition2");
 
 const rif_resistance11111 = document.getElementById("rif_resistance1");
 const rif_resistance22222 = document.getElementById("rif_resistance2");
@@ -26,6 +28,7 @@ function toggleElementVisibility() {
     mtb_detection.style.display = "block";
     rif_resistance.style.display = "block";
     ct_value1.style.display = "block";
+
     if (rif_resistance33333.checked) {
       test_repeatition.style.display = "block";
     } else {
@@ -41,9 +44,21 @@ function toggleElementVisibility() {
   } else if (sequence_type3.checked) {
     sequence_number1.style.display = "none";
     sequence_number.style.display = "none";
+
     mtb_detection.style.display = "none";
     rif_resistance.style.display = "none";
     ct_value1.style.display = "none";
+
+    // if (test_repeatition1111111111111111.checked) {
+    //   mtb_detection.style.display = "block";
+    //   rif_resistance.style.display = "block";
+    //   ct_value1.style.display = "block";
+    // } else {
+    //   mtb_detection.style.display = "none";
+    //   rif_resistance.style.display = "none";
+    //   ct_value1.style.display = "none";
+    // }
+
     if (rif_resistance33333.checked) {
       test_repeatition.style.display = "block";
     } else {
@@ -52,9 +67,20 @@ function toggleElementVisibility() {
   } else if (sequence_type4.checked) {
     sequence_number1.style.display = "block";
     sequence_number.style.display = "block";
+
     mtb_detection.style.display = "none";
     rif_resistance.style.display = "none";
     ct_value1.style.display = "none";
+
+    // if (test_repeatition1111111111111111.checked) {
+    //   mtb_detection.style.display = "block";
+    //   rif_resistance.style.display = "block";
+    //   ct_value1.style.display = "block";
+    // } else {
+    //   mtb_detection.style.display = "none";
+    //   rif_resistance.style.display = "none";
+    //   ct_value1.style.display = "none";
+    // }
 
     if (rif_resistance33333.checked) {
       test_repeatition.style.display = "block";
@@ -64,9 +90,21 @@ function toggleElementVisibility() {
   } else if (sequence_type5.checked) {
     sequence_number1.style.display = "none";
     sequence_number.style.display = "none";
+
     mtb_detection.style.display = "none";
     rif_resistance.style.display = "none";
     ct_value1.style.display = "none";
+
+    // if (test_repeatition1111111111111111.checked) {
+    //   mtb_detection.style.display = "block";
+    //   rif_resistance.style.display = "block";
+    //   ct_value1.style.display = "block";
+    // } else {
+    //   mtb_detection.style.display = "none";
+    //   rif_resistance.style.display = "none";
+    //   ct_value1.style.display = "none";
+    // }
+
     if (rif_resistance33333.checked) {
       test_repeatition.style.display = "block";
     } else {
@@ -88,8 +126,14 @@ sequence_type3.addEventListener("change", toggleElementVisibility);
 sequence_type4.addEventListener("change", toggleElementVisibility);
 sequence_type5.addEventListener("change", toggleElementVisibility);
 
-// sequence_done111.addEventListener("change", toggleElementVisibility);
-// sequence_done222.addEventListener("change", toggleElementVisibility);
+test_repeatition1111111111111111.addEventListener(
+  "change",
+  toggleElementVisibility
+);
+test_repeatition2222222222222222.addEventListener(
+  "change",
+  toggleElementVisibility
+);
 
 rif_resistance11111.addEventListener("change", toggleElementVisibility);
 rif_resistance22222.addEventListener("change", toggleElementVisibility);

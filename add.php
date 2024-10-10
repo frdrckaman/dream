@@ -10297,6 +10297,74 @@ if ($user->isLoggedIn()) {
             </div>
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 19) { ?>
+            <!DOCTYPE html>
+            <html lang="en">
+
+            <head>
+                <meta charset="UTF-8">
+                <title>Person Details Form</title>
+                <script>
+                    function toggleEducationRow() {
+                        const education = document.getElementById("education");
+                        const educationDetails = document.getElementById("educationDetails");
+                        if (education.value === "Yes") {
+                            educationDetails.style.display = "block";
+                        } else {
+                            educationDetails.style.display = "none";
+                        }
+                    }
+
+                    function addNewRow() {
+                        const table = document.getElementById("educationTable");
+                        const row = table.insertRow(-1);
+                        const cell1 = row.insertCell(0);
+                        const cell2 = row.insertCell(1);
+                        cell1.innerHTML = '<input type="text" name="education_detail[]">';
+                        cell2.innerHTML = '<button type="button" onclick="removeRow(this)">Remove</button>';
+                    }
+
+                    function removeRow(button) {
+                        const row = button.parentNode.parentNode;
+                        row.parentNode.removeChild(row);
+                    }
+                </script>
+            </head>
+
+            <body>
+
+                <form action="submit.php" method="post">
+                    <label>Age of Person:</label>
+                    <input type="number" name="age" required><br><br>
+
+                    <label>Sex of Person:</label>
+                    <select name="sex" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select><br><br>
+
+                    <label>Is the person educated?</label>
+                    <select id="education" name="education" onchange="toggleEducationRow()" required>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select><br><br>
+
+                    <div id="educationDetails" style="display:none;">
+                        <label>Education Details:</label>
+                        <table id="educationTable">
+                            <tr>
+                                <td><input type="text" name="education_detail[]"></td>
+                                <td><button type="button" onclick="addNewRow()">Add New Row</button></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button type="submit">Submit</button>
+                </form>
+
+            </body>
+
+            </html>
+
         <?php } elseif ($_GET['id'] == 20) { ?>
         <?php } elseif ($_GET['id'] == 21) { ?>
         <?php } elseif ($_GET['id'] == 22) { ?>
