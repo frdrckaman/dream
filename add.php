@@ -4925,7 +4925,7 @@ if ($user->isLoggedIn()) {
 
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-3" id="mtb_detection">
+                                                <div class="col-sm-2" id="mtb_detection">
                                                     <label for="mtb_detection" class="form-label">63. If MTB detected </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4944,7 +4944,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="rif_resistance">
+                                                <div class="col-sm-2" id="rif_resistance">
                                                     <label for="rif_resistance" class="form-label">64. If MTB detected, RIF resistance </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4965,7 +4965,7 @@ if ($user->isLoggedIn()) {
 
 
 
-                                                <div class="col-3" id="ct_value1">
+                                                <div class="col-2" id="ct_value1">
                                                     <div class="mb-3">
                                                         <label for="ct_value" class="form-label">65. Sample Cycle threshold (Ct) Value (number, two digits)</label>
                                                         <input type="number" value="<?php if ($costing['ct_value']) {
@@ -10402,15 +10402,16 @@ if ($user->isLoggedIn()) {
 
 
     <!-- RESPIRATORY format numbers Js -->
-         <script src="myjs/add/respiratory/afb_microscopy.js"></script>
-             <script src="myjs/add/respiratory/microscopy_reason.js"></script>
+    <script src="myjs/add/respiratory/afb_microscopy.js"></script>
+    <script src="myjs/add/respiratory/microscopy_reason.js"></script>
+    <script src="myjs/add/respiratory/rif_resistance.js"></script>
     <script src="myjs/add/respiratory/sample_received.js"></script>
-        <script src="myjs/add/respiratory/sample_type.js"></script>
-            <script src="myjs/add/respiratory/sequence_done.js"></script>
-                <script src="myjs/add/respiratory/sequence_type.js"></script>
-                    <script src="myjs/add/respiratory/test_reasons.js"></script>
+    <script src="myjs/add/respiratory/sample_type.js"></script>
+    <script src="myjs/add/respiratory/sequence_done.js"></script>
+    <script src="myjs/add/respiratory/sequence_type.js"></script>
+    <script src="myjs/add/respiratory/test_reasons.js"></script>
     <script src="myjs/add/respiratory/test_rejected.js"></script>
-        <script src="myjs/add/respiratory/test_repeatition.js"></script>
+    <script src="myjs/add/respiratory/test_repeatition.js"></script>
     <script src="myjs/add/respiratory/wrd_test.js"></script>
 
 
