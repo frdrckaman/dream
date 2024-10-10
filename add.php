@@ -5126,6 +5126,7 @@ if ($user->isLoggedIn()) {
                                                 <table class="table table-bordered" id="testTable">
                                                     <thead>
                                                         <tr>
+                                                            <th>No</th>
                                                             <th>Sequence Type</th>
                                                             <th>Code/Number</th>
                                                             <th>MTB Detected</th>
@@ -5136,14 +5137,30 @@ if ($user->isLoggedIn()) {
                                                     </thead>
                                                     <tbody>
                                                         <?php
-                                                        foreach ($override->getNews('respiratory_repeated_tests', 'respiratory_id', $costing['id'], 'status', 1) as $treatment) { ?>
+                                                        foreach ($override->getNews('respiratory_repeated_tests', 'respiratory_id', $costing['id'], 'status', 1) as $medications) { ?>
                                                             <tr>
-                                                                <td><input type="text" name="sequence_type[]" class="form-control"></td>
-                                                                <td><input type="text" name="sequence_number[]" class="form-control"></td>
+
+                                                                <td>
+                                                                    <select name="sequence_type[]" id="medication_type[]" class="form-control select2" style="width: 100%;" required>
+                                                                        <?php if (!$medications) { ?>
+                                                                            <option value="">Select Medication</option>
+                                                                        <?php } else { ?>
+                                                                            <option value="<?= $medications[0]['id'] ?>"><?= $medications[0]['name'] ?></option>
+                                                                        <?php } ?>
+                                                                        <?php foreach ($override->get('sequence_type', 'status', 1) as $medication) { ?>
+                                                                            <option value="<?= $medication['id'] ?>"><?= $medication['name'] ?></option>
+                                                                        <?php } ?>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <input type="text" name="sequence_number[]" value="<?php if ($treatment['sequence_number']) {
+                                                                                                                            print_r($treatment['sequence_number']);
+                                                                                                                        }  ?>" class="form-control">
+                                                                </td>
                                                                 <td><input type="text" name="mtb_detection[]" class="form-control"></td>
                                                                 <td><input type="text" name="rif_resistance[]" class="form-control"></td>
                                                                 <td><input type="number" name="ct_value[]" class="form-control" min="0" max="99"></td>
-                                                                <!-- <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> -->
+                                                                <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>
                                                             </tr>
                                                         <?php } ?>
                                                     </tbody>
@@ -10918,6 +10935,7 @@ if ($user->isLoggedIn()) {
             const newRow = document.createElement('tr');
 
             newRow.innerHTML = `
+                    <td><input type="hidden" name="respiratory_id[]" value="<?php $costing['respiratory_id'] ?>" class="form-control" min="0" max="99"></td>
                     <td><select class="form-control select2" name="sequence_type2[]" id="sequence_type2[]" style="width: 100%;" required><option value="">Select</option><?php foreach ($override->get('sequence_type', 'status', 1) as $medication) { ?><option value="<?= $medication['id']; ?>"><?= $medication['name']; ?></option> <?php } ?></select></td>
                     <td><input type="number" name="sequence_number2[]" class="form-control" min="0" max="99"></td>
                     <td><select class="form-control select2" name="mtb_detection2[]" id="mtb_detection2[]" style="width: 100%;" required><option value="">Select</option><?php foreach ($override->get('mtb_detection', 'status', 1) as $medication) { ?><option value="<?= $medication['id']; ?>"><?= $medication['name']; ?></option> <?php } ?></select></td>
