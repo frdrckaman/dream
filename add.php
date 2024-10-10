@@ -882,6 +882,35 @@ if ($user->isLoggedIn()) {
                         'site_id' => $clients['site_id'],
                     ), $costing[0]['id']);
 
+                    $respiratory_repeated_tests = $override->getNews('respiratory_repeated_tests', 'status', 1, 'respiratory_id', $costing[0]['id']);
+
+                    if ($respiratory_repeated_tests) {
+                        $user->updateRecord('respiratory_repeated_tests', array(
+                            'sequence_type2' => Input::get('sequence_type2'),
+                            'sequence_number2' => Input::get('sequence_number2'),
+                            'mtb_detection2' => Input::get('mtb_detection2'),
+                            'rif_resistance2' => Input::get('rif_resistance2'),
+                            'ct_value2' => Input::get('ct_value2'),
+                            'test_repeatition' => Input::get('test_repeatition'),
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                        ), $respiratory_repeated_tests[0]['id']);
+                    } else {
+                        $user->createRecord('respiratory_repeated_tests', array(
+                            'sequence_type2' => Input::get('sequence_type2'),
+                            'sequence_number2' => Input::get('sequence_number2'),
+                            'mtb_detection2' => Input::get('mtb_detection2'),
+                            'rif_resistance2' => Input::get('rif_resistance2'),
+                            'ct_value2' => Input::get('ct_value2'),
+                            'test_repeatition' => Input::get('test_repeatition'),
+                            'status' => 1,
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                        ));
+                    }
+
                     $successMessage = 'Respiratory Data  Successful Updated';
                 } else {
                     $user->createRecord('respiratory', array(
@@ -934,6 +963,37 @@ if ($user->isLoggedIn()) {
                         'update_id' => $user->data()->id,
                         'site_id' => $clients['site_id'],
                     ));
+
+                    $last_row = $override->lastRow('clients', 'id')[0];
+
+                    $respiratory_repeated_tests = $override->getNews('respiratory_repeated_tests', 'status', 1, 'respiratory_id', $last_row['id']);
+
+                    if ($respiratory_repeated_tests) {
+                        $user->updateRecord('respiratory_repeated_tests', array(
+                            'sequence_type2' => Input::get('sequence_type2'),
+                            'sequence_number2' => Input::get('sequence_number2'),
+                            'mtb_detection2' => Input::get('mtb_detection2'),
+                            'rif_resistance2' => Input::get('rif_resistance2'),
+                            'ct_value2' => Input::get('ct_value2'),
+                            'test_repeatition' => Input::get('test_repeatition'),
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                        ), $respiratory_repeated_tests[0]['id']);
+                    } else {
+                        $user->createRecord('respiratory_repeated_tests', array(
+                            'sequence_type2' => Input::get('sequence_type2'),
+                            'sequence_number2' => Input::get('sequence_number2'),
+                            'mtb_detection2' => Input::get('mtb_detection2'),
+                            'rif_resistance2' => Input::get('rif_resistance2'),
+                            'ct_value2' => Input::get('ct_value2'),
+                            'test_repeatition' => Input::get('test_repeatition'),
+                            'status' => 1,
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                        ));
+                    }
 
                     $successMessage = 'Respiratory Data  Successful Added';
                 }
@@ -4974,11 +5034,11 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="test_repeatition">
+                                                <!-- <div class="col-sm-3" id="test_repeatition">
                                                     <label for="test_repeatition" class="form-label">66. If Invalid/Error/No result/Indeterminate, was the test repeated?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
+                                                    </label> -->
+                                                <!-- radio -->
+                                                <!-- <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
@@ -4991,6 +5051,24 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                         <button type="button" onclick="unsetRadio('test_repeatition')">Unset</button>
 
+                                                    </div>
+                                                </div> -->
+
+                                                <div class="col-sm-3" id="test_repeatition">
+                                                    <label for="test_repeatition" class="form-label">66. If Invalid/Error/No result/Indeterminate, was the test repeated?</label>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="test_repeatition" id="test_repeatition<?= $value['id']; ?>" value="<?= $value['id']; ?>"
+                                                                        <?php if ($costing['test_repeatition'] == $value['id']) {
+                                                                            echo 'checked';
+                                                                        } ?>
+                                                                        onclick="toggleTable(this)">
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -5020,6 +5098,58 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
+                                            <!-- 
+                                            <div class="row">
+                                                <div class="col-sm-3" id="test_repeatition">
+                                                    <label for="test_repeatition" class="form-label">66. If Invalid/Error/No result/Indeterminate, was the test repeated?</label>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="test_repeatition" id="test_repeatition<?= $value['id']; ?>" value="<?= $value['id']; ?>"
+                                                                        <?php if ($costing['test_repeatition'] == $value['id']) {
+                                                                            echo 'checked';
+                                                                        } ?>
+                                                                        onclick="toggleTable(this)">
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                            <!-- Dynamic Table -->
+                                            <div id="dynamicTable" style="display: none;">
+                                                <h5>If yes then return/ask to above four items?</h5> <button type="button" class="btn btn-primary" onclick="addRow()">Add Repeated Test</button>
+
+                                                <table class="table table-bordered" id="testTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sequence Type</th>
+                                                            <th>Code/Number</th>
+                                                            <th>MTB Detected</th>
+                                                            <th>RIF Resistance</th>
+                                                            <th>Ct Value</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        foreach ($override->getNews('respiratory_repeated_tests', 'respiratory_id', $costing['id'], 'status', 1) as $treatment) { ?>
+                                                            <tr>
+                                                                <td><input type="text" name="sequence_type[]" class="form-control"></td>
+                                                                <td><input type="text" name="sequence_number[]" class="form-control"></td>
+                                                                <td><input type="text" name="mtb_detection[]" class="form-control"></td>
+                                                                <td><input type="text" name="rif_resistance[]" class="form-control"></td>
+                                                                <td><input type="number" name="ct_value[]" class="form-control" min="0" max="99"></td>
+                                                                <!-- <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> -->
+                                                            </tr>
+                                                        <?php } ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
@@ -10770,6 +10900,41 @@ if ($user->isLoggedIn()) {
             section.remove(); // Remove the section
         }
     </script>
+
+    <script>
+        // Function to show/hide the table based on the selection
+        function toggleTable(radio) {
+            const table = document.getElementById('dynamicTable');
+            if (radio.value == '1') { // Assuming '1' is 'Yes'
+                table.style.display = 'block';
+            } else {
+                table.style.display = 'none';
+            }
+        }
+
+        // Function to add a new row to the table
+        function addRow() {
+            const tableBody = document.getElementById('testTable').getElementsByTagName('tbody')[0];
+            const newRow = document.createElement('tr');
+
+            newRow.innerHTML = `
+                    <td><select class="form-control select2" name="sequence_type2[]" id="sequence_type2[]" style="width: 100%;" required><option value="">Select</option><?php foreach ($override->get('sequence_type', 'status', 1) as $medication) { ?><option value="<?= $medication['id']; ?>"><?= $medication['name']; ?></option> <?php } ?></select></td>
+                    <td><input type="number" name="sequence_number2[]" class="form-control" min="0" max="99"></td>
+                    <td><select class="form-control select2" name="mtb_detection2[]" id="mtb_detection2[]" style="width: 100%;" required><option value="">Select</option><?php foreach ($override->get('mtb_detection', 'status', 1) as $medication) { ?><option value="<?= $medication['id']; ?>"><?= $medication['name']; ?></option> <?php } ?></select></td>
+                    <td><select class="form-control select2" name="rif_resistance2[]" id="rif_resistance2[]" style="width: 100%;" required><option value="">Select</option><?php foreach ($override->get('rif_resistance', 'status', 1) as $medication) { ?><option value="<?= $medication['id']; ?>"><?= $medication['name']; ?></option> <?php } ?></select></td>
+                    <td><input type="number" name="ct_value2[]" class="form-control" min="0" max="99"></td>
+                    <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>
+    `;
+            tableBody.appendChild(newRow);
+        }
+
+        // Function to remove a row from the table
+        function removeRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+        }
+    </script>
+
 
 </body>
 
