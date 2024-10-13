@@ -5128,45 +5128,67 @@ if ($user->isLoggedIn()) {
                                                     <thead>
                                                         <tr>
                                                             <!-- <th>No</th> -->
-                                                            <th>Sequence Type</th>
-                                                            <th>Code/Number</th>
-                                                            <th>MTB Detected</th>
-                                                            <th>RIF Resistance</th>
-                                                            <th>Ct Value</th>
+                                                            <th>62. If yes</th>
+                                                            <th>62. What code/number?</th>
+                                                            <th>63. If MTB detected </th>
+                                                            <th>64. If MTB detected, RIF resistance</th>
+                                                            <th>65. Sample Cycle threshold (Ct) Value (number, two digits)</th>
                                                             <!-- <th>Actions</th> -->
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?php
                                                         // foreach ($override->getNews('respiratory_repeated_tests', 'respiratory_id', $costing['id'], 'status', 1) as $medications) {
-                                                             ?>
-                                                            <tr>
+                                                        ?>
+                                                        <tr>
 
-                                                                <td>
-                                                                    <select name="sequence_type[]" id="medication_type[]" class="form-control select2" style="width: 100%;" required>
-                                                                        <?php if (!$medications) { ?>
-                                                                            <option value="">Select Medication</option>
-                                                                        <?php } else { ?>
-                                                                            <option value="<?= $medications[0]['id'] ?>"><?= $medications[0]['name'] ?></option>
-                                                                        <?php } ?>
-                                                                        <?php foreach ($override->get('sequence_type', 'status', 1) as $medication) { ?>
-                                                                            <option value="<?= $medication['id'] ?>"><?= $medication['name'] ?></option>
-                                                                        <?php } ?>
-                                                                    </select>
-                                                                </td>
-                                                                <td>
-                                                                    <input type="text" name="sequence_number[]" value="<?php if ($treatment['sequence_number']) {
-                                                                                                                            print_r($treatment['sequence_number']);
-                                                                                                                        }  ?>" class="form-control">
-                                                                </td>
-                                                                <td><input type="text" name="mtb_detection[]" class="form-control"></td>
-                                                                <td><input type="text" name="rif_resistance[]" class="form-control"></td>
-                                                                <td><input type="number" name="ct_value[]" class="form-control" min="0" max="99"></td>
-                                                                <!-- <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> -->
-                                                            </tr>
-                                                        <?php 
-                                                    // }
-                                                     ?>
+                                                            <td>
+                                                                <select name="sequence_type[]" id="medication_type[]" class="form-control select2" style="width: 100%;" required>
+                                                                    <?php if (!$medications) { ?>
+                                                                        <option value="">Select Medication</option>
+                                                                    <?php } else { ?>
+                                                                        <option value="<?= $medications[0]['id'] ?>"><?= $medications[0]['name'] ?></option>
+                                                                    <?php } ?>
+                                                                    <?php foreach ($override->get('sequence_type', 'status', 1) as $medication) { ?>
+                                                                        <option value="<?= $medication['id'] ?>"><?= $medication['name'] ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" name="sequence_number[]" value="<?php if ($treatment['sequence_number']) {
+                                                                                                                        print_r($treatment['sequence_number']);
+                                                                                                                    }  ?>" class="form-control">
+                                                            </td>
+                                                            <td>
+                                                                <select name="mtb_detection[]" id="mtb_detection[]" class="form-control select2" style="width: 100%;" required>
+                                                                    <?php if (!$medications) { ?>
+                                                                        <option value="">Select Medication</option>
+                                                                    <?php } else { ?>
+                                                                        <option value="<?= $medications[0]['id'] ?>"><?= $medications[0]['name'] ?></option>
+                                                                    <?php } ?>
+                                                                    <?php foreach ($override->get('mtb_detection', 'status', 1) as $medication) { ?>
+                                                                        <option value="<?= $medication['id'] ?>"><?= $medication['name'] ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <select name="rif_resistance[]" id="rif_resistance[]" class="form-control select2" style="width: 100%;" required>
+                                                                    <?php if (!$medications) { ?>
+                                                                        <option value="">Select Medication</option>
+                                                                    <?php } else { ?>
+                                                                        <option value="<?= $medications[0]['id'] ?>"><?= $medications[0]['name'] ?></option>
+                                                                    <?php } ?>
+                                                                    <?php foreach ($override->get('rif_resistance', 'status', 1) as $medication) { ?>
+                                                                        <option value="<?= $medication['id'] ?>"><?= $medication['name'] ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </td>
+                                                            <td><input type="number" name="ct_value[]" class="form-control" min="0" max="99"></td>
+                                                            <!-- <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> -->
+                                                        </tr>
+                                                        <?php
+                                                        // }
+                                                        ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -10632,7 +10654,7 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/respiratory/test_rejected.js"></script>
     <script src="myjs/add/respiratory/test_repeatition.js"></script>
     <script src="myjs/add/respiratory/wrd_test.js"></script>
-    
+
 
 
 
