@@ -5098,8 +5098,8 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-                                            <!-- 
-                                            <div class="row">
+
+                                            <!-- <div class="row">
                                                 <div class="col-sm-3" id="test_repeatition">
                                                     <label for="test_repeatition" class="form-label">66. If Invalid/Error/No result/Indeterminate, was the test repeated?</label>
                                                     <div class="row-form clearfix">
@@ -5120,24 +5120,26 @@ if ($user->isLoggedIn()) {
                                             </div> -->
 
                                             <!-- Dynamic Table -->
-                                            <div id="dynamicTable" style="display: none;">
-                                                <h5>If yes then return/ask to above four items?</h5> <button type="button" class="btn btn-primary" onclick="addRow()">Add Repeated Test</button>
-
+                                            <!-- <div id="dynamicTable" style="display: none;"> -->
+                                            <div id="Repeatable_Table">
+                                                <h5>If yes on Qn. 66 then return/ask to above four items? ( Add Repeated Test )</h5>
+                                                <!-- <button type="button" class="btn btn-primary" onclick="addRow()"></button> -->
                                                 <table class="table table-bordered" id="testTable">
                                                     <thead>
                                                         <tr>
-                                                            <th>No</th>
+                                                            <!-- <th>No</th> -->
                                                             <th>Sequence Type</th>
                                                             <th>Code/Number</th>
                                                             <th>MTB Detected</th>
                                                             <th>RIF Resistance</th>
                                                             <th>Ct Value</th>
-                                                            <th>Actions</th>
+                                                            <!-- <th>Actions</th> -->
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?php
-                                                        foreach ($override->getNews('respiratory_repeated_tests', 'respiratory_id', $costing['id'], 'status', 1) as $medications) { ?>
+                                                        // foreach ($override->getNews('respiratory_repeated_tests', 'respiratory_id', $costing['id'], 'status', 1) as $medications) {
+                                                             ?>
                                                             <tr>
 
                                                                 <td>
@@ -5160,9 +5162,11 @@ if ($user->isLoggedIn()) {
                                                                 <td><input type="text" name="mtb_detection[]" class="form-control"></td>
                                                                 <td><input type="text" name="rif_resistance[]" class="form-control"></td>
                                                                 <td><input type="number" name="ct_value[]" class="form-control" min="0" max="99"></td>
-                                                                <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>
+                                                                <!-- <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> -->
                                                             </tr>
-                                                        <?php } ?>
+                                                        <?php 
+                                                    // }
+                                                     ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -10628,6 +10632,7 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/respiratory/test_rejected.js"></script>
     <script src="myjs/add/respiratory/test_repeatition.js"></script>
     <script src="myjs/add/respiratory/wrd_test.js"></script>
+    
 
 
 
@@ -10879,7 +10884,7 @@ if ($user->isLoggedIn()) {
         // DropzoneJS Demo Code End
     </script>
 
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Function to add new section
             document.getElementById('addRowButton').addEventListener('click', function() {
@@ -10916,9 +10921,9 @@ if ($user->isLoggedIn()) {
             const section = button.closest('.repeatableSection');
             section.remove(); // Remove the section
         }
-    </script>
+    </script> -->
 
-    <script>
+    <!-- <script>
         // Function to show/hide the table based on the selection
         function toggleTable(radio) {
             const table = document.getElementById('dynamicTable');
@@ -10951,7 +10956,7 @@ if ($user->isLoggedIn()) {
             const row = button.closest('tr');
             row.remove();
         }
-    </script>
+    </script> -->
 
 
 </body>
