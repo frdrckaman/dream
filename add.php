@@ -5474,44 +5474,44 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-                                            <label for="zn" class="form-label text-center">69. If ZN </label>
+                                            <label for="zn" id="n_zn" class="form-label text-center">69. If ZN </label>
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-6" id="zn_results_a">
-                                                    <label for="zn_results_a" class="form-label">Results A </label>
+                                                <div class="col-sm-6" id="n_zn_results_a">
+                                                    <label for="n_zn_results_a" class="form-label">Results A </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="zn_results_a" id="zn_results_a<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['zn_results_a'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
+                                                                    <input class="form-check-input" type="radio" name="n_zn_results_a" id="n_zn_results_a<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['zn_results_a'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <button type="button" onclick="unsetRadio('zn_results_a')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('n_zn_results_a')">Unset</button>
 
                                                         </div>
                                                     </div>
 
                                                 </div>
 
-                                                <div class="col-sm-6" id="zn_results_b">
-                                                    <label for="zn_results_b" class="form-label">Results B </label>
+                                                <div class="col-sm-6" id="n_zn_results_b">
+                                                    <label for="n_zn_results_b" class="form-label">Results B </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="zn_results_b" id="zn_results_b<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['zn_results_b'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
+                                                                    <input class="form-check-input" type="radio" name="n_zn_results_b" id="n_zn_results_b<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['zn_results_b'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <button type="button" onclick="unsetRadio('zn_results_b')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('n_zn_results_b')">Unset</button>
 
                                                         </div>
                                                         <span>(Not mandatory)</span>
@@ -5521,44 +5521,44 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-                                            <label for="zn" class="form-label text-center">70. If FM </label>
+                                            <label for="n_fm" class="form-label text-center">70. If FM </label>
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-6" id="fm_results_a">
-                                                    <label for="fm_results_a" class="form-label">Results A </label>
+                                                <div class="col-sm-6" id="n_fm_results_a">
+                                                    <label for="n_fm_results_a" class="form-label">Results A </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="fm_results_a" id="fm_results_a<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['fm_results_a'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
+                                                                    <input class="form-check-input" type="radio" name="n_fm_results_a" id="n_fm_results_a<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['fm_results_a'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <button type="button" onclick="unsetRadio('fm_results_a')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('n_fm_results_a')">Unset</button>
 
                                                         </div>
                                                     </div>
 
                                                 </div>
 
-                                                <div class="col-sm-6" id="fm_results_b">
-                                                    <label for="fm_results_b" class="form-label">Results B </label>
+                                                <div class="col-sm-6" id="n_fm_results_b">
+                                                    <label for="n_fm_results_b" class="form-label">Results B </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="fm_results_b" id="fm_results_b<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['fm_results_b'] == $value['id']) {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
+                                                                    <input class="form-check-input" type="radio" name="n_fm_results_b" id="n_fm_results_b<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['fm_results_b'] == $value['id']) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <button type="button" onclick="unsetRadio('fm_results_b')">Unset</button>
+                                                            <button type="button" onclick="unsetRadio('n_fm_results_b')">Unset</button>
 
                                                         </div>
                                                         <span>(Not mandatory)</span>

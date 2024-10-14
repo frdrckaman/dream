@@ -23,6 +23,9 @@ const n_fm_results_b1 = document.getElementById("n_fm_results_b1");
 
 function toggleElementVisibility() {
   if (n_afb_microscopy1.checked) {
+    n_afb_microscopy_date1.style.display = "block";
+    n_zn_microscopy_date1.style.display = "block";
+    n_fm_microscopy_date1.style.display = "none";
     n_zn.style.display = "block";
     n_zn_results_a.style.display = "block";
     n_zn_results_a1.setAttribute("required", "required");
@@ -34,6 +37,9 @@ function toggleElementVisibility() {
     n_fm_results_b.style.display = "none";
     n_fm_results_b1.removeAttribute("required");
   } else if (n_afb_microscopy2.checked) {
+    n_afb_microscopy_date1.style.display = "block";
+    n_zn_microscopy_date1.style.display = "none";
+    n_fm_microscopy_date1.style.display = "block";
     n_zn.style.display = "none";
     n_zn_results_a.style.display = "none";
     n_zn_results_a1.removeAttribute("required");
@@ -44,7 +50,24 @@ function toggleElementVisibility() {
     n_fm_results_a1.setAttribute("required", "required");
     n_fm_results_b.style.display = "block";
     n_fm_results_b1.setAttribute("required", "required");
+  } else if (n_afb_microscopy3.checked) {
+    n_afb_microscopy_date1.style.display = "none";
+    n_zn_microscopy_date1.style.display = "none";
+    n_fm_microscopy_date1.style.display = "none";
+    n_zn.style.display = "none";
+    n_zn_results_a.style.display = "none";
+    n_zn_results_a1.removeAttribute("required");
+    n_zn_results_b.style.display = "none";
+    n_zn_results_b1.removeAttribute("required");
+    n_fm.style.display = "none";
+    n_fm_results_a.style.display = "none";
+    n_fm_results_a1.removeAttribute("required");
+    n_fm_results_b.style.display = "none";
+    n_fm_results_b1.removeAttribute("required");
   } else {
+    n_afb_microscopy_date1.style.display = "none";
+    n_zn_microscopy_date1.style.display = "none";
+    n_fm_microscopy_date1.style.display = "none";
     n_zn.style.display = "none";
     n_zn_results_a.style.display = "none";
     n_zn_results_a1.removeAttribute("required");
