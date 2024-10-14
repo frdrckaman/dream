@@ -1,47 +1,112 @@
-const sequence_type221 = document.getElementById("sequence_type221");
-const sequence_type222 = document.getElementById("sequence_type222");
-const sequence_type223 = document.getElementById("sequence_type223");
-const sequence_type224 = document.getElementById("sequence_type224");
-const sequence_type225 = document.getElementById("sequence_type225");
+const sequence_type6_7_1 = document.getElementById("sequence_type6_7_1");
+const sequence_type6_7_2 = document.getElementById("sequence_type6_7_2");
+const sequence_type6_7_3 = document.getElementById("sequence_type6_7_3");
+const sequence_type6_7_4 = document.getElementById("sequence_type6_7_4");
+const sequence_type6_7_5 = document.getElementById("sequence_type6_7_5");
 
+const sequence_number6_0 = document.getElementById("sequence_number6_0");
+const sequence_number6_1 = document.getElementById("sequence_number6_1");
+const sequence_number6_3 = document.getElementById("sequence_number6_3");
 
-const sequence_number_221 = document.getElementById("sequence_number_221");
-const sequence_number22 = document.getElementById("sequence_number22");
+const mtb_detection6_0 = document.getElementById("mtb_detection6_0");
+const mtb_detection6_1 = document.getElementById("mtb_detection6_1");
+const mtb_detection6_2 = document.getElementById("mtb_detection6_2");
 
-const mtb_detection22 = document.getElementById("mtb_detection22");
-const rif_resistance22 = document.getElementById("rif_resistance22");
-const c2t_value22 = document.getElementById("c2t_value22");
+const rif_resistance6_0 = document.getElementById("rif_resistance6_0");
+const rif_resistance6_1 = document.getElementById("rif_resistance6_1");
+const rif_resistance6_2 = document.getElementById("rif_resistance6_2");
+
+const ct_value6_0 = document.getElementById("ct_value6_0");
+const ct_value6_1 = document.getElementById("ct_value6_1");
+const ct_value6_2 = document.getElementById("ct_value6_2");
 
 function toggleElementVisibility() {
-  if (sequence_type221.checked) {
-    sequence_number_221.style.display = "none";
-    sequence_number22.style.display = "none";
-    mtb_detection22.style.display = "block";
-    rif_resistance22.style.display = "block";
-    c2t_value22.style.display = "block";
-
-  } else if (sequence_type224.checked) {
-    sequence_number_221.style.display = "block";
-    sequence_number22.style.display = "block";
-
-    mtb_detection22.style.display = "none";
-    rif_resistance22.style.display = "none";
-    c2t_value22.style.display = "none";
+  if (sequence_type6_7_1.checked) {
+    sequence_number6_0.style.display = "none";
+    sequence_number6_1.style.display = "none";
+    sequence_number6_3.style.display = "none";
+    mtb_detection6_0.style.display = "block";
+    mtb_detection6_1.style.display = "block";
+    mtb_detection6_2.style.display = "block";
+    rif_resistance6_0.style.display = "block";
+    rif_resistance6_1.style.display = "block";
+    rif_resistance6_2.style.display = "block";
+    ct_value6_0.style.display = "block";
+    ct_value6_1.style.display = "block";
+    ct_value6_2.style.display = "block";
+  } else if (sequence_type6_7_2.checked) {
+    sequence_number6_0.style.display = "none";
+    sequence_number6_1.style.display = "none";
+    sequence_number6_3.style.display = "none";
+    mtb_detection6_0.style.display = "none";
+    mtb_detection6_1.style.display = "none";
+    mtb_detection6_2.style.display = "none";
+    rif_resistance6_0.style.display = "none";
+    rif_resistance6_1.style.display = "none";
+    rif_resistance6_2.style.display = "none";
+    ct_value6_0.style.display = "none";
+    ct_value6_1.style.display = "none";
+    ct_value6_2.style.display = "none";
+  } else if (sequence_type6_7_3.checked) {
+    sequence_number6_0.style.display = "none";
+    sequence_number6_1.style.display = "none";
+    sequence_number6_3.style.display = "none";
+    mtb_detection6_0.style.display = "none";
+    mtb_detection6_1.style.display = "none";
+    mtb_detection6_2.style.display = "none";
+    rif_resistance6_0.style.display = "none";
+    rif_resistance6_1.style.display = "none";
+    rif_resistance6_2.style.display = "none";
+    ct_value6_0.style.display = "none";
+    ct_value6_1.style.display = "none";
+    ct_value6_2.style.display = "none";
+  } else if (sequence_type6_7_4.checked) {
+    sequence_number6_0.style.display = "block";
+    sequence_number6_1.style.display = "block";
+    sequence_number6_3.style.display = "block";
+    mtb_detection6_0.style.display = "none";
+    mtb_detection6_1.style.display = "none";
+    mtb_detection6_2.style.display = "none";
+    rif_resistance6_0.style.display = "none";
+    rif_resistance6_1.style.display = "none";
+    rif_resistance6_2.style.display = "none";
+    ct_value6_0.style.display = "none";
+    ct_value6_1.style.display = "none";
+    ct_value6_2.style.display = "none";
+  } else if (sequence_type6_7_5.checked) {
+    sequence_number6_0.style.display = "none";
+    sequence_number6_1.style.display = "none";
+    sequence_number6_3.style.display = "none";
+    mtb_detection6_0.style.display = "none";
+    mtb_detection6_1.style.display = "none";
+    mtb_detection6_2.style.display = "none";
+    rif_resistance6_0.style.display = "none";
+    rif_resistance6_1.style.display = "none";
+    rif_resistance6_2.style.display = "none";
+    ct_value6_0.style.display = "none";
+    ct_value6_1.style.display = "none";
+    ct_value6_2.style.display = "none";
   } else {
-    sequence_number_221.style.display = "none";
-    sequence_number22.style.display = "none";
-    mtb_detection22.style.display = "none";
-    rif_resistance22.style.display = "none";
-    c2t_value22.style.display = "none";
+    sequence_number6_0.style.display = "none";
+    sequence_number6_1.style.display = "none";
+    sequence_number6_3.style.display = "none";
+    mtb_detection6_0.style.display = "none";
+    mtb_detection6_1.style.display = "none";
+    mtb_detection6_2.style.display = "none";
+    rif_resistance6_0.style.display = "none";
+    rif_resistance6_1.style.display = "none";
+    rif_resistance6_2.style.display = "none";
+    ct_value6_0.style.display = "none";
+    ct_value6_1.style.display = "none";
+    ct_value6_2.style.display = "none";
   }
 }
 
-sequence_type221.addEventListener("change", toggleElementVisibility);
-sequence_type222.addEventListener("change", toggleElementVisibility);
-sequence_type223.addEventListener("change", toggleElementVisibility);
-sequence_type224.addEventListener("change", toggleElementVisibility);
-sequence_type225.addEventListener("change", toggleElementVisibility);
-
+sequence_type6_7_1.addEventListener("change", toggleElementVisibility);
+sequence_type6_7_2.addEventListener("change", toggleElementVisibility);
+sequence_type6_7_3.addEventListener("change", toggleElementVisibility);
+sequence_type6_7_4.addEventListener("change", toggleElementVisibility);
+sequence_type6_7_5.addEventListener("change", toggleElementVisibility);
 
 // Initial check
 toggleElementVisibility();

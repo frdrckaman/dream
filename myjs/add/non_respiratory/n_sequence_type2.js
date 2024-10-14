@@ -4,13 +4,6 @@ const sequence_type3_3 = document.getElementById("sequence_type3_3");
 const sequence_type3_4 = document.getElementById("sequence_type3_4");
 const sequence_type3_5 = document.getElementById("sequence_type3_5");
 
-// const test_repeatition2_1 = document.getElementById("test_repeatition2_1");
-// const test_repeatition2_2 = document.getElementById("test_repeatition2_2");
-
-// const rif_resistance2_1 = document.getElementById("rif_resistance2_1");
-// const rif_resistance2_2 = document.getElementById("rif_resistance2_2");
-// const rif_resistance2_3 = document.getElementById("rif_resistance2_3");
-
 const sequence_number3_1 = document.getElementById("sequence_number3_1");
 const sequence_number3_2 = document.getElementById("sequence_number3_2");
 const sequence_number3_3 = document.getElementById("sequence_number3_3");
@@ -127,13 +120,6 @@ sequence_type3_2.addEventListener("change", toggleElementVisibility);
 sequence_type3_3.addEventListener("change", toggleElementVisibility);
 sequence_type3_4.addEventListener("change", toggleElementVisibility);
 sequence_type3_5.addEventListener("change", toggleElementVisibility);
-
-// test_repeatition2_1.addEventListener("change", toggleElementVisibility);
-// test_repeatition2_2.addEventListener("change", toggleElementVisibility);
-
-// rif_resistance2_1.addEventListener("change", toggleElementVisibility);
-// rif_resistance2_2.addEventListener("change", toggleElementVisibility);
-// rif_resistance2_3.addEventListener("change", toggleElementVisibility);
 
 // Initial check
 toggleElementVisibility();
