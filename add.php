@@ -5521,7 +5521,7 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-                                            <label for="n_fm" class="form-label text-center">70. If FM </label>
+                                            <label for="n_fm" id="n_fm" class="form-label text-center">70. If FM </label>
                                             <hr>
 
                                             <div class="row">
