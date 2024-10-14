@@ -22,9 +22,6 @@ const ct_value6_2 = document.getElementById("ct_value6_2");
 
 function toggleElementVisibility() {
   if (sequence_type6_7_1.checked) {
-    sequence_number6_0.style.display = "none";
-    sequence_number6_1.style.display = "none";
-    sequence_number6_3.style.display = "none";
     mtb_detection6_0.style.display = "block";
     mtb_detection6_1.style.display = "block";
     mtb_detection6_2.style.display = "block";
@@ -34,10 +31,10 @@ function toggleElementVisibility() {
     ct_value6_0.style.display = "block";
     ct_value6_1.style.display = "block";
     ct_value6_2.style.display = "block";
+    sequence_number6_0.style.display = "none";
+    sequence_number6_1.style.display = "none";
+    sequence_number6_3.style.display = "none";
   } else if (sequence_type6_7_2.checked) {
-    sequence_number6_0.style.display = "none";
-    sequence_number6_1.style.display = "none";
-    sequence_number6_3.style.display = "none";
     mtb_detection6_0.style.display = "none";
     mtb_detection6_1.style.display = "none";
     mtb_detection6_2.style.display = "none";
@@ -47,10 +44,10 @@ function toggleElementVisibility() {
     ct_value6_0.style.display = "none";
     ct_value6_1.style.display = "none";
     ct_value6_2.style.display = "none";
+    sequence_number6_0.style.display = "none";
+    sequence_number6_1.style.display = "none";
+    sequence_number6_3.style.display = "none";
   } else if (sequence_type6_7_3.checked) {
-    sequence_number6_0.style.display = "none";
-    sequence_number6_1.style.display = "none";
-    sequence_number6_3.style.display = "none";
     mtb_detection6_0.style.display = "none";
     mtb_detection6_1.style.display = "none";
     mtb_detection6_2.style.display = "none";
@@ -60,23 +57,23 @@ function toggleElementVisibility() {
     ct_value6_0.style.display = "none";
     ct_value6_1.style.display = "none";
     ct_value6_2.style.display = "none";
+    sequence_number6_0.style.display = "none";
+    sequence_number6_1.style.display = "none";
+    sequence_number6_3.style.display = "none";
   } else if (sequence_type6_7_4.checked) {
+    mtb_detection6_0.style.display = "none";
+    mtb_detection6_1.style.display = "none";
+    mtb_detection6_2.style.display = "none";
+    rif_resistance6_0.style.display = "none";
+    rif_resistance6_1.style.display = "none";
+    rif_resistance6_2.style.display = "none";
+    ct_value6_0.style.display = "none";
+    ct_value6_1.style.display = "none";
+    ct_value6_2.style.display = "none";
     sequence_number6_0.style.display = "block";
     sequence_number6_1.style.display = "block";
     sequence_number6_3.style.display = "block";
-    mtb_detection6_0.style.display = "none";
-    mtb_detection6_1.style.display = "none";
-    mtb_detection6_2.style.display = "none";
-    rif_resistance6_0.style.display = "none";
-    rif_resistance6_1.style.display = "none";
-    rif_resistance6_2.style.display = "none";
-    ct_value6_0.style.display = "none";
-    ct_value6_1.style.display = "none";
-    ct_value6_2.style.display = "none";
   } else if (sequence_type6_7_5.checked) {
-    sequence_number6_0.style.display = "none";
-    sequence_number6_1.style.display = "none";
-    sequence_number6_3.style.display = "none";
     mtb_detection6_0.style.display = "none";
     mtb_detection6_1.style.display = "none";
     mtb_detection6_2.style.display = "none";
@@ -86,10 +83,10 @@ function toggleElementVisibility() {
     ct_value6_0.style.display = "none";
     ct_value6_1.style.display = "none";
     ct_value6_2.style.display = "none";
+    sequence_number6_0.style.display = "none";
+    sequence_number6_1.style.display = "none";
+    sequence_number6_3.style.display = "none";
   } else {
-    sequence_number6_0.style.display = "none";
-    sequence_number6_1.style.display = "none";
-    sequence_number6_3.style.display = "none";
     mtb_detection6_0.style.display = "none";
     mtb_detection6_1.style.display = "none";
     mtb_detection6_2.style.display = "none";
@@ -99,6 +96,9 @@ function toggleElementVisibility() {
     ct_value6_0.style.display = "none";
     ct_value6_1.style.display = "none";
     ct_value6_2.style.display = "none";
+    sequence_number6_0.style.display = "none";
+    sequence_number6_1.style.display = "none";
+    sequence_number6_3.style.display = "none";
   }
 }
 

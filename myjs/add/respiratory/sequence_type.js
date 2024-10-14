@@ -29,12 +29,6 @@ function toggleElementVisibility() {
     rif_resistance.style.display = "block";
     ct_value1.style.display = "block";
     test_repeatition.style.display = "block";
-
-    // if (rif_resistance33333.checked) {
-    //   test_repeatition.style.display = "block";
-    // } else {
-    //   test_repeatition.style.display = "none";
-    // }
   } else if (sequence_type1.checked && rif_resistance33333.checked) {
     sequence_number1.style.display = "none";
     sequence_number.style.display = "none";
@@ -57,22 +51,6 @@ function toggleElementVisibility() {
     rif_resistance.style.display = "none";
     ct_value1.style.display = "none";
     test_repeatition.style.display = "block";
-
-    // if (test_repeatition1111111111111111.checked) {
-    //   mtb_detection.style.display = "block";
-    //   rif_resistance.style.display = "block";
-    //   ct_value1.style.display = "block";
-    // } else {
-    //   mtb_detection.style.display = "none";
-    //   rif_resistance.style.display = "none";
-    //   ct_value1.style.display = "none";
-    // }
-
-    // if (rif_resistance33333.checked) {
-    //   test_repeatition.style.display = "block";
-    // } else {
-    //   test_repeatition.style.display = "none";
-    // }
   } else if (sequence_type4.checked) {
     sequence_number1.style.display = "block";
     sequence_number.style.display = "block";
@@ -81,22 +59,6 @@ function toggleElementVisibility() {
     rif_resistance.style.display = "none";
     ct_value1.style.display = "none";
     test_repeatition.style.display = "block";
-
-    // if (test_repeatition1111111111111111.checked) {
-    //   mtb_detection.style.display = "block";
-    //   rif_resistance.style.display = "block";
-    //   ct_value1.style.display = "block";
-    // } else {
-    //   mtb_detection.style.display = "none";
-    //   rif_resistance.style.display = "none";
-    //   ct_value1.style.display = "none";
-    // }
-
-    // if (rif_resistance33333.checked) {
-    //   test_repeatition.style.display = "block";
-    // } else {
-    //   test_repeatition.style.display = "none";
-    // }
   } else if (sequence_type5.checked) {
     sequence_number1.style.display = "none";
     sequence_number.style.display = "none";
@@ -105,22 +67,6 @@ function toggleElementVisibility() {
     rif_resistance.style.display = "none";
     ct_value1.style.display = "none";
     test_repeatition.style.display = "block";
-
-    // if (test_repeatition1111111111111111.checked) {
-    //   mtb_detection.style.display = "block";
-    //   rif_resistance.style.display = "block";
-    //   ct_value1.style.display = "block";
-    // } else {
-    //   mtb_detection.style.display = "none";
-    //   rif_resistance.style.display = "none";
-    //   ct_value1.style.display = "none";
-    // }
-
-    // if (rif_resistance33333.checked) {
-    //   test_repeatition.style.display = "block";
-    // } else {
-    //   test_repeatition.style.display = "none";
-    // }
   } else {
     sequence_number1.style.display = "none";
     sequence_number.style.display = "none";

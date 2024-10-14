@@ -5219,13 +5219,11 @@ if ($user->isLoggedIn()) {
                                                 <table class="table table-bordered" id="testTable">
                                                     <thead>
                                                         <tr>
-                                                            <!-- <th>No</th> -->
                                                             <th>62. If yes</th>
                                                             <th id="sequence_number6_0">62. What code/number?</th>
                                                             <th id="mtb_detection6_0">63. If MTB detected </th>
                                                             <th id="rif_resistance6_0"> 64. If MTB detected, RIF resistance</th>
                                                             <th id="ct_value6_0">65. Sample Cycle threshold (Ct) Value (number, two digits)</th>
-                                                            <!-- <th>Actions</th> -->
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -5234,14 +5232,6 @@ if ($user->isLoggedIn()) {
                                                         $sequence_type = $override->getNews('sequence_type', 'status', 1, 'id', $medications3[0]['sequence_type']);
                                                         $mtb_detection = $override->getNews('mtb_detection', 'status', 1, 'id', $medications3[0]['mtb_detection']);
                                                         $rif_resistance = $override->getNews('rif_resistance', 'status', 1, 'id', $medications3[0]['rif_resistance']);
-
-                                                        // print_r($medications3[0]);
-
-                                                        // print_r($medications3[0]['sequence_type']);
-
-                                                        // print_r($sequence_type[0]);
-
-                                                        // foreach ($override->getNews('respiratory_repeated_tests', 'respiratory_id', $costing['id'], 'status', 1) as $medications) {
                                                         ?>
                                                         <tr>
 
@@ -5293,11 +5283,7 @@ if ($user->isLoggedIn()) {
                                                                                                                                                                         print_r($medications3[0]['ct_value']);
                                                                                                                                                                     }  ?>">
                                                             </td>
-                                                            <!-- <td><button type=" button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> -->
                                                         </tr>
-                                                        <?php
-                                                        // }
-                                                        ?>
                                                     </tbody>
                                                 </table>
                                             </div>
