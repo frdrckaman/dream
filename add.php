@@ -5256,26 +5256,28 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('mtb_detection', 'status', 1) as $value) { ?>
                                                                     <div class="form-check" id="mtb_detection6_2">
                                                                         <input class=" form-check-input" type="radio" name="mtb_detection2" id="mtb_detection6_6_6_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['mtb_detection'] == $value['id']) {
-                                                                                                                                                                                                                        echo 'checked';
-                                                                                                                                                                                                                    } ?>>
+                                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                                        } ?>>
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                                <!-- <br> -->
+                                                                <br>
                                                                 <button type="button" onclick="unsetRadio('mtb_detection2')">Unset</button>
                                                             </td>
                                                             <td id="rif_resistance6_1">
                                                                 <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check" id="rif_resistance6_2">
-                                                                        <input class="form-check-input" type="radio" name="rif_resistance2" id="rif_resistance6_6_6_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['rif_resistance'] == $value['id']) {
-                                                                                                                                                                                                                        echo 'checked';
-                                                                                                                                                                                                                    } ?>>
-                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
+                                                                    <!-- <span> -->
+                                                                        <div class="form-check" id="rif_resistance6_2">
+                                                                            <input class="form-check-input" type="radio" name="rif_resistance2" id="rif_resistance6_6_6_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['rif_resistance'] == $value['id']) {
+                                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                                            } ?>>
+                                                                            <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                        </div>
+                                                                    <!-- </span> -->
                                                                 <?php } ?>
-                                                                <!-- <br>
                                                                 <br>
-                                                                <br> -->
+                                                                <br>
+                                                                <br>
                                                                 <button type="button" onclick="unsetRadio('rif_resistance2')">Unset</button>
                                                             </td>
                                                             <td id="ct_value6_1">
