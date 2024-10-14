@@ -5731,7 +5731,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                             <button type="button" onclick="unsetRadio('microscopy_reason2_0')">Unset</button>
 
-                                                            <label for="microscopy_reason_other2_2" id="microscopy_reason_other2_1" class="form-label">If Other Mention</label>
+                                                            <label for="microscopy_reason_other2_1" id="microscopy_reason_other2_1" class="form-label">If Other Mention</label>
                                                             <input type="text" value="<?php if ($costing['microscopy_reason_other']) {
                                                                                             print_r($costing['microscopy_reason_other']);
                                                                                         } ?>" id="microscopy_reason_other2_2" name="microscopy_reason_other2_2" class="form-control" placeholder="Enter here" />
@@ -5742,6 +5742,97 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
+
+                                            <!-- Dynamic Table -->
+                                            <!-- <div id="dynamicTable" style="display: none;"> -->
+                                            <div id="Repeatable_Table2_1">
+                                                <h5 style="text-align: center; color: green;">If yes on Qn. 66 then return/ask to above four items? ( Add Repeated Test )</h5>
+                                                <!-- <button type="button" class="btn btn-primary" onclick="addRow()"></button> -->
+                                                <table class="table table-bordered" id="testTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <!-- <th>No</th> -->
+                                                            <th>62. If yes</th>
+                                                            <th id="sequence_number_221">62. What code/number?</th>
+                                                            <th id="sequence_number_222">63. If MTB detected </th>
+                                                            <th id="sequence_number_223"> 64. If MTB detected, RIF resistance</th>
+                                                            <th id="sequence_number_224">65. Sample Cycle threshold (Ct) Value (number, two digits)</th>
+                                                            <!-- <th>Actions</th> -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        $medications3 = $override->get3('non_respiratory_repeated_tests', 'patient_id', $costing['patient_id'], 'non_respiratory_id', $costing['id'], 'status', 1);
+                                                        $sequence_type = $override->getNews('sequence_type', 'status', 1, 'id', $medications3[0]['sequence_type']);
+                                                        $mtb_detection = $override->getNews('mtb_detection', 'status', 1, 'id', $medications3[0]['mtb_detection']);
+                                                        $rif_resistance = $override->getNews('rif_resistance', 'status', 1, 'id', $medications3[0]['rif_resistance']);
+
+                                                        // print_r($medications3[0]);
+
+                                                        // print_r($medications3[0]['sequence_type']);
+
+                                                        // print_r($sequence_type[0]);
+
+                                                        // foreach ($override->getNews('respiratory_repeated_tests', 'respiratory_id', $costing['id'], 'status', 1) as $medications) {
+                                                        ?>
+                                                        <tr>
+
+                                                            <td>
+                                                                <?php foreach ($override->get('sequence_type', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="sequence_type2" id="sequence_type222<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['sequence_type'] == $value['id']) {
+                                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                                    } ?>>
+                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                                <br>
+                                                                <button type="button" onclick="unsetRadio('sequence_type2')">Unset</button>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" name="sequence_number2" id="sequence_number22" value="<?php if ($medications3[0]['sequence_number']) {
+                                                                                                                                                print_r($medications3[0]['sequence_number']);
+                                                                                                                                            }  ?>" class="form-control">
+                                                            </td>
+                                                            <td>
+                                                                <?php foreach ($override->get('mtb_detection', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="mtb_detection2" id="mtb_detection22<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['mtb_detection'] == $value['id']) {
+                                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                                    } ?>>
+                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                                <br>
+                                                                <button type="button" onclick="unsetRadio('mtb_detection2')">Unset</button>
+                                                            </td>
+                                                            <td>
+                                                                <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="rif_resistance2" id="rif_resistance22<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['rif_resistance'] == $value['id']) {
+                                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                                    } ?>>
+                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                                <br>
+                                                                <br>
+                                                                <br>
+                                                                <button type="button" onclick="unsetRadio('rif_resistance2')">Unset</button>
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" name="ct_value2" id="c2t_value22" class="form-control" min="0" max="99" value="<?php if ($medications3[0]['ct_value']) {
+                                                                                                                                                                        print_r($medications3[0]['ct_value']);
+                                                                                                                                                                    }  ?>">
+                                                            </td>
+                                                            <!-- <td><button type=" button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> -->
+                                                        </tr>
+                                                        <?php
+                                                        // }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
