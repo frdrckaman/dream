@@ -5750,7 +5750,7 @@ if ($user->isLoggedIn()) {
                                                 <table class="table table-bordered" id="testTable">
                                                     <thead>
                                                         <tr>
-                                                            <th id="sequence_type3_0">73. If yes</th>
+                                                            <th>73. If yes</th>
                                                             <th id="sequence_number3_1">73. What code/number?</th>
                                                             <th id="mtb_detection4_0">74. If MTB detected </th>
                                                             <th id="rif_resistance4_0"> 75. If MTB detected, RIF resistance</th>
@@ -5784,7 +5784,7 @@ if ($user->isLoggedIn()) {
                                                             </td>
                                                             <td id="mtb_detection3_0">
                                                                 <?php foreach ($override->get('mtb_detection', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
+                                                                    <div class="form-check" id="mtb_detection5_0">
                                                                         <input class="form-check-input" type="radio" name="mtb_detection3_0" id="mtb_detection3_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['mtb_detection'] == $value['id']) {
                                                                                                                                                                                                                         echo 'checked';
                                                                                                                                                                                                                     } ?>>
@@ -5796,7 +5796,7 @@ if ($user->isLoggedIn()) {
                                                             </td>
                                                             <td id="rif_resistance3_0">
                                                                 <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
+                                                                    <div class="form-check" id="rif_resistance5_0">
                                                                         <input class="form-check-input" type="radio" name="rif_resistance3_0" id="rif_resistance3_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['rif_resistance'] == $value['id']) {
                                                                                                                                                                                                                             echo 'checked';
                                                                                                                                                                                                                         } ?>>
@@ -5808,8 +5808,8 @@ if ($user->isLoggedIn()) {
                                                                 <br>
                                                                 <button type="button" onclick="unsetRadio('rif_resistance3_0')">Unset</button>
                                                             </td>
-                                                            <td id="ct_value3_3">
-                                                                <input type="number" name="ct_value3_2" id="ct_value3_2" class="form-control" min="0" max="99" value="<?php if ($medications3[0]['ct_value']) {
+                                                            <td id="ct_value3_2">
+                                                                <input type="number" name="ct_value3_2" id="ct_value3_3" class="form-control" min="0" max="99" value="<?php if ($medications3[0]['ct_value']) {
                                                                                                                                                                             print_r($medications3[0]['ct_value']);
                                                                                                                                                                         }  ?>">
                                                             </td>
