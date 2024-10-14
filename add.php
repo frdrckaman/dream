@@ -879,6 +879,7 @@ if ($user->isLoggedIn()) {
                         'respiratory_completness' => Input::get('respiratory_completness'),
                         'comments' => Input::get('comments'),
                         'date_completed' => Input::get('date_completed'),
+                        'respiratory_completed_by' => Input::get('respiratory_completed_by'),
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
                         'site_id' => $clients['site_id'],
@@ -963,6 +964,7 @@ if ($user->isLoggedIn()) {
                         'respiratory_completness' => Input::get('respiratory_completness'),
                         'comments' => Input::get('comments'),
                         'date_completed' => Input::get('date_completed'),
+                        'respiratory_completed_by' => Input::get('respiratory_completed_by'),
                         'status' => 1,
                         'patient_id' => $clients['id'],
                         'create_on' => date('Y-m-d H:i:s'),
@@ -1065,6 +1067,7 @@ if ($user->isLoggedIn()) {
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
+                        'non_respiratory_completed' => Input::get('non_respiratory_completed'),
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
                     ), $costing[0]['id']);
@@ -1134,6 +1137,7 @@ if ($user->isLoggedIn()) {
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
+                        'non_respiratory_completed' => Input::get('non_respiratory_completed'),
                         'status' => 1,
                         'patient_id' => $clients['id'],
                         'create_on' => date('Y-m-d H:i:s'),
@@ -5125,26 +5129,6 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <!-- <div class="col-sm-3" id="test_repeatition">
-                                                    <label for="test_repeatition" class="form-label">66. If Invalid/Error/No result/Indeterminate, was the test repeated?
-                                                    </label> -->
-                                                <!-- radio -->
-                                                <!-- <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="test_repeatition" id="test_repeatition<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['test_repeatition'] == $value['id']) {
-                                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                                } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button" onclick="unsetRadio('test_repeatition')">Unset</button>
-
-                                                    </div>
-                                                </div> -->
-
                                                 <div class="col-sm-3" id="test_repeatition">
                                                     <label for="test_repeatition" class="form-label">66. If Invalid/Error/No result/Indeterminate, was the test repeated?</label>
                                                     <div class="row-form clearfix">
@@ -5190,26 +5174,6 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-
-                                            <!-- <div class="row">
-                                                <div class="col-sm-3" id="test_repeatition">
-                                                    <label for="test_repeatition" class="form-label">66. If Invalid/Error/No result/Indeterminate, was the test repeated?</label>
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="test_repeatition" id="test_repeatition<?= $value['id']; ?>" value="<?= $value['id']; ?>"
-                                                                        <?php if ($costing['test_repeatition'] == $value['id']) {
-                                                                            echo 'checked';
-                                                                        } ?>
-                                                                        onclick="toggleTable(this)">
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> -->
 
                                             <!-- Dynamic Table -->
                                             <!-- <div id="dynamicTable" style="display: none;"> -->
@@ -5266,14 +5230,12 @@ if ($user->isLoggedIn()) {
                                                             </td>
                                                             <td id="rif_resistance6_1">
                                                                 <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
-                                                                    <!-- <span> -->
-                                                                        <div class="form-check" id="rif_resistance6_2">
-                                                                            <input class="form-check-input" type="radio" name="rif_resistance2" id="rif_resistance6_6_6_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['rif_resistance'] == $value['id']) {
-                                                                                                                                                                                                                                echo 'checked';
-                                                                                                                                                                                                                            } ?>>
-                                                                            <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <!-- </span> -->
+                                                                    <div class="form-check" id="rif_resistance6_2">
+                                                                        <input class="form-check-input" type="radio" name="rif_resistance2" id="rif_resistance6_6_6_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['rif_resistance'] == $value['id']) {
+                                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                                        } ?>>
+                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
                                                                 <?php } ?>
                                                                 <br>
                                                                 <br>
@@ -5321,7 +5283,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-6" id="respiratory_completness">
+                                                <div class="col-sm-4" id="respiratory_completness">
                                                     <label>Complete?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5339,7 +5301,7 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-4">
                                                     <div class="mb-2">
                                                         <label for="date_completed" class="form-label">Date form completed</label>
                                                         <input type="date" value="<?php if ($costing['date_completed']) {
@@ -5347,6 +5309,25 @@ if ($user->isLoggedIn()) {
                                                                                     } ?>" id="date_completed" name="date_completed" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
                                                     </div>
 
+                                                </div>
+                                                <div class="col-sm-4" id="respiratory_completed_by">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>65 (a).This form was completed by( Full Name )</label>
+                                                            <select id="respiratory_completed_by" name="respiratory_completed_by" class="form-control" required>
+                                                                <?php $diagnosis_test_completed = $override->get('user', 'id', $costing['respiratory_completed_by'])[0]; ?>
+                                                                <option value="<?= $diagnosis_test_completed['id'] ?>"><?php if ($costing['respiratory_completed_by']) {
+                                                                                                                            print_r($diagnosis_test_completed['firstname'] . ' ' . $diagnosis_test_completed['lastname']);
+                                                                                                                        } else {
+                                                                                                                            echo 'Select';
+                                                                                                                        } ?>
+                                                                </option>
+                                                                <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
+                                                                    <option value="<?= $value['id'] ?>"><?= $value['firstname'] . ' ' . $value['lastname'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <hr>
@@ -5836,7 +5817,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-6" id="form_completness">
+                                                <div class="col-sm-4" id="form_completness">
                                                     <label>Complete?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5854,12 +5835,32 @@ if ($user->isLoggedIn()) {
                                                     <button type="button" onclick="unsetRadio('form_completness')">Unset</button>
 
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-4">
                                                     <div class="mb-2">
                                                         <label for="date_completed" class="form-label">Date form completed</label>
                                                         <input type="date" value="<?php if ($costing['date_completed']) {
                                                                                         print_r($costing['date_completed']);
                                                                                     } ?>" id="date_completed" name="date_completed" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4" id="non_respiratory_completed">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>75 (a).This form was completed by( Full Name )</label>
+                                                            <select id="non_respiratory_completed" name="non_respiratory_completed" class="form-control" required>
+                                                                <?php $diagnosis_test_completed = $override->get('user', 'id', $costing['non_respiratory_completed'])[0]; ?>
+                                                                <option value="<?= $diagnosis_test_completed['id'] ?>"><?php if ($costing['non_respiratory_completed']) {
+                                                                                                                            print_r($diagnosis_test_completed['firstname'] . ' ' . $diagnosis_test_completed['lastname']);
+                                                                                                                        } else {
+                                                                                                                            echo 'Select';
+                                                                                                                        } ?>
+                                                                </option>
+                                                                <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
+                                                                    <option value="<?= $value['id'] ?>"><?= $value['firstname'] . ' ' . $value['lastname'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -7445,59 +7446,10 @@ if ($user->isLoggedIn()) {
                                             <hr>
                                             <div class="card card-warning">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">95. This form was completed by (name)</h3>
+                                                    <h3 class="card-title"></h3>
                                                 </div>
                                             </div>
                                             <hr>
-                                            <div class="col-sm-12" id="diagnosis_test_completed1">
-                                                <div class="row-form clearfix">
-                                                    <div class="form-group">
-                                                        <label>40. This form was completed by (name) </label>
-                                                        <select id="diagnosis_test_completed" name="diagnosis_test_completed" class="form-control" required>
-                                                            <?php $diagnosis_test_completed = $override->get('user', 'id', $costing['diagnosis_test_completed'])[0]; ?>
-                                                            <option value="<?= $diagnosis_test_completed['id'] ?>"><?php if ($costing['diagnosis_test_completed']) {
-                                                                                                                        print_r($diagnosis_test_completed['firstname'] . ' ' . $diagnosis_test_completed['lastname']);
-                                                                                                                    } else {
-                                                                                                                        echo 'Select';
-                                                                                                                    } ?>
-                                                            </option>
-                                                            <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
-                                                                <option value="<?= $value['id'] ?>"><?= $value['firstname'] . ' ' . $value['lastname'] ?></option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- <div class="row">
-                                                <div class="col-4">
-                                                    <div class="mb-2">
-                                                        <label for="d_firstName" class="form-label">First NAME</label>
-                                                        <input type="text" value="<?php if ($costing['d_firstName']) {
-                                                                                        print_r($costing['d_firstName']);
-                                                                                    } ?>" id="d_firstName" name="d_firstName" class="form-control" placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="mb-2">
-                                                        <label for="d_middleName" class="form-label">Middle (Optional)</label>
-                                                        <input type="text" value="<?php if ($costing['d_middleName']) {
-                                                                                        print_r($costing['d_middleName']);
-                                                                                    } ?>" id="d_middleName" name="d_middleName" class="form-control" placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="mb-2">
-                                                        <label for="d_surname" class="form-label">Surname:</label>
-                                                        <input type="text" value="<?php if ($costing['d_surname']) {
-                                                                                        print_r($costing['d_surname']);
-                                                                                    } ?>" id="d_surname" name="d_surname" class="form-control" placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-                                            </div> -->
-
-                                            <hr>
-
-
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
@@ -7529,7 +7481,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-6" id="form_completness">
+                                                <div class="col-sm-4" id="form_completness">
                                                     <label>Complete?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -7546,12 +7498,32 @@ if ($user->isLoggedIn()) {
                                                         <button type="button" onclick="unsetRadio('form_completness')">Unset</button>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-4">
                                                     <div class="mb-2">
                                                         <label for="date_completed" class="form-label">Date form completed</label>
                                                         <input type="date" value="<?php if ($costing['date_completed']) {
                                                                                         print_r($costing['date_completed']);
                                                                                     } ?>" id="date_completed" name="date_completed" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4" id="diagnosis_test_completed1">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>95.This form was completed by( Full Name )</label>
+                                                            <select id="diagnosis_test_completed" name="diagnosis_test_completed" class="form-control" required>
+                                                                <?php $diagnosis_test_completed = $override->get('user', 'id', $costing['diagnosis_test_completed'])[0]; ?>
+                                                                <option value="<?= $diagnosis_test_completed['id'] ?>"><?php if ($costing['diagnosis_test_completed']) {
+                                                                                                                            print_r($diagnosis_test_completed['firstname'] . ' ' . $diagnosis_test_completed['lastname']);
+                                                                                                                        } else {
+                                                                                                                            echo 'Select';
+                                                                                                                        } ?>
+                                                                </option>
+                                                                <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
+                                                                    <option value="<?= $value['id'] ?>"><?= $value['firstname'] . ' ' . $value['lastname'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -8024,58 +7996,7 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-                                            <div class="row">
-                                                <label for="ct_value" class="form-label">113. This form was completed by (name)</label>
 
-                                            </div>
-
-                                            <hr>
-                                            <div class="col-sm-12" id="diagnosis_completed1">
-                                                <div class="row-form clearfix">
-                                                    <div class="form-group">
-                                                        <label>40. This form was completed by (name) </label>
-                                                        <select id="diagnosis_completed" name="diagnosis_completed" class="form-control" required>
-                                                            <?php $diagnosis_completed = $override->get('user', 'id', $costing['diagnosis_completed'])[0]; ?>
-                                                            <option value="<?= $diagnosis_completed['id'] ?>"><?php if ($costing['diagnosis_completed']) {
-                                                                                                                    print_r($diagnosis_completed['firstname'] . ' ' . $diagnosis_completed['lastname']);
-                                                                                                                } else {
-                                                                                                                    echo 'Select';
-                                                                                                                } ?>
-                                                            </option>
-                                                            <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
-                                                                <option value="<?= $value['id'] ?>"><?= $value['firstname'] . ' ' . $value['lastname'] ?></option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- <div class="row">
-                                                <div class="col-4">
-                                                    <div class="mb-2">
-                                                        <label for="clinician_firstname" class="form-label">First NAME</label>
-                                                        <input type="text" value="<?php if ($costing['clinician_firstname']) {
-                                                                                        print_r($costing['clinician_firstname']);
-                                                                                    } ?>" id="clinician_firstname" name="clinician_firstname" class="form-control" placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="mb-2">
-                                                        <label for="clinician_middlename" class="form-label">Middle (Optional)</label>
-                                                        <input type="text" value="<?php if ($costing['clinician_middlename']) {
-                                                                                        print_r($costing['clinician_middlename']);
-                                                                                    } ?>" id="clinician_middlename" name="clinician_middlename" class="form-control" placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="mb-2">
-                                                        <label for="clinician_lastname" class="form-label">Surname:</label>
-                                                        <input type="text" value="<?php if ($costing['clinician_lastname']) {
-                                                                                        print_r($costing['clinician_lastname']);
-                                                                                    } ?>" id="clinician_lastname" name="clinician_lastname" class="form-control" placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-                                            </div> -->
-                                            <hr>
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
@@ -8107,7 +8028,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-6" id="form_completness">
+                                                <div class="col-sm-4" id="form_completness">
                                                     <label>Complete?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -8125,12 +8046,31 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-4">
                                                     <div class="mb-2">
                                                         <label for="date_completed" class="form-label">Date form completed</label>
                                                         <input type="date" value="<?php if ($costing['date_completed']) {
                                                                                         print_r($costing['date_completed']);
                                                                                     } ?>" id="date_completed" name="date_completed" max="<?= date('Y-m-d') ?>" class="form-control" placeholder="Enter date" required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4" id="diagnosis_completed1">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>113. This form was completed by ( Full Name )</label>
+                                                            <select id="diagnosis_completed" name="diagnosis_completed" class="form-control" required>
+                                                                <?php $diagnosis_completed = $override->get('user', 'id', $costing['diagnosis_completed'])[0]; ?>
+                                                                <option value="<?= $diagnosis_completed['id'] ?>"><?php if ($costing['diagnosis_completed']) {
+                                                                                                                        print_r($diagnosis_completed['firstname'] . ' ' . $diagnosis_completed['lastname']);
+                                                                                                                    } else {
+                                                                                                                        echo 'Select';
+                                                                                                                    } ?>
+                                                                </option>
+                                                                <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
+                                                                    <option value="<?= $value['id'] ?>"><?= $value['firstname'] . ' ' . $value['lastname'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
