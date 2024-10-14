@@ -28,6 +28,19 @@ function toggleElementVisibility() {
     } else {
       test_repeatition2_0.style.display = "none";
     }
+  } else if (sequence_done2_2.checked) {
+    sequence_date2_1.style.display = "none";
+    sequence_date2_2.style.display = "none";
+    sequence_type2_0.style.display = "none";
+    mtb_detection2_0.style.display = "none";
+    rif_resistance2_0.style.display = "none";
+    ct_value2_1.style.display = "none";
+
+    if (rif_resistance2_3.checked) {
+      test_repeatition2_0.style.display = "block";
+    } else {
+      test_repeatition2_0.style.display = "none";
+    }
   } else {
     sequence_date2_1.style.display = "none";
     sequence_date2_2.style.display = "none";

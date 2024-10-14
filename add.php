@@ -5650,7 +5650,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
                                             <div class="row">
 
-                                                <div class="col-sm-3" id="mtb_detection2_0">
+                                                <div class="col-sm-2" id="mtb_detection2_0">
                                                     <label for="mtb_detection2_0" class="form-label">74. If MTB detected </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5668,7 +5668,7 @@ if ($user->isLoggedIn()) {
                                                     <button type="button" onclick="unsetRadio('mtb_detection2_0')">Unset</button>
 
                                                 </div>
-                                                <div class="col-sm-3" id="rif_resistance2_0">
+                                                <div class="col-sm-2" id="rif_resistance2_0">
                                                     <label for="rif_resistance2_0" class="form-label">75. If MTB detected, RIF resistance </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5687,9 +5687,9 @@ if ($user->isLoggedIn()) {
 
                                                 </div>
 
-                                                <div class="col-3" id="ct_value2_1">
+                                                <div class="col-2" id="ct_value2_1">
                                                     <div class="mb-3">
-                                                        <label for="ct_value2_0" class="form-label">76. Sample Cycle threshold (Ct) Value (number, two digits)</label>
+                                                        <label for="ct_value2_2" class="form-label">76. Sample Cycle threshold (Ct) Value (number, two digits)</label>
                                                         <input type="number" value="<?php if ($costing['ct_value']) {
                                                                                         print_r($costing['ct_value']);
                                                                                     } ?>" id="ct_value2_2" name="ct_value2_2" min="0" max="99" class="form-control" placeholder="Enter here" />
@@ -10894,7 +10894,7 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/non_respiratory/n_sequence_type.js"></script>
     <script src="myjs/add/non_respiratory/n_test_repeatition.js"></script>
     <script src="myjs/add/non_respiratory/n_afb.js"></script>
-    <script src="myjs/add/non_respiratory/"></script>
+    <script src="myjs/add/non_respiratory/n_sequence_done.js"></script>
 
 
     <!-- Diagnosis Test format numbers Js -->
