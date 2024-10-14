@@ -5750,11 +5750,11 @@ if ($user->isLoggedIn()) {
                                                 <table class="table table-bordered" id="testTable">
                                                     <thead>
                                                         <tr>
-                                                            <th>73. If yes</th>
-                                                            <th id="sequence_number_221">73. What code/number?</th>
-                                                            <th id="sequence_number_222">74. If MTB detected </th>
-                                                            <th id="sequence_number_223"> 75. If MTB detected, RIF resistance</th>
-                                                            <th id="sequence_number_224">76. Sample Cycle threshold (Ct) Value (number, two digits)</th>
+                                                            <th id="sequence_type3_0">73. If yes</th>
+                                                            <th id="sequence_number3_1">73. What code/number?</th>
+                                                            <th id="mtb_detection4_0">74. If MTB detected </th>
+                                                            <th id="rif_resistance4_0"> 75. If MTB detected, RIF resistance</th>
+                                                            <th id="ct_value3_1">76. Sample Cycle threshold (Ct) Value (number, two digits)</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -5765,7 +5765,6 @@ if ($user->isLoggedIn()) {
                                                         $rif_resistance = $override->getNews('rif_resistance', 'status', 1, 'id', $medications3[0]['rif_resistance']);
                                                         ?>
                                                         <tr>
-
                                                             <td>
                                                                 <?php foreach ($override->get('sequence_type', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
@@ -5778,12 +5777,12 @@ if ($user->isLoggedIn()) {
                                                                 <br>
                                                                 <button type="button" onclick="unsetRadio('sequence_type3_0')">Unset</button>
                                                             </td>
-                                                            <td>
+                                                            <td id="sequence_number3_3">
                                                                 <input type="text" name="sequence_number3_2" id="sequence_number3_2" value="<?php if ($medications3[0]['sequence_number']) {
                                                                                                                                                 print_r($medications3[0]['sequence_number']);
                                                                                                                                             }  ?>" class="form-control">
                                                             </td>
-                                                            <td>
+                                                            <td id="mtb_detection3_0">
                                                                 <?php foreach ($override->get('mtb_detection', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="mtb_detection3_0" id="mtb_detection3_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['mtb_detection'] == $value['id']) {
@@ -5795,7 +5794,7 @@ if ($user->isLoggedIn()) {
                                                                 <br>
                                                                 <button type="button" onclick="unsetRadio('mtb_detection3_0')">Unset</button>
                                                             </td>
-                                                            <td>
+                                                            <td id="rif_resistance3_0">
                                                                 <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio" name="rif_resistance3_0" id="rif_resistance3_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['rif_resistance'] == $value['id']) {
@@ -5809,7 +5808,7 @@ if ($user->isLoggedIn()) {
                                                                 <br>
                                                                 <button type="button" onclick="unsetRadio('rif_resistance3_0')">Unset</button>
                                                             </td>
-                                                            <td>
+                                                            <td id="ct_value3_3">
                                                                 <input type="number" name="ct_value3_2" id="ct_value3_2" class="form-control" min="0" max="99" value="<?php if ($medications3[0]['ct_value']) {
                                                                                                                                                                             print_r($medications3[0]['ct_value']);
                                                                                                                                                                         }  ?>">
@@ -10895,6 +10894,8 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/non_respiratory/n_afb.js"></script>
     <script src="myjs/add/non_respiratory/n_sequence_done.js"></script>
     <script src="myjs/add/non_respiratory/n_microscopy_reason.js"></script>
+    <script src="myjs/add/non_respiratory/n_sequence_type2.js"></script>
+
 
 
 
