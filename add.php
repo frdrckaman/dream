@@ -5261,7 +5261,7 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                                <br>
+                                                                <!-- <br> -->
                                                                 <button type="button" onclick="unsetRadio('mtb_detection2')">Unset</button>
                                                             </td>
                                                             <td id="rif_resistance6_1">
@@ -5273,9 +5273,9 @@ if ($user->isLoggedIn()) {
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
+                                                                <!-- <br>
                                                                 <br>
-                                                                <br>
-                                                                <br>
+                                                                <br> -->
                                                                 <button type="button" onclick="unsetRadio('rif_resistance2')">Unset</button>
                                                             </td>
                                                             <td id="ct_value6_1">
