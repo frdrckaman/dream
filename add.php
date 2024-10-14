@@ -10887,14 +10887,14 @@ if ($user->isLoggedIn()) {
 
 
     <!-- NON RESPIRATORY format numbers Js -->
-    <script src="myjs/add/non_respiratory/sample_received.js"></script>
-    <script src="myjs/add/non_respiratory/test_rejected.js"></script>
+    <script src="myjs/add/non_respiratory/n_sample_received.js"></script>
+    <script src="myjs/add/non_respiratory/n_test_rejected.js"></script>
     <script src="myjs/add/non_respiratory/n_afb_microscopy.js"></script>
-    <script src="myjs/add/non_respiratory/wrd_test.js"></script>
-    <script src="myjs/add/non_respiratory/sequence_type.js"></script>
-    <script src="myjs/add/non_respiratory/test_repeatition.js"></script>
-    <script src="myjs/add/non_respiratory/afb.js"></script>
-    <!-- <script src="myjs/add/non_respiratory"></script> -->
+    <script src="myjs/add/non_respiratory/n_wrd_test.js"></script>
+    <script src="myjs/add/non_respiratory/n_sequence_type.js"></script>
+    <script src="myjs/add/non_respiratory/n_test_repeatition.js"></script>
+    <script src="myjs/add/non_respiratory/n_afb.js"></script>
+    <script src="myjs/add/non_respiratory/"></script>
 
 
     <!-- Diagnosis Test format numbers Js -->
