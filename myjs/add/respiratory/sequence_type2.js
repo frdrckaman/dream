@@ -4,9 +4,13 @@ const sequence_type223 = document.getElementById("sequence_type223");
 const sequence_type224 = document.getElementById("sequence_type224");
 const sequence_type225 = document.getElementById("sequence_type225");
 
-const rif_resistance2211111 = document.getElementById("rif_resistance221");
-const rif_resistance2222222 = document.getElementById("rif_resistance222");
-const rif_resistance2233333 = document.getElementById("rif_resistance223");
+    alert(sequence_type221);
+
+
+
+const rif_resistance22233333 = document.getElementById("rif_resistance221");
+// const rif_resistance2222222 = document.getElementById("rif_resistance222");
+// const rif_resistance2233333 = document.getElementById("rif_resistance223");
 
 const sequence_number221 = document.getElementById("sequence_number221");
 const sequence_number22 = document.getElementById("sequence_number22");
@@ -23,7 +27,7 @@ function toggleElementVisibility() {
     rif_resistance22.style.display = "block";
     c2t_value22.style.display = "block";
 
-  } else if (sequence_type221.checked && rif_resistance2233333.checked) {
+  } else if (sequence_type221.checked && rif_resistance22233333.checked) {
     sequence_number221.style.display = "none";
     sequence_number22.style.display = "none";
     mtb_detection22.style.display = "block";
@@ -77,9 +81,9 @@ sequence_type223.addEventListener("change", toggleElementVisibility);
 sequence_type224.addEventListener("change", toggleElementVisibility);
 sequence_type225.addEventListener("change", toggleElementVisibility);
 
-rif_resistance2211111.addEventListener("change", toggleElementVisibility);
-rif_resistance2222222.addEventListener("change", toggleElementVisibility);
-rif_resistance2233333.addEventListener("change", toggleElementVisibility);
+// rif_resistance2211111.addEventListener("change", toggleElementVisibility);
+// rif_resistance2222222.addEventListener("change", toggleElementVisibility);
+// rif_resistance2233333.addEventListener("change", toggleElementVisibility);
 
 // Initial check
 toggleElementVisibility();

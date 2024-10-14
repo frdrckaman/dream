@@ -5135,7 +5135,7 @@ if ($user->isLoggedIn()) {
                                             <!-- Dynamic Table -->
                                             <!-- <div id="dynamicTable" style="display: none;"> -->
                                             <div id="Repeatable_Table">
-                                                <h5>If yes on Qn. 66 then return/ask to above four items? ( Add Repeated Test )</h5>
+                                                <h5 style="text-align: center; color: green;">If yes on Qn. 66 then return/ask to above four items? ( Add Repeated Test )</h5>
                                                 <!-- <button type="button" class="btn btn-primary" onclick="addRow()"></button> -->
                                                 <table class="table table-bordered" id="testTable">
                                                     <thead>
@@ -5169,7 +5169,7 @@ if ($user->isLoggedIn()) {
                                                             <td>
                                                                 <?php foreach ($override->get('sequence_type', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="sequence_type2" id="sequence_type22<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['sequence_type'] == $value['id']) {
+                                                                        <input class="form-check-input" type="radio" name="sequence_type2" id="sequence_type222<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['sequence_type'] == $value['id']) {
                                                                                                                                                                                                                         echo 'checked';
                                                                                                                                                                                                                     } ?>>
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
