@@ -5142,10 +5142,10 @@ if ($user->isLoggedIn()) {
                                                         <tr>
                                                             <!-- <th>No</th> -->
                                                             <th>62. If yes</th>
-                                                            <th>62. What code/number?</th>
-                                                            <th>63. If MTB detected </th>
-                                                            <th>64. If MTB detected, RIF resistance</th>
-                                                            <th>65. Sample Cycle threshold (Ct) Value (number, two digits)</th>
+                                                            <th id="sequence_number_221">62. What code/number?</th>
+                                                            <th id="sequence_number_222">63. If MTB detected </th>
+                                                            <th id="sequence_number_223"> 64. If MTB detected, RIF resistance</th>
+                                                            <th id="sequence_number_224">65. Sample Cycle threshold (Ct) Value (number, two digits)</th>
                                                             <!-- <th>Actions</th> -->
                                                         </tr>
                                                     </thead>
