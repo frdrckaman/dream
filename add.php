@@ -1044,12 +1044,12 @@ if ($user->isLoggedIn()) {
                 if ($costing) {
                     $user->updateRecord('non_respiratory', array(
                         'visit_date' => Input::get('visit_date'),
-                        'afb_microscopy' => Input::get('afb_microscopy'),
-                        'afb_microscopy_date' => Input::get('afb_microscopy_date'),
-                        'zn_results_a' => Input::get('zn_results_a'),
-                        'zn_results_b' => Input::get('zn_results_b'),
-                        'fm_results_a' => Input::get('fm_results_a'),
-                        'fm_results_b' => Input::get('fm_results_b'),
+                        'afb_microscopy' => Input::get('n_afb_microscopy'),
+                        'afb_microscopy_date' => Input::get('n_afb_microscopy_date'),
+                        'zn_results_a' => Input::get('n_zn_results_a'),
+                        'zn_results_b' => Input::get('n_zn_results_b'),
+                        'fm_results_a' => Input::get('n_fm_results_a'),
+                        'fm_results_b' => Input::get('n_fm_results_b'),
                         'wrd_test' => Input::get('wrd_test2_0'),
                         'wrd_test_date' => Input::get('wrd_test_date2_2'),
                         'sequence_done' => Input::get('sequence_done2_0'),
@@ -1113,12 +1113,12 @@ if ($user->isLoggedIn()) {
                         'pid' => $clients['study_id'],
                         'study_id' => $clients['study_id'],
                         'visit_date' => Input::get('visit_date'),
-                        'afb_microscopy' => Input::get('afb_microscopy'),
-                        'afb_microscopy_date' => Input::get('afb_microscopy_date'),
-                        'zn_results_a' => Input::get('zn_results_a'),
-                        'zn_results_b' => Input::get('zn_results_b'),
-                        'fm_results_a' => Input::get('fm_results_a'),
-                        'fm_results_b' => Input::get('fm_results_b'),
+                        'afb_microscopy' => Input::get('n_afb_microscopy'),
+                        'afb_microscopy_date' => Input::get('n_afb_microscopy_date'),
+                        'zn_results_a' => Input::get('n_zn_results_a'),
+                        'zn_results_b' => Input::get('n_zn_results_b'),
+                        'fm_results_a' => Input::get('n_fm_results_a'),
+                        'fm_results_b' => Input::get('n_fm_results_b'),
                         'wrd_test' => Input::get('wrd_test2_0'),
                         'wrd_test_date' => Input::get('wrd_test_date2_2'),
                         'sequence_done' => Input::get('sequence_done2_0'),
@@ -5449,7 +5449,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('afb_microscopy', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="afb_microscopy" id="n_afb_microscopy<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="n_afb_microscopy" id="n_afb_microscopy<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy'] == $value['id']) {
                                                                                                                                                                                                                     echo 'checked';
                                                                                                                                                                                                                 } ?> required>
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
@@ -5457,7 +5457,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
-                                                    <button type="button" onclick="unsetRadio('afb_microscopy')">Unset</button>
+                                                    <button type="button" onclick="unsetRadio('n_afb_microscopy')">Unset</button>
 
                                                 </div>
 
@@ -10889,7 +10889,7 @@ if ($user->isLoggedIn()) {
     <!-- NON RESPIRATORY format numbers Js -->
     <script src="myjs/add/non_respiratory/sample_received.js"></script>
     <script src="myjs/add/non_respiratory/test_rejected.js"></script>
-    <script src="myjs/add/non_respiratory/afb_microscopy.js"></script>
+    <script src="myjs/add/non_respiratory/n_afb_microscopy.js"></script>
     <script src="myjs/add/non_respiratory/wrd_test.js"></script>
     <script src="myjs/add/non_respiratory/sequence_type.js"></script>
     <script src="myjs/add/non_respiratory/test_repeatition.js"></script>
