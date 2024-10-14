@@ -5746,18 +5746,16 @@ if ($user->isLoggedIn()) {
                                             <!-- Dynamic Table -->
                                             <!-- <div id="dynamicTable" style="display: none;"> -->
                                             <div id="Repeatable_Table2_1">
-                                                <h5 style="text-align: center; color: green;">If yes on Qn. 66 then return/ask to above four items? ( Add Repeated Test )</h5>
+                                                <h5 style="text-align: center; color: green;">If yes on Qn. 77 then return/ask to above four items? ( Add Repeated Test )</h5>
                                                 <!-- <button type="button" class="btn btn-primary" onclick="addRow()"></button> -->
                                                 <table class="table table-bordered" id="testTable">
                                                     <thead>
                                                         <tr>
-                                                            <!-- <th>No</th> -->
-                                                            <th>62. If yes</th>
-                                                            <th id="sequence_number_221">62. What code/number?</th>
-                                                            <th id="sequence_number_222">63. If MTB detected </th>
-                                                            <th id="sequence_number_223"> 64. If MTB detected, RIF resistance</th>
-                                                            <th id="sequence_number_224">65. Sample Cycle threshold (Ct) Value (number, two digits)</th>
-                                                            <!-- <th>Actions</th> -->
+                                                            <th>73. If yes</th>
+                                                            <th id="sequence_number_221">73. What code/number?</th>
+                                                            <th id="sequence_number_222">74. If MTB detected </th>
+                                                            <th id="sequence_number_223"> 75. If MTB detected, RIF resistance</th>
+                                                            <th id="sequence_number_224">76. Sample Cycle threshold (Ct) Value (number, two digits)</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -5766,14 +5764,6 @@ if ($user->isLoggedIn()) {
                                                         $sequence_type = $override->getNews('sequence_type', 'status', 1, 'id', $medications3[0]['sequence_type']);
                                                         $mtb_detection = $override->getNews('mtb_detection', 'status', 1, 'id', $medications3[0]['mtb_detection']);
                                                         $rif_resistance = $override->getNews('rif_resistance', 'status', 1, 'id', $medications3[0]['rif_resistance']);
-
-                                                        // print_r($medications3[0]);
-
-                                                        // print_r($medications3[0]['sequence_type']);
-
-                                                        // print_r($sequence_type[0]);
-
-                                                        // foreach ($override->getNews('respiratory_repeated_tests', 'respiratory_id', $costing['id'], 'status', 1) as $medications) {
                                                         ?>
                                                         <tr>
 
