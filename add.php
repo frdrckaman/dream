@@ -1074,11 +1074,11 @@ if ($user->isLoggedIn()) {
                     if ($non_respiratory_repeated_tests) {
                         $user->updateRecord('non_respiratory_repeated_tests', array(
                             'non_respiratory_id' => $costing[0]['id'],
-                            'sequence_type' => Input::get('sequence_type2_0'),
-                            'sequence_number' => Input::get('sequence_number2_2'),
-                            'mtb_detection' => Input::get('mtb_detection2_0'),
-                            'rif_resistance' => Input::get('rif_resistance2_0'),
-                            'ct_value' => Input::get('ct_value2_2'),
+                            'sequence_type' => Input::get('sequence_type3_0'),
+                            'sequence_number' => Input::get('sequence_number3_2'),
+                            'mtb_detection' => Input::get('mtb_detection3_0'),
+                            'rif_resistance' => Input::get('rif_resistance3_0'),
+                            'ct_value' => Input::get('ct_value3_2'),
                             'test_repeatition' => Input::get('test_repeatition2_0'),
                             'patient_id' => $clients['id'],
                             'update_on' => date('Y-m-d H:i:s'),
@@ -1088,11 +1088,11 @@ if ($user->isLoggedIn()) {
                     } else {
                         $user->createRecord('non_respiratory_repeated_tests', array(
                             'non_respiratory_id' => $costing[0]['id'],
-                            'sequence_type' => Input::get('sequence_type2_0'),
-                            'sequence_number' => Input::get('sequence_number2_2'),
-                            'mtb_detection' => Input::get('mtb_detection2_0'),
-                            'rif_resistance' => Input::get('rif_resistance2_0'),
-                            'ct_value' => Input::get('ct_value2_2'),
+                            'sequence_type' => Input::get('sequence_type3_0'),
+                            'sequence_number' => Input::get('sequence_number3_2'),
+                            'mtb_detection' => Input::get('mtb_detection3_0'),
+                            'rif_resistance' => Input::get('rif_resistance3_0'),
+                            'ct_value' => Input::get('ct_value3_2'),
                             'test_repeatition' => Input::get('test_repeatition2_0'),
                             'patient_id' => $clients['id'],
                             'status' => 1,
@@ -1150,11 +1150,11 @@ if ($user->isLoggedIn()) {
                     if ($respiratory_repeated_tests) {
                         $user->updateRecord('non_respiratory_repeated_tests', array(
                             'non_respiratory_id' => $last_row['id'],
-                            'sequence_type' => Input::get('sequence_type2_0'),
-                            'sequence_number' => Input::get('sequence_number2_2'),
-                            'mtb_detection' => Input::get('mtb_detection2_0'),
-                            'rif_resistance' => Input::get('rif_resistance2_0'),
-                            'ct_value' => Input::get('ct_value2_2'),
+                            'sequence_type' => Input::get('sequence_type3_0'),
+                            'sequence_number' => Input::get('sequence_number3_2'),
+                            'mtb_detection' => Input::get('mtb_detection3_0'),
+                            'rif_resistance' => Input::get('rif_resistance3_0'),
+                            'ct_value' => Input::get('ct_value3_2'),
                             'test_repeatition' => Input::get('test_repeatition2_0'),
                             'patient_id' => $clients['id'],
                             'update_on' => date('Y-m-d H:i:s'),
@@ -1164,11 +1164,11 @@ if ($user->isLoggedIn()) {
                     } else {
                         $user->createRecord('non_respiratory_repeated_tests', array(
                             'non_respiratory_id' => $last_row['id'],
-                            'sequence_type' => Input::get('sequence_type2_0'),
-                            'sequence_number' => Input::get('sequence_number2_2'),
-                            'mtb_detection' => Input::get('mtb_detection2_0'),
-                            'rif_resistance' => Input::get('rif_resistance2_0'),
-                            'ct_value' => Input::get('ct_value2_2'),
+                            'sequence_type' => Input::get('sequence_type3_0'),
+                            'sequence_number' => Input::get('sequence_number3_2'),
+                            'mtb_detection' => Input::get('mtb_detection3_0'),
+                            'rif_resistance' => Input::get('rif_resistance3_0'),
+                            'ct_value' => Input::get('ct_value3_2'),
                             'test_repeatition' => Input::get('test_repeatition2_0'),
                             'patient_id' => $clients['id'],
                             'status' => 1,
@@ -5770,56 +5770,52 @@ if ($user->isLoggedIn()) {
                                                             <td>
                                                                 <?php foreach ($override->get('sequence_type', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="sequence_type2" id="sequence_type222<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['sequence_type'] == $value['id']) {
+                                                                        <input class="form-check-input" type="radio" name="sequence_type3_0" id="sequence_type3_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['sequence_type'] == $value['id']) {
                                                                                                                                                                                                                         echo 'checked';
                                                                                                                                                                                                                     } ?>>
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
                                                                 <br>
-                                                                <button type="button" onclick="unsetRadio('sequence_type2')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('sequence_type3_0')">Unset</button>
                                                             </td>
                                                             <td>
-                                                                <input type="text" name="sequence_number2" id="sequence_number22" value="<?php if ($medications3[0]['sequence_number']) {
+                                                                <input type="text" name="sequence_number3_2" id="sequence_number3_2" value="<?php if ($medications3[0]['sequence_number']) {
                                                                                                                                                 print_r($medications3[0]['sequence_number']);
                                                                                                                                             }  ?>" class="form-control">
                                                             </td>
                                                             <td>
                                                                 <?php foreach ($override->get('mtb_detection', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="mtb_detection2" id="mtb_detection22<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['mtb_detection'] == $value['id']) {
+                                                                        <input class="form-check-input" type="radio" name="mtb_detection3_0" id="mtb_detection3_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['mtb_detection'] == $value['id']) {
                                                                                                                                                                                                                         echo 'checked';
                                                                                                                                                                                                                     } ?>>
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
                                                                 <br>
-                                                                <button type="button" onclick="unsetRadio('mtb_detection2')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('mtb_detection3_0')">Unset</button>
                                                             </td>
                                                             <td>
                                                                 <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="rif_resistance2" id="rif_resistance22<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['rif_resistance'] == $value['id']) {
-                                                                                                                                                                                                                        echo 'checked';
-                                                                                                                                                                                                                    } ?>>
+                                                                        <input class="form-check-input" type="radio" name="rif_resistance3_0" id="rif_resistance3_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['rif_resistance'] == $value['id']) {
+                                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                                        } ?>>
                                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
                                                                 <br>
                                                                 <br>
                                                                 <br>
-                                                                <button type="button" onclick="unsetRadio('rif_resistance2')">Unset</button>
+                                                                <button type="button" onclick="unsetRadio('rif_resistance3_0')">Unset</button>
                                                             </td>
                                                             <td>
-                                                                <input type="number" name="ct_value2" id="c2t_value22" class="form-control" min="0" max="99" value="<?php if ($medications3[0]['ct_value']) {
-                                                                                                                                                                        print_r($medications3[0]['ct_value']);
-                                                                                                                                                                    }  ?>">
+                                                                <input type="number" name="c2t_value3_2" id="c2t_value3_2" class="form-control" min="0" max="99" value="<?php if ($medications3[0]['ct_value']) {
+                                                                                                                                                                            print_r($medications3[0]['ct_value']);
+                                                                                                                                                                        }  ?>">
                                                             </td>
-                                                            <!-- <td><button type=" button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> -->
                                                         </tr>
-                                                        <?php
-                                                        // }
-                                                        ?>
                                                     </tbody>
                                                 </table>
                                             </div>
