@@ -2,7 +2,7 @@ const sequence_done2_1 = document.getElementById("sequence_done2_1");
 const sequence_done2_2 = document.getElementById("sequence_done2_2");
 
 const rif_resistance2_1 = document.getElementById("rif_resistance2_1");
-const rif_resistance2_2 = document.getElementById("rif_resistance2_");
+const rif_resistance2_2 = document.getElementById("rif_resistance2_2");
 const rif_resistance2_3 = document.getElementById("rif_resistance2_3");
 
 const sequence_date2_1 = document.getElementById("sequence_date2_1");

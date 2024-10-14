@@ -5586,7 +5586,7 @@ if ($user->isLoggedIn()) {
                                                             <button type="button" onclick="unsetRadio('wrd_test2_0')">Unset</button>
                                                         </div>
                                                         <br>
-                                                        <label for="wrd_test_date" id="wrd_test_date2_1" class="form-label">what date ?</label>
+                                                        <label for="wrd_test_date" id="wrd_test_date2_1" class="form-label">Date Done?</label>
                                                         <input type="date" value="<?php if ($costing['wrd_test_date']) {
                                                                                         print_r($costing['wrd_test_date']);
                                                                                     } ?>" id="wrd_test_date2_2" name="wrd_test_date2_2" class="form-control" placeholder="Enter here" />
@@ -5613,10 +5613,10 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                         <br>
                                                         <br>
-                                                        <label for="sequence_date" id="sequence_date2_1" class="form-label">what date ?</label>
+                                                        <label for="sequence_date" id="sequence_date2_1" class="form-label">What date ?</label>
                                                         <input type="date" value="<?php if ($costing['sequence_date']) {
                                                                                         print_r($costing['sequence_date']);
-                                                                                    } ?>" id="sequence_date2_2" name="sequence_date2_2" class="form-control" placeholder="Enter here" />
+                                                                                    } ?>" id="sequence_date2_2" name="sequence_date2_2" class="form-control" />
                                                     </div>
 
                                                 </div>
@@ -5730,12 +5730,11 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                             <button type="button" onclick="unsetRadio('microscopy_reason2_0')">Unset</button>
-
-                                                            <label for="microscopy_reason_other2_1" id="microscopy_reason_other2_1" class="form-label">If Other Mention</label>
-                                                            <input type="text" value="<?php if ($costing['microscopy_reason_other']) {
-                                                                                            print_r($costing['microscopy_reason_other']);
-                                                                                        } ?>" id="microscopy_reason_other2_2" name="microscopy_reason_other2_2" class="form-control" placeholder="Enter here" />
                                                         </div>
+                                                        <label for="microscopy_reason_other2_1" id="microscopy_reason_other2_1" class="form-label">If Other Mention</label>
+                                                        <input type="text" value="<?php if ($costing['microscopy_reason_other']) {
+                                                                                        print_r($costing['microscopy_reason_other']);
+                                                                                    } ?>" id="microscopy_reason_other2_2" name="microscopy_reason_other2_2" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
@@ -10895,6 +10894,8 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/non_respiratory/n_test_repeatition.js"></script>
     <script src="myjs/add/non_respiratory/n_afb.js"></script>
     <script src="myjs/add/non_respiratory/n_sequence_done.js"></script>
+    <script src="myjs/add/non_respiratory/n_microscopy_reason.js"></script>
+
 
 
     <!-- Diagnosis Test format numbers Js -->
