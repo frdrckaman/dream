@@ -882,32 +882,38 @@ if ($user->isLoggedIn()) {
                         'site_id' => $clients['site_id'],
                     ), $costing[0]['id']);
 
-                    $respiratory_repeated_tests = $override->getNews('respiratory_repeated_tests', 'status', 1, 'respiratory_id', $costing[0]['id']);
+                    $respiratory_repeated_tests = $override->get3('respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'respiratory_id', $costing[0]['id']);
 
                     if ($respiratory_repeated_tests) {
                         $user->updateRecord('respiratory_repeated_tests', array(
-                            'sequence_type2' => Input::get('sequence_type2'),
-                            'sequence_number2' => Input::get('sequence_number2'),
-                            'mtb_detection2' => Input::get('mtb_detection2'),
-                            'rif_resistance2' => Input::get('rif_resistance2'),
-                            'ct_value2' => Input::get('ct_value2'),
+                            'respiratory_id' => $costing[0]['id'],
+                            'sequence_type' => Input::get('sequence_type2'),
+                            'sequence_number' => Input::get('sequence_number2'),
+                            'mtb_detection' => Input::get('mtb_detection2'),
+                            'rif_resistance' => Input::get('rif_resistance2'),
+                            'ct_value' => Input::get('ct_value2'),
                             'test_repeatition' => Input::get('test_repeatition'),
+                            'patient_id' => $clients['id'],
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'site_id' => $clients['site_id'],
                         ), $respiratory_repeated_tests[0]['id']);
                     } else {
                         $user->createRecord('respiratory_repeated_tests', array(
-                            'sequence_type2' => Input::get('sequence_type2'),
-                            'sequence_number2' => Input::get('sequence_number2'),
-                            'mtb_detection2' => Input::get('mtb_detection2'),
-                            'rif_resistance2' => Input::get('rif_resistance2'),
-                            'ct_value2' => Input::get('ct_value2'),
+                            'respiratory_id' => $costing[0]['id'],
+                            'sequence_type' => Input::get('sequence_type2'),
+                            'sequence_number' => Input::get('sequence_number2'),
+                            'mtb_detection' => Input::get('mtb_detection2'),
+                            'rif_resistance' => Input::get('rif_resistance2'),
+                            'ct_value' => Input::get('ct_value2'),
                             'test_repeatition' => Input::get('test_repeatition'),
+                            'patient_id' => $clients['id'],
                             'status' => 1,
                             'create_on' => date('Y-m-d H:i:s'),
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'site_id' => $clients['site_id'],
                         ));
                     }
 
@@ -964,34 +970,40 @@ if ($user->isLoggedIn()) {
                         'site_id' => $clients['site_id'],
                     ));
 
-                    $last_row = $override->lastRow('clients', 'id')[0];
+                    $last_row = $override->lastRow('respiratory', 'id')[0];
 
-                    $respiratory_repeated_tests = $override->getNews('respiratory_repeated_tests', 'status', 1, 'respiratory_id', $last_row['id']);
+                    $respiratory_repeated_tests = $override->get3('respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'respiratory_id', $last_row['id']);
 
                     if ($respiratory_repeated_tests) {
                         $user->updateRecord('respiratory_repeated_tests', array(
-                            'sequence_type2' => Input::get('sequence_type2'),
-                            'sequence_number2' => Input::get('sequence_number2'),
-                            'mtb_detection2' => Input::get('mtb_detection2'),
-                            'rif_resistance2' => Input::get('rif_resistance2'),
-                            'ct_value2' => Input::get('ct_value2'),
+                            'respiratory_id' => $last_row['id'],
+                            'sequence_type' => Input::get('sequence_type2'),
+                            'sequence_number' => Input::get('sequence_number2'),
+                            'mtb_detection' => Input::get('mtb_detection2'),
+                            'rif_resistance' => Input::get('rif_resistance2'),
+                            'ct_value' => Input::get('ct_value2'),
                             'test_repeatition' => Input::get('test_repeatition'),
+                            'patient_id' => $clients['id'],
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'site_id' => $clients['site_id'],
                         ), $respiratory_repeated_tests[0]['id']);
                     } else {
                         $user->createRecord('respiratory_repeated_tests', array(
-                            'sequence_type2' => Input::get('sequence_type2'),
-                            'sequence_number2' => Input::get('sequence_number2'),
-                            'mtb_detection2' => Input::get('mtb_detection2'),
-                            'rif_resistance2' => Input::get('rif_resistance2'),
-                            'ct_value2' => Input::get('ct_value2'),
+                            'respiratory_id' => $last_row['id'],
+                            'sequence_type' => Input::get('sequence_type2'),
+                            'sequence_number' => Input::get('sequence_number2'),
+                            'mtb_detection' => Input::get('mtb_detection2'),
+                            'rif_resistance' => Input::get('rif_resistance2'),
+                            'ct_value' => Input::get('ct_value2'),
                             'test_repeatition' => Input::get('test_repeatition'),
+                            'patient_id' => $clients['id'],
                             'status' => 1,
                             'create_on' => date('Y-m-d H:i:s'),
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'site_id' => $clients['site_id'],
                         ));
                     }
 
@@ -5138,16 +5150,21 @@ if ($user->isLoggedIn()) {
                                                     </thead>
                                                     <tbody>
                                                         <?php
+                                                        $medications3 = $override->get3('respiratory_repeated_tests', 'patient_id', $_GET['cid'], 'respiratory_id', $costing['id'], 'status', 1);
+                                                        $sequence_type = $override->get('sequence_type', 'status', 1, 'id', $medications3['sequence_type']);
+                                                        $mtb_detection = $override->get('mtb_detection', 'status', 1, 'id', $medications3['mtb_detection']);
+                                                        $rif_resistance = $override->get('rif_resistance', 'status', 1, 'id', $medications3['rif_resistance']);
+
                                                         // foreach ($override->getNews('respiratory_repeated_tests', 'respiratory_id', $costing['id'], 'status', 1) as $medications) {
                                                         ?>
                                                         <tr>
 
                                                             <td>
-                                                                <select name="sequence_type[]" id="medication_type[]" class="form-control select2" style="width: 100%;" required>
-                                                                    <?php if (!$medications) { ?>
-                                                                        <option value="">Select Medication</option>
+                                                                <select name="sequence_type2" id="sequence_type22" class="form-control select2" style="width: 100%;" required>
+                                                                    <?php if (!$sequence_type) { ?>
+                                                                        <option value="">Select</option>
                                                                     <?php } else { ?>
-                                                                        <option value="<?= $medications[0]['id'] ?>"><?= $medications[0]['name'] ?></option>
+                                                                        <option value="<?= $sequence_type[0]['id'] ?>"><?= $sequence_type[0]['name'] ?></option>
                                                                     <?php } ?>
                                                                     <?php foreach ($override->get('sequence_type', 'status', 1) as $medication) { ?>
                                                                         <option value="<?= $medication['id'] ?>"><?= $medication['name'] ?></option>
@@ -5155,16 +5172,16 @@ if ($user->isLoggedIn()) {
                                                                 </select>
                                                             </td>
                                                             <td>
-                                                                <input type="text" name="sequence_number[]" value="<?php if ($treatment['sequence_number']) {
-                                                                                                                        print_r($treatment['sequence_number']);
-                                                                                                                    }  ?>" class="form-control">
+                                                                <input type="text" name="sequence_number2" id="sequence_number22" value="<?php if ($medications3['sequence_number']) {
+                                                                                                                                                print_r($medications3['sequence_number']);
+                                                                                                                                            }  ?>" class="form-control">
                                                             </td>
                                                             <td>
-                                                                <select name="mtb_detection[]" id="mtb_detection[]" class="form-control select2" style="width: 100%;" required>
-                                                                    <?php if (!$medications) { ?>
-                                                                        <option value="">Select Medication</option>
+                                                                <select name="mtb_detection2" id="mtb_detection22" class="form-control select2" style="width: 100%;" required>
+                                                                    <?php if (!$mtb_detection) { ?>
+                                                                        <option value="">Select</option>
                                                                     <?php } else { ?>
-                                                                        <option value="<?= $medications[0]['id'] ?>"><?= $medications[0]['name'] ?></option>
+                                                                        <option value="<?= $mtb_detection[0]['id'] ?>"><?= $mtb_detection[0]['name'] ?></option>
                                                                     <?php } ?>
                                                                     <?php foreach ($override->get('mtb_detection', 'status', 1) as $medication) { ?>
                                                                         <option value="<?= $medication['id'] ?>"><?= $medication['name'] ?></option>
@@ -5172,19 +5189,23 @@ if ($user->isLoggedIn()) {
                                                                 </select>
                                                             </td>
                                                             <td>
-                                                                <select name="rif_resistance[]" id="rif_resistance[]" class="form-control select2" style="width: 100%;" required>
-                                                                    <?php if (!$medications) { ?>
-                                                                        <option value="">Select Medication</option>
+                                                                <select name="rif_resistance2" id="rif_resistance22" class="form-control select2" style="width: 100%;" required>
+                                                                    <?php if (!$rif_resistance) { ?>
+                                                                        <option value="">Select</option>
                                                                     <?php } else { ?>
-                                                                        <option value="<?= $medications[0]['id'] ?>"><?= $medications[0]['name'] ?></option>
+                                                                        <option value="<?= $rif_resistance[0]['id'] ?>"><?= $rif_resistance[0]['name'] ?></option>
                                                                     <?php } ?>
                                                                     <?php foreach ($override->get('rif_resistance', 'status', 1) as $medication) { ?>
                                                                         <option value="<?= $medication['id'] ?>"><?= $medication['name'] ?></option>
                                                                     <?php } ?>
                                                                 </select>
                                                             </td>
-                                                            <td><input type="number" name="ct_value[]" class="form-control" min="0" max="99"></td>
-                                                            <!-- <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> -->
+                                                            <td>
+                                                                <input type="number" name="ct_value2" id="c2t_value22" class="form-control" min="0" max="99" value="<?php if ($medications3['ct_value']) {
+                                                                                                                                                                        print_r($medications3['ct_value']);
+                                                                                                                                                                    }  ?>">
+                                                            </td>
+                                                            <!-- <td><button type=" button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> -->
                                                         </tr>
                                                         <?php
                                                         // }
