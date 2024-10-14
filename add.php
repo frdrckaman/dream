@@ -5150,10 +5150,16 @@ if ($user->isLoggedIn()) {
                                                     </thead>
                                                     <tbody>
                                                         <?php
-                                                        $medications3 = $override->get3('respiratory_repeated_tests', 'patient_id', $_GET['cid'], 'respiratory_id', $costing['id'], 'status', 1);
-                                                        $sequence_type = $override->get('sequence_type', 'status', 1, 'id', $medications3['sequence_type']);
-                                                        $mtb_detection = $override->get('mtb_detection', 'status', 1, 'id', $medications3['mtb_detection']);
-                                                        $rif_resistance = $override->get('rif_resistance', 'status', 1, 'id', $medications3['rif_resistance']);
+                                                        $medications3 = $override->get3('respiratory_repeated_tests', 'patient_id', $costing['patient_id'], 'respiratory_id', $costing['id'], 'status', 1);
+                                                        $sequence_type = $override->getNews('sequence_type', 'status', 1, 'id', $medications3[0]['sequence_type']);
+                                                        $mtb_detection = $override->getNews('mtb_detection', 'status', 1, 'id', $medications3[0]['mtb_detection']);
+                                                        $rif_resistance = $override->getNews('rif_resistance', 'status', 1, 'id', $medications3[0]['rif_resistance']);
+
+                                                        // print_r($medications3[0]);
+
+                                                        // print_r($medications3[0]['sequence_type']);
+
+                                                        // print_r($sequence_type[0]);
 
                                                         // foreach ($override->getNews('respiratory_repeated_tests', 'respiratory_id', $costing['id'], 'status', 1) as $medications) {
                                                         ?>
@@ -5172,12 +5178,12 @@ if ($user->isLoggedIn()) {
                                                                 </select>
                                                             </td>
                                                             <td>
-                                                                <input type="text" name="sequence_number2" id="sequence_number22" value="<?php if ($medications3['sequence_number']) {
-                                                                                                                                                print_r($medications3['sequence_number']);
+                                                                <input type="text" name="sequence_number2" id="sequence_number22" value="<?php if ($medications3[0]['sequence_number']) {
+                                                                                                                                                print_r($medications3[0]['sequence_number']);
                                                                                                                                             }  ?>" class="form-control">
                                                             </td>
                                                             <td>
-                                                                <select name="mtb_detection2" id="mtb_detection22" class="form-control select2" style="width: 100%;" required>
+                                                                <select name="mtb_detection2" id="mtb_detection22" class="form-control select2" style="width: 100%;">
                                                                     <?php if (!$mtb_detection) { ?>
                                                                         <option value="">Select</option>
                                                                     <?php } else { ?>
@@ -5189,7 +5195,7 @@ if ($user->isLoggedIn()) {
                                                                 </select>
                                                             </td>
                                                             <td>
-                                                                <select name="rif_resistance2" id="rif_resistance22" class="form-control select2" style="width: 100%;" required>
+                                                                <select name="rif_resistance2" id="rif_resistance22" class="form-control select2" style="width: 100%;">
                                                                     <?php if (!$rif_resistance) { ?>
                                                                         <option value="">Select</option>
                                                                     <?php } else { ?>
@@ -5201,8 +5207,8 @@ if ($user->isLoggedIn()) {
                                                                 </select>
                                                             </td>
                                                             <td>
-                                                                <input type="number" name="ct_value2" id="c2t_value22" class="form-control" min="0" max="99" value="<?php if ($medications3['ct_value']) {
-                                                                                                                                                                        print_r($medications3['ct_value']);
+                                                                <input type="number" name="ct_value2" id="c2t_value22" class="form-control" min="0" max="99" value="<?php if ($medications3[0]['ct_value']) {
+                                                                                                                                                                        print_r($medications3[0]['ct_value']);
                                                                                                                                                                     }  ?>">
                                                             </td>
                                                             <!-- <td><button type=" button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> -->
