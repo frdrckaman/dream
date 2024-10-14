@@ -1145,9 +1145,9 @@ if ($user->isLoggedIn()) {
 
                     $last_row = $override->lastRow('non_respiratory', 'id')[0];
 
-                    $respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'non_respiratory_id', $last_row['id']);
+                    $non_respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'non_respiratory_id', $last_row['id']);
 
-                    if ($respiratory_repeated_tests) {
+                    if ($non_respiratory_repeated_tests) {
                         $user->updateRecord('non_respiratory_repeated_tests', array(
                             'non_respiratory_id' => $last_row['id'],
                             'sequence_type' => Input::get('sequence_type3_0'),
@@ -1160,7 +1160,7 @@ if ($user->isLoggedIn()) {
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                             'site_id' => $clients['site_id'],
-                        ), $respiratory_repeated_tests[0]['id']);
+                        ), $non_respiratory_repeated_tests[0]['id']);
                     } else {
                         $user->createRecord('non_respiratory_repeated_tests', array(
                             'non_respiratory_id' => $last_row['id'],
@@ -5811,7 +5811,7 @@ if ($user->isLoggedIn()) {
                                                                 <button type="button" onclick="unsetRadio('rif_resistance3_0')">Unset</button>
                                                             </td>
                                                             <td>
-                                                                <input type="number" name="c2t_value3_2" id="c2t_value3_2" class="form-control" min="0" max="99" value="<?php if ($medications3[0]['ct_value']) {
+                                                                <input type="number" name="ct_value3_2" id="ct_value3_2" class="form-control" min="0" max="99" value="<?php if ($medications3[0]['ct_value']) {
                                                                                                                                                                             print_r($medications3[0]['ct_value']);
                                                                                                                                                                         }  ?>">
                                                             </td>
