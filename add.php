@@ -704,6 +704,7 @@ if ($user->isLoggedIn()) {
                         'd_firstName' => Input::get('d_firstName'),
                         'd_middleName' => Input::get('d_middleName'),
                         'd_middleName' => Input::get('d_middleName'),
+                        'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),                        
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
@@ -793,6 +794,7 @@ if ($user->isLoggedIn()) {
                         'version_number' => Input::get('version_number'),
                         'lot_number' => Input::get('lot_number'),
                         'mutations_detected_list' => Input::get('mutations_detected_list'),
+                        'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),                        
                         'd_firstName' => Input::get('d_firstName'),
                         'd_middleName' => Input::get('d_middleName'),
                         'd_middleName' => Input::get('d_middleName'),
@@ -1177,6 +1179,7 @@ if ($user->isLoggedIn()) {
                         'clinician_firstname' => Input::get('clinician_firstname'),
                         'clinician_middlename' => Input::get('clinician_middlename'),
                         'clinician_lastname' => Input::get('clinician_lastname'),
+                        'diagnosis_completed' => Input::get('diagnosis_completed'),                        
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
@@ -1230,6 +1233,7 @@ if ($user->isLoggedIn()) {
                         'clinician_firstname' => Input::get('clinician_firstname'),
                         'clinician_middlename' => Input::get('clinician_middlename'),
                         'clinician_lastname' => Input::get('clinician_lastname'),
+                        'diagnosis_completed' => Input::get('diagnosis_completed'),                        
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
@@ -7305,7 +7309,26 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                             <hr>
-                                            <div class="row">
+                                            <div class="col-sm-12" id="diagnosis_test_completed1">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>40. This form was completed by (name) </label>
+                                                        <select id="diagnosis_test_completed" name="diagnosis_test_completed" class="form-control" required>
+                                                            <?php $diagnosis_test_completed = $override->get('user', 'id', $costing['diagnosis_test_completed'])[0]; ?>
+                                                            <option value="<?= $diagnosis_test_completed['id'] ?>"><?php if ($costing['diagnosis_test_completed']) {
+                                                                                                                        print_r($diagnosis_test_completed['firstname'] . ' ' . $diagnosis_test_completed['lastname']);
+                                                                                                                    } else {
+                                                                                                                        echo 'Select';
+                                                                                                                    } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['firstname'] . ' ' . $value['lastname'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="row">
                                                 <div class="col-4">
                                                     <div class="mb-2">
                                                         <label for="d_firstName" class="form-label">First NAME</label>
@@ -7330,7 +7353,7 @@ if ($user->isLoggedIn()) {
                                                                                     } ?>" id="d_surname" name="d_surname" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <hr>
 
@@ -7867,7 +7890,26 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-                                            <div class="row">
+                                            <div class="col-sm-12" id="diagnosis_completed1">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>40. This form was completed by (name) </label>
+                                                        <select id="diagnosis_completed" name="diagnosis_completed" class="form-control" required>
+                                                            <?php $diagnosis_completed = $override->get('user', 'id', $costing['diagnosis_completed'])[0]; ?>
+                                                            <option value="<?= $diagnosis_completed['id'] ?>"><?php if ($costing['diagnosis_completed']) {
+                                                                                                                        print_r($diagnosis_completed['firstname'] . ' ' . $diagnosis_completed['lastname']);
+                                                                                                                    } else {
+                                                                                                                        echo 'Select';
+                                                                                                                    } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
+                                                                <option value="<?= $value['id'] ?>"><?= $value['firstname'] . ' ' . $value['lastname'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="row">
                                                 <div class="col-4">
                                                     <div class="mb-2">
                                                         <label for="clinician_firstname" class="form-label">First NAME</label>
@@ -7892,7 +7934,7 @@ if ($user->isLoggedIn()) {
                                                                                     } ?>" id="clinician_lastname" name="clinician_lastname" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <hr>
 
                                             <div class="card card-warning">
