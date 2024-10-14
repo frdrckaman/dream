@@ -5080,6 +5080,7 @@ if ($user->isLoggedIn()) {
                                                                     <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
+                                                            <button type="button" onclick="unsetRadio('test_repeatition')">Unset</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5166,16 +5167,14 @@ if ($user->isLoggedIn()) {
                                                         <tr>
 
                                                             <td>
-                                                                <select name="sequence_type2" id="sequence_type22" class="form-control select2" style="width: 100%;" required>
-                                                                    <?php if (!$sequence_type) { ?>
-                                                                        <option value="">Select</option>
-                                                                    <?php } else { ?>
-                                                                        <option value="<?= $sequence_type[0]['id'] ?>"><?= $sequence_type[0]['name'] ?></option>
-                                                                    <?php } ?>
-                                                                    <?php foreach ($override->get('sequence_type', 'status', 1) as $medication) { ?>
-                                                                        <option value="<?= $medication['id'] ?>"><?= $medication['name'] ?></option>
-                                                                    <?php } ?>
-                                                                </select>
+                                                                <?php foreach ($override->get('sequence_type', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="sequence_type2" id="sequence_type22<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($sequence_type['sequence_type'] == $value['id']) {
+                                                                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                                                                    } ?>>
+                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
                                                             </td>
                                                             <td>
                                                                 <input type="text" name="sequence_number2" id="sequence_number22" value="<?php if ($medications3[0]['sequence_number']) {
@@ -10677,6 +10676,7 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/respiratory/sample_type.js"></script>
     <script src="myjs/add/respiratory/sequence_done.js"></script>
     <script src="myjs/add/respiratory/sequence_type.js"></script>
+    <script src="myjs/add/respiratory/sequence_type2.js"></script>
     <script src="myjs/add/respiratory/test_reasons.js"></script>
     <script src="myjs/add/respiratory/test_rejected.js"></script>
     <script src="myjs/add/respiratory/test_repeatition.js"></script>
