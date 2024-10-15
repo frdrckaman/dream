@@ -1404,7 +1404,9 @@ if ($user->isLoggedIn()) {
                                                                         <?php } ?>
 
 
-                                                                        <?php if (!$override->get3('respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sample_type', 1)) { ?>
+                                                                        <?php
+                                                                        //  if (!$override->get3('respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sample_type', 1)) { 
+                                                                            ?>
 
                                                                             <?php if ($override->get3('non_respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
                                                                                 <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Diagnostic Test Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
@@ -1413,7 +1415,9 @@ if ($user->isLoggedIn()) {
                                                                                 <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Diagnostic Test Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
 
                                                                             <?php } ?>
-                                                                        <?php } ?>
+                                                                        <?php
+                                                                    //  } 
+                                                                     ?>
 
 
                                                                         <?php if ($override->get3('diagnosis_test', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
