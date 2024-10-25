@@ -1220,7 +1220,7 @@ if ($user->isLoggedIn()) {
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Name</th>
+                                                    <!-- <th>Name</th> -->
                                                     <th>Study Id</th>
                                                     <th>Age</th>
                                                     <th>Sex</th>
