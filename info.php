@@ -1113,7 +1113,7 @@ if ($user->isLoggedIn()) {
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Name</th>
+                                                    <!-- <th>Name</th> -->
                                                     <th>Study Id</th>
                                                     <th>Age</th>
                                                     <th>Sex</th>
@@ -1160,9 +1160,9 @@ if ($user->isLoggedIn()) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
                                                 ?>
                                                     <tr>
-                                                        <td class="table-user">
+                                                        <!-- <td class="table-user">
                                                             <?= $value['firstname'] . '  ' . $value['middlename'] . ' ' . $value['lastname']; ?>
-                                                        </td>
+                                                        </td> -->
                                                         <td class="table-user">
                                                             <?= $value['study_id']; ?>
                                                         </td>

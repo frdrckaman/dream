@@ -26,13 +26,13 @@ function toggleElementVisibility() {
     mtb_detection2_0.style.display = "block";
     rif_resistance2_0.style.display = "block";
     ct_value2_1.style.display = "block";
-    test_repeatition2_0.style.display = "block";
+    test_repeatition2_0.style.display = "none";
   } else if (sequence_type2_1.checked && rif_resistance2_3.checked) {
     sequence_number2_1.style.display = "none";
     sequence_number2_2.style.display = "none";
     mtb_detection2_0.style.display = "block";
     rif_resistance2_0.style.display = "block";
-    ct_value2_1.style.display = "block";
+    ct_value2_1.style.display = "none";
     test_repeatition2_0.style.display = "block";
   } else if (sequence_type2_2.checked) {
     sequence_number2_1.style.display = "none";
