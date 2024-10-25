@@ -1303,7 +1303,7 @@ if ($user->isLoggedIn()) {
                                         <div class="row mb-2">
                                             <div class="col-sm-6">
                                                 <h1>Study ID: <?= $patient['study_id'] ?></h1>
-                                                <h4><?= $name ?></h4>
+                                                <!-- <h4><?= $name ?></h4> -->
                                                 <h4><?= $age ?></h4>
                                                 <h4><?= $gender ?></h4>
                                                 <!-- <h4><?= $cat ?></h4> -->
