@@ -501,7 +501,11 @@ if ($user->isLoggedIn()) {
                             'sputum_samples_date' => Input::get('sputum_samples_date'),
                             'chest_x_ray' => Input::get('chest_x_ray'),
                             'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                            'enrollment_completness' => Input::get('enrollment_completness'),
                             'enrollment_completed' => Input::get('enrollment_completed'),
+                            'enrollment_completed_date' => Input::get('enrollment_completed_date'),
+                            'enrollment_verified_by' => Input::get('enrollment_verified_by'),
+                            'enrollment_verified_date' => Input::get('enrollment_verified_date'),
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                         ), $_GET['cid']);
@@ -554,7 +558,11 @@ if ($user->isLoggedIn()) {
                             'sputum_samples_date' => Input::get('sputum_samples_date'),
                             'chest_x_ray' => Input::get('chest_x_ray'),
                             'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                            'enrollment_completness' => Input::get('enrollment_completness'),
                             'enrollment_completed' => Input::get('enrollment_completed'),
+                            'enrollment_completed_date' => Input::get('enrollment_completed_date'),
+                            'enrollment_verified_by' => Input::get('enrollment_verified_by'),
+                            'enrollment_verified_date' => Input::get('enrollment_verified_date'),
                             'respondent' => 2,
                             'patient_id' => $clients['id'],
                             'status' => 1,
@@ -708,6 +716,8 @@ if ($user->isLoggedIn()) {
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
+                        'diagnosis_test_verified_by' => Input::get('diagnosis_test_verified_by'),
+                        'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
                     ), $individual[0]['id']);
@@ -801,6 +811,8 @@ if ($user->isLoggedIn()) {
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
+                        'diagnosis_test_verified_by' => Input::get('diagnosis_test_verified_by'),
+                        'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
                         'status' => 1,
                         'patient_id' => $clients['id'],
                         'create_on' => date('Y-m-d H:i:s'),
@@ -880,6 +892,8 @@ if ($user->isLoggedIn()) {
                         'comments' => Input::get('comments'),
                         'date_completed' => Input::get('date_completed'),
                         'respiratory_completed_by' => Input::get('respiratory_completed_by'),
+                        'respiratory_verified_by' => Input::get('respiratory_verified_by'),
+                        'respiratory_verified_date' => Input::get('respiratory_verified_date'),
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
                         'site_id' => $clients['site_id'],
@@ -965,6 +979,8 @@ if ($user->isLoggedIn()) {
                         'comments' => Input::get('comments'),
                         'date_completed' => Input::get('date_completed'),
                         'respiratory_completed_by' => Input::get('respiratory_completed_by'),
+                        'respiratory_verified_by' => Input::get('respiratory_verified_by'),
+                        'respiratory_verified_date' => Input::get('respiratory_verified_date'),
                         'status' => 1,
                         'patient_id' => $clients['id'],
                         'create_on' => date('Y-m-d H:i:s'),
@@ -1068,6 +1084,8 @@ if ($user->isLoggedIn()) {
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
                         'non_respiratory_completed' => Input::get('non_respiratory_completed'),
+                        'non_respiratory_verified_by' => Input::get('non_respiratory_verified_by'),
+                        'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
                     ), $costing[0]['id']);
@@ -1138,6 +1156,8 @@ if ($user->isLoggedIn()) {
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
                         'non_respiratory_completed' => Input::get('non_respiratory_completed'),
+                        'non_respiratory_verified_by' => Input::get('non_respiratory_verified_by'),
+                        'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
                         'status' => 1,
                         'patient_id' => $clients['id'],
                         'create_on' => date('Y-m-d H:i:s'),
@@ -1263,6 +1283,8 @@ if ($user->isLoggedIn()) {
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
+                        'diagnosis_verified_by' => Input::get('diagnosis_verified_by'),
+                        'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
                     ), $costing[0]['id']);
@@ -1318,6 +1340,8 @@ if ($user->isLoggedIn()) {
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
+                        'diagnosis_verified_by' => Input::get('diagnosis_verified_by'),
+                        'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
                         'status' => 1,
                         'patient_id' => $clients['id'],
                         'create_on' => date('Y-m-d H:i:s'),
@@ -5333,6 +5357,45 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                             <hr>
+
+                                             <?php if ($user->data()->position == 3 && $costing['respiratory_completness'] == 1) { ?>
+                                            <div class="row">
+
+
+                                                 <div class="col-sm-6" id="respiratory_verified_by">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>40. This form was Verified by (name) </label>
+                                                            <select id="respiratory_verified_by" name="respiratory_verified_by" class="form-control" required>
+                                                                <?php $enrollment_completed = $override->get('user', 'id', $costing['respiratory_verified_by'])[0]; ?>
+                                                                <option value="<?= $enrollment_completed['id'] ?>"><?php if ($costing['respiratory_verified_by']) {
+                                                                                                                        print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
+                                                                                                                    } else {
+                                                                                                                        echo 'Select';
+                                                                                                                    } ?>
+                                                                </option>
+                                                                <?php foreach ($override->getNews('user', 'status', 1,'position',3) as $value) { ?>
+                                                                    <option value="<?= $value['id'] ?>"><?= $value['firstname'] . ' ' . $value['lastname'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6" id="respiratory_verified_date">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>40. Form Verified  Date</label>
+                                                            <input class="form-control" type="date" name="respiratory_verified_date" id="respiratory_verified_date" value="<?php if ($costing['respiratory_verified_date']) {
+                                                                                                                                                                print_r($costing['respiratory_verified_date']);
+                                                                                                                                                            }  ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+
+                                                <?php } ?>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
@@ -5951,6 +6014,45 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                             <hr>
+
+                                             <?php if ($user->data()->position == 3 && $costing['form_completness'] == 1) { ?>
+                                            <div class="row">
+
+
+                                                 <div class="col-sm-6" id="non_respiratory_verified_by">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>40. This form was Verified by (name) </label>
+                                                            <select id="non_respiratory_verified_by" name="non_respiratory_verified_by" class="form-control" required>
+                                                                <?php $enrollment_completed = $override->get('user', 'id', $costing['non_respiratory_verified_by'])[0]; ?>
+                                                                <option value="<?= $enrollment_completed['id'] ?>"><?php if ($costing['non_respiratory_verified_by']) {
+                                                                                                                        print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
+                                                                                                                    } else {
+                                                                                                                        echo 'Select';
+                                                                                                                    } ?>
+                                                                </option>
+                                                                <?php foreach ($override->getNews('user', 'status', 1,'position',3) as $value) { ?>
+                                                                    <option value="<?= $value['id'] ?>"><?= $value['firstname'] . ' ' . $value['lastname'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6" id="non_respiratory_verified_date">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>40. Form Verified  Date</label>
+                                                            <input class="form-control" type="date" name="non_respiratory_verified_date" id="non_respiratory_verified_date" value="<?php if ($costing['non_respiratory_verified_date']) {
+                                                                                                                                                                print_r($costing['non_respiratory_verified_date']);
+                                                                                                                                                            }  ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+
+                                                <?php } ?>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
@@ -7614,6 +7716,45 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                             <hr>
+
+                                             <?php if ($user->data()->position == 3 && $costing['form_completness'] == 1) { ?>
+                                            <div class="row">
+
+
+                                                 <div class="col-sm-6" id="diagnosis_test_verified_by">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>40. This form was Verified by (name) </label>
+                                                            <select id="diagnosis_test_verified_by" name="diagnosis_test_verified_by" class="form-control" required>
+                                                                <?php $enrollment_completed = $override->get('user', 'id', $costing['diagnosis_test_verified_by'])[0]; ?>
+                                                                <option value="<?= $enrollment_completed['id'] ?>"><?php if ($costing['diagnosis_test_verified_by']) {
+                                                                                                                        print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
+                                                                                                                    } else {
+                                                                                                                        echo 'Select';
+                                                                                                                    } ?>
+                                                                </option>
+                                                                <?php foreach ($override->getNews('user', 'status', 1,'position',3) as $value) { ?>
+                                                                    <option value="<?= $value['id'] ?>"><?= $value['firstname'] . ' ' . $value['lastname'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6" id="diagnosis_test_verified_date">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>40. Form Verified  Date</label>
+                                                            <input class="form-control" type="date" name="diagnosis_test_verified_date" id="diagnosis_test_verified_date" value="<?php if ($costing['diagnosis_test_verified_date']) {
+                                                                                                                                                                print_r($costing['diagnosis_test_verified_date']);
+                                                                                                                                                            }  ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+
+                                                <?php } ?>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
@@ -8169,6 +8310,43 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                             <hr>
+
+                                             <?php if ($user->data()->position == 3 && $costing['form_completness'] == 1) { ?>
+                                            <div class="row">
+                                                 <div class="col-sm-6" id="diagnosis_test_verified_by">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>40. This form was Verified by (name) </label>
+                                                            <select id="diagnosis_verified_by" name="diagnosis_verified_by" class="form-control" required>
+                                                                <?php $enrollment_completed = $override->get('user', 'id', $costing['diagnosis_verified_by'])[0]; ?>
+                                                                <option value="<?= $enrollment_completed['id'] ?>"><?php if ($costing['diagnosis_verified_by']) {
+                                                                                                                        print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
+                                                                                                                    } else {
+                                                                                                                        echo 'Select';
+                                                                                                                    } ?>
+                                                                </option>
+                                                                <?php foreach ($override->getNews('user', 'status', 1,'position',3) as $value) { ?>
+                                                                    <option value="<?= $value['id'] ?>"><?= $value['firstname'] . ' ' . $value['lastname'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6" id="diagnosis_verified_date">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>40. Form Verified  Date</label>
+                                                            <input class="form-control" type="date" name="diagnosis_verified_date" id="diagnosis_verified_date" value="<?php if ($costing['diagnosis_verified_date']) {
+                                                                                                                                                                print_r($costing['diagnosis_verified_date']);
+                                                                                                                                                            }  ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+
+                                                <?php } ?>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
@@ -8905,7 +9083,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
                                             <div class="row">
 
-                                                <div class="col-sm-4" id="chest_x_ray">
+                                                <div class="col-sm-6" id="chest_x_ray">
                                                     <label>39. Was chest X-ray requested? </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -8925,7 +9103,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="chest_x_ray_date1">
+                                                <div class="col-sm-6" id="chest_x_ray_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8937,7 +9115,30 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="enrollment_completed">
+                                                   </div>
+                                            <hr>
+                                            <div class="row">
+
+                                             <div class="col-sm-4" id="enrollment_completness">
+                                                    <label>Complete?</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="enrollment_completness" id="enrollment_completness<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['enrollment_completness'] == $value['id']) {
+                                                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                                                } ?> required>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button type="button" onclick="unsetRadio('enrollment_completness')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6" id="enrollment_completed">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>40. This form was completed by (name) </label>
@@ -8955,9 +9156,57 @@ if ($user->isLoggedIn()) {
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <button type="button" onclick="unsetRadio('enrollment_completed')">Unset</button>
-
                                                 </div>
+
+                                                <div class="col-sm-6" id="enrollment_completed_date">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>40. Form completed  Date</label>
+                                                            <input class="form-control" type="date" name="enrollment_completed_date" id="enrollment_completed_date" value="<?php if ($clients['enrollment_completed_date']) {
+                                                                                                                                                                print_r($clients['enrollment_completed_date']);
+                                                                                                                                                            }  ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                             <?php if ($user->data()->position == 3 && $costing['enrollment_completness'] == 1) { ?>
+
+
+                                                 <div class="col-sm-6" id="enrollment_completed">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>40. This form was Verified by (name) </label>
+                                                            <select id="enrollment_completed" name="enrollment_completed" class="form-control" required>
+                                                                <?php $enrollment_completed = $override->get('user', 'id', $clients['enrollment_completed'])[0]; ?>
+                                                                <option value="<?= $enrollment_completed['id'] ?>"><?php if ($clients['enrollment_completed']) {
+                                                                                                                        print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
+                                                                                                                    } else {
+                                                                                                                        echo 'Select';
+                                                                                                                    } ?>
+                                                                </option>
+                                                                <?php foreach ($override->getNews('user', 'status', 1,'position',3) as $value) { ?>
+                                                                    <option value="<?= $value['id'] ?>"><?= $value['firstname'] . ' ' . $value['lastname'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6" id="enrollment_completed_date">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>40. Form Verified  Date</label>
+                                                            <input class="form-control" type="date" name="enrollment_completed_date" id="enrollment_completed_date" value="<?php if ($clients['enrollment_completed_date']) {
+                                                                                                                                                                print_r($clients['enrollment_completed_date']);
+                                                                                                                                                            }  ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <?php } ?>
+
                                             </div>
                                             <hr>
                                         </div>
