@@ -20,6 +20,9 @@ const ct_value3_1 = document.getElementById("ct_value3_1");
 const ct_value3_2 = document.getElementById("ct_value3_2");
 const ct_value3_3 = document.getElementById("ct_value3_3");
 
+const test_repeatition2_0__1 = document.getElementById("test_repeatition2_0");
+
+
 function toggleElementVisibility() {
   if (sequence_type3_1.checked) {
     sequence_number3_1.style.display = "none";
@@ -34,7 +37,10 @@ function toggleElementVisibility() {
     ct_value3_1.style.display = "block";
     ct_value3_2.style.display = "block";
     ct_value3_3.style.display = "block";
-  } else if (sequence_type3_1.checked && rif_resistance2_3.checked) {
+
+    test_repeatition2_0__1.style.display = "none";
+
+  } else if (sequence_type3_1.checked) {
     sequence_number3_1.style.display = "none";
     sequence_number3_2.style.display = "none";
     sequence_number3_3.style.display = "none";
@@ -47,6 +53,9 @@ function toggleElementVisibility() {
     ct_value3_1.style.display = "none";
     ct_value3_2.style.display = "none";
     ct_value3_3.style.display = "none";
+
+    test_repeatition2_0__1.style.display = "none";
+
   } else if (sequence_type3_2.checked) {
     sequence_number3_1.style.display = "none";
     sequence_number3_2.style.display = "none";
@@ -60,6 +69,9 @@ function toggleElementVisibility() {
     ct_value3_1.style.display = "none";
     ct_value3_2.style.display = "none";
     ct_value3_3.style.display = "none";
+
+    test_repeatition2_0__1.style.display = "block";
+
   } else if (sequence_type3_3.checked) {
     sequence_number3_1.style.display = "none";
     sequence_number3_2.style.display = "none";
@@ -73,6 +85,9 @@ function toggleElementVisibility() {
     ct_value3_1.style.display = "none";
     ct_value3_2.style.display = "none";
     ct_value3_3.style.display = "none";
+
+    test_repeatition2_0__1.style.display = "block";
+
   } else if (sequence_type3_4.checked) {
     sequence_number3_1.style.display = "block";
     sequence_number3_2.style.display = "block";
@@ -86,6 +101,9 @@ function toggleElementVisibility() {
     ct_value3_1.style.display = "none";
     ct_value3_2.style.display = "none";
     ct_value3_3.style.display = "none";
+
+    test_repeatition2_0__1.style.display = "block";
+
   } else if (sequence_type3_5.checked) {
     sequence_number3_1.style.display = "none";
     sequence_number3_2.style.display = "none";
@@ -99,6 +117,9 @@ function toggleElementVisibility() {
     ct_value3_1.style.display = "none";
     ct_value3_2.style.display = "none";
     ct_value3_3.style.display = "none";
+
+    test_repeatition2_0__1.style.display = "block";
+
   } else {
     sequence_number3_1.style.display = "none";
     sequence_number3_2.style.display = "none";
@@ -112,6 +133,9 @@ function toggleElementVisibility() {
     ct_value3_1.style.display = "none";
     ct_value3_2.style.display = "none";
     ct_value3_3.style.display = "none";
+
+    test_repeatition2_0__1.style.display = "none";
+
   }
 }
 

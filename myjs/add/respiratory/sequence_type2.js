@@ -20,6 +20,9 @@ const ct_value6_0 = document.getElementById("ct_value6_0");
 const ct_value6_1 = document.getElementById("ct_value6_1");
 const ct_value6_2 = document.getElementById("ct_value6_2");
 
+// const test_repeatition2_0__1 = document.getElementById("test_repeatition2_0");
+
+
 function toggleElementVisibility() {
   if (sequence_type6_7_1.checked) {
     mtb_detection6_0.style.display = "block";
@@ -34,6 +37,9 @@ function toggleElementVisibility() {
     sequence_number6_0.style.display = "none";
     sequence_number6_1.style.display = "none";
     sequence_number6_3.style.display = "none";
+
+    // test_repeatition2_0__1.style.display = "none";
+
   } else if (sequence_type6_7_2.checked) {
     mtb_detection6_0.style.display = "none";
     mtb_detection6_1.style.display = "none";
@@ -47,6 +53,9 @@ function toggleElementVisibility() {
     sequence_number6_0.style.display = "none";
     sequence_number6_1.style.display = "none";
     sequence_number6_3.style.display = "none";
+
+    // test_repeatition2_0__1.style.display = "none";
+
   } else if (sequence_type6_7_3.checked) {
     mtb_detection6_0.style.display = "none";
     mtb_detection6_1.style.display = "none";
@@ -60,6 +69,9 @@ function toggleElementVisibility() {
     sequence_number6_0.style.display = "none";
     sequence_number6_1.style.display = "none";
     sequence_number6_3.style.display = "none";
+
+    // test_repeatition2_0__1.style.display = "block";
+
   } else if (sequence_type6_7_4.checked) {
     mtb_detection6_0.style.display = "none";
     mtb_detection6_1.style.display = "none";
@@ -73,6 +85,9 @@ function toggleElementVisibility() {
     sequence_number6_0.style.display = "block";
     sequence_number6_1.style.display = "block";
     sequence_number6_3.style.display = "block";
+
+    // test_repeatition2_0__1.style.display = "block";
+
   } else if (sequence_type6_7_5.checked) {
     mtb_detection6_0.style.display = "none";
     mtb_detection6_1.style.display = "none";
@@ -86,6 +101,9 @@ function toggleElementVisibility() {
     sequence_number6_0.style.display = "none";
     sequence_number6_1.style.display = "none";
     sequence_number6_3.style.display = "none";
+
+    // test_repeatition2_0__1.style.display = "block";
+
   } else {
     mtb_detection6_0.style.display = "none";
     mtb_detection6_1.style.display = "none";
@@ -99,6 +117,9 @@ function toggleElementVisibility() {
     sequence_number6_0.style.display = "none";
     sequence_number6_1.style.display = "none";
     sequence_number6_3.style.display = "none";
+
+    // test_repeatition2_0__1.style.display = "none";
+
   }
 }
 
