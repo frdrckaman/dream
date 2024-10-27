@@ -690,7 +690,7 @@ if ($user->isLoggedIn()) {
                         'mutations_detected_list' => Input::get('mutations_detected_list'),
                         'd_firstName' => Input::get('d_firstName'),
                         'd_middleName' => Input::get('d_middleName'),
-                        'd_middleName' => Input::get('d_middleName'),
+                        // 'd_middleName' => Input::get('d_middleName'),
                         'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
@@ -1582,14 +1582,14 @@ if ($user->isLoggedIn()) {
                 $pageError = $validate->errors();
             }
         } elseif (Input::get('add_visit')) {
-            $validate = $validate->check($_POST, items: array(
+            $validate = $validate->check($_POST, array(
                 'visit_date' => array(
                     'required' => true,
                 ),
             ));
 
             if ($validate->passed()) {
-                $user->updateRecord('visit', items: array(
+                $user->updateRecord('visit', array(
                     'visit_date' => Input::get('visit_date'),
                     'visit_status' => Input::get('visit_status'),
                     'comments' => Input::get('comments'),
