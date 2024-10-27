@@ -1113,7 +1113,6 @@ if ($user->isLoggedIn()) {
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <!-- <th>Name</th> -->
                                                     <th>Study Id</th>
                                                     <th>Age</th>
                                                     <th>Sex</th>
@@ -1142,27 +1141,10 @@ if ($user->isLoggedIn()) {
                                                 $x = 1;
                                                 foreach ($clients as $value) {
                                                     $yes_no = $override->get('yes_no', 'status', 1)[0];
-                                                    // $kap = $override->getNews('kap', 'status', 1, 'patient_id', $value['id']);
-                                                    // $history = $override->getNews('history', 'status', 1, 'patient_id', $value['id']);
-
-                                                    // $results1 = $override->get3('results', 'status', 1, 'patient_id', $value['id'], 'sequence', 1);
-                                                    // $results2 = $override->get3('results', 'status', 1, 'patient_id', $value['id'], 'sequence', 2);
-
-                                                    // $classification1 = $override->get3('classification', 'status', 1, 'patient_id', $value['id'], 'sequence', 1);
-                                                    // $classification2 = $override->get3('classification', 'status', 1, 'patient_id', $value['id'], 'sequence', 2);
-
-                                                    // $economic1 = $override->get3('economic', 'status', 1, 'patient_id', $value['id'], 'sequence', 1);
-                                                    // $economic2 = $override->get3('economic', 'status', 1, 'patient_id', $value['id'], 'sequence', 2);
-
-                                                    // $outcome1 = $override->get3('outcome', 'status', 1, 'patient_id', $value['id'], 'sequence', 1);
-                                                    // $outcome2 = $override->get3('outcome', 'status', 1, 'patient_id', $value['id'], 'sequence', 2);
 
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
                                                 ?>
                                                     <tr>
-                                                        <!-- <td class="table-user">
-                                                            <?= $value['firstname'] . '  ' . $value['middlename'] . ' ' . $value['lastname']; ?>
-                                                        </td> -->
                                                         <td class="table-user">
                                                             <?= $value['study_id']; ?>
                                                         </td>
@@ -1220,7 +1202,6 @@ if ($user->isLoggedIn()) {
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <!-- <th>Name</th> -->
                                                     <th>Study Id</th>
                                                     <th>Age</th>
                                                     <th>Sex</th>
