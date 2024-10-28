@@ -1619,11 +1619,6 @@ if ($user->isLoggedIn()) {
                 $screening = $override->getNews('screening', 'status', 1, 'patient_id', $_GET['cid']);
                 $eligible = 0;
                 $pregnant = 0;
-                if ($clients[0]['sex'] == 2) {
-                    $pregnant = Input::get('pregnant');
-                } else {
-                    $pregnant = '98';
-                }
 
                 if (Input::get('conset') == 1) {
                     $eligible = 1;
