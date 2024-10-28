@@ -1645,13 +1645,6 @@ if ($user->isLoggedIn()) {
                             'screening_date' => Input::get('screening_date'),
                             'conset' => Input::get('conset'),
                             'conset_date' => Input::get('conset_date'),
-                            'hiv_date' => 1,
-                            'date_status' => 1,
-                            'receive_art' => 1,
-                            'start_art' => 1,
-                            'stay' => 1,
-                            'severely' => 1,
-                            'pregnant' => $pregnant,
                             'comments' => Input::get('comments'),
                             'eligible' => $eligible,
                             'update_on' => date('Y-m-d H:i:s'),
@@ -1720,13 +1713,6 @@ if ($user->isLoggedIn()) {
                             'screening_date' => Input::get('screening_date'),
                             'conset' => Input::get('conset'),
                             'conset_date' => Input::get('conset_date'),
-                            'hiv_date' => 1,
-                            'date_status' => 1,
-                            'receive_art' => 1,
-                            'start_art' => 1,
-                            'stay' => 1,
-                            'severely' => 1,
-                            'pregnant' => $pregnant,
                             'comments' => Input::get('comments'),
                             'eligible' => $eligible,
                             'status' => 1,
@@ -3555,7 +3541,6 @@ if ($user->isLoggedIn()) {
                                 </div>
                                 <!-- /.card -->
                             </div>
-                            <!--/.col (right) -->
                         </div>
                         <!-- /.row -->
                     </div><!-- /.container-fluid -->
@@ -12217,28 +12202,28 @@ if ($user->isLoggedIn()) {
     <?php
     // Specify the directory where your JavaScript files are located
     // $jsDirectory = 'myjs/add/';
-    
+
     // Use glob to get all .js files in the specified directory
     // $jsFiles = glob($jsDirectory . '*.js');
-    
+
     // Loop through the files and output a <script> tag for each one
     // foreach ($jsFiles as $jsFile) {
     //     echo '<script src="' . $jsFile . '"></script>' . PHP_EOL;
     // }
-    
+
 
 
     // // Specify the directory where your JavaScript files are located
     // $jsDirectory = 'myjs/add/';
-    
+
     // // Use glob with recursive pattern to get all .js files in the directory and its subdirectories
     // $jsFiles = glob($jsDirectory . '**/*.js', GLOB_BRACE);
-    
+
     // // Loop through the files and output a <script> tag for each one
     // foreach ($jsFiles as $jsFile) {
     //     echo '<script src="' . $jsFile . '"></script>' . PHP_EOL;
     // }
-    
+
     ?>
 
     <!-- jQuery -->
