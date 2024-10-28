@@ -28,14 +28,7 @@ function toggleElementVisibility() {
     mtb_detection.style.display = "block";
     rif_resistance.style.display = "block";
     ct_value1.style.display = "block";
-    test_repeatition.style.display = "block";
-  } else if (sequence_type1.checked && rif_resistance33333.checked) {
-    sequence_number1.style.display = "none";
-    sequence_number.style.display = "none";
-    mtb_detection.style.display = "block";
-    rif_resistance.style.display = "block";
-    ct_value1.style.display = "block";
-    test_repeatition.style.display = "block";
+    test_repeatition.style.display = "none";
   } else if (sequence_type2.checked) {
     sequence_number1.style.display = "none";
     sequence_number.style.display = "none";

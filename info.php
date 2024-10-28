@@ -1113,7 +1113,6 @@ if ($user->isLoggedIn()) {
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <!-- <th>Name</th> -->
                                                     <th>Study Id</th>
                                                     <th>Age</th>
                                                     <th>Sex</th>
@@ -1142,27 +1141,10 @@ if ($user->isLoggedIn()) {
                                                 $x = 1;
                                                 foreach ($clients as $value) {
                                                     $yes_no = $override->get('yes_no', 'status', 1)[0];
-                                                    // $kap = $override->getNews('kap', 'status', 1, 'patient_id', $value['id']);
-                                                    // $history = $override->getNews('history', 'status', 1, 'patient_id', $value['id']);
-
-                                                    // $results1 = $override->get3('results', 'status', 1, 'patient_id', $value['id'], 'sequence', 1);
-                                                    // $results2 = $override->get3('results', 'status', 1, 'patient_id', $value['id'], 'sequence', 2);
-
-                                                    // $classification1 = $override->get3('classification', 'status', 1, 'patient_id', $value['id'], 'sequence', 1);
-                                                    // $classification2 = $override->get3('classification', 'status', 1, 'patient_id', $value['id'], 'sequence', 2);
-
-                                                    // $economic1 = $override->get3('economic', 'status', 1, 'patient_id', $value['id'], 'sequence', 1);
-                                                    // $economic2 = $override->get3('economic', 'status', 1, 'patient_id', $value['id'], 'sequence', 2);
-
-                                                    // $outcome1 = $override->get3('outcome', 'status', 1, 'patient_id', $value['id'], 'sequence', 1);
-                                                    // $outcome2 = $override->get3('outcome', 'status', 1, 'patient_id', $value['id'], 'sequence', 2);
 
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
                                                 ?>
                                                     <tr>
-                                                        <!-- <td class="table-user">
-                                                            <?= $value['firstname'] . '  ' . $value['middlename'] . ' ' . $value['lastname']; ?>
-                                                        </td> -->
                                                         <td class="table-user">
                                                             <?= $value['study_id']; ?>
                                                         </td>
@@ -1220,7 +1202,6 @@ if ($user->isLoggedIn()) {
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Name</th>
                                                     <th>Study Id</th>
                                                     <th>Age</th>
                                                     <th>Sex</th>
@@ -1278,15 +1259,6 @@ if ($user->isLoggedIn()) {
                                         $patient = $override->get('clients', 'id', $_GET['cid'])[0];
                                         $cat = '';
 
-                                        if ($patient['interview_type'] == 1) {
-                                            $cat = 'Kap & Screening';
-                                        } elseif ($patient['interview_type'] == 2) {
-                                            $cat = 'Health Care Worker';
-                                        } else {
-                                            $cat = 'Not Screened';
-                                        }
-
-
                                         if ($patient['sex'] == 1) {
                                             $gender = 'Male';
                                         } elseif ($patient['sex'] == 2) {
@@ -1303,7 +1275,7 @@ if ($user->isLoggedIn()) {
                                         <div class="row mb-2">
                                             <div class="col-sm-6">
                                                 <h1>Study ID: <?= $patient['study_id'] ?></h1>
-                                                <h4><?= $name ?></h4>
+                                                <!-- <h4><?= $name ?></h4> -->
                                                 <h4><?= $age ?></h4>
                                                 <h4><?= $gender ?></h4>
                                                 <!-- <h4><?= $cat ?></h4> -->
