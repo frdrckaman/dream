@@ -5253,10 +5253,10 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <?php
-                                            $medications3 = $override->get3('non_respiratory_repeated_tests', 'patient_id', $costing['patient_id'], 'non_respiratory_id', $costing['id'], 'status', 1);
-                                            $sequence_type = $override->getNews('sequence_type', 'status', 1, 'id', $medications3[0]['sequence_type']);
-                                            $mtb_detection = $override->getNews('mtb_detection', 'status', 1, 'id', $medications3[0]['mtb_detection']);
-                                            $rif_resistance = $override->getNews('rif_resistance', 'status', 1, 'id', $medications3[0]['rif_resistance']);
+                                            $medications22 = $override->get3('respiratory_repeated_tests', 'patient_id', $costing['patient_id'], 'respiratory_id', $costing['id'], 'status', 1);
+                                            $sequence_type = $override->getNews('sequence_type', 'status', 1, 'id', $medications22[0]['sequence_type']);
+                                            $mtb_detection = $override->getNews('mtb_detection', 'status', 1, 'id', $medications22[0]['mtb_detection']);
+                                            $rif_resistance = $override->getNews('rif_resistance', 'status', 1, 'id', $medications22[0]['rif_resistance']);
                                             ?>
 
                                             <div id="Repeatable_Table">
@@ -5268,7 +5268,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="row">
 
                                                     <div class="col-sm-3" id="ct_value6_0">
-                                                        <label for="ct_value6_0" class="form-label">73. If yes (If
+                                                        <label for="ct_value6_0" class="form-label">62. If yes (If
                                                             Invalid/Error/No results skip next two qtn)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -5278,7 +5278,7 @@ if ($user->isLoggedIn()) {
                                                                         <input class="form-check-input" type="radio"
                                                                             name="sequence_type2"
                                                                             id="sequence_type6_7_<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($medications3[0]['sequence_type'] == $value['id']) {
+                                                                            value="<?= $value['id']; ?>" <?php if ($medications22[0]['sequence_type'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label
@@ -5290,8 +5290,8 @@ if ($user->isLoggedIn()) {
                                                             </div>
                                                             <label for="sequence_number6_1" id="sequence_number6_1"
                                                                 class="form-label">(If error, what code/number??) </label>
-                                                            <input type="text" value="<?php if ($medications3[0]['sequence_number']) {
-                                                                print_r($medications3[0]['sequence_number']);
+                                                            <input type="text" value="<?php if ($medications22[0]['sequence_number']) {
+                                                                print_r($medications22[0]['sequence_number']);
                                                             } ?>" id="sequence_number6_2" name="sequence_number2"
                                                                 class="form-control" placeholder="Enter here" />
                                                         </div>
@@ -5299,7 +5299,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="mtb_detection6_1">
-                                                        <label for="mtb_detection6_1" class="form-label">74. If MTB detected
+                                                        <label for="mtb_detection6_1" class="form-label">63. If MTB detected
                                                         </label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -5309,7 +5309,7 @@ if ($user->isLoggedIn()) {
                                                                         <input class="form-check-input" type="radio"
                                                                             name="mtb_detection2"
                                                                             id="mtb_detection6_6_6_<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($medications3[0]['mtb_detection'] == $value['id']) {
+                                                                            value="<?= $value['id']; ?>" <?php if ($medications22[0]['mtb_detection'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label
@@ -5323,7 +5323,7 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                     <div class="col-sm-3" id="rif_resistance6_1">
-                                                        <label for="rif_resistance6_1" class="form-label">75. If MTB
+                                                        <label for="rif_resistance6_1" class="form-label">64. If MTB
                                                             detected, RIF resistance </label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -5333,7 +5333,7 @@ if ($user->isLoggedIn()) {
                                                                         <input class="form-check-input" type="radio"
                                                                             name="rif_resistance2"
                                                                             id="rif_resistance6_6_6_<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($medications3[0]['rif_resistance'] == $value['id']) {
+                                                                            value="<?= $value['id']; ?>" <?php if ($medications22[0]['rif_resistance'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label
@@ -5349,10 +5349,10 @@ if ($user->isLoggedIn()) {
 
                                                     <div class="col-3" id="ct_value6_1">
                                                         <div class="mb-3">
-                                                            <label for="ct_value6_1" class="form-label">76. Sample Cycle
+                                                            <label for="ct_value6_1" class="form-label">65. Sample Cycle
                                                                 threshold (Ct) Value (number, two digits)</label>
-                                                            <input type="number" value="<?php if ($medications3[0]['ct_value']) {
-                                                                print_r($medications3[0]['ct_value']);
+                                                            <input type="number" value="<?php if ($medications22[0]['ct_value']) {
+                                                                print_r($medications22[0]['ct_value']);
                                                             } ?>" id="ct_value6_2" name="ct_value2" min="0" max="99"
                                                                 class="form-control" placeholder="Enter here" />
                                                         </div>
