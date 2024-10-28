@@ -1259,15 +1259,6 @@ if ($user->isLoggedIn()) {
                                         $patient = $override->get('clients', 'id', $_GET['cid'])[0];
                                         $cat = '';
 
-                                        if ($patient['interview_type'] == 1) {
-                                            $cat = 'Kap & Screening';
-                                        } elseif ($patient['interview_type'] == 2) {
-                                            $cat = 'Health Care Worker';
-                                        } else {
-                                            $cat = 'Not Screened';
-                                        }
-
-
                                         if ($patient['sex'] == 1) {
                                             $gender = 'Male';
                                         } elseif ($patient['sex'] == 2) {

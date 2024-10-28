@@ -1620,11 +1620,7 @@ if ($user->isLoggedIn()) {
                 $eligible = 0;
                 $pregnant = 0;
 
-                if (Input::get('conset') == 1) {
-                    $eligible = 1;
-                } else {
-                    $eligible = 2;
-                }
+                $eligible = (Input::get('conset') == 1) ? 1 : 2;
 
                 if (Input::get('screening_date') < $clients[0]['date_registered']) {
                     $errorMessage = 'Screaning Date Can not be less than Registration date';
@@ -1752,7 +1748,7 @@ if ($user->isLoggedIn()) {
                     $user->updateRecord('clients', array(
                         'screened' => 1,
                         'eligible' => $eligible,
-                    ), $clients[0]['id']);
+                    ), $_GET['cid']);
 
                     Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&sequence=' . $_GET['sequence'] . '&visit_code=' . $_GET['visit_code'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
                 }
