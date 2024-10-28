@@ -3460,10 +3460,10 @@ if ($user->isLoggedIn()) {
                                                             ):</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter comments here">
-                                                                                                        <?php if ($facility['comments']) {
-                                                                                                            print_r($facility['comments']);
-                                                                                                        } ?>
-                                                                                                        </textarea>
+                                                                                                            <?php if ($facility['comments']) {
+                                                                                                                print_r($facility['comments']);
+                                                                                                            } ?>
+                                                                                                            </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -3637,10 +3637,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                        <?php if ($screening['comments']) {
-                                                                            print_r($screening['comments']);
-                                                                        } ?>
-                                                                    </textarea>
+                                                                            <?php if ($screening['comments']) {
+                                                                                print_r($screening['comments']);
+                                                                            } ?>
+                                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5252,34 +5252,27 @@ if ($user->isLoggedIn()) {
 
                                             <hr>
 
-                                            <!-- Dynamic Table -->
-                                            <!-- <div id="dynamicTable" style="display: none;"> -->
-                                            <div id="Repeatable_Table">
-                                                <h5 style="text-align: center; color: green;">If yes on Qn. 66 then
-                                                    return/ask to above four items? ( Add Repeated Test )</h5>
-                                                <!-- <button type="button" class="btn btn-primary" onclick="addRow()"></button> -->
-                                                <table class="table table-bordered" id="testTable">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>62. If yes</th>
-                                                            <th id="sequence_number6_0">62. What code/number?</th>
-                                                            <th id="mtb_detection6_0">63. If MTB detected </th>
-                                                            <th id="rif_resistance6_0"> 64. If MTB detected, RIF resistance
-                                                            </th>
-                                                            <th id="ct_value6_0">65. Sample Cycle threshold (Ct) Value
-                                                                (number, two digits)</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $medications3 = $override->get3('respiratory_repeated_tests', 'patient_id', $costing['patient_id'], 'respiratory_id', $costing['id'], 'status', 1);
-                                                        $sequence_type = $override->getNews('sequence_type', 'status', 1, 'id', $medications3[0]['sequence_type']);
-                                                        $mtb_detection = $override->getNews('mtb_detection', 'status', 1, 'id', $medications3[0]['mtb_detection']);
-                                                        $rif_resistance = $override->getNews('rif_resistance', 'status', 1, 'id', $medications3[0]['rif_resistance']);
-                                                        ?>
-                                                        <tr>
+                                            <?php
+                                            $medications3 = $override->get3('non_respiratory_repeated_tests', 'patient_id', $costing['patient_id'], 'non_respiratory_id', $costing['id'], 'status', 1);
+                                            $sequence_type = $override->getNews('sequence_type', 'status', 1, 'id', $medications3[0]['sequence_type']);
+                                            $mtb_detection = $override->getNews('mtb_detection', 'status', 1, 'id', $medications3[0]['mtb_detection']);
+                                            $rif_resistance = $override->getNews('rif_resistance', 'status', 1, 'id', $medications3[0]['rif_resistance']);
+                                            ?>
 
-                                                            <td>
+                                            <div id="Repeatable_Table">
+
+                                                <hr>
+                                                If yes on Qn. 66 then
+                                                return/ask to above four items? ( Add Repeated Test )
+                                                <hr>
+                                                <div class="row">
+
+                                                    <div class="col-sm-3" id="ct_value6_0">
+                                                        <label for="ct_value6_0" class="form-label">73. If yes (If
+                                                            Invalid/Error/No results skip next two qtn)</label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
                                                                 <?php foreach ($override->get('sequence_type', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
@@ -5292,20 +5285,28 @@ if ($user->isLoggedIn()) {
                                                                             class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                                <br>
                                                                 <button type="button"
-                                                                    onclick="unsetRadio('sequence_type2')">Unset</button>
-                                                            </td>
-                                                            <td id="sequence_number6_1">
-                                                                <input type="text" name="sequence_number2"
-                                                                    id="sequence_number6_2" value="<?php if ($medications3[0]['sequence_number']) {
-                                                                        print_r($medications3[0]['sequence_number']);
-                                                                    } ?>" class="form-control">
-                                                            </td>
-                                                            <td id="mtb_detection6_1">
+                                                                    onclick="unsetRadio('sequence_type3_0')">Unset</button>
+                                                            </div>
+                                                            <label for="sequence_number6_1" id="sequence_number6_1"
+                                                                class="form-label">(If error, what code/number??) </label>
+                                                            <input type="text" value="<?php if ($medications3[0]['sequence_number']) {
+                                                                print_r($medications3[0]['sequence_number']);
+                                                            } ?>" id="sequence_number6_2" name="sequence_number2"
+                                                                class="form-control" placeholder="Enter here" />
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="mtb_detection6_1">
+                                                        <label for="mtb_detection6_1" class="form-label">74. If MTB detected
+                                                        </label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
                                                                 <?php foreach ($override->get('mtb_detection', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check" id="mtb_detection6_2">
-                                                                        <input class=" form-check-input" type="radio"
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
                                                                             name="mtb_detection2"
                                                                             id="mtb_detection6_6_6_<?= $value['id']; ?>"
                                                                             value="<?= $value['id']; ?>" <?php if ($medications3[0]['mtb_detection'] == $value['id']) {
@@ -5315,13 +5316,20 @@ if ($user->isLoggedIn()) {
                                                                             class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                                <br>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('mtb_detection2')">Unset</button>
-                                                            </td>
-                                                            <td id="rif_resistance6_1">
+                                                            </div>
+                                                        </div>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('mtb_detection2')">Unset</button>
+
+                                                    </div>
+                                                    <div class="col-sm-3" id="rif_resistance6_1">
+                                                        <label for="rif_resistance6_1" class="form-label">75. If MTB
+                                                            detected, RIF resistance </label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
                                                                 <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check" id="rif_resistance6_2">
+                                                                    <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="rif_resistance2"
                                                                             id="rif_resistance6_6_6_<?= $value['id']; ?>"
@@ -5332,22 +5340,25 @@ if ($user->isLoggedIn()) {
                                                                             class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
-                                                                <br>
-                                                                <br>
-                                                                <br>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('rif_resistance2')">Unset</button>
-                                                            </td>
-                                                            <td id="ct_value6_1">
-                                                                <input type="number" name="ct_value2" id="ct_value6_2"
-                                                                    class="form-control" min="0" max="99" value="<?php if ($medications3[0]['ct_value']) {
-                                                                        print_r($medications3[0]['ct_value']);
-                                                                    } ?>">
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('rif_resistance2')">Unset</button>
+
+                                                    </div>
+
+                                                    <div class="col-3" id="ct_value6_1">
+                                                        <div class="mb-3">
+                                                            <label for="ct_value6_1" class="form-label">76. Sample Cycle
+                                                                threshold (Ct) Value (number, two digits)</label>
+                                                            <input type="number" value="<?php if ($medications3[0]['ct_value']) {
+                                                                print_r($medications3[0]['ct_value']);
+                                                            } ?>" id="ct_value6_2" name="ct_value2" min="0" max="99"
+                                                                class="form-control" placeholder="Enter here" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                          
 
 
                                             <div class="card card-warning">
@@ -5366,7 +5377,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                            </textarea>
+                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6062,80 +6073,6 @@ if ($user->isLoggedIn()) {
 
 
 
-                                            <!-- Dynamic Table -->
-                                            <!-- <div id="dynamicTable" style="display: none;"> -->
-                                            <!-- <div id="Repeatable_Table2_1">
-                                                <h5 style="text-align: center; color: green;">If yes on Qn. 77 then return/ask to above four items? ( Add Repeated Test )</h5>
-                                                <table class="table table-bordered" id="testTable">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>73. If yes</th>
-                                                            <th id="sequence_number3_1">73. What code/number?</th>
-                                                            <th id="mtb_detection4_0">74. If MTB detected </th>
-                                                            <th id="rif_resistance4_0"> 75. If MTB detected, RIF resistance</th>
-                                                            <th id="ct_value3_1">76. Sample Cycle threshold (Ct) Value (number, two digits)</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $medications3 = $override->get3('non_respiratory_repeated_tests', 'patient_id', $costing['patient_id'], 'non_respiratory_id', $costing['id'], 'status', 1);
-                                                        $sequence_type = $override->getNews('sequence_type', 'status', 1, 'id', $medications3[0]['sequence_type']);
-                                                        $mtb_detection = $override->getNews('mtb_detection', 'status', 1, 'id', $medications3[0]['mtb_detection']);
-                                                        $rif_resistance = $override->getNews('rif_resistance', 'status', 1, 'id', $medications3[0]['rif_resistance']);
-                                                        ?>
-                                                        <tr>
-                                                            <td>
-                                                                <?php foreach ($override->get('sequence_type', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="sequence_type3_0" id="sequence_type3_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['sequence_type'] == $value['id']) {
-                                                                                echo 'checked';
-                                                                            } ?>>
-                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                                <br>
-                                                                <button type="button" onclick="unsetRadio('sequence_type3_0')">Unset</button>
-                                                            </td>
-                                                            <td id="sequence_number3_3">
-                                                                <input type="text" name="sequence_number3_2" id="sequence_number3_2" value="<?php if ($medications3[0]['sequence_number']) {
-                                                                    print_r($medications3[0]['sequence_number']);
-                                                                } ?>" class="form-control">
-                                                            </td>
-                                                            <td id="mtb_detection3_0">
-                                                                <?php foreach ($override->get('mtb_detection', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check" id="mtb_detection5_0">
-                                                                        <input class="form-check-input" type="radio" name="mtb_detection3_0" id="mtb_detection3_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['mtb_detection'] == $value['id']) {
-                                                                                echo 'checked';
-                                                                            } ?>>
-                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                                <br>
-                                                                <button type="button" onclick="unsetRadio('mtb_detection3_0')">Unset</button>
-                                                            </td>
-                                                            <td id="rif_resistance3_0">
-                                                                <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check" id="rif_resistance5_0">
-                                                                        <input class="form-check-input" type="radio" name="rif_resistance3_0" id="rif_resistance3_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($medications3[0]['rif_resistance'] == $value['id']) {
-                                                                                echo 'checked';
-                                                                            } ?>>
-                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                                <br>
-                                                                <br>
-                                                                <br>
-                                                                <button type="button" onclick="unsetRadio('rif_resistance3_0')">Unset</button>
-                                                            </td>
-                                                            <td id="ct_value3_2">
-                                                                <input type="number" name="ct_value3_2" id="ct_value3_3" class="form-control" min="0" max="99" value="<?php if ($medications3[0]['ct_value']) {
-                                                                    print_r($medications3[0]['ct_value']);
-                                                                } ?>">
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div> -->
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
@@ -6153,7 +6090,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                            </textarea>
+                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6398,10 +6335,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                        <?php if ($screening['comments']) {
-                                                                            print_r($screening['comments']);
-                                                                        } ?>
-                                                                    </textarea>
+                                                                            <?php if ($screening['comments']) {
+                                                                                print_r($screening['comments']);
+                                                                            } ?>
+                                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -8187,7 +8124,7 @@ if ($user->isLoggedIn()) {
                                                                 rows="3" placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                            </textarea>
+                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8217,7 +8154,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                            </textarea>
+                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8920,7 +8857,7 @@ if ($user->isLoggedIn()) {
                                                             placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                 print_r($costing['comments']);
                                                             } ?>
-                                                                            </textarea>
+                                                                                </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -10427,8 +10364,8 @@ if ($user->isLoggedIn()) {
                                                                 results</label>
                                                             <input type="text" value="<?php if ($costing['fm_results']) {
                                                                 print_r($costing['fm_results']);
-                                                            } ?>" id="fm_results" name="fm_results" class="form-control"
-                                                                placeholder="Enter here" />
+                                                            } ?>" id="fm_results" name="fm_results"
+                                                                class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
 
@@ -10511,8 +10448,8 @@ if ($user->isLoggedIn()) {
                                                             ljculres_date</label>
                                                         <input type="date" value="<?php if ($costing['ljculres_date']) {
                                                             print_r($costing['ljculres_date']);
-                                                        } ?>" id="ljculres_date" name="ljculres_date" class="form-control"
-                                                            placeholder="Enter here" />
+                                                        } ?>" id="ljculres_date" name="ljculres_date"
+                                                            class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -10550,8 +10487,8 @@ if ($user->isLoggedIn()) {
                                                             mgitcul_date</label>
                                                         <input type="date" value="<?php if ($costing['mgitcul_date']) {
                                                             print_r($costing['mgitcul_date']);
-                                                        } ?>" id="mgitcul_date" name="mgitcul_date" class="form-control"
-                                                            placeholder="Enter here" />
+                                                        } ?>" id="mgitcul_date" name="mgitcul_date"
+                                                            class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
@@ -11334,8 +11271,8 @@ if ($user->isLoggedIn()) {
                                                             myco_lineage</label>
                                                         <input type="text" value="<?php if ($costing['myco_lineage']) {
                                                             print_r($costing['myco_lineage']);
-                                                        } ?>" id="myco_lineage" name="myco_lineage" class="form-control"
-                                                            placeholder="Enter date" />
+                                                        } ?>" id="myco_lineage" name="myco_lineage"
+                                                            class="form-control" placeholder="Enter date" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -11740,7 +11677,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                            </textarea>
+                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -12186,28 +12123,28 @@ if ($user->isLoggedIn()) {
     <?php
     // Specify the directory where your JavaScript files are located
     // $jsDirectory = 'myjs/add/';
-
+    
     // Use glob to get all .js files in the specified directory
     // $jsFiles = glob($jsDirectory . '*.js');
-
+    
     // Loop through the files and output a <script> tag for each one
     // foreach ($jsFiles as $jsFile) {
     //     echo '<script src="' . $jsFile . '"></script>' . PHP_EOL;
     // }
-
+    
 
 
     // // Specify the directory where your JavaScript files are located
     // $jsDirectory = 'myjs/add/';
-
+    
     // // Use glob with recursive pattern to get all .js files in the directory and its subdirectories
     // $jsFiles = glob($jsDirectory . '**/*.js', GLOB_BRACE);
-
+    
     // // Loop through the files and output a <script> tag for each one
     // foreach ($jsFiles as $jsFile) {
     //     echo '<script src="' . $jsFile . '"></script>' . PHP_EOL;
     // }
-
+    
     ?>
 
     <!-- jQuery -->
