@@ -9873,7 +9873,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-6" id="enrollment_completed">
+                                                <div class="col-sm-4" id="enrollment_completed">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>40. This form was completed by (name) </label>
@@ -9897,7 +9897,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-6" id="enrollment_completed_date">
+                                                <div class="col-sm-4" id="enrollment_completed_date">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9912,7 +9912,6 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <?php if ($user->data()->position == 3 && $costing['enrollment_completness'] == 1) { ?>
-
 
                                                     <div class="col-sm-6" id="enrollment_completed">
                                                         <div class="row-form clearfix">
