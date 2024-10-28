@@ -320,7 +320,6 @@ if ($user->isLoggedIn()) {
                                 'comments' => Input::get('comments'),
                                 'status' => 1,
                                 'facility_id' => Input::get('site'),
-                                'table_id' => $clients[0]['id'],
                                 'patient_id' => $clients[0]['id'],
                                 'create_on' => date('Y-m-d H:i:s'),
                                 'staff_id' => $user->data()->id,
@@ -342,7 +341,6 @@ if ($user->isLoggedIn()) {
                                 'comments' => Input::get('comments'),
                                 'status' => 1,
                                 'facility_id' => Input::get('site'),
-                                'table_id' => $clients[0]['id'],
                                 'patient_id' => $clients[0]['id'],
                                 'create_on' => date('Y-m-d H:i:s'),
                                 'staff_id' => $user->data()->id,
@@ -407,7 +405,6 @@ if ($user->isLoggedIn()) {
                             'comments' => Input::get('comments'),
                             'status' => 1,
                             'facility_id' => Input::get('site'),
-                            'table_id' => $last_row['id'],
                             'patient_id' => $last_row['id'],
                             'create_on' => date('Y-m-d H:i:s'),
                             'staff_id' => $user->data()->id,
@@ -1659,7 +1656,6 @@ if ($user->isLoggedIn()) {
                                     'comments' => Input::get('comments'),
                                     'status' => 1,
                                     'facility_id' => $clients[0]['site_id'],
-                                    'table_id' => $screening[0]['id'],
                                     'patient_id' => $clients[0]['id'],
                                     'create_on' => date('Y-m-d H:i:s'),
                                     'staff_id' => $user->data()->id,
@@ -1681,7 +1677,6 @@ if ($user->isLoggedIn()) {
                                     'comments' => Input::get('comments'),
                                     'status' => 1,
                                     'facility_id' => $clients[0]['site_id'],
-                                    'table_id' => $screening[0]['id'],
                                     'patient_id' => $clients[0]['id'],
                                     'create_on' => date('Y-m-d H:i:s'),
                                     'staff_id' => $user->data()->id,
@@ -1716,7 +1711,6 @@ if ($user->isLoggedIn()) {
                         ));
 
                         if ($eligible == 1) {
-
                             $user->createRecord('visit', array(
                                 'sequence' => 1,
                                 'visit_code' => 'EV',
@@ -1730,7 +1724,6 @@ if ($user->isLoggedIn()) {
                                 'comments' => Input::get('comments'),
                                 'status' => 1,
                                 'facility_id' => $clients[0]['site_id'],
-                                'table_id' => $last_row['id'],
                                 'patient_id' => $clients[0]['id'],
                                 'create_on' => date('Y-m-d H:i:s'),
                                 'staff_id' => $user->data()->id,
@@ -12544,82 +12537,6 @@ if ($user->isLoggedIn()) {
         }
         // DropzoneJS Demo Code End
     </script>
-
-    <!-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Function to add new section
-            document.getElementById('addRowButton').addEventListener('click', function() {
-                addNewSection();
-            });
-
-            // Add event listener to 'Yes' radio button for the 'test_repeatition' question
-            document.querySelectorAll('input[name="test_repeatition"]').forEach(function(element) {
-                element.addEventListener('change', function() {
-                    if (this.value == '1') { // Assuming '1' means 'Yes'
-                        addNewSection(); // Add new section if test was repeated
-                    }
-                });
-            });
-        });
-
-        // Function to clone and append new section
-        function addNewSection() {
-            const container = document.getElementById('repeatableSectionContainer');
-            const section = document.querySelector('.repeatableSection');
-            const newSection = section.cloneNode(true);
-
-            // Clear input values and reset ID tracking fields
-            newSection.querySelectorAll('input').forEach(function(input) {
-                input.value = '';
-            });
-
-            // Append new section
-            container.appendChild(newSection);
-        }
-
-        // Function to remove section
-        function removeSection(button) {
-            const section = button.closest('.repeatableSection');
-            section.remove(); // Remove the section
-        }
-    </script> -->
-
-    <!-- <script>
-        // Function to show/hide the table based on the selection
-        function toggleTable(radio) {
-            const table = document.getElementById('dynamicTable');
-            if (radio.value == '1') { // Assuming '1' is 'Yes'
-                table.style.display = 'block';
-            } else {
-                table.style.display = 'none';
-            }
-        }
-
-        // Function to add a new row to the table
-        function addRow() {
-            const tableBody = document.getElementById('testTable').getElementsByTagName('tbody')[0];
-            const newRow = document.createElement('tr');
-
-            newRow.innerHTML = `
-                    <td><input type="hidden" name="respiratory_id[]" value="<?php $costing['respiratory_id'] ?>" class="form-control" min="0" max="99"></td>
-                    <td><select class="form-control select2" name="sequence_type2[]" id="sequence_type2[]" style="width: 100%;" required><option value="">Select</option><?php foreach ($override->get('sequence_type', 'status', 1) as $medication) { ?><option value="<?= $medication['id']; ?>"><?= $medication['name']; ?></option> <?php } ?></select></td>
-                    <td><input type="number" name="sequence_number2[]" class="form-control" min="0" max="99"></td>
-                    <td><select class="form-control select2" name="mtb_detection2[]" id="mtb_detection2[]" style="width: 100%;" required><option value="">Select</option><?php foreach ($override->get('mtb_detection', 'status', 1) as $medication) { ?><option value="<?= $medication['id']; ?>"><?= $medication['name']; ?></option> <?php } ?></select></td>
-                    <td><select class="form-control select2" name="rif_resistance2[]" id="rif_resistance2[]" style="width: 100%;" required><option value="">Select</option><?php foreach ($override->get('rif_resistance', 'status', 1) as $medication) { ?><option value="<?= $medication['id']; ?>"><?= $medication['name']; ?></option> <?php } ?></select></td>
-                    <td><input type="number" name="ct_value2[]" class="form-control" min="0" max="99"></td>
-                    <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>
-    `;
-            tableBody.appendChild(newRow);
-        }
-
-        // Function to remove a row from the table
-        function removeRow(button) {
-            const row = button.closest('tr');
-            row.remove();
-        }
-    </script> -->
-
-
 </body>
 
 </html>
