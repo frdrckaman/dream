@@ -428,7 +428,7 @@ if ($user->isLoggedIn()) {
                         $successMessage = 'Client  Added Successful';
                     }
                     Redirect::to('info.php?id=3&status=7');
-                    Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&sequence=' . $_GET['sequence'] . '&visit_code=' . $_GET['visit_code'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
+                    // Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&sequence=' . $_GET['sequence'] . '&visit_code=' . $_GET['visit_code'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
 
                 } catch (Exception $e) {
                     die($e->getMessage());

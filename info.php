@@ -1181,11 +1181,11 @@ if ($user->isLoggedIn()) {
                                                         <?php } ?>
                                                         <td class="text-center">
                                                             <?php if ($_GET['status'] == 7) { ?>
-                                                                <a href="add.php?id=4&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>" class="btn btn-info"> <i class="ri-edit-box-line"></i>Update Participant enrolment form</a>&nbsp;&nbsp;<br>
+                                                                <a href="add.php?id=4&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>" class="btn btn-info"> <i class="ri-edit-box-line"></i>Update Participant Eligibility form</a>&nbsp;&nbsp;<br>
                                                             <?php } ?>
                                                             <br>
                                                             <?php if ($value['respondent'] == 2) { ?>
-                                                                <?php if ($value['age'] >= 18) { ?>
+                                                                <?php if ($value['eligible'] == 1 && $value['age'] >= 18) { ?>
                                                                     <?php if ($kap && $history && $results1 && $results2 && $classification1 && $classification2 && $economic1 && $economic2 && $outcome1 && $outcome2) { ?>
                                                                         <a href="info.php?id=4&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>" class="btn btn-success"> <i class="ri-edit-box-line"></i>Update Study CRF's</a>&nbsp;&nbsp;<br>
                                                                     <?php   } else { ?>
