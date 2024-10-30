@@ -288,6 +288,9 @@ if ($user->isLoggedIn()) {
                             'facility_region' => Input::get('facility_district'),
                             'facility_district' => Input::get('facility_district'),
                             'date_enrolled' => Input::get('date_enrolled'),
+                            'screening_date' => Input::get('screening_date'),
+                            'conset' => Input::get('conset'),
+                            'conset_date' => Input::get('conset_date'),
                             'sex' => Input::get('sex'),
                             'dob' => Input::get('dob'),
                             'age' => $age,
@@ -366,6 +369,9 @@ if ($user->isLoggedIn()) {
                             'facility_district' => Input::get('facility_district'),
                             'study_id' => $std_id['study_id'],
                             'date_enrolled' => Input::get('date_enrolled'),
+                            'screening_date' => Input::get('screening_date'),
+                            'conset' => Input::get('conset'),
+                            'conset_date' => Input::get('conset_date'),
                             'sex' => Input::get('sex'),
                             'dob' => Input::get('dob'),
                             'age' => $age,
@@ -2829,6 +2835,9 @@ if ($user->isLoggedIn()) {
                             $districts = $override->get('districts', 'id', $clients['district'])[0];
                             $wards = $override->get('wards', 'id', $clients['ward'])[0];
                             $facility = $override->get('districts', 'id', $clients['facility_district'])[0];
+
+                            // $screening = $override->get3('screening', 'status', 1, 'sequence', $_GET['sequence'], 'patient_id', $_GET['cid'])[0];
+
                             ?>
                             <!-- right column -->
                             <div class="col-md-12">
@@ -2846,6 +2855,48 @@ if ($user->isLoggedIn()) {
                                                     <h3 class="card-title">CLINICIAN DETAILS</h3>
                                                 </div>
                                             </div>
+
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="mb-2">
+                                                        <label for="test_date" class="form-label">Date of Screening</label>
+                                                        <input type="date" value="<?php if ($screening['screening_date']) {
+                                                            print_r($screening['screening_date']);
+                                                        } ?>" id="screening_date" name="screening_date"
+                                                            class="form-control" placeholder="Enter date" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <label for="conset" class="form-label">Patient Conset?</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="conset"
+                                                                        id="conset<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($screening['conset'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?> required>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4" id="conset_date1">
+                                                    <div class="mb-2">
+                                                        <label for="results_date" class="form-label">Date of Conset</label>
+                                                        <input type="date" value="<?php if ($screening['conset_date']) {
+                                                            print_r($screening['conset_date']);
+                                                        } ?>" id="conset_date" name="conset_date" class="form-control"
+                                                            placeholder="Enter date" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
 
                                             <hr>
 
@@ -2927,7 +2978,6 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-
 
                                                 <div class="col-sm-4">
                                                     <div class="row-form clearfix">
@@ -3460,10 +3510,10 @@ if ($user->isLoggedIn()) {
                                                             ):</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter comments here">
-                                                                                                            <?php if ($facility['comments']) {
-                                                                                                                print_r($facility['comments']);
-                                                                                                            } ?>
-                                                                                                            </textarea>
+                                                                                                                <?php if ($facility['comments']) {
+                                                                                                                    print_r($facility['comments']);
+                                                                                                                } ?>
+                                                                                                                </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -3533,138 +3583,6 @@ if ($user->isLoggedIn()) {
             </div>
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 7) { ?>
-            <?php
-            $screening = $override->get3('screening', 'status', 1, 'sequence', $_GET['sequence'], 'patient_id', $_GET['cid'])[0];
-            ?>
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <?php if ($screening) { ?>
-                                    <h1>Add New Screening</h1>
-                                <?php } else { ?>
-                                    <h1>Update Screening</h1>
-                                <?php } ?>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item">
-                                        <a href="info.php?id=4&cid=<?= $_GET['cid']; ?>&status=<?= $_GET['status']; ?>">
-                                            < Back</a>
-                                    </li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item">
-                                        <a href="index1.php">Home</a>
-                                    </li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item">
-                                        <a href="info.php?id=3&status=<?= $_GET['status']; ?>">
-                                            Go to screening list > </a>
-                                    </li>&nbsp;&nbsp;
-                                    <?php if ($results) { ?>
-                                        <li class="breadcrumb-item active">Add New Screening</li>
-                                    <?php } else { ?>
-                                        <li class="breadcrumb-item active">Update Screening</li>
-                                    <?php } ?>
-                                </ol>
-                            </div>
-                        </div>
-                    </div><!-- /.container-fluid -->
-                </section>
-
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <!-- right column -->
-                            <div class="col-md-12">
-                                <!-- general form elements disabled -->
-                                <div class="card card-warning">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Inclusion Criteria</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
-                                        <div class="card-body">
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <div class="mb-2">
-                                                        <label for="test_date" class="form-label">Date of Screening</label>
-                                                        <input type="date" value="<?php if ($screening['screening_date']) {
-                                                            print_r($screening['screening_date']);
-                                                        } ?>" id="screening_date" name="screening_date"
-                                                            class="form-control" placeholder="Enter date" required />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <label for="conset" class="form-label">Patient Conset?</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="conset"
-                                                                        id="conset<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($screening['conset'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?> required>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-4" id="conset_date1">
-                                                    <div class="mb-2">
-                                                        <label for="results_date" class="form-label">Date of Conset</label>
-                                                        <input type="date" value="<?php if ($screening['conset_date']) {
-                                                            print_r($screening['conset_date']);
-                                                        } ?>" id="conset_date" name="conset_date" class="form-control"
-                                                            placeholder="Enter date" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <hr>
-
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="mb-2">
-                                                        <label for="ldct_results" class="form-label">Comments</label>
-                                                        <textarea class="form-control" name="comments" id="comments"
-                                                            rows="4" placeholder="Enter here" required>
-                                                                            <?php if ($screening['comments']) {
-                                                                                print_r($screening['comments']);
-                                                                            } ?>
-                                                                        </textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /.card-body -->
-                                        <div class="card-footer">
-                                            <a href="info.php?id=4&cid=<?= $_GET['cid']; ?>&status=<?= $_GET['status']; ?>"
-                                                class="btn btn-default">Back</a>
-                                            <input type="hidden" name="cid" value="<?= $_GET['cid'] ?>">
-                                            <input type="submit" name="add_screening" value="Submit"
-                                                class="btn btn-primary">
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- /.card -->
-                            </div>
-                            <!--/.col (right) -->
-                        </div>
-                        <!-- /.row -->
-                    </div><!-- /.container-fluid -->
-                </section>
-                <!-- /.content -->
-            </div>
-            <!-- /.content-wrapper -->
 
         <?php } elseif ($_GET['id'] == 8) { ?>
             <!-- Content Wrapper. Contains page content -->
@@ -5358,7 +5276,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>                                          
+                                            </div>
 
 
                                             <div class="card card-warning">
@@ -5377,7 +5295,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                </textarea>
+                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6090,7 +6008,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                </textarea>
+                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6335,10 +6253,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                            <?php if ($screening['comments']) {
-                                                                                print_r($screening['comments']);
-                                                                            } ?>
-                                                                        </textarea>
+                                                                                <?php if ($screening['comments']) {
+                                                                                    print_r($screening['comments']);
+                                                                                } ?>
+                                                                            </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -8124,7 +8042,7 @@ if ($user->isLoggedIn()) {
                                                                 rows="3" placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                </textarea>
+                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8154,7 +8072,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                </textarea>
+                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8857,7 +8775,7 @@ if ($user->isLoggedIn()) {
                                                             placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                 print_r($costing['comments']);
                                                             } ?>
-                                                                                </textarea>
+                                                                                    </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -11676,7 +11594,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                </textarea>
+                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
