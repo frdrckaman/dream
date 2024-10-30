@@ -1131,13 +1131,7 @@ if ($user->isLoggedIn()) {
                                                 $kap = 0;
                                                 $screening = 0;
                                                 $health_care = 0;
-                                                if ($_GET['interview'] == 1) {
-                                                    $interview = 'kap';
-                                                } elseif ($_GET['interview'] == 2) {
-                                                    $interview = 'screening';
-                                                } elseif ($_GET['interview'] == 3) {
-                                                    $interview = 'health_care';
-                                                }
+
                                                 $x = 1;
                                                 foreach ($clients as $value) {
                                                     $yes_no = $override->get('yes_no', 'status', 1)[0];
