@@ -262,7 +262,7 @@ if ($user->isLoggedIn()) {
             }
         } elseif (Input::get('add_client')) {
             $validate = $validate->check($_POST, array(
-                'date_enrolled' => array(
+                'screening_date' => array(
                     'required' => true,
                 ),
                 'sex' => array(
@@ -276,8 +276,14 @@ if ($user->isLoggedIn()) {
                 try {
                     $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid']);
 
-                    $years = $user->dateDiffYears(Input::get('date_enrolled'), Input::get('dob'));
-                    $age = $user->dateDiffYears(Input::get('date_enrolled'), Input::get('dob'));
+                    $years = $user->dateDiffYears(Input::get('screening_date'), Input::get('dob'));
+                    $age = $user->dateDiffYears(Input::get('screening_date'), Input::get('dob'));
+
+
+                    $eligible = 0;
+
+                    $eligible = (Input::get('conset') == 1) ? 1 : 2;
+
 
                     if ($clients) {
                         $user->updateRecord('clients', array(
@@ -287,7 +293,7 @@ if ($user->isLoggedIn()) {
                             'site_id' => Input::get('site'),
                             'facility_region' => Input::get('facility_district'),
                             'facility_district' => Input::get('facility_district'),
-                            'date_enrolled' => Input::get('date_enrolled'),
+                            'date_enrolled' => Input::get('screening_date'),
                             'screening_date' => Input::get('screening_date'),
                             'conset' => Input::get('conset'),
                             'conset_date' => Input::get('conset_date'),
@@ -301,7 +307,7 @@ if ($user->isLoggedIn()) {
                             'respondent' => 2,
                             'status' => 1,
                             'screened' => 0,
-                            'eligible' => 0,
+                            'eligible' => $eligible,
                             'enrolled' => 0,
                             'end_study' => 0,
                             'update_on' => date('Y-m-d H:i:s'),
@@ -317,8 +323,8 @@ if ($user->isLoggedIn()) {
                                 'respondent' => 2,
                                 'study_id' => $clients[0]['study_id'],
                                 'pid' => $clients[0]['study_id'],
-                                'expected_date' => Input::get('date_enrolled'),
-                                'visit_date' => Input::get('date_enrolled'),
+                                'expected_date' => Input::get('screening_date'),
+                                'visit_date' => Input::get('screening_date'),
                                 'visit_status' => 1,
                                 'comments' => Input::get('comments'),
                                 'status' => 1,
@@ -338,8 +344,8 @@ if ($user->isLoggedIn()) {
                                 'respondent' => 2,
                                 'study_id' => $clients[0]['study_id'],
                                 'pid' => $clients[0]['study_id'],
-                                'expected_date' => Input::get('date_enrolled'),
-                                'visit_date' => Input::get('date_enrolled'),
+                                'expected_date' => Input::get('screening_date'),
+                                'visit_date' => Input::get('screening_date'),
                                 'visit_status' => 1,
                                 'comments' => Input::get('comments'),
                                 'status' => 1,
@@ -368,7 +374,7 @@ if ($user->isLoggedIn()) {
                             'facility_region' => Input::get('facility_district'),
                             'facility_district' => Input::get('facility_district'),
                             'study_id' => $std_id['study_id'],
-                            'date_enrolled' => Input::get('date_enrolled'),
+                            'date_enrolled' => Input::get('screening_date'),
                             'screening_date' => Input::get('screening_date'),
                             'conset' => Input::get('conset'),
                             'conset_date' => Input::get('conset_date'),
@@ -382,7 +388,7 @@ if ($user->isLoggedIn()) {
                             'respondent' => 2,
                             'status' => 1,
                             'screened' => 0,
-                            'eligible' => 0,
+                            'eligible' => $eligible,
                             'enrolled' => 0,
                             'end_study' => 0,
                             'create_on' => date('Y-m-d H:i:s'),
@@ -405,8 +411,8 @@ if ($user->isLoggedIn()) {
                             'respondent' => 2,
                             'study_id' => $std_id['study_id'],
                             'pid' => $std_id['study_id'],
-                            'expected_date' => Input::get('date_enrolled'),
-                            'visit_date' => Input::get('date_enrolled'),
+                            'expected_date' => Input::get('screening_date'),
+                            'visit_date' => Input::get('screening_date'),
                             'visit_status' => 1,
                             'comments' => Input::get('comments'),
                             'status' => 1,
@@ -422,6 +428,8 @@ if ($user->isLoggedIn()) {
                         $successMessage = 'Client  Added Successful';
                     }
                     Redirect::to('info.php?id=3&status=7');
+                    Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&sequence=' . $_GET['sequence'] . '&visit_code=' . $_GET['visit_code'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
+
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -2835,16 +2843,18 @@ if ($user->isLoggedIn()) {
                             $districts = $override->get('districts', 'id', $clients['district'])[0];
                             $wards = $override->get('wards', 'id', $clients['ward'])[0];
                             $facility = $override->get('districts', 'id', $clients['facility_district'])[0];
+                            $site = $override->get('sites', 'id', $clients['site_id'])[0];
+
 
                             // $screening = $override->get3('screening', 'status', 1, 'sequence', $_GET['sequence'], 'patient_id', $_GET['cid'])[0];
-
+                        
                             ?>
                             <!-- right column -->
                             <div class="col-md-12">
                                 <!-- general form elements disabled -->
                                 <div class="card card-warning">
                                     <div class="card-header">
-                                        <h3 class="card-title">Details of enrolment and patient demographics</h3>
+                                        <h3 class="card-title">PATIENT DETAILS : Details of enrolment and patient demographics</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <form id="clients" enctype="multipart/form-data" method="post" autocomplete="off">
@@ -2852,22 +2862,67 @@ if ($user->isLoggedIn()) {
                                             <hr>
                                             <div class="card card-warning">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">CLINICIAN DETAILS</h3>
+                                                    <h3 class="card-title">PID : <?php print_r($clients['study_id']); ?>
+                                                    </h3>
                                                 </div>
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-4">
+                                                <div class="col-2">
                                                     <div class="mb-2">
                                                         <label for="test_date" class="form-label">Date of Screening</label>
-                                                        <input type="date" value="<?php if ($screening['screening_date']) {
-                                                            print_r($screening['screening_date']);
+                                                        <input type="date" value="<?php if ($clients['screening_date']) {
+                                                            print_r($clients['screening_date']);
                                                         } ?>" id="screening_date" name="screening_date"
                                                             class="form-control" placeholder="Enter date" required />
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-2">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Date of birth:</label>
+                                                            <input class="form-control" max="<?= date('Y-m-d'); ?>" type="date" name="dob" id="dob" style="width: 100%;"
+                                                                value="<?php if ($clients['dob']) {
+                                                                    print_r($clients['dob']);
+                                                                } ?>" required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-sm-2">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Age</label>
+                                                            <input class="form-control" type="number" name="age" value="<?php if ($clients['age']) {
+                                                                print_r($clients['age']);
+                                                            } ?>" readonly />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-sm-2">
+                                                    <label>SEX</label>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="sex" id="sex" value="1" <?php if ($clients['sex'] == 1) {
+                                                                    echo 'checked';
+                                                                } ?> required>
+                                                                <label class="form-check-label">Male</label>
+                                                            </div>
+                                                
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="sex" id="sex" value="2" <?php if ($clients['sex'] == 2) {
+                                                                    echo 'checked';
+                                                                } ?>>
+                                                                <label class="form-check-label">Female</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-2">
                                                     <label for="conset" class="form-label">Patient Conset?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -2876,7 +2931,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="conset"
                                                                         id="conset<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($screening['conset'] == $value['id']) {
+                                                                        value="<?= $value['id']; ?>" <?php if ($clients['conset'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?> required>
                                                                     <label
@@ -2886,11 +2941,11 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-4" id="conset_date1">
+                                                <div class="col-2" id="conset_date1">
                                                     <div class="mb-2">
                                                         <label for="results_date" class="form-label">Date of Conset</label>
-                                                        <input type="date" value="<?php if ($screening['conset_date']) {
-                                                            print_r($screening['conset_date']);
+                                                        <input type="date" value="<?php if ($clients['conset_date']) {
+                                                            print_r($clients['conset_date']);
                                                         } ?>" id="conset_date" name="conset_date" class="form-control"
                                                             placeholder="Enter date" />
                                                     </div>
@@ -2901,21 +2956,23 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-6" id="site">
-                                                    <label>Name of Health facility:</label>
+                                                <div class="col-sm-6">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="site"
-                                                                        id="site<?= $site['id']; ?>" value="<?= $site['id']; ?>"
-                                                                        <?php if ($clients['site_id'] == $site['id']) {
-                                                                            echo 'checked' . ' ' . 'required';
-                                                                        } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $site['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
+                                                            <label>Name of Health facility:</label>
+                                                            <select name="site" class="form-control" required>
+                                                                <option value="<?= $site['id'] ?>"><?php if ($clients['site_id']) {
+                                                                      print_r($site['name']);
+                                                                  } else {
+                                                                      echo 'Select';
+                                                                  } ?>
+                                                                </option>
+                                                                <?php foreach ($override->get('sites', 'status', 1) as $district) { ?>
+                                                                    <option value="<?= $district['id'] ?>">
+                                                                        <?= $district['name'] ?>
+                                                                    </option>
+                                                                <?php } ?>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2942,92 +2999,6 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-                                            <div class="card card-warning">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">PATIENT DETAILS</h3>
-                                                </div>
-                                            </div>
-
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>STUDY ID </label>
-                                                            <input class="form-control" type="text" value="<?php if ($clients['study_id']) {
-                                                                print_r($clients['study_id']);
-                                                            } ?>" readonly />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-6">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>Date of enrolment:</label>
-                                                            <input class="form-control" type="date"
-                                                                max="<?= date('Y-m-d'); ?>" name="date_enrolled"
-                                                                id="date_enrolled" value="<?php if ($clients['date_enrolled']) {
-                                                                    print_r($clients['date_enrolled']);
-                                                                } ?>" required />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <hr>
-
-                                            <div class="row">
-
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>Date of birth:</label>
-                                                            <input class="form-control" max="<?= date('Y-m-d'); ?>"
-                                                                type="date" name="dob" id="dob" style="width: 100%;" value="<?php if ($clients['dob']) {
-                                                                    print_r($clients['dob']);
-                                                                } ?>" required />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>Age</label>
-                                                            <input class="form-control" type="number" name="age" value="<?php if ($clients['age']) {
-                                                                print_r($clients['age']);
-                                                            } ?>" readonly />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <label>SEX</label>
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="sex"
-                                                                    id="sex" value="1" <?php if ($clients['sex'] == 1) {
-                                                                        echo 'checked';
-                                                                    } ?> required>
-                                                                <label class="form-check-label">Male</label>
-                                                            </div>
-
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="sex"
-                                                                    id="sex" value="2" <?php if ($clients['sex'] == 2) {
-                                                                        echo 'checked';
-                                                                    } ?>>
-                                                                <label class="form-check-label">Female</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
@@ -3510,10 +3481,10 @@ if ($user->isLoggedIn()) {
                                                             ):</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter comments here">
-                                                                                                                <?php if ($facility['comments']) {
-                                                                                                                    print_r($facility['comments']);
-                                                                                                                } ?>
-                                                                                                                </textarea>
+                                                                                                                    <?php if ($facility['comments']) {
+                                                                                                                        print_r($facility['comments']);
+                                                                                                                    } ?>
+                                                                                                                    </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5295,7 +5266,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                    </textarea>
+                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6008,7 +5979,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                    </textarea>
+                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6253,10 +6224,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                <?php if ($screening['comments']) {
-                                                                                    print_r($screening['comments']);
-                                                                                } ?>
-                                                                            </textarea>
+                                                                                    <?php if ($screening['comments']) {
+                                                                                        print_r($screening['comments']);
+                                                                                    } ?>
+                                                                                </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -8042,7 +8013,7 @@ if ($user->isLoggedIn()) {
                                                                 rows="3" placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                    </textarea>
+                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8072,7 +8043,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                    </textarea>
+                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8775,7 +8746,7 @@ if ($user->isLoggedIn()) {
                                                             placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                 print_r($costing['comments']);
                                                             } ?>
-                                                                                    </textarea>
+                                                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -11594,7 +11565,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                    </textarea>
+                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
