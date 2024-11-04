@@ -2685,7 +2685,7 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Add Participant enrolment form</h1>
+                                <h1>Add Participant Eliginility form</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -2701,18 +2701,10 @@ if ($user->isLoggedIn()) {
                                                 Go to eligible list >
                                             <?php } elseif ($_GET['status'] == 3) { ?>
                                                 Go to enrollment list >
-                                            <?php } elseif ($_GET['status'] == 4) { ?>
-                                                Go to terminated / end study list >
-                                            <?php } elseif ($_GET['status'] == 5) { ?>
-                                                Go to registered list >
-                                            <?php } elseif ($_GET['status'] == 6) { ?>
-                                                Go to registered list >
-                                            <?php } elseif ($_GET['status'] == 7) { ?>
-                                                Go to registered list >
                                             <?php } ?>
                                         </a>
                                     </li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item active">Add New Client</li>
+                                    <li class="breadcrumb-item active">Add New Patient</li>
                                 </ol>
                             </div>
                         </div>
@@ -2743,8 +2735,7 @@ if ($user->isLoggedIn()) {
                                 <!-- general form elements disabled -->
                                 <div class="card card-warning">
                                     <div class="card-header">
-                                        <h3 class="card-title">PATIENT DETAILS : Details of enrolment and patient
-                                            demographics</h3>
+                                        <h3 class="card-title">Screening Details</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <form id="clients" enctype="multipart/form-data" method="post" autocomplete="off">
