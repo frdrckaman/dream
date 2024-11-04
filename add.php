@@ -477,7 +477,7 @@ if ($user->isLoggedIn()) {
 
                         $successMessage = 'Enrollment Form  Added Successful';
                     }
-                    // Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&status=3&msg=' . $successMessage);
+                    Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&status=3&msg=' . $successMessage);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
