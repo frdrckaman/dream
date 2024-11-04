@@ -344,7 +344,7 @@ if ($user->isLoggedIn()) {
                         $successMessage = 'Screening  Added Successful';
                     }
 
-                    Redirect::to('info.php?id=3&status=7');
+                    Redirect::to('info.php?id=3&status=1');
                     // Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&sequence=' . $_GET['sequence'] . '&visit_code=' . $_GET['visit_code'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
 
                 } catch (Exception $e) {
@@ -2752,7 +2752,7 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row">
                             <?php
-                            $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid'])[0];
+                            $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
                             $sex = $override->get('sex', 'id', $clients['sex'])[0];
                             $education = $override->get('education', 'id', $clients['education'])[0];
                             $occupation = $override->get('occupation', 'id', $clients['occupation'])[0];
@@ -2881,7 +2881,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <label>Name of Health facility:</label>
                                                             <select name="site" class="form-control" required>
-                                                                <option value="<?= $site['id'] ?>"><?php if ($clients['site_id']) {
+                                                                <option value="<?= $site['id'] ?>"><?php if ($clients['facility_id']) {
                                                                       print_r($site['name']);
                                                                   } else {
                                                                       echo 'Select';
