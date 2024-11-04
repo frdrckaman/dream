@@ -318,7 +318,7 @@ if ($user->isLoggedIn()) {
                             'facility_id' => Input::get('site'),
                             'facility_region' => Input::get('facility_district'),
                             'facility_district' => Input::get('facility_district'),
-                            'pid' => $std_id['pid'],
+                            'pid' => $std_id['study_id'],
                             'screening_date' => Input::get('screening_date'),
                             'conset' => Input::get('conset'),
                             'conset_date' => Input::get('conset_date'),
