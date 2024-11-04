@@ -274,7 +274,7 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 try {
-                    $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid']);
+                    $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid']);
 
                     $years = $user->dateDiffYears(Input::get('screening_date'), Input::get('dob'));
                     $age = $user->dateDiffYears(Input::get('screening_date'), Input::get('dob'));
@@ -286,14 +286,10 @@ if ($user->isLoggedIn()) {
 
 
                     if ($clients) {
-                        $user->updateRecord('clients', array(
-                            'sequence' => -1,
-                            'visit_code' => 'RV',
-                            'visit_name' => 'Registration Visit',
-                            'site_id' => Input::get('site'),
+                        $user->updateRecord('screening', array(
+                            'facility_id' => Input::get('site'),
                             'facility_region' => Input::get('facility_district'),
                             'facility_district' => Input::get('facility_district'),
-                            'date_enrolled' => Input::get('screening_date'),
                             'screening_date' => Input::get('screening_date'),
                             'conset' => Input::get('conset'),
                             'conset_date' => Input::get('conset_date'),
@@ -304,77 +300,25 @@ if ($user->isLoggedIn()) {
                             'district' => Input::get('district'),
                             'ward' => Input::get('ward'),
                             'comments' => Input::get('comments'),
-                            'respondent' => 2,
                             'status' => 1,
-                            'screened' => 0,
                             'eligible' => $eligible,
-                            'enrolled' => 0,
-                            'end_study' => 0,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                         ), $_GET['cid']);
-                        $visit = $override->get3('visit', 'status', 1, 'patient_id', $clients[0]['id'], 'sequence', 0);
 
-                        if ($visit) {
-                            $user->updateRecord('visit', array(
-                                'sequence' => 0,
-                                'visit_code' => 'SV',
-                                'visit_name' => 'Screening Visit',
-                                'respondent' => 2,
-                                'study_id' => $clients[0]['study_id'],
-                                'pid' => $clients[0]['study_id'],
-                                'expected_date' => Input::get('screening_date'),
-                                'visit_date' => Input::get('screening_date'),
-                                'visit_status' => 1,
-                                'comments' => Input::get('comments'),
-                                'status' => 1,
-                                'facility_id' => Input::get('site'),
-                                'patient_id' => $clients[0]['id'],
-                                'create_on' => date('Y-m-d H:i:s'),
-                                'staff_id' => $user->data()->id,
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'site_id' => Input::get('site'),
-                            ), $visit[0]['id']);
-                        } else {
-                            $user->createRecord('visit', array(
-                                'sequence' => 0,
-                                'visit_code' => 'SV',
-                                'visit_name' => 'Screening Visit',
-                                'respondent' => 2,
-                                'study_id' => $clients[0]['study_id'],
-                                'pid' => $clients[0]['study_id'],
-                                'expected_date' => Input::get('screening_date'),
-                                'visit_date' => Input::get('screening_date'),
-                                'visit_status' => 1,
-                                'comments' => Input::get('comments'),
-                                'status' => 1,
-                                'facility_id' => Input::get('site'),
-                                'patient_id' => $clients[0]['id'],
-                                'create_on' => date('Y-m-d H:i:s'),
-                                'staff_id' => $user->data()->id,
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'site_id' => Input::get('site'),
-                            ));
-                        }
+                        $user->visit_schedule('visit', Input::get('screening_date'), $clients[0]['pid'], $clients[0]['id'], $user->data()->id, Input::get('site'), Input::get('comments'), 1);
+
 
                         $successMessage = 'Client Updated Successful';
                     } else {
 
-                        // $std_id = $override->getNews('study_id', 'site_id', Input::get('site'), 'status', 0)[0];
                         $std_id = $override->get('study_id', 'status', 0)[0];
 
-
-                        $user->createRecord('clients', array(
-                            'sequence' => -1,
-                            'visit_code' => 'RV',
-                            'visit_name' => 'Registration Visit',
-                            'site_id' => Input::get('site'),
+                        $user->createRecord('screening', array(
+                            'facility_id' => Input::get('site'),
                             'facility_region' => Input::get('facility_district'),
                             'facility_district' => Input::get('facility_district'),
-                            'study_id' => $std_id['study_id'],
-                            'date_enrolled' => Input::get('screening_date'),
+                            'pid' => $std_id['study_id'],
                             'screening_date' => Input::get('screening_date'),
                             'conset' => Input::get('conset'),
                             'conset_date' => Input::get('conset_date'),
@@ -385,48 +329,21 @@ if ($user->isLoggedIn()) {
                             'district' => Input::get('district'),
                             'ward' => Input::get('ward'),
                             'comments' => Input::get('comments'),
-                            'respondent' => 2,
                             'status' => 1,
-                            'screened' => 0,
                             'eligible' => $eligible,
-                            'enrolled' => 0,
-                            'end_study' => 0,
                             'create_on' => date('Y-m-d H:i:s'),
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                         ));
 
-                        $last_row = $override->lastRow('clients', 'id')[0];
+                        $last_row = $override->lastRow('screening', 'id')[0];
 
-                        $user->updateRecord('study_id', array(
-                            'status' => 1,
-                            'client_id' => $last_row['id'],
-                        ), $std_id['id']);
+                        $user->visit_schedule('visit', Input::get('screening_date'), $clients[0]['pid'], $last_row[0]['id'], $user->data()->id, Input::get('site'), Input::get('comments'), 1);
 
-                        $user->createRecord('visit', array(
-                            'sequence' => 0,
-                            'visit_code' => 'SV',
-                            'visit_name' => 'Screening Visit',
-                            'respondent' => 2,
-                            'study_id' => $std_id['study_id'],
-                            'pid' => $std_id['study_id'],
-                            'expected_date' => Input::get('screening_date'),
-                            'visit_date' => Input::get('screening_date'),
-                            'visit_status' => 1,
-                            'comments' => Input::get('comments'),
-                            'status' => 1,
-                            'facility_id' => Input::get('site'),
-                            'patient_id' => $last_row['id'],
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'site_id' => Input::get('site'),
-                        ));
-
-                        $successMessage = 'Client  Added Successful';
+                        $successMessage = 'Screening  Added Successful';
                     }
+
                     Redirect::to('info.php?id=3&status=7');
                     // Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&sequence=' . $_GET['sequence'] . '&visit_code=' . $_GET['visit_code'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
 
@@ -3484,10 +3401,10 @@ if ($user->isLoggedIn()) {
                                                             ):</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter comments here">
-                                                                                                                                <?php if ($facility['comments']) {
-                                                                                                                                    print_r($facility['comments']);
-                                                                                                                                } ?>
-                                                                                                                                </textarea>
+                                                                                                                                    <?php if ($facility['comments']) {
+                                                                                                                                        print_r($facility['comments']);
+                                                                                                                                    } ?>
+                                                                                                                                    </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5269,7 +5186,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                    </textarea>
+                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5982,7 +5899,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                    </textarea>
+                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6227,10 +6144,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                <?php if ($screening['comments']) {
-                                                                                                    print_r($screening['comments']);
-                                                                                                } ?>
-                                                                                            </textarea>
+                                                                                                    <?php if ($screening['comments']) {
+                                                                                                        print_r($screening['comments']);
+                                                                                                    } ?>
+                                                                                                </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -8016,7 +7933,7 @@ if ($user->isLoggedIn()) {
                                                                 rows="3" placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                    </textarea>
+                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8046,7 +7963,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                    </textarea>
+                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8749,7 +8666,7 @@ if ($user->isLoggedIn()) {
                                                             placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                 print_r($costing['comments']);
                                                             } ?>
-                                                                                                    </textarea>
+                                                                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -11568,7 +11485,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                    </textarea>
+                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>

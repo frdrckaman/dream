@@ -452,7 +452,8 @@ if ($user->isLoggedIn()) {
     <title>Dream Fund Sub-Studies Database | Info</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables -->
@@ -582,7 +583,7 @@ if ($user->isLoggedIn()) {
                                                     $position = $override->getNews('position', 'status', 1, 'id', $staff['position'])[0];
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $staff['site_id'])[0];
 
-                                                ?>
+                                                    ?>
                                                     <tr>
                                                         <td class="table-user">
                                                             <?= $staff['firstname'] . '  ' . $staff['middlename'] . ' ' . $staff['lastname']; ?>
@@ -618,7 +619,7 @@ if ($user->isLoggedIn()) {
                                                                         </i>Active
                                                                     </a>
                                                                 </td>
-                                                            <?php  } else { ?>
+                                                            <?php } else { ?>
                                                                 <td class="text-center">
                                                                     <a href="#" class="btn btn-danger">
                                                                         <i class="ri-edit-box-line">
@@ -627,67 +628,95 @@ if ($user->isLoggedIn()) {
                                                                 </td>
                                                             <?php } ?>
 
-                                                        <?php  } else { ?>
+                                                        <?php } else { ?>
                                                             <td class="text-center">
-                                                                <a href="#" class="btn btn-warning"> <i class="ri-edit-box-line"></i>Locked</a>
+                                                                <a href="#" class="btn btn-warning"> <i
+                                                                        class="ri-edit-box-line"></i>Locked</a>
                                                             </td>
                                                         <?php } ?>
                                                         <td>
-                                                            <a href="add.php?id=1&staff_id=<?= $staff['id'] ?>" class="btn btn-info">Update</a>
-                                                            <a href="#reset<?= $staff['id'] ?>" role="button" class="btn btn-default" data-toggle="modal">Reset</a>
-                                                            <a href="#lock<?= $staff['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">Lock</a>
-                                                            <a href="#unlock<?= $staff['id'] ?>" role="button" class="btn btn-primary" data-toggle="modal">Unlock</a>
-                                                            <a href="#delete<?= $staff['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
-                                                            <a href="#restore<?= $staff['id'] ?>" role="button" class="btn btn-secondary" data-toggle="modal">Restore</a>&nbsp;&nbsp;&nbsp;
-                                                            <a href="profile.php?id=<?= $staff['id'] ?>&status=<?= $_GET['status'] ?>" class="btn btn-success">Change Password</a>
+                                                            <a href="add.php?id=1&staff_id=<?= $staff['id'] ?>"
+                                                                class="btn btn-info">Update</a>
+                                                            <a href="#reset<?= $staff['id'] ?>" role="button"
+                                                                class="btn btn-default" data-toggle="modal">Reset</a>
+                                                            <a href="#lock<?= $staff['id'] ?>" role="button"
+                                                                class="btn btn-warning" data-toggle="modal">Lock</a>
+                                                            <a href="#unlock<?= $staff['id'] ?>" role="button"
+                                                                class="btn btn-primary" data-toggle="modal">Unlock</a>
+                                                            <a href="#delete<?= $staff['id'] ?>" role="button"
+                                                                class="btn btn-danger" data-toggle="modal">Delete</a>
+                                                            <a href="#restore<?= $staff['id'] ?>" role="button"
+                                                                class="btn btn-secondary"
+                                                                data-toggle="modal">Restore</a>&nbsp;&nbsp;&nbsp;
+                                                            <a href="profile.php?id=<?= $staff['id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                class="btn btn-success">Change Password</a>
                                                         </td>
                                                     </tr>
-                                                    <div class="modal fade" id="reset<?= $staff['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="reset<?= $staff['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <form method="post">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
                                                                         <h4>Reset Password</h4>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <p>Are you sure you want to reset password to default (12345678)</p>
+                                                                        <p>Are you sure you want to reset password to default
+                                                                            (12345678)</p>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input type="hidden" name="id" value="<?= $staff['id'] ?>">
-                                                                        <input type="submit" name="reset_pass" value="Reset" class="btn btn-warning">
-                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $staff['id'] ?>">
+                                                                        <input type="submit" name="reset_pass" value="Reset"
+                                                                            class="btn btn-warning">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="lock<?= $staff['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="lock<?= $staff['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <form method="post">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
                                                                         <h4>Lock Account</h4>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <p>Are you sure you want to lock this account </p>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input type="hidden" name="id" value="<?= $staff['id'] ?>">
-                                                                        <input type="submit" name="lock_account" value="Lock" class="btn btn-warning">
-                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $staff['id'] ?>">
+                                                                        <input type="submit" name="lock_account" value="Lock"
+                                                                            class="btn btn-warning">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="unlock<?= $staff['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="unlock<?= $staff['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <form method="post">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
                                                                         <h4>Unlock Account</h4>
                                                                     </div>
                                                                     <div class="modal-body">
@@ -696,20 +725,27 @@ if ($user->isLoggedIn()) {
                                                                         </strong>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input type="hidden" name="id" value="<?= $staff['id'] ?>">
-                                                                        <input type="submit" name="unlock_account" value="Unlock" class="btn btn-success">
-                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $staff['id'] ?>">
+                                                                        <input type="submit" name="unlock_account"
+                                                                            value="Unlock" class="btn btn-success">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="delete<?= $staff['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="delete<?= $staff['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <form method="post">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
                                                                         <h4>Delete User</h4>
                                                                     </div>
                                                                     <div class="modal-body">
@@ -718,20 +754,27 @@ if ($user->isLoggedIn()) {
                                                                         </strong>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input type="hidden" name="id" value="<?= $staff['id'] ?>">
-                                                                        <input type="submit" name="delete_staff" value="Delete" class="btn btn-danger">
-                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $staff['id'] ?>">
+                                                                        <input type="submit" name="delete_staff" value="Delete"
+                                                                            class="btn btn-danger">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="restore<?= $staff['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="restore<?= $staff['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <form method="post">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
                                                                         <h4>Restore User</h4>
                                                                     </div>
                                                                     <div class="modal-body">
@@ -740,15 +783,18 @@ if ($user->isLoggedIn()) {
                                                                         </strong>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input type="hidden" name="id" value="<?= $staff['id'] ?>">
-                                                                        <input type="submit" name="restore_staff" value="Restore" class="btn btn-success">
-                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $staff['id'] ?>">
+                                                                        <input type="submit" name="restore_staff"
+                                                                            value="Restore" class="btn btn-success">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
-                                                <?php $x++;
+                                                    <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -788,12 +834,12 @@ if ($user->isLoggedIn()) {
                                     <?php
                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                         if ($_GET['site_id'] != null) {
-                                            $clients = $override->getDataDesc2('sites', 'status', 1, 'id', $_GET['site_id'],  'id');
+                                            $clients = $override->getDataDesc2('sites', 'status', 1, 'id', $_GET['site_id'], 'id');
                                         } else {
                                             $clients = $override->getDataDesc1('sites', 'status', 1, 'id');
                                         }
                                     } else {
-                                        $clients = $override->getDataDesc2('sites', 'status', 1, 'id', $_GET['site_id'],  'id');
+                                        $clients = $override->getDataDesc2('sites', 'status', 1, 'id', $_GET['site_id'], 'id');
                                     } ?>
                                     Sites
                                 </h1>
@@ -857,7 +903,7 @@ if ($user->isLoggedIn()) {
                                                 $x = 1;
                                                 foreach ($clients as $value) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
-                                                ?>
+                                                    ?>
                                                     <tr>
                                                         <td class="table-user">
                                                             <?= $x; ?>
@@ -869,16 +915,22 @@ if ($user->isLoggedIn()) {
                                                             <a href="#" class="btn btn-success">Active</a>
                                                         </td>
                                                         <td class="table-user">
-                                                            <a href="add.php?id=2&site_id=<?= $value['id'] ?>" class="btn btn-info">Update</a>
-                                                            <a href="#delete<?= $value['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                                                            <a href="add.php?id=2&site_id=<?= $value['id'] ?>"
+                                                                class="btn btn-info">Update</a>
+                                                            <a href="#delete<?= $value['id'] ?>" role="button"
+                                                                class="btn btn-danger" data-toggle="modal">Delete</a>
                                                         </td>
                                                     </tr>
-                                                    <div class="modal fade" id="delete<?= $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="delete<?= $value['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <form method="post">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
                                                                         <h4>Delete Site</h4>
                                                                     </div>
                                                                     <div class="modal-body">
@@ -887,15 +939,18 @@ if ($user->isLoggedIn()) {
                                                                         </strong>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                                                        <input type="submit" name="delete_sites" value="Delete" class="btn btn-danger">
-                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $value['id'] ?>">
+                                                                        <input type="submit" name="delete_sites" value="Delete"
+                                                                            class="btn btn-danger">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
-                                                <?php $x++;
+                                                    <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -931,86 +986,27 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <h1>
                                     <?php
-                                    if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                        if ($_GET['site_id'] != null) {
-                                            if ($_GET['status'] == 1) {
-                                                $clients = $override->getDataDesc3('clients', 'status', 1, 'screened', 1, 'site_id', $_GET['site_id'], 'id');
-                                            } elseif ($_GET['status'] == 2) {
-                                                $clients = $override->getDataDesc3('clients', 'status', 1, 'eligible', 1, 'site_id', $_GET['site_id'], 'id');
-                                            } elseif ($_GET['status'] == 3) {
-                                                $clients = $override->getDataDesc3('clients', 'status', 1, 'enrolled', 1, 'site_id', $_GET['site_id'], 'id');
-                                            } elseif ($_GET['status'] == 4) {
-                                                $clients = $override->getDataDesc3('clients', 'status', 1, 'end_study', 1, 'site_id', $_GET['site_id'], 'id');
-                                            } elseif ($_GET['status'] == 5) {
-                                                $clients = $override->getDataDesc2('clients', 'status', 1, 'site_id', $_GET['site_id'],  'id');
-                                            } elseif ($_GET['status'] == 6) {
-                                                $clients = $override->getDataDesc3('clients', 'status', 1, 'screened', 1, 'site_id', $_GET['site_id'], 'id');
-                                            } elseif ($_GET['status'] == 7) {
-                                                $clients = $override->getDataDesc1('clients', 'site_id', $_GET['site_id'], 'id');
-                                            } elseif ($_GET['status'] == 8) {
-                                                $clients = $override->getDataDesc2('clients', 'status', 0, 'site_id', $_GET['site_id'],  'id');
-                                            }
-                                        } else {
-
-                                            if ($_GET['status'] == 1) {
-                                                $clients = $override->getDataDesc2('clients', 'status', 1, 'screened', 1, 'id');
-                                            } elseif ($_GET['status'] == 2) {
-                                                $clients = $override->getDataDesc2('clients', 'status', 1, 'eligible', 1, 'id');
-                                            } elseif ($_GET['status'] == 3) {
-                                                $clients = $override->getDataDesc2('clients', 'status', 1, 'enrolled', 1, 'id');
-                                            } elseif ($_GET['status'] == 4) {
-                                                $clients = $override->getDataDesc2('clients', 'status', 1, 'end_study', 1, 'id');
-                                            } elseif ($_GET['status'] == 5) {
-                                                $clients = $override->getDataDesc1('clients', 'status', 1, 'id');
-                                            } elseif ($_GET['status'] == 6) {
-                                                $clients = $override->getDataDesc2('clients', 'status', 1, 'screened', 0, 'id');
-                                            } elseif ($_GET['status'] == 7) {
-                                                $clients = $override->getDataDesc('clients', 'id');
-                                            } elseif ($_GET['status'] == 8) {
-                                                $clients = $override->getDataDesc1('clients', 'status', 0, 'id');
-                                            }
-                                        }
+                                    if ($_GET['status'] == 1) {
+                                        $data = $override->get('screening', 'status', 1);
+                                    } else if ($_GET['status'] == 2) {
+                                        $data = $override->getNews('screening', 'status', 1, 'eligible', 1);
                                     } else {
-
-                                        if ($_GET['status'] == 1) {
-                                            $clients = $override->getDataDesc3('clients', 'status', 1, 'screened', 1, 'site_id', $user->data()->site_id, 'id');
-                                        } elseif ($_GET['status'] == 2) {
-                                            $clients = $override->getDataDesc3('clients', 'status', 1, 'eligible', 1, 'site_id', $user->data()->site_id, 'id');
-                                        } elseif ($_GET['status'] == 3) {
-                                            $clients = $override->getDataDesc3('clients', 'status', 1, 'enrolled', 1, 'site_id', $user->data()->site_id, 'id');
-                                        } elseif ($_GET['status'] == 4) {
-                                            $clients = $override->getDataDesc3('clients', 'status', 1, 'end_study', 1, 'site_id', $user->data()->site_id, 'id');
-                                        } elseif ($_GET['status'] == 5) {
-                                            $clients = $override->getDataDesc2('clients', 'status', 1, 'site_id', $user->data()->site_id,  'id');
-                                        } elseif ($_GET['status'] == 6) {
-                                            $clients = $override->getDataDesc3('clients', 'status', 1, 'screened', 1, 'site_id', $user->data()->site_id, 'id');
-                                        } elseif ($_GET['status'] == 7) {
-                                            $clients = $override->getDataDesc1('clients', 'site_id', $user->data()->site_id, 'id');
-                                        } elseif ($_GET['status'] == 8) {
-                                            $clients = $override->getDataDesc2('clients', 'status', 0, 'site_id', $user->data()->site_id,  'id');
-                                        }
-                                    } ?>
+                                        $data = $override->getNews('screening', 'status', 1, 'eligible', 1);
+                                    }
+                                    ?>
                                     <?php
                                     if ($_GET['status'] == 1) {
                                         echo $title = 'Screening';
-                                    ?>
-                                    <?php
+                                        ?>
+                                        <?php
                                     } elseif ($_GET['status'] == 2) {
-                                        echo $title = 'Eligibility';
-                                    ?>
-                                    <?php
+                                        echo $title = 'Eligible';
+                                        ?>
+                                        <?php
                                     } elseif ($_GET['status'] == 3) {
-                                        echo  $title = 'Enrollment';
-                                    ?>
-                                    <?php
-                                    } elseif ($_GET['status'] == 4) {
-                                        echo $title = 'Termination';
-                                    ?>
-                                    <?php
-                                    } elseif ($_GET['status'] == 5) {
-                                        echo  $title = 'Registration';
-                                    ?>
-                                    <?php
+                                        echo $title = 'Enrollment';
+                                        ?>
+                                        <?php
                                     } ?>
                                 </h1>
                             </div>
@@ -1037,44 +1033,37 @@ if ($user->isLoggedIn()) {
                                                     <div class="card-header">
                                                         <?php
                                                         if ($_GET['status'] == 1) { ?>
-                                                            <h3 class="card-title">List of Screened Clients</h3> &nbsp;&nbsp;
+                                                            <h3 class="card-title">List of Screened screening</h3> &nbsp;&nbsp;
                                                             <span class="badge badge-info right"><?= $screened; ?></span>
-                                                        <?php
+                                                            <?php
                                                         } elseif ($_GET['status'] == 2) { ?>
                                                             <h3 class="card-title">List of Eligible Clients</h3> &nbsp;&nbsp;
                                                             <span class="badge badge-info right"><?= $eligible; ?></span>
-                                                        <?php
+                                                            <?php
                                                         } elseif ($_GET['status'] == 3) { ?>
                                                             <h3 class="card-title">List of Enrolled Clients</h3> &nbsp;&nbsp;
                                                             <span class="badge badge-info right"><?= $enrolled; ?></span>
-                                                        <?php
-                                                        } elseif ($_GET['status'] == 4) { ?>
-                                                            <h3 class="card-title">List of Terminated Clients</h3> &nbsp;&nbsp;
-                                                            <span class="badge badge-info right"><?= $end; ?></span>
-                                                        <?php
-                                                        } elseif ($_GET['status'] == 5) { ?>
-                                                            <h3 class="card-title">List of Registered Clients</h3> &nbsp;&nbsp;
-                                                            <span class="badge badge-info right"><?= $registered; ?></span>
-                                                        <?php
-                                                        } elseif ($_GET['status'] == 7) { ?>
-                                                            <h3 class="card-title">List of Registered Clients</h3> &nbsp;&nbsp;
-                                                            <span class="badge badge-info right"><?= $registered; ?></span>
-                                                        <?php } ?>
+                                                            <?php
+                                                        } ?>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <select class="form-control" name="site_id" style="width: 100%;" autocomplete="off">
+                                                                            <select class="form-control" name="site_id"
+                                                                                style="width: 100%;" autocomplete="off">
                                                                                 <option value="">Select Site</option>
                                                                                 <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                    <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
+                                                                                    <option value="<?= $site['id'] ?>">
+                                                                                        <?= $site['name'] ?>
+                                                                                    </option>
                                                                                 <?php } ?>
                                                                             </select>
                                                                         </div>
@@ -1083,7 +1072,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="search_by_site" value="Search by Site" class="btn btn-primary">
+                                                                            <input type="submit" name="search_by_site"
+                                                                                value="Search by Site" class="btn btn-primary">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1118,7 +1108,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Sex</th>
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
+                                                        ?>
                                                         <th>Site</th>
                                                     <?php } ?>
                                                     <th>Status</th>
@@ -1127,20 +1117,15 @@ if ($user->isLoggedIn()) {
                                             </thead>
                                             <tbody>
                                                 <?php
-
-                                                $kap = 0;
-                                                $screening = 0;
-                                                $health_care = 0;
-
                                                 $x = 1;
-                                                foreach ($clients as $value) {
+                                                foreach ($data as $value) {
                                                     $yes_no = $override->get('yes_no', 'status', 1)[0];
 
-                                                    $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
-                                                ?>
+                                                    $sites = $override->getNews('sites', 'status', 1, 'id', $value['facility_id'])[0];
+                                                    ?>
                                                     <tr>
                                                         <td class="table-user">
-                                                            <?= $value['study_id']; ?>
+                                                            <?= $value['pid']; ?>
                                                         </td>
                                                         <td class="table-user">
                                                             <?= $value['age']; ?>
@@ -1156,42 +1141,47 @@ if ($user->isLoggedIn()) {
                                                         <?php } ?>
                                                         <?php
                                                         if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                        ?>
+                                                            ?>
                                                             <td class="table-user">
                                                                 <?= $sites['name']; ?>
                                                             </td>
                                                         <?php } ?>
-                                                        <?php if ($value['age'] >= 18) { ?>
+                                                        <?php if ($value['eligible'] == 1 && $value['age'] >= 18) { ?>
                                                             <td class="text-center">
                                                                 <a href="#" class="btn btn-success">
                                                                     <i class="ri-edit-box-line">
-                                                                    </i><?php if ($value['age'] >= 18) {  ?> Eligible <?php } ?>
+                                                                    </i><?php if ($value['age'] >= 18) { ?> Eligible <?php } ?>
                                                                 </a>
                                                             </td>
-                                                        <?php  } else { ?>
+                                                        <?php } else { ?>
                                                             <td class="text-center">
-                                                                <a href="#" class="btn btn-danger"> <i class="ri-edit-box-line"></i>Not Eligible</a>
+                                                                <a href="#" class="btn btn-danger"> <i
+                                                                        class="ri-edit-box-line"></i>Not Eligible</a>
                                                             </td>
                                                         <?php } ?>
                                                         <td class="text-center">
-                                                            <?php if ($_GET['status'] == 7) { ?>
-                                                                <a href="add.php?id=4&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>" class="btn btn-info"> <i class="ri-edit-box-line"></i>Update Participant Eligibility form</a>&nbsp;&nbsp;<br>
+                                                            <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
+                                                                <a href="add.php?id=4&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                    class="btn btn-info"> <i class="ri-edit-box-line"></i>Update
+                                                                    Participant Eligibility form</a>&nbsp;&nbsp;<br>
                                                             <?php } ?>
                                                             <br>
-                                                            <?php if ($value['respondent'] == 2) { ?>
-                                                                <?php if ($value['eligible'] == 1 && $value['age'] >= 18) { ?>
-                                                                    <?php if ($kap && $history && $results1 && $results2 && $classification1 && $classification2 && $economic1 && $economic2 && $outcome1 && $outcome2) { ?>
-                                                                        <a href="info.php?id=4&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>" class="btn btn-success"> <i class="ri-edit-box-line"></i>Update Study CRF's</a>&nbsp;&nbsp;<br>
-                                                                    <?php   } else { ?>
-                                                                        <a href="info.php?id=4&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>" class="btn btn-warning"> <i class="ri-edit-box-line"></i>Add Study CRF's</a>&nbsp;&nbsp;<br>
-                                                                    <?php   } ?>
-                                                                <?php   } ?>
-                                                            <?php   } ?>
+                                                            <?php if ($value['eligible'] == 1 && $value['age'] >= 18) { ?>
+                                                                <?php if ($kap && $history && $results1 && $results2 && $classification1 && $classification2 && $economic1 && $economic2 && $outcome1 && $outcome2) { ?>
+                                                                    <a href="info.php?id=4&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                        class="btn btn-success"> <i class="ri-edit-box-line"></i>Update
+                                                                        Study CRF's</a>&nbsp;&nbsp;<br>
+                                                                <?php } else { ?>
+                                                                    <a href="info.php?id=4&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                        class="btn btn-warning"> <i class="ri-edit-box-line"></i>Add
+                                                                        Study CRF's</a>&nbsp;&nbsp;<br>
+                                                                <?php } ?>
+                                                            <?php } ?>
                                                             <br>
                                                         </td>
                                                     </tr>
 
-                                                <?php $x++;
+                                                    <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -1201,7 +1191,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Sex</th>
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
+                                                        ?>
                                                         <th>Site</th>
                                                     <?php } ?>
                                                     <th>Status</th>
@@ -1260,9 +1250,9 @@ if ($user->isLoggedIn()) {
                                         }
 
                                         $name = 'Name: ' . $patient['firstname'] . ' ' . $patient['lastname'];
-                                        $age =  'Age:  ' . $patient['age'];
-                                        $gender =  'Gender: ' . $gender;
-                                        $cat =  'Type: ' . $cat;
+                                        $age = 'Age:  ' . $patient['age'];
+                                        $gender = 'Gender: ' . $gender;
+                                        $cat = 'Type: ' . $cat;
                                         ?>
 
 
@@ -1276,7 +1266,8 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <div class="col-sm-6">
                                                 <ol class="breadcrumb float-sm-right">
-                                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
+                                                    <li class="breadcrumb-item"><a
+                                                            href="info.php?id=3&status=<?= $_GET['status'] ?>">
                                                             < Back</a>
                                                     </li>
                                                     <li class="breadcrumb-item">
@@ -1297,7 +1288,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Visit Date</th>
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
+                                                        ?>
                                                         <th>SITE</th>
                                                     <?php } ?>
                                                     <th>Status</th>
@@ -1308,11 +1299,11 @@ if ($user->isLoggedIn()) {
                                                 <?php
                                                 $x = 1;
                                                 foreach ($override->getNews('visit', 'status', 1, 'patient_id', $_GET['cid']) as $visit) {
-                                                    $clients = $override->getNews('clients', 'status', 1, 'id',  $_GET['cid'])[0];
+                                                    $clients = $override->getNews('clients', 'status', 1, 'id', $_GET['cid'])[0];
                                                     $screening = $override->getNews('screening', 'status', 1, 'patient_id', $_GET['cid'])[0];
                                                     $enrollment = $override->getNews('enrollment', 'status', 1, 'patient_id', $_GET['cid'])[0];
                                                     $site = $override->get('sites', 'id', $visit['site_id'])[0];
-                                                ?>
+                                                    ?>
                                                     <tr>
                                                         <td> <?= $visit['visit_name'] ?></td>
                                                         <td> <?= $visit['expected_date'] ?></td>
@@ -1320,21 +1311,38 @@ if ($user->isLoggedIn()) {
 
                                                         <?php
                                                         if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                        ?>
+                                                            ?>
                                                             <td> <?= $site['name'] ?> </td>
                                                         <?php } ?>
                                                         <td>
                                                             <?php if ($visit['visit_status'] == 1) { ?>
-                                                                <a href="#editVisit<?= $visit['id'] ?>" role="button" class="btn btn-success" data-toggle="modal">
-                                                                    Done <?php if ($screening['eligible'] == 1) {  ?> & ELigible for Enrollment <?php } elseif ($screening['eligible'] == 2) {  ?><p style="color:red" ;>&nbsp;&nbsp; & Not ELigible for Enrollment </p><?php } else { ?>& <p style="color:yellow" ;>&nbsp;&nbsp;Pending For Screening</p> <?php } ?>
+                                                                <a href="#editVisit<?= $visit['id'] ?>" role="button"
+                                                                    class="btn btn-success" data-toggle="modal">
+                                                                    Done <?php if ($screening['eligible'] == 1) { ?> & ELigible for
+                                                                        Enrollment <?php } elseif ($screening['eligible'] == 2) { ?>
+                                                                        <p style="color:red" ;>&nbsp;&nbsp; & Not ELigible for
+                                                                            Enrollment </p><?php } else { ?>& <p style="color:yellow" ;>
+                                                                            &nbsp;&nbsp;Pending For Screening</p> <?php } ?>
                                                                 </a>
                                                             <?php } elseif ($visit['visit_status'] == 2) { ?>
-                                                                <a href="#editVisit<?= $visit['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">
-                                                                    Missed <?php if ($screening['eligible'] == 1) {  ?> & ELigible for Enrollment <?php } elseif ($screening['eligible'] == 2) {  ?><p style="color:red" ;>&nbsp;&nbsp; & Not ELigible for Enrollment </p><?php } else { ?>& <p style="color:yellow" ;>&nbsp;&nbsp;Pending For Screening</p> <?php } ?>
+                                                                <a href="#editVisit<?= $visit['id'] ?>" role="button"
+                                                                    class="btn btn-danger" data-toggle="modal">
+                                                                    Missed <?php if ($screening['eligible'] == 1) { ?> & ELigible
+                                                                        for Enrollment
+                                                                    <?php } elseif ($screening['eligible'] == 2) { ?>
+                                                                        <p style="color:red" ;>&nbsp;&nbsp; & Not ELigible for
+                                                                            Enrollment </p><?php } else { ?>& <p style="color:yellow" ;>
+                                                                            &nbsp;&nbsp;Pending For Screening</p> <?php } ?>
                                                                 </a>
                                                             <?php } elseif ($visit['visit_status'] == 0) { ?>
-                                                                <a href="#editVisit<?= $visit['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">
-                                                                    Pending <?php if ($screening['eligible'] == 1) {  ?> & ELigible for Enrollment <?php } elseif ($screening['eligible'] == 2) {  ?><p style="color:red" ;>&nbsp;&nbsp; & Not ELigible for Enrollment </p><?php } else { ?>& <p style="color:yellow" ;>&nbsp;&nbsp;Pending For Screening</p> <?php } ?>
+                                                                <a href="#editVisit<?= $visit['id'] ?>" role="button"
+                                                                    class="btn btn-warning" data-toggle="modal">
+                                                                    Pending <?php if ($screening['eligible'] == 1) { ?> & ELigible
+                                                                        for Enrollment
+                                                                    <?php } elseif ($screening['eligible'] == 2) { ?>
+                                                                        <p style="color:red" ;>&nbsp;&nbsp; & Not ELigible for
+                                                                            Enrollment </p><?php } else { ?>& <p style="color:yellow" ;>
+                                                                            &nbsp;&nbsp;Pending For Screening</p> <?php } ?>
                                                                 </a>
                                                             <?php } ?>
                                                         </td>
@@ -1343,10 +1351,14 @@ if ($user->isLoggedIn()) {
                                                             <?php if ($visit['visit_status'] == 1) { ?>
                                                                 <?php if ($visit['sequence'] == 0) { ?>
                                                                     <?php if ($override->getNews('screening', 'patient_id', $_GET['cid'], 'status', 1)) { ?>
-                                                                        <a href="add.php?id=7&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Eligibility Data </a>&nbsp;&nbsp; <br><br>
+                                                                        <a href="add.php?id=7&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                            role=" button" class="btn btn-info"> Update Eligibility Data
+                                                                        </a>&nbsp;&nbsp; <br><br>
 
                                                                     <?php } else { ?>
-                                                                        <a href="add.php?id=7&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Eligibility Data</a>&nbsp;&nbsp; <br><br>
+                                                                        <a href="add.php?id=7&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                            role=" button" class="btn btn-warning"> Add Eligibility
+                                                                            Data</a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
                                                                 <?php } ?>
 
@@ -1354,51 +1366,71 @@ if ($user->isLoggedIn()) {
                                                                     <?php if ($screening['eligible'] == 1) {
                                                                         $i = 1; ?>
                                                                         <?php if ($override->getNews('enrollment_form', 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
-                                                                            <a href="add.php?id=16&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Participant Enrolment Data</a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=16&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                                role=" button" class="btn btn-info"> Update Participant
+                                                                                Enrolment Data</a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } else { ?>
-                                                                            <a href="add.php?id=16&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Participant Enrolment Data </a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=16&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                                role=" button" class="btn btn-warning"> Add Participant
+                                                                                Enrolment Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } ?>
 
                                                                         <?php if ($override->get3('respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
-                                                                            <a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Respiratory Sample Data </a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                                role=" button" class="btn btn-info"> Update Respiratory Sample
+                                                                                Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } else { ?>
-                                                                            <a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Respiratory Sample Data </a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                                role=" button" class="btn btn-warning"> Add Respiratory Sample
+                                                                                Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } ?>
 
 
                                                                         <?php
                                                                         //  if (!$override->get3('respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sample_type', 1)) { 
-                                                                            ?>
+                                                                        ?>
 
-                                                                            <?php if ($override->get3('non_respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
-                                                                                <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Diagnostic Test Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
+                                                                        <?php if ($override->get3('non_respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
+                                                                            <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                                role=" button" class="btn btn-info"> Update Diagnostic Test
+                                                                                Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
 
-                                                                            <?php } else { ?>
-                                                                                <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Diagnostic Test Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
+                                                                        <?php } else { ?>
+                                                                            <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                                role=" button" class="btn btn-warning"> Add Diagnostic Test
+                                                                                Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
 
-                                                                            <?php } ?>
+                                                                        <?php } ?>
                                                                         <?php
-                                                                    //  } 
-                                                                     ?>
+                                                                        //  } 
+                                                                        ?>
 
 
                                                                         <?php if ($override->get3('diagnosis_test', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
-                                                                            <a href="add.php?id=14&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Diagnostic Test DST Data </a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=14&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                                role=" button" class="btn btn-info"> Update Diagnostic Test DST
+                                                                                Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } else { ?>
-                                                                            <a href="add.php?id=14&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Diagnostic Test DST Data </a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=14&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                                role=" button" class="btn btn-warning"> Add Diagnostic Test DST
+                                                                                Data </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } ?>
 
                                                                         <?php if ($override->get3('diagnosis', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $i)) { ?>
-                                                                            <a href="add.php?id=15&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> Update Diagnosis Data </a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=15&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                                role=" button" class="btn btn-info"> Update Diagnosis Data
+                                                                            </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } else { ?>
-                                                                            <a href="add.php?id=15&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-warning"> Add Diagnosis Data </a>&nbsp;&nbsp; <br><br>
+                                                                            <a href="add.php?id=15&cid=<?= $_GET['cid'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&study_id=<?= $visit['study_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                                role=" button" class="btn btn-warning"> Add Diagnosis Data
+                                                                            </a>&nbsp;&nbsp; <br><br>
 
                                                                         <?php } ?>
 
@@ -1421,7 +1453,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h4 class="modal-title">Update visit Status</h4>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                            aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
@@ -1433,24 +1466,32 @@ if ($user->isLoggedIn()) {
                                                                                     <div class="form-group">
                                                                                         <label>Visit Date</label>
                                                                                         <input value="<?php if ($visit['visit_date']) {
-                                                                                                            echo $visit['visit_date'];
-                                                                                                        } ?>" class="form-control" max="<?= date('Y-m-d'); ?>" type="date" name="visit_date" id="visit_date" required />
+                                                                                            echo $visit['visit_date'];
+                                                                                        } ?>" class="form-control"
+                                                                                            max="<?= date('Y-m-d'); ?>"
+                                                                                            type="date" name="visit_date"
+                                                                                            id="visit_date" required />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-6">
                                                                                 <div class="mb-2">
-                                                                                    <label for="income_household" class="form-label">Visit Status</label>
-                                                                                    <select class="form-control" id="visit_status" name="visit_status" style="width: 100%;" required>
-                                                                                        <option value="<?= $visit['visit_status'] ?>"><?php if ($visit['visit_status']) {
-                                                                                                                                            if ($visit['visit_status'] == 1) {
-                                                                                                                                                echo 'Attended';
-                                                                                                                                            } elseif ($visit['visit_status'] == 2) {
-                                                                                                                                                echo 'Missed';
-                                                                                                                                            }
-                                                                                                                                        } else {
-                                                                                                                                            echo 'Select';
-                                                                                                                                        } ?>
+                                                                                    <label for="income_household"
+                                                                                        class="form-label">Visit Status</label>
+                                                                                    <select class="form-control"
+                                                                                        id="visit_status" name="visit_status"
+                                                                                        style="width: 100%;" required>
+                                                                                        <option
+                                                                                            value="<?= $visit['visit_status'] ?>">
+                                                                                            <?php if ($visit['visit_status']) {
+                                                                                                if ($visit['visit_status'] == 1) {
+                                                                                                    echo 'Attended';
+                                                                                                } elseif ($visit['visit_status'] == 2) {
+                                                                                                    echo 'Missed';
+                                                                                                }
+                                                                                            } else {
+                                                                                                echo 'Select';
+                                                                                            } ?>
                                                                                         </option>
                                                                                         <option value="1">Attended</option>
                                                                                         <option value="2">Missed</option>
@@ -1463,11 +1504,12 @@ if ($user->isLoggedIn()) {
                                                                                     <!-- select -->
                                                                                     <div class="form-group">
                                                                                         <label>Notes / Remarks /Comments</label>
-                                                                                        <textarea class="form-control" name="comments" rows="3">
-                                                                                            <?php if ($visit['comments']) {
-                                                                                                echo $visit['comments'];
-                                                                                            } ?>
-                                                                                        </textarea>
+                                                                                        <textarea class="form-control"
+                                                                                            name="comments" rows="3">
+                                                                                                                                    <?php if ($visit['comments']) {
+                                                                                                                                        echo $visit['comments'];
+                                                                                                                                    } ?>
+                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -1475,9 +1517,12 @@ if ($user->isLoggedIn()) {
                                                                         <div class="dr"><span></span></div>
                                                                     </div>
                                                                     <div class="modal-footer justify-content-between">
-                                                                        <input type="hidden" name="id" value="<?= $visit['id'] ?>">
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                        <input type="submit" name="add_visit" class="btn btn-primary" value="Submit">
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $visit['id'] ?>">
+                                                                        <button type="button" class="btn btn-default"
+                                                                            data-dismiss="modal">Close</button>
+                                                                        <input type="submit" name="add_visit"
+                                                                            class="btn btn-primary" value="Submit">
                                                                     </div>
                                                                 </div>
                                                                 <!-- /.modal-content -->
@@ -1493,7 +1538,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h4 class="modal-title">Enrollment Form</h4>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                            aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
@@ -1505,8 +1551,11 @@ if ($user->isLoggedIn()) {
                                                                                     <div class="form-group">
                                                                                         <label>Enrollment Date</label>
                                                                                         <input value="<?php if ($enrollment['visit_date']) {
-                                                                                                            echo $enrollment['visit_date'];
-                                                                                                        } ?>" class="form-control" max="<?= date('Y-m-d'); ?>" type="date" name="enrollment_date" id="enrollment_date" required />
+                                                                                            echo $enrollment['visit_date'];
+                                                                                        } ?>" class="form-control"
+                                                                                            max="<?= date('Y-m-d'); ?>"
+                                                                                            type="date" name="enrollment_date"
+                                                                                            id="enrollment_date" required />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -1516,11 +1565,12 @@ if ($user->isLoggedIn()) {
                                                                                     <!-- select -->
                                                                                     <div class="form-group">
                                                                                         <label>Notes / Remarks /Comments</label>
-                                                                                        <textarea class="form-control" name="comments" rows="3">
-                                                                                            <?php if ($enrollment['comments']) {
-                                                                                                echo $enrollment['comments'];
-                                                                                            } ?>
-                                                                                        </textarea>
+                                                                                        <textarea class="form-control"
+                                                                                            name="comments" rows="3">
+                                                                                                                                    <?php if ($enrollment['comments']) {
+                                                                                                                                        echo $enrollment['comments'];
+                                                                                                                                    } ?>
+                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -1528,11 +1578,16 @@ if ($user->isLoggedIn()) {
                                                                         <div class="dr"><span></span></div>
                                                                     </div>
                                                                     <div class="modal-footer justify-content-between">
-                                                                        <input type="hidden" name="id" value="<?= $enrollment['id'] ?>">
-                                                                        <input type="hidden" name="cid" value="<?= $enrollment['patient_id'] ?>">
-                                                                        <input type="hidden" name="sid" value="<?= $screening['id'] ?>">
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                        <input type="submit" name="add_enrollment" class="btn btn-primary" value="Submit">
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $enrollment['id'] ?>">
+                                                                        <input type="hidden" name="cid"
+                                                                            value="<?= $enrollment['patient_id'] ?>">
+                                                                        <input type="hidden" name="sid"
+                                                                            value="<?= $screening['id'] ?>">
+                                                                        <button type="button" class="btn btn-default"
+                                                                            data-dismiss="modal">Close</button>
+                                                                        <input type="submit" name="add_enrollment"
+                                                                            class="btn btn-primary" value="Submit">
                                                                     </div>
                                                                 </div>
                                                                 <!-- /.modal-content -->
@@ -1541,7 +1596,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- /.modal-dialog -->
                                                     </div>
                                                     <!-- /.modal -->
-                                                <?php
+                                                    <?php
                                                     $x++;
                                                 } ?>
                                             </tbody>
@@ -1552,7 +1607,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Visit Date</th>
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
+                                                        ?>
                                                         <th>SITE</th>
                                                     <?php } ?>
                                                     <th>Status</th>
@@ -1585,12 +1640,12 @@ if ($user->isLoggedIn()) {
                                     <?php
                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                         if ($_GET['site_id'] != null) {
-                                            $clients = $override->getDataDesc2('position', 'status', 1, 'id', $_GET['position_id'],  'id');
+                                            $clients = $override->getDataDesc2('position', 'status', 1, 'id', $_GET['position_id'], 'id');
                                         } else {
                                             $clients = $override->getDataDesc1('position', 'status', 1, 'id');
                                         }
                                     } else {
-                                        $clients = $override->getDataDesc2('position', 'status', 1, 'id', $_GET['position_id'],  'id');
+                                        $clients = $override->getDataDesc2('position', 'status', 1, 'id', $_GET['position_id'], 'id');
                                     } ?>
                                     position
                                 </h1>
@@ -1654,7 +1709,7 @@ if ($user->isLoggedIn()) {
                                                 $x = 1;
                                                 foreach ($clients as $value) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
-                                                ?>
+                                                    ?>
                                                     <tr>
                                                         <td class="table-user">
                                                             <?= $x; ?>
@@ -1666,16 +1721,22 @@ if ($user->isLoggedIn()) {
                                                             <a href="#" class="btn btn-success">Active</a>
                                                         </td>
                                                         <td class="table-user">
-                                                            <a href="add.php?id=2&sit_id=<?= $value['id'] ?>" class="btn btn-info">Update</a>
-                                                            <a href="#delete<?= $value['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                                                            <a href="add.php?id=2&sit_id=<?= $value['id'] ?>"
+                                                                class="btn btn-info">Update</a>
+                                                            <a href="#delete<?= $value['id'] ?>" role="button"
+                                                                class="btn btn-danger" data-toggle="modal">Delete</a>
                                                         </td>
                                                     </tr>
-                                                    <div class="modal fade" id="delete<?= $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="delete<?= $value['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <form method="post">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
                                                                         <h4>Delete position</h4>
                                                                     </div>
                                                                     <div class="modal-body">
@@ -1684,15 +1745,18 @@ if ($user->isLoggedIn()) {
                                                                         </strong>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                                                        <input type="submit" name="delete_positions" value="Delete" class="btn btn-danger">
-                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $value['id'] ?>">
+                                                                        <input type="submit" name="delete_positions"
+                                                                            value="Delete" class="btn btn-danger">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
-                                                <?php $x++;
+                                                    <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -1730,12 +1794,12 @@ if ($user->isLoggedIn()) {
                                     <?php
                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                         if ($_GET['site_id'] != null) {
-                                            $clients = $override->getDataDesc2('kap', 'status', 1, 'site_id', $_GET['site_id'],  'id');
+                                            $clients = $override->getDataDesc2('kap', 'status', 1, 'site_id', $_GET['site_id'], 'id');
                                         } else {
                                             $clients = $override->getDataDesc1('kap', 'status', 1, 'id');
                                         }
                                     } else {
-                                        $clients = $override->getDataDesc2('kap', 'status', 1, 'site_id', $user->data()->site_id,  'id');
+                                        $clients = $override->getDataDesc2('kap', 'status', 1, 'site_id', $user->data()->site_id, 'id');
                                     } ?>
                                     Kap
                                 </h1>
@@ -1768,16 +1832,20 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <select class="form-control" name="site_id" style="width: 100%;" autocomplete="off">
+                                                                            <select class="form-control" name="site_id"
+                                                                                style="width: 100%;" autocomplete="off">
                                                                                 <option value="">Select Site</option>
                                                                                 <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                    <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
+                                                                                    <option value="<?= $site['id'] ?>">
+                                                                                        <?= $site['name'] ?>
+                                                                                    </option>
                                                                                 <?php } ?>
                                                                             </select>
                                                                         </div>
@@ -1786,7 +1854,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="search_by_site" value="Search" class="btn btn-primary">
+                                                                            <input type="submit" name="search_by_site"
+                                                                                value="Search" class="btn btn-primary">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1797,13 +1866,15 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="download_kap" value="Download" class="btn btn-info">
+                                                                            <input type="submit" name="download_kap"
+                                                                                value="Download" class="btn btn-info">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1844,7 +1915,7 @@ if ($user->isLoggedIn()) {
                                                 $x = 1;
                                                 foreach ($clients as $value) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
-                                                ?>
+                                                    ?>
                                                     <tr>
                                                         <td class="table-user">
                                                             <?= $value['study_id']; ?>
@@ -1856,10 +1927,11 @@ if ($user->isLoggedIn()) {
                                                             <a href="#" class="btn btn-success">Active</a>
                                                         </td>
                                                         <td class="table-user">
-                                                            <a href="add.php?id=5&cid=<?= $value['id'] ?>" class="btn btn-info">Update</a>
+                                                            <a href="add.php?id=5&cid=<?= $value['id'] ?>"
+                                                                class="btn btn-info">Update</a>
                                                         </td>
                                                     </tr>
-                                                <?php $x++;
+                                                    <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -1896,12 +1968,12 @@ if ($user->isLoggedIn()) {
                                     <?php
                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                         if ($_GET['site_id'] != null) {
-                                            $clients = $override->getDataDesc2('history', 'status', 1, 'site_id', $_GET['site_id'],  'id');
+                                            $clients = $override->getDataDesc2('history', 'status', 1, 'site_id', $_GET['site_id'], 'id');
                                         } else {
                                             $clients = $override->getDataDesc1('history', 'status', 1, 'id');
                                         }
                                     } else {
-                                        $clients = $override->getDataDesc2('history', 'status', 1, 'site_id', $user->data()->site_id,  'id');
+                                        $clients = $override->getDataDesc2('history', 'status', 1, 'site_id', $user->data()->site_id, 'id');
                                     } ?>
                                     history
                                 </h1>
@@ -1934,16 +2006,20 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <select class="form-control" name="site_id" style="width: 100%;" autocomplete="off">
+                                                                            <select class="form-control" name="site_id"
+                                                                                style="width: 100%;" autocomplete="off">
                                                                                 <option value="">Select Site</option>
                                                                                 <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                    <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
+                                                                                    <option value="<?= $site['id'] ?>">
+                                                                                        <?= $site['name'] ?>
+                                                                                    </option>
                                                                                 <?php } ?>
                                                                             </select>
                                                                         </div>
@@ -1952,7 +2028,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="search_by_site" value="Search" class="btn btn-primary">
+                                                                            <input type="submit" name="search_by_site"
+                                                                                value="Search" class="btn btn-primary">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1963,13 +2040,15 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="download_history" value="Download" class="btn btn-info">
+                                                                            <input type="submit" name="download_history"
+                                                                                value="Download" class="btn btn-info">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2010,7 +2089,7 @@ if ($user->isLoggedIn()) {
                                                 $x = 1;
                                                 foreach ($clients as $value) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
-                                                ?>
+                                                    ?>
                                                     <tr>
                                                         <td class="table-user">
                                                             <?= $value['study_id']; ?>
@@ -2022,10 +2101,11 @@ if ($user->isLoggedIn()) {
                                                             <a href="#" class="btn btn-success">Active</a>
                                                         </td>
                                                         <td class="table-user">
-                                                            <a href="add.php?id=6&cid=<?= $value['id'] ?>" class="btn btn-info">Update</a>
+                                                            <a href="add.php?id=6&cid=<?= $value['id'] ?>"
+                                                                class="btn btn-info">Update</a>
                                                         </td>
                                                     </tr>
-                                                <?php $x++;
+                                                    <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -2063,12 +2143,12 @@ if ($user->isLoggedIn()) {
                                     <?php
                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                         if ($_GET['site_id'] != null) {
-                                            $clients = $override->getDataDesc2('results', 'status', 1, 'site_id', $_GET['site_id'],  'id');
+                                            $clients = $override->getDataDesc2('results', 'status', 1, 'site_id', $_GET['site_id'], 'id');
                                         } else {
                                             $clients = $override->getDataDesc1('results', 'status', 1, 'id');
                                         }
                                     } else {
-                                        $clients = $override->getDataDesc2('results', 'status', 1, 'site_id', $user->data()->site_id,  'id');
+                                        $clients = $override->getDataDesc2('results', 'status', 1, 'site_id', $user->data()->site_id, 'id');
                                     } ?>
                                     results
                                 </h1>
@@ -2101,16 +2181,20 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <select class="form-control" name="site_id" style="width: 100%;" autocomplete="off">
+                                                                            <select class="form-control" name="site_id"
+                                                                                style="width: 100%;" autocomplete="off">
                                                                                 <option value="">Select Site</option>
                                                                                 <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                    <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
+                                                                                    <option value="<?= $site['id'] ?>">
+                                                                                        <?= $site['name'] ?>
+                                                                                    </option>
                                                                                 <?php } ?>
                                                                             </select>
                                                                         </div>
@@ -2119,7 +2203,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="search_by_site" value="Search" class="btn btn-primary">
+                                                                            <input type="submit" name="search_by_site"
+                                                                                value="Search" class="btn btn-primary">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2130,13 +2215,15 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="download_results" value="Download" class="btn btn-info">
+                                                                            <input type="submit" name="download_results"
+                                                                                value="Download" class="btn btn-info">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2177,7 +2264,7 @@ if ($user->isLoggedIn()) {
                                                 $x = 1;
                                                 foreach ($clients as $value) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
-                                                ?>
+                                                    ?>
                                                     <tr>
                                                         <td class="table-user">
                                                             <?= $value['study_id']; ?>
@@ -2189,10 +2276,11 @@ if ($user->isLoggedIn()) {
                                                             <a href="#" class="btn btn-success">Active</a>
                                                         </td>
                                                         <td class="table-user">
-                                                            <a href="add.php?id=7&cid=<?= $value['id'] ?>" class="btn btn-info">Update</a>
+                                                            <a href="add.php?id=7&cid=<?= $value['id'] ?>"
+                                                                class="btn btn-info">Update</a>
                                                         </td>
                                                     </tr>
-                                                <?php $x++;
+                                                    <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -2230,12 +2318,12 @@ if ($user->isLoggedIn()) {
                                     <?php
                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                         if ($_GET['site_id'] != null) {
-                                            $clients = $override->getDataDesc2('classification', 'status', 1, 'site_id', $_GET['site_id'],  'id');
+                                            $clients = $override->getDataDesc2('classification', 'status', 1, 'site_id', $_GET['site_id'], 'id');
                                         } else {
                                             $clients = $override->getDataDesc1('classification', 'status', 1, 'id');
                                         }
                                     } else {
-                                        $clients = $override->getDataDesc2('classification', 'status', 1, 'site_id', $user->data()->site_id,  'id');
+                                        $clients = $override->getDataDesc2('classification', 'status', 1, 'site_id', $user->data()->site_id, 'id');
                                     } ?>
                                     classification
                                 </h1>
@@ -2268,16 +2356,20 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <select class="form-control" name="site_id" style="width: 100%;" autocomplete="off">
+                                                                            <select class="form-control" name="site_id"
+                                                                                style="width: 100%;" autocomplete="off">
                                                                                 <option value="">Select Site</option>
                                                                                 <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                    <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
+                                                                                    <option value="<?= $site['id'] ?>">
+                                                                                        <?= $site['name'] ?>
+                                                                                    </option>
                                                                                 <?php } ?>
                                                                             </select>
                                                                         </div>
@@ -2286,7 +2378,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="search_by_site" value="Search" class="btn btn-primary">
+                                                                            <input type="submit" name="search_by_site"
+                                                                                value="Search" class="btn btn-primary">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2297,13 +2390,15 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="download_classifiaction" value="Download" class="btn btn-info">
+                                                                            <input type="submit" name="download_classifiaction"
+                                                                                value="Download" class="btn btn-info">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2344,7 +2439,7 @@ if ($user->isLoggedIn()) {
                                                 $x = 1;
                                                 foreach ($clients as $value) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
-                                                ?>
+                                                    ?>
                                                     <tr>
                                                         <td class="table-user">
                                                             <?= $value['study_id']; ?>
@@ -2356,10 +2451,11 @@ if ($user->isLoggedIn()) {
                                                             <a href="#" class="btn btn-success">Active</a>
                                                         </td>
                                                         <td class="table-user">
-                                                            <a href="add.php?id=8&cid=<?= $value['id'] ?>" class="btn btn-info">Update</a>
+                                                            <a href="add.php?id=8&cid=<?= $value['id'] ?>"
+                                                                class="btn btn-info">Update</a>
                                                         </td>
                                                     </tr>
-                                                <?php $x++;
+                                                    <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -2397,12 +2493,12 @@ if ($user->isLoggedIn()) {
                                     <?php
                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                         if ($_GET['site_id'] != null) {
-                                            $clients = $override->getDataDesc2('outcome', 'status', 1, 'site_id', $_GET['site_id'],  'id');
+                                            $clients = $override->getDataDesc2('outcome', 'status', 1, 'site_id', $_GET['site_id'], 'id');
                                         } else {
                                             $clients = $override->getDataDesc1('outcome', 'status', 1, 'id');
                                         }
                                     } else {
-                                        $clients = $override->getDataDesc2('outcome', 'status', 1, 'site_id', $user->data()->site_id,  'id');
+                                        $clients = $override->getDataDesc2('outcome', 'status', 1, 'site_id', $user->data()->site_id, 'id');
                                     } ?>
                                     outcome
                                 </h1>
@@ -2435,16 +2531,20 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <select class="form-control" name="site_id" style="width: 100%;" autocomplete="off">
+                                                                            <select class="form-control" name="site_id"
+                                                                                style="width: 100%;" autocomplete="off">
                                                                                 <option value="">Select Site</option>
                                                                                 <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                    <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
+                                                                                    <option value="<?= $site['id'] ?>">
+                                                                                        <?= $site['name'] ?>
+                                                                                    </option>
                                                                                 <?php } ?>
                                                                             </select>
                                                                         </div>
@@ -2453,7 +2553,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="search_by_site" value="Search" class="btn btn-primary">
+                                                                            <input type="submit" name="search_by_site"
+                                                                                value="Search" class="btn btn-primary">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2464,13 +2565,15 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="download_outcome" value="Download" class="btn btn-info">
+                                                                            <input type="submit" name="download_outcome"
+                                                                                value="Download" class="btn btn-info">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2511,7 +2614,7 @@ if ($user->isLoggedIn()) {
                                                 $x = 1;
                                                 foreach ($clients as $value) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
-                                                ?>
+                                                    ?>
                                                     <tr>
                                                         <td class="table-user">
                                                             <?= $value['study_id']; ?>
@@ -2523,10 +2626,11 @@ if ($user->isLoggedIn()) {
                                                             <a href="#" class="btn btn-success">Active</a>
                                                         </td>
                                                         <td class="table-user">
-                                                            <a href="add.php?id=10&cid=<?= $value['id'] ?>" class="btn btn-info">Update</a>
+                                                            <a href="add.php?id=10&cid=<?= $value['id'] ?>"
+                                                                class="btn btn-info">Update</a>
                                                         </td>
                                                     </tr>
-                                                <?php $x++;
+                                                    <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -2598,16 +2702,20 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <select class="form-control" name="site_id" style="width: 100%;" autocomplete="off">
+                                                                            <select class="form-control" name="site_id"
+                                                                                style="width: 100%;" autocomplete="off">
                                                                                 <option value="">Select Site</option>
                                                                                 <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                    <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
+                                                                                    <option value="<?= $site['id'] ?>">
+                                                                                        <?= $site['name'] ?>
+                                                                                    </option>
                                                                                 <?php } ?>
                                                                             </select>
                                                                         </div>
@@ -2616,7 +2724,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="search_by_site" value="Search" class="btn btn-primary">
+                                                                            <input type="submit" name="search_by_site"
+                                                                                value="Search" class="btn btn-primary">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2627,13 +2736,15 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="download_economic" value="Download" class="btn btn-info">
+                                                                            <input type="submit" name="download_economic"
+                                                                                value="Download" class="btn btn-info">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2680,7 +2791,7 @@ if ($user->isLoggedIn()) {
                                                     $arm = $override->getNews('facility_arm', 'status', 1, 'id', $value['arm'])[0];
                                                     $level = $override->getNews('facility_level', 'status', 1, 'id', $value['level'])[0];
                                                     $facility = $override->getNews('facility', 'sequence', 0, 'facility_id', $value['id'])[0];
-                                                ?>
+                                                    ?>
                                                     <tr>
                                                         <td>
                                                             <?= $x; ?>
@@ -2707,73 +2818,95 @@ if ($user->isLoggedIn()) {
                                                         </td>
                                                         <td class="table-user text-center">
                                                             <?php if ($facility['status']) { ?>
-                                                                <a href="info.php?id=12&site_id=<?= $value['id'] ?>&region_id=<?= $value['region'] ?>&district_id=<?= $value['district'] ?>&ward_id=<?= $value['ward'] ?>&respondent=<?= $value['respondent'] ?>" class="btn btn-info">View Schedule</a>
+                                                                <a href="info.php?id=12&site_id=<?= $value['id'] ?>&region_id=<?= $value['region'] ?>&district_id=<?= $value['district'] ?>&ward_id=<?= $value['ward'] ?>&respondent=<?= $value['respondent'] ?>"
+                                                                    class="btn btn-info">View Schedule</a>
 
                                                             <?php } else { ?>
-                                                                <a href="add.php?id=6&site_id=<?= $value['id'] ?>&region_id=<?= $value['region'] ?>&district_id=<?= $value['district'] ?>&ward_id=<?= $value['ward'] ?>&sequence=0&visit_code=M0&vid=3&respondent=<?= $value['respondent'] ?>" class="btn btn-warning">Add Schedule</a>
+                                                                <a href="add.php?id=6&site_id=<?= $value['id'] ?>&region_id=<?= $value['region'] ?>&district_id=<?= $value['district'] ?>&ward_id=<?= $value['ward'] ?>&sequence=0&visit_code=M0&vid=3&respondent=<?= $value['respondent'] ?>"
+                                                                    class="btn btn-warning">Add Schedule</a>
 
 
                                                             <?php } ?>
                                                             <?php if ($user->data()->power == 1) { ?>
-                                                                <a href="add.php?id=3&site_id=<?= $value['id'] ?>&region_id=<?= $value['region'] ?>&district_id=<?= $value['district'] ?>&ward_id=<?= $value['ward'] ?>&respondent=<?= $value['respondent'] ?>" class="btn btn-primary">Edit Site ( Facility )</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <a href="add.php?id=3&site_id=<?= $value['id'] ?>&region_id=<?= $value['region'] ?>&district_id=<?= $value['district'] ?>&ward_id=<?= $value['ward'] ?>&respondent=<?= $value['respondent'] ?>"
+                                                                    class="btn btn-primary">Edit Site ( Facility
+                                                                    )</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                                                                <a href="#deleteSite<?= $value['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">
+                                                                <a href="#deleteSite<?= $value['id'] ?>" role="button"
+                                                                    class="btn btn-danger" data-toggle="modal">
                                                                     Delete
                                                                 </a>
 
-                                                                <a href="#restoreSite<?= $value['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">
+                                                                <a href="#restoreSite<?= $value['id'] ?>" role="button"
+                                                                    class="btn btn-warning" data-toggle="modal">
                                                                     Restore
                                                                 </a>
                                                             <?php } ?>
                                                         </td>
                                                     </tr>
-                                                    <div class="modal fade" id="deleteSite<?= $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="deleteSite<?= $value['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <form method="post">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
                                                                         <h4>Delete Facility</h4>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <strong style="font-weight: bold;color: red">
-                                                                            <p>Are you sure you want to delete this Facility ?</p>
+                                                                            <p>Are you sure you want to delete this Facility ?
+                                                                            </p>
                                                                         </strong>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                                                        <input type="submit" name="delete_facility" value="Delete" class="btn btn-danger">
-                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $value['id'] ?>">
+                                                                        <input type="submit" name="delete_facility"
+                                                                            value="Delete" class="btn btn-danger">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
                                                     <!-- /.modal -->
-                                                    <div class="modal fade" id="restoreSite<?= $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="restoreSite<?= $value['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <form method="post">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
                                                                         <h4>Restore Facility</h4>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <strong style="font-weight: bold;color: yellow">
-                                                                            <p>Are you sure you want to Restore this Facility ?</p>
+                                                                            <p>Are you sure you want to Restore this Facility ?
+                                                                            </p>
                                                                         </strong>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                                                        <input type="submit" name="restore_facility" value="Restore" class="btn btn-warning">
-                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $value['id'] ?>">
+                                                                        <input type="submit" name="restore_facility"
+                                                                            value="Restore" class="btn btn-warning">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
                                                     <!-- /.modal -->
-                                                <?php $x++;
+                                                    <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -2846,11 +2979,11 @@ if ($user->isLoggedIn()) {
                                         // } elseif ($patient['sex'] == 2) {
                                         //     $gender = 'Female';
                                         // }
-
+                                    
                                         $name = 'Name: ' . $site['name'];
                                         // $age =  'Age:  ' . $patient['age'];
                                         // $gender =  'Gender: ' . $gender;
-                                        $cat =  'Type: ' . $cat;
+                                        $cat = 'Type: ' . $cat;
                                         ?>
 
 
@@ -2885,7 +3018,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Visit Date</th>
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
+                                                        ?>
                                                         <th>SITE</th>
                                                     <?php } ?>
                                                     <th>Status</th>
@@ -2899,7 +3032,7 @@ if ($user->isLoggedIn()) {
                                                 foreach ($override->get('facility', 'site_id', $_GET['site_id']) as $visit) {
                                                     $clients = $override->get('clients', 'id', $_GET['cid'])[0];
                                                     $site = $override->get('sites', 'id', $visit['site_id'])[0];
-                                                ?>
+                                                    ?>
                                                     <tr>
                                                         <td> <?= $visit['visit_code'] ?></td>
                                                         <td> <?= $visit['expected_date'] ?></td>
@@ -2907,20 +3040,23 @@ if ($user->isLoggedIn()) {
 
                                                         <?php
                                                         if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                        ?>
+                                                            ?>
                                                             <td> <?= $site['name'] ?> </td>
                                                         <?php } ?>
                                                         <td>
                                                             <?php if ($visit['visit_status'] == 1) { ?>
-                                                                <a href="#addVisit<?= $visit['id'] ?>" role="button" class="btn btn-success" data-toggle="modal">
+                                                                <a href="#addVisit<?= $visit['id'] ?>" role="button"
+                                                                    class="btn btn-success" data-toggle="modal">
                                                                     Done
                                                                 </a>
                                                             <?php } elseif ($visit['visit_status'] == 2) { ?>
-                                                                <a href="#addVisit<?= $visit['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">
+                                                                <a href="#addVisit<?= $visit['id'] ?>" role="button"
+                                                                    class="btn btn-warning" data-toggle="modal">
                                                                     Missed
                                                                 </a>
                                                             <?php } elseif ($visit['visit_status'] == 0) { ?>
-                                                                <a href="#addVisit<?= $visit['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">
+                                                                <a href="#addVisit<?= $visit['id'] ?>" role="button"
+                                                                    class="btn btn-warning" data-toggle="modal">
                                                                     Pending
                                                                 </a>
                                                             <?php } ?>
@@ -2930,10 +3066,14 @@ if ($user->isLoggedIn()) {
                                                             <?php if ($visit['visit_status'] == 1) { ?>
                                                                 <?php if ($visit['sequence'] >= 0) { ?>
                                                                     <?php if ($override->get3('facility', 'site_id', $_GET['site_id'], 'extraction_date', '', 'sequence', $i)) { ?>
-                                                                        <a href="add.php?id=6&site_id=<?= $_GET['site_id'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&status=<?= $_GET['status'] ?>&respondent=<?= $_GET['respondent'] ?>" role=" button" class="btn btn-warning"> Add Facility Records</a>&nbsp;&nbsp; <br><br>
+                                                                        <a href="add.php?id=6&site_id=<?= $_GET['site_id'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&status=<?= $_GET['status'] ?>&respondent=<?= $_GET['respondent'] ?>"
+                                                                            role=" button" class="btn btn-warning"> Add Facility
+                                                                            Records</a>&nbsp;&nbsp; <br><br>
 
                                                                     <?php } else { ?>
-                                                                        <a href="add.php?id=6&site_id=<?= $_GET['site_id'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&status=<?= $_GET['status'] ?>&respondent=<?= $_GET['respondent'] ?>" role=" button" class="btn btn-info"> Update Facility Records </a>&nbsp;&nbsp; <br><br>
+                                                                        <a href="add.php?id=6&site_id=<?= $_GET['site_id'] ?>&sequence=<?= $visit['sequence'] ?>&visit_code=<?= $visit['visit_code'] ?>&vid=<?= $visit['id'] ?>&status=<?= $_GET['status'] ?>&respondent=<?= $_GET['respondent'] ?>"
+                                                                            role=" button" class="btn btn-info"> Update Facility Records
+                                                                        </a>&nbsp;&nbsp; <br><br>
 
                                                                     <?php } ?>
                                                                 <?php } ?>
@@ -2947,7 +3087,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h4 class="modal-title">Update visit Status</h4>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                            aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
@@ -2959,24 +3100,32 @@ if ($user->isLoggedIn()) {
                                                                                     <div class="form-group">
                                                                                         <label>Visit Date</label>
                                                                                         <input value="<?php if ($visit['visit_date']) {
-                                                                                                            echo $visit['visit_date'];
-                                                                                                        } ?>" class="form-control" max="<?= date('Y-m-d'); ?>" type="date" name="visit_date" id="visit_date" required />
+                                                                                            echo $visit['visit_date'];
+                                                                                        } ?>" class="form-control"
+                                                                                            max="<?= date('Y-m-d'); ?>"
+                                                                                            type="date" name="visit_date"
+                                                                                            id="visit_date" required />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-6">
                                                                                 <div class="mb-2">
-                                                                                    <label for="income_household" class="form-label">Visit Status</label>
-                                                                                    <select class="form-control" id="visit_status" name="visit_status" style="width: 100%;" required>
-                                                                                        <option value="<?= $visit['visit_status'] ?>"><?php if ($visit['visit_status']) {
-                                                                                                                                            if ($visit['visit_status'] == 1) {
-                                                                                                                                                echo 'Attended';
-                                                                                                                                            } elseif ($visit['visit_status'] == 2) {
-                                                                                                                                                echo 'Missed';
-                                                                                                                                            }
-                                                                                                                                        } else {
-                                                                                                                                            echo 'Select';
-                                                                                                                                        } ?>
+                                                                                    <label for="income_household"
+                                                                                        class="form-label">Visit Status</label>
+                                                                                    <select class="form-control"
+                                                                                        id="visit_status" name="visit_status"
+                                                                                        style="width: 100%;" required>
+                                                                                        <option
+                                                                                            value="<?= $visit['visit_status'] ?>">
+                                                                                            <?php if ($visit['visit_status']) {
+                                                                                                if ($visit['visit_status'] == 1) {
+                                                                                                    echo 'Attended';
+                                                                                                } elseif ($visit['visit_status'] == 2) {
+                                                                                                    echo 'Missed';
+                                                                                                }
+                                                                                            } else {
+                                                                                                echo 'Select';
+                                                                                            } ?>
                                                                                         </option>
                                                                                         <option value="1">Attended</option>
                                                                                         <option value="2">Missed</option>
@@ -2989,11 +3138,12 @@ if ($user->isLoggedIn()) {
                                                                                     <!-- select -->
                                                                                     <div class="form-group">
                                                                                         <label>Notes / Remarks /Comments</label>
-                                                                                        <textarea class="form-control" name="comments" rows="3">
-                                                                                            <?php if ($visit['comments']) {
-                                                                                                echo $visit['comments'];
-                                                                                            } ?>
-                                                                                        </textarea>
+                                                                                        <textarea class="form-control"
+                                                                                            name="comments" rows="3">
+                                                                                                                                    <?php if ($visit['comments']) {
+                                                                                                                                        echo $visit['comments'];
+                                                                                                                                    } ?>
+                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3001,9 +3151,12 @@ if ($user->isLoggedIn()) {
                                                                         <div class="dr"><span></span></div>
                                                                     </div>
                                                                     <div class="modal-footer justify-content-between">
-                                                                        <input type="hidden" name="id" value="<?= $visit['id'] ?>">
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                        <input type="submit" name="add_facility_visit" class="btn btn-primary" value="Save changes">
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $visit['id'] ?>">
+                                                                        <button type="button" class="btn btn-default"
+                                                                            data-dismiss="modal">Close</button>
+                                                                        <input type="submit" name="add_facility_visit"
+                                                                            class="btn btn-primary" value="Save changes">
                                                                     </div>
                                                                 </div>
                                                                 <!-- /.modal-content -->
@@ -3012,7 +3165,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- /.modal-dialog -->
                                                     </div>
                                                     <!-- /.modal -->
-                                                <?php
+                                                    <?php
                                                     $x++;
                                                     $i++;
                                                 } ?>
@@ -3024,7 +3177,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Visit Date</th>
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
+                                                        ?>
                                                         <th>SITE</th>
                                                     <?php } ?>
                                                     <th>Status</th>
@@ -3111,9 +3264,12 @@ if ($user->isLoggedIn()) {
                                                         <select name="name" id="name" class="form-control" required>
                                                             <option value="">Select Table</option>
                                                             <?php foreach ($AllTables as $tables) {
-                                                                if ($tables['Tables_in_lungcancer'] == 'clients' || $tables['Tables_in_lungcancer'] == 'kap' || $tables['Tables_in_lungcancer'] == 'history' || $tables['Tables_in_lungcancer'] == 'results' || $tables['Tables_in_lungcancer'] == 'classification' || $tables['Tables_in_lungcancer'] == 'outcome' || $tables['Tables_in_lungcancer'] == 'economic' || $tables['Tables_in_lungcancer'] == 'visit') { ?> ?>
-                                                                    <option value="<?= $tables['Tables_in_lungcancer'] ?>"><?= $tables['Tables_in_lungcancer'] ?></option>
-                                                            <?php }
+                                                                if ($tables['Tables_in_lungcancer'] == 'clients' || $tables['Tables_in_lungcancer'] == 'kap' || $tables['Tables_in_lungcancer'] == 'history' || $tables['Tables_in_lungcancer'] == 'results' || $tables['Tables_in_lungcancer'] == 'classification' || $tables['Tables_in_lungcancer'] == 'outcome' || $tables['Tables_in_lungcancer'] == 'economic' || $tables['Tables_in_lungcancer'] == 'visit') { ?>
+                                                                    ?>
+                                                                    <option value="<?= $tables['Tables_in_lungcancer'] ?>">
+                                                                        <?= $tables['Tables_in_lungcancer'] ?>
+                                                                    </option>
+                                                                <?php }
                                                             } ?>
                                                         </select>
                                                     </div>
@@ -3122,7 +3278,8 @@ if ($user->isLoggedIn()) {
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <input type="submit" name="clear_data" value="Clear Data" class="btn btn-primary">
+                                            <input type="submit" name="clear_data" value="Clear Data"
+                                                class="btn btn-primary">
                                         </div>
                                     </form>
                                 </div>
@@ -3184,8 +3341,10 @@ if ($user->isLoggedIn()) {
                                                             <option value="">Select Table</option>
                                                             <?php foreach ($AllTables as $tables) {
                                                                 if ($tables['Tables_in_lungcancer'] == 'study_id') { ?>
-                                                                    <option value="<?= $tables['Tables_in_lungcancer'] ?>"><?= $tables['Tables_in_lungcancer'] ?></option>
-                                                            <?php }
+                                                                    <option value="<?= $tables['Tables_in_lungcancer'] ?>">
+                                                                        <?= $tables['Tables_in_lungcancer'] ?>
+                                                                    </option>
+                                                                <?php }
                                                             } ?>
                                                         </select>
                                                     </div>
@@ -3194,7 +3353,8 @@ if ($user->isLoggedIn()) {
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <input type="submit" name="unset_study_id" value="Unset Study ID Table" class="btn btn-primary">
+                                            <input type="submit" name="unset_study_id" value="Unset Study ID Table"
+                                                class="btn btn-primary">
                                         </div>
                                     </form>
                                 </div>
@@ -3220,35 +3380,35 @@ if ($user->isLoggedIn()) {
                                     <?php
                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
                                         if ($_GET['site_id'] != null) {
-                                            $clients = $override->get('validations', 'status',  1);
+                                            $clients = $override->get('validations', 'status', 1);
                                         } else {
 
-                                            $clients = $override->get('validations', 'status',  1);
+                                            $clients = $override->get('validations', 'status', 1);
                                         }
                                     } else {
-                                        $clients = $override->get('validations', 'status',  1);
+                                        $clients = $override->get('validations', 'status', 1);
                                     } ?>
                                     <?php
                                     if ($_GET['status'] == 1) {
                                         echo $title = 'Screening';
-                                    ?>
-                                    <?php
+                                        ?>
+                                        <?php
                                     } elseif ($_GET['status'] == 2) {
                                         echo $title = 'Eligibility';
-                                    ?>
-                                    <?php
+                                        ?>
+                                        <?php
                                     } elseif ($_GET['status'] == 3) {
-                                        echo  $title = 'Enrollment';
-                                    ?>
-                                    <?php
+                                        echo $title = 'Enrollment';
+                                        ?>
+                                        <?php
                                     } elseif ($_GET['status'] == 4) {
                                         echo $title = 'Termination';
-                                    ?>
-                                    <?php
+                                        ?>
+                                        <?php
                                     } elseif ($_GET['status'] == 5) {
-                                        echo  $title = 'Registration';
-                                    ?>
-                                    <?php
+                                        echo $title = 'Registration';
+                                        ?>
+                                        <?php
                                     } ?>
                                 </h1>
                             </div>
@@ -3277,23 +3437,23 @@ if ($user->isLoggedIn()) {
                                                         if ($_GET['status'] == 1) { ?>
                                                             <h3 class="card-title">List of Screened Clients</h3> &nbsp;&nbsp;
                                                             <span class="badge badge-info right"><?= $screened; ?></span>
-                                                        <?php
+                                                            <?php
                                                         } elseif ($_GET['status'] == 2) { ?>
                                                             <h3 class="card-title">List of Eligible Clients</h3> &nbsp;&nbsp;
                                                             <span class="badge badge-info right"><?= $eligible; ?></span>
-                                                        <?php
+                                                            <?php
                                                         } elseif ($_GET['status'] == 3) { ?>
                                                             <h3 class="card-title">List of Enrolled Clients</h3> &nbsp;&nbsp;
                                                             <span class="badge badge-info right"><?= $enrolled; ?></span>
-                                                        <?php
+                                                            <?php
                                                         } elseif ($_GET['status'] == 4) { ?>
                                                             <h3 class="card-title">List of Terminated Clients</h3> &nbsp;&nbsp;
                                                             <span class="badge badge-info right"><?= $end; ?></span>
-                                                        <?php
+                                                            <?php
                                                         } elseif ($_GET['status'] == 5) { ?>
                                                             <h3 class="card-title">List of Registered Clients</h3> &nbsp;&nbsp;
                                                             <span class="badge badge-info right"><?= $registered; ?></span>
-                                                        <?php
+                                                            <?php
                                                         } elseif ($_GET['status'] == 7) { ?>
                                                             <h3 class="card-title">List of Registered Clients</h3> &nbsp;&nbsp;
                                                             <span class="badge badge-info right"><?= $registered; ?></span>
@@ -3303,16 +3463,20 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                                        ?>
+                                                        <form id="validation" enctype="multipart/form-data" method="post"
+                                                            autocomplete="off">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <select class="form-control" name="site_id" style="width: 100%;" autocomplete="off">
+                                                                            <select class="form-control" name="site_id"
+                                                                                style="width: 100%;" autocomplete="off">
                                                                                 <option value="">Select Site</option>
                                                                                 <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                    <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
+                                                                                    <option value="<?= $site['id'] ?>">
+                                                                                        <?= $site['name'] ?>
+                                                                                    </option>
                                                                                 <?php } ?>
                                                                             </select>
                                                                         </div>
@@ -3321,7 +3485,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="col-sm-6">
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
-                                                                            <input type="submit" name="search_by_site" value="Search by Site" class="btn btn-primary">
+                                                                            <input type="submit" name="search_by_site"
+                                                                                value="Search by Site" class="btn btn-primary">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -3354,7 +3519,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Study Id</th>
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
+                                                        ?>
                                                         <th>Site</th>
                                                     <?php } ?>
                                                     <th>Status</th>
@@ -3379,28 +3544,28 @@ if ($user->isLoggedIn()) {
                                                     $yes_no = $override->get('yes_no', 'status', 1)[0];
                                                     // $kap = $override->getNews('kap', 'status', 1, 'patient_id', $value['id']);
                                                     // $history = $override->getNews('history', 'status', 1, 'patient_id', $value['id']);
-
+                                            
                                                     // $results1 = $override->get3('results', 'status', 1, 'patient_id', $value['id'], 'sequence', 1);
                                                     // $results2 = $override->get3('results', 'status', 1, 'patient_id', $value['id'], 'sequence', 2);
-
+                                            
                                                     // $classification1 = $override->get3('classification', 'status', 1, 'patient_id', $value['id'], 'sequence', 1);
                                                     // $classification2 = $override->get3('classification', 'status', 1, 'patient_id', $value['id'], 'sequence', 2);
-
+                                            
                                                     // $economic1 = $override->get3('economic', 'status', 1, 'patient_id', $value['id'], 'sequence', 1);
                                                     // $economic2 = $override->get3('economic', 'status', 1, 'patient_id', $value['id'], 'sequence', 2);
-
+                                            
                                                     // $outcome1 = $override->get3('outcome', 'status', 1, 'patient_id', $value['id'], 'sequence', 1);
                                                     // $outcome2 = $override->get3('outcome', 'status', 1, 'patient_id', $value['id'], 'sequence', 2);
-
+                                            
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
-                                                ?>
+                                                    ?>
                                                     <tr>
                                                         <td class="table-user">
                                                             <?= $value['study_id']; ?>
                                                         </td>
                                                         <?php
                                                         if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                        ?>
+                                                            ?>
 
                                                             <td class="table-user">
                                                                 <?= $sites['name']; ?>
@@ -3408,20 +3573,24 @@ if ($user->isLoggedIn()) {
                                                         <?php } ?>
                                                         <?php if ($value['status'] == 1) { ?>
                                                             <td class="text-center">
-                                                                <a href="#" class="btn btn-success"> <i class="ri-edit-box-line"></i>Active</a>
+                                                                <a href="#" class="btn btn-success"> <i
+                                                                        class="ri-edit-box-line"></i>Active</a>
                                                             </td>
-                                                        <?php  } else { ?>
+                                                        <?php } else { ?>
                                                             <td class="text-center">
-                                                                <a href="#" class="btn btn-danger"> <i class="ri-edit-box-line"></i>Not Active</a>
+                                                                <a href="#" class="btn btn-danger"> <i
+                                                                        class="ri-edit-box-line"></i>Not Active</a>
                                                             </td>
                                                         <?php } ?>
                                                         <td class="text-center">
-                                                            <a href="add.php?id=17&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>" class="btn btn-info"> <i class="ri-edit-box-line"></i>Update Validation Tool</a>&nbsp;&nbsp;<br>
+                                                            <a href="add.php?id=17&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                class="btn btn-info"> <i class="ri-edit-box-line"></i>Update
+                                                                Validation Tool</a>&nbsp;&nbsp;<br>
 
                                                         </td>
                                                     </tr>
 
-                                                <?php $x++;
+                                                    <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -3429,7 +3598,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Study Id</th>
                                                     <?php
                                                     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                    ?>
+                                                        ?>
                                                         <th>Site</th>
                                                     <?php } ?>
                                                     <th>Status</th>
@@ -3450,7 +3619,7 @@ if ($user->isLoggedIn()) {
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-        <?php  } ?>
+        <?php } ?>
     </div>
     <!-- /.col -->
     </div>

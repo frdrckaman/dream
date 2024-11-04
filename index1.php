@@ -27,23 +27,14 @@ if ($user->isLoggedIn()) {
     }
   }
 
-  if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-    if ($_GET['site_id'] != null) {
-      $screened = $override->countData2('clients', 'status', 1, 'screened', 1, 'site_id', $_GET['site_id']);
-      $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $_GET['site_id']);
-      $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $_GET['site_id']);
-      $end = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $_GET['site_id']);
-    } else {
-      $screened = $override->countData('clients', 'status', 1, 'screened', 1);
-      $eligible = $override->countData('clients', 'status', 1, 'eligible', 1);
-      $enrolled = $override->countData('clients', 'status', 1, 'enrolled', 1);
-      $end = $override->countData('clients', 'status', 1, 'end_study', 1);
-    }
+  if ($_GET['site_id'] != null) {
+    $screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['site_id']);
+    $eligible = $override->countData2('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['site_id']);
+    $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['site_id']);
   } else {
-    $screened = $override->countData2('clients', 'status', 1, 'screened', 1, 'site_id', $user->data()->site_id);
-    $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $user->data()->site_id);
-    $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $user->data()->site_id);
-    $end = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $user->data()->site_id);
+    $screened = $override->getCount('screening', 'status', 1);
+    $eligible = $override->countData('screening', 'status', 1, 'eligible', 1);
+    $enrolled = $override->getCount('enrollment_form', 'status', 1);
   }
 } else {
   Redirect::to('index.php');
@@ -61,7 +52,8 @@ if ($user->isLoggedIn()) {
   <title>Dream Fund Sub-Studies Database | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -122,7 +114,7 @@ if ($user->isLoggedIn()) {
 
               <?php
               if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-              ?>
+                ?>
                 <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
                   <div class="row">
                     <div class="col-sm-6">
@@ -163,82 +155,69 @@ if ($user->isLoggedIn()) {
 
       <!-- Main content -->
       <!-- <section class="content"> -->
-        <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
-          <div class="row">
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-info">
-                <div class="inner">
-                  <h3><?= $screened ?></h3>
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-4 col-4">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3><?= $screened ?></h3>
 
-                  <p>Screened</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
-                </div>
-                <a href="info.php?id=3&status=1" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <p>Screened</p>
               </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-success">
-                <div class="inner">
-                  <h3><?= $eligible ?><sup style="font-size: 20px"></sup></h3>
-
-                  <p>Eligible</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="info.php?id=3&status=2" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
               </div>
+              <a href="info.php?id=3&status=1" class="small-box-footer">More info <i
+                  class="fas fa-arrow-circle-right"></i></a>
             </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-warning">
-                <div class="inner">
-                  <h3><?= $enrolled ?></h3>
-
-                  <p>Enrolled</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-person-add"></i>
-                </div>
-                <a href="info.php?id=3&status=3" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3><?= $end ?></h3>
-
-                  <p>End of study</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
-                </div>
-                <a href="info.php?id=3&status=4" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
           </div>
-          <!-- /.row -->
+          <!-- ./col -->
+          <div class="col-lg-4 col-4">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3><?= $eligible ?><sup style="font-size: 20px"></sup></h3>
 
-          <?php
-          //  if ($_GET['id'] == 100) {
-          ?>
+                <p>Eligible</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="info.php?id=3&status=2" class="small-box-footer">More info <i
+                  class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-4 col-4">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3><?= $enrolled ?></h3>
 
-          <!-- /.row (main row) -->
+                <p>Enrolled</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="info.php?id=3&status=3" class="small-box-footer">More info <i
+                  class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>         
+        </div>
+        <!-- /.row -->
 
-          <?php
-          //  }
-          ?>
-          <!-- <hr>
+        <?php
+        //  if ($_GET['id'] == 100) {
+        ?>
+
+        <!-- /.row (main row) -->
+
+        <?php
+        //  }
+        ?>
+        <!-- <hr>
 
           <div class="content-header">
             <div class="container-fluid">
@@ -247,21 +226,21 @@ if ($user->isLoggedIn()) {
                   <h1 class="m-0 text-center">Registration Up to <?= date('Y-m-d'); ?></h1>
                 </div>
               </div> -->
-          <!-- /.row -->
-          <!-- </div> -->
-          <!-- /.container-fluid -->
-          <!-- </div>
+        <!-- /.row -->
+        <!-- </div> -->
+        <!-- /.container-fluid -->
+        <!-- </div>
 
           <hr> -->
 
-          <!-- <div class="row">
+        <!-- <div class="row">
             <div class="chartBox">
               <canvas id="registration"></canvas>
             </div>
 
           </div> -->
 
-          <!-- <hr>
+        <!-- <hr>
 
           <div class="content-header">
             <div class="container-fluid">
@@ -269,22 +248,22 @@ if ($user->isLoggedIn()) {
                 <div class="col-sm-12">
                   <h1 class="m-0 text-center">Screaning Up to <?= date('Y-m-d'); ?></h1>
                 </div> -->
-          <!-- </div> -->
-          <!-- /.row -->
-          <!-- </div> -->
-          <!-- /.container-fluid -->
-          <!-- </div>
+        <!-- </div> -->
+        <!-- /.row -->
+        <!-- </div> -->
+        <!-- /.container-fluid -->
+        <!-- </div>
 
           <hr> -->
 
-          <!-- <div class="row">
+        <!-- <div class="row">
             <div class="chartBox">
               <canvas id="screening"></canvas>
             </div>
 
           </div> -->
 
-          <!-- <hr>
+        <!-- <hr>
 
           <div class="content-header">
             <div class="container-fluid">
@@ -293,10 +272,10 @@ if ($user->isLoggedIn()) {
                   <h1 class="m-0 text-center">Eligible Up to <?= date('Y-m-d'); ?></h1>
                 </div>
               </div> -->
-          <!-- /.row -->
-          <!-- </div> -->
-          <!-- /.container-fluid -->
-          <!-- </div>
+        <!-- /.row -->
+        <!-- </div> -->
+        <!-- /.container-fluid -->
+        <!-- </div>
 
           <hr>
 
@@ -309,17 +288,17 @@ if ($user->isLoggedIn()) {
 
           <hr> -->
 
-          <!-- <div class="content-header">
+        <!-- <div class="content-header">
             <div class="container-fluid">
               <div class="row mb-2">
                 <div class="col-sm-12">
                   <h1 class="m-0 text-center">Enrolled Up to <?= date('Y-m-d'); ?></h1>
                 </div> -->
-          <!-- </div> -->
-          <!-- /.row -->
-          <!-- </div> -->
-          <!-- /.container-fluid -->
-          <!-- </div>
+        <!-- </div> -->
+        <!-- /.row -->
+        <!-- </div> -->
+        <!-- /.container-fluid -->
+        <!-- </div>
 
           <hr>
 
@@ -332,19 +311,19 @@ if ($user->isLoggedIn()) {
 
           <hr> -->
 
-          <!-- <div class="content-header">
+        <!-- <div class="content-header">
             <div class="container-fluid">
               <div class="row mb-2">
                 <div class="col-sm-12">
                   <h1 class="m-0 text-center">End Study Up to <?= date('Y-m-d'); ?></h1>
                 </div>
               </div> -->
-          <!-- /.row -->
-          <!-- </div> -->
-          <!-- /.container-fluid -->
-          <!-- </div> -->
+        <!-- /.row -->
+        <!-- </div> -->
+        <!-- /.container-fluid -->
+        <!-- </div> -->
 
-          <!-- <hr>
+        <!-- <hr>
 
           <div class="row">
             <div class="chartBox">
@@ -355,8 +334,8 @@ if ($user->isLoggedIn()) {
 
           <hr> -->
 
-        </div>
-        <!-- /.container-fluid -->
+      </div>
+      <!-- /.container-fluid -->
       <!-- </section> -->
       <!-- /.content -->
     </div>

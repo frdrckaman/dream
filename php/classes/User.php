@@ -2,13 +2,13 @@
 class User
 {
     private $_db,
-        $_data,
-        $_getdata,
-        $_sessionName,
-        $_sessionTableName,
-        $_sessionTable,
-        $_cookieName,
-        $_override;
+    $_data,
+    $_getdata,
+    $_sessionName,
+    $_sessionTableName,
+    $_sessionTable,
+    $_cookieName,
+    $_override;
     public $isLoggedIn;
 
     public function __construct($user = null)
@@ -66,32 +66,32 @@ class User
         global $user_agent;
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
-        $os_platform  = "Unknown OS Platform";
+        $os_platform = "Unknown OS Platform";
 
-        $os_array     = array(
-            '/windows nt 10/i'      =>  'Windows 10',
-            '/windows nt 6.3/i'     =>  'Windows 8.1',
-            '/windows nt 6.2/i'     =>  'Windows 8',
-            '/windows nt 6.1/i'     =>  'Windows 7',
-            '/windows nt 6.0/i'     =>  'Windows Vista',
-            '/windows nt 5.2/i'     =>  'Windows Server 2003/XP x64',
-            '/windows nt 5.1/i'     =>  'Windows XP',
-            '/windows xp/i'         =>  'Windows XP',
-            '/windows nt 5.0/i'     =>  'Windows 2000',
-            '/windows me/i'         =>  'Windows ME',
-            '/win98/i'              =>  'Windows 98',
-            '/win95/i'              =>  'Windows 95',
-            '/win16/i'              =>  'Windows 3.11',
-            '/macintosh|mac os x/i' =>  'Mac OS X',
-            '/mac_powerpc/i'        =>  'Mac OS 9',
-            '/linux/i'              =>  'Linux',
-            '/ubuntu/i'             =>  'Ubuntu',
-            '/iphone/i'             =>  'iPhone',
-            '/ipod/i'               =>  'iPod',
-            '/ipad/i'               =>  'iPad',
-            '/android/i'            =>  'Android',
-            '/blackberry/i'         =>  'BlackBerry',
-            '/webos/i'              =>  'Mobile'
+        $os_array = array(
+            '/windows nt 10/i' => 'Windows 10',
+            '/windows nt 6.3/i' => 'Windows 8.1',
+            '/windows nt 6.2/i' => 'Windows 8',
+            '/windows nt 6.1/i' => 'Windows 7',
+            '/windows nt 6.0/i' => 'Windows Vista',
+            '/windows nt 5.2/i' => 'Windows Server 2003/XP x64',
+            '/windows nt 5.1/i' => 'Windows XP',
+            '/windows xp/i' => 'Windows XP',
+            '/windows nt 5.0/i' => 'Windows 2000',
+            '/windows me/i' => 'Windows ME',
+            '/win98/i' => 'Windows 98',
+            '/win95/i' => 'Windows 95',
+            '/win16/i' => 'Windows 3.11',
+            '/macintosh|mac os x/i' => 'Mac OS X',
+            '/mac_powerpc/i' => 'Mac OS 9',
+            '/linux/i' => 'Linux',
+            '/ubuntu/i' => 'Ubuntu',
+            '/iphone/i' => 'iPhone',
+            '/ipod/i' => 'iPod',
+            '/ipad/i' => 'iPad',
+            '/android/i' => 'Android',
+            '/blackberry/i' => 'BlackBerry',
+            '/webos/i' => 'Mobile'
         );
 
         foreach ($os_array as $regex => $value)
@@ -107,19 +107,19 @@ class User
         global $user_agent;
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
-        $browser        = "Unknown Browser";
+        $browser = "Unknown Browser";
 
         $browser_array = array(
-            '/msie/i'      => 'Internet Explorer',
-            '/firefox/i'   => 'Firefox',
-            '/safari/i'    => 'Safari',
-            '/chrome/i'    => 'Chrome',
-            '/edge/i'      => 'Edge',
-            '/opera/i'     => 'Opera',
-            '/netscape/i'  => 'Netscape',
-            '/maxthon/i'   => 'Maxthon',
+            '/msie/i' => 'Internet Explorer',
+            '/firefox/i' => 'Firefox',
+            '/safari/i' => 'Safari',
+            '/chrome/i' => 'Chrome',
+            '/edge/i' => 'Edge',
+            '/opera/i' => 'Opera',
+            '/netscape/i' => 'Netscape',
+            '/maxthon/i' => 'Maxthon',
             '/konqueror/i' => 'Konqueror',
-            '/mobile/i'    => 'Handheld Browser'
+            '/mobile/i' => 'Handheld Browser'
         );
 
         foreach ($browser_array as $regex => $value)
@@ -223,6 +223,8 @@ class User
             throw new Exception('There is problem updating');
         }
     }
+
+
     public function updateRecord($table, $fields = array(), $id = null)
     {
         if (!$id && $this->isLoggedIn()) {
@@ -232,6 +234,8 @@ class User
             throw new Exception('There is problem updating');
         }
     }
+
+
     public function deleteRecord($table, $field, $value)
     {
         if (!$this->_db->delete($table, array($field, '=', $value))) {
@@ -247,240 +251,35 @@ class User
         return true;
     }
 
-
-    function visit_delete($client_id)
+    public function visit_schedule($table, $screening_date, $pid, $patient_id, $staff_id, $site_id, $comments, $status)
     {
-        $this->deleteRecord('visit', 'client_id', $client_id);
-    }
-
-
-    function visit_delete1($client_id, $enrollment_date, $study_id, $staff_id, $site_id, $respondent, $table)
-    {
-        $sequence = 1;
-        $visit_id1 = $this->_override->get3('visit',  'status', 1, 'patient_id', $client_id, 'sequence', $sequence);
-        $visit_id = $this->_override->get3GretaerThan1('visit',  'status', 1, 'patient_id', $client_id, 'sequence', $sequence);
-        if ($visit_id) {
-            if ($visit_id1['enrollment_date'] != $enrollment_date) {
-                foreach ($visit_id as $visit) {
-                    $this->deleteRecord('visit', 'id', $visit['id']);
-                }
-
-                foreach ($this->_override->get('schedule', 'status', 1) as $schedule) {
-                    $this->createRecord('visit', array(
-                        'sequence' => $sequence,
-                        // 'schedule' => $schedule['id'],
-                        'visit_code' => $schedule['code'],
-                        'visit_name' => $schedule['name'],
-                        'respondent' => $respondent,
-                        'pid' => $study_id,
-                        'study_id' => $study_id,
-                        'expected_date' => $enrollment_date,
-                        'visit_date' => '',
-                        'visit_status' => 0,
-                        'comments' => '',
-                        'status' => 1,
-                        'table_id' => $table,
-                        'facility_id' => $site_id,
-                        'patient_id' => $client_id,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $staff_id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $staff_id,
-                        'site_id' => $site_id,
-                    ));
-
-                    $enrollment_date = date('Y-m-d', strtotime('+1 month', strtotime($enrollment_date)));
-
-
-                    $sequence++;
-                }
-            }
-        } else {
-            foreach ($this->_override->get('schedule', 'status', 1) as $schedule) {
-                $this->createRecord('visit', array(
-                    'sequence' => $sequence,
-                    // 'schedule' => $schedule['id'],
-                    'visit_code' => $schedule['code'],
-                    'visit_name' => $schedule['name'],
-                    'respondent' => $respondent,
-                    'pid' => $study_id,
-                    'study_id' => $study_id,
-                    'expected_date' => $enrollment_date,
-                    'visit_date' => '',
-                    'visit_status' => 0,
-                    'comments' => '',
-                    'status' => 1,
-                    'table_id' => $table,
-                    'facility_id' => $site_id,
-                    'patient_id' => $client_id,
-                    'create_on' => date('Y-m-d H:i:s'),
-                    'staff_id' => $staff_id,
-                    'update_on' => date('Y-m-d H:i:s'),
-                    'update_id' => $staff_id,
-                    'site_id' => $site_id,
-                ));
-
-                $enrollment_date = date('Y-m-d', strtotime('+1 month', strtotime($enrollment_date)));
-
-
-                $sequence++;
-            }
-        }
-    }
-
-
-    // function visit_schedule($visit_date, $study_id, $staff_id, $site_id, $respondent, $table)
-    // {
-    //     $sequence = 0;
-    //     $visit_id1 = $this->_override->get3('visit',  'status', 1, 'patient_id', $client_id, 'sequence', $sequence);
-    //     $visit_id = $this->_override->get3GretaerThan1('visit',  'status', 1, 'patient_id', $client_id, 'sequence', $sequence);
-    //     if ($visit_id) {
-    //         if ($visit_id1['enrollment_date'] != $enrollment_date) {
-    //             foreach ($visit_id as $visit) {
-    //                 $this->deleteRecord('visit', 'id', $visit['id']);
-    //             }
-
-    //             foreach ($this->_override->get('schedule', 'status', 1) as $schedule) {
-    //                 $this->createRecord('visit', array(
-    //                     'sequence' => $sequence,
-    //                     // 'schedule' => $schedule['id'],
-    //                     'visit_code' => $schedule['code'],
-    //                     'visit_name' => $schedule['name'],
-    //                     'respondent' => $respondent,
-    //                     'pid' => $study_id,
-    //                     'study_id' => $study_id,
-    //                     'expected_date' => $enrollment_date,
-    //                     'visit_date' => '',
-    //                     'visit_status' => 0,
-    //                     'comments' => '',
-    //                     'status' => 1,
-    //                     'table_id' => $table,
-    //                     'facility_id' => $site_id,
-    //                     'patient_id' => $client_id,
-    //                     'create_on' => date('Y-m-d H:i:s'),
-    //                     'staff_id' => $staff_id,
-    //                     'update_on' => date('Y-m-d H:i:s'),
-    //                     'update_id' => $staff_id,
-    //                     'site_id' => $site_id,
-    //                 ));
-
-    //                 $enrollment_date = date('Y-m-d', strtotime('+1 month', strtotime($enrollment_date)));
-
-
-    //                 $sequence++;
-    //             }
-    //         }
-    //     } else {
-    //         foreach ($this->_override->get('schedule', 'status', 1) as $schedule) {
-    //             $this->createRecord('facility', array(
-    //                 'sequence' => $_GET['sequence'],
-    //                 'vid' => 1,
-    //                 'expected_date' => $expected_date,
-    //                 'visit_date' => Input::get('visit_date'),
-    //                 'visit_code' => $_GET['visit_code'],
-    //                 'facility_id' => Input::get('facility_id'),
-    //                 'facility_arm' => Input::get('facility_arm'),
-    //                 'facility_level' => Input::get('facility_level'),
-    //                 'facility_type' => Input::get('facility_type'),
-    //                 'appointments' => Input::get('appointments'),
-    //                 'month_name' => Input::get('month_name'),
-    //                 'patients_tested' => Input::get('patients_tested'),
-    //                 'vl_results_available' => Input::get('vl_results_available'),
-    //                 'comments' => Input::get('comments'),
-    //                 'respondent' => $_GET['respondent'],
-    //                 'facility_completed' => Input::get('facility_completed'),
-    //                 'date_completed' => Input::get('date_completed'),
-    //                 'status' => 1,
-    //                 'visit_status' => 0,
-    //                 'create_on' => date('Y-m-d H:i:s'),
-    //                 'staff_id' => $user->data()->id,
-    //                 'update_on' => date('Y-m-d H:i:s'),
-    //                 'update_id' => $user->data()->id,
-    //                 'site_id' => $_GET['site_id'],
-    //             ));
-    //             $successMessage = 'Facility  Successful Added';
-
-    //             $enrollment_date = date('Y-m-d', strtotime('+1 month', strtotime($enrollment_date)));
-
-
-    //             $sequence++;
-    //         }
-    //     }
-    // }
-
-
-    function visit_delete11($client_id, $screening_date, $study_id, $staff_id, $site_id, $eligible)
-    {
-        $visit_id = $this->_override->getNews('visit', 'patient_id', $client_id, 'sequence', 1);
-        if ($eligible) {
-            if ($visit_id) {
-                $this->updateRecord('visit', array(
-                    'expected_date' => $screening_date,
-                    'update_on' => date('Y-m-d H:i:s'),
-                    'update_id' => $staff_id,
-                ), $visit_id[0]['id']);
-            } else {
-                $this->createRecord('visit', array(
-                    'sequence' => 1,
-                    'expected_date' => $screening_date,
-                    'visit_date' => '',
-                    'visit_code' => 'M0',
-                    'visit_name' => 'Month 0',
-                    'study_id' => $study_id,
-                    'visit_status' => 0,
-                    'status' => 1,
-                    'patient_id' => $client_id,
-                    'create_on' => date('Y-m-d H:i:s'),
-                    'staff_id' => $staff_id,
-                    'update_on' => date('Y-m-d H:i:s'),
-                    'update_id' => $staff_id,
-                    'site_id' => $site_id,
-                ));
-            }
-        } else {
-            if ($visit_id) {
-                $this->deleteRecord('visit', 'id', $visit_id[0]['id']);
-            }
-        }
-    }
-
-    function visit_delete2($client_id, $screening_date, $study_id, $staff_id, $site_id, $visit_code, $visit_name, $eligible)
-    {
-        foreach ($this->_override->get('visit', 'patient_id', $client_id) as $visit) {
-            $visit_exists = $this->_override->getNews('visit', 'patient_id', $client_id, 'visit_code', $visit_code);
-            $visit_id = $visit['id'];
-            if ($visit_exists) {
-                if ($eligible) {
-                    $this->updateRecord('visit', array(
-                        'expected_date' => $screening_date,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $staff_id,
-                    ), $visit_id);
-                } else {
-                    if ($visit['visit_code'] == $visit_code) {
-                        $this->deleteRecord('visit', 'id', $visit['id']);
-                    }
-                }
-            } else {
-                if ($eligible) {
-                    $this->createRecord('visit', array(
-                        'expected_date' => $screening_date,
-                        'visit_date' => '',
-                        'visit_code' => $visit_code,
-                        'visit_name' => $visit_name,
-                        'study_id' => $study_id,
-                        'sequence' => 1,
-                        'visit_status' => 0,
-                        'status' => 1,
-                        'patient_id' => $client_id,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $staff_id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $staff_id,
-                        'site_id' => $site_id,
-                    ));
-                }
-            }
+        $visit = $this->_override->get3($table, 'pid', $pid, 'patient_id', $patient_id, 'status', $status);
+        if ($visit) {
+            // $this->deleteRecord($table, 'id', $visit[0]['id']);
+            $this->updateRecord($table, array(
+                'pid' => $pid,
+                'screening_date' => $screening_date,
+                'comments' => $comments,
+                'status' => $status,
+                'patient_id' => $patient_id,
+                'update_on' => date('Y-m-d H:i:s'),
+                'update_id' => $staff_id,
+                'facility_id' => $site_id,
+                'site_id' => $site_id,
+            ),$visit[0]['id']);
+        }else{
+            $this->createRecord($table, array(
+                'pid' => $pid,
+                'screening_date' => $screening_date,
+                'comments' => $comments,
+                'status' => $status,
+                'patient_id' => $patient_id,
+                'create_on' => date('Y-m-d H:i:s'),
+                'staff_id' => $staff_id,
+                'update_on' => date('Y-m-d H:i:s'),
+                'update_id' => $staff_id,
+                'facility_id' => $site_id,
+            ));  
         }
     }
 
@@ -496,6 +295,7 @@ class User
             }
         }
     }
+
     public function findUser($user = null, $table)
     {
         if ($user) {
@@ -573,6 +373,7 @@ class User
     {
         return $this->isLoggedIn;
     }
+
     function report($value)
     {
         $men = 0;
