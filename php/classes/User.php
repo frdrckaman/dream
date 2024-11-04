@@ -253,7 +253,7 @@ class User
 
     public function visit_schedule($table, $screening_date, $pid, $patient_id, $staff_id, $site_id, $comments, $status)
     {
-        $visit = $this->_override->get3($table, 'pid', $pid, 'patient_id', $patient_id, 'status', $status);
+        $visit = $this->_override->getNews($table, 'patient_id', $patient_id, 'status', $status);
         if ($visit) {
             // $this->deleteRecord($table, 'id', $visit[0]['id']);
             $this->updateRecord($table, array(
@@ -265,7 +265,6 @@ class User
                 'update_on' => date('Y-m-d H:i:s'),
                 'update_id' => $staff_id,
                 'facility_id' => $site_id,
-                'site_id' => $site_id,
             ),$visit[0]['id']);
         }else{
             $this->createRecord($table, array(
