@@ -8,9 +8,12 @@
           <li class="nav-item d-none d-sm-inline-block">
               <a href="index1.php" class="nav-link">Home</a>
           </li>
-          <!-- <li class="nav-item d-none d-sm-inline-block">
-              <a href="add.php?id=4&status=7" class="nav-link">Add New CLient</a>
-          </li> -->
+          <li class="nav-item d-none d-sm-inline-block">
+              <a href="add.php?id=4&status=1" class="nav-link">Add New Patient</a>
+          </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+              <a href="info.php?id=3&status=1" class="nav-link">View All Screened Patients</a>
+          </li>
           <li class="nav-item d-none d-sm-inline-block">
               <a href="logout.php" class="nav-link">Logout</a>
           </li>

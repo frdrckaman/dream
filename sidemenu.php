@@ -38,26 +38,20 @@ if ($user->isLoggedIn()) {
 
     if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
         if ($_GET['site_id'] != null) {
-            $registered = $override->countData('clients', 'status', 1, 'site_id', $_GET['site_id']);
-            $screened = $override->countData2('clients', 'status', 1, 'screened', 1, 'site_id', $_GET['site_id']);
-            $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $_GET['site_id']);
-            $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $_GET['site_id']);
-            $end = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $_GET['site_id']);
+            $screened = $override->getCount('screening', 'status', 1);
+            $eligible = $override->countData('screening', 'status', 1, 'eligible', 1);
+            $enrolled = $override->getCount('enrollment_form', 'status', 1);
             $validations = $override->getCount('validations', 'status', 1);            
         } else {
-            $registered = $override->getCount('clients', 'status', 1);
-            $screened = $override->countData('clients', 'status', 1, 'screened', 1);
-            $eligible = $override->countData('clients', 'status', 1, 'eligible', 1);
-            $enrolled = $override->countData('clients', 'status', 1, 'enrolled', 1);
-            $end = $override->countData('clients', 'status', 1, 'end_study', 1);
+            $screened = $override->getCount('screening', 'status', 1);
+            $eligible = $override->countData('screening', 'status', 1, 'eligible', 1);
+            $enrolled = $override->getCount('enrollment_form', 'status', 1);
             $validations = $override->getCount('validations', 'status', 1);            
         }
     } else {
-        $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
-        $screened = $override->countData2('clients', 'status', 1, 'screened', 1, 'site_id', $user->data()->site_id);
-        $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $user->data()->site_id);
-        $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $user->data()->site_id);
-        $end = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $user->data()->site_id);
+        $screened = $override->getCount('screening', 'status', 1);
+        $eligible = $override->countData('screening', 'status', 1, 'eligible', 1);
+        $enrolled = $override->getCount('enrollment_form', 'status', 1);
         $validations = $override->getCount('validations', 'status', 1);            
     }
 } else {
@@ -135,7 +129,7 @@ if ($user->isLoggedIn()) {
                         </li> -->
                     </ul>
                 </li>
-                <?php if ($user->data()->accessLevel == 1) {
+                <?php if ($user->data()->power == 1) {
                 ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -253,7 +247,7 @@ if ($user->isLoggedIn()) {
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="add.php?id=4&status=7" class="nav-link">
+                            <a href="add.php?id=4&status=1" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Add
@@ -262,10 +256,10 @@ if ($user->isLoggedIn()) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="info.php?id=3&status=7" class="nav-link">
+                            <a href="info.php?id=3&status=1" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <span class="badge badge-info right"><?= $registered; ?></span>
-                                <p>Total Patients</p>
+                                <span class="badge badge-info right"><?= $screened; ?></span>
+                                <p>Total Screened Patients</p>
                             </a>
                         </li>
                     </ul>
@@ -344,7 +338,7 @@ if ($user->isLoggedIn()) {
                                 <a href="info.php?id=5&status=16" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <span class="badge badge-info right"><?= $registered; ?></span>
-                                    <p>CLients</p>
+                                    <p>screening</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -433,7 +427,7 @@ if ($user->isLoggedIn()) {
                         </ul> -->
                     </li>
                 <?php } ?>
-                <?php if ($user->data()->accessLevel == 1) {
+                <?php if ($user->data()->power == 1) {
                 ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
