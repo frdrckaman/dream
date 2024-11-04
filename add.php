@@ -364,7 +364,7 @@ if ($user->isLoggedIn()) {
 
                     $diseases_medical = implode(',', Input::get('diseases_medical'));
                     $sputum_samples = implode(',', Input::get('sputum_samples'));
-                    $dr_ds = implode(',', Input::get('dr_ds'));
+                    // $dr_ds = implode(',', Input::get('dr_ds'));
                     if ($enrollment_form) {
                         $user->updateRecord('enrollment_form', array(
                             'enrollment_date' => Input::get('visit_date'),
@@ -378,7 +378,7 @@ if ($user->isLoggedIn()) {
                             'history_tb' => Input::get('history_tb'),
                             'tx_previous' => Input::get('tx_previous'),
                             'tx_number' => Input::get('tx_number'),
-                            'dr_ds' => $dr_ds,
+                            'dr_ds' => Input::get('dr_ds'),
                             'tb_category' => Input::get('tb_category'),
                             'relapse_years' => Input::get('relapse_years'),
                             'ltf_months' => Input::get('ltf_months'),
@@ -432,7 +432,7 @@ if ($user->isLoggedIn()) {
                             'history_tb' => Input::get('history_tb'),
                             'tx_previous' => Input::get('tx_previous'),
                             'tx_number' => Input::get('tx_number'),
-                            'dr_ds' => $dr_ds,
+                            'dr_ds' => Input::get('dr_ds'),
                             'tb_category' => Input::get('tb_category'),
                             'relapse_years' => Input::get('relapse_years'),
                             'ltf_months' => Input::get('ltf_months'),
@@ -9066,24 +9066,24 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-4" id="dr_ds1">
-                                                    <label>22. Was it DR or DS TB (Multiple options)</label>
+                                                    <label>22. Was it DR or DS TB </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('dr_ds', 'status', 1) as $value) { ?>
+                                                             <?php foreach ($override->get('dr_ds', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        name="dr_ds[]" id="dr_ds<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php foreach (explode(',', $clients['dr_ds']) as $values) {
-                                                                              if ($values == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              }
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="dr_ds" id="dr_ds<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($clients['dr_ds'] == $value['id']) {
+                                                                              echo 'checked';
                                                                           } ?>>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                                                                            <button type="button" onclick="unsetRadio('dr_ds')">Unset</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -9296,7 +9296,7 @@ if ($user->isLoggedIn()) {
 
                                                         <div id="immunosuppressive_specify1">
                                                             <label>33. If yes specify</label>
-                                                            <input class="form-control" type="number"
+                                                            <input class="form-control" type="text"
                                                                 name="immunosuppressive_specify"
                                                                 id="immunosuppressive_specify" placeholder="Type here..."
                                                                 value="<?php if ($clients['immunosuppressive_specify']) {
