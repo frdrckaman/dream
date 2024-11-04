@@ -341,11 +341,15 @@ if ($user->isLoggedIn()) {
 
                         $user->visit_schedule('visit', Input::get('screening_date'), $last_row['pid'], $last_row['id'], $user->data()->id, Input::get('site'), Input::get('comments'), 1);
 
+                        $user->updateRecord('study_id', array(
+                            'client_id' => $last_row['id'],
+                            'status' => 1,
+                        ), $std_id['id']);
+
                         $successMessage = 'Screening  Added Successful';
                     }
 
                     Redirect::to('info.php?id=3&status=1');
-                    // Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&sequence=' . $_GET['sequence'] . '&visit_code=' . $_GET['visit_code'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
 
                 } catch (Exception $e) {
                     die($e->getMessage());
