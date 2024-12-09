@@ -396,10 +396,9 @@ if ($user->isLoggedIn()) {
                             'ltf_months' => Input::get('ltf_months'),
                             'ltf_months_unknown' => Input::get('ltf_months_unknown'),
                             'tb_regimen' => Input::get('tb_regimen'),
+                            'tb_regimen_specify' => Input::get('tb_regimen_specify'),
                             'regimen_months' => Input::get('regimen_months'),
                             'regimen_months_unknown' => Input::get('regimen_months_unknown'),
-                            'regimen_changed' => Input::get('regimen_changed'),
-                            'regimen_name' => Input::get('regimen_name'),
                             'tb_otcome' => Input::get('tb_otcome'),
                             'hiv_status' => Input::get('hiv_status'),
                             'immunosuppressive' => Input::get('immunosuppressive'),
@@ -462,9 +461,8 @@ if ($user->isLoggedIn()) {
                             'relapse_years' => Input::get('relapse_years'),
                             'ltf_months' => Input::get('ltf_months'),
                             'tb_regimen' => Input::get('tb_regimen'),
+                            'tb_regimen_specify' => Input::get('tb_regimen_specify'),
                             'regimen_months' => Input::get('regimen_months'),
-                            'regimen_changed' => Input::get('regimen_changed'),
-                            'regimen_name' => Input::get('regimen_name'),
                             'tb_otcome' => Input::get('tb_otcome'),
                             'hiv_status' => Input::get('hiv_status'),
                             'immunosuppressive' => Input::get('immunosuppressive'),
@@ -3388,10 +3386,10 @@ if ($user->isLoggedIn()) {
                                                             ):</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter comments here">
-                                                                                                                                                                                <?php if ($facility['comments']) {
-                                                                                                                                                                                    print_r($facility['comments']);
-                                                                                                                                                                                } ?>
-                                                                                                                                                                                </textarea>
+                                                                                                                                                                                            <?php if ($facility['comments']) {
+                                                                                                                                                                                                print_r($facility['comments']);
+                                                                                                                                                                                            } ?>
+                                                                                                                                                                                            </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5173,7 +5171,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                    </textarea>
+                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5886,7 +5884,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                    </textarea>
+                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6131,10 +6129,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                                                                <?php if ($screening['comments']) {
-                                                                                                                                                    print_r($screening['comments']);
-                                                                                                                                                } ?>
-                                                                                                                                            </textarea>
+                                                                                                                                                            <?php if ($screening['comments']) {
+                                                                                                                                                                print_r($screening['comments']);
+                                                                                                                                                            } ?>
+                                                                                                                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -7921,7 +7919,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                    </textarea>
+                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7951,7 +7949,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                    </textarea>
+                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8654,7 +8652,7 @@ if ($user->isLoggedIn()) {
                                                             placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                 print_r($costing['comments']);
                                                             } ?>
-                                                                                                                                                    </textarea>
+                                                                                                                                                                </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -9376,25 +9374,30 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="tb_regimen1">
+                                                <div class="col-sm-4" id="tb_regimen">
+                                                    <label>10g. Which treatment regimen was initiated </label>
+                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>10g. Which treatment regimen was initiated </label>
-                                                            <select id="tb_regimen" name="tb_regimen" class="form-control">
-                                                                <?php $tb_regimen = $override->get('tb_regimen', 'id', $clients['tb_regimen'])[0]; ?>
-                                                                <option value="<?= $tb_regimen['id'] ?>"><?php if ($clients['tb_regimen']) {
-                                                                      print_r($tb_regimen['name']);
-                                                                  } else {
-                                                                      echo 'Select';
-                                                                  } ?>
-                                                                </option>
-                                                                <option value="">Select</option>
-                                                                <?php foreach ($override->get('tb_regimen', 'status', 1) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?>
-                                                                    </option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <?php foreach ($override->get('tb_regimen', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="tb_regimen" id="tb_regimen_1_<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($clients['tb_regimen'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?>>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
                                                         </div>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('tb_regimen')">Unset</button>
+                                                        <hr>
+                                                        <input class="form-control" type="text" name="tb_regimen_specify"
+                                                            id="tb_regimen_1_specify" placeholder="Specify Here..." value="<?php if ($clients['tb_regimen_specify']) {
+                                                                print_r($clients['tb_regimen_specify']);
+                                                            } ?>" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -9425,8 +9428,8 @@ if ($user->isLoggedIn()) {
                                                             <!-- Unknown Checkbox -->
                                                             <div class="form-check mt-3">
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    id="regimen_months_unknown" name="regimen_months_unknown"
-                                                                    value="1" <?php if ($clients['regimen_months_unknown'] ?? false) {
+                                                                    id="regimen_months_unknown"
+                                                                    name="regimen_months_unknown" value="1" <?php if ($clients['regimen_months_unknown'] ?? false) {
                                                                         echo 'checked';
                                                                     } ?>>
                                                                 <label class="form-check-label"
@@ -11659,7 +11662,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                    </textarea>
+                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -12186,6 +12189,8 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/enrollment/tx_episode.js"></script>
     <script src="myjs/add/enrollment/tx_ltf_months.js"></script>
     <script src="myjs/add/enrollment/tx_regimen_months.js"></script>
+    <script src="myjs/add/enrollment/tb_regimen.js"></script>
+
 
 
 
