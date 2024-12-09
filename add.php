@@ -4633,8 +4633,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <label for="afb_microscopy" class="form-label">57. AFB
-                                                        microscopy</label>
+                                                    <label for="afb_microscopy" class="form-label">9. AFB microscopy (if tested at clinic)</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -5192,7 +5191,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>40. Form Verified Date</label>
+                                                            <label>Form Verified Date</label>
                                                             <input class="form-control" type="date"
                                                                 name="respiratory_verified_date"
                                                                 id="respiratory_verified_date" value="<?php if ($costing['respiratory_verified_date']) {
