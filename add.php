@@ -366,140 +366,150 @@ if ($user->isLoggedIn()) {
                     $enrollment_form = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['cid']);
                     $diseases_medical = implode(',', Input::get('diseases_medical'));
                     $sputum_samples = implode(',', Input::get('sputum_samples'));
-                    if ($enrollment_form) {
-                        print_r($enrollment_form);
-                        $user->updateRecord('enrollment_form', array(
-                            'enrollment_date' => Input::get('enrollment_date'),
-                            'dob' => Input::get('dob'),
-                            'age' => Input::get('age'),
-                            'sex' => Input::get('sex'),
-                            'region' => Input::get('region'),
-                            'district' => Input::get('district'),
-                            'ward' => Input::get('ward'),
-                            'village_street' => Input::get('village_street'),
-                            'cough2weeks' => Input::get('cough2weeks'),
-                            'chest_xray' => Input::get('chest_xray'),
-                            'poor_weight' => Input::get('poor_weight'),
-                            'coughing_blood' => Input::get('coughing_blood'),
-                            'unexplained_fever' => Input::get('unexplained_fever'),
-                            'night_sweats' => Input::get('night_sweats'),
-                            'neck_lymph' => Input::get('neck_lymph'),
-                            'date_information_collected' => Input::get('date_information_collected'),
-                            'history_tb' => Input::get('history_tb'),
-                            'tx_previous' => Input::get('tx_previous'),
-                            'tx_month' => Input::get('tx_month'),
-                            'tx_year' => Input::get('tx_year'),
-                            'tx_unknown' => Input::get('tx_unknown'),
-                            'dr_ds' => Input::get('dr_ds'),
-                            'tb_category' => Input::get('tb_category'),
-                            'relapse_years' => Input::get('relapse_years'),
-                            'ltf_months' => Input::get('ltf_months'),
-                            'ltf_months_unknown' => Input::get('ltf_months_unknown'),
-                            'tb_regimen' => Input::get('tb_regimen'),
-                            'tb_regimen_specify' => Input::get('tb_regimen_specify'),
-                            'regimen_months' => Input::get('regimen_months'),
-                            'regimen_months_unknown' => Input::get('regimen_months_unknown'),
-                            'tb_otcome' => Input::get('tb_otcome'),
-                            'hiv_status' => Input::get('hiv_status'),
-                            'immunosuppressive' => Input::get('immunosuppressive'),
-                            'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
-                            'other_diseases' => Input::get('other_diseases'),
-                            'diseases_medical' => $diseases_medical,
-                            'diseases_specify' => Input::get('diseases_specify'),
-                            'sputum_collected' => Input::get('sputum_collected'),
-                            'sample_date' => Input::get('sample_date'),
-                            'other_samples' => Input::get('other_samples'),
-                            'sputum_samples' => $sputum_samples,
-                            'pleural_fluid_date' => Input::get('pleural_fluid_date'),
-                            'csf_date' => Input::get('csf_date'),
-                            'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
-                            'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
-                            'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
-                            'stool_date' => Input::get('stool_date'),
-                            'sputum_samples_other' => Input::get('sputum_samples_other'),
-                            'sputum_samples_date' => Input::get('sputum_samples_date'),
-                            'chest_x_ray' => Input::get('chest_x_ray'),
-                            'chest_x_ray_date' => Input::get('chest_x_ray_date'),
-                            'enrollment_completed' => Input::get('enrollment_completed'),
-                            'enrollment_completed_by' => Input::get('enrollment_completed_by'),
-                            'enrollment_completed_date' => Input::get('enrollment_completed_date'),
-                            'enrollment_verified_by' => Input::get('enrollment_verified_by'),
-                            'enrollment_verified_date' => Input::get('enrollment_verified_date'),
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                        ), $_GET['cid']);
-
-                        $successMessage = 'Enrollment Form Updated Successful';
+                    if (Input::get('enrollment_completed') == 3 && Input::get('enrollment_verified_date') == "") {
+                        $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
                     } else {
-                        $std_id = $override->get('study_id', 'status', 0)[0];
+                        if ($enrollment_form) {
+                            $user->updateRecord('enrollment_form', array(
+                                'enrollment_date' => Input::get('enrollment_date'),
+                                'dob' => Input::get('dob'),
+                                'age' => Input::get('age'),
+                                'sex' => Input::get('sex'),
+                                'region' => Input::get('region'),
+                                'district' => Input::get('district'),
+                                'ward' => Input::get('ward'),
+                                'village_street' => Input::get('village_street'),
+                                'cough2weeks' => Input::get('cough2weeks'),
+                                'chest_xray' => Input::get('chest_xray'),
+                                'poor_weight' => Input::get('poor_weight'),
+                                'coughing_blood' => Input::get('coughing_blood'),
+                                'unexplained_fever' => Input::get('unexplained_fever'),
+                                'night_sweats' => Input::get('night_sweats'),
+                                'neck_lymph' => Input::get('neck_lymph'),
+                                'date_information_collected' => Input::get('date_information_collected'),
+                                'history_tb' => Input::get('history_tb'),
+                                'tx_previous' => Input::get('tx_previous'),
+                                'tx_month' => Input::get('tx_month'),
+                                'tx_year' => Input::get('tx_year'),
+                                'tx_unknown' => Input::get('tx_unknown'),
+                                'dr_ds' => Input::get('dr_ds'),
+                                'tb_category' => Input::get('tb_category'),
+                                'relapse_years' => Input::get('relapse_years'),
+                                'ltf_months' => Input::get('ltf_months'),
+                                'ltf_months_unknown' => Input::get('ltf_months_unknown'),
+                                'tb_regimen' => Input::get('tb_regimen'),
+                                'tb_regimen_specify' => Input::get('tb_regimen_specify'),
+                                'regimen_months' => Input::get('regimen_months'),
+                                'regimen_months_unknown' => Input::get('regimen_months_unknown'),
+                                'tb_otcome' => Input::get('tb_otcome'),
+                                'hiv_status' => Input::get('hiv_status'),
+                                'immunosuppressive' => Input::get('immunosuppressive'),
+                                'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
+                                'other_diseases' => Input::get('other_diseases'),
+                                'diseases_medical' => $diseases_medical,
+                                'diseases_specify' => Input::get('diseases_specify'),
+                                'sputum_collected' => Input::get('sputum_collected'),
+                                'dst_sample_date' => Input::get('dst_sample_date'),
+                                'dst_sample_type' => Input::get('dst_sample_type'),
+                                'sequencing_sample_date' => Input::get('sequencing_sample_date'),
+                                'sequencing_sample_type' => Input::get('sequencing_sample_type'),
+                                'other_samples' => Input::get('other_samples'),
+                                'sputum_samples' => $sputum_samples,
+                                'pleural_fluid_date' => Input::get('pleural_fluid_date'),
+                                'csf_date' => Input::get('csf_date'),
+                                'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
+                                'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
+                                'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
+                                'stool_date' => Input::get('stool_date'),
+                                'sputum_samples_other' => Input::get('sputum_samples_other'),
+                                'sputum_samples_date' => Input::get('sputum_samples_date'),
+                                'chest_x_ray' => Input::get('chest_x_ray'),
+                                'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                                'enrollment_completed' => Input::get('enrollment_completed'),
+                                'enrollment_completed_by' => $user->data()->id,
+                                'enrollment_completed_date' => Input::get('enrollment_completed_date'),
+                                'enrollment_verified_by' => $user->data()->id,
+                                'enrollment_verified_date' => Input::get('enrollment_verified_date'),
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                            ), $_GET['cid']);
 
-                        $user->createRecord('enrollment_form', array(
-                            'pid' => $std_id['study_id'],
-                            'enrollment_date' => Input::get('enrollment_date'),
-                            'dob' => Input::get('dob'),
-                            'age' => Input::get('age'),
-                            'sex' => Input::get('sex'),
-                            'region' => Input::get('region'),
-                            'district' => Input::get('district'),
-                            'ward' => Input::get('ward'),
-                            'village_street' => Input::get('village_street'),
-                            'cough2weeks' => Input::get('cough2weeks'),
-                            'chest_xray' => Input::get('chest_xray'),
-                            'poor_weight' => Input::get('poor_weight'),
-                            'coughing_blood' => Input::get('coughing_blood'),
-                            'unexplained_fever' => Input::get('unexplained_fever'),
-                            'night_sweats' => Input::get('night_sweats'),
-                            'neck_lymph' => Input::get('neck_lymph'),
-                            'date_information_collected' => Input::get('date_information_collected'),
-                            'history_tb' => Input::get('history_tb'),
-                            'tx_previous' => Input::get('tx_previous'),
-                            'tx_month' => Input::get('tx_month'),
-                            'tx_year' => Input::get('tx_year'),
-                            'tx_unknown' => Input::get('tx_unknown'),
-                            'dr_ds' => Input::get('dr_ds'),
-                            'tb_category' => Input::get('tb_category'),
-                            'relapse_years' => Input::get('relapse_years'),
-                            'ltf_months' => Input::get('ltf_months'),
-                            'tb_regimen' => Input::get('tb_regimen'),
-                            'tb_regimen_specify' => Input::get('tb_regimen_specify'),
-                            'regimen_months' => Input::get('regimen_months'),
-                            'tb_otcome' => Input::get('tb_otcome'),
-                            'hiv_status' => Input::get('hiv_status'),
-                            'immunosuppressive' => Input::get('immunosuppressive'),
-                            'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
-                            'other_diseases' => Input::get('other_diseases'),
-                            'diseases_medical' => $diseases_medical,
-                            'diseases_specify' => Input::get('diseases_specify'),
-                            'sputum_collected' => Input::get('sputum_collected'),
-                            'sample_date' => Input::get('sample_date'),
-                            'other_samples' => Input::get('other_samples'),
-                            'sputum_samples' => $sputum_samples,
-                            'pleural_fluid_date' => Input::get('pleural_fluid_date'),
-                            'csf_date' => Input::get('csf_date'),
-                            'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
-                            'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
-                            'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
-                            'stool_date' => Input::get('stool_date'),
-                            'sputum_samples_other' => Input::get('sputum_samples_other'),
-                            'sputum_samples_date' => Input::get('sputum_samples_date'),
-                            'chest_x_ray' => Input::get('chest_x_ray'),
-                            'chest_x_ray_date' => Input::get('chest_x_ray_date'),
-                            'enrollment_completed' => Input::get('enrollment_completed'),
-                            'enrollment_completed_by' => Input::get('enrollment_completed_by'),
-                            'enrollment_completed_date' => Input::get('enrollment_completed_date'),
-                            'enrollment_verified_by' => Input::get('enrollment_verified_by'),
-                            'enrollment_verified_date' => Input::get('enrollment_verified_date'),
-                            'status' => 1,
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $user->data()->site_id,
-                        ));
+                            $successMessage = 'Enrollment Form Updated Successful';
+                        } else {
+                            $std_id = $override->get('study_id', 'status', 0)[0];
 
-                        $successMessage = 'Enrollment Form  Added Successful';
+                            $user->createRecord('enrollment_form', array(
+                                'pid' => $std_id['study_id'],
+                                'enrollment_date' => Input::get('enrollment_date'),
+                                'dob' => Input::get('dob'),
+                                'age' => Input::get('age'),
+                                'sex' => Input::get('sex'),
+                                'region' => Input::get('region'),
+                                'district' => Input::get('district'),
+                                'ward' => Input::get('ward'),
+                                'village_street' => Input::get('village_street'),
+                                'cough2weeks' => Input::get('cough2weeks'),
+                                'chest_xray' => Input::get('chest_xray'),
+                                'poor_weight' => Input::get('poor_weight'),
+                                'coughing_blood' => Input::get('coughing_blood'),
+                                'unexplained_fever' => Input::get('unexplained_fever'),
+                                'night_sweats' => Input::get('night_sweats'),
+                                'neck_lymph' => Input::get('neck_lymph'),
+                                'date_information_collected' => Input::get('date_information_collected'),
+                                'history_tb' => Input::get('history_tb'),
+                                'tx_previous' => Input::get('tx_previous'),
+                                'tx_month' => Input::get('tx_month'),
+                                'tx_year' => Input::get('tx_year'),
+                                'tx_unknown' => Input::get('tx_unknown'),
+                                'dr_ds' => Input::get('dr_ds'),
+                                'tb_category' => Input::get('tb_category'),
+                                'relapse_years' => Input::get('relapse_years'),
+                                'ltf_months' => Input::get('ltf_months'),
+                                'tb_regimen' => Input::get('tb_regimen'),
+                                'tb_regimen_specify' => Input::get('tb_regimen_specify'),
+                                'regimen_months' => Input::get('regimen_months'),
+                                'tb_otcome' => Input::get('tb_otcome'),
+                                'hiv_status' => Input::get('hiv_status'),
+                                'immunosuppressive' => Input::get('immunosuppressive'),
+                                'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
+                                'other_diseases' => Input::get('other_diseases'),
+                                'diseases_medical' => $diseases_medical,
+                                'diseases_specify' => Input::get('diseases_specify'),
+                                'sputum_collected' => Input::get('sputum_collected'),
+                                'dst_sample_date' => Input::get('dst_sample_date'),
+                                'dst_sample_type' => Input::get('dst_sample_type'),
+                                'sequencing_sample_date' => Input::get('sequencing_sample_date'),
+                                'sequencing_sample_type' => Input::get('sequencing_sample_type'),
+                                'other_samples' => Input::get('other_samples'),
+                                'sputum_samples' => $sputum_samples,
+                                'pleural_fluid_date' => Input::get('pleural_fluid_date'),
+                                'csf_date' => Input::get('csf_date'),
+                                'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
+                                'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
+                                'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
+                                'stool_date' => Input::get('stool_date'),
+                                'sputum_samples_other' => Input::get('sputum_samples_other'),
+                                'sputum_samples_date' => Input::get('sputum_samples_date'),
+                                'chest_x_ray' => Input::get('chest_x_ray'),
+                                'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                                'enrollment_completed' => Input::get('enrollment_completed'),
+                                'enrollment_completed_by' => $user->data()->id,
+                                'enrollment_completed_date' => Input::get('enrollment_completed_date'),
+                                'enrollment_verified_by' => $user->data()->id,
+                                'enrollment_verified_date' => Input::get('enrollment_verified_date'),
+                                'status' => 1,
+                                'create_on' => date('Y-m-d H:i:s'),
+                                'staff_id' => $user->data()->id,
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $user->data()->site_id,
+                            ));
+
+                            $successMessage = 'Enrollment Form  Added Successful';
+                        }
+                        Redirect::to('info.php?id=3&cid=' . $_GET['enrollment_id'] . '&status=1&msg=' . $successMessage);
                     }
-                    Redirect::to('info.php?id=3&cid=' . $_GET['cid'] . '&status=1&msg=' . $successMessage);
+
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -3386,10 +3396,10 @@ if ($user->isLoggedIn()) {
                                                             ):</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter comments here">
-                                                                                                                                                                                            <?php if ($facility['comments']) {
-                                                                                                                                                                                                print_r($facility['comments']);
-                                                                                                                                                                                            } ?>
-                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                            <?php if ($facility['comments']) {
+                                                                                                                                                                                                                print_r($facility['comments']);
+                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                            </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -4341,7 +4351,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 11) { ?>
             <?php
-            $costing = $override->getNews('respiratory', 'status', 1, 'patient_id', $_GET['cid'])[0];
+            $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -4359,12 +4369,12 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=4&cid=<?= $_GET['cid']; ?>&status=<?= $_GET['status']; ?>">
+                                            href="info.php?id=4&enrollment_id=<?= $_GET['enrollment_id']; ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status']; ?>">
-                                            Go to screening list > </a>
+                                    <li class="breadcrumb-item"><a href="info.php?id=3">
+                                            Go to Enrollment list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
                                         <li class="breadcrumb-item active">Add New Respiratory sample Data</li>
@@ -5171,7 +5181,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                </textarea>
+                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5315,7 +5325,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 12) { ?>
             <?php
-            $costing = $override->getNews('non_respiratory', 'status', 1, 'patient_id', $_GET['cid'])[0];
+            $costing = $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -5333,12 +5343,12 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=4&cid=<?= $_GET['cid']; ?>&status=<?= $_GET['status']; ?>">
+                                            href="info.php?id=4&enrollment_id=<?= $_GET['enrollment_id']; ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status']; ?>">
-                                            Go to screening list > </a>
+                                    <li class="breadcrumb-item"><a href="info.php?id=3">
+                                            Go to Enrollment list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
                                         <li class="breadcrumb-item active">Add New Non Respiratory sample Data</li>
@@ -5884,7 +5894,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                </textarea>
+                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6129,10 +6139,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                                                                            <?php if ($screening['comments']) {
-                                                                                                                                                                print_r($screening['comments']);
-                                                                                                                                                            } ?>
-                                                                                                                                                        </textarea>
+                                                                                                                                                                            <?php if ($screening['comments']) {
+                                                                                                                                                                                print_r($screening['comments']);
+                                                                                                                                                                            } ?>
+                                                                                                                                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -7919,7 +7929,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                </textarea>
+                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7949,7 +7959,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                </textarea>
+                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8652,7 +8662,7 @@ if ($user->isLoggedIn()) {
                                                             placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                 print_r($costing['comments']);
                                                             } ?>
-                                                                                                                                                                </textarea>
+                                                                                                                                                                                </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -8827,7 +8837,7 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row">
                             <?php
-                            $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['cid'])[0];
+                            $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id'])[0];
                             // $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
                             $sex = $override->get('sex', 'id', $clients['sex'])[0];
                             $education = $override->get('education', 'id', $clients['education'])[0];
@@ -9472,10 +9482,10 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-6">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>31. HIV status </label>
+                                                            <label>11. HIV status </label>
                                                             <select id="hiv_status" name="hiv_status" class="form-control"
                                                                 required>
                                                                 <?php $hiv_status = $override->get('hiv_status', 'id', $clients['hiv_status'])[0]; ?>
@@ -9494,8 +9504,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="immunosuppressive">
-                                                    <label>32. Do you have other immunosuppressive diseases?</label>
+                                                <div class="col-sm-6" id="immunosuppressive">
+                                                    <label>12. Do you have other immunosuppressive diseases?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9516,7 +9526,7 @@ if ($user->isLoggedIn()) {
                                                             onclick="unsetRadio('immunosuppressive')">Unset</button>
 
                                                         <div id="immunosuppressive_specify1">
-                                                            <label>33. If yes specify</label>
+                                                            <label>If yes specify</label>
                                                             <input class="form-control" type="text"
                                                                 name="immunosuppressive_specify"
                                                                 id="immunosuppressive_specify" placeholder="Type here..."
@@ -9528,8 +9538,15 @@ if ($user->isLoggedIn()) {
 
                                                 </div>
 
-                                                <div class="col-sm-3" id="other_diseases">
-                                                    <label>34. Other relevant diseases/medical conditions</label>
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="row">
+
+                                                <div class="col-sm-6" id="other_diseases">
+                                                    <label>13. Other relevant diseases/medical conditions ( Select multiple
+                                                        )</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9552,8 +9569,8 @@ if ($user->isLoggedIn()) {
 
                                                 </div>
 
-                                                <div class="col-sm-3" id="diseases_medical">
-                                                    <label>34. If yes, Select relevant diseases/medical conditions</label>
+                                                <div class="col-sm-6" id="diseases_medical">
+                                                    <label>13b. If yes, Select relevant diseases/medical conditions</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9595,11 +9612,12 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="sputum_collected">
-                                                    <label>35. Were two sputum samples collected? </label>
+                                                    <label>14.After TB was confirmed by a rapid molecular test, were two
+                                                        additional respiratory samples collected?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('respiratory_samples', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
                                                                         name="sputum_collected"
@@ -9618,22 +9636,61 @@ if ($user->isLoggedIn()) {
 
                                                 </div>
 
-                                                <div class="col-sm-3" id="sample_date1">
-                                                    <!-- radio -->
+                                                <div class="col-sm-6">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>36. Date of respiratory sample collection </label>
-                                                            <input class="form-control" type="date" name="sample_date"
-                                                                id="sample_date" value="<?php if ($clients['sample_date']) {
-                                                                    print_r($clients['sample_date']);
-                                                                } ?>" />
+                                                            <label>14b. Date of respiratory sample collection and sample
+                                                                type</label>
+
+                                                            <!-- Row for Date and Sample Type Inputs -->
+                                                            <div class="row">
+                                                                <!-- DST Sample Date Input -->
+                                                                <div class="col-sm-6">
+                                                                    <label for="dst_sample_date" class="form-label">DST
+                                                                        Sample Date</label>
+                                                                    <input class="form-control" type="date"
+                                                                        name="dst_sample_date" id="dst_sample_date" value="<?php if ($clients['dst_sample_date']) {
+                                                                            print_r($clients['dst_sample_date']);
+                                                                        } ?>" />
+
+                                                                    <!-- DST Sample Type Input -->
+                                                                    <label for="dst_sample_type"
+                                                                        class="form-label mt-2">Sample Type</label>
+                                                                    <input class="form-control" type="text"
+                                                                        name="dst_sample_type" id="dst_sample_type" value="<?php if ($clients['dst_sample_type']) {
+                                                                            print_r($clients['dst_sample_type']);
+                                                                        } ?>" placeholder="Type Sample Type..." />
+                                                                </div>
+
+                                                                <!-- Sequencing Sample Date Input -->
+                                                                <div class="col-sm-6" id="sample_date1">
+                                                                    <label for="sequencing_sample_date"
+                                                                        class="form-label">Sequencing Sample Date</label>
+                                                                    <input class="form-control" type="date"
+                                                                        name="sequencing_sample_date"
+                                                                        id="sequencing_sample_date" value="<?php if ($clients['sequencing_sample_date']) {
+                                                                            print_r($clients['sequencing_sample_date']);
+                                                                        } ?>" />
+
+                                                                    <!-- Sequencing Sample Type Input -->
+                                                                    <label for="sequencing_sample_type"
+                                                                        class="form-label mt-2">Sample Type</label>
+                                                                    <input class="form-control" type="text"
+                                                                        name="sequencing_sample_type"
+                                                                        id="sequencing_sample_type" value="<?php if ($clients['sequencing_sample_type']) {
+                                                                            print_r($clients['sequencing_sample_type']);
+                                                                        } ?>" placeholder="Type Sample Type..." />
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
 
+
+
                                                 <div class="col-sm-3" id="other_samples">
-                                                    <label>37. Were any other diagnostic samples requested? </label>
+                                                    <label>15. Were any other diagnostic samples requested? </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9657,7 +9714,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="sputum_samples">
-                                                    <label>38. Tick all that apply and fill date for each sample ticked
+                                                    <label>15. Tick all that apply and fill date for each sample ticked
                                                     </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -9684,7 +9741,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Specify Other and Date</label>
+                                                            <label>15. Specify Other and Date</label>
                                                             <input class="form-control" type="text"
                                                                 name="sputum_samples_other" id="sputum_samples_other" value="<?php if ($clients['sputum_samples_other']) {
                                                                     print_r($clients['sputum_samples_other']);
@@ -9710,7 +9767,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Pleural fluid Date</label>
+                                                            <label>15. Pleural fluid Date</label>
                                                             <input class="form-control" type="date"
                                                                 name="pleural_fluid_date" id="pleural_fluid_date" value="<?php if ($clients['pleural_fluid_date']) {
                                                                     print_r($clients['pleural_fluid_date']);
@@ -9723,7 +9780,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Cerebral spinal fluid (CSF) Date</label>
+                                                            <label>15. Cerebral spinal fluid (CSF) Date</label>
                                                             <input class="form-control" type="date" name="csf_date"
                                                                 id="csf_date" value="<?php if ($clients['csf_date']) {
                                                                     print_r($clients['csf_date']);
@@ -9735,7 +9792,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Peritoneal fluid Date</label>
+                                                            <label>15. Peritoneal fluid Date</label>
                                                             <input class="form-control" type="date"
                                                                 name="peritoneal_fluid_date" id="peritoneal_fluid_date"
                                                                 value="<?php if ($clients['peritoneal_fluid_date']) {
@@ -9753,7 +9810,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Pericardial fluid Date</label>
+                                                            <label>15. Pericardial fluid Date</label>
                                                             <input class="form-control" type="date"
                                                                 name="pericardial_fluid_date" id="pericardial_fluid_date"
                                                                 value="<?php if ($clients['pericardial_fluid_date']) {
@@ -9767,7 +9824,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Lymph node aspirate Date</label>
+                                                            <label>15. Lymph node aspirate Date</label>
                                                             <input class="form-control" type="date"
                                                                 name="lymph_node_aspirate_date"
                                                                 id="lymph_node_aspirate_date" value="<?php if ($clients['lymph_node_aspirate_date']) {
@@ -9780,7 +9837,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Stool Date</label>
+                                                            <label>15. Stool Date</label>
                                                             <input class="form-control" type="date" name="stool_date"
                                                                 id="stool_date" value="<?php if ($clients['stool_date']) {
                                                                     print_r($clients['stool_date']);
@@ -9794,7 +9851,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
 
                                                 <div class="col-sm-6" id="chest_x_ray">
-                                                    <label>39. Was chest X-ray requested? </label>
+                                                    <label>16. Was chest X-ray requested? </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9821,7 +9878,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>39.If yes,Specify Date</label>
+                                                            <label>16.If yes,Specify Date chest X-ray requested </label>
                                                             <input class="form-control" type="date" name="chest_x_ray_date"
                                                                 id="chest_x_ray_date" value="<?php if ($clients['chest_x_ray_date']) {
                                                                     print_r($clients['chest_x_ray_date']);
@@ -9846,7 +9903,8 @@ if ($user->isLoggedIn()) {
                                                                         id="enrollment_completed<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($clients['enrollment_completed'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?> required>
+                                                                          } ?>         <?php if ($clients['enrollment_completed'] == 3) { ?> readonly
+                                                                        <?php } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
@@ -9859,26 +9917,15 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-4">
+                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>40. This form was completed by (name) </label>
-                                                            <select id="enrollment_completed_by"
-                                                                name="enrollment_completed_by" class="form-control"
-                                                                required>
-                                                                <?php $enrollment_completed = $override->get('user', 'id', $clients['enrollment_completed_by'])[0]; ?>
-                                                                <option value="<?= $enrollment_completed['id'] ?>">
-                                                                    <?php if ($clients['enrollment_completed_by']) {
-                                                                        print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
-                                                                    } else {
-                                                                        echo 'Select';
-                                                                    } ?>
-                                                                </option>
-                                                                <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>">
-                                                                        <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                    </option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <label>Form completed Date</label>
+                                                            <input class="form-control" type="date"
+                                                                name="enrollment_completed_date"
+                                                                id="enrollment_completed_date" value="<?php if ($clients['enrollment_completed_date']) {
+                                                                    print_r($clients['enrollment_completed_date']);
+                                                                } ?>" <?php if ($clients['enrollment_completed'] == 3) { ?> readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9887,57 +9934,18 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>40. Form completed Date</label>
+                                                            <label>40. Form Verified Date</label>
                                                             <input class="form-control" type="date"
-                                                                name="enrollment_completed_date"
-                                                                id="enrollment_completed_date" value="<?php if ($clients['enrollment_completed_date']) {
-                                                                    print_r($clients['enrollment_completed_date']);
-                                                                } ?>" />
+                                                                name="enrollment_verified_date"
+                                                                id="enrollment_verified_date" value="<?php if ($clients['enrollment_verified_date']) {
+                                                                    print_r($clients['enrollment_verified_date']);
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <?php if ($user->data()->position == 3 && $costing['enrollment_completed'] == 1) { ?>
 
-                                                    <div class="col-sm-6">
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>40. This form was Verified by (name) </label>
-                                                                <select id="enrollment_verified_by"
-                                                                    name="enrollment_verified_by" class="form-control" required>
-                                                                    <?php $enrollment_completed = $override->get('user', 'id', $clients['enrollment_verified_by'])[0]; ?>
-                                                                    <option value="<?= $enrollment_completed['id'] ?>">
-                                                                        <?php if ($clients['enrollment_verified_by']) {
-                                                                            print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
-                                                                        } else {
-                                                                            echo 'Select';
-                                                                        } ?>
-                                                                    </option>
-                                                                    <?php foreach ($override->getNews('user', 'status', 1, 'position', 3) as $value) { ?>
-                                                                        <option value="<?= $value['id'] ?>">
-                                                                            <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                        </option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>40. Form Verified Date</label>
-                                                                <input class="form-control" type="date"
-                                                                    name="enrollment_verified_date"
-                                                                    id="enrollment_verified_date" value="<?php if ($clients['enrollment_verified_date']) {
-                                                                        print_r($clients['enrollment_verified_date']);
-                                                                    } ?>" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                <?php } ?>
 
                                             </div>
                                             <hr>
@@ -11662,7 +11670,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                </textarea>
+                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
