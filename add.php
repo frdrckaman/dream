@@ -357,7 +357,7 @@ if ($user->isLoggedIn()) {
             }
         } elseif (Input::get('add_enrollment_form')) {
             $validate = $validate->check($_POST, array(
-                'visit_date' => array(
+                'enrollment_date' => array(
                     'required' => true,
                 ),
             ));
@@ -371,7 +371,7 @@ if ($user->isLoggedIn()) {
                     // $dr_ds = implode(',', Input::get('dr_ds'));
                     if ($enrollment_form) {
                         $user->updateRecord('enrollment_form', array(
-                            'enrollment_date' => Input::get('visit_date'),
+                            'enrollment_date' => Input::get('enrollment_date'),
                             'cough2weeks' => Input::get('cough2weeks'),
                             'cough_any' => Input::get('cough_any'),
                             'poor_weight' => Input::get('poor_weight'),
@@ -425,7 +425,7 @@ if ($user->isLoggedIn()) {
                     } else {
                         $user->createRecord('enrollment_form', array(
                             'pid' => $clients['pid'],
-                            'enrollment_date' => Input::get('visit_date'),
+                            'enrollment_date' => Input::get('enrollment_date'),
                             'cough2weeks' => Input::get('cough2weeks'),
                             'cough_any' => Input::get('cough_any'),
                             'poor_weight' => Input::get('poor_weight'),
@@ -8828,10 +8828,10 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <!-- select -->
                                                         <div class="form-group">
-                                                            <label>Date of Visit:</label>
+                                                            <label>Date of enrolment</label>
                                                             <input class="form-control" type="date"
-                                                                max="<?= date('Y-m-d'); ?>" name="visit_date"
-                                                                id="visit_date" value="<?php if ($clients['enrollment_date']) {
+                                                                max="<?= date('Y-m-d'); ?>" name="enrollment_date"
+                                                                id="enrollment_date" value="<?php if ($clients['enrollment_date']) {
                                                                     print_r($clients['enrollment_date']);
                                                                 } ?>" required />
                                                         </div>
