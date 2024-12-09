@@ -363,15 +363,20 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 try {
-                    $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
-                    $enrollment_form = $override->getNews('enrollment_form', 'status', 1, 'patient_id', $_GET['cid']);
-
+                    $enrollment_form = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['cid']);
                     $diseases_medical = implode(',', Input::get('diseases_medical'));
                     $sputum_samples = implode(',', Input::get('sputum_samples'));
-                    // $dr_ds = implode(',', Input::get('dr_ds'));
                     if ($enrollment_form) {
+                        print_r($enrollment_form);
                         $user->updateRecord('enrollment_form', array(
                             'enrollment_date' => Input::get('enrollment_date'),
+                            'dob' => Input::get('dob'),
+                            'age' => Input::get('age'),
+                            'sex' => Input::get('sex'),
+                            'region' => Input::get('region'),
+                            'district' => Input::get('district'),
+                            'ward' => Input::get('ward'),
+                            'village_street' => Input::get('village_street'),
                             'cough2weeks' => Input::get('cough2weeks'),
                             'cough_any' => Input::get('cough_any'),
                             'poor_weight' => Input::get('poor_weight'),
@@ -418,14 +423,22 @@ if ($user->isLoggedIn()) {
                             'enrollment_verified_date' => Input::get('enrollment_verified_date'),
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
                         ), $_GET['cid']);
 
                         $successMessage = 'Enrollment Form Updated Successful';
                     } else {
+                        $std_id = $override->get('study_id', 'status', 0)[0];
+
                         $user->createRecord('enrollment_form', array(
-                            'pid' => $clients['pid'],
+                            'pid' => $std_id['study_id'],
                             'enrollment_date' => Input::get('enrollment_date'),
+                            'dob' => Input::get('dob'),
+                            'age' => Input::get('age'),
+                            'sex' => Input::get('sex'),
+                            'region' => Input::get('region'),
+                            'district' => Input::get('district'),
+                            'ward' => Input::get('ward'),
+                            'village_street' => Input::get('village_street'),
                             'cough2weeks' => Input::get('cough2weeks'),
                             'cough_any' => Input::get('cough_any'),
                             'poor_weight' => Input::get('poor_weight'),
@@ -470,18 +483,17 @@ if ($user->isLoggedIn()) {
                             'enrollment_completed_date' => Input::get('enrollment_completed_date'),
                             'enrollment_verified_by' => Input::get('enrollment_verified_by'),
                             'enrollment_verified_date' => Input::get('enrollment_verified_date'),
-                            'patient_id' => $clients['id'],
                             'status' => 1,
                             'create_on' => date('Y-m-d H:i:s'),
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
+                            'facility_id' => $user->data()->site_id,
                         ));
 
                         $successMessage = 'Enrollment Form  Added Successful';
                     }
-                    Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&status=3&msg=' . $successMessage);
+                    Redirect::to('info.php?id=3&cid=' . $_GET['cid'] . '&status=1&msg=' . $successMessage);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -626,7 +638,7 @@ if ($user->isLoggedIn()) {
                         'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
-                                                    'site_id' => $clients['facility_id'],
+                        'site_id' => $clients['facility_id'],
                     ), $individual[0]['id']);
 
                     $successMessage = 'Diagnosis test  Successful Updated';
@@ -3368,10 +3380,10 @@ if ($user->isLoggedIn()) {
                                                             ):</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter comments here">
-                                                                                                                                    <?php if ($facility['comments']) {
-                                                                                                                                        print_r($facility['comments']);
-                                                                                                                                    } ?>
-                                                                                                                                    </textarea>
+                                                                                                                                                    <?php if ($facility['comments']) {
+                                                                                                                                                        print_r($facility['comments']);
+                                                                                                                                                    } ?>
+                                                                                                                                                    </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5153,7 +5165,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                        </textarea>
+                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5866,7 +5878,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                        </textarea>
+                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6111,10 +6123,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                    <?php if ($screening['comments']) {
-                                                                                                        print_r($screening['comments']);
-                                                                                                    } ?>
-                                                                                                </textarea>
+                                                                                                                    <?php if ($screening['comments']) {
+                                                                                                                        print_r($screening['comments']);
+                                                                                                                    } ?>
+                                                                                                                </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -7897,10 +7909,11 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <label>List drug resistance mutations detected</label>
                                                             <textarea class="form-control" name="mutations_detected_list"
-                                                                rows="3" placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
+                                                                rows="3"
+                                                                placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                        </textarea>
+                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7930,7 +7943,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                        </textarea>
+                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8633,7 +8646,7 @@ if ($user->isLoggedIn()) {
                                                             placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                 print_r($costing['comments']);
                                                             } ?>
-                                                                                                        </textarea>
+                                                                                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -8808,23 +8821,31 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row">
                             <?php
-                            $clients = $override->getNews('enrollment_form', 'status', 1, 'patient_id', $_GET['cid'])[0];
+                            $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['cid'])[0];
+                            // $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
+                            $sex = $override->get('sex', 'id', $clients['sex'])[0];
+                            $education = $override->get('education', 'id', $clients['education'])[0];
+                            $occupation = $override->get('occupation', 'id', $clients['occupation'])[0];
+                            $regions = $override->get('regions', 'id', $clients['region'])[0];
+                            $districts = $override->get('districts', 'id', $clients['district'])[0];
+                            $wards = $override->get('wards', 'id', $clients['ward'])[0];
+                            $facility = $override->get('districts', 'id', $clients['facility_district'])[0];
+                            $site = $override->get('sites', 'id', $clients['facility_id'])[0];
                             ?>
                             <!-- right column -->
                             <div class="col-md-12">
                                 <!-- general form elements disabled -->
                                 <div class="card card-warning">
                                     <div class="card-header">
-                                        <h3 class="card-title">Reason(s) for being regarded a presumptive TB patient at
-                                            initial
-                                            assessment (Multiple selection)</h3>
+                                        <h3 class="card-title">Details of enrolment and patient demographics</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <form id="clients" enctype="multipart/form-data" method="post" autocomplete="off">
-                                        <div class="card-body">
+                                    <form id="clients" enctype="multipart/form-data" method="post" autocomplete="off"
+                                        style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                        <div class="card-body">                                          
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-3" style="flex: 1;">
                                                     <div class="row-form clearfix">
                                                         <!-- select -->
                                                         <div class="form-group">
@@ -8837,8 +8858,138 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-sm-3" style="flex: 1;">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Date of birth:</label>
+                                                            <input class="form-control" max="<?= date('Y-m-d'); ?>"
+                                                                type="date" max="<?= date('Y-m-d'); ?>" name="dob" id="dob"
+                                                                style="width: 100%;" value="<?php if ($clients['dob']) {
+                                                                    print_r($clients['dob']);
+                                                                } ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" style="flex: 1;">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Age</label>
+                                                            <input class="form-control" type="number" min="0" max="100"
+                                                                name="age" id="age" value="<?php if ($clients['age']) {
+                                                                    print_r($clients['age']);
+                                                                } ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" style="flex: 1;">
+                                                    <label>SEX</label>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="sex"
+                                                                    id="sex" value="1" <?php if ($clients['sex'] == 1) {
+                                                                        echo 'checked';
+                                                                    } ?> required>
+                                                                <label class="form-check-label">Male</label>
+                                                            </div>
+
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="sex"
+                                                                    id="sex" value="2" <?php if ($clients['sex'] == 2) {
+                                                                        echo 'checked';
+                                                                    } ?>>
+                                                                <label class="form-check-label">Female</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
+                                            <hr>
+
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Patient’s Residence address </h3>
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Region</label>
+                                                            <select id="region" name="region" class="form-control" required>
+                                                                <option value="<?= $regions['id'] ?>"><?php if ($clients['region']) {
+                                                                      print_r($regions['name']);
+                                                                  } else {
+                                                                      echo 'Select region';
+                                                                  } ?>
+                                                                </option>
+                                                                <?php foreach ($override->get('regions', 'status', 1) as $region) { ?>
+                                                                    <option value="<?= $region['id'] ?>"><?= $region['name'] ?>
+                                                                    </option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>District</label>
+                                                            <select id="district" name="district" class="form-control"
+                                                                required>
+                                                                <option value="<?= $districts['id'] ?>"><?php if ($clients['district']) {
+                                                                      print_r($districts['name']);
+                                                                  } else {
+                                                                      echo 'Select district';
+                                                                  } ?>
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Ward</label>
+                                                            <select id="ward" name="ward" class="form-control" required>
+                                                                <option value="<?= $wards['id'] ?>"><?php if ($clients['ward']) {
+                                                                      print_r($wards['name']);
+                                                                  } else {
+                                                                      echo 'Select district';
+                                                                  } ?>
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Village/street</label>
+                                                            <input class="form-control" type="text" name="village_street"
+                                                                value="<?php if ($clients['village_street']) {
+                                                                    print_r($clients['village_street']);
+                                                                } ?>" required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Reason(s) for being regarded as presumptive TB
+                                                        patient at initial assessment </h3>
+                                                </div>
+                                            </div>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-3">
@@ -9074,10 +9225,10 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                             <?php foreach ($override->get('dr_ds', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dr_ds', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="dr_ds" id="dr_ds<?= $value['id']; ?>"
+                                                                    <input class="form-check-input" type="radio" name="dr_ds"
+                                                                        id="dr_ds<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($clients['dr_ds'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
@@ -9086,7 +9237,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                                                                            <button type="button" onclick="unsetRadio('dr_ds')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('dr_ds')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9645,8 +9796,9 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>40. This form was completed by (name) </label>
-                                                            <select id="enrollment_completed_by" name="enrollment_completed_by"
-                                                                class="form-control" required>
+                                                            <select id="enrollment_completed_by"
+                                                                name="enrollment_completed_by" class="form-control"
+                                                                required>
                                                                 <?php $enrollment_completed = $override->get('user', 'id', $clients['enrollment_completed_by'])[0]; ?>
                                                                 <option value="<?= $enrollment_completed['id'] ?>">
                                                                     <?php if ($clients['enrollment_completed_by']) {
@@ -9685,8 +9837,8 @@ if ($user->isLoggedIn()) {
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <label>40. This form was Verified by (name) </label>
-                                                                <select id="enrollment_verified_by" name="enrollment_verified_by"
-                                                                    class="form-control" required>
+                                                                <select id="enrollment_verified_by"
+                                                                    name="enrollment_verified_by" class="form-control" required>
                                                                     <?php $enrollment_completed = $override->get('user', 'id', $clients['enrollment_verified_by'])[0]; ?>
                                                                     <option value="<?= $enrollment_completed['id'] ?>">
                                                                         <?php if ($clients['enrollment_verified_by']) {
@@ -11444,7 +11596,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                        </textarea>
+                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -11967,6 +12119,7 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/enrollment/immunosuppressive.js"></script>
     <script src="myjs/add/enrollment/diseases_medical.js"></script>
     <script src="myjs/add/enrollment/chest_x_ray.js"></script>
+    <script src="myjs/add/enrollment/dob.js"></script>
 
 
 
