@@ -15,6 +15,13 @@ function toggleElementVisibility() {
   if (tb_treatment1_1.checked) {
     tb_treatment_date1.style.display = "block";
     tb_treatment_date.style.display = "block";
+    tb_facility1.style.display = "none";
+    tb_facility.style.display = "none";
+    tb_reason1.style.display = "none";
+    tb_reason.style.display = "none";
+  } else if (tb_treatment2_1.checked) {
+    tb_treatment_date1.style.display = "none";
+    tb_treatment_date.style.display = "none";
     tb_facility1.style.display = "block";
     tb_facility.style.display = "block";
     tb_reason1.style.display = "none";
