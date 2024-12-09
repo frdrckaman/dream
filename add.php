@@ -378,16 +378,19 @@ if ($user->isLoggedIn()) {
                             'ward' => Input::get('ward'),
                             'village_street' => Input::get('village_street'),
                             'cough2weeks' => Input::get('cough2weeks'),
-                            'cough_any' => Input::get('cough_any'),
+                            'chest_xray' => Input::get('chest_xray'),
                             'poor_weight' => Input::get('poor_weight'),
                             'coughing_blood' => Input::get('coughing_blood'),
                             'unexplained_fever' => Input::get('unexplained_fever'),
                             'night_sweats' => Input::get('night_sweats'),
                             'neck_lymph' => Input::get('neck_lymph'),
+                            'date_information_collected' => Input::get('date_information_collected'),
                             'history_tb' => Input::get('history_tb'),
                             'tx_previous' => Input::get('tx_previous'),
-                            'tx_number' => Input::get('tx_number'),
-                            'dr_ds' => Input::get('dr_ds'),
+                            'tx_month' => Input::get('tx_month'),
+                            'tx_year' => Input::get('tx_year'),
+                            'tx_unknown' => Input::get('tx_unknown'),
+                                                        'dr_ds' => Input::get('dr_ds'),
                             'tb_category' => Input::get('tb_category'),
                             'relapse_years' => Input::get('relapse_years'),
                             'ltf_months' => Input::get('ltf_months'),
@@ -440,15 +443,18 @@ if ($user->isLoggedIn()) {
                             'ward' => Input::get('ward'),
                             'village_street' => Input::get('village_street'),
                             'cough2weeks' => Input::get('cough2weeks'),
-                            'cough_any' => Input::get('cough_any'),
+                            'chest_xray' => Input::get('chest_xray'),
                             'poor_weight' => Input::get('poor_weight'),
                             'coughing_blood' => Input::get('coughing_blood'),
                             'unexplained_fever' => Input::get('unexplained_fever'),
                             'night_sweats' => Input::get('night_sweats'),
                             'neck_lymph' => Input::get('neck_lymph'),
+                            'date_information_collected' => Input::get('date_information_collected'),
                             'history_tb' => Input::get('history_tb'),
                             'tx_previous' => Input::get('tx_previous'),
-                            'tx_number' => Input::get('tx_number'),
+                            'tx_month' => Input::get('tx_month'),
+                                                        'tx_year' => Input::get('tx_year'),
+                            'tx_unknown' => Input::get('tx_unknown'),
                             'dr_ds' => Input::get('dr_ds'),
                             'tb_category' => Input::get('tb_category'),
                             'relapse_years' => Input::get('relapse_years'),
@@ -3380,10 +3386,10 @@ if ($user->isLoggedIn()) {
                                                             ):</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter comments here">
-                                                                                                                                                    <?php if ($facility['comments']) {
-                                                                                                                                                        print_r($facility['comments']);
-                                                                                                                                                    } ?>
-                                                                                                                                                    </textarea>
+                                                                                                                                                                        <?php if ($facility['comments']) {
+                                                                                                                                                                            print_r($facility['comments']);
+                                                                                                                                                                        } ?>
+                                                                                                                                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5165,7 +5171,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                        </textarea>
+                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5878,7 +5884,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                        </textarea>
+                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6123,10 +6129,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                                    <?php if ($screening['comments']) {
-                                                                                                                        print_r($screening['comments']);
-                                                                                                                    } ?>
-                                                                                                                </textarea>
+                                                                                                                                        <?php if ($screening['comments']) {
+                                                                                                                                            print_r($screening['comments']);
+                                                                                                                                        } ?>
+                                                                                                                                    </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -7913,7 +7919,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                        </textarea>
+                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7943,7 +7949,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                        </textarea>
+                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8646,7 +8652,7 @@ if ($user->isLoggedIn()) {
                                                             placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                 print_r($costing['comments']);
                                                             } ?>
-                                                                                                                        </textarea>
+                                                                                                                                            </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -8842,14 +8848,14 @@ if ($user->isLoggedIn()) {
                                     <!-- /.card-header -->
                                     <form id="clients" enctype="multipart/form-data" method="post" autocomplete="off"
                                         style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                        <div class="card-body">                                          
+                                        <div class="card-body">
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-3" style="flex: 1;">
                                                     <div class="row-form clearfix">
                                                         <!-- select -->
                                                         <div class="form-group">
-                                                            <label>Date of enrolment</label>
+                                                            <label>2. Date of enrolment</label>
                                                             <input class="form-control" type="date"
                                                                 max="<?= date('Y-m-d'); ?>" name="enrollment_date"
                                                                 id="enrollment_date" value="<?php if ($clients['enrollment_date']) {
@@ -8861,7 +8867,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3" style="flex: 1;">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Date of birth:</label>
+                                                            <label>4. Date of birth:</label>
                                                             <input class="form-control" max="<?= date('Y-m-d'); ?>"
                                                                 type="date" max="<?= date('Y-m-d'); ?>" name="dob" id="dob"
                                                                 style="width: 100%;" value="<?php if ($clients['dob']) {
@@ -8874,7 +8880,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3" style="flex: 1;">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Age</label>
+                                                            <label>5. Age (years)</label>
                                                             <input class="form-control" type="number" min="0" max="100"
                                                                 name="age" id="age" value="<?php if ($clients['age']) {
                                                                     print_r($clients['age']);
@@ -8884,7 +8890,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" style="flex: 1;">
-                                                    <label>SEX</label>
+                                                    <label>6. SEX</label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <div class="form-check">
@@ -8920,7 +8926,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Region</label>
+                                                            <label>7. Region</label>
                                                             <select id="region" name="region" class="form-control" required>
                                                                 <option value="<?= $regions['id'] ?>"><?php if ($clients['region']) {
                                                                       print_r($regions['name']);
@@ -8940,7 +8946,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>District</label>
+                                                            <label>7. District</label>
                                                             <select id="district" name="district" class="form-control"
                                                                 required>
                                                                 <option value="<?= $districts['id'] ?>"><?php if ($clients['district']) {
@@ -8957,7 +8963,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Ward</label>
+                                                            <label>7. Ward</label>
                                                             <select id="ward" name="ward" class="form-control" required>
                                                                 <option value="<?= $wards['id'] ?>"><?php if ($clients['ward']) {
                                                                       print_r($wards['name']);
@@ -8973,7 +8979,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-3">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Village/street</label>
+                                                            <label>8. Village/street</label>
                                                             <input class="form-control" type="text" name="village_street"
                                                                 value="<?php if ($clients['village_street']) {
                                                                     print_r($clients['village_street']);
@@ -8992,10 +8998,10 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>12. Cough of >2 weeks</label>
+                                                            <label>9a. Cough of >2 weeks</label>
                                                             <select id="cough2weeks" name="cough2weeks" class="form-control"
                                                                 required>
                                                                 <?php $cough2weeks = $override->get('yes_no', 'id', $clients['cough2weeks'])[0]; ?>
@@ -9014,33 +9020,10 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>13. Cough any duration for PLHIV</label>
-                                                            <select id="cough_any" name="cough_any" class="form-control"
-                                                                required>
-                                                                <?php $cough_any = $override->get('yes_no', 'id', $clients['cough_any'])[0]; ?>
-                                                                <option value="<?= $cough_any['id'] ?>"><?php if ($clients['cough_any']) {
-                                                                      print_r($cough_any['name']);
-                                                                  } else {
-                                                                      echo 'Select';
-                                                                  } ?>
-                                                                </option>
-                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?>
-                                                                    </option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>14. Poor weight gain or loss of weight</label>
+                                                            <label>9b. Poor weight gain or loss of weight</label>
                                                             <select id="poor_weight" name="poor_weight" class="form-control"
                                                                 required>
                                                                 <?php $poor_weight = $override->get('yes_no', 'id', $clients['poor_weight'])[0]; ?>
@@ -9059,10 +9042,10 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>15. Coughing up blood</label>
+                                                            <label>9c. Coughing up blood</label>
                                                             <select id="coughing_blood" name="coughing_blood"
                                                                 class="form-control" required>
                                                                 <?php $coughing_blood = $override->get('yes_no', 'id', $clients['coughing_blood'])[0]; ?>
@@ -9080,15 +9063,16 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
 
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>16. Unexplained fever</label>
+                                                            <label>9d. Unexplained fever</label>
                                                             <select id="unexplained_fever" name="unexplained_fever"
                                                                 class="form-control" required>
                                                                 <?php $unexplained_fever = $override->get('yes_no', 'id', $clients['unexplained_fever'])[0]; ?>
@@ -9107,11 +9091,10 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>17. Drenching night sweats</label>
+                                                            <label>9e. Drenching night sweats</label>
                                                             <select id="night_sweats" name="night_sweats"
                                                                 class="form-control" required>
                                                                 <?php $night_sweats = $override->get('yes_no', 'id', $clients['night_sweats'])[0]; ?>
@@ -9130,10 +9113,10 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>18. Enlarged neck lymph nodes</label>
+                                                            <label>9f. Lymph nodes in neck enlarged</label>
                                                             <select id="neck_lymph" name="neck_lymph" class="form-control"
                                                                 required>
                                                                 <?php $neck_lymph = $override->get('yes_no', 'id', $clients['neck_lymph'])[0]; ?>
@@ -9151,11 +9134,15 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div class="col-sm-3">
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>19. Contact history with infectious TB patient</label>
+                                                            <label>9g. Contact history with infectious TB patient</label>
                                                             <select id="history_tb" name="history_tb" class="form-control"
                                                                 required>
                                                                 <?php $history_tb = $override->get('yes_no', 'id', $clients['history_tb'])[0]; ?>
@@ -9170,6 +9157,43 @@ if ($user->isLoggedIn()) {
                                                                     </option>
                                                                 <?php } ?>
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>9h. chest X-ray</label>
+                                                            <select id="chest_xray" name="chest_xray" class="form-control"
+                                                                required>
+                                                                <?php $history_tb = $override->get('yes_no', 'id', $clients['chest_xray'])[0]; ?>
+                                                                <option value="<?= $history_tb['id'] ?>"><?php if ($clients['chest_xray']) {
+                                                                      print_r($history_tb['name']);
+                                                                  } else {
+                                                                      echo 'Select';
+                                                                  } ?>
+                                                                </option>
+                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?>
+                                                                    </option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4" style="flex: 1;">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>9i. Date information collected</label>
+                                                            <input class="form-control" type="date"
+                                                                max="<?= date('Y-m-d'); ?>"
+                                                                name="date_information_collected"
+                                                                id="date_information_collected" value="<?php if ($clients['date_information_collected']) {
+                                                                    print_r($clients['date_information_collected']);
+                                                                } ?>" required />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9211,14 +9235,50 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-4" id="tx_number1">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>21. If yes, how many times</label>
-                                                            <input class="form-control" type="number" name="tx_number"
-                                                                id="tx_number" placeholder="Type how many ... " value="<?php if ($clients['tx_number']) {
-                                                                    print_r($clients['tx_number']);
-                                                                } ?>" />
+                                                            <label for="tx_month">21. When did the patient’s last treatment
+                                                                episode end?</label>
+
+                                                            <!-- Row for Month and Year -->
+                                                            <div class="row">
+                                                                <!-- Month Input -->
+                                                                <div class="col-sm-6">
+                                                                    <label for="tx_month" class="form-label">Month</label>
+                                                                    <input class="form-control" type="number"
+                                                                        name="tx_month" id="tx_month"
+                                                                        placeholder="Type Month..." min="1" max="12"
+                                                                        value="<?php if ($clients['tx_month']) {
+                                                                            print_r($clients['tx_month']);
+                                                                        } ?>" />
+                                                                </div>
+
+                                                                <!-- Year Input -->
+                                                                <div class="col-sm-6">
+                                                                    <label for="tx_year" class="form-label">Year</label>
+                                                                    <input class="form-control" type="number" name="tx_year"
+                                                                        id="tx_year" placeholder="Type Year..." min="1970"
+                                                                        max="2025"
+                                                                        value="<?php if ($clients['tx_year']) {
+                                                                            print_r($clients['tx_year']);
+                                                                        } ?>" />
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Unknown Checkbox -->
+                                                            <div class="form-check mt-3">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    id="tx_unknown" name="tx_unknown" value="1" <?php if ($clients['tx_unknown'] ?? false) {
+                                                                        echo 'checked';
+                                                                    } ?>>
+                                                                <label class="form-check-label"
+                                                                    for="tx_unknown">Unknown</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
+
+
+
 
                                                 <div class="col-sm-4" id="dr_ds1">
                                                     <label>22. Was it DR or DS TB </label>
@@ -9282,18 +9342,40 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-sm-4" id="ltf_months1">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>25. If LTF for how long the participant received TB
                                                                 treatment? (months)</label>
-                                                            <input class="form-control" type="number" name="ltf_months"
-                                                                id="ltf_months" placeholder="Type years..." value="<?php if ($clients['ltf_months']) {
-                                                                    print_r($clients['ltf_months']);
-                                                                } ?>" />
+
+                                                            <!-- Row for Month and Year -->
+                                                            <div class="row">
+                                                                <!-- Month Input -->
+                                                                <div class="col-sm-12">
+                                                                    <label for="tx_month" class="form-label">Months</label>
+                                                                    <input class="form-control" type="number"
+                                                                        name="ltf_months" id="ltf_months"
+                                                                        placeholder="Type Month..." min="1" max="12"
+                                                                        value="<?php if ($clients['ltf_months']) {
+                                                                            print_r($clients['ltf_months']);
+                                                                        } ?>" />
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Unknown Checkbox -->
+                                                            <div class="form-check mt-3">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    id="ltf_months_unknown" name="ltf_months_unknown" value="1" <?php if ($clients['ltf_months_unknown'] ?? false) {
+                                                                        echo 'checked';
+                                                                    } ?>>
+                                                                <label class="form-check-label"
+                                                                    for="ltf_months_unknown">Unknown</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-sm-4" id="tb_regimen1">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9320,15 +9402,35 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
+
                                                 <div class="col-sm-3" id="regimen_months1">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>27. How long was the treatment regimen (months)</label>
-                                                            <input class="form-control" type="number" name="regimen_months"
-                                                                id="regimen_months" placeholder="Type lastname..."
-                                                                onkeyup="fetchData()" value="<?php if ($clients['regimen_months']) {
-                                                                    print_r($clients['regimen_months']);
-                                                                } ?>" />
+                                                            <label>10g. How long was the treatment regimen</label>
+
+                                                            <!-- Row for Month and Year -->
+                                                            <div class="row">
+                                                                <!-- Month Input -->
+                                                                <div class="col-sm-12">
+                                                                    <label for="regimen_months" class="form-label">Months</label>
+                                                                    <input class="form-control" type="number"
+                                                                        name="regimen_months" id="regimen_months"
+                                                                        placeholder="Type Month..." min="1" max="12"
+                                                                        value="<?php if ($clients['regimen_months']) {
+                                                                            print_r($clients['regimen_months']);
+                                                                        } ?>" />
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Unknown Checkbox -->
+                                                            <div class="form-check mt-3">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    id="regimen_months" name="regimen_months_unknown" value="1" <?php if ($clients['regimen_months_unknown'] ?? false) {
+                                                                        echo 'checked';
+                                                                    } ?>>
+                                                                <label class="form-check-label"
+                                                                    for="regimen_months_unknown">Unknown</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -11596,7 +11698,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                        </textarea>
+                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -12120,6 +12222,9 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/enrollment/diseases_medical.js"></script>
     <script src="myjs/add/enrollment/chest_x_ray.js"></script>
     <script src="myjs/add/enrollment/dob.js"></script>
+        <script src="myjs/add/enrollment/tx_episode.js"></script>
+                <script src="myjs/add/enrollment/tx_ltf_months.js"></script>
+                                <script src="myjs/add/enrollment/tx_ltf_months.js"></script>
 
 
 

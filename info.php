@@ -1096,6 +1096,7 @@ if ($user->isLoggedIn()) {
                                                 <tr>
                                                     <th>Enrollment Date</th>
                                                     <th>PID</th>
+                                                    <th>Date of Birth</th>
                                                     <th>Age</th>
                                                     <th>Sex</th>
                                                     <th>Site</th>
@@ -1116,6 +1117,9 @@ if ($user->isLoggedIn()) {
                                                         </td>
                                                         <td class="table-user">
                                                             <?= $value['pid']; ?>
+                                                        </td>
+                                                        <td class="table-user">
+                                                            <?= $value['dob']; ?>
                                                         </td>
                                                         <td class="table-user">
                                                             <?= $value['age']; ?>
@@ -1219,6 +1223,7 @@ if ($user->isLoggedIn()) {
                                                 <tr>
                                                     <th>Enrollment Date</th>
                                                     <th>PID</th>
+                                                    <th>Date of Birth</th>
                                                     <th>Age</th>
                                                     <th>Sex</th>
                                                     <th>Site</th>
@@ -1440,10 +1445,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
-                                                                                                                                                                                                        echo $enrollment['comments'];
-                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                            <?php if ($enrollment['comments']) {
+                                                                                                                                                                                                                echo $enrollment['comments'];
+                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3006,10 +3011,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                    <?php if ($visit['comments']) {
-                                                                                                                                                                                                        echo $visit['comments'];
-                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                            <?php if ($visit['comments']) {
+                                                                                                                                                                                                                echo $visit['comments'];
+                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
