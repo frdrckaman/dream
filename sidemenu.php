@@ -258,8 +258,8 @@ if ($user->isLoggedIn()) {
                         <li class="nav-item">
                             <a href="info.php?id=3&status=1" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <span class="badge badge-info right"><?= $screened; ?></span>
-                                <p>Total Screened Patients</p>
+                                <span class="badge badge-info right"><?= $enrolled; ?></span>
+                                <p>Enrolled Patients</p>
                             </a>
                         </li>
                     </ul>

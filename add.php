@@ -524,10 +524,7 @@ if ($user->isLoggedIn()) {
             }
         } elseif (Input::get('add_diagnosis_test')) {
             $validate = $validate->check($_POST, array(
-                'visit_date' => array(
-                    'required' => true,
-                ),
-                'culture_done' => array(
+                'culture_performed' => array(
                     'required' => true,
                 ),
             ));
@@ -577,19 +574,16 @@ if ($user->isLoggedIn()) {
 
                 if ($individual) {
                     $user->updateRecord('diagnosis_test', array(
-                        'visit_date' => Input::get('visit_date'),
-                        'culture_done' => Input::get('culture_done'),
-                        'sample_type2' => Input::get('sample_type2'),
-                        'sample_type_other2' => Input::get('sample_type_other2'),
+                        'sputum_test' => Input::get('sputum_test'),
+                        'anti_tb' => Input::get('anti_tb'),
+                        'mic' => Input::get('mic'),
+                        'culture_performed' => Input::get('culture_performed'),
+                        'culture_type' => Input::get('culture_type'),
+                        'culture_type_other' => Input::get('culture_type_other'),
+                        'phenotypic_performed' => Input::get('phenotypic_performed'),
                         'sample_methods' => $sample_methods,
-                        'lj_date' => Input::get('lj_date'),
-                        'mgit_date' => Input::get('mgit_date'),
                         'lj_results' => Input::get('lj_results'),
                         'mgit_results' => Input::get('mgit_results'),
-                        'phenotypic_method' => Input::get('phenotypic_method'),
-                        'phenotypic_done' => Input::get('phenotypic_done'),
-                        'apm_date' => Input::get('apm_date'),
-                        'mgit_date2' => Input::get('mgit_date2'),
                         'rifampicin' => Input::get('rifampicin'),
                         'isoniazid' => Input::get('isoniazid'),
                         'levofloxacin' => Input::get('levofloxacin'),
@@ -669,19 +663,16 @@ if ($user->isLoggedIn()) {
                 } else {
                     $user->createRecord('diagnosis_test', array(
                         'pid' => $clients['pid'],
-                        'visit_date' => Input::get('visit_date'),
-                        'culture_done' => Input::get('culture_done'),
-                        'sample_type2' => Input::get('sample_type2'),
-                        'sample_type_other2' => Input::get('sample_type_other2'),
+                        'sputum_test' => Input::get('sputum_test'),
+                        'anti_tb' => Input::get('anti_tb'),
+                        'mic' => Input::get('mic'),
+                        'culture_performed' => Input::get('culture_performed'),
+                        'culture_type' => Input::get('culture_type'),
+                        'culture_type_other' => Input::get('culture_type_other'),
+                        'phenotypic_performed' => Input::get('phenotypic_performed'),
                         'sample_methods' => $sample_methods,
-                        'lj_date' => Input::get('lj_date'),
-                        'mgit_date' => Input::get('mgit_date'),
                         'lj_results' => Input::get('lj_results'),
                         'mgit_results' => Input::get('mgit_results'),
-                        'phenotypic_method' => Input::get('phenotypic_method'),
-                        'phenotypic_done' => Input::get('phenotypic_done'),
-                        'apm_date' => Input::get('apm_date'),
-                        'mgit_date2' => Input::get('mgit_date2'),
                         'rifampicin' => Input::get('rifampicin'),
                         'isoniazid' => Input::get('isoniazid'),
                         'levofloxacin' => Input::get('levofloxacin'),
@@ -745,8 +736,6 @@ if ($user->isLoggedIn()) {
                         'mutations_detected_list' => Input::get('mutations_detected_list'),
                         'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
                         'd_firstName' => Input::get('d_firstName'),
-                        'd_middleName' => Input::get('d_middleName'),
-                        // 'd_middleName' => Input::get('d_middleName'),
                         'comments' => Input::get('comments'),
                         'form_completness' => Input::get('form_completness'),
                         'date_completed' => Input::get('date_completed'),
@@ -1182,11 +1171,11 @@ if ($user->isLoggedIn()) {
                         'laboratory_test_used' => $laboratory_test_used,
                         'laboratory_test_used2' => $laboratory_test_used2,
                         'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                        'diagnosis_completed' => Input::get('diagnosis_completed'),
                         'comments' => Input::get('comments'),
-                        'form_completness' => Input::get('form_completness'),
-                        'date_completed' => Input::get('date_completed'),
-                        'diagnosis_verified_by' => Input::get('diagnosis_verified_by'),
+                        'diagnosis_completness' => Input::get('diagnosis_completness'),
+                        'diagnosis_completed_by' => $user->data()->id,
+                        'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
+                        'diagnosis_verified_by' => $user->data()->id,
                         'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
@@ -1232,10 +1221,10 @@ if ($user->isLoggedIn()) {
                         'laboratory_test_used' => $laboratory_test_used,
                         'laboratory_test_used2' => $laboratory_test_used2,
                         'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                        'diagnosis_completed' => Input::get('diagnosis_completed'),
                         'comments' => Input::get('comments'),
-                        'form_completness' => Input::get('form_completness'),
-                        'date_completed' => Input::get('date_completed'),
+                        'diagnosis_completness' => Input::get('diagnosis_completness'),
+                        'diagnosis_completed_by' => $user->data()->id,
+                        'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
                         'diagnosis_verified_by' => $user->data()->id,
                         'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
                         'status' => 1,
@@ -3387,10 +3376,10 @@ if ($user->isLoggedIn()) {
                                                             ):</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter comments here">
-                                                                                                                                                                                                                                            <?php if ($facility['comments']) {
-                                                                                                                                                                                                                                                print_r($facility['comments']);
-                                                                                                                                                                                                                                            } ?>
-                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                            <?php if ($facility['comments']) {
+                                                                                                                                                                                                                                                                print_r($facility['comments']);
+                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                            </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5123,7 +5112,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5783,7 +5772,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6028,10 +6017,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                                                                                                                            <?php if ($screening['comments']) {
-                                                                                                                                                                                                                print_r($screening['comments']);
-                                                                                                                                                                                                            } ?>
-                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                            <?php if ($screening['comments']) {
+                                                                                                                                                                                                                                print_r($screening['comments']);
+                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -6110,30 +6099,56 @@ if ($user->isLoggedIn()) {
                                     <!-- /.card-header -->
                                     <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
                                         <div class="card-body">
-                                            <hr>
                                             <div class="row">
-                                                <div class="col-3">
+                                                <div class="col-4">
                                                     <div class="mb-2">
-                                                        <label for="visit_date" class="form-label">Visit Date</label>
-                                                        <input type="date" value="<?php if ($costing['visit_date']) {
-                                                            print_r($costing['visit_date']);
-                                                        } ?>" id="visit_date" name="visit_date"
-                                                            max="<?= date('Y-m-d') ?>" class="form-control"
-                                                            placeholder="Enter date" required />
+                                                        <label for="sputum_test" class="form-label">Test conducted on sputum</label>
+                                                        <input type="text" value="<?php if ($costing['sputum_test']) {
+                                                            print_r($costing['sputum_test']);
+                                                        } ?>" id="sputum_test" name="sputum_test"
+                                                             class="form-control"
+                                                            placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3">
-                                                    <label for="culture_done" class="form-label">79. Culture done</label>
+                                                <div class="col-4">
+                                                    <div class="mb-2">
+                                                        <label for="anti_tb" class="form-label">Anti-TB drug (or probe)</label>
+                                                        <input type="text" value="<?php if ($costing['anti_tb']) {
+                                                            print_r($costing['anti_tb']);
+                                                        } ?>" id="anti_tb" name="anti_tb"
+                                                            class="form-control"
+                                                            placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-4">
+                                                    <div class="mb-2">
+                                                        <label for="mic" class="form-label">Test result (indicate minimum inhibitory concentration (MIC) if available)</label>
+                                                        <input type="text" value="<?php if ($costing['mic']) {
+                                                            print_r($costing['mic']);
+                                                        } ?>" id="mic" name="mic"
+                                                             class="form-control"
+                                                            placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label for="culture_performed" class="form-label">19a. Was culture
+                                                        performed?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="culture_done"
-                                                                        id="culture_done<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['culture_done'] == $value['id']) {
+                                                                        name="culture_performed"
+                                                                        id="culture_performed<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['culture_performed'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?> required>
                                                                     <label
@@ -6142,43 +6157,75 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                         <button type="button"
-                                                            onclick="unsetRadio('culture_done')">Unset</button>
+                                                            onclick="unsetRadio('culture_performed')">Unset</button>
 
                                                     </div>
                                                 </div>
 
 
-                                                <div class="col-sm-3" id="sample_type2">
-                                                    <label for="sample_type2" class="form-label">80.Sample type </label>
+                                                <div class="col-sm-6" id="culture_type">
+                                                    <label for="culture_type" class="form-label">19a. If yes </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sample_type', 'status2', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('culture_type', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="sample_type2"
-                                                                        id="sample_type2<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['sample_type2'] == $value['id']) {
+                                                                        name="culture_type"
+                                                                        id="culture_type<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['culture_type'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <label for="sample_type_other2" id="sample_type_other2_1"
+                                                            <label for="culture_type_other" id="culture_type_other"
                                                                 class="form-label">Specify</label>
-                                                            <input type="text" value="<?php if ($costing['sample_type_other2']) {
-                                                                print_r($costing['sample_type_other2']);
-                                                            } ?>" id="sample_type_other2_22" name="sample_type_other2"
+                                                            <input type="text" value="<?php if ($costing['culture_type_other']) {
+                                                                print_r($costing['culture_type_other']);
+                                                            } ?>" id="culture_type_other" name="culture_type_other"
                                                                 class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
                                                     <button type="button"
-                                                        onclick="unsetRadio('sample_type2')">Unset</button>
+                                                        onclick="unsetRadio('culture_type')">Unset</button>
 
                                                 </div>
 
-                                                <div class="col-sm-3" id="sample_methods">
+                                                
+                                            </div>                                           
+
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-3" id="phenotypic_performed">
+                                                    <label for="phenotypic_performed" class="form-label">19a. Was phenotypic DST performed?</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="phenotypic_performed"
+                                                                        id="phenotypic_performed<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['phenotypic_performed'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?>>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+
+                                                        </div>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('phenotypic_performed')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-3" id="phenotypic_method">
                                                     <label for="sample_methods" class="form-label">81.If yes above, then
                                                         method used (Multiple options) </label>
                                                     <!-- radio -->
@@ -6201,28 +6248,15 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <hr>
-
-                                            <div class="row">
-                                                <div class="col-3" id="lj_date1">
-                                                    <div class="mb-2">
-                                                        <label for="lj_date" class="form-label">LJ Date?</label>
-                                                        <input type="date" value="<?php if ($costing['lj_date']) {
-                                                            print_r($costing['lj_date']);
-                                                        } ?>" id="lj_date" name="lj_date" class="form-control"
-                                                            placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-
+                                            
                                                 <div class="col-sm-3" id="lj_results">
                                                     <label for="lj_results" class="form-label">82.Results LJ (Only If was
                                                         selected above) </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('lj_results', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('culture_type', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
                                                                         name="lj_results" id="lj_results<?= $value['id']; ?>"
@@ -6240,24 +6274,13 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3" id="mgit_date1">
-                                                    <div class="mb-2">
-                                                        <label for="mgit_date" class="form-label">MGIT Date?</label>
-                                                        <input type="date" value="<?php if ($costing['mgit_date']) {
-                                                            print_r($costing['mgit_date']);
-                                                        } ?>" id="mgit_date" name="mgit_date" class="form-control"
-                                                            placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-
-
                                                 <div class="col-sm-3" id="mgit_results">
                                                     <label for="mgit_results" class="form-label">83.Results MGIT (Only If
                                                         was selected above) </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('mgit_results', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('culture_type', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
                                                                         name="mgit_results"
@@ -6277,88 +6300,9 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
 
-                                            <hr>
-
-                                            <div class="row">
-
-                                                <div class="col-sm-4" id="phenotypic_done">
-                                                    <label for="phenotypic_done" class="form-label">84. Phenotypic DST was
-                                                        done?</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="phenotypic_done"
-                                                                        id="phenotypic_done<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['phenotypic_done'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('phenotypic_done')">Unset</button>
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4" id="phenotypic_method">
-                                                    <label for="phenotypic_method" class="form-label">85. If yes above, then
-                                                        method used? </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('sample_methods', 'status2', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="phenotypic_method"
-                                                                        id="phenotypic_method<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['phenotypic_method'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                    <button type="button"
-                                                        onclick="unsetRadio('phenotypic_method')">Unset</button>
-
-                                                </div>
-
-                                                <div class="col-4" id="apm_date_1">
-                                                    <div class="mb-2">
-                                                        <label for="apm_date" class="form-label">APM date ?</label>
-                                                        <input type="date" value="<?php if ($costing['apm_date']) {
-                                                            print_r($costing['apm_date']);
-                                                        } ?>" id="apm_date" name="apm_date" class="form-control"
-                                                            placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-4" id="mgit_date2_1">
-                                                    <div class="mb-2">
-                                                        <label for="mgit_date2" class="form-label">MGIT date ?</label>
-                                                        <input type="date" value="<?php if ($costing['mgit_date2']) {
-                                                            print_r($costing['mgit_date2']);
-                                                        } ?>" id="mgit_date2" name="mgit_date2" class="form-control"
-                                                            placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
                                             <div id="phenotypic_done00">
                                                 <hr>
-                                                Phenotypic DST
-                                                (Can selected multiple items on the right column but only one option from
-                                                the last column on the right with the respect to each item selected)
+                                                Phenotypic DST results
                                                 <hr>
                                                 <div class="row">
                                                     <div class="col-sm-3" id="rifampicin">
@@ -6955,7 +6899,8 @@ if ($user->isLoggedIn()) {
                                                         <div class="col-4" id="isoniazid2_error_code1">
                                                             <div class="mb-2">
                                                                 <label for="isoniazid2_error_code"
-                                                                    class="form-label">Specify Error Code</label>
+                                                                    class="form-label">Specify
+                                                                    Error Code</label>
                                                                 <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
                                                                     print_r($costing['isoniazid2_error_code']);
                                                                 } ?>" id="isoniazid2_error_code"
@@ -7029,8 +6974,8 @@ if ($user->isLoggedIn()) {
                                                                     Error Code</label>
                                                                 <input type="text" value="<?php if ($costing['amikacin2_error_code']) {
                                                                     print_r($costing['amikacin2_error_code']);
-                                                                } ?>" id="amikacin2_error_code"
-                                                                    name="amikacin2_error_code" class="form-control"
+                                                                } ?>" id="amikacin2_error_code" name="amikacin2_error_code"
+                                                                    class="form-control"
                                                                     placeholder="Enter here Error Code" />
                                                             </div>
                                                         </div>
@@ -7069,8 +7014,8 @@ if ($user->isLoggedIn()) {
                                                                     Error Code</label>
                                                                 <input type="text" value="<?php if ($costing['kanamycin_error_code']) {
                                                                     print_r($costing['kanamycin_error_code']);
-                                                                } ?>" id="kanamycin_error_code"
-                                                                    name="kanamycin_error_code" class="form-control"
+                                                                } ?>" id="kanamycin_error_code" name="kanamycin_error_code"
+                                                                    class="form-control"
                                                                     placeholder="Enter here Error Code" />
                                                             </div>
                                                         </div>
@@ -7101,7 +7046,8 @@ if ($user->isLoggedIn()) {
                                                         <div class="col-4" id="capreomycin_error_code1">
                                                             <div class="mb-2">
                                                                 <label for="capreomycin_error_code"
-                                                                    class="form-label">Specify Error Code</label>
+                                                                    class="form-label">Specify
+                                                                    Error Code</label>
                                                                 <input type="text" value="<?php if ($costing['capreomycin_error_code']) {
                                                                     print_r($costing['capreomycin_error_code']);
                                                                 } ?>" id="capreomycin_error_code"
@@ -7136,7 +7082,8 @@ if ($user->isLoggedIn()) {
                                                         <div class="col-4" id="ethionamide2_error_code1">
                                                             <div class="mb-2">
                                                                 <label for="ethionamide2_error_code"
-                                                                    class="form-label">Specify Error Code</label>
+                                                                    class="form-label">Specify
+                                                                    Error Code</label>
                                                                 <input type="text" value="<?php if ($costing['ethionamide2_error_code']) {
                                                                     print_r($costing['ethionamide2_error_code']);
                                                                 } ?>" id="ethionamide2_error_code"
@@ -7437,7 +7384,8 @@ if ($user->isLoggedIn()) {
                                                                             value="<?= $value['id']; ?>" <?php if ($costing['terizidone3'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
-                                                                        <label
+                                                                        <label                                        </div>
+
                                                                             class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
@@ -7819,7 +7767,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7849,7 +7797,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8515,7 +8463,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8538,18 +8486,19 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="diagnosis_completed"
-                                                                        id="diagnosis_completed<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['diagnosis_completed'] == $value['id']) {
+                                                                        name="diagnosis_completness"
+                                                                        id="diagnosis_completness<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['diagnosis_completness'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?>         <?php if ($costing['diagnosis_completed'] == 3) { ?> readonly <?php } ?> required>
+                                                                          } ?>         <?php if ($costing['diagnosis_completness'] == 3) { ?> readonly
+                                                                        <?php } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
                                                         <button type="button"
-                                                            onclick="unsetRadio('diagnosis_completed')">Unset</button>
+                                                            onclick="unsetRadio('diagnosis_completness')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -8560,10 +8509,11 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <label>Form completed Date</label>
                                                             <input class="form-control" type="date"
-                                                                name="enrollment_completed_date"
-                                                                id="enrollment_completed_date" value="<?php if ($costing['diagnosis_completed']) {
-                                                                    print_r($costing['enrollment_completed_date']);
-                                                                } ?>" <?php if ($costing['enrollment_completed'] == 3) { ?> readonly <?php } ?> />
+                                                                name="diagnosis_completed_date"
+                                                                id="diagnosis_completed_date" value="<?php if ($costing['diagnosis_completed_date']) {
+                                                                    print_r($costing['diagnosis_completed_date']);
+                                                                } ?>" <?php if ($costing['diagnosis_completness'] == 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8577,8 +8527,8 @@ if ($user->isLoggedIn()) {
                                                                 name="diagnosis_verified_date" id="diagnosis_verified_date"
                                                                 value="<?php if ($costing['diagnosis_verified_date']) {
                                                                     print_r($costing['diagnosis_verified_date']);
-                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
-                                                                    readonly <?php } ?> />
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?> readonly
+                                                                <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8743,7 +8693,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>7. Region</label>
@@ -8763,7 +8713,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>7. District</label>
@@ -8780,11 +8730,11 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3">
+                                                <!-- <div class="col-sm-3">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>7. Ward</label>
-                                                            <select id="ward" name="ward" class="form-control" required>
+                                                            <select id="ward" name="ward" class="form-control">
                                                                 <option value="<?= $wards['id'] ?>"><?php if ($clients['ward']) {
                                                                       print_r($wards['name']);
                                                                   } else {
@@ -8794,9 +8744,10 @@ if ($user->isLoggedIn()) {
                                                             </select>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
 
-                                                <div class="col-sm-3">
+
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>8. Village/street</label>
@@ -9465,7 +9416,8 @@ if ($user->isLoggedIn()) {
 
                                                                     <!-- DST Sample Type Input -->
                                                                     <label for="dst_sample_type"
-                                                                        class="form-label mt-2">Sample Type</label>
+                                                                        class="form-label mt-2">Sample
+                                                                        Type</label>
                                                                     <input class="form-control" type="text"
                                                                         name="dst_sample_type" id="dst_sample_type" value="<?php if ($clients['dst_sample_type']) {
                                                                             print_r($clients['dst_sample_type']);
@@ -9735,7 +9687,8 @@ if ($user->isLoggedIn()) {
                                                                 name="enrollment_completed_date"
                                                                 id="enrollment_completed_date" value="<?php if ($clients['enrollment_completed_date']) {
                                                                     print_r($clients['enrollment_completed_date']);
-                                                                } ?>" <?php if ($clients['enrollment_completed'] == 3) { ?> readonly <?php } ?> />
+                                                                } ?>" <?php if ($clients['enrollment_completed'] == 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9749,8 +9702,8 @@ if ($user->isLoggedIn()) {
                                                                 name="enrollment_verified_date"
                                                                 id="enrollment_verified_date" value="<?php if ($clients['enrollment_verified_date']) {
                                                                     print_r($clients['enrollment_verified_date']);
-                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
-                                                                    readonly <?php } ?> />
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?> readonly
+                                                                <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10166,8 +10119,8 @@ if ($user->isLoggedIn()) {
                                                                 results</label>
                                                             <input type="text" value="<?php if ($costing['fm_results']) {
                                                                 print_r($costing['fm_results']);
-                                                            } ?>" id="fm_results" name="fm_results"
-                                                                class="form-control" placeholder="Enter here" />
+                                                            } ?>" id="fm_results" name="fm_results" class="form-control"
+                                                                placeholder="Enter here" />
                                                         </div>
                                                     </div>
 
@@ -10250,8 +10203,8 @@ if ($user->isLoggedIn()) {
                                                             ljculres_date</label>
                                                         <input type="date" value="<?php if ($costing['ljculres_date']) {
                                                             print_r($costing['ljculres_date']);
-                                                        } ?>" id="ljculres_date" name="ljculres_date"
-                                                            class="form-control" placeholder="Enter here" />
+                                                        } ?>" id="ljculres_date" name="ljculres_date" class="form-control"
+                                                            placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -10289,8 +10242,8 @@ if ($user->isLoggedIn()) {
                                                             mgitcul_date</label>
                                                         <input type="date" value="<?php if ($costing['mgitcul_date']) {
                                                             print_r($costing['mgitcul_date']);
-                                                        } ?>" id="mgitcul_date" name="mgitcul_date"
-                                                            class="form-control" placeholder="Enter here" />
+                                                        } ?>" id="mgitcul_date" name="mgitcul_date" class="form-control"
+                                                            placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
@@ -11073,8 +11026,8 @@ if ($user->isLoggedIn()) {
                                                             myco_lineage</label>
                                                         <input type="text" value="<?php if ($costing['myco_lineage']) {
                                                             print_r($costing['myco_lineage']);
-                                                        } ?>" id="myco_lineage" name="myco_lineage"
-                                                            class="form-control" placeholder="Enter date" />
+                                                        } ?>" id="myco_lineage" name="myco_lineage" class="form-control"
+                                                            placeholder="Enter date" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -11479,7 +11432,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>

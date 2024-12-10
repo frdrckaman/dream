@@ -980,9 +980,9 @@ if ($user->isLoggedIn()) {
                                     if ($_GET['status'] == 1) {
                                         $data = $override->get('enrollment_form', 'status', 1);
                                     } else if ($_GET['status'] == 2) {
-                                        $data = $override->get('enrollment_form', 'status', 1);
+                                        $data = $override->get('enrollment_form', 'status', 0);
                                     } else {
-                                        $data = $override->get('enrollment_form', 'status', 1);
+                                        $data = $override->get('enrollment_form', 'status', 0);
                                     }
                                     ?>
                                     <?php
@@ -991,7 +991,7 @@ if ($user->isLoggedIn()) {
                                         ?>
                                         <?php
                                     } elseif ($_GET['status'] == 2) {
-                                        echo $title = 'Enrollment';
+                                        echo $title = 'End Study';
                                         ?>
                                         <?php
                                     } elseif ($_GET['status'] == 3) {
