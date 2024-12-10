@@ -927,8 +927,6 @@ if ($user->isLoggedIn()) {
                     }
                     Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
                 }
-
-                Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id']);
             } else {
                 $pageError = $validate->errors();
             }
@@ -951,8 +949,8 @@ if ($user->isLoggedIn()) {
                 // ),
             ));
             if ($validate->passed()) {
-                $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
-                $costing = $override->getNews('non_respiratory', 'status', 1, 'patient_id', $_GET['cid']);
+                $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id'])[0];
+                $costing = $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id']);
 
                 // $test_reasons = implode(',', Input::get('test_reasons'));
                 // $sample_type = implode(',', Input::get('sample_type'));
@@ -961,7 +959,6 @@ if ($user->isLoggedIn()) {
                 } else {
                     if ($costing) {
                         $user->updateRecord('non_respiratory', array(
-                            'visit_date' => Input::get('visit_date'),
                             'afb_microscopy' => Input::get('n_afb_microscopy'),
                             'afb_microscopy_date' => Input::get('n_afb_microscopy_date'),
                             'zn_results_a' => Input::get('n_zn_results_a'),
@@ -984,14 +981,14 @@ if ($user->isLoggedIn()) {
                             'form_completness' => Input::get('form_completness'),
                             'date_completed' => Input::get('date_completed'),
                             'non_respiratory_completed' => Input::get('non_respiratory_completed'),
-                            'non_respiratory_verified_by' => Input::get('non_respiratory_verified_by'),
+                            'non_respiratory_verified_by' => $user->data()->id,
                             'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'site_id' => $clients['facility_id'],
+                            'facility_id' => $clients['facility_id'],
                         ), $costing[0]['id']);
 
-                        $non_respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'non_respiratory_id', $costing[0]['id']);
+                        $non_respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'enrollment_id', $clients['id'], 'status', 1, 'non_respiratory_id', $costing[0]['id']);
 
                         if ($non_respiratory_repeated_tests) {
                             $user->updateRecord('non_respiratory_repeated_tests', array(
@@ -1002,10 +999,10 @@ if ($user->isLoggedIn()) {
                                 'rif_resistance' => Input::get('rif_resistance3_0'),
                                 'ct_value' => Input::get('ct_value3_2'),
                                 'test_repeatition' => Input::get('test_repeatition2_0'),
-                                'patient_id' => $clients['id'],
+                                'enrollment_id' => $_GET['enrollment_id'],
                                 'update_on' => date('Y-m-d H:i:s'),
                                 'update_id' => $user->data()->id,
-                                'site_id' => $clients['facility_id'],
+                                'facility_id' => $clients['facility_id'],
                             ), $non_respiratory_repeated_tests[0]['id']);
                         } else {
                             $user->createRecord('non_respiratory_repeated_tests', array(
@@ -1016,90 +1013,89 @@ if ($user->isLoggedIn()) {
                                 'rif_resistance' => Input::get('rif_resistance3_0'),
                                 'ct_value' => Input::get('ct_value3_2'),
                                 'test_repeatition' => Input::get('test_repeatition2_0'),
-                                'patient_id' => $clients['id'],
+                                'enrollment_id' => $_GET['enrollment_id'],
                                 'status' => 1,
                                 'create_on' => date('Y-m-d H:i:s'),
                                 'staff_id' => $user->data()->id,
                                 'update_on' => date('Y-m-d H:i:s'),
                                 'update_id' => $user->data()->id,
-                                'site_id' => $clients['facility_id'],
+                                'facility_id' => $clients['facility_id'],
                             ));
                         }
 
                         $successMessage = 'Non Respiratory Data  Successful Updated';
                     } else {
-                        $user->createRecord('non_respiratory', array(
-                            'pid' => $clients['pid'],
-                            'visit_date' => Input::get('visit_date'),
-                            'afb_microscopy' => Input::get('n_afb_microscopy'),
-                            'afb_microscopy_date' => Input::get('n_afb_microscopy_date'),
-                            'zn_results_a' => Input::get('n_zn_results_a'),
-                            'zn_results_b' => Input::get('n_zn_results_b'),
-                            'fm_results_a' => Input::get('n_fm_results_a'),
-                            'fm_results_b' => Input::get('n_fm_results_b'),
-                            'wrd_test' => Input::get('wrd_test2_0'),
-                            'wrd_test_date' => Input::get('wrd_test_date2_2'),
-                            'sequence_done' => Input::get('sequence_done2_0'),
-                            'sequence_date' => Input::get('sequence_date2_2'),
-                            'sequence_type' => Input::get('sequence_type2_0'),
-                            'sequence_number' => Input::get('sequence_number2_2'),
-                            'mtb_detection' => Input::get('mtb_detection2_0'),
-                            'rif_resistance' => Input::get('rif_resistance2_0'),
-                            'ct_value' => Input::get('ct_value2_2'),
-                            'test_repeatition' => Input::get('test_repeatition2_0'),
-                            'microscopy_reason' => Input::get('microscopy_reason2_0'),
-                            'microscopy_reason_other' => Input::get('microscopy_reason_other2_2'),
-                            'comments' => Input::get('comments'),
-                            'form_completness' => Input::get('form_completness'),
-                            'date_completed' => Input::get('date_completed'),
-                            'non_respiratory_completed' => Input::get('non_respiratory_completed'),
-                            'non_respiratory_verified_by' => Input::get('non_respiratory_verified_by'),
-                            'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
-                            'status' => 1,
-                            'patient_id' => $clients['id'],
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'site_id' => $clients['facility_id'],
-                        ));
+                        // $user->createRecord('non_respiratory', array(
+                        //     'pid' => $clients['pid'],
+                        //     'afb_microscopy' => Input::get('n_afb_microscopy'),
+                        //     'afb_microscopy_date' => Input::get('n_afb_microscopy_date'),
+                        //     'zn_results_a' => Input::get('n_zn_results_a'),
+                        //     'zn_results_b' => Input::get('n_zn_results_b'),
+                        //     'fm_results_a' => Input::get('n_fm_results_a'),
+                        //     'fm_results_b' => Input::get('n_fm_results_b'),
+                        //     'wrd_test' => Input::get('wrd_test2_0'),
+                        //     'wrd_test_date' => Input::get('wrd_test_date2_2'),
+                        //     'sequence_done' => Input::get('sequence_done2_0'),
+                        //     'sequence_date' => Input::get('sequence_date2_2'),
+                        //     'sequence_type' => Input::get('sequence_type2_0'),
+                        //     'sequence_number' => Input::get('sequence_number2_2'),
+                        //     'mtb_detection' => Input::get('mtb_detection2_0'),
+                        //     'rif_resistance' => Input::get('rif_resistance2_0'),
+                        //     'ct_value' => Input::get('ct_value2_2'),
+                        //     'test_repeatition' => Input::get('test_repeatition2_0'),
+                        //     'microscopy_reason' => Input::get('microscopy_reason2_0'),
+                        //     'microscopy_reason_other' => Input::get('microscopy_reason_other2_2'),
+                        //     'comments' => Input::get('comments'),
+                        //     'form_completness' => Input::get('form_completness'),
+                        //     'date_completed' => Input::get('date_completed'),
+                        //     'non_respiratory_completed' => Input::get('non_respiratory_completed'),
+                        //     'non_respiratory_verified_by' => $user->data()->id,,
+                        //     'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
+                        //     'status' => 1,
+                        //     'enrollment_id' => $_GET['enrollment_id'],
+                        //     'create_on' => date('Y-m-d H:i:s'),
+                        //     'staff_id' => $user->data()->id,
+                        //     'update_on' => date('Y-m-d H:i:s'),
+                        //     'update_id' => $user->data()->id,
+                        //     'facility_id' => $clients['facility_id'],
+                        // ));
 
-                        $last_row = $override->lastRow('non_respiratory', 'id')[0];
+                        // $last_row = $override->lastRow('non_respiratory', 'id')[0];
 
-                        $non_respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'non_respiratory_id', $last_row['id']);
+                        // $non_respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'enrollment_id', $clients['id'], 'status', 1, 'non_respiratory_id', $last_row['id']);
 
-                        if ($non_respiratory_repeated_tests) {
-                            $user->updateRecord('non_respiratory_repeated_tests', array(
-                                'non_respiratory_id' => $last_row['id'],
-                                'sequence_type' => Input::get('sequence_type3_0'),
-                                'sequence_number' => Input::get('sequence_number3_2'),
-                                'mtb_detection' => Input::get('mtb_detection3_0'),
-                                'rif_resistance' => Input::get('rif_resistance3_0'),
-                                'ct_value' => Input::get('ct_value3_2'),
-                                'test_repeatition' => Input::get('test_repeatition2_0'),
-                                'patient_id' => $clients['id'],
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'site_id' => $clients['facility_id'],
-                            ), $non_respiratory_repeated_tests[0]['id']);
-                        } else {
-                            $user->createRecord('non_respiratory_repeated_tests', array(
-                                'non_respiratory_id' => $last_row['id'],
-                                'sequence_type' => Input::get('sequence_type3_0'),
-                                'sequence_number' => Input::get('sequence_number3_2'),
-                                'mtb_detection' => Input::get('mtb_detection3_0'),
-                                'rif_resistance' => Input::get('rif_resistance3_0'),
-                                'ct_value' => Input::get('ct_value3_2'),
-                                'test_repeatition' => Input::get('test_repeatition2_0'),
-                                'patient_id' => $clients['id'],
-                                'status' => 1,
-                                'create_on' => date('Y-m-d H:i:s'),
-                                'staff_id' => $user->data()->id,
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'site_id' => $clients['facility_id'],
-                            ));
-                        }
+                        // if ($non_respiratory_repeated_tests) {
+                        //     $user->updateRecord('non_respiratory_repeated_tests', array(
+                        //         'non_respiratory_id' => $last_row['id'],
+                        //         'sequence_type' => Input::get('sequence_type3_0'),
+                        //         'sequence_number' => Input::get('sequence_number3_2'),
+                        //         'mtb_detection' => Input::get('mtb_detection3_0'),
+                        //         'rif_resistance' => Input::get('rif_resistance3_0'),
+                        //         'ct_value' => Input::get('ct_value3_2'),
+                        //         'test_repeatition' => Input::get('test_repeatition2_0'),
+                        //     'enrollment_id' => $_GET['enrollment_id'],
+                        //         'update_on' => date('Y-m-d H:i:s'),
+                        //         'update_id' => $user->data()->id,
+                        //         'facility_id' => $clients['facility_id'],
+                        //     ), $non_respiratory_repeated_tests[0]['id']);
+                        // } else {
+                        //     $user->createRecord('non_respiratory_repeated_tests', array(
+                        //         'non_respiratory_id' => $last_row['id'],
+                        //         'sequence_type' => Input::get('sequence_type3_0'),
+                        //         'sequence_number' => Input::get('sequence_number3_2'),
+                        //         'mtb_detection' => Input::get('mtb_detection3_0'),
+                        //         'rif_resistance' => Input::get('rif_resistance3_0'),
+                        //         'ct_value' => Input::get('ct_value3_2'),
+                        //         'test_repeatition' => Input::get('test_repeatition2_0'),
+                        //         'enrollment_id' => $_GET['enrollment_id'],
+                        //         'status' => 1,
+                        //         'create_on' => date('Y-m-d H:i:s'),
+                        //         'staff_id' => $user->data()->id,
+                        //         'update_on' => date('Y-m-d H:i:s'),
+                        //         'update_id' => $user->data()->id,
+                        //         'facility_id' => $clients['facility_id'],
+                        //     ));
+                        // }
 
                         $successMessage = 'Non Respiratory Data  Successful Added';
                     }
@@ -4746,7 +4742,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4889,19 +4885,8 @@ if ($user->isLoggedIn()) {
                                     <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
                                         <div class="card-body">
                                             <hr>
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <div class="mb-2">
-                                                        <label for="visit_date" class="form-label">Visit Date</label>
-                                                        <input type="date" value="<?php if ($costing['visit_date']) {
-                                                            print_r($costing['visit_date']);
-                                                        } ?>" id="visit_date" name="visit_date"
-                                                            max="<?= date('Y-m-d') ?>" class="form-control"
-                                                            placeholder="Enter date" required />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-4">
+                                            <div class="row">                             
+                                                <div class="col-6">
                                                     <label for="afb_microscopy" class="form-label">68. AFB
                                                         microscopy</label>
                                                     <!-- radio -->
@@ -4926,7 +4911,7 @@ if ($user->isLoggedIn()) {
 
                                                 </div>
 
-                                                <div class="col-4" id="n_afb_microscopy_date1">
+                                                <div class="col-6" id="n_afb_microscopy_date1">
                                                     <div class="mb-2">
                                                         <label for="n_afb_microscopy_date" id="n_zn_microscopy_date1"
                                                             class="form-label">If ZN what date?</label>
@@ -5281,7 +5266,7 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <?php
-                                            $medications3 = $override->get3('non_respiratory_repeated_tests', 'patient_id', $costing['patient_id'], 'non_respiratory_id', $costing['id'], 'status', 1);
+                                            $medications3 = $override->get3('non_respiratory_repeated_tests', 'enrollment_id', $costing['id'], 'non_respiratory_id', $costing['id'], 'status', 1);
                                             $sequence_type = $override->getNews('sequence_type', 'status', 1, 'id', $medications3[0]['sequence_type']);
                                             $mtb_detection = $override->getNews('mtb_detection', 'status', 1, 'id', $medications3[0]['mtb_detection']);
                                             $rif_resistance = $override->getNews('rif_resistance', 'status', 1, 'id', $medications3[0]['rif_resistance']);
@@ -5406,7 +5391,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5651,10 +5636,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                                                                                                                                                            <?php if ($screening['comments']) {
-                                                                                                                                                                                                                                                print_r($screening['comments']);
-                                                                                                                                                                                                                                            } ?>
-                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                <?php if ($screening['comments']) {
+                                                                                                                                                                                                                                                    print_r($screening['comments']);
+                                                                                                                                                                                                                                                } ?>
+                                                                                                                                                                                                                                            </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -6811,7 +6796,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6841,7 +6826,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7455,7 +7440,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10420,7 +10405,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
