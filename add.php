@@ -5406,7 +5406,8 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-4" id="form_completness">
+
+                                                <div class="col-sm-4">
                                                     <label>Complete?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5418,101 +5419,47 @@ if ($user->isLoggedIn()) {
                                                                         id="form_completness<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($costing['form_completness'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?> required>
+                                                                          } ?>         <?php if ($costing['form_completness'] == 3) { ?> readonly
+                                                                        <?php } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                    </div>
-                                                    <button type="button"
-                                                        onclick="unsetRadio('form_completness')">Unset</button>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('form_completness')">Unset</button>
 
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="mb-2">
-                                                        <label for="date_completed" class="form-label">Date form
-                                                            completed</label>
-                                                        <input type="date" value="<?php if ($costing['date_completed']) {
-                                                            print_r($costing['date_completed']);
-                                                        } ?>" id="date_completed" name="date_completed"
-                                                            max="<?= date('Y-m-d') ?>" class="form-control"
-                                                            placeholder="Enter date" required />
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="non_respiratory_completed">
+                                                <div class="col-sm-4">
+                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>75 (a).This form was completed by( Full Name )</label>
-                                                            <select id="non_respiratory_completed"
-                                                                name="non_respiratory_completed" class="form-control"
-                                                                required>
-                                                                <?php $diagnosis_test_completed = $override->get('user', 'id', $costing['non_respiratory_completed'])[0]; ?>
-                                                                <option value="<?= $diagnosis_test_completed['id'] ?>">
-                                                                    <?php if ($costing['non_respiratory_completed']) {
-                                                                        print_r($diagnosis_test_completed['firstname'] . ' ' . $diagnosis_test_completed['lastname']);
-                                                                    } else {
-                                                                        echo 'Select';
-                                                                    } ?>
-                                                                </option>
-                                                                <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>">
-                                                                        <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                    </option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <label>Form completed Date</label>
+                                                            <input class="form-control" type="date" name="date_completed"
+                                                                id="date_completed" value="<?php if ($costing['date_completed']) {
+                                                                    print_r($costing['date_completed']);
+                                                                } ?>" <?php if ($costing['date_completed'] == 3) { ?> readonly <?php } ?> />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Form Verified Date</label>
+                                                            <input class="form-control" type="date"
+                                                                name="non_respiratory_verified_date"
+                                                                id="non_respiratory_verified_date" value="<?php if ($costing['non_respiratory_verified_date']) {
+                                                                    print_r($costing['non_respiratory_verified_date']);
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr>
-
-                                            <?php if ($user->data()->position == 3 && $costing['form_completness'] == 1) { ?>
-                                                <div class="row">
-
-
-                                                    <div class="col-sm-6" id="non_respiratory_verified_by">
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>40. This form was Verified by (name) </label>
-                                                                <select id="non_respiratory_verified_by"
-                                                                    name="non_respiratory_verified_by" class="form-control"
-                                                                    required>
-                                                                    <?php $enrollment_completed = $override->get('user', 'id', $costing['non_respiratory_verified_by'])[0]; ?>
-                                                                    <option value="<?= $enrollment_completed['id'] ?>">
-                                                                        <?php if ($costing['non_respiratory_verified_by']) {
-                                                                            print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
-                                                                        } else {
-                                                                            echo 'Select';
-                                                                        } ?>
-                                                                    </option>
-                                                                    <?php foreach ($override->getNews('user', 'status', 1, 'position', 3) as $value) { ?>
-                                                                        <option value="<?= $value['id'] ?>">
-                                                                            <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                        </option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6" id="non_respiratory_verified_date">
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>40. Form Verified Date</label>
-                                                                <input class="form-control" type="date"
-                                                                    name="non_respiratory_verified_date"
-                                                                    id="non_respiratory_verified_date" value="<?php if ($costing['non_respiratory_verified_date']) {
-                                                                        print_r($costing['non_respiratory_verified_date']);
-                                                                    } ?>" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            <?php } ?>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
