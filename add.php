@@ -8226,8 +8226,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
 
                                                 <div class="col-sm-6" id="other_diseases">
-                                                    <label>13. Other relevant diseases/medical conditions ( Select multiple
-                                                        )</label>
+                                                    <label>13. Other relevant diseases/medical conditions </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8251,7 +8250,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-6" id="diseases_medical">
-                                                    <label>13b. If yes, Select relevant diseases/medical conditions</label>
+                                                    <label>13b. If yes, Select relevant diseases/medical conditions ( Select multiple
+                                                        )</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8372,7 +8372,7 @@ if ($user->isLoggedIn()) {
 
 
                                                 <div class="col-sm-3" id="other_samples">
-                                                    <label>15. Were any other diagnostic samples requested? </label>
+                                                    <label>15a. Were any other diagnostic samples requested? </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8396,7 +8396,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="sputum_samples">
-                                                    <label>15. Tick all that apply and fill date for each sample ticked
+                                                    <label>15b. Tick all that apply and fill date for each sample ticked
                                                     </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -8423,7 +8423,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>15. Specify Other and Date</label>
+                                                            <label>15c. Specify Other and Date</label>
                                                             <input class="form-control" type="text"
                                                                 name="sputum_samples_other" id="sputum_samples_other" value="<?php if ($clients['sputum_samples_other']) {
                                                                     print_r($clients['sputum_samples_other']);
@@ -8449,7 +8449,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>15. Pleural fluid Date</label>
+                                                            <label>15d. Pleural fluid Date</label>
                                                             <input class="form-control" type="date"
                                                                 name="pleural_fluid_date" id="pleural_fluid_date" value="<?php if ($clients['pleural_fluid_date']) {
                                                                     print_r($clients['pleural_fluid_date']);
@@ -8462,7 +8462,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>15. Cerebral spinal fluid (CSF) Date</label>
+                                                            <label>15e. Cerebral spinal fluid (CSF) Date</label>
                                                             <input class="form-control" type="date" name="csf_date"
                                                                 id="csf_date" value="<?php if ($clients['csf_date']) {
                                                                     print_r($clients['csf_date']);
@@ -8492,7 +8492,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>15. Pericardial fluid Date</label>
+                                                            <label>15f. Pericardial fluid Date</label>
                                                             <input class="form-control" type="date"
                                                                 name="pericardial_fluid_date" id="pericardial_fluid_date"
                                                                 value="<?php if ($clients['pericardial_fluid_date']) {
@@ -8506,7 +8506,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>15. Lymph node aspirate Date</label>
+                                                            <label>15g. Lymph node aspirate Date</label>
                                                             <input class="form-control" type="date"
                                                                 name="lymph_node_aspirate_date"
                                                                 id="lymph_node_aspirate_date" value="<?php if ($clients['lymph_node_aspirate_date']) {
@@ -8519,7 +8519,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>15. Stool Date</label>
+                                                            <label>15h. Stool Date</label>
                                                             <input class="form-control" type="date" name="stool_date"
                                                                 id="stool_date" value="<?php if ($clients['stool_date']) {
                                                                     print_r($clients['stool_date']);
@@ -8533,7 +8533,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
 
                                                 <div class="col-sm-6" id="chest_x_ray">
-                                                    <label>16. Was chest X-ray requested? </label>
+                                                    <label>16a. Was chest X-ray requested? </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8560,7 +8560,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>16.If yes,Specify Date chest X-ray requested </label>
+                                                            <label>16b.If yes,Specify Date chest X-ray requested </label>
                                                             <input class="form-control" type="date" name="chest_x_ray_date"
                                                                 id="chest_x_ray_date" value="<?php if ($clients['chest_x_ray_date']) {
                                                                     print_r($clients['chest_x_ray_date']);

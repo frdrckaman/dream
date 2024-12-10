@@ -1158,7 +1158,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
 
                                                             <a href="info.php?id=6&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
-                                                                role=" button" class="btn btn-warning"> Viw Other Forms
+                                                                role=" button" class="btn btn-warning"> View Other Forms
                                                             </a>&nbsp;&nbsp; <br><br>
                                                         </td>
                                                         <br>
