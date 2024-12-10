@@ -1,23 +1,23 @@
-const culture_done1 = document.getElementById("culture_done1");
-const culture_done2 = document.getElementById("culture_done2");
+const culture_performed1 = document.getElementById("culture_performed1");
+const culture_performed2 = document.getElementById("culture_performed2");
 
-const sample_type2 = document.getElementById("sample_type2");
+const culture_type = document.getElementById("culture_type");
 const sample_methods = document.getElementById("sample_methods");
 
 function toggleElementVisibility() {
-  if (culture_done1.checked) {
-    sample_type2.style.display = "block";
+  if (culture_performed1.checked) {
+    culture_type.style.display = "block";
     // qn05_other.setAttribute("required", "required");
     sample_methods.style.display = "block";
   } else {
-    sample_type2.style.display = "none";
+    culture_type.style.display = "none";
     // qn05_other.removeAttribute("required");
     sample_methods.style.display = "none";
   }
 }
 
-culture_done1.addEventListener("change", toggleElementVisibility);
-culture_done2.addEventListener("change", toggleElementVisibility);
+culture_performed1.addEventListener("change", toggleElementVisibility);
+culture_performed2.addEventListener("change", toggleElementVisibility);
 
 // Initial check
 toggleElementVisibility();

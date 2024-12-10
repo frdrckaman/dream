@@ -8,7 +8,7 @@ const dr_ds = document.getElementById("dr_ds");
 const tb_category = document.getElementById("tb_category");
 const relapse_years1_1 = document.getElementById("relapse_years1");
 const ltf_months1_1 = document.getElementById("ltf_months1");
-const tb_regimen1 = document.getElementById("tb_regimen1");
+const tb_regimen = document.getElementById("tb_regimen");
 const regimen_months1 = document.getElementById("regimen_months1");
 const regimen_changed = document.getElementById("regimen_changed");
 const regimen_name1_1 = document.getElementById("regimen_name1");
@@ -26,7 +26,7 @@ function toggleElementVisibility() {
     tx_number1.style.display = "block";
     dr_ds1.style.display = "block";
     tb_category.style.display = "block";
-    tb_regimen1.style.display = "block";
+    tb_regimen.style.display = "block";
     regimen_months1.style.display = "block";
     regimen_changed.style.display = "block";
     tb_otcome1.style.display = "block";
@@ -49,7 +49,7 @@ function toggleElementVisibility() {
     tb_category.style.display = "none";
     relapse_years1_1.style.display = "none";
     ltf_months1_1.style.display = "none";
-    tb_regimen1.style.display = "none";
+    tb_regimen.style.display = "none";
     regimen_months1.style.display = "none";
     regimen_changed.style.display = "none";
     regimen_name1_1.style.display = "none";
@@ -60,7 +60,7 @@ function toggleElementVisibility() {
     tb_category.style.display = "none";
     relapse_years1_1.style.display = "none";
     ltf_months1_1.style.display = "none";
-    tb_regimen1.style.display = "none";
+    tb_regimen.style.display = "none";
     regimen_months1.style.display = "none";
     regimen_changed.style.display = "none";
     regimen_name1_1.style.display = "none";

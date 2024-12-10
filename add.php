@@ -357,148 +357,181 @@ if ($user->isLoggedIn()) {
             }
         } elseif (Input::get('add_enrollment_form')) {
             $validate = $validate->check($_POST, array(
-                'visit_date' => array(
+                'enrollment_date' => array(
                     'required' => true,
                 ),
             ));
             if ($validate->passed()) {
                 try {
-                    $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
-                    $enrollment_form = $override->getNews('enrollment_form', 'status', 1, 'patient_id', $_GET['cid']);
-
+                    $enrollment_form = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id']);
                     $diseases_medical = implode(',', Input::get('diseases_medical'));
                     $sputum_samples = implode(',', Input::get('sputum_samples'));
-                    // $dr_ds = implode(',', Input::get('dr_ds'));
-                    if ($enrollment_form) {
-                        $user->updateRecord('enrollment_form', array(
-                            'enrollment_date' => Input::get('visit_date'),
-                            'cough2weeks' => Input::get('cough2weeks'),
-                            'cough_any' => Input::get('cough_any'),
-                            'poor_weight' => Input::get('poor_weight'),
-                            'coughing_blood' => Input::get('coughing_blood'),
-                            'unexplained_fever' => Input::get('unexplained_fever'),
-                            'night_sweats' => Input::get('night_sweats'),
-                            'neck_lymph' => Input::get('neck_lymph'),
-                            'history_tb' => Input::get('history_tb'),
-                            'tx_previous' => Input::get('tx_previous'),
-                            'tx_number' => Input::get('tx_number'),
-                            'dr_ds' => Input::get('dr_ds'),
-                            'tb_category' => Input::get('tb_category'),
-                            'relapse_years' => Input::get('relapse_years'),
-                            'ltf_months' => Input::get('ltf_months'),
-                            'tb_regimen' => Input::get('tb_regimen'),
-                            'regimen_months' => Input::get('regimen_months'),
-                            'regimen_changed' => Input::get('regimen_changed'),
-                            'regimen_name' => Input::get('regimen_name'),
-                            'tb_otcome' => Input::get('tb_otcome'),
-                            'hiv_status' => Input::get('hiv_status'),
-                            'immunosuppressive' => Input::get('immunosuppressive'),
-                            'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
-                            'other_diseases' => Input::get('other_diseases'),
-                            'diseases_medical' => $diseases_medical,
-                            'diseases_specify' => Input::get('diseases_specify'),
-                            'sputum_collected' => Input::get('sputum_collected'),
-                            'sample_date' => Input::get('sample_date'),
-                            'other_samples' => Input::get('other_samples'),
-                            'sputum_samples' => $sputum_samples,
-                            'pleural_fluid_date' => Input::get('pleural_fluid_date'),
-                            'csf_date' => Input::get('csf_date'),
-                            'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
-                            'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
-                            'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
-                            'stool_date' => Input::get('stool_date'),
-                            'sputum_samples_other' => Input::get('sputum_samples_other'),
-                            'sputum_samples_date' => Input::get('sputum_samples_date'),
-                            'chest_x_ray' => Input::get('chest_x_ray'),
-                            'chest_x_ray_date' => Input::get('chest_x_ray_date'),
-                            'enrollment_completed' => Input::get('enrollment_completed'),
-                            'enrollment_completed_by' => Input::get('enrollment_completed_by'),
-                            'enrollment_completed_date' => Input::get('enrollment_completed_date'),
-                            'enrollment_verified_by' => Input::get('enrollment_verified_by'),
-                            'enrollment_verified_date' => Input::get('enrollment_verified_date'),
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
-                        ), $_GET['cid']);
-
-                        $successMessage = 'Enrollment Form Updated Successful';
+                    if (Input::get('enrollment_completed') == 3 && Input::get('enrollment_verified_date') == "") {
+                        $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
                     } else {
-                        $user->createRecord('enrollment_form', array(
-                            'pid' => $clients['pid'],
-                            'enrollment_date' => Input::get('visit_date'),
-                            'cough2weeks' => Input::get('cough2weeks'),
-                            'cough_any' => Input::get('cough_any'),
-                            'poor_weight' => Input::get('poor_weight'),
-                            'coughing_blood' => Input::get('coughing_blood'),
-                            'unexplained_fever' => Input::get('unexplained_fever'),
-                            'night_sweats' => Input::get('night_sweats'),
-                            'neck_lymph' => Input::get('neck_lymph'),
-                            'history_tb' => Input::get('history_tb'),
-                            'tx_previous' => Input::get('tx_previous'),
-                            'tx_number' => Input::get('tx_number'),
-                            'dr_ds' => Input::get('dr_ds'),
-                            'tb_category' => Input::get('tb_category'),
-                            'relapse_years' => Input::get('relapse_years'),
-                            'ltf_months' => Input::get('ltf_months'),
-                            'tb_regimen' => Input::get('tb_regimen'),
-                            'regimen_months' => Input::get('regimen_months'),
-                            'regimen_changed' => Input::get('regimen_changed'),
-                            'regimen_name' => Input::get('regimen_name'),
-                            'tb_otcome' => Input::get('tb_otcome'),
-                            'hiv_status' => Input::get('hiv_status'),
-                            'immunosuppressive' => Input::get('immunosuppressive'),
-                            'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
-                            'other_diseases' => Input::get('other_diseases'),
-                            'diseases_medical' => $diseases_medical,
-                            'diseases_specify' => Input::get('diseases_specify'),
-                            'sputum_collected' => Input::get('sputum_collected'),
-                            'sample_date' => Input::get('sample_date'),
-                            'other_samples' => Input::get('other_samples'),
-                            'sputum_samples' => $sputum_samples,
-                            'pleural_fluid_date' => Input::get('pleural_fluid_date'),
-                            'csf_date' => Input::get('csf_date'),
-                            'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
-                            'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
-                            'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
-                            'stool_date' => Input::get('stool_date'),
-                            'sputum_samples_other' => Input::get('sputum_samples_other'),
-                            'sputum_samples_date' => Input::get('sputum_samples_date'),
-                            'chest_x_ray' => Input::get('chest_x_ray'),
-                            'chest_x_ray_date' => Input::get('chest_x_ray_date'),
-                            'enrollment_completed' => Input::get('enrollment_completed'),
-                            'enrollment_completed_by' => Input::get('enrollment_completed_by'),
-                            'enrollment_completed_date' => Input::get('enrollment_completed_date'),
-                            'enrollment_verified_by' => Input::get('enrollment_verified_by'),
-                            'enrollment_verified_date' => Input::get('enrollment_verified_date'),
-                            'patient_id' => $clients['id'],
-                            'status' => 1,
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
-                        ));
+                        if ($enrollment_form) {
+                            $user->updateRecord('enrollment_form', array(
+                                'enrollment_date' => Input::get('enrollment_date'),
+                                'dob' => Input::get('dob'),
+                                'age' => Input::get('age'),
+                                'sex' => Input::get('sex'),
+                                'region' => Input::get('region'),
+                                'district' => Input::get('district'),
+                                'ward' => Input::get('ward'),
+                                'village_street' => Input::get('village_street'),
+                                'cough2weeks' => Input::get('cough2weeks'),
+                                'chest_xray' => Input::get('chest_xray'),
+                                'poor_weight' => Input::get('poor_weight'),
+                                'coughing_blood' => Input::get('coughing_blood'),
+                                'unexplained_fever' => Input::get('unexplained_fever'),
+                                'night_sweats' => Input::get('night_sweats'),
+                                'neck_lymph' => Input::get('neck_lymph'),
+                                'date_information_collected' => Input::get('date_information_collected'),
+                                'history_tb' => Input::get('history_tb'),
+                                'tx_previous' => Input::get('tx_previous'),
+                                'tx_month' => Input::get('tx_month'),
+                                'tx_year' => Input::get('tx_year'),
+                                'tx_unknown' => Input::get('tx_unknown'),
+                                'dr_ds' => Input::get('dr_ds'),
+                                'tb_category' => Input::get('tb_category'),
+                                'relapse_years' => Input::get('relapse_years'),
+                                'ltf_months' => Input::get('ltf_months'),
+                                'ltf_months_unknown' => Input::get('ltf_months_unknown'),
+                                'tb_regimen' => Input::get('tb_regimen'),
+                                'tb_regimen_specify' => Input::get('tb_regimen_specify'),
+                                'regimen_months' => Input::get('regimen_months'),
+                                'regimen_months_unknown' => Input::get('regimen_months_unknown'),
+                                'tb_otcome' => Input::get('tb_otcome'),
+                                'hiv_status' => Input::get('hiv_status'),
+                                'immunosuppressive' => Input::get('immunosuppressive'),
+                                'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
+                                'other_diseases' => Input::get('other_diseases'),
+                                'diseases_medical' => $diseases_medical,
+                                'diseases_specify' => Input::get('diseases_specify'),
+                                'sputum_collected' => Input::get('sputum_collected'),
+                                'dst_sample_date' => Input::get('dst_sample_date'),
+                                'dst_sample_type' => Input::get('dst_sample_type'),
+                                'sequencing_sample_date' => Input::get('sequencing_sample_date'),
+                                'sequencing_sample_type' => Input::get('sequencing_sample_type'),
+                                'other_samples' => Input::get('other_samples'),
+                                'sputum_samples' => $sputum_samples,
+                                'pleural_fluid_date' => Input::get('pleural_fluid_date'),
+                                'csf_date' => Input::get('csf_date'),
+                                'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
+                                'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
+                                'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
+                                'stool_date' => Input::get('stool_date'),
+                                'sputum_samples_other' => Input::get('sputum_samples_other'),
+                                'sputum_samples_date' => Input::get('sputum_samples_date'),
+                                'chest_x_ray' => Input::get('chest_x_ray'),
+                                'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                                'enrollment_completed' => Input::get('enrollment_completed'),
+                                'enrollment_completed_by' => $user->data()->id,
+                                'enrollment_completed_date' => Input::get('enrollment_completed_date'),
+                                'enrollment_verified_by' => $user->data()->id,
+                                'enrollment_verified_date' => Input::get('enrollment_verified_date'),
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                            ), $_GET['enrollment_id']);
 
-                        $successMessage = 'Enrollment Form  Added Successful';
+                            $successMessage = 'Enrollment Form Updated Successful';
+                        } else {
+                            $std_id = $override->get('study_id', 'status', 0)[0];
+
+                            $user->createRecord('enrollment_form', array(
+                                'pid' => $std_id['study_id'],
+                                'enrollment_date' => Input::get('enrollment_date'),
+                                'dob' => Input::get('dob'),
+                                'age' => Input::get('age'),
+                                'sex' => Input::get('sex'),
+                                'region' => Input::get('region'),
+                                'district' => Input::get('district'),
+                                'ward' => Input::get('ward'),
+                                'village_street' => Input::get('village_street'),
+                                'cough2weeks' => Input::get('cough2weeks'),
+                                'chest_xray' => Input::get('chest_xray'),
+                                'poor_weight' => Input::get('poor_weight'),
+                                'coughing_blood' => Input::get('coughing_blood'),
+                                'unexplained_fever' => Input::get('unexplained_fever'),
+                                'night_sweats' => Input::get('night_sweats'),
+                                'neck_lymph' => Input::get('neck_lymph'),
+                                'date_information_collected' => Input::get('date_information_collected'),
+                                'history_tb' => Input::get('history_tb'),
+                                'tx_previous' => Input::get('tx_previous'),
+                                'tx_month' => Input::get('tx_month'),
+                                'tx_year' => Input::get('tx_year'),
+                                'tx_unknown' => Input::get('tx_unknown'),
+                                'dr_ds' => Input::get('dr_ds'),
+                                'tb_category' => Input::get('tb_category'),
+                                'relapse_years' => Input::get('relapse_years'),
+                                'ltf_months' => Input::get('ltf_months'),
+                                'tb_regimen' => Input::get('tb_regimen'),
+                                'tb_regimen_specify' => Input::get('tb_regimen_specify'),
+                                'regimen_months' => Input::get('regimen_months'),
+                                'tb_otcome' => Input::get('tb_otcome'),
+                                'hiv_status' => Input::get('hiv_status'),
+                                'immunosuppressive' => Input::get('immunosuppressive'),
+                                'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
+                                'other_diseases' => Input::get('other_diseases'),
+                                'diseases_medical' => $diseases_medical,
+                                'diseases_specify' => Input::get('diseases_specify'),
+                                'sputum_collected' => Input::get('sputum_collected'),
+                                'dst_sample_date' => Input::get('dst_sample_date'),
+                                'dst_sample_type' => Input::get('dst_sample_type'),
+                                'sequencing_sample_date' => Input::get('sequencing_sample_date'),
+                                'sequencing_sample_type' => Input::get('sequencing_sample_type'),
+                                'other_samples' => Input::get('other_samples'),
+                                'sputum_samples' => $sputum_samples,
+                                'pleural_fluid_date' => Input::get('pleural_fluid_date'),
+                                'csf_date' => Input::get('csf_date'),
+                                'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
+                                'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
+                                'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
+                                'stool_date' => Input::get('stool_date'),
+                                'sputum_samples_other' => Input::get('sputum_samples_other'),
+                                'sputum_samples_date' => Input::get('sputum_samples_date'),
+                                'chest_x_ray' => Input::get('chest_x_ray'),
+                                'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                                'enrollment_completed' => Input::get('enrollment_completed'),
+                                'enrollment_completed_by' => $user->data()->id,
+                                'enrollment_completed_date' => Input::get('enrollment_completed_date'),
+                                'enrollment_verified_by' => $user->data()->id,
+                                'enrollment_verified_date' => Input::get('enrollment_verified_date'),
+                                'status' => 1,
+                                'create_on' => date('Y-m-d H:i:s'),
+                                'staff_id' => $user->data()->id,
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $user->data()->site_id,
+                            ));
+
+                            $last_row = $override->lastRow('enrollment_form', 'id')[0];
+
+
+                            $user->updateRecord('study_id', array(
+                                'client_id' => $last_row['id'],
+                                'status' => 1,
+                            ), $std_id['id']);
+
+                            $successMessage = 'Enrollment Form  Added Successful';
+                        }
+                        Redirect::to('info.php?id=3&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
                     }
-                    Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&status=3&msg=' . $successMessage);
+
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
             }
         } elseif (Input::get('add_diagnosis_test')) {
             $validate = $validate->check($_POST, array(
-                'visit_date' => array(
-                    'required' => true,
-                ),
-                'culture_done' => array(
+                'culture_performed' => array(
                     'required' => true,
                 ),
             ));
             if ($validate->passed()) {
                 // print_r($_POST);
-                $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
-                $individual = $override->getNews('diagnosis_test', 'status', 1, 'patient_id', $_GET['cid']);
+                $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id'])[0];
+                $individual = $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['enrollment_id']);
                 $first_line = 0;
                 $second_line = 0;
                 $third_line = 0;
@@ -538,205 +571,175 @@ if ($user->isLoggedIn()) {
                 $nanopore_sequencing = implode(',', Input::get('nanopore_sequencing'));
                 $_1st_line_drugs = implode(',', Input::get('_1st_line_drugs'));
                 $_2st_line_drugs = implode(',', Input::get('_2st_line_drugs'));
-
-                if ($individual) {
-                    $user->updateRecord('diagnosis_test', array(
-                        'visit_date' => Input::get('visit_date'),
-                        'culture_done' => Input::get('culture_done'),
-                        'sample_type2' => Input::get('sample_type2'),
-                        'sample_type_other2' => Input::get('sample_type_other2'),
-                        'sample_methods' => $sample_methods,
-                        'lj_date' => Input::get('lj_date'),
-                        'mgit_date' => Input::get('mgit_date'),
-                        'lj_results' => Input::get('lj_results'),
-                        'mgit_results' => Input::get('mgit_results'),
-                        'phenotypic_method' => Input::get('phenotypic_method'),
-                        'phenotypic_done' => Input::get('phenotypic_done'),
-                        'apm_date' => Input::get('apm_date'),
-                        'mgit_date2' => Input::get('mgit_date2'),
-                        'rifampicin' => Input::get('rifampicin'),
-                        'isoniazid' => Input::get('isoniazid'),
-                        'levofloxacin' => Input::get('levofloxacin'),
-                        'moxifloxacin' => Input::get('moxifloxacin'),
-                        'bedaquiline' => Input::get('bedaquiline'),
-                        'linezolid' => Input::get('linezolid'),
-                        'clofazimine' => Input::get('clofazimine'),
-                        'cycloserine' => Input::get('cycloserine'),
-                        'terizidone' => Input::get('terizidone'),
-                        'ethambutol' => Input::get('ethambutol'),
-                        'delamanid' => Input::get('delamanid'),
-                        'pyrazinamide' => Input::get('pyrazinamide'),
-                        'imipenem' => Input::get('imipenem'),
-                        'cilastatin' => Input::get('cilastatin'),
-                        'meropenem' => Input::get('meropenem'),
-                        'amikacin' => Input::get('amikacin'),
-                        'streptomycin' => Input::get('streptomycin'),
-                        'ethionamide' => Input::get('ethionamide'),
-                        'prothionamide' => Input::get('prothionamide'),
-                        'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
-                        'genotyping_done' => Input::get('genotyping_done'),
-                        'genotyping_asay' => $genotyping_asay,
-                        'isoniazid2' => Input::get('isoniazid2'),
-                        'isoniazid2_error_code' => Input::get('isoniazid2_error_code'),
-                        'fluoroquinolones' => Input::get('fluoroquinolones'),
-                        'fluoroquinolones_error_code' => Input::get('fluoroquinolones_error_code'),
-                        'amikacin2' => Input::get('amikacin2'),
-                        'amikacin2_error_code' => Input::get('amikacin2_error_code'),
-                        'kanamycin' => Input::get('kanamycin'),
-                        'kanamycin_error_code' => Input::get('kanamycin_error_code'),
-                        'capreomycin' => Input::get('capreomycin'),
-                        'capreomycin_error_code' => Input::get('capreomycin_error_code'),
-                        'ethionamide2' => Input::get('ethionamide2'),
-                        'ethionamide2_error_code' => Input::get('ethionamide2_error_code'),
-                        'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
-                        'nanopore_sequencing' => $nanopore_sequencing,
-                        'rifampicin3' => Input::get('rifampicin3'),
-                        'isoniazid3' => Input::get('isoniazid3'),
-                        'levofloxacin3' => Input::get('levofloxacin3'),
-                        'moxifloxacin3' => Input::get('moxifloxacin3'),
-                        'bedaquiline3' => Input::get('bedaquiline3'),
-                        'linezolid3' => Input::get('linezolid3'),
-                        'clofazimine3' => Input::get('clofazimine3'),
-                        'cycloserine3' => Input::get('cycloserine3'),
-                        'terizidone3' => Input::get('terizidone3'),
-                        'ethambutol3' => Input::get('ethambutol3'),
-                        'delamanid3' => Input::get('delamanid3'),
-                        'pyrazinamide3' => Input::get('pyrazinamide3'),
-                        'imipenem3' => Input::get('imipenem3'),
-                        'cilastatin3' => Input::get('cilastatin3'),
-                        'meropenem3' => Input::get('meropenem3'),
-                        'amikacin3' => Input::get('amikacin3'),
-                        'streptomycin3' => Input::get('streptomycin3'),
-                        'ethionamide3' => Input::get('ethionamide3'),
-                        'prothionamide3' => Input::get('prothionamide3'),
-                        'para_aminosalicylic_acid3' => Input::get('para_aminosalicylic_acid3'),
-                        '_1st_line_drugs' => $_1st_line_drugs,
-                        '_2st_line_drugs' => $_2st_line_drugs,
-                        'version_number' => Input::get('version_number'),
-                        'lot_number' => Input::get('lot_number'),
-                        'mutations_detected_list' => Input::get('mutations_detected_list'),
-                        'd_firstName' => Input::get('d_firstName'),
-                        'd_middleName' => Input::get('d_middleName'),
-                        // 'd_middleName' => Input::get('d_middleName'),
-                        'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
-                        'comments' => Input::get('comments'),
-                        'form_completness' => Input::get('form_completness'),
-                        'date_completed' => Input::get('date_completed'),
-                        'diagnosis_test_verified_by' => Input::get('diagnosis_test_verified_by'),
-                        'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                                                    'site_id' => $clients['facility_id'],
-                    ), $individual[0]['id']);
-
-                    $successMessage = 'Diagnosis test  Successful Updated';
+                if (Input::get('form_completness') == 3 && Input::get('diagnosis_test_verified_date') == "") {
+                    $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
                 } else {
-                    $user->createRecord('diagnosis_test', array(
-                        'pid' => $clients['pid'],
-                        'visit_date' => Input::get('visit_date'),
-                        'culture_done' => Input::get('culture_done'),
-                        'sample_type2' => Input::get('sample_type2'),
-                        'sample_type_other2' => Input::get('sample_type_other2'),
-                        'sample_methods' => $sample_methods,
-                        'lj_date' => Input::get('lj_date'),
-                        'mgit_date' => Input::get('mgit_date'),
-                        'lj_results' => Input::get('lj_results'),
-                        'mgit_results' => Input::get('mgit_results'),
-                        'phenotypic_method' => Input::get('phenotypic_method'),
-                        'phenotypic_done' => Input::get('phenotypic_done'),
-                        'apm_date' => Input::get('apm_date'),
-                        'mgit_date2' => Input::get('mgit_date2'),
-                        'rifampicin' => Input::get('rifampicin'),
-                        'isoniazid' => Input::get('isoniazid'),
-                        'levofloxacin' => Input::get('levofloxacin'),
-                        'moxifloxacin' => Input::get('moxifloxacin'),
-                        'bedaquiline' => Input::get('bedaquiline'),
-                        'linezolid' => Input::get('linezolid'),
-                        'clofazimine' => Input::get('clofazimine'),
-                        'cycloserine' => Input::get('cycloserine'),
-                        'terizidone' => Input::get('terizidone'),
-                        'ethambutol' => Input::get('ethambutol'),
-                        'delamanid' => Input::get('delamanid'),
-                        'pyrazinamide' => Input::get('pyrazinamide'),
-                        'imipenem' => Input::get('imipenem'),
-                        'cilastatin' => Input::get('cilastatin'),
-                        'meropenem' => Input::get('meropenem'),
-                        'amikacin' => Input::get('amikacin'),
-                        'streptomycin' => Input::get('streptomycin'),
-                        'ethionamide' => Input::get('ethionamide'),
-                        'prothionamide' => Input::get('prothionamide'),
-                        'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
-                        'genotyping_done' => Input::get('genotyping_done'),
-                        'genotyping_asay' => $genotyping_asay,
-                        'isoniazid2' => Input::get('isoniazid2'),
-                        'isoniazid2_error_code' => Input::get('isoniazid2_error_code'),
-                        'fluoroquinolones' => Input::get('fluoroquinolones'),
-                        'fluoroquinolones_error_code' => Input::get('fluoroquinolones_error_code'),
-                        'amikacin2' => Input::get('amikacin2'),
-                        'amikacin2_error_code' => Input::get('amikacin2_error_code'),
-                        'kanamycin' => Input::get('kanamycin'),
-                        'kanamycin_error_code' => Input::get('kanamycin_error_code'),
-                        'capreomycin' => Input::get('capreomycin'),
-                        'capreomycin_error_code' => Input::get('capreomycin_error_code'),
-                        'ethionamide2' => Input::get('ethionamide2'),
-                        'ethionamide2_error_code' => Input::get('ethionamide2_error_code'),
-                        'nanopore_sequencing_done' => Input::get('nanopore_sequencing_done'),
-                        'nanopore_sequencing' => $nanopore_sequencing,
-                        'rifampicin3' => Input::get('rifampicin3'),
-                        'isoniazid3' => Input::get('isoniazid3'),
-                        'levofloxacin3' => Input::get('levofloxacin3'),
-                        'moxifloxacin3' => Input::get('moxifloxacin3'),
-                        'bedaquiline3' => Input::get('bedaquiline3'),
-                        'linezolid3' => Input::get('linezolid3'),
-                        'clofazimine3' => Input::get('clofazimine3'),
-                        'cycloserine3' => Input::get('cycloserine3'),
-                        'terizidone3' => Input::get('terizidone3'),
-                        'ethambutol3' => Input::get('ethambutol3'),
-                        'delamanid3' => Input::get('delamanid3'),
-                        'pyrazinamide3' => Input::get('pyrazinamide3'),
-                        'imipenem3' => Input::get('imipenem3'),
-                        'cilastatin3' => Input::get('cilastatin3'),
-                        'meropenem3' => Input::get('meropenem3'),
-                        'amikacin3' => Input::get('amikacin3'),
-                        'streptomycin3' => Input::get('streptomycin3'),
-                        'ethionamide3' => Input::get('ethionamide3'),
-                        'prothionamide3' => Input::get('prothionamide3'),
-                        'para_aminosalicylic_acid3' => Input::get('para_aminosalicylic_acid3'),
-                        '_1st_line_drugs' => $_1st_line_drugs,
-                        '_2st_line_drugs' => $_2st_line_drugs,
-                        'version_number' => Input::get('version_number'),
-                        'lot_number' => Input::get('lot_number'),
-                        'mutations_detected_list' => Input::get('mutations_detected_list'),
-                        'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
-                        'd_firstName' => Input::get('d_firstName'),
-                        'd_middleName' => Input::get('d_middleName'),
-                        // 'd_middleName' => Input::get('d_middleName'),
-                        'comments' => Input::get('comments'),
-                        'form_completness' => Input::get('form_completness'),
-                        'date_completed' => Input::get('date_completed'),
-                        'diagnosis_test_verified_by' => Input::get('diagnosis_test_verified_by'),
-                        'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
-                        'status' => 1,
-                        'patient_id' => $clients['id'],
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $clients['facility_id'],
-                    ));
+                    if ($individual) {
+                        $user->updateRecord('diagnosis_test', array(
+                            'sputum_test' => Input::get('sputum_test'),
+                            'anti_tb' => Input::get('anti_tb'),
+                            'mic' => Input::get('mic'),
+                            'culture_performed' => Input::get('culture_performed'),
+                            'culture_type' => Input::get('culture_type'),
+                            'culture_type_other' => Input::get('culture_type_other'),
+                            'phenotypic_performed' => Input::get('phenotypic_performed'),
+                            'sample_methods' => $sample_methods,
+                            'lj_results' => Input::get('lj_results'),
+                            'mgit_results' => Input::get('mgit_results'),
+                            'rifampicin' => Input::get('rifampicin'),
+                            'rifampicin_date' => Input::get('rifampicin_date'),
+                            'isoniazid' => Input::get('isoniazid'),
+                            'isoniazid_date' => Input::get('isoniazid_date'),
+                            'levofloxacin' => Input::get('levofloxacin'),
+                            'levofloxacin_date' => Input::get('levofloxacin_date'),
+                            'moxifloxacin' => Input::get('moxifloxacin'),
+                            'moxifloxacin_date' => Input::get('moxifloxacin_date'),
+                            'bedaquiline' => Input::get('bedaquiline'),
+                            'bedaquiline_date' => Input::get('bedaquiline_date'),
+                            'linezolid' => Input::get('linezolid'),
+                            'linezolid_date' => Input::get('linezolid_date'),
+                            'clofazimine' => Input::get('clofazimine'),
+                            'clofazimine_date' => Input::get('clofazimine_date'),
+                            'cycloserine' => Input::get('cycloserine'),
+                            'cycloserine_date' => Input::get('_date'),
+                            'terizidone' => Input::get('terizidone'),
+                            'terizidone_date' => Input::get('terizidone_date'),
+                            'ethambutol' => Input::get('ethambutol'),
+                            'ethambutol_date' => Input::get('ethambutol_date'),
+                            'delamanid' => Input::get('delamanid'),
+                            'delamanid_date' => Input::get('delamanid_date'),
+                            'pyrazinamide' => Input::get('pyrazinamide'),
+                            'pyrazinamide_date' => Input::get('pyrazinamide_date'),
+                            'imipenem' => Input::get('imipenem'),
+                            'imipenem_date' => Input::get('imipenem_date'),
+                            'cilastatin' => Input::get('cilastatin'),
+                            'cilastatin_date' => Input::get('cilastatin_date'),
+                            'meropenem' => Input::get('meropenem'),
+                            'meropenem_date' => Input::get('meropenem_date'),
+                            'amikacin' => Input::get('amikacin'),
+                            'amikacin_date' => Input::get('amikacin_date'),
+                            'streptomycin' => Input::get('streptomycin'),
+                            'streptomycin_date' => Input::get('streptomycin_date'),
+                            'ethionamide' => Input::get('ethionamide'),
+                            'ethionamide_date' => Input::get('ethionamide_date'),
+                            'prothionamide' => Input::get('prothionamide'),
+                            'prothionamide_date' => Input::get('prothionamide_date'),
+                            'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
+                            'para_aminosalicylic_acid_date' => Input::get('para_aminosalicylic_acid_date'),
+                            'isoniazid2' => Input::get('isoniazid2'),
+                            'fluoroquinolones' => Input::get('fluoroquinolones'),
+                            'amikacin2' => Input::get('amikacin2'),
+                            'kanamycin' => Input::get('kanamycin'),
+                            'capreomycin' => Input::get('capreomycin'),
+                            'ethionamide2' => Input::get('ethionamide2'),
+                            '_1st_line_drugs' => $_1st_line_drugs,
+                            '_2st_line_drugs' => $_2st_line_drugs,
+                            'version_number' => Input::get('version_number'),
+                            'lot_number' => Input::get('lot_number'),
+                            'mutations_detected_list' => Input::get('mutations_detected_list'),
+                            'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
+                            'comments' => Input::get('comments'),
+                            'form_completness' => Input::get('form_completness'),
+                            'date_completed' => Input::get('date_completed'),
+                            'diagnosis_test_verified_by' => $user->data()->id,
+                            'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $clients['facility_id'],
+                        ), $individual[0]['id']);
 
-                    $successMessage = 'Diagnosis test  Successful Added';
+                        $successMessage = 'Diagnosis test  Successful Updated';
+                    } else {
+                        $user->createRecord('diagnosis_test', array(
+                            'pid' => $clients['pid'],
+                            'sputum_test' => Input::get('sputum_test'),
+                            'anti_tb' => Input::get('anti_tb'),
+                            'mic' => Input::get('mic'),
+                            'culture_performed' => Input::get('culture_performed'),
+                            'culture_type' => Input::get('culture_type'),
+                            'culture_type_other' => Input::get('culture_type_other'),
+                            'phenotypic_performed' => Input::get('phenotypic_performed'),
+                            'sample_methods' => $sample_methods,
+                            'lj_results' => Input::get('lj_results'),
+                            'mgit_results' => Input::get('mgit_results'),
+                            'rifampicin' => Input::get('rifampicin'),
+                            'rifampicin_date' => Input::get('rifampicin_date'),
+                            'isoniazid' => Input::get('isoniazid'),
+                            'isoniazid_date' => Input::get('isoniazid_date'),
+                            'levofloxacin' => Input::get('levofloxacin'),
+                            'levofloxacin_date' => Input::get('levofloxacin_date'),
+                            'moxifloxacin' => Input::get('moxifloxacin'),
+                            'moxifloxacin_date' => Input::get('moxifloxacin_date'),
+                            'bedaquiline' => Input::get('bedaquiline'),
+                            'bedaquiline_date' => Input::get('bedaquiline_date'),
+                            'linezolid' => Input::get('linezolid'),
+                            'linezolid_date' => Input::get('linezolid_date'),
+                            'clofazimine' => Input::get('clofazimine'),
+                            'clofazimine_date' => Input::get('clofazimine_date'),
+                            'cycloserine' => Input::get('cycloserine'),
+                            'cycloserine_date' => Input::get('_date'),
+                            'terizidone' => Input::get('terizidone'),
+                            'terizidone_date' => Input::get('terizidone_date'),
+                            'ethambutol' => Input::get('ethambutol'),
+                            'ethambutol_date' => Input::get('ethambutol_date'),
+                            'delamanid' => Input::get('delamanid'),
+                            'delamanid_date' => Input::get('delamanid_date'),
+                            'pyrazinamide' => Input::get('pyrazinamide'),
+                            'pyrazinamide_date' => Input::get('pyrazinamide_date'),
+                            'imipenem' => Input::get('imipenem'),
+                            'imipenem_date' => Input::get('imipenem_date'),
+                            'cilastatin' => Input::get('cilastatin'),
+                            'cilastatin_date' => Input::get('cilastatin_date'),
+                            'meropenem' => Input::get('meropenem'),
+                            'meropenem_date' => Input::get('meropenem_date'),
+                            'amikacin' => Input::get('amikacin'),
+                            'amikacin_date' => Input::get('amikacin_date'),
+                            'streptomycin' => Input::get('streptomycin'),
+                            'streptomycin_date' => Input::get('streptomycin_date'),
+                            'ethionamide' => Input::get('ethionamide'),
+                            'ethionamide_date' => Input::get('ethionamide_date'),
+                            'prothionamide' => Input::get('prothionamide'),
+                            'prothionamide_date' => Input::get('prothionamide_date'),
+                            'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
+                            'para_aminosalicylic_acid_date' => Input::get('para_aminosalicylic_acid_date'),
+                            'isoniazid2' => Input::get('isoniazid2'),
+                            'fluoroquinolones' => Input::get('fluoroquinolones'),
+                            'amikacin2' => Input::get('amikacin2'),
+                            'kanamycin' => Input::get('kanamycin'),
+                            'capreomycin' => Input::get('capreomycin'),
+                            'ethionamide2' => Input::get('ethionamide2'),
+                            '_1st_line_drugs' => $_1st_line_drugs,
+                            '_2st_line_drugs' => $_2st_line_drugs,
+                            'version_number' => Input::get('version_number'),
+                            'lot_number' => Input::get('lot_number'),
+                            'mutations_detected_list' => Input::get('mutations_detected_list'),
+                            'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
+                            'comments' => Input::get('comments'),
+                            'form_completness' => Input::get('form_completness'),
+                            'date_completed' => Input::get('date_completed'),
+                            'diagnosis_test_verified_by' => $user->data()->id,
+                            'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
+                            'status' => 1,
+                            'enrollment_id' => $_GET['enrollment_id'],
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $clients['facility_id'],
+                        ));
+
+                        $successMessage = 'Diagnosis test  Successful Added';
+                    }
+                    Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
                 }
 
-                Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
+
+                Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id']);
             } else {
                 $pageError = $validate->errors();
             }
         } elseif (Input::get('add_respiratory')) {
             $validate = $validate->check($_POST, array(
-                'visit_date' => array(
-                    'required' => true,
-                ),
                 'lab_name' => array(
                     'required' => true,
                 ),
@@ -745,187 +748,185 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
-                $costing = $override->getNews('respiratory', 'status', 1, 'patient_id', $_GET['cid']);
+                $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id'])[0];
+                $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id']);
 
                 $test_reasons = implode(',', Input::get('test_reasons'));
                 $sample_type = implode(',', Input::get('sample_type'));
 
-
-                if ($costing) {
-                    $user->updateRecord('respiratory', array(
-                        'visit_date' => Input::get('visit_date'),
-                        'lab_name' => Input::get('lab_name'),
-                        'sample_received' => Input::get('sample_received'),
-                        'sample_amount' => Input::get('sample_amount'),
-                        'sample_reason' => Input::get('sample_reason'),
-                        'test_rejected' => Input::get('test_rejected'),
-                        'test_reasons' => $test_reasons,
-                        'test_reasons_other' => Input::get('test_reasons_other'),
-                        'sample_date' => Input::get('sample_date'),
-                        'sample_type' => $sample_type,
-                        'sample_type_other' => Input::get('sample_type_other'),
-                        'sample_number' => Input::get('sample_number'),
-                        'appearance' => Input::get('appearance'),
-                        'sample_volume' => Input::get('sample_volume'),
-                        'sample_accession' => Input::get('sample_accession'),
-                        'afb_microscopy' => Input::get('afb_microscopy'),
-                        'afb_microscopy_date' => Input::get('afb_microscopy_date'),
-                        'zn_results_a' => Input::get('zn_results_a'),
-                        'zn_results_b' => Input::get('zn_results_b'),
-                        'fm_results_a' => Input::get('fm_results_a'),
-                        'fm_results_b' => Input::get('fm_results_b'),
-                        'wrd_test' => Input::get('wrd_test'),
-                        'wrd_test_date' => Input::get('wrd_test_date'),
-                        'sequence_done' => Input::get('sequence_done'),
-                        'sequence_date' => Input::get('sequence_date'),
-                        'sequence_type' => Input::get('sequence_type'),
-                        'sequence_number' => Input::get('sequence_number'),
-                        'mtb_detection' => Input::get('mtb_detection'),
-                        'rif_resistance' => Input::get('rif_resistance'),
-                        'ct_value' => Input::get('ct_value'),
-                        'test_repeatition' => Input::get('test_repeatition'),
-                        'microscopy_reason' => Input::get('microscopy_reason'),
-                        'microscopy_reason_other' => Input::get('microscopy_reason_other'),
-                        'respiratory_completness' => Input::get('respiratory_completness'),
-                        'comments' => Input::get('comments'),
-                        'date_completed' => Input::get('date_completed'),
-                        'respiratory_completed_by' => Input::get('respiratory_completed_by'),
-                        'respiratory_verified_by' => Input::get('respiratory_verified_by'),
-                        'respiratory_verified_date' => Input::get('respiratory_verified_date'),
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $clients['facility_id'],
-                    ), $costing[0]['id']);
-
-                    $respiratory_repeated_tests = $override->get3('respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'respiratory_id', $costing[0]['id']);
-
-                    if ($respiratory_repeated_tests) {
-                        $user->updateRecord('respiratory_repeated_tests', array(
-                            'respiratory_id' => $costing[0]['id'],
-                            'sequence_type' => Input::get('sequence_type2'),
-                            'sequence_number' => Input::get('sequence_number2'),
-                            'mtb_detection' => Input::get('mtb_detection2'),
-                            'rif_resistance' => Input::get('rif_resistance2'),
-                            'ct_value' => Input::get('ct_value2'),
-                            'test_repeatition' => Input::get('test_repeatition'),
-                            'patient_id' => $clients['id'],
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'site_id' => $clients['facility_id'],
-                        ), $respiratory_repeated_tests[0]['id']);
-                    } else {
-                        $user->createRecord('respiratory_repeated_tests', array(
-                            'respiratory_id' => $costing[0]['id'],
-                            'sequence_type' => Input::get('sequence_type2'),
-                            'sequence_number' => Input::get('sequence_number2'),
-                            'mtb_detection' => Input::get('mtb_detection2'),
-                            'rif_resistance' => Input::get('rif_resistance2'),
-                            'ct_value' => Input::get('ct_value2'),
-                            'test_repeatition' => Input::get('test_repeatition'),
-                            'patient_id' => $clients['id'],
-                            'status' => 1,
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'site_id' => $clients['facility_id'],
-                        ));
-                    }
-
-                    $successMessage = 'Respiratory Data  Successful Updated';
+                if (Input::get('respiratory_completness') == 3 && Input::get('respiratory_verified_date') == "") {
+                    $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
                 } else {
-                    $user->createRecord('respiratory', array(
-                        'pid' => $clients['pid'],
-                        'visit_date' => Input::get('visit_date'),
-                        'lab_name' => Input::get('lab_name'),
-                        'sample_received' => Input::get('sample_received'),
-                        'sample_amount' => Input::get('sample_amount'),
-                        'sample_reason' => Input::get('sample_reason'),
-                        'test_rejected' => Input::get('test_rejected'),
-                        'test_reasons' => $test_reasons,
-                        'test_reasons_other' => Input::get('test_reasons_other'),
-                        'sample_date' => Input::get('sample_date'),
-                        'sample_type' => $sample_type,
-                        'sample_type_other' => Input::get('sample_type_other'),
-                        'sample_number' => Input::get('sample_number'),
-                        'appearance' => Input::get('appearance'),
-                        'sample_volume' => Input::get('sample_volume'),
-                        'sample_accession' => Input::get('sample_accession'),
-                        'afb_microscopy' => Input::get('afb_microscopy'),
-                        'afb_microscopy_date' => Input::get('afb_microscopy_date'),
-                        'zn_results_a' => Input::get('zn_results_a'),
-                        'zn_results_b' => Input::get('zn_results_b'),
-                        'fm_results_a' => Input::get('fm_results_a'),
-                        'fm_results_b' => Input::get('fm_results_b'),
-                        'wrd_test' => Input::get('wrd_test'),
-                        'wrd_test_date' => Input::get('wrd_test_date'),
-                        'sequence_done' => Input::get('sequence_done'),
-                        'sequence_date' => Input::get('sequence_date'),
-                        'sequence_type' => Input::get('sequence_type'),
-                        'sequence_number' => Input::get('sequence_number'),
-                        'mtb_detection' => Input::get('mtb_detection'),
-                        'rif_resistance' => Input::get('rif_resistance'),
-                        'ct_value' => Input::get('ct_value'),
-                        'test_repeatition' => Input::get('test_repeatition'),
-                        'microscopy_reason' => Input::get('microscopy_reason'),
-                        'microscopy_reason_other' => Input::get('microscopy_reason_other'),
-                        'respiratory_completness' => Input::get('respiratory_completness'),
-                        'comments' => Input::get('comments'),
-                        'date_completed' => Input::get('date_completed'),
-                        'respiratory_completed_by' => Input::get('respiratory_completed_by'),
-                        'respiratory_verified_by' => Input::get('respiratory_verified_by'),
-                        'respiratory_verified_date' => Input::get('respiratory_verified_date'),
-                        'status' => 1,
-                        'patient_id' => $clients['id'],
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $clients['facility_id'],
-                    ));
-
-                    $last_row = $override->lastRow('respiratory', 'id')[0];
-
-                    $respiratory_repeated_tests = $override->get3('respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'respiratory_id', $last_row['id']);
-
-                    if ($respiratory_repeated_tests) {
-                        $user->updateRecord('respiratory_repeated_tests', array(
-                            'respiratory_id' => $last_row['id'],
-                            'sequence_type' => Input::get('sequence_type2'),
-                            'sequence_number' => Input::get('sequence_number2'),
-                            'mtb_detection' => Input::get('mtb_detection2'),
-                            'rif_resistance' => Input::get('rif_resistance2'),
-                            'ct_value' => Input::get('ct_value2'),
+                    if ($costing) {
+                        $user->updateRecord('respiratory', array(
+                            'lab_name' => Input::get('lab_name'),
+                            'sample_received' => Input::get('sample_received'),
+                            'sample_date_one' => Input::get('sample_date_one'),
+                            'sample_date_two' => Input::get('sample_date_two'),
+                            'sample_reason' => Input::get('sample_reason'),
+                            'sample_reason_other1' => Input::get('sample_reason_other1'),
+                            'sample_one_collected_date' => Input::get('sample_one_collected_date'),
+                            'sample_two_collected_date' => Input::get('sample_two_collected_date'),
+                            'sample_type' => Input::get('sample_type'),
+                            'sample_number' => Input::get('sample_number'),
+                            'sample_type_other' => Input::get('sample_type_other'),
+                            'appearance' => Input::get('appearance'),
+                            'sample_volume' => Input::get('sample_volume'),
+                            'afb_microscopy' => Input::get('afb_microscopy'),
+                            'afb_microscopy_date' => Input::get('afb_microscopy_date'),
+                            'zn_results_a' => Input::get('zn_results_a'),
+                            'zn_results_b' => Input::get('zn_results_b'),
+                            'fm_results_a' => Input::get('fm_results_a'),
+                            'fm_results_b' => Input::get('fm_results_b'),
+                            'wrd_test' => Input::get('wrd_test'),
+                            'wrd_test_date' => Input::get('wrd_test_date'),
+                            'sequence_done' => Input::get('sequence_done'),
+                            'sequence_date' => Input::get('sequence_date'),
+                            'sequence_type' => Input::get('sequence_type'),
+                            'sequence_number' => Input::get('sequence_number'),
+                            'mtb_detection' => Input::get('mtb_detection'),
+                            'rif_resistance' => Input::get('rif_resistance'),
+                            'ct_value' => Input::get('ct_value'),
                             'test_repeatition' => Input::get('test_repeatition'),
-                            'patient_id' => $clients['id'],
+                            'microscopy_reason' => Input::get('microscopy_reason'),
+                            'microscopy_reason_other' => Input::get('microscopy_reason_other'),
+                            'respiratory_completness' => Input::get('respiratory_completness'),
+                            'comments' => Input::get('comments'),
+                            'date_completed' => Input::get('date_completed'),
+                            'respiratory_completed_by' => $user->data()->id,
+                            'respiratory_verified_by' => $user->data()->id,
+                            'respiratory_verified_date' => Input::get('respiratory_verified_date'),
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'site_id' => $clients['facility_id'],
-                        ), $respiratory_repeated_tests[0]['id']);
+                            'facility_id' => $clients['facility_id'],
+                        ), $costing[0]['id']);
+
+                        $respiratory_repeated_tests = $override->get3('respiratory_repeated_tests', 'enrollment_id', $clients['id'], 'status', 1, 'respiratory_id', $costing[0]['id']);
+
+                        if ($respiratory_repeated_tests) {
+                            $user->updateRecord('respiratory_repeated_tests', array(
+                                'respiratory_id' => $costing[0]['id'],
+                                'sequence_type' => Input::get('sequence_type2'),
+                                'sequence_number' => Input::get('sequence_number2'),
+                                'mtb_detection' => Input::get('mtb_detection2'),
+                                'rif_resistance' => Input::get('rif_resistance2'),
+                                'ct_value' => Input::get('ct_value2'),
+                                'test_repeatition' => Input::get('test_repeatition'),
+                                'enrollment_id' => $_GET['enrollment_id'],
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $clients['facility_id'],
+                            ), $respiratory_repeated_tests[0]['id']);
+                        } else {
+                            $user->createRecord('respiratory_repeated_tests', array(
+                                'respiratory_id' => $costing[0]['id'],
+                                'sequence_type' => Input::get('sequence_type2'),
+                                'sequence_number' => Input::get('sequence_number2'),
+                                'mtb_detection' => Input::get('mtb_detection2'),
+                                'rif_resistance' => Input::get('rif_resistance2'),
+                                'ct_value' => Input::get('ct_value2'),
+                                'test_repeatition' => Input::get('test_repeatition'),
+                                'enrollment_id' => $_GET['enrollment_id'],
+                                'status' => 1,
+                                'create_on' => date('Y-m-d H:i:s'),
+                                'staff_id' => $user->data()->id,
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $clients['facility_id'],
+                            ));
+                        }
+
+                        $successMessage = 'Respiratory Data  Successful Updated';
                     } else {
-                        $user->createRecord('respiratory_repeated_tests', array(
-                            'respiratory_id' => $last_row['id'],
-                            'sequence_type' => Input::get('sequence_type2'),
-                            'sequence_number' => Input::get('sequence_number2'),
-                            'mtb_detection' => Input::get('mtb_detection2'),
-                            'rif_resistance' => Input::get('rif_resistance2'),
-                            'ct_value' => Input::get('ct_value2'),
+                        $user->createRecord('respiratory', array(
+                            'pid' => $clients['pid'],
+                            'lab_name' => Input::get('lab_name'),
+                            'sample_received' => Input::get('sample_received'),
+                            'sample_date_one' => Input::get('sample_date_one'),
+                            'sample_date_two' => Input::get('sample_date_two'),
+                            'sample_reason' => Input::get('sample_reason'),
+                            'sample_reason_other1' => Input::get('sample_reason_other1'),
+                            'sample_one_collected_date' => Input::get('sample_one_collected_date'),
+                            'sample_two_collected_date' => Input::get('sample_two_collected_date'),
+                            'sample_type' => Input::get('sample_type'),
+                            'sample_number' => Input::get('sample_number'),
+                            'sample_type_other' => Input::get('sample_type_other'),
+                            'appearance' => Input::get('appearance'),
+                            'sample_volume' => Input::get('sample_volume'),
+                            'afb_microscopy' => Input::get('afb_microscopy'),
+                            'afb_microscopy_date' => Input::get('afb_microscopy_date'),
+                            'zn_results_a' => Input::get('zn_results_a'),
+                            'zn_results_b' => Input::get('zn_results_b'),
+                            'fm_results_a' => Input::get('fm_results_a'),
+                            'fm_results_b' => Input::get('fm_results_b'),
+                            'wrd_test' => Input::get('wrd_test'),
+                            'wrd_test_date' => Input::get('wrd_test_date'),
+                            'sequence_done' => Input::get('sequence_done'),
+                            'sequence_date' => Input::get('sequence_date'),
+                            'sequence_type' => Input::get('sequence_type'),
+                            'sequence_number' => Input::get('sequence_number'),
+                            'mtb_detection' => Input::get('mtb_detection'),
+                            'rif_resistance' => Input::get('rif_resistance'),
+                            'ct_value' => Input::get('ct_value'),
                             'test_repeatition' => Input::get('test_repeatition'),
-                            'patient_id' => $clients['id'],
+                            'microscopy_reason' => Input::get('microscopy_reason'),
+                            'microscopy_reason_other' => Input::get('microscopy_reason_other'),
+                            'respiratory_completness' => Input::get('respiratory_completness'),
+                            'comments' => Input::get('comments'),
+                            'date_completed' => Input::get('date_completed'),
+                            'respiratory_completed_by' => $user->data()->id,
+                            'respiratory_verified_by' => $user->data()->id,
+                            'respiratory_verified_date' => Input::get('respiratory_verified_date'),
                             'status' => 1,
+                            'enrollment_id' => $_GET['enrollment_id'],
                             'create_on' => date('Y-m-d H:i:s'),
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'site_id' => $clients['facility_id'],
+                            'facility_id' => $clients['facility_id'],
                         ));
+
+                        $last_row = $override->lastRow('respiratory', 'id')[0];
+
+                        $respiratory_repeated_tests = $override->get3('respiratory_repeated_tests', 'enrollment_id', $clients['id'], 'status', 1, 'respiratory_id', $last_row['id']);
+
+                        if ($respiratory_repeated_tests) {
+                            $user->updateRecord('respiratory_repeated_tests', array(
+                                'respiratory_id' => $last_row['id'],
+                                'sequence_type' => Input::get('sequence_type2'),
+                                'sequence_number' => Input::get('sequence_number2'),
+                                'mtb_detection' => Input::get('mtb_detection2'),
+                                'rif_resistance' => Input::get('rif_resistance2'),
+                                'ct_value' => Input::get('ct_value2'),
+                                'test_repeatition' => Input::get('test_repeatition'),
+                                'enrollment_id' => $_GET['enrollment_id'],
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $clients['facility_id'],
+                            ), $respiratory_repeated_tests[0]['id']);
+                        } else {
+                            $user->createRecord('respiratory_repeated_tests', array(
+                                'respiratory_id' => $last_row['id'],
+                                'sequence_type' => Input::get('sequence_type2'),
+                                'sequence_number' => Input::get('sequence_number2'),
+                                'mtb_detection' => Input::get('mtb_detection2'),
+                                'rif_resistance' => Input::get('rif_resistance2'),
+                                'ct_value' => Input::get('ct_value2'),
+                                'test_repeatition' => Input::get('test_repeatition'),
+                                'enrollment_id' => $_GET['enrollment_id'],
+                                'status' => 1,
+                                'create_on' => date('Y-m-d H:i:s'),
+                                'staff_id' => $user->data()->id,
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $clients['facility_id'],
+                            ));
+                        }
+
+                        $successMessage = 'Respiratory Data  Successful Added';
                     }
-
-                    $successMessage = 'Respiratory Data  Successful Added';
+                    Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
                 }
-
-                Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
             } else {
                 $pageError = $validate->errors();
             }
@@ -948,290 +949,284 @@ if ($user->isLoggedIn()) {
                 // ),
             ));
             if ($validate->passed()) {
-                $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
-                $costing = $override->getNews('non_respiratory', 'status', 1, 'patient_id', $_GET['cid']);
+                $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id'])[0];
+                $costing = $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id']);
 
                 // $test_reasons = implode(',', Input::get('test_reasons'));
                 // $sample_type = implode(',', Input::get('sample_type'));
-
-                if ($costing) {
-                    $user->updateRecord('non_respiratory', array(
-                        'visit_date' => Input::get('visit_date'),
-                        'afb_microscopy' => Input::get('n_afb_microscopy'),
-                        'afb_microscopy_date' => Input::get('n_afb_microscopy_date'),
-                        'zn_results_a' => Input::get('n_zn_results_a'),
-                        'zn_results_b' => Input::get('n_zn_results_b'),
-                        'fm_results_a' => Input::get('n_fm_results_a'),
-                        'fm_results_b' => Input::get('n_fm_results_b'),
-                        'wrd_test' => Input::get('wrd_test2_0'),
-                        'wrd_test_date' => Input::get('wrd_test_date2_2'),
-                        'sequence_done' => Input::get('sequence_done2_0'),
-                        'sequence_date' => Input::get('sequence_date2_2'),
-                        'sequence_type' => Input::get('sequence_type2_0'),
-                        'sequence_number' => Input::get('sequence_number2_2'),
-                        'mtb_detection' => Input::get('mtb_detection2_0'),
-                        'rif_resistance' => Input::get('rif_resistance2_0'),
-                        'ct_value' => Input::get('ct_value2_2'),
-                        'test_repeatition' => Input::get('test_repeatition2_0'),
-                        'microscopy_reason' => Input::get('microscopy_reason2_0'),
-                        'microscopy_reason_other' => Input::get('microscopy_reason_other2_2'),
-                        'comments' => Input::get('comments'),
-                        'form_completness' => Input::get('form_completness'),
-                        'date_completed' => Input::get('date_completed'),
-                        'non_respiratory_completed' => Input::get('non_respiratory_completed'),
-                        'non_respiratory_verified_by' => Input::get('non_respiratory_verified_by'),
-                        'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $clients['facility_id'],
-                    ), $costing[0]['id']);
-
-                    $non_respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'non_respiratory_id', $costing[0]['id']);
-
-                    if ($non_respiratory_repeated_tests) {
-                        $user->updateRecord('non_respiratory_repeated_tests', array(
-                            'non_respiratory_id' => $costing[0]['id'],
-                            'sequence_type' => Input::get('sequence_type3_0'),
-                            'sequence_number' => Input::get('sequence_number3_2'),
-                            'mtb_detection' => Input::get('mtb_detection3_0'),
-                            'rif_resistance' => Input::get('rif_resistance3_0'),
-                            'ct_value' => Input::get('ct_value3_2'),
-                            'test_repeatition' => Input::get('test_repeatition2_0'),
-                            'patient_id' => $clients['id'],
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'site_id' => $clients['facility_id'],
-                        ), $non_respiratory_repeated_tests[0]['id']);
-                    } else {
-                        $user->createRecord('non_respiratory_repeated_tests', array(
-                            'non_respiratory_id' => $costing[0]['id'],
-                            'sequence_type' => Input::get('sequence_type3_0'),
-                            'sequence_number' => Input::get('sequence_number3_2'),
-                            'mtb_detection' => Input::get('mtb_detection3_0'),
-                            'rif_resistance' => Input::get('rif_resistance3_0'),
-                            'ct_value' => Input::get('ct_value3_2'),
-                            'test_repeatition' => Input::get('test_repeatition2_0'),
-                            'patient_id' => $clients['id'],
-                            'status' => 1,
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'site_id' => $clients['facility_id'],
-                        ));
-                    }
-
-                    $successMessage = 'Non Respiratory Data  Successful Updated';
+                if (Input::get('form_completness') == 3 && Input::get('non_respiratory_verified_date') == "") {
+                    $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
                 } else {
-                    $user->createRecord('non_respiratory', array(
-                        'pid' => $clients['pid'],
-                        'visit_date' => Input::get('visit_date'),
-                        'afb_microscopy' => Input::get('n_afb_microscopy'),
-                        'afb_microscopy_date' => Input::get('n_afb_microscopy_date'),
-                        'zn_results_a' => Input::get('n_zn_results_a'),
-                        'zn_results_b' => Input::get('n_zn_results_b'),
-                        'fm_results_a' => Input::get('n_fm_results_a'),
-                        'fm_results_b' => Input::get('n_fm_results_b'),
-                        'wrd_test' => Input::get('wrd_test2_0'),
-                        'wrd_test_date' => Input::get('wrd_test_date2_2'),
-                        'sequence_done' => Input::get('sequence_done2_0'),
-                        'sequence_date' => Input::get('sequence_date2_2'),
-                        'sequence_type' => Input::get('sequence_type2_0'),
-                        'sequence_number' => Input::get('sequence_number2_2'),
-                        'mtb_detection' => Input::get('mtb_detection2_0'),
-                        'rif_resistance' => Input::get('rif_resistance2_0'),
-                        'ct_value' => Input::get('ct_value2_2'),
-                        'test_repeatition' => Input::get('test_repeatition2_0'),
-                        'microscopy_reason' => Input::get('microscopy_reason2_0'),
-                        'microscopy_reason_other' => Input::get('microscopy_reason_other2_2'),
-                        'comments' => Input::get('comments'),
-                        'form_completness' => Input::get('form_completness'),
-                        'date_completed' => Input::get('date_completed'),
-                        'non_respiratory_completed' => Input::get('non_respiratory_completed'),
-                        'non_respiratory_verified_by' => Input::get('non_respiratory_verified_by'),
-                        'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
-                        'status' => 1,
-                        'patient_id' => $clients['id'],
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $clients['facility_id'],
-                    ));
-
-                    $last_row = $override->lastRow('non_respiratory', 'id')[0];
-
-                    $non_respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'non_respiratory_id', $last_row['id']);
-
-                    if ($non_respiratory_repeated_tests) {
-                        $user->updateRecord('non_respiratory_repeated_tests', array(
-                            'non_respiratory_id' => $last_row['id'],
-                            'sequence_type' => Input::get('sequence_type3_0'),
-                            'sequence_number' => Input::get('sequence_number3_2'),
-                            'mtb_detection' => Input::get('mtb_detection3_0'),
-                            'rif_resistance' => Input::get('rif_resistance3_0'),
-                            'ct_value' => Input::get('ct_value3_2'),
+                    if ($costing) {
+                        $user->updateRecord('non_respiratory', array(
+                            'afb_microscopy' => Input::get('n_afb_microscopy'),
+                            'afb_microscopy_date' => Input::get('n_afb_microscopy_date'),
+                            'zn_results_a' => Input::get('n_zn_results_a'),
+                            'zn_results_b' => Input::get('n_zn_results_b'),
+                            'fm_results_a' => Input::get('n_fm_results_a'),
+                            'fm_results_b' => Input::get('n_fm_results_b'),
+                            'wrd_test' => Input::get('wrd_test2_0'),
+                            'wrd_test_date' => Input::get('wrd_test_date2_2'),
+                            'sequence_done' => Input::get('sequence_done2_0'),
+                            'sequence_date' => Input::get('sequence_date2_2'),
+                            'sequence_type' => Input::get('sequence_type2_0'),
+                            'sequence_number' => Input::get('sequence_number2_2'),
+                            'mtb_detection' => Input::get('mtb_detection2_0'),
+                            'rif_resistance' => Input::get('rif_resistance2_0'),
+                            'ct_value' => Input::get('ct_value2_2'),
                             'test_repeatition' => Input::get('test_repeatition2_0'),
-                            'patient_id' => $clients['id'],
+                            'microscopy_reason' => Input::get('microscopy_reason2_0'),
+                            'microscopy_reason_other' => Input::get('microscopy_reason_other2_2'),
+                            'comments' => Input::get('comments'),
+                            'form_completness' => Input::get('form_completness'),
+                            'date_completed' => Input::get('date_completed'),
+                            'non_respiratory_completed' => Input::get('non_respiratory_completed'),
+                            'non_respiratory_verified_by' => $user->data()->id,
+                            'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'site_id' => $clients['facility_id'],
-                        ), $non_respiratory_repeated_tests[0]['id']);
+                            'facility_id' => $clients['facility_id'],
+                        ), $costing[0]['id']);
+
+                        $non_respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'enrollment_id', $clients['id'], 'status', 1, 'non_respiratory_id', $costing[0]['id']);
+
+                        if ($non_respiratory_repeated_tests) {
+                            $user->updateRecord('non_respiratory_repeated_tests', array(
+                                'non_respiratory_id' => $costing[0]['id'],
+                                'sequence_type' => Input::get('sequence_type3_0'),
+                                'sequence_number' => Input::get('sequence_number3_2'),
+                                'mtb_detection' => Input::get('mtb_detection3_0'),
+                                'rif_resistance' => Input::get('rif_resistance3_0'),
+                                'ct_value' => Input::get('ct_value3_2'),
+                                'test_repeatition' => Input::get('test_repeatition2_0'),
+                                'enrollment_id' => $_GET['enrollment_id'],
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $clients['facility_id'],
+                            ), $non_respiratory_repeated_tests[0]['id']);
+                        } else {
+                            $user->createRecord('non_respiratory_repeated_tests', array(
+                                'non_respiratory_id' => $costing[0]['id'],
+                                'sequence_type' => Input::get('sequence_type3_0'),
+                                'sequence_number' => Input::get('sequence_number3_2'),
+                                'mtb_detection' => Input::get('mtb_detection3_0'),
+                                'rif_resistance' => Input::get('rif_resistance3_0'),
+                                'ct_value' => Input::get('ct_value3_2'),
+                                'test_repeatition' => Input::get('test_repeatition2_0'),
+                                'enrollment_id' => $_GET['enrollment_id'],
+                                'status' => 1,
+                                'create_on' => date('Y-m-d H:i:s'),
+                                'staff_id' => $user->data()->id,
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $clients['facility_id'],
+                            ));
+                        }
+
+                        $successMessage = 'Non Respiratory Data  Successful Updated';
                     } else {
-                        $user->createRecord('non_respiratory_repeated_tests', array(
-                            'non_respiratory_id' => $last_row['id'],
-                            'sequence_type' => Input::get('sequence_type3_0'),
-                            'sequence_number' => Input::get('sequence_number3_2'),
-                            'mtb_detection' => Input::get('mtb_detection3_0'),
-                            'rif_resistance' => Input::get('rif_resistance3_0'),
-                            'ct_value' => Input::get('ct_value3_2'),
+                        $user->createRecord('non_respiratory', array(
+                            'pid' => $clients['pid'],
+                            'afb_microscopy' => Input::get('n_afb_microscopy'),
+                            'afb_microscopy_date' => Input::get('n_afb_microscopy_date'),
+                            'zn_results_a' => Input::get('n_zn_results_a'),
+                            'zn_results_b' => Input::get('n_zn_results_b'),
+                            'fm_results_a' => Input::get('n_fm_results_a'),
+                            'fm_results_b' => Input::get('n_fm_results_b'),
+                            'wrd_test' => Input::get('wrd_test2_0'),
+                            'wrd_test_date' => Input::get('wrd_test_date2_2'),
+                            'sequence_done' => Input::get('sequence_done2_0'),
+                            'sequence_date' => Input::get('sequence_date2_2'),
+                            'sequence_type' => Input::get('sequence_type2_0'),
+                            'sequence_number' => Input::get('sequence_number2_2'),
+                            'mtb_detection' => Input::get('mtb_detection2_0'),
+                            'rif_resistance' => Input::get('rif_resistance2_0'),
+                            'ct_value' => Input::get('ct_value2_2'),
                             'test_repeatition' => Input::get('test_repeatition2_0'),
-                            'patient_id' => $clients['id'],
+                            'microscopy_reason' => Input::get('microscopy_reason2_0'),
+                            'microscopy_reason_other' => Input::get('microscopy_reason_other2_2'),
+                            'comments' => Input::get('comments'),
+                            'form_completness' => Input::get('form_completness'),
+                            'date_completed' => Input::get('date_completed'),
+                            'non_respiratory_completed' => Input::get('non_respiratory_completed'),
+                            'non_respiratory_verified_by' => $user->data()->id,
+                            'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
                             'status' => 1,
+                            'enrollment_id' => $_GET['enrollment_id'],
                             'create_on' => date('Y-m-d H:i:s'),
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'site_id' => $clients['facility_id'],
+                            'facility_id' => $clients['facility_id'],
                         ));
+
+                        $last_row = $override->lastRow('non_respiratory', 'id')[0];
+
+                        $non_respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'enrollment_id', $clients['id'], 'status', 1, 'non_respiratory_id', $last_row['id']);
+
+                        if ($non_respiratory_repeated_tests) {
+                            $user->updateRecord('non_respiratory_repeated_tests', array(
+                                'non_respiratory_id' => $last_row['id'],
+                                'sequence_type' => Input::get('sequence_type3_0'),
+                                'sequence_number' => Input::get('sequence_number3_2'),
+                                'mtb_detection' => Input::get('mtb_detection3_0'),
+                                'rif_resistance' => Input::get('rif_resistance3_0'),
+                                'ct_value' => Input::get('ct_value3_2'),
+                                'test_repeatition' => Input::get('test_repeatition2_0'),
+                                'enrollment_id' => $_GET['enrollment_id'],
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $clients['facility_id'],
+                            ), $non_respiratory_repeated_tests[0]['id']);
+                        } else {
+                            $user->createRecord('non_respiratory_repeated_tests', array(
+                                'non_respiratory_id' => $last_row['id'],
+                                'sequence_type' => Input::get('sequence_type3_0'),
+                                'sequence_number' => Input::get('sequence_number3_2'),
+                                'mtb_detection' => Input::get('mtb_detection3_0'),
+                                'rif_resistance' => Input::get('rif_resistance3_0'),
+                                'ct_value' => Input::get('ct_value3_2'),
+                                'test_repeatition' => Input::get('test_repeatition2_0'),
+                                'enrollment_id' => $_GET['enrollment_id'],
+                                'status' => 1,
+                                'create_on' => date('Y-m-d H:i:s'),
+                                'staff_id' => $user->data()->id,
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $clients['facility_id'],
+                            ));
+                        }
+
+                        $successMessage = 'Non Respiratory Data  Successful Added';
                     }
 
-                    $successMessage = 'Non Respiratory Data  Successful Added';
+                    Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
                 }
-
-                Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
             } else {
                 $pageError = $validate->errors();
             }
         } elseif (Input::get('add_diagnosis')) {
             $validate = $validate->check($_POST, array(
-                'visit_date' => array(
-                    'required' => true,
-                ),
-                'form_completness' => array(
-                    'required' => true,
-                ),
-                'date_completed' => array(
+                'tb_diagnosis' => array(
                     'required' => true,
                 ),
             ));
             if ($validate->passed()) {
-                $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
-                $costing = $override->getNews('diagnosis', 'status', 1, 'patient_id', $_GET['cid']);
+                $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id'])[0];
+                $costing = $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['enrollment_id']);
 
                 $bacteriological_diagnosis = implode(',', Input::get('bacteriological_diagnosis'));
                 $tb_diagnosed_clinically = implode(',', Input::get('tb_diagnosed_clinically'));
                 $laboratory_test_used = implode(',', Input::get('laboratory_test_used'));
                 $laboratory_test_used2 = implode(',', Input::get('laboratory_test_used2'));
-
-                if ($costing) {
-                    $user->updateRecord('diagnosis', array(
-                        'visit_date' => Input::get('visit_date'),
-                        'clinician_name' => Input::get('clinician_name'),
-                        'tb_diagnosis' => Input::get('tb_diagnosis'),
-                        'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
-                        'diagnosis_made_other' => Input::get('diagnosis_made_other'),
-                        'bacteriological_diagnosis' => $bacteriological_diagnosis,
-                        'xpert_ultra_date' => Input::get('xpert_ultra_date'),
-                        'truenat_date' => Input::get('truenat_date'),
-                        'afb_microscope_date' => Input::get('afb_microscope_date'),
-                        'other_bacteriological' => Input::get('other_bacteriological'),
-                        'other_bacteriological_date' => Input::get('other_bacteriological_date'),
-                        'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
-                        'tb_clinically_other' => Input::get('tb_clinically_other'),
-                        'tb_treatment' => Input::get('tb_treatment'),
-                        'tb_treatment_date' => Input::get('tb_treatment_date'),
-                        'tb_facility' => Input::get('tb_facility'),
-                        'tb_reason' => Input::get('tb_reason'),
-                        'tb_regimen' => Input::get('tb_regimen'),
-                        'tb_regimen_other' => Input::get('tb_regimen_other'),
-                        'tb_regimen_based' => Input::get('tb_regimen_based'),
-                        'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
-                        'regimen_changed' => Input::get('regimen_changed'),
-                        'regimen_changed_other' => Input::get('regimen_changed_other'),
-                        'regimen_changed__date' => Input::get('regimen_changed__date'),
-                        'regimen_removed_name' => Input::get('regimen_removed_name'),
-                        'regimen_added_name' => Input::get('regimen_added_name'),
-                        'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
-                        'regimen_changed__reason' => Input::get('regimen_changed__reason'),
-                        'tb_otcome2' => Input::get('tb_otcome2'),
-                        'tb_otcome2_date' => Input::get('tb_otcome2_date'),
-                        'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
-                        'tb_other_specify' => Input::get('tb_other_specify'),
-                        'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
-                        'laboratory_test_used' => $laboratory_test_used,
-                        'laboratory_test_used2' => $laboratory_test_used2,
-                        'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                        'diagnosis_completed' => Input::get('diagnosis_completed'),
-                        'comments' => Input::get('comments'),
-                        'form_completness' => Input::get('form_completness'),
-                        'date_completed' => Input::get('date_completed'),
-                        'diagnosis_verified_by' => Input::get('diagnosis_verified_by'),
-                        'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $clients['facility_id'],
-                    ), $costing[0]['id']);
-
-                    $successMessage = 'Diagnosis Data  Successful Updated';
+                if (Input::get('diagnosis_completness') == 3 && Input::get('diagnosis_verified_date') == "") {
+                    $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
                 } else {
-                    $user->createRecord('diagnosis', array(
-                        'pid' => $clients['pid'],
-                        'visit_date' => Input::get('visit_date'),
-                        'clinician_name' => Input::get('clinician_name'),
-                        'tb_diagnosis' => Input::get('tb_diagnosis'),
-                        'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
-                        'diagnosis_made_other' => Input::get('diagnosis_made_other'),
-                        'bacteriological_diagnosis' => $bacteriological_diagnosis,
-                        'xpert_ultra_date' => Input::get('xpert_ultra_date'),
-                        'truenat_date' => Input::get('truenat_date'),
-                        'afb_microscope_date' => Input::get('afb_microscope_date'),
-                        'other_bacteriological' => Input::get('other_bacteriological'),
-                        'other_bacteriological_date' => Input::get('other_bacteriological_date'),
-                        'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
-                        'tb_clinically_other' => Input::get('tb_clinically_other'),
-                        'tb_treatment' => Input::get('tb_treatment'),
-                        'tb_treatment_date' => Input::get('tb_treatment_date'),
-                        'tb_facility' => Input::get('tb_facility'),
-                        'tb_reason' => Input::get('tb_reason'),
-                        'tb_regimen' => Input::get('tb_regimen'),
-                        'tb_regimen_other' => Input::get('tb_regimen_other'),
-                        'tb_regimen_based' => Input::get('tb_regimen_based'),
-                        'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
-                        'regimen_changed' => Input::get('regimen_changed'),
-                        'regimen_changed_other' => Input::get('regimen_changed_other'),
-                        'regimen_changed__date' => Input::get('regimen_changed__date'),
-                        'regimen_removed_name' => Input::get('regimen_removed_name'),
-                        'regimen_added_name' => Input::get('regimen_added_name'),
-                        'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
-                        'regimen_changed__reason' => Input::get('regimen_changed__reason'),
-                        'tb_otcome2' => Input::get('tb_otcome2'),
-                        'tb_otcome2_date' => Input::get('tb_otcome2_date'),
-                        'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
-                        'tb_other_specify' => Input::get('tb_other_specify'),
-                        'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
-                        'laboratory_test_used' => $laboratory_test_used,
-                        'laboratory_test_used2' => $laboratory_test_used2,
-                        'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                        'diagnosis_completed' => Input::get('diagnosis_completed'),
-                        'comments' => Input::get('comments'),
-                        'form_completness' => Input::get('form_completness'),
-                        'date_completed' => Input::get('date_completed'),
-                        'diagnosis_verified_by' => Input::get('diagnosis_verified_by'),
-                        'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
-                        'status' => 1,
-                        'patient_id' => $clients['id'],
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $clients['facility_id'],
-                    ));
+                    if ($costing) {
+                        $user->updateRecord('diagnosis', array(
+                            'tb_diagnosis' => Input::get('tb_diagnosis'),
+                            'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
+                            'diagnosis_made_other' => Input::get('diagnosis_made_other'),
+                            'bacteriological_diagnosis' => $bacteriological_diagnosis,
+                            'clinician_received_date' => Input::get('clinician_received_date'),
+                            'xpert_truenat_date' => Input::get('xpert_truenat_date'),
+                            'other_bacteriological' => Input::get('other_bacteriological'),
+                            'other_bacteriological_date' => Input::get('other_bacteriological_date'),
+                            'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
+                            'tb_clinically_other' => Input::get('tb_clinically_other'),
+                            'tb_treatment' => Input::get('tb_treatment'),
+                            'tb_treatment_date' => Input::get('tb_treatment_date'),
+                            'tb_facility' => Input::get('tb_facility'),
+                            'tb_reason' => Input::get('tb_reason'),
+                            'tb_regimen' => Input::get('tb_regimen'),
+                            'tb_regimen_other' => Input::get('tb_regimen_other'),
+                            'tb_regimen_based' => Input::get('tb_regimen_based'),
+                            'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
+                            'regimen_changed' => Input::get('regimen_changed'),
+                            'regimen_changed_other' => Input::get('regimen_changed_other'),
+                            'regimen_changed__date' => Input::get('regimen_changed__date'),
+                            'regimen_removed_name' => Input::get('regimen_removed_name'),
+                            'regimen_added_name' => Input::get('regimen_added_name'),
+                            'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
+                            'regimen_changed__reason' => Input::get('regimen_changed__reason'),
+                            'tb_otcome2' => Input::get('tb_otcome2'),
+                            'tb_otcome2_date' => Input::get('tb_otcome2_date'),
+                            'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
+                            'tb_other_specify' => Input::get('tb_other_specify'),
+                            'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
+                            'laboratory_test_used' => $laboratory_test_used,
+                            'laboratory_test_used2' => $laboratory_test_used2,
+                            'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
+                            'comments' => Input::get('comments'),
+                            'diagnosis_completness' => Input::get('diagnosis_completness'),
+                            'diagnosis_completed_by' => $user->data()->id,
+                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
+                            'diagnosis_verified_by' => $user->data()->id,
+                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $clients['facility_id'],
+                        ), $costing[0]['id']);
 
-                    $successMessage = 'Diagnosis Data  Successful Added';
+                        $successMessage = 'Diagnosis Data  Successful Updated';
+                    } else {
+                        $user->createRecord('diagnosis', array(
+                            'pid' => $clients['pid'],
+                            'visit_date' => Input::get('visit_date'),
+                            'clinician_name' => Input::get('clinician_name'),
+                            'tb_diagnosis' => Input::get('tb_diagnosis'),
+                            'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
+                            'diagnosis_made_other' => Input::get('diagnosis_made_other'),
+                            'bacteriological_diagnosis' => $bacteriological_diagnosis,
+                            'clinician_received_date' => Input::get('clinician_received_date'),
+                            'xpert_truenat_date' => Input::get('xpert_truenat_date'),
+                            'other_bacteriological' => Input::get('other_bacteriological'),
+                            'other_bacteriological_date' => Input::get('other_bacteriological_date'),
+                            'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
+                            'tb_clinically_other' => Input::get('tb_clinically_other'),
+                            'tb_treatment' => Input::get('tb_treatment'),
+                            'tb_treatment_date' => Input::get('tb_treatment_date'),
+                            'tb_facility' => Input::get('tb_facility'),
+                            'tb_reason' => Input::get('tb_reason'),
+                            'tb_regimen' => Input::get('tb_regimen'),
+                            'tb_regimen_other' => Input::get('tb_regimen_other'),
+                            'tb_regimen_based' => Input::get('tb_regimen_based'),
+                            'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
+                            'regimen_changed' => Input::get('regimen_changed'),
+                            'regimen_changed_other' => Input::get('regimen_changed_other'),
+                            'regimen_changed__date' => Input::get('regimen_changed__date'),
+                            'regimen_removed_name' => Input::get('regimen_removed_name'),
+                            'regimen_added_name' => Input::get('regimen_added_name'),
+                            'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
+                            'regimen_changed__reason' => Input::get('regimen_changed__reason'),
+                            'tb_otcome2' => Input::get('tb_otcome2'),
+                            'tb_otcome2_date' => Input::get('tb_otcome2_date'),
+                            'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
+                            'tb_other_specify' => Input::get('tb_other_specify'),
+                            'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
+                            'laboratory_test_used' => $laboratory_test_used,
+                            'laboratory_test_used2' => $laboratory_test_used2,
+                            'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
+                            'comments' => Input::get('comments'),
+                            'diagnosis_completness' => Input::get('diagnosis_completness'),
+                            'diagnosis_completed_by' => $user->data()->id,
+                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
+                            'diagnosis_verified_by' => $user->data()->id,
+                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'status' => 1,
+                            'enrollment_id' => $_GET['enrollment_id'],
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $clients['facility_id'],
+                        ));
+
+                        $successMessage = 'Diagnosis Data  Successful Added';
+                    }
+
+                    Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
                 }
-
-                Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
             } else {
                 $pageError = $validate->errors();
             }
@@ -3082,364 +3077,7 @@ if ($user->isLoggedIn()) {
             </div>
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 6) { ?>
-            <?php
-            $facility = $override->get3('facility', 'status', 1, 'sequence', $_GET['sequence'], 'site_id', $_GET['site_id'])[0];
-            $site = $override->getNews('sites', 'status', 1, 'id', $_GET['site_id'])[0];
-            ?>
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <?php if ($facility) { ?>
-                                    <h1>Add New Facility</h1>
-                                <?php } else { ?>
-                                    <h1>Update Facility</h1>
-                                <?php } ?>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item">
-                                        <a
-                                            href="info.php?id=12&site_id=<?= $_GET['site_id']; ?>&status=<?= $_GET['status']; ?>">
-                                            < Back</a>
-                                    </li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item">
-                                        <a href="index1.php">Home</a>
-                                    </li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item">
-                                        <a href="info.php?id=11&status=<?= $_GET['status']; ?>">
-                                            Go to Facilities list > </a>
-                                    </li>&nbsp;&nbsp;
-                                    <?php if ($facility) { ?>
-                                        <li class="breadcrumb-item active">Add New Facility</li>
-                                    <?php } else { ?>
-                                        <li class="breadcrumb-item active">Update Facility</li>
-                                    <?php } ?>
-                                </ol>
-                            </div>
-                        </div>
-                    </div><!-- /.container-fluid -->
-                </section>
 
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <!-- right column -->
-                            <div class="col-md-12">
-                                <!-- general form elements disabled -->
-                                <div class="card card-warning">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Section 1: Facility PIVLO-Test list details (to be completed
-                                            monthly in clinic)</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="mb-2">
-                                                        <label for="extraction_date" class="form-label">Date of
-                                                            Extraction</label>
-                                                        <input type="date" value="<?php if ($facility['extraction_date']) {
-                                                            print_r($facility['extraction_date']);
-                                                        } ?>" id="extraction_date" name="extraction_date"
-                                                            max="<?= date('Y-m-d') ?>" class="form-control"
-                                                            placeholder="Enter date" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label for="month_name" class="form-label">Month (Name)</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('months', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="month_name" id="month_name<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($facility['month_name'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="appointments" class="form-label">Total number of test
-                                                            appointment in a
-                                                            month.</label>
-                                                        <input type="number" value="<?php if ($facility['appointments']) {
-                                                            print_r($facility['appointments']);
-                                                        } ?>" id="appointments" name="appointments" min="0"
-                                                            class="form-control" placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="patients_tested" class="form-label">Total patients got
-                                                            tested this month</label>
-                                                        <input type="number" value="<?php if ($facility['patients_tested']) {
-                                                            print_r($facility['patients_tested']);
-                                                        } ?>" id="patients_tested" name="patients_tested" min="0"
-                                                            class="form-control" placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="results_soft_copy" class="form-label">Total VL test
-                                                            results made available for
-                                                            this month</label>
-                                                        <input type="number" value="<?php if ($facility['results_soft_copy']) {
-                                                            print_r($facility['results_soft_copy']);
-                                                        } ?>" id="results_soft_copy" name="results_soft_copy" min="0"
-                                                            class="form-control" placeholder="Enter here" required />
-                                                    </div>
-                                                    <span>From Soft Copy ( Excel )</span>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="results_hard_copy" class="form-label">Total VL test
-                                                            results made available for
-                                                            this month</label>
-                                                        <input type="number" value="<?php if ($facility['results_hard_copy']) {
-                                                            print_r($facility['results_hard_copy']);
-                                                        } ?>" id="results_hard_copy" name="results_hard_copy" min="0"
-                                                            class="form-control" placeholder="Enter here" required />
-                                                    </div>
-                                                    <span>From Hard Copy</span>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="card card-warning">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Reason for those who were not tested.</h3>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="ltf" class="form-label">Loss to Follow Up </label>
-                                                        <input type="number" value="<?php if ($facility['ltf']) {
-                                                            print_r($facility['ltf']);
-                                                        } ?>" id="ltf" name="ltf" min="0" class="form-control"
-                                                            placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="transferred_out" class="form-label">TRANSFERRED OUT
-                                                        </label>
-                                                        <input type="number" value="<?php if ($facility['transferred_out']) {
-                                                            print_r($facility['transferred_out']);
-                                                        } ?>" id="transferred_out" name="transferred_out" min="0"
-                                                            class="form-control" placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="admitted" class="form-label">ADMITTED ELSE WHERE
-                                                        </label>
-                                                        <input type="number" value="<?php if ($facility['admitted']) {
-                                                            print_r($facility['admitted']);
-                                                        } ?>" id="admitted" name="admitted" min="0"
-                                                            class="form-control" placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="death" class="form-label">DEATH </label>
-                                                        <input type="number" value="<?php if ($facility['death']) {
-                                                            print_r($facility['death']);
-                                                        } ?>" id="death" name="death" min="0" class="form-control"
-                                                            placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="inability_transport" class="form-label">INABILITY TO PAY
-                                                            TRANSPORT COST</label>
-                                                        <input type="number" value="<?php if ($facility['inability_transport']) {
-                                                            print_r($facility['inability_transport']);
-                                                        } ?>" id="inability_transport" name="inability_transport"
-                                                            min="0" class="form-control" placeholder="Enter here"
-                                                            required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="lack_accompany" class="form-label">LACK OF ACCOMPANY
-                                                            PERSON</label>
-                                                        <input type="number" value="<?php if ($facility['lack_accompany']) {
-                                                            print_r($facility['lack_accompany']);
-                                                        } ?>" id="lack_accompany" name="lack_accompany" min="0"
-                                                            class="form-control" placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="incompatibility_time" class="form-label">INCOMPATIBILITY
-                                                            OF TESTING TIME </label>
-                                                        <input type="number" value="<?php if ($facility['incompatibility_time']) {
-                                                            print_r($facility['incompatibility_time']);
-                                                        } ?>" id="incompatibility_time" name="incompatibility_time"
-                                                            min="0" class="form-control" placeholder="Enter here"
-                                                            required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="tosa" class="form-label">TRAVELLED OUSTSIDE STUDY
-                                                            AREA</label>
-                                                        <input type="number" value="<?php if ($facility['tosa']) {
-                                                            print_r($facility['tosa']);
-                                                        } ?>" id="tosa" name="tosa" min="0" class="form-control"
-                                                            placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="mourning" class="form-label">MOURNING</label>
-                                                        <input type="number" value="<?php if ($facility['mourning']) {
-                                                            print_r($facility['mourning']);
-                                                        } ?>" id="mourning" name="mourning" min="0"
-                                                            class="form-control" placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="mb-2">
-                                                        <label for="forgot" class="form-label">FORGOT</label>
-                                                        <input type="number" value="<?php if ($facility['forgot']) {
-                                                            print_r($facility['forgot']);
-                                                        } ?>" id="forgot" name="forgot" min="0" class="form-control"
-                                                            placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="mb-2">
-                                                        <label for="unknown" class="form-label">UNKNOWN</label>
-                                                        <input type="number" value="<?php if ($facility['unknown']) {
-                                                            print_r($facility['unknown']);
-                                                        } ?>" id="unknown" name="unknown" min="0" class="form-control"
-                                                            placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="extra_pills" class="form-label">PATIENT STILL HAVE ARV
-                                                            PILLS AT HOME</label>
-                                                        <input type="number" value="<?php if ($facility['extra_pills']) {
-                                                            print_r($facility['extra_pills']);
-                                                        } ?>" id="extra_pills" name="extra_pills" min="0"
-                                                            class="form-control" placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="mb-2">
-                                                        <label for="others" class="form-label">OTHERS</label>
-                                                        <input type="number" value="<?php if ($facility['others']) {
-                                                            print_r($facility['others']);
-                                                        } ?>" id="others" name="others" min="0" class="form-control"
-                                                            placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="mb-2">
-                                                        <label for="comments" class="form-label">Any Comments ( If Available
-                                                            ):</label>
-                                                        <textarea class="form-control" name="comments" id="comments"
-                                                            rows="4" placeholder="Enter comments here">
-                                                                                                                                    <?php if ($facility['comments']) {
-                                                                                                                                        print_r($facility['comments']);
-                                                                                                                                    } ?>
-                                                                                                                                    </textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-
-                                            <div class="card card-warning">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">FORM STATUS</h3>
-                                                </div>
-                                            </div>
-                                            <hr>
-
-                                            <div class="row">
-                                                <div class="col-sm-6" id="facility_completed">
-                                                    <label>Complete?</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="facility_completed"
-                                                                        id="facility_completed<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($facility['facility_completed'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?> required>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="mb-2">
-                                                        <label for="date_completed" class="form-label">Date form
-                                                            completed</label>
-                                                        <input type="date" value="<?php if ($facility['date_completed']) {
-                                                            print_r($facility['date_completed']);
-                                                        } ?>" id="date_completed" name="date_completed"
-                                                            max="<?= date('Y-m-d') ?>" class="form-control"
-                                                            placeholder="Enter date" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                        </div>
-                                        <!-- /.card-body -->
-                                        <div class="card-footer">
-                                            <a href="info.php?id=11&site_id=<?= $_GET['site_id']; ?>&status=<?= $_GET['status']; ?>"
-                                                class="btn btn-default">Back</a>
-                                            <input type="hidden" name="facility_id" value="<?= $site['id'] ?>">
-                                            <input type="hidden" name="facility_arm" value="<?= $site['arm'] ?>">
-                                            <input type="hidden" name="facility_level" value="<?= $site['level'] ?>">
-                                            <input type="hidden" name="facility_type" value="<?= $site['type'] ?>">
-                                            <input type="submit" name="add_facility" value="Submit" class="btn btn-primary">
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- /.card -->
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                    </div><!-- /.container-fluid -->
-                </section>
-                <!-- /.content -->
-            </div>
-            <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 7) { ?>
 
         <?php } elseif ($_GET['id'] == 8) { ?>
@@ -4323,7 +3961,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 11) { ?>
             <?php
-            $costing = $override->getNews('respiratory', 'status', 1, 'patient_id', $_GET['cid'])[0];
+            $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -4341,12 +3979,12 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=4&cid=<?= $_GET['cid']; ?>&status=<?= $_GET['status']; ?>">
+                                            href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status']; ?>">
-                                            Go to screening list > </a>
+                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
+                                            Go to Enrollment list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
                                         <li class="breadcrumb-item active">Add New Respiratory sample Data</li>
@@ -4375,20 +4013,10 @@ if ($user->isLoggedIn()) {
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">
-                                                <div class="col-6">
-                                                    <div class="mb-2">
-                                                        <label for="visit_date" class="form-label">Visit Date</label>
-                                                        <input type="date" value="<?php if ($costing['visit_date']) {
-                                                            print_r($costing['visit_date']);
-                                                        } ?>" id="visit_date" name="visit_date"
-                                                            max="<?= date('Y-m-d') ?>" class="form-control"
-                                                            placeholder="Enter date" required />
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-6">
+                                                <div class="col-12">
                                                     <div class="mb-2">
-                                                        <label for="lab_name" class="form-label">40. Name of
+                                                        <label for="lab_name" class="form-label">1a. Name of
                                                             laboratory</label>
                                                         <input type="text" value="<?php if ($costing['lab_name']) {
                                                             print_r($costing['lab_name']);
@@ -4411,8 +4039,8 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
 
-                                                <div class="col-sm-3" id="sample_received">
-                                                    <label for="sample_received" class="form-label">46. Is at least one
+                                                <div class="col-sm-4" id="sample_received">
+                                                    <label for="sample_received" class="form-label">2. Is at least one
                                                         respiratory sample received?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4434,33 +4062,35 @@ if ($user->isLoggedIn()) {
                                                     <button type="button"
                                                         onclick="unsetRadio('sample_received')">Unset</button>
                                                 </div>
-
-                                                <div class="col-sm-3" id="sample_amount">
-                                                    <label for="sample_amount" class="form-label">47. If yes, how
-                                                        many;</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('sample_amount', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="sample_amount"
-                                                                        id="sample_amount<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['sample_amount'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('sample_received')">Unset</button>
+                                                <div class="col-sm-4" id="sample_amount">
+                                                    <!-- Sample One -->
+                                                    Date sample(s) collected?
+                                                    <!-- <div class="col-sm-6"> -->
+                                                    <div class="mb-3">
+                                                        <label for="sample_one_date" class="form-label">Sample
+                                                            One</label>
+                                                        <input type="date" value="<?php if ($costing['sample_date_one']) {
+                                                            print_r($costing['sample_date_one']);
+                                                        } ?>" id="sample_one_date" name="sample_date_one"
+                                                            class="form-control" placeholder="Enter here" />
                                                     </div>
+                                                    <!-- </div> -->
+
+                                                    <!-- Sample Two -->
+                                                    <!-- <div class="col-sm-6"> -->
+                                                    <div class="mb-3">
+                                                        <label for="sample_two_date" class="form-label">Sample
+                                                            Two</label>
+                                                        <input type="date" value="<?php if ($costing['sample_date_two']) {
+                                                            print_r($costing['sample_date_two']);
+                                                        } ?>" id="sample_two_date" name="sample_date_two"
+                                                            class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                    <!-- </div> -->
                                                 </div>
 
-                                                <div class="col-sm-3" id="sample_reason">
-                                                    <label for="tested_this_month" class="form-label">48. If no give
+                                                <div class="col-sm-4" id="sample_reason">
+                                                    <label for="tested_this_month" class="form-label">2. If no give
                                                         reason</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4481,87 +4111,61 @@ if ($user->isLoggedIn()) {
                                                         <button type="button"
                                                             onclick="unsetRadio('sample_reason')">Unset</button>
                                                     </div>
-                                                </div>
 
-                                                <div class="col-sm-3" id="test_rejected">
-                                                    <label for="test_rejected" class="form-label">49. Was test
-                                                        rejected</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="test_rejected"
-                                                                        id="test_rejected<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['test_rejected'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
+                                                    <label for="sample_reason_other" id="sample_reason_other1"
+                                                        class="form-label">2. If Other Specify</label>
+                                                    <input type="text" value="<?php if ($costing['sample_reason_other']) {
+                                                        print_r($costing['sample_reason_other']);
+                                                    } ?>" id="sample_reason_other" name="sample_reason_other"
+                                                        class="form-control" placeholder="Enter here" />
+                                                </div>
+                                            </div>
+
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-4" id="sample_received_hides1">
+                                                    <!-- Common Label -->
+                                                    <div class="col-12">
+                                                        <label class="form-label">3. Date sample(s) collected?</label>
+                                                    </div>
+
+                                                    <!-- Sample One Collected Date -->
+                                                    <div class="col-sm-6">
+                                                        <div class="mb-3">
+                                                            <label for="sample_one_collected_date" class="form-label">Sample
+                                                                One</label>
+                                                            <input type="date" value="<?php if ($costing['sample_one_collected_date']) {
+                                                                print_r($costing['sample_one_collected_date']);
+                                                            } ?>" id="sample_one_collected_date"
+                                                                name="sample_one_collected_date" class="form-control"
+                                                                placeholder="Enter here" />
                                                         </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('test_rejected')">Unset</button>
+                                                    </div>
+
+                                                    <!-- Sample Two Collected Date -->
+                                                    <div class="col-sm-6">
+                                                        <div class="mb-3">
+                                                            <label for="sample_two_collected_date" class="form-label">Sample
+                                                                Two</label>
+                                                            <input type="date" value="<?php if ($costing['sample_two_collected_date']) {
+                                                                print_r($costing['sample_two_collected_date']);
+                                                            } ?>" id="sample_two_collected_date"
+                                                                name="sample_two_collected_date" class="form-control"
+                                                                placeholder="Enter here" />
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3" id="test_reasons">
-                                                    <label for="new_vl_date" class="form-label">50. If yes, reason (multiple
-                                                        selection)</label>
+
+                                                <div class="col-sm-4" id="sample_type">
+                                                    <label for="sample_type" class="form-label">6. Type and number of
+                                                        respiratory sample(s) received</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('test_reasons', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        name="test_reasons[]"
-                                                                        id="test_reasons<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['test_reasons']) as $values) {
-                                                                              if ($values == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              }
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                            <label for="test_reasons_other" id="test_reasons_other1"
-                                                                class="form-label">50. If Other Mention</label>
-                                                            <input type="text" value="<?php if ($costing['test_reasons_other']) {
-                                                                print_r($costing['test_reasons_other']);
-                                                            } ?>" id="test_reasons_other" name="test_reasons_other"
-                                                                class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- <button type="button" onclick="unsetRadio('test_rejected')">Unset</button> -->
-                                            </div>
-
-                                            <hr>
-                                            <div class="row" id="sample_received_hides1">
-                                                <div class="col-4">
-                                                    <div class="mb-3">
-                                                        <label for="sample_date" class="form-label">51. Date sample(s)
-                                                            received in the laboratory</label>
-                                                        <input type="date" value="<?php if ($costing['sample_date']) {
-                                                            print_r($costing['sample_date']);
-                                                        } ?>" id="sample_date" name="sample_date" class="form-control"
-                                                            placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4" id="sample_type">
-                                                    <label for="sample_type" class="form-label">52. Type of sample(s)
-                                                        received (multiple selection)</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('sample_type', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        name="sample_type[]"
-                                                                        id="sample_type<?= $value['id']; ?>"
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="sample_type" id="sample_type<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['sample_type']) as $values) {
                                                                               if ($values == $value['id']) {
                                                                                   echo 'checked';
@@ -4572,31 +4176,33 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                             <label for="sample_type_other" id="sample_type_other1"
-                                                                class="form-label">52. Explain</label>
+                                                                class="form-label">6. If Other Specify</label>
                                                             <input type="text" value="<?php if ($costing['sample_type_other']) {
                                                                 print_r($costing['sample_type_other']);
                                                             } ?>" id="sample_type_other" name="sample_type_other"
                                                                 class="form-control" placeholder="Enter here" />
                                                         </div>
-
                                                     </div>
+                                                    <button type="button" onclick="unsetRadio('sample_type')">Unset</button>
                                                 </div>
+
                                                 <div class="col-4">
                                                     <div class="mb-3">
-                                                        <label for="sample_number" class="form-label">53. Number of samples
-                                                            received</label>
+                                                        <label for="sample_number" class="form-label">6. Number of
+                                                            respiratory sample(s) received</label>
                                                         <input type="number" value="<?php if ($costing['sample_number']) {
                                                             print_r($costing['sample_number']);
                                                         } ?>" id="sample_number" name="sample_number" min="0"
                                                             max="100000000" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
+
                                             </div>
 
                                             <hr>
                                             <div class="row" id="sample_received_hides2">
-                                                <div class="col-4">
-                                                    <label for="appearance" class="form-label">54. Appearance</label>
+                                                <div class="col-6">
+                                                    <label for="appearance" class="form-label">7. Appearance</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -4618,9 +4224,10 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-4">
+                                                <div class="col-6">
                                                     <div class="mb-3">
-                                                        <label for="sample_volume" class="form-label">55. Approximate volume
+                                                        <label for="sample_volume" class="form-label">8. Approximate
+                                                            volume
                                                             sample (number, two digits)</label>
                                                         <input type="number" value="<?php if ($costing['sample_volume']) {
                                                             print_r($costing['sample_volume']);
@@ -4629,38 +4236,13 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                     <span>mL</span>
                                                 </div>
-
-                                                <div class="col-4">
-                                                    <label for="sample_accession" class="form-label">56. Sample accession
-                                                        status</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('sample_accession', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="sample_accession"
-                                                                        id="sample_accession<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['sample_accession'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('sample_accession')">Unset</button>
-
-                                                    </div>
-                                                </div>
                                             </div>
 
                                             <hr>
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <label for="afb_microscopy" class="form-label">57. AFB
-                                                        microscopy</label>
+                                                    <label for="afb_microscopy" class="form-label">9. AFB microscopy (if
+                                                        tested at clinic)</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -4932,7 +4514,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-2" id="rif_resistance">
-                                                    <label for="rif_resistance" class="form-label">64. If MTB detected, RIF
+                                                    <label for="rif_resistance" class="form-label">64. If MTB detected,
+                                                        RIF
                                                         resistance </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4960,7 +4543,8 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-2" id="ct_value1">
                                                     <div class="mb-3">
-                                                        <label for="ct_value" class="form-label">65. Sample Cycle threshold
+                                                        <label for="ct_value" class="form-label">65. Sample Cycle
+                                                            threshold
                                                             (Ct) Value (number, two digits)</label>
                                                         <input type="number" value="<?php if ($costing['ct_value']) {
                                                             print_r($costing['ct_value']);
@@ -4970,7 +4554,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="test_repeatition">
-                                                    <label for="test_repeatition" class="form-label">66. If Invalid/Error/No
+                                                    <label for="test_repeatition" class="form-label">66. If
+                                                        Invalid/Error/No
                                                         result/Indeterminate, was the test repeated?</label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -4993,7 +4578,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="microscopy_reason">
-                                                    <label for="microscopy_reason" class="form-label">67. If no reason(s)
+                                                    <label for="microscopy_reason" class="form-label">67. If no
+                                                        reason(s)
                                                     </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5015,7 +4601,8 @@ if ($user->isLoggedIn()) {
                                                         </div>
 
                                                         <label for="microscopy_reason_other" id="microscopy_reason_other1"
-                                                            class="form-label">If Other Mention</label>
+                                                            class="form-label">If Other
+                                                            Mention</label>
                                                         <input type="text" value="<?php if ($costing['microscopy_reason_other']) {
                                                             print_r($costing['microscopy_reason_other']);
                                                         } ?>" id="microscopy_reason_other"
@@ -5029,7 +4616,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <?php
-                                            $medications22 = $override->get3('respiratory_repeated_tests', 'patient_id', $costing['patient_id'], 'respiratory_id', $costing['id'], 'status', 1);
+                                            $medications22 = $override->get3('respiratory_repeated_tests', 'enrollment_id', $costing['enrollment_id'], 'respiratory_id', $costing['id'], 'status', 1);
                                             $sequence_type = $override->getNews('sequence_type', 'status', 1, 'id', $medications22[0]['sequence_type']);
                                             $mtb_detection = $override->getNews('mtb_detection', 'status', 1, 'id', $medications22[0]['mtb_detection']);
                                             $rif_resistance = $override->getNews('rif_resistance', 'status', 1, 'id', $medications22[0]['rif_resistance']);
@@ -5065,7 +4652,8 @@ if ($user->isLoggedIn()) {
                                                                     onclick="unsetRadio('sequence_type3_0')">Unset</button>
                                                             </div>
                                                             <label for="sequence_number6_1" id="sequence_number6_1"
-                                                                class="form-label">(If error, what code/number??) </label>
+                                                                class="form-label">(If error, what code/number??)
+                                                            </label>
                                                             <input type="text" value="<?php if ($medications22[0]['sequence_number']) {
                                                                 print_r($medications22[0]['sequence_number']);
                                                             } ?>" id="sequence_number6_2" name="sequence_number2"
@@ -5075,7 +4663,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="mtb_detection6_1">
-                                                        <label for="mtb_detection6_1" class="form-label">63. If MTB detected
+                                                        <label for="mtb_detection6_1" class="form-label">63. If MTB
+                                                            detected
                                                         </label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -5153,7 +4742,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                        </textarea>
+                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5168,7 +4757,8 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-4" id="respiratory_completness">
+
+                                                <div class="col-sm-4">
                                                     <label>Complete?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5180,7 +4770,8 @@ if ($user->isLoggedIn()) {
                                                                         id="respiratory_completness<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($costing['respiratory_completness'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?> required>
+                                                                          } ?>         <?php if ($costing['respiratory_completness'] == 3) { ?> readonly
+                                                                        <?php } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
@@ -5191,94 +4782,39 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
                                                 </div>
-                                                <div class="col-4">
-                                                    <div class="mb-2">
-                                                        <label for="date_completed" class="form-label">Date form
-                                                            completed</label>
-                                                        <input type="date" value="<?php if ($costing['date_completed']) {
-                                                            print_r($costing['date_completed']);
-                                                        } ?>" id="date_completed" name="date_completed"
-                                                            max="<?= date('Y-m-d') ?>" class="form-control"
-                                                            placeholder="Enter date" required />
-                                                    </div>
 
-                                                </div>
-                                                <div class="col-sm-4" id="respiratory_completed_by">
+                                                <div class="col-sm-4">
+                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>65 (a).This form was completed by( Full Name )</label>
-                                                            <select id="respiratory_completed_by"
-                                                                name="respiratory_completed_by" class="form-control"
-                                                                required>
-                                                                <?php $diagnosis_test_completed = $override->get('user', 'id', $costing['respiratory_completed_by'])[0]; ?>
-                                                                <option value="<?= $diagnosis_test_completed['id'] ?>">
-                                                                    <?php if ($costing['respiratory_completed_by']) {
-                                                                        print_r($diagnosis_test_completed['firstname'] . ' ' . $diagnosis_test_completed['lastname']);
-                                                                    } else {
-                                                                        echo 'Select';
-                                                                    } ?>
-                                                                </option>
-                                                                <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>">
-                                                                        <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                    </option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <label>Form completed Date</label>
+                                                            <input class="form-control" type="date" name="date_completed"
+                                                                id="date_completed" value="<?php if ($costing['date_completed']) {
+                                                                    print_r($costing['date_completed']);
+                                                                } ?>" <?php if ($costing['respiratory_completness'] == 3) { ?> readonly <?php } ?> />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Form Verified Date</label>
+                                                            <input class="form-control" type="date"
+                                                                name="respiratory_verified_date"
+                                                                id="respiratory_verified_date" value="<?php if ($costing['respiratory_verified_date']) {
+                                                                    print_r($costing['respiratory_verified_date']);
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr>
-
-                                            <?php if ($user->data()->position == 3 && $costing['respiratory_completness'] == 1) { ?>
-                                                <div class="row">
-
-
-                                                    <div class="col-sm-6" id="respiratory_verified_by">
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>40. This form was Verified by (name) </label>
-                                                                <select id="respiratory_verified_by"
-                                                                    name="respiratory_verified_by" class="form-control"
-                                                                    required>
-                                                                    <?php $enrollment_completed = $override->get('user', 'id', $costing['respiratory_verified_by'])[0]; ?>
-                                                                    <option value="<?= $enrollment_completed['id'] ?>">
-                                                                        <?php if ($costing['respiratory_verified_by']) {
-                                                                            print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
-                                                                        } else {
-                                                                            echo 'Select';
-                                                                        } ?>
-                                                                    </option>
-                                                                    <?php foreach ($override->getNews('user', 'status', 1, 'position', 3) as $value) { ?>
-                                                                        <option value="<?= $value['id'] ?>">
-                                                                            <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                        </option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6" id="respiratory_verified_date">
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>40. Form Verified Date</label>
-                                                                <input class="form-control" type="date"
-                                                                    name="respiratory_verified_date"
-                                                                    id="respiratory_verified_date" value="<?php if ($costing['respiratory_verified_date']) {
-                                                                        print_r($costing['respiratory_verified_date']);
-                                                                    } ?>" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            <?php } ?>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <a href="info.php?id=4&cid=<?= $_GET['cid']; ?>&study_id=<?= $_GET['study_id']; ?>&status=<?= $_GET['status']; ?>"
+                                            <a href="info.php?id=6&enrolllment_id=<?= $_GET['enrolllment_id']; ?>&status=<?= $_GET['status'] ?>"
                                                 class="btn btn-default">Back</a>
                                             <input type="submit" name="add_respiratory" value="Submit"
                                                 class="btn btn-primary">
@@ -5297,7 +4833,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 12) { ?>
             <?php
-            $costing = $override->getNews('non_respiratory', 'status', 1, 'patient_id', $_GET['cid'])[0];
+            $costing = $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -5315,12 +4851,12 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=4&cid=<?= $_GET['cid']; ?>&status=<?= $_GET['status']; ?>">
+                                            href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status']; ?>">
-                                            Go to screening list > </a>
+                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
+                                            Go to Enrollment list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
                                         <li class="breadcrumb-item active">Add New Non Respiratory sample Data</li>
@@ -5350,18 +4886,7 @@ if ($user->isLoggedIn()) {
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">
-                                                <div class="col-4">
-                                                    <div class="mb-2">
-                                                        <label for="visit_date" class="form-label">Visit Date</label>
-                                                        <input type="date" value="<?php if ($costing['visit_date']) {
-                                                            print_r($costing['visit_date']);
-                                                        } ?>" id="visit_date" name="visit_date"
-                                                            max="<?= date('Y-m-d') ?>" class="form-control"
-                                                            placeholder="Enter date" required />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-4">
+                                                <div class="col-6">
                                                     <label for="afb_microscopy" class="form-label">68. AFB
                                                         microscopy</label>
                                                     <!-- radio -->
@@ -5386,7 +4911,7 @@ if ($user->isLoggedIn()) {
 
                                                 </div>
 
-                                                <div class="col-4" id="n_afb_microscopy_date1">
+                                                <div class="col-6" id="n_afb_microscopy_date1">
                                                     <div class="mb-2">
                                                         <label for="n_afb_microscopy_date" id="n_zn_microscopy_date1"
                                                             class="form-label">If ZN what date?</label>
@@ -5741,7 +5266,7 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <?php
-                                            $medications3 = $override->get3('non_respiratory_repeated_tests', 'patient_id', $costing['patient_id'], 'non_respiratory_id', $costing['id'], 'status', 1);
+                                            $medications3 = $override->get3('non_respiratory_repeated_tests', 'enrollment_id', $costing['id'], 'non_respiratory_id', $costing['id'], 'status', 1);
                                             $sequence_type = $override->getNews('sequence_type', 'status', 1, 'id', $medications3[0]['sequence_type']);
                                             $mtb_detection = $override->getNews('mtb_detection', 'status', 1, 'id', $medications3[0]['mtb_detection']);
                                             $rif_resistance = $override->getNews('rif_resistance', 'status', 1, 'id', $medications3[0]['rif_resistance']);
@@ -5866,7 +5391,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                        </textarea>
+                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5881,7 +5406,8 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-4" id="form_completness">
+
+                                                <div class="col-sm-4">
                                                     <label>Complete?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5893,105 +5419,51 @@ if ($user->isLoggedIn()) {
                                                                         id="form_completness<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($costing['form_completness'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?> required>
+                                                                          } ?>         <?php if ($costing['form_completness'] == 3) { ?> readonly
+                                                                        <?php } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                    </div>
-                                                    <button type="button"
-                                                        onclick="unsetRadio('form_completness')">Unset</button>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('form_completness')">Unset</button>
 
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="mb-2">
-                                                        <label for="date_completed" class="form-label">Date form
-                                                            completed</label>
-                                                        <input type="date" value="<?php if ($costing['date_completed']) {
-                                                            print_r($costing['date_completed']);
-                                                        } ?>" id="date_completed" name="date_completed"
-                                                            max="<?= date('Y-m-d') ?>" class="form-control"
-                                                            placeholder="Enter date" required />
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="non_respiratory_completed">
+                                                <div class="col-sm-4">
+                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>75 (a).This form was completed by( Full Name )</label>
-                                                            <select id="non_respiratory_completed"
-                                                                name="non_respiratory_completed" class="form-control"
-                                                                required>
-                                                                <?php $diagnosis_test_completed = $override->get('user', 'id', $costing['non_respiratory_completed'])[0]; ?>
-                                                                <option value="<?= $diagnosis_test_completed['id'] ?>">
-                                                                    <?php if ($costing['non_respiratory_completed']) {
-                                                                        print_r($diagnosis_test_completed['firstname'] . ' ' . $diagnosis_test_completed['lastname']);
-                                                                    } else {
-                                                                        echo 'Select';
-                                                                    } ?>
-                                                                </option>
-                                                                <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>">
-                                                                        <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                    </option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <label>Form completed Date</label>
+                                                            <input class="form-control" type="date" name="date_completed"
+                                                                id="date_completed" value="<?php if ($costing['date_completed']) {
+                                                                    print_r($costing['date_completed']);
+                                                                } ?>" <?php if ($costing['date_completed'] == 3) { ?> readonly <?php } ?> />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Form Verified Date</label>
+                                                            <input class="form-control" type="date"
+                                                                name="non_respiratory_verified_date"
+                                                                id="non_respiratory_verified_date" value="<?php if ($costing['non_respiratory_verified_date']) {
+                                                                    print_r($costing['non_respiratory_verified_date']);
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr>
-
-                                            <?php if ($user->data()->position == 3 && $costing['form_completness'] == 1) { ?>
-                                                <div class="row">
-
-
-                                                    <div class="col-sm-6" id="non_respiratory_verified_by">
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>40. This form was Verified by (name) </label>
-                                                                <select id="non_respiratory_verified_by"
-                                                                    name="non_respiratory_verified_by" class="form-control"
-                                                                    required>
-                                                                    <?php $enrollment_completed = $override->get('user', 'id', $costing['non_respiratory_verified_by'])[0]; ?>
-                                                                    <option value="<?= $enrollment_completed['id'] ?>">
-                                                                        <?php if ($costing['non_respiratory_verified_by']) {
-                                                                            print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
-                                                                        } else {
-                                                                            echo 'Select';
-                                                                        } ?>
-                                                                    </option>
-                                                                    <?php foreach ($override->getNews('user', 'status', 1, 'position', 3) as $value) { ?>
-                                                                        <option value="<?= $value['id'] ?>">
-                                                                            <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                        </option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6" id="non_respiratory_verified_date">
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>40. Form Verified Date</label>
-                                                                <input class="form-control" type="date"
-                                                                    name="non_respiratory_verified_date"
-                                                                    id="non_respiratory_verified_date" value="<?php if ($costing['non_respiratory_verified_date']) {
-                                                                        print_r($costing['non_respiratory_verified_date']);
-                                                                    } ?>" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            <?php } ?>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <a href="info.php?id=4&cid=<?= $_GET['cid']; ?>&study_id=<?= $_GET['study_id']; ?>&status=<?= $_GET['status']; ?>"
+                                            <a href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status']; ?>"
                                                 class="btn btn-default">Back</a>
                                             <input type="submit" name="add_non_respiratory" value="Submit"
                                                 class="btn btn-primary">
@@ -6111,10 +5583,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                    <?php if ($screening['comments']) {
-                                                                                                        print_r($screening['comments']);
-                                                                                                    } ?>
-                                                                                                </textarea>
+                                                                                                                                                                                                                                                    <?php if ($screening['comments']) {
+                                                                                                                                                                                                                                                        print_r($screening['comments']);
+                                                                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                                                                </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -6142,7 +5614,7 @@ if ($user->isLoggedIn()) {
 
         <?php } elseif ($_GET['id'] == 14) { ?>
             <?php
-            $costing = $override->getNews('diagnosis_test', 'status', 1, 'patient_id', $_GET['cid'])[0];
+            $costing = $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -6160,12 +5632,12 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=4&cid=<?= $_GET['cid']; ?>&status=<?= $_GET['status']; ?>">
+                                            href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status']; ?>">
-                                            Go to screening list > </a>
+                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
+                                            Go to enrolled list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
                                         <li class="breadcrumb-item active">Add New Diagnostic Test DST Data</li>
@@ -6187,35 +5659,62 @@ if ($user->isLoggedIn()) {
                                 <!-- general form elements disabled -->
                                 <div class="card card-warning">
                                     <div class="card-header">
-                                        <h3 class="card-title">Culture and Drug susceptibility test (DST) Form</h3>
+                                        <h3 class="card-title">Drug susceptibility test (DST) done and results on sputum of
+                                            this participant (fill if applicable)</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
                                         <div class="card-body">
-                                            <hr>
                                             <div class="row">
-                                                <div class="col-3">
+                                                <div class="col-4">
                                                     <div class="mb-2">
-                                                        <label for="visit_date" class="form-label">Visit Date</label>
-                                                        <input type="date" value="<?php if ($costing['visit_date']) {
-                                                            print_r($costing['visit_date']);
-                                                        } ?>" id="visit_date" name="visit_date"
-                                                            max="<?= date('Y-m-d') ?>" class="form-control"
-                                                            placeholder="Enter date" required />
+                                                        <label for="sputum_test" class="form-label">Test conducted on
+                                                            sputum</label>
+                                                        <input type="text" value="<?php if ($costing['sputum_test']) {
+                                                            print_r($costing['sputum_test']);
+                                                        } ?>" id="sputum_test" name="sputum_test" class="form-control"
+                                                            placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3">
-                                                    <label for="culture_done" class="form-label">79. Culture done</label>
+                                                <div class="col-4">
+                                                    <div class="mb-2">
+                                                        <label for="anti_tb" class="form-label">Anti-TB drug (or
+                                                            probe)</label>
+                                                        <input type="text" value="<?php if ($costing['anti_tb']) {
+                                                            print_r($costing['anti_tb']);
+                                                        } ?>" id="anti_tb" name="anti_tb" class="form-control"
+                                                            placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-4">
+                                                    <div class="mb-2">
+                                                        <label for="mic" class="form-label">Test result (indicate minimum
+                                                            inhibitory concentration (MIC) if available)</label>
+                                                        <input type="text" value="<?php if ($costing['mic']) {
+                                                            print_r($costing['mic']);
+                                                        } ?>" id="mic" name="mic" class="form-control"
+                                                            placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label for="culture_performed" class="form-label">19a. Was culture
+                                                        performed?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="culture_done"
-                                                                        id="culture_done<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['culture_done'] == $value['id']) {
+                                                                        name="culture_performed"
+                                                                        id="culture_performed<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['culture_performed'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?> required>
                                                                     <label
@@ -6224,43 +5723,69 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                         <button type="button"
-                                                            onclick="unsetRadio('culture_done')">Unset</button>
+                                                            onclick="unsetRadio('culture_performed')">Unset</button>
 
                                                     </div>
                                                 </div>
 
 
-                                                <div class="col-sm-3" id="sample_type2">
-                                                    <label for="sample_type2" class="form-label">80.Sample type </label>
+                                                <div class="col-sm-6" id="culture_type">
+                                                    <label for="culture_type" class="form-label">19a. If yes </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sample_type', 'status2', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('culture_type', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="sample_type2"
-                                                                        id="sample_type2<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['sample_type2'] == $value['id']) {
+                                                                        name="culture_type"
+                                                                        id="culture_type<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['culture_type'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <label for="sample_type_other2" id="sample_type_other2_1"
-                                                                class="form-label">Specify</label>
-                                                            <input type="text" value="<?php if ($costing['sample_type_other2']) {
-                                                                print_r($costing['sample_type_other2']);
-                                                            } ?>" id="sample_type_other2_22" name="sample_type_other2"
-                                                                class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
                                                     <button type="button"
-                                                        onclick="unsetRadio('sample_type2')">Unset</button>
-
+                                                        onclick="unsetRadio('culture_type')">Unset</button>
                                                 </div>
 
-                                                <div class="col-sm-3" id="sample_methods">
+
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-3" id="phenotypic_performed">
+                                                    <label for="phenotypic_performed" class="form-label">19a. Was phenotypic
+                                                        DST performed?</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="phenotypic_performed"
+                                                                        id="phenotypic_performed<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['phenotypic_performed'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?>>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+
+                                                        </div>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('phenotypic_performed')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-3" id="phenotypic_method">
                                                     <label for="sample_methods" class="form-label">81.If yes above, then
                                                         method used (Multiple options) </label>
                                                     <!-- radio -->
@@ -6283,20 +5808,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <hr>
-
-                                            <div class="row">
-                                                <div class="col-3" id="lj_date1">
-                                                    <div class="mb-2">
-                                                        <label for="lj_date" class="form-label">LJ Date?</label>
-                                                        <input type="date" value="<?php if ($costing['lj_date']) {
-                                                            print_r($costing['lj_date']);
-                                                        } ?>" id="lj_date" name="lj_date" class="form-control"
-                                                            placeholder="Enter here" />
-                                                    </div>
-                                                </div>
 
                                                 <div class="col-sm-3" id="lj_results">
                                                     <label for="lj_results" class="form-label">82.Results LJ (Only If was
@@ -6304,7 +5816,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('lj_results', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('culture_type', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
                                                                         name="lj_results" id="lj_results<?= $value['id']; ?>"
@@ -6322,24 +5834,13 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3" id="mgit_date1">
-                                                    <div class="mb-2">
-                                                        <label for="mgit_date" class="form-label">MGIT Date?</label>
-                                                        <input type="date" value="<?php if ($costing['mgit_date']) {
-                                                            print_r($costing['mgit_date']);
-                                                        } ?>" id="mgit_date" name="mgit_date" class="form-control"
-                                                            placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-
-
                                                 <div class="col-sm-3" id="mgit_results">
                                                     <label for="mgit_results" class="form-label">83.Results MGIT (Only If
                                                         was selected above) </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('mgit_results', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('culture_type', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
                                                                         name="mgit_results"
@@ -6359,88 +5860,9 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
 
-                                            <hr>
-
-                                            <div class="row">
-
-                                                <div class="col-sm-4" id="phenotypic_done">
-                                                    <label for="phenotypic_done" class="form-label">84. Phenotypic DST was
-                                                        done?</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="phenotypic_done"
-                                                                        id="phenotypic_done<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['phenotypic_done'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('phenotypic_done')">Unset</button>
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4" id="phenotypic_method">
-                                                    <label for="phenotypic_method" class="form-label">85. If yes above, then
-                                                        method used? </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('sample_methods', 'status2', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="phenotypic_method"
-                                                                        id="phenotypic_method<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['phenotypic_method'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                    <button type="button"
-                                                        onclick="unsetRadio('phenotypic_method')">Unset</button>
-
-                                                </div>
-
-                                                <div class="col-4" id="apm_date_1">
-                                                    <div class="mb-2">
-                                                        <label for="apm_date" class="form-label">APM date ?</label>
-                                                        <input type="date" value="<?php if ($costing['apm_date']) {
-                                                            print_r($costing['apm_date']);
-                                                        } ?>" id="apm_date" name="apm_date" class="form-control"
-                                                            placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-4" id="mgit_date2_1">
-                                                    <div class="mb-2">
-                                                        <label for="mgit_date2" class="form-label">MGIT date ?</label>
-                                                        <input type="date" value="<?php if ($costing['mgit_date2']) {
-                                                            print_r($costing['mgit_date2']);
-                                                        } ?>" id="mgit_date2" name="mgit_date2" class="form-control"
-                                                            placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
                                             <div id="phenotypic_done00">
                                                 <hr>
-                                                Phenotypic DST
-                                                (Can selected multiple items on the right column but only one option from
-                                                the last column on the right with the respect to each item selected)
+                                                Phenotypic DST results
                                                 <hr>
                                                 <div class="row">
                                                     <div class="col-sm-3" id="rifampicin">
@@ -6465,6 +5887,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('rifampicin')">Unset</button>
 
                                                         </div>
+                                                        <label for="rifampicin_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['rifampicin_date']) {
+                                                            print_r($costing['rifampicin_date']);
+                                                        } ?>" id="rifampicin_date" name="rifampicin_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="isoniazid">
@@ -6488,6 +5916,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('isoniazid')">Unset</button>
 
                                                         </div>
+                                                        <label for="isoniazid_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['isoniazid_date']) {
+                                                            print_r($costing['isoniazid_date']);
+                                                        } ?>" id="isoniazid_date" name="isoniazid_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="levofloxacin">
@@ -6512,6 +5946,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('levofloxacin')">Unset</button>
 
                                                         </div>
+                                                        <label for="levofloxacin_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['levofloxacin_date']) {
+                                                            print_r($costing['levofloxacin_date']);
+                                                        } ?>" id="levofloxacin_date" name="levofloxacin_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="moxifloxacin">
@@ -6536,6 +5976,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('moxifloxacin')">Unset</button>
 
                                                         </div>
+                                                        <label for="moxifloxacin_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['moxifloxacin_date']) {
+                                                            print_r($costing['moxifloxacin_date']);
+                                                        } ?>" id="moxifloxacin_date" name="moxifloxacin_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                 </div>
@@ -6564,6 +6010,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('bedaquiline')">Unset</button>
 
                                                         </div>
+                                                        <label for="bedaquiline_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['bedaquiline_date']) {
+                                                            print_r($costing['bedaquiline_date']);
+                                                        } ?>" id="bedaquiline_date" name="bedaquiline_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="linezolid">
@@ -6587,6 +6039,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('linezolid')">Unset</button>
 
                                                         </div>
+                                                        <label for="linezolid_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['linezolid_date']) {
+                                                            print_r($costing['linezolid_date']);
+                                                        } ?>" id="linezolid_date" name="linezolid_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="clofazimine">
@@ -6611,6 +6069,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('clofazimine')">Unset</button>
 
                                                         </div>
+                                                        <label for="clofazimine_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['clofazimine_date']) {
+                                                            print_r($costing['clofazimine_date']);
+                                                        } ?>" id="clofazimine_date" name="clofazimine_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="cycloserine">
@@ -6635,6 +6099,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('cycloserine')">Unset</button>
 
                                                         </div>
+                                                        <label for="cycloserine_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['cycloserine_date']) {
+                                                            print_r($costing['cycloserine_date']);
+                                                        } ?>" id="cycloserine_date" name="cycloserine_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                 </div>
@@ -6664,6 +6134,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('terizidone')">Unset</button>
 
                                                         </div>
+                                                        <label for="terizidone_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['terizidone_date']) {
+                                                            print_r($costing['terizidone_date']);
+                                                        } ?>" id="terizidone_date" name="terizidone_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="ethambutol">
@@ -6688,6 +6164,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('ethambutol')">Unset</button>
 
                                                         </div>
+                                                        <label for="ethambutol_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['ethambutol_date']) {
+                                                            print_r($costing['ethambutol_date']);
+                                                        } ?>" id="ethambutol_date" name="ethambutol_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="delamanid">
@@ -6711,6 +6193,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('delamanid')">Unset</button>
 
                                                         </div>
+                                                        <label for="delamanid_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['delamanid_date']) {
+                                                            print_r($costing['delamanid_date']);
+                                                        } ?>" id="delamanid_date" name="delamanid_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="pyrazinamide">
@@ -6735,6 +6223,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('pyrazinamide')">Unset</button>
 
                                                         </div>
+                                                        <label for="pyrazinamide_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['pyrazinamide_date']) {
+                                                            print_r($costing['pyrazinamide_date']);
+                                                        } ?>" id="pyrazinamide_date" name="pyrazinamide_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                 </div>
@@ -6763,6 +6257,11 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('imipenem')">Unset</button>
 
                                                         </div>
+                                                        <label for="imipenem_date" class="form-label">Date available</label>
+                                                        <input type="date" value="<?php if ($costing['imipenem_date']) {
+                                                            print_r($costing['imipenem_date']);
+                                                        } ?>" id="imipenem_date" name="imipenem_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="cilastatin">
@@ -6787,6 +6286,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('cilastatin')">Unset</button>
 
                                                         </div>
+                                                        <label for="cilastatin_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['cilastatin_date']) {
+                                                            print_r($costing['cilastatin_date']);
+                                                        } ?>" id="cilastatin_date" name="cilastatin_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="meropenem">
@@ -6810,6 +6315,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('meropenem')">Unset</button>
 
                                                         </div>
+                                                        <label for="meropenem_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['meropenem_date']) {
+                                                            print_r($costing['meropenem_date']);
+                                                        } ?>" id="meropenem_date" name="meropenem_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="amikacin">
@@ -6833,6 +6344,11 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('amikacin')">Unset</button>
 
                                                         </div>
+                                                        <label for="amikacin_date" class="form-label">Date available</label>
+                                                        <input type="date" value="<?php if ($costing['amikacin_date']) {
+                                                            print_r($costing['amikacin_date']);
+                                                        } ?>" id="amikacin_date" name="amikacin_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                 </div>
@@ -6862,6 +6378,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('streptomycin')">Unset</button>
 
                                                         </div>
+                                                        <label for="streptomycin_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['streptomycin_date']) {
+                                                            print_r($costing['streptomycin_date']);
+                                                        } ?>" id="streptomycin_date" name="streptomycin_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="ethionamide">
@@ -6886,6 +6408,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('ethionamide')">Unset</button>
 
                                                         </div>
+                                                        <label for="ethionamide_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['ethionamide_date']) {
+                                                            print_r($costing['ethionamide_date']);
+                                                        } ?>" id="ethionamide_date" name="ethionamide_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="prothionamide">
@@ -6910,6 +6438,12 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('prothionamide')">Unset</button>
 
                                                         </div>
+                                                        <label for="prothionamide_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['prothionamide_date']) {
+                                                            print_r($costing['prothionamide_date']);
+                                                        } ?>" id="prothionamide_date" name="prothionamide_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                     <div class="col-sm-3" id="para_aminosalicylic_acid">
@@ -6933,10 +6467,14 @@ if ($user->isLoggedIn()) {
                                                             </div>
                                                             <button type="button"
                                                                 onclick="unsetRadio('para_aminosalicylic_acid')">Unset</button>
-
                                                         </div>
+                                                        <label for="para_aminosalicylic_acid_date" class="form-label">Date
+                                                            available</label>
+                                                        <input type="date" value="<?php if ($costing['para_aminosalicylic_acid_date']) {
+                                                            print_r($costing['para_aminosalicylic_acid_date']);
+                                                        } ?>" id="para_aminosalicylic_acid_date"
+                                                            name="para_aminosalicylic_acid_date" class="form-control" />
                                                     </div>
-
                                                 </div>
                                             </div>
 
@@ -6944,79 +6482,20 @@ if ($user->isLoggedIn()) {
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Genotyping</h3>
+                                                    <h3 class="card-title">Xpert XDR</h3>
                                                 </div>
                                             </div>
 
 
                                             <hr>
-                                            <div class="row">
-                                                <div class="col-sm-6" id="genotyping_done">
-                                                    <label for="genotyping_done" class="form-label">87. Genotyping DST was
-                                                        done? </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="genotyping_done"
-                                                                        id="genotyping_done<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['genotyping_done'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('genotyping_done')">Unset</button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-6" id="genotyping_asay">
-                                                    <label for="genotyping_asay" class="form-label">88. If yes, which assay
-                                                        (Multiple options) </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('genotyping_tests', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        name="genotyping_asay[]"
-                                                                        id="genotyping_asay<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['genotyping_asay']) as $values) {
-                                                                              if ($values == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              }
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('genotyping_asay')">Unset</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div id="genotyping_done00">
-                                                <hr>
-                                                89. If Xpert XDR selected above
-                                                (Can selected multiple items on the right column but only one option from
-                                                the last column on the right with the respect to each item selected)
-                                                <hr>
-
+                                            <div>
                                                 <div class="row">
                                                     <div class="col-sm-4" id="isoniazid2">
-                                                        <label for="isoniazid2" class="form-label">Isoniazid</label>
+                                                        <label for="isoniazid2" class="form-label">19a. Isoniazid</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('genotyping_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('Isoniazid', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="isoniazid2"
@@ -7033,27 +6512,15 @@ if ($user->isLoggedIn()) {
 
                                                             </div>
                                                         </div>
-
-                                                        <div class="col-4" id="isoniazid2_error_code1">
-                                                            <div class="mb-2">
-                                                                <label for="isoniazid2_error_code"
-                                                                    class="form-label">Specify Error Code</label>
-                                                                <input type="text" value="<?php if ($costing['isoniazid2_error_code']) {
-                                                                    print_r($costing['isoniazid2_error_code']);
-                                                                } ?>" id="isoniazid2_error_code"
-                                                                    name="isoniazid2_error_code" class="form-control"
-                                                                    placeholder="Enter here Error Code" />
-                                                            </div>
-                                                        </div>
                                                     </div>
 
                                                     <div class="col-sm-4" id="fluoroquinolones">
-                                                        <label for="fluoroquinolones"
-                                                            class="form-label">Fluoroquinolones</label>
+                                                        <label for="fluoroquinolones" class="form-label">19a.
+                                                            Fluoroquinolones</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('genotyping_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('Fluoroquinolones', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="fluoroquinolones"
@@ -7071,25 +6538,15 @@ if ($user->isLoggedIn()) {
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-4" id="fluoroquinolones_error_code1">
-                                                            <div class="mb-2">
-                                                                <label for="fluoroquinolones_error_code"
-                                                                    class="form-label">Specify Error Code</label>
-                                                                <input type="text" value="<?php if ($costing['fluoroquinolones_error_code']) {
-                                                                    print_r($costing['fluoroquinolones_error_code']);
-                                                                } ?>" id="fluoroquinolones_error_code"
-                                                                    name="fluoroquinolones_error_code" class="form-control"
-                                                                    placeholder="Enter here Error Code" />
-                                                            </div>
-                                                        </div>
+
                                                     </div>
 
                                                     <div class="col-sm-4" id="amikacin2">
-                                                        <label for="amikacin2" class="form-label">Amikacin</label>
+                                                        <label for="amikacin2" class="form-label">19a. Amikacin</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('genotyping_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('Amikacin', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="amikacin2" id="amikacin2<?= $value['id']; ?>"
@@ -7105,17 +6562,7 @@ if ($user->isLoggedIn()) {
 
                                                             </div>
                                                         </div>
-                                                        <div class="col-4" id="amikacin2_error_code1">
-                                                            <div class="mb-2">
-                                                                <label for="amikacin2_error_code" class="form-label">Specify
-                                                                    Error Code</label>
-                                                                <input type="text" value="<?php if ($costing['amikacin2_error_code']) {
-                                                                    print_r($costing['amikacin2_error_code']);
-                                                                } ?>" id="amikacin2_error_code"
-                                                                    name="amikacin2_error_code" class="form-control"
-                                                                    placeholder="Enter here Error Code" />
-                                                            </div>
-                                                        </div>
+
                                                     </div>
 
                                                 </div>
@@ -7124,11 +6571,11 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="row">
                                                     <div class="col-sm-4" id="kanamycin">
-                                                        <label for="kanamycin" class="form-label">Kanamycin</label>
+                                                        <label for="kanamycin" class="form-label">19a. Kanamycin</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('genotyping_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('Kanamycin', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="kanamycin" id="kanamycin<?= $value['id']; ?>"
@@ -7145,24 +6592,14 @@ if ($user->isLoggedIn()) {
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-4" id="kanamycin_error_code1">
-                                                            <div class="mb-2">
-                                                                <label for="kanamycin_error_code" class="form-label">Specify
-                                                                    Error Code</label>
-                                                                <input type="text" value="<?php if ($costing['kanamycin_error_code']) {
-                                                                    print_r($costing['kanamycin_error_code']);
-                                                                } ?>" id="kanamycin_error_code"
-                                                                    name="kanamycin_error_code" class="form-control"
-                                                                    placeholder="Enter here Error Code" />
-                                                            </div>
-                                                        </div>
+
                                                     </div>
                                                     <div class="col-sm-4" id="capreomycin">
-                                                        <label for="capreomycin" class="form-label">Capreomycin</label>
+                                                        <label for="capreomycin" class="form-label">19a. Capreomycin</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('genotyping_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('Capreomycin', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="capreomycin"
@@ -7180,24 +6617,15 @@ if ($user->isLoggedIn()) {
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-4" id="capreomycin_error_code1">
-                                                            <div class="mb-2">
-                                                                <label for="capreomycin_error_code"
-                                                                    class="form-label">Specify Error Code</label>
-                                                                <input type="text" value="<?php if ($costing['capreomycin_error_code']) {
-                                                                    print_r($costing['capreomycin_error_code']);
-                                                                } ?>" id="capreomycin_error_code"
-                                                                    name="capreomycin_error_code" class="form-control"
-                                                                    placeholder="Enter here Error Code" />
-                                                            </div>
-                                                        </div>
+
                                                     </div>
                                                     <div class="col-sm-4" id="ethionamide2">
-                                                        <label for="ethionamide2" class="form-label">89. Ethionamide</label>
+                                                        <label for="ethionamide2" class="form-label">19a.
+                                                            Ethionamide</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('genotyping_dst', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('Ethionamide', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="ethionamide2"
@@ -7215,597 +6643,11 @@ if ($user->isLoggedIn()) {
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-4" id="ethionamide2_error_code1">
-                                                            <div class="mb-2">
-                                                                <label for="ethionamide2_error_code"
-                                                                    class="form-label">Specify Error Code</label>
-                                                                <input type="text" value="<?php if ($costing['ethionamide2_error_code']) {
-                                                                    print_r($costing['ethionamide2_error_code']);
-                                                                } ?>" id="ethionamide2_error_code"
-                                                                    name="ethionamide2_error_code" class="form-control"
-                                                                    placeholder="Enter here Error Code" />
-                                                            </div>
-                                                        </div>
+
                                                     </div>
 
                                                 </div>
                                             </div>
-
-
-                                            <hr>
-
-
-                                            <div class="card card-warning">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Nanopore sequencing</h3>
-                                                </div>
-                                            </div>
-
-
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-6" id="nanopore_sequencing_done">
-                                                    <label for="nanopore_sequencing_done" class="form-label">90. Nanopore
-                                                        sequencing</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="nanopore_sequencing_done"
-                                                                        id="nanopore_sequencing_done<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['nanopore_sequencing_done'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('nanopore_sequencing_done')">Unset</button>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="col-sm-6" id="nanopore_sequencing">
-                                                    <label for="nanopore_sequencing" class="form-label">91. If yes, what
-                                                        were results (multiple options)</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('nanopore_sequencing', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        name="nanopore_sequencing[]"
-                                                                        id="nanopore_sequencing<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['nanopore_sequencing']) as $values) {
-                                                                              if ($values == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              }
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('nanopore_sequencing')">Unset</button>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div id="nanopore_sequencing_done00">
-                                                <hr>
-                                                91. If positive for MTBC
-                                                (Can selected multiple items on the right column but only one option from
-                                                the last column on the right with the respect to each item selected)
-                                                <hr>
-
-                                                <div class="row">
-                                                    <div class="col-sm-3" id="rifampicin3">
-                                                        <label for="rifampicin3" class="form-label">Rifampicin</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="rifampicin3"
-                                                                            id="rifampicin3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['rifampicin3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('rifampicin3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="isoniazid3">
-                                                        <label for="isoniazid3" class="form-label">Isoniazid</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="isoniazid3"
-                                                                            id="isoniazid3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['isoniazid3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('isoniazid3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="levofloxacin3">
-                                                        <label for="levofloxacin3" class="form-label">Levofloxacin</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="levofloxacin3"
-                                                                            id="levofloxacin3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['levofloxacin3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('levofloxacin3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="moxifloxacin3">
-                                                        <label for="moxifloxacin3" class="form-label">Moxifloxacin</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="moxifloxacin3"
-                                                                            id="moxifloxacin3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['moxifloxacin3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('moxifloxacin3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3" id="bedaquiline3">
-                                                        <label for="bedaquiline3" class="form-label">Bedaquiline</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="bedaquiline3"
-                                                                            id="bedaquiline3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['bedaquiline3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('bedaquiline3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="linezolid3">
-                                                        <label for="linezolid3" class="form-label">Linezolid</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="linezolid3"
-                                                                            id="linezolid3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['linezolid3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('linezolid3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="clofazimine3">
-                                                        <label for="clofazimine3" class="form-label">Clofazimine</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="clofazimine3"
-                                                                            id="clofazimine3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['clofazimine3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('clofazimine3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="cycloserine3">
-                                                        <label for="cycloserine3" class="form-label">Cycloserine</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="cycloserine3"
-                                                                            id="cycloserine3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['cycloserine3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('cycloserine3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <hr>
-
-                                                <div class="row">
-                                                    <div class="col-sm-3" id="terizidone3">
-                                                        <label for="terizidone3" class="form-label">Terizidone</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="terizidone3"
-                                                                            id="terizidone3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['terizidone3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('terizidone3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="ethambutol3">
-                                                        <label for="ethambutol3" class="form-label">Ethambutol</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="ethambutol3"
-                                                                            id="ethambutol3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['ethambutol3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('ethambutol3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="delamanid3">
-                                                        <label for="delamanid3" class="form-label">Delamanid</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="delamanid3"
-                                                                            id="delamanid3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['delamanid3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('delamanid3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="pyrazinamide3">
-                                                        <label for="pyrazinamide3" class="form-label">Pyrazinamide</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="pyrazinamide3"
-                                                                            id="pyrazinamide3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['pyrazinamide3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('pyrazinamide3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <hr>
-
-                                                <div class="row">
-                                                    <div class="col-sm-3" id="imipenem3">
-                                                        <label for="imipenem3" class="form-label">Imipenem</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="imipenem3" id="imipenem3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['imipenem3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('imipenem3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="cilastatin3">
-                                                        <label for="cilastatin3" class="form-label">Cilastatin</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="cilastatin3"
-                                                                            id="cilastatin3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['cilastatin3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('cilastatin3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="meropenem3">
-                                                        <label for="meropenem3" class="form-label">Meropenem</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="meropenem3"
-                                                                            id="meropenem3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['meropenem3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('meropenem3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="amikacin3">
-                                                        <label for="amikacin3" class="form-label">Amikacin</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="amikacin3" id="amikacin3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['amikacin3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('amikacin3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <hr>
-
-                                                <div class="row">
-                                                    <div class="col-sm-3" id="streptomycin3">
-                                                        <label for="streptomycin3" class="form-label">Streptomycin</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="streptomycin3"
-                                                                            id="streptomycin3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['streptomycin3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('streptomycin3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="ethionamide3">
-                                                        <label for="ethionamide3" class="form-label">Ethionamide</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="ethionamide3"
-                                                                            id="ethionamide3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['ethionamide3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('ethionamide3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="prothionamide3">
-                                                        <label for="prothionamide3" class="form-label">Prothionamide</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="prothionamide3"
-                                                                            id="prothionamide3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['prothionamide3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('prothionamide3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-3" id="para_aminosalicylic_acid3">
-                                                        <label for="para_aminosalicylic_acid3" class="form-label">Para-
-                                                            aminosalicylic acid</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="para_aminosalicylic_acid3"
-                                                                            id="para_aminosalicylic_acid3<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['para_aminosalicylic_acid3'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('para_aminosalicylic_acid3')">Unset</button>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
                                             <hr>
                                             <label class="form-label text-center"> Indicate all bands visible on the
                                                 strip:</label>
@@ -7813,7 +6655,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-6" id="_1st_line_drugs">
-                                                    <label for="_1st_line_drugs" class="form-label">92. Line probe assay
+                                                    <label for="_1st_line_drugs" class="form-label">15a. Line probe assay
                                                         (1st line drugs). (GenoType MTBDRplus V2 )</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -7837,7 +6679,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-6" id="_2st_line_drugs">
-                                                    <label for="_1st_line_drugs" class="form-label">93. Line probe assay
+                                                    <label for="_1st_line_drugs" class="form-label">15b. Line probe assay
                                                         (2nd line drugs).
                                                         (GenoType MTBDRsl V2).</label>
                                                     <!-- radio -->
@@ -7866,7 +6708,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
                                             <div class="card card-warning">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">94. Nanopore sequencing</h3>
+                                                    <h3 class="card-title">19f. Nanopore sequencing</h3>
                                                 </div>
                                             </div>
                                             <hr>
@@ -7897,10 +6739,11 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <label>List drug resistance mutations detected</label>
                                                             <textarea class="form-control" name="mutations_detected_list"
-                                                                rows="3" placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
+                                                                rows="3"
+                                                                placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                        </textarea>
+                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7930,7 +6773,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                        </textarea>
+                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7945,7 +6788,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-4" id="form_completness">
+                                                <div class="col-sm-4">
                                                     <label>Complete?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -7957,7 +6800,7 @@ if ($user->isLoggedIn()) {
                                                                         id="form_completness<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($costing['form_completness'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?> required>
+                                                                          } ?>         <?php if ($costing['form_completness'] == 3) { ?> readonly <?php } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
@@ -7965,100 +6808,46 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                         <button type="button"
                                                             onclick="unsetRadio('form_completness')">Unset</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="mb-2">
-                                                        <label for="date_completed" class="form-label">Date form
-                                                            completed</label>
-                                                        <input type="date" value="<?php if ($costing['date_completed']) {
-                                                            print_r($costing['date_completed']);
-                                                        } ?>" id="date_completed" name="date_completed"
-                                                            max="<?= date('Y-m-d') ?>" class="form-control"
-                                                            placeholder="Enter date" required />
+
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="diagnosis_test_completed1">
+                                                <div class="col-sm-4">
+                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>95.This form was completed by( Full Name )</label>
-                                                            <select id="diagnosis_test_completed"
-                                                                name="diagnosis_test_completed" class="form-control"
-                                                                required>
-                                                                <?php $diagnosis_test_completed = $override->get('user', 'id', $costing['diagnosis_test_completed'])[0]; ?>
-                                                                <option value="<?= $diagnosis_test_completed['id'] ?>">
-                                                                    <?php if ($costing['diagnosis_test_completed']) {
-                                                                        print_r($diagnosis_test_completed['firstname'] . ' ' . $diagnosis_test_completed['lastname']);
-                                                                    } else {
-                                                                        echo 'Select';
-                                                                    } ?>
-                                                                </option>
-                                                                <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>">
-                                                                        <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                    </option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <label>Form completed Date</label>
+                                                            <input class="form-control" type="date" name="date_completed"
+                                                                id="date_completed" value="<?php if ($costing['date_completed']) {
+                                                                    print_r($costing['date_completed']);
+                                                                } ?>" <?php if ($costing['form_completness'] == 3) { ?>
+                                                                    readonly <?php } ?> />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Form Verified Date</label>
+                                                            <input class="form-control" type="date"
+                                                                name="diagnosis_test_verified_date"
+                                                                id="diagnosis_test_verified_date" value="<?php if ($costing['diagnosis_test_verified_date']) {
+                                                                    print_r($costing['diagnosis_test_verified_date']);
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr>
-
-                                            <?php if ($user->data()->position == 3 && $costing['form_completness'] == 1) { ?>
-                                                <div class="row">
-
-
-                                                    <div class="col-sm-6" id="diagnosis_test_verified_by">
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>40. This form was Verified by (name) </label>
-                                                                <select id="diagnosis_test_verified_by"
-                                                                    name="diagnosis_test_verified_by" class="form-control"
-                                                                    required>
-                                                                    <?php $enrollment_completed = $override->get('user', 'id', $costing['diagnosis_test_verified_by'])[0]; ?>
-                                                                    <option value="<?= $enrollment_completed['id'] ?>">
-                                                                        <?php if ($costing['diagnosis_test_verified_by']) {
-                                                                            print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
-                                                                        } else {
-                                                                            echo 'Select';
-                                                                        } ?>
-                                                                    </option>
-                                                                    <?php foreach ($override->getNews('user', 'status', 1, 'position', 3) as $value) { ?>
-                                                                        <option value="<?= $value['id'] ?>">
-                                                                            <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                        </option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6" id="diagnosis_test_verified_date">
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>40. Form Verified Date</label>
-                                                                <input class="form-control" type="date"
-                                                                    name="diagnosis_test_verified_date"
-                                                                    id="diagnosis_test_verified_date" value="<?php if ($costing['diagnosis_test_verified_date']) {
-                                                                        print_r($costing['diagnosis_test_verified_date']);
-                                                                    } ?>" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            <?php } ?>
-                                        </div>
-                                        <!-- /.card-body -->
-                                        <div class="card-footer">
-                                            <a href="info.php?id=4&cid=<?= $_GET['cid']; ?>&study_id=<?= $_GET['study_id']; ?>&status=<?= $_GET['status']; ?>"
-                                                class="btn btn-default">Back</a>
-                                            <input type="submit" name="add_diagnosis_test" value="Submit"
-                                                class="btn btn-primary">
-                                        </div>
+                                            <!-- /.card-body -->
+                                            <div class="card-footer">
+                                                <a href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>"
+                                                    class="btn btn-default">Back</a>
+                                                <input type="submit" name="add_diagnosis_test" value="Submit"
+                                                    class="btn btn-primary">
+                                            </div>
                                     </form>
                                 </div>
                                 <!-- /.card -->
@@ -8074,7 +6863,7 @@ if ($user->isLoggedIn()) {
 
         <?php } elseif ($_GET['id'] == 15) { ?>
             <?php
-            $costing = $override->getNews('diagnosis', 'status', 1, 'patient_id', $_GET['cid'])[0];
+            $costing = $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -8092,12 +6881,12 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=4&cid=<?= $_GET['cid']; ?>&status=<?= $_GET['status']; ?>">
+                                            href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status']; ?>">
-                                            Go to screening list > </a>
+                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
+                                            Go to enrolled list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
                                         <li class="breadcrumb-item active">Add New Diagnosis Data</li>
@@ -8119,100 +6908,84 @@ if ($user->isLoggedIn()) {
                                 <!-- general form elements disabled -->
                                 <div class="card card-warning">
                                     <div class="card-header">
-                                        <h3 class="card-title">Diagnosis Form</h3>
+                                        <h3 class="card-title">Final diagnosis</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
                                         <div class="card-body">
-                                            <hr>
                                             <div class="row">
-                                                <div class="col-6">
-                                                    <div class="mb-2">
-                                                        <label for="visit_date" class="form-label">Visit Date</label>
-                                                        <input type="date" value="<?php if ($costing['visit_date']) {
-                                                            print_r($costing['visit_date']);
-                                                        } ?>" id="visit_date" name="visit_date"
-                                                            max="<?= date('Y-m-d') ?>" class="form-control"
-                                                            placeholder="Enter date" required />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <div class="mb-3">
-                                                        <label for="clinician_name" class="form-label">96. Name of
-                                                            clinician</label>
-                                                        <input type="text" value="<?php if ($costing['clinician_name']) {
-                                                            print_r($costing['clinician_name']);
-                                                        } ?>" id="clinician_name" name="clinician_name"
-                                                            class="form-control" placeholder="Enter here" required />
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <hr>
-                                            <div class="card card-warning">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Final diagnosis</h3>
-                                                </div>
-                                            </div>
-
-                                            <hr>
-
-                                            <!-- <div class="row">
                                                 <div class="col-sm-3">
-                                                    <label for="tb_diagnosis" class="form-label">101. Was a TB diagnosis made?</label>
+                                                    <label for="tb_diagnosis" class="form-label">101. Was a TB diagnosis
+                                                        made?</label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="tb_diagnosis" id="tb_diagnosis<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_diagnosis'] == $value['id']) {
-                                                                            echo 'checked';
-                                                                        } ?> required>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="tb_diagnosis"
+                                                                        id="tb_diagnosis<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['tb_diagnosis'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?> required>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button type="button" onclick="unsetRadio('tb_diagnosis')">Unset</button>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('tb_diagnosis')">Unset</button>
 
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-3" id="tb_diagnosis_made">
-                                                    <label for="tb_diagnosis_made" class="form-label">102. How was the TB diagnosis made? </label>
+                                                    <label for="tb_diagnosis_made" class="form-label">102. How was the TB
+                                                        diagnosis made? </label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('tb_diagnosis_made', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="tb_diagnosis_made" id="tb_diagnosis_made<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['tb_diagnosis_made'] == $value['id']) {
-                                                                            echo 'checked';
-                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="tb_diagnosis_made"
+                                                                        id="tb_diagnosis_made<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['tb_diagnosis_made'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?>>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <button type="button" onclick="unsetRadio('tb_diagnosis_made')">Unset</button>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('tb_diagnosis_made')">Unset</button>
                                                         </div>
 
-                                                        <label for="diagnosis_made_other" id="diagnosis_made_other1" class="form-label">If Other Specify ?</label>
+                                                        <label for="diagnosis_made_other" id="diagnosis_made_other1"
+                                                            class="form-label">If Other Specify ?</label>
                                                         <input type="text" value="<?php if ($costing['diagnosis_made_other']) {
                                                             print_r($costing['diagnosis_made_other']);
-                                                        } ?>" id="diagnosis_made_other" name="diagnosis_made_other" class="form-control" placeholder="Enter here" />
+                                                        } ?>" id="diagnosis_made_other" name="diagnosis_made_other"
+                                                            class="form-control" placeholder="Enter here" />
                                                     </div>
 
                                                 </div>
 
                                                 <div class="col-sm-3" id="bacteriological_diagnosis">
-                                                    <label for="bacteriological_diagnosis" class="form-label">103. On what test result(s) was the bacteriological diagnosis based?</label>
+                                                    <label for="bacteriological_diagnosis" class="form-label">103. On what
+                                                        test result(s) was the bacteriological diagnosis based?</label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('bacteriological_diagnosis', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" name="bacteriological_diagnosis[]" id="bacteriological_diagnosis<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['bacteriological_diagnosis']) as $values) {
-                                                                            if ($values == $value['id']) {
-                                                                                echo 'checked';
-                                                                            }
-                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        name="bacteriological_diagnosis[]"
+                                                                        id="bacteriological_diagnosis<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['bacteriological_diagnosis']) as $values) {
+                                                                              if ($values == $value['id']) {
+                                                                                  echo 'checked';
+                                                                              }
+                                                                          } ?>>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
@@ -8220,14 +6993,18 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                                 <div class="col-sm-3" id="other_bacteriological_date1">
                                                     <div class="mb-3">
-                                                        <label for="other_bacteriological" class="form-label">103. Specify and Date</label>
+                                                        <label for="other_bacteriological" class="form-label">103. Specify
+                                                            and Date</label>
                                                         <input type="text" value="<?php if ($costing['other_bacteriological']) {
                                                             print_r($costing['other_bacteriological']);
-                                                        } ?>" id="other_bacteriological" name="other_bacteriological" class="form-control" placeholder="Speficy here" />
+                                                        } ?>" id="other_bacteriological" name="other_bacteriological"
+                                                            class="form-control" placeholder="Speficy here" />
                                                         <br>
                                                         <input type="date" value="<?php if ($costing['other_bacteriological_date']) {
                                                             print_r($costing['other_bacteriological_date']);
-                                                        } ?>" id="other_bacteriological_date" name="other_bacteriological_date" class="form-control" placeholder="Enter here" />
+                                                        } ?>" id="other_bacteriological_date"
+                                                            name="other_bacteriological_date" class="form-control"
+                                                            placeholder="Enter here" />
 
                                                     </div>
                                                 </div>
@@ -8237,261 +7014,312 @@ if ($user->isLoggedIn()) {
                                                 <hr>
                                                 <div class="row">
 
-                                                    <div class="col-sm-4" id="xpert_ultra_date1">
+                                                    <div class="col-sm-6" id="clinician_received_date1">
                                                         <div class="mb-3">
-                                                            <label for="xpert_ultra_date" class="form-label">103. If Xpert Ultra (Date?)</label>
-                                                            <input type="date" value="<?php if ($costing['xpert_ultra_date']) {
-                                                                print_r($costing['xpert_ultra_date']);
-                                                            } ?>" id="xpert_ultra_date" name="xpert_ultra_date" class="form-control" placeholder="Enter here" />
+                                                            <label for="clinician_received_date" class="form-label">103. If
+                                                                Positive test result ,Date result received by clinician
+                                                            </label>
+                                                            <input type="date" value="<?php if ($costing['clinician_received_date']) {
+                                                                print_r($costing['clinician_received_date']);
+                                                            } ?>" id="clinician_received_date"
+                                                                name="clinician_received_date" class="form-control"
+                                                                placeholder="Enter here" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-4" id="truenat_date1">
+                                                    <div class="col-sm-6" id="xpert_truenat_date1">
                                                         <div class="mb-3">
-                                                            <label for="truenat_date" class="form-label">103. If Truenat (Date?)</label>
-                                                            <input type="date" value="<?php if ($costing['truenat_date']) {
-                                                                print_r($costing['truenat_date']);
-                                                            } ?>" id="truenat_date" name="truenat_date" class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4" id="afb_microscope_date1">
-                                                        <div class="mb-3">
-                                                            <label for="afb_microscope_date" class="form-label">103. If AFB Microscope (Date?)</label>
-                                                            <input type="date" value="<?php if ($costing['afb_microscope_date']) {
-                                                                print_r($costing['afb_microscope_date']);
-                                                            } ?>" id="afb_microscope_date" name="afb_microscope_date" class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
-                                                </div> -->
-
-                                            <hr>
-                                            <div class="row">
-
-                                                <div class="col-sm-4" id="tb_diagnosed_clinically">
-                                                    <label for="tb_diagnosed_clinically" class="form-label">104. In case TB
-                                                        was diagnosed clinically, based on what information was the
-                                                        diagnosis made? </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('tb_diagnosed_clinically', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        name="tb_diagnosed_clinically[]"
-                                                                        id="tb_diagnosed_clinically<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['tb_diagnosed_clinically']) as $values) {
-                                                                              if ($values == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              }
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                            <label for="tb_clinically_other" id="tb_clinically_other1"
-                                                                class="form-label">Other Specify ?</label>
-                                                            <input type="text" value="<?php if ($costing['tb_clinically_other']) {
-                                                                print_r($costing['tb_clinically_other']);
-                                                            } ?>" id="tb_clinically_other" name="tb_clinically_other"
+                                                            <label for="xpert_truenat_date" class="form-label">103. If
+                                                                Xpert/Truenat on sputum/NGA (Date?)</label>
+                                                            <input type="date" value="<?php if ($costing['xpert_truenat_date']) {
+                                                                print_r($costing['xpert_truenat_date']);
+                                                            } ?>" id="xpert_truenat_date" name="xpert_truenat_date"
                                                                 class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="tb_treatment">
-                                                    <label for="tb_treatment" class="form-label">105. Was TB treatment
-                                                        started?</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('tb_treatment', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="tb_treatment"
-                                                                        id="tb_treatment<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['tb_treatment'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('tb_treatment')">Unset</button>
+                                                <hr>
+                                                <div class="row">
+
+                                                    <div class="col-sm-4" id="tb_diagnosed_clinically">
+                                                        <label for="tb_diagnosed_clinically" class="form-label">9. In case
+                                                            TB
+                                                            was diagnosed clinically, based on what information was the
+                                                            diagnosis made? </label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('tb_diagnosed_clinically', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="tb_diagnosed_clinically[]"
+                                                                            id="tb_diagnosed_clinically<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['tb_diagnosed_clinically']) as $values) {
+                                                                                  if ($values == $value['id']) {
+                                                                                      echo 'checked';
+                                                                                  }
+                                                                              } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                                <label for="tb_clinically_other" id="tb_clinically_other1"
+                                                                    class="form-label">Other Specify ?</label>
+                                                                <input type="text" value="<?php if ($costing['tb_clinically_other']) {
+                                                                    print_r($costing['tb_clinically_other']);
+                                                                } ?>" id="tb_clinically_other"
+                                                                    name="tb_clinically_other" class="form-control"
+                                                                    placeholder="Enter here" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-4" id="tb_treatment">
+                                                        <label for="tb_treatment" class="form-label">10a. Was TB treatment
+                                                            started?</label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('tb_treatment', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="tb_treatment"
+                                                                            id="tb_treatment<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['tb_treatment'] == $value['id']) {
+                                                                                  echo 'checked';
+                                                                              } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                                <button type="button"
+                                                                    onclick="unsetRadio('tb_treatment')">Unset</button>
+                                                            </div>
+
+
+                                                            <label for="tb_treatment_date" id="tb_treatment_date1"
+                                                                class="form-label">What was treatment start date ?</label>
+                                                            <input type="date" value="<?php if ($costing['tb_treatment_date']) {
+                                                                print_r($costing['tb_treatment_date']);
+                                                            } ?>" id="tb_treatment_date" name="tb_treatment_date"
+                                                                class="form-control" placeholder="Enters here" />
+                                                            <label for="tb_facility" id="tb_facility1"
+                                                                class="form-label">(Name
+                                                                health facility):</label>
+                                                            <input type="text" value="<?php if ($costing['tb_facility']) {
+                                                                print_r($costing['tb_facility']);
+                                                            } ?>" id="tb_facility" name="tb_facility"
+                                                                class="form-control" placeholder="Enter heres" />
+                                                            <label for="tb_reason" id="tb_reason1" class="form-label">reason
+                                                                (specify):</label>
+                                                            <input type="text" value="<?php if ($costing['tb_reason']) {
+                                                                print_r($costing['tb_reason']);
+                                                            } ?>" id="tb_reason" name="tb_reason" class="form-control"
+                                                                placeholder="Enter here" />
+
                                                         </div>
 
+                                                    </div>
 
-                                                        <label for="tb_treatment_date" id="tb_treatment_date1"
-                                                            class="form-label">What was treatment start date ?</label>
-                                                        <input type="date" value="<?php if ($costing['tb_treatment_date']) {
-                                                            print_r($costing['tb_treatment_date']);
-                                                        } ?>" id="tb_treatment_date" name="tb_treatment_date"
-                                                            class="form-control" placeholder="Enters here" />
-                                                        <label for="tb_facility" id="tb_facility1" class="form-label">(Name
-                                                            health facility):</label>
-                                                        <input type="text" value="<?php if ($costing['tb_facility']) {
-                                                            print_r($costing['tb_facility']);
-                                                        } ?>" id="tb_facility" name="tb_facility" class="form-control"
-                                                            placeholder="Enter heres" />
-                                                        <label for="tb_reason" id="tb_reason1" class="form-label">reason
-                                                            (specify):</label>
-                                                        <input type="text" value="<?php if ($costing['tb_reason']) {
-                                                            print_r($costing['tb_reason']);
-                                                        } ?>" id="tb_reason" name="tb_reason" class="form-control"
-                                                            placeholder="Enter here" />
+                                                    <div class="col-sm-4" id="tb_regimen">
+                                                        <label for="tb_regimen" class="form-label">10b. What treatment
+                                                            regimen
+                                                            was prescribed? </label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('tb_regimen', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="tb_regimen"
+                                                                            id="tb_regimen<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['tb_regimen'] == $value['id']) {
+                                                                                  echo 'checked';
+                                                                              } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('tb_regimen')">Unset</button>
+                                                        </div>
+                                                        <label for="tb_regimen_other" id="tb_regimen_other1"
+                                                            class="form-label">Regimens specify</label>
+                                                        <input type="text" value="<?php if ($costing['tb_regimen_other']) {
+                                                            print_r($costing['tb_regimen_other']);
+                                                        } ?>" id="tb_regimen_other" name="tb_regimen_other"
+                                                            class="form-control" placeholder="Enter here" />
 
+
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+                                                <div class="row">
+
+
+                                                    <div class="col-sm-3" id="laboratory_test_used">
+                                                        <label for="laboratory_test_used" class="form-label">11a. On what
+                                                            test
+                                                            result was the treatment regimen based and when did this test
+                                                            result
+                                                            become available to you? (dd / mm / yyyy)</label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('laboratory_test_used', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="laboratory_test_used[]"
+                                                                            id="laboratory_test_used<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['laboratory_test_used']) as $values) {
+                                                                                  if ($values == $value['id']) {
+                                                                                      echo 'checked';
+                                                                                  }
+                                                                              } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+
+                                                            <label for="laboratory_test_used_other"
+                                                                id="laboratory_test_used_other1" class="form-label">Other
+                                                                Specify </label>
+                                                            <input type="text" value="<?php if ($costing['laboratory_test_used_other']) {
+                                                                print_r($costing['laboratory_test_used_other']);
+                                                            } ?>" id="laboratory_test_used_other"
+                                                                name="laboratory_test_used_other" class="form-control"
+                                                                placeholder="Enter here" />
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-3" id="laboratory_test_used_date">
+                                                        <div class="mb-2">
+                                                            <label for="laboratory_test_used_date" class="form-label">Date
+                                                                of
+                                                                the results</label>
+                                                            <input type="date" value="<?php if ($costing['laboratory_test_used_date']) {
+                                                                print_r($costing['laboratory_test_used_date']);
+                                                            } ?>" id="laboratory_test_used_date"
+                                                                name="laboratory_test_used_date" max="<?= date('Y-m-d') ?>"
+                                                                class="form-control" placeholder="Enter date" required />
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="col-sm-3" id="regimen_changed">
+                                                        <label for="regimen_changed" class="form-label">11b. Was the regimen
+                                                            changed during the treatment and if so, what were the
+                                                            changes?</label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="regimen_changed"
+                                                                            id="regimen_changed<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['regimen_changed'] == $value['id']) {
+                                                                                  echo 'checked';
+                                                                              } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                                <button type="button"
+                                                                    onclick="unsetRadio('regimen_changed')">Unset</button>
+                                                            </div>
+
+
+                                                            <label for="regimen_changed__date" id="regimen_changed__date1"
+                                                                class="form-label">Date </label>
+                                                            <input type="text" value="<?php if ($costing['regimen_changed__date']) {
+                                                                print_r($costing['regimen_changed__date']);
+                                                            } ?>" id="regimen_changed__date"
+                                                                name="regimen_changed__date" class="form-control"
+                                                                placeholder="Enter here" />
+                                                            <label for="regimen_added_name" id="regimen_added_name1"
+                                                                class="form-label">Change introduced to the regimen </label>
+                                                            <input type="text" value="<?php if ($costing['regimen_added_name']) {
+                                                                print_r($costing['regimen_added_name']);
+                                                            } ?>" id="regimen_added_name" name="regimen_added_name"
+                                                                class="form-control" placeholder="Enter here" />
+                                                            <label for="regimen_changed__reason"
+                                                                id="regimen_changed__reason1" class="form-label">Reason for
+                                                                change (e.g. new DST result became available)</label>
+                                                            <input type="text" value="<?php if ($costing['regimen_changed__reason']) {
+                                                                print_r($costing['regimen_changed__reason']);
+                                                            } ?>" id="regimen_changed__reason"
+                                                                name="regimen_changed__reason" class="form-control"
+                                                                placeholder="Enter here" />
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="tb_otcome2">
+                                                        <label for="tb_otcome2" class="form-label">11c. Treatment
+                                                            outcomes</label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('tb_otcome2', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="tb_otcome2"
+                                                                            id="tb_otcome2<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['tb_otcome2'] == $value['id']) {
+                                                                                  echo 'checked';
+                                                                              } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('tb_otcome2')">Unset</button>
+                                                        </div>
+                                                        <br>
+                                                        <label for="tb_otcome2_date_completed"
+                                                            id="tb_otcome2_date_completed" class="form-label">Date
+                                                            Completed</label>
+                                                        <label for="tb_otcome2_date_died" id="tb_otcome2_date_died"
+                                                            class="form-label">Date Of Deathn</label>
+                                                        <label for="tb_otcome2_date_ltf" id="tb_otcome2_date_ltf"
+                                                            class="form-label">Last date Known to be alive</label>
+                                                        <input type="date" value="<?php if ($costing['tb_otcome2_date']) {
+                                                            print_r($costing['tb_otcome2_date']);
+                                                        } ?>" id="tb_otcome2_date" name="tb_otcome2_date"
+                                                            class="form-control" />
                                                     </div>
 
                                                 </div>
-
-                                                <div class="col-sm-4" id="tb_regimen">
-                                                    <label for="tb_regimen" class="form-label">106. What treatment regimen
-                                                        was prescribed? </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('tb_regimen2', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="tb_regimen" id="tb_regimen<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['tb_regimen'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('tb_regimen')">Unset</button>
-                                                    </div>
-                                                    <label for="tb_regimen_other" id="tb_regimen_other1"
-                                                        class="form-label">Regimens specify</label>
-                                                    <input type="text" value="<?php if ($costing['tb_regimen_other']) {
-                                                        print_r($costing['tb_regimen_other']);
-                                                    } ?>" id="tb_regimen_other" name="tb_regimen_other"
-                                                        class="form-control" placeholder="Enter here" />
-
-
+                                            </div>
+                                            <hr>
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Diagnosis other than TB</h3>
                                                 </div>
                                             </div>
 
                                             <hr>
                                             <div class="row">
-
-
-                                                <div class="col-sm-3" id="laboratory_test_used">
-                                                    <label for="laboratory_test_used" class="form-label">107. On what test
-                                                        result was the treatment regimen based and when did this test result
-                                                        become available to you? (dd / mm / yyyy)</label>
+                                                <div class="col-sm-6" id="tb_other_diagnosis">
+                                                    <label for="tb_other_diagnosis" class="form-label">12a. What diagnosis
+                                                        other
+                                                        than TB was made? </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('laboratory_test_used', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        name="laboratory_test_used[]"
-                                                                        id="laboratory_test_used<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['laboratory_test_used']) as $values) {
-                                                                              if ($values == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              }
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-
-                                                        <label for="laboratory_test_used_other"
-                                                            id="laboratory_test_used_other1" class="form-label">Other
-                                                            Specify </label>
-                                                        <input type="text" value="<?php if ($costing['laboratory_test_used_other']) {
-                                                            print_r($costing['laboratory_test_used_other']);
-                                                        } ?>" id="laboratory_test_used_other"
-                                                            name="laboratory_test_used_other" class="form-control"
-                                                            placeholder="Enter here" />
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-3" id="laboratory_test_used_date">
-                                                    <div class="mb-2">
-                                                        <label for="laboratory_test_used_date" class="form-label">Date of
-                                                            the results</label>
-                                                        <input type="date" value="<?php if ($costing['laboratory_test_used_date']) {
-                                                            print_r($costing['laboratory_test_used_date']);
-                                                        } ?>" id="laboratory_test_used_date"
-                                                            name="laboratory_test_used_date" max="<?= date('Y-m-d') ?>"
-                                                            class="form-control" placeholder="Enter date" required />
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="col-sm-3" id="regimen_changed">
-                                                    <label for="regimen_changed" class="form-label">108. Was the regimen
-                                                        changed during the treatment and if so, what were the
-                                                        changes?</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('tb_other_diagnosis', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="regimen_changed"
-                                                                        id="regimen_changed<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['regimen_changed'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('regimen_changed')">Unset</button>
-                                                        </div>
-
-
-                                                        <label for="regimen_changed__date" id="regimen_changed__date1"
-                                                            class="form-label">1st (Date??), </label>
-                                                        <input type="text" value="<?php if ($costing['regimen_changed__date']) {
-                                                            print_r($costing['regimen_changed__date']);
-                                                        } ?>" id="regimen_changed__date" name="regimen_changed__date"
-                                                            class="form-control" placeholder="Enter here" />
-                                                        <label for="regimen_removed_name" id="regimen_removed_name1"
-                                                            class="form-label">Drug(s) removed </label>
-                                                        <input type="text" value="<?php if ($costing['regimen_removed_name']) {
-                                                            print_r($costing['regimen_removed_name']);
-                                                        } ?>" id="regimen_removed_name" name="regimen_removed_name"
-                                                            class="form-control" placeholder="Enter here" />
-                                                        <label for="regimen_added_name" id="regimen_added_name1"
-                                                            class="form-label">Drugs added </label>
-                                                        <input type="text" value="<?php if ($costing['regimen_added_name']) {
-                                                            print_r($costing['regimen_added_name']);
-                                                        } ?>" id="regimen_added_name" name="regimen_added_name"
-                                                            class="form-control" placeholder="Enter here" />
-                                                        <label for="regimen_changed__reason" id="regimen_changed__reason1"
-                                                            class="form-label">Reason for change </label>
-                                                        <input type="text" value="<?php if ($costing['regimen_changed__reason']) {
-                                                            print_r($costing['regimen_changed__reason']);
-                                                        } ?>" id="regimen_changed__reason"
-                                                            name="regimen_changed__reason" class="form-control"
-                                                            placeholder="Enter here" />
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="tb_otcome2">
-                                                    <label for="tb_otcome2" class="form-label">109. Treatment
-                                                        outcomes</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('tb_otcome2', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="tb_otcome2" id="tb_otcome2<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['tb_otcome2'] == $value['id']) {
+                                                                        name="tb_other_diagnosis"
+                                                                        id="tb_other_diagnosis<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['tb_other_diagnosis'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
                                                                     <label
@@ -8500,262 +7328,143 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                         <button type="button"
-                                                            onclick="unsetRadio('tb_otcome2')">Unset</button>
+                                                            onclick="unsetRadio('tb_other_diagnosis')">Unset</button>
                                                     </div>
-                                                    <br>
-                                                    <label for="tb_otcome2_date_completed" id="tb_otcome2_date_completed"
-                                                        class="form-label">Date Completed</label>
-                                                    <label for="tb_otcome2_date_died" id="tb_otcome2_date_died"
-                                                        class="form-label">Date Of Deathn</label>
-                                                    <label for="tb_otcome2_date_ltf" id="tb_otcome2_date_ltf"
-                                                        class="form-label">Last date Known to be alive</label>
-                                                    <input type="date" value="<?php if ($costing['tb_otcome2_date']) {
-                                                        print_r($costing['tb_otcome2_date']);
-                                                    } ?>" id="tb_otcome2_date" name="tb_otcome2_date"
-                                                        class="form-control" />
-                                                </div>
 
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="card card-warning">
-                                            <div class="card-header">
-                                                <h3 class="card-title">Diagnosis other than TB</h3>
-                                            </div>
-                                        </div>
-
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-sm-4" id="tb_other_diagnosis">
-                                                <label for="tb_other_diagnosis" class="form-label">110. What diagnosis other
-                                                    than TB was made? </label>
-                                                <!-- radio -->
-                                                <div class="row-form clearfix">
-                                                    <div class="form-group">
-                                                        <?php foreach ($override->get('tb_other_diagnosis', 'status', 1) as $value) { ?>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="tb_other_diagnosis"
-                                                                    id="tb_other_diagnosis<?= $value['id']; ?>"
-                                                                    value="<?= $value['id']; ?>" <?php if ($costing['tb_other_diagnosis'] == $value['id']) {
-                                                                          echo 'checked';
-                                                                      } ?>>
-                                                                <label class="form-check-label"><?= $value['name']; ?></label>
-                                                            </div>
-                                                        <?php } ?>
-                                                    </div>
-                                                    <button type="button"
-                                                        onclick="unsetRadio('tb_other_diagnosis')">Unset</button>
-                                                </div>
-
-                                                <label for="tb_other_specify" id="tb_other_specify1" class="form-label">If
-                                                    Other Mention</label>
-                                                <input type="text" value="<?php if ($costing['tb_other_specify']) {
-                                                    print_r($costing['tb_other_specify']);
-                                                } ?>" id="tb_other_specify" name="tb_other_specify"
-                                                    class="form-control" placeholder="Enter here" />
-
-                                            </div>
-
-                                            <div class="col-sm-4" id="tb_diagnosis_made2">
-                                                <label for="tb_diagnosis_made" class="form-label">111. How was this
-                                                    diagnosis made?</label>
-                                                <!-- radio -->
-                                                <div class="row-form clearfix">
-                                                    <div class="form-group">
-                                                        <?php foreach ($override->get('tb_diagnosis_made3', 'status', 1) as $value) { ?>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="tb_diagnosis_made2"
-                                                                    id="tb_diagnosis_made2<?= $value['id']; ?>"
-                                                                    value="<?= $value['id']; ?>" <?php if ($costing['tb_diagnosis_made2'] == $value['id']) {
-                                                                          echo 'checked';
-                                                                      } ?>>
-                                                                <label class="form-check-label"><?= $value['name']; ?></label>
-                                                            </div>
-                                                        <?php } ?>
-                                                    </div>
-                                                </div>
-                                                <button type="button"
-                                                    onclick="unsetRadio('tb_diagnosis_made2')">Unset</button>
-
-                                            </div>
-
-
-                                            <div class="col-sm-4" id="laboratory_test_used221111">
-                                                <label for="microscopy_reason" class="form-label">112. If laboratory, which
-                                                    test used </label>
-                                                <!-- radio -->
-                                                <div class="row-form clearfix">
-                                                    <div class="form-group">
-                                                        <?php foreach ($override->get('laboratory_test_used2', 'status', 1) as $value) { ?>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="laboratory_test_used2"
-                                                                    id="laboratory_test_used2<?= $value['id']; ?>"
-                                                                    value="<?= $value['id']; ?>" <?php if ($costing['laboratory_test_used2'] == $value['id']) {
-                                                                          echo 'checked';
-                                                                      } ?>>
-                                                                <label class="form-check-label"><?= $value['name']; ?></label>
-                                                            </div>
-                                                        <?php } ?>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('laboratory_test_used2')">Unset</button>
-                                                    </div>
-                                                    <label for="microscopy_reason_other" id="microscopy_reason_other1"
-                                                        class="form-label">If Other Mention</label>
-                                                    <input type="text" value="<?php if ($costing['microscopy_reason_other']) {
-                                                        print_r($costing['microscopy_reason_other']);
-                                                    } ?>" id="microscopy_reason_other" name="microscopy_reason_other"
+                                                    <label for="tb_other_specify" id="tb_other_specify1"
+                                                        class="form-label">If
+                                                        Other Mention</label>
+                                                    <input type="text" value="<?php if ($costing['tb_other_specify']) {
+                                                        print_r($costing['tb_other_specify']);
+                                                    } ?>" id="tb_other_specify" name="tb_other_specify"
                                                         class="form-control" placeholder="Enter here" />
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <hr>
-
-
-                                        <div class="card card-warning">
-                                            <div class="card-header">
-                                                <h3 class="card-title">ANY COMENT OR REMARKS</h3>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>Remarks / Comments:</label>
-                                                        <textarea class="form-control" name="comments" rows="3"
-                                                            placeholder="Type comments here..."><?php if ($costing['comments']) {
-                                                                print_r($costing['comments']);
-                                                            } ?>
-                                                                                                        </textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-
-                                        <div class="card card-warning">
-                                            <div class="card-header">
-                                                <h3 class="card-title">FORM STATUS</h3>
-                                            </div>
-                                        </div>
-                                        <hr>
-
-                                        <div class="row">
-                                            <div class="col-sm-4" id="form_completness">
-                                                <label>Complete?</label>
-                                                <!-- radio -->
-                                                <div class="row-form clearfix">
-                                                    <div class="form-group">
-                                                        <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="form_completness"
-                                                                    id="form_completness<?= $value['id']; ?>"
-                                                                    value="<?= $value['id']; ?>" <?php if ($costing['form_completness'] == $value['id']) {
-                                                                          echo 'checked';
-                                                                      } ?> required>
-                                                                <label class="form-check-label"><?= $value['name']; ?></label>
-                                                            </div>
-                                                        <?php } ?>
-                                                    </div>
-                                                    <button type="button"
-                                                        onclick="unsetRadio('form_completness')">Unset</button>
 
                                                 </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="mb-2">
-                                                    <label for="date_completed" class="form-label">Date form
-                                                        completed</label>
-                                                    <input type="date" value="<?php if ($costing['date_completed']) {
-                                                        print_r($costing['date_completed']);
-                                                    } ?>" id="date_completed" name="date_completed"
-                                                        max="<?= date('Y-m-d') ?>" class="form-control"
-                                                        placeholder="Enter date" required />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4" id="diagnosis_completed1">
-                                                <div class="row-form clearfix">
-                                                    <div class="form-group">
-                                                        <label>113. This form was completed by ( Full Name )</label>
-                                                        <select id="diagnosis_completed" name="diagnosis_completed"
-                                                            class="form-control" required>
-                                                            <?php $diagnosis_completed = $override->get('user', 'id', $costing['diagnosis_completed'])[0]; ?>
-                                                            <option value="<?= $diagnosis_completed['id'] ?>">
-                                                                <?php if ($costing['diagnosis_completed']) {
-                                                                    print_r($diagnosis_completed['firstname'] . ' ' . $diagnosis_completed['lastname']);
-                                                                } else {
-                                                                    echo 'Select';
-                                                                } ?>
-                                                            </option>
-                                                            <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
-                                                                <option value="<?= $value['id'] ?>">
-                                                                    <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                </option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
 
-                                        <?php if ($user->data()->position == 3 && $costing['form_completness'] == 1) { ?>
-                                            <div class="row">
-                                                <div class="col-sm-6" id="diagnosis_test_verified_by">
+                                                <div class="col-sm-6" id="tb_diagnosis_made2">
+                                                    <label for="tb_diagnosis_made" class="form-label">12b. How was this
+                                                        diagnosis made?</label>
+                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>40. This form was Verified by (name) </label>
-                                                            <select id="diagnosis_verified_by" name="diagnosis_verified_by"
-                                                                class="form-control" required>
-                                                                <?php $enrollment_completed = $override->get('user', 'id', $costing['diagnosis_verified_by'])[0]; ?>
-                                                                <option value="<?= $enrollment_completed['id'] ?>">
-                                                                    <?php if ($costing['diagnosis_verified_by']) {
-                                                                        print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
-                                                                    } else {
-                                                                        echo 'Select';
-                                                                    } ?>
-                                                                </option>
-                                                                <?php foreach ($override->getNews('user', 'status', 1, 'position', 3) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>">
-                                                                        <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                    </option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <?php foreach ($override->get('tb_diagnosis_made3', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="tb_diagnosis_made2"
+                                                                        id="tb_diagnosis_made2<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['tb_diagnosis_made2'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?>>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button"
+                                                        onclick="unsetRadio('tb_diagnosis_made2')">Unset</button>
+
+                                                </div>
+
+                                            </div>
+
+                                            <hr>
+
+
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">ANY COMENT OR REMARKS</h3>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>Remarks / Comments:</label>
+                                                            <textarea class="form-control" name="comments" rows="3"
+                                                                placeholder="Type comments here..."><?php if ($costing['comments']) {
+                                                                    print_r($costing['comments']);
+                                                                } ?>
+                                                                                                                                                                                                                                                        </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">FORM STATUS</h3>
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label>Complete?</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="diagnosis_completness"
+                                                                        id="diagnosis_completness<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['diagnosis_completness'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?>         <?php if ($costing['diagnosis_completness'] == 3) { ?> readonly
+                                                                        <?php } ?> required>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('diagnosis_completness')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Form completed Date</label>
+                                                            <input class="form-control" type="date"
+                                                                name="diagnosis_completed_date"
+                                                                id="diagnosis_completed_date" value="<?php if ($costing['diagnosis_completed_date']) {
+                                                                    print_r($costing['diagnosis_completed_date']);
+                                                                } ?>" <?php if ($costing['diagnosis_completness'] == 3) { ?> readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-6" id="diagnosis_verified_date">
+                                                <div class="col-sm-4">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>40. Form Verified Date</label>
+                                                            <label>Form Verified Date</label>
                                                             <input class="form-control" type="date"
                                                                 name="diagnosis_verified_date" id="diagnosis_verified_date"
                                                                 value="<?php if ($costing['diagnosis_verified_date']) {
                                                                     print_r($costing['diagnosis_verified_date']);
-                                                                } ?>" />
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php } ?>
-                                        <!-- </div> -->
-                                        <!-- /.card-body -->
-                                        <div class="card-footer">
-                                            <a href="info.php?id=4&cid=<?= $_GET['cid']; ?>&study_id=<?= $_GET['study_id']; ?>&status=<?= $_GET['status']; ?>"
-                                                class="btn btn-default">Back</a>
-                                            <input type="submit" name="add_diagnosis" value="Submit"
-                                                class="btn btn-primary">
-                                        </div>
+                                            <hr>
+                                            <!-- </div> -->
+                                            <!-- /.card-body -->
+                                            <div class="card-footer">
+                                                <a href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>"
+                                                    class="btn btn-default">Back</a>
+                                                <input type="submit" name="add_diagnosis" value="Submit"
+                                                    class="btn btn-primary">
+                                            </div>
                                     </form>
                                 </div>
                                 <!-- /.card -->
@@ -8781,12 +7490,12 @@ if ($user->isLoggedIn()) {
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status']; ?>">
+                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item">
-                                        <a href="info.php?id=3&status=<?= $_GET['status']; ?>">
+                                        <a href="info.php?id=3&status=<?= $_GET['status'] ?>">
                                             <?php if ($_GET['status'] == 1) { ?>
                                                 Go to screening list >
                                             <?php } elseif ($_GET['status'] == 2) { ?>
@@ -8808,43 +7517,182 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row">
                             <?php
-                            $clients = $override->getNews('enrollment_form', 'status', 1, 'patient_id', $_GET['cid'])[0];
+                            $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id'])[0];
+                            // $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
+                            $sex = $override->get('sex', 'id', $clients['sex'])[0];
+                            $education = $override->get('education', 'id', $clients['education'])[0];
+                            $occupation = $override->get('occupation', 'id', $clients['occupation'])[0];
+                            $regions = $override->get('regions', 'id', $clients['region'])[0];
+                            $districts = $override->get('districts', 'id', $clients['district'])[0];
+                            $wards = $override->get('wards', 'id', $clients['ward'])[0];
+                            $facility = $override->get('districts', 'id', $clients['facility_district'])[0];
+                            $site = $override->get('sites', 'id', $clients['facility_id'])[0];
                             ?>
                             <!-- right column -->
                             <div class="col-md-12">
                                 <!-- general form elements disabled -->
                                 <div class="card card-warning">
                                     <div class="card-header">
-                                        <h3 class="card-title">Reason(s) for being regarded a presumptive TB patient at
-                                            initial
-                                            assessment (Multiple selection)</h3>
+                                        <h3 class="card-title">Details of enrolment and patient demographics</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <form id="clients" enctype="multipart/form-data" method="post" autocomplete="off">
+                                    <form id="clients" enctype="multipart/form-data" method="post" autocomplete="off"
+                                        style="display: flex; flex-wrap: wrap; gap: 10px;">
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-3" style="flex: 1;">
                                                     <div class="row-form clearfix">
                                                         <!-- select -->
                                                         <div class="form-group">
-                                                            <label>Date of Visit:</label>
+                                                            <label>2. Date of enrolment</label>
                                                             <input class="form-control" type="date"
-                                                                max="<?= date('Y-m-d'); ?>" name="visit_date"
-                                                                id="visit_date" value="<?php if ($clients['enrollment_date']) {
+                                                                max="<?= date('Y-m-d'); ?>" name="enrollment_date"
+                                                                id="enrollment_date" value="<?php if ($clients['enrollment_date']) {
                                                                     print_r($clients['enrollment_date']);
                                                                 } ?>" required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3" style="flex: 1;">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>4. Date of birth:</label>
+                                                            <input class="form-control" max="<?= date('Y-m-d'); ?>"
+                                                                type="date" max="<?= date('Y-m-d'); ?>" name="dob" id="dob"
+                                                                style="width: 100%;" value="<?php if ($clients['dob']) {
+                                                                    print_r($clients['dob']);
+                                                                } ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" style="flex: 1;">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>5. Age (years)</label>
+                                                            <input class="form-control" type="number" min="0" max="100"
+                                                                name="age" id="age" value="<?php if ($clients['age']) {
+                                                                    print_r($clients['age']);
+                                                                } ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" style="flex: 1;">
+                                                    <label>6. SEX</label>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="sex"
+                                                                    id="sex" value="1" <?php if ($clients['sex'] == 1) {
+                                                                        echo 'checked';
+                                                                    } ?> required>
+                                                                <label class="form-check-label">Male</label>
+                                                            </div>
+
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="sex"
+                                                                    id="sex" value="2" <?php if ($clients['sex'] == 2) {
+                                                                        echo 'checked';
+                                                                    } ?>>
+                                                                <label class="form-check-label">Female</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <hr>
+
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Patient’s Residence address </h3>
+                                                </div>
+                                            </div>
+                                            <hr>
+
                                             <div class="row">
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>12. Cough of >2 weeks</label>
+                                                            <label>7. Region</label>
+                                                            <select id="region" name="region" class="form-control" required>
+                                                                <option value="<?= $regions['id'] ?>"><?php if ($clients['region']) {
+                                                                      print_r($regions['name']);
+                                                                  } else {
+                                                                      echo 'Select region';
+                                                                  } ?>
+                                                                </option>
+                                                                <?php foreach ($override->get('regions', 'status', 1) as $region) { ?>
+                                                                    <option value="<?= $region['id'] ?>"><?= $region['name'] ?>
+                                                                    </option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>7. District</label>
+                                                            <select id="district" name="district" class="form-control"
+                                                                required>
+                                                                <option value="<?= $districts['id'] ?>"><?php if ($clients['district']) {
+                                                                      print_r($districts['name']);
+                                                                  } else {
+                                                                      echo 'Select district';
+                                                                  } ?>
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <div class="col-sm-3">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>7. Ward</label>
+                                                            <select id="ward" name="ward" class="form-control">
+                                                                <option value="<?= $wards['id'] ?>"><?php if ($clients['ward']) {
+                                                                      print_r($wards['name']);
+                                                                  } else {
+                                                                      echo 'Select district';
+                                                                  } ?>
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+
+
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>8. Village/street</label>
+                                                            <input class="form-control" type="text" name="village_street"
+                                                                value="<?php if ($clients['village_street']) {
+                                                                    print_r($clients['village_street']);
+                                                                } ?>" required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Reason(s) for being regarded as presumptive TB
+                                                        patient at initial assessment </h3>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>9a. Cough of >2 weeks</label>
                                                             <select id="cough2weeks" name="cough2weeks" class="form-control"
                                                                 required>
                                                                 <?php $cough2weeks = $override->get('yes_no', 'id', $clients['cough2weeks'])[0]; ?>
@@ -8863,33 +7711,10 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>13. Cough any duration for PLHIV</label>
-                                                            <select id="cough_any" name="cough_any" class="form-control"
-                                                                required>
-                                                                <?php $cough_any = $override->get('yes_no', 'id', $clients['cough_any'])[0]; ?>
-                                                                <option value="<?= $cough_any['id'] ?>"><?php if ($clients['cough_any']) {
-                                                                      print_r($cough_any['name']);
-                                                                  } else {
-                                                                      echo 'Select';
-                                                                  } ?>
-                                                                </option>
-                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?>
-                                                                    </option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>14. Poor weight gain or loss of weight</label>
+                                                            <label>9b. Poor weight gain or loss of weight</label>
                                                             <select id="poor_weight" name="poor_weight" class="form-control"
                                                                 required>
                                                                 <?php $poor_weight = $override->get('yes_no', 'id', $clients['poor_weight'])[0]; ?>
@@ -8908,10 +7733,10 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>15. Coughing up blood</label>
+                                                            <label>9c. Coughing up blood</label>
                                                             <select id="coughing_blood" name="coughing_blood"
                                                                 class="form-control" required>
                                                                 <?php $coughing_blood = $override->get('yes_no', 'id', $clients['coughing_blood'])[0]; ?>
@@ -8929,15 +7754,16 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
 
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>16. Unexplained fever</label>
+                                                            <label>9d. Unexplained fever</label>
                                                             <select id="unexplained_fever" name="unexplained_fever"
                                                                 class="form-control" required>
                                                                 <?php $unexplained_fever = $override->get('yes_no', 'id', $clients['unexplained_fever'])[0]; ?>
@@ -8956,11 +7782,10 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>17. Drenching night sweats</label>
+                                                            <label>9e. Drenching night sweats</label>
                                                             <select id="night_sweats" name="night_sweats"
                                                                 class="form-control" required>
                                                                 <?php $night_sweats = $override->get('yes_no', 'id', $clients['night_sweats'])[0]; ?>
@@ -8979,10 +7804,10 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>18. Enlarged neck lymph nodes</label>
+                                                            <label>9f. Lymph nodes in neck enlarged</label>
                                                             <select id="neck_lymph" name="neck_lymph" class="form-control"
                                                                 required>
                                                                 <?php $neck_lymph = $override->get('yes_no', 'id', $clients['neck_lymph'])[0]; ?>
@@ -9000,11 +7825,15 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div class="col-sm-3">
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>19. Contact history with infectious TB patient</label>
+                                                            <label>9g. Contact history with infectious TB patient</label>
                                                             <select id="history_tb" name="history_tb" class="form-control"
                                                                 required>
                                                                 <?php $history_tb = $override->get('yes_no', 'id', $clients['history_tb'])[0]; ?>
@@ -9019,6 +7848,43 @@ if ($user->isLoggedIn()) {
                                                                     </option>
                                                                 <?php } ?>
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>9h. chest X-ray</label>
+                                                            <select id="chest_xray" name="chest_xray" class="form-control"
+                                                                required>
+                                                                <?php $history_tb = $override->get('yes_no', 'id', $clients['chest_xray'])[0]; ?>
+                                                                <option value="<?= $history_tb['id'] ?>"><?php if ($clients['chest_xray']) {
+                                                                      print_r($history_tb['name']);
+                                                                  } else {
+                                                                      echo 'Select';
+                                                                  } ?>
+                                                                </option>
+                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?>
+                                                                    </option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4" style="flex: 1;">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>9i. Date information collected</label>
+                                                            <input class="form-control" type="date"
+                                                                max="<?= date('Y-m-d'); ?>"
+                                                                name="date_information_collected"
+                                                                id="date_information_collected" value="<?php if ($clients['date_information_collected']) {
+                                                                    print_r($clients['date_information_collected']);
+                                                                } ?>" required />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9037,7 +7903,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
 
                                                 <div class="col-sm-4">
-                                                    <label>20. Was the participant treated for TB before?</label>
+                                                    <label>10a. Was the participant treated for TB before?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9060,24 +7926,58 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-4" id="tx_number1">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>21. If yes, how many times</label>
-                                                            <input class="form-control" type="number" name="tx_number"
-                                                                id="tx_number" placeholder="Type how many ... " value="<?php if ($clients['tx_number']) {
-                                                                    print_r($clients['tx_number']);
-                                                                } ?>" />
+                                                            <label for="tx_month">10b. When did the patient’s last treatment
+                                                                episode end?</label>
+
+                                                            <!-- Row for Month and Year -->
+                                                            <div class="row">
+                                                                <!-- Month Input -->
+                                                                <div class="col-sm-6">
+                                                                    <label for="tx_month" class="form-label">Month</label>
+                                                                    <input class="form-control" type="number"
+                                                                        name="tx_month" id="tx_month"
+                                                                        placeholder="Type Month..." min="1" max="12" value="<?php if ($clients['tx_month']) {
+                                                                            print_r($clients['tx_month']);
+                                                                        } ?>" />
+                                                                </div>
+
+                                                                <!-- Year Input -->
+                                                                <div class="col-sm-6">
+                                                                    <label for="tx_year" class="form-label">Year</label>
+                                                                    <input class="form-control" type="number" name="tx_year"
+                                                                        id="tx_year" placeholder="Type Year..." min="1970"
+                                                                        max="2025" value="<?php if ($clients['tx_year']) {
+                                                                            print_r($clients['tx_year']);
+                                                                        } ?>" />
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Unknown Checkbox -->
+                                                            <div class="form-check mt-3">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    id="tx_unknown" name="tx_unknown" value="1" <?php if ($clients['tx_unknown'] ?? false) {
+                                                                        echo 'checked';
+                                                                    } ?>>
+                                                                <label class="form-check-label"
+                                                                    for="tx_unknown">Unknown</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
+
+
+
+
                                                 <div class="col-sm-4" id="dr_ds1">
-                                                    <label>22. Was it DR or DS TB </label>
+                                                    <label>10c. Was it DR or DS TB </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                             <?php foreach ($override->get('dr_ds', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('dr_ds', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="dr_ds" id="dr_ds<?= $value['id']; ?>"
+                                                                    <input class="form-check-input" type="radio" name="dr_ds"
+                                                                        id="dr_ds<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($clients['dr_ds'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
@@ -9086,7 +7986,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                                                                            <button type="button" onclick="unsetRadio('dr_ds')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('dr_ds')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -9097,7 +7997,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
 
                                                 <div class="col-sm-4" id="tb_category">
-                                                    <label>23. What category is the previously treated patient </label>
+                                                    <label>10d. What category is the previously treated patient </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9121,7 +8021,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-4" id="relapse_years1">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>24. If relapse how long ago was the participant treated
+                                                            <label>10e. If relapse how long ago was the participant treated
                                                                 for
                                                                 TB? (years)</label>
                                                             <input class="form-control" type="number" name="relapse_years"
@@ -9131,69 +8031,50 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-sm-4" id="ltf_months1">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>25. If LTF for how long the participant received TB
-                                                                treatment? (months)</label>
-                                                            <input class="form-control" type="number" name="ltf_months"
-                                                                id="ltf_months" placeholder="Type years..." value="<?php if ($clients['ltf_months']) {
-                                                                    print_r($clients['ltf_months']);
-                                                                } ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4" id="tb_regimen1">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>26. Which treatment regimen was initiated </label>
-                                                            <select id="tb_regimen" name="tb_regimen" class="form-control">
-                                                                <?php $tb_regimen = $override->get('tb_regimen', 'id', $clients['tb_regimen'])[0]; ?>
-                                                                <option value="<?= $tb_regimen['id'] ?>"><?php if ($clients['tb_regimen']) {
-                                                                      print_r($tb_regimen['name']);
-                                                                  } else {
-                                                                      echo 'Select';
-                                                                  } ?>
-                                                                </option>
-                                                                <option value="">Select</option>
-                                                                <?php foreach ($override->get('tb_regimen', 'status', 1) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?>
-                                                                    </option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                            <label>10f. If LTF for how long the participant received TB
+                                                                treatment?</label>
 
-                                            <hr>
+                                                            <!-- Row for Month and Year -->
+                                                            <div class="row">
+                                                                <!-- Month Input -->
+                                                                <div class="col-sm-12">
+                                                                    <label for="tx_month" class="form-label">Months</label>
+                                                                    <input class="form-control" type="number"
+                                                                        name="ltf_months" id="ltf_months"
+                                                                        placeholder="Type Month..." min="1" max="12" value="<?php if ($clients['ltf_months']) {
+                                                                            print_r($clients['ltf_months']);
+                                                                        } ?>" />
+                                                                </div>
+                                                            </div>
 
-                                            <div class="row">
-                                                <div class="col-sm-3" id="regimen_months1">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>27. How long was the treatment regimen (months)</label>
-                                                            <input class="form-control" type="number" name="regimen_months"
-                                                                id="regimen_months" placeholder="Type lastname..."
-                                                                onkeyup="fetchData()" value="<?php if ($clients['regimen_months']) {
-                                                                    print_r($clients['regimen_months']);
-                                                                } ?>" />
+                                                            <!-- Unknown Checkbox -->
+                                                            <div class="form-check mt-3">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    id="ltf_months_unknown" name="ltf_months_unknown"
+                                                                    value="1" <?php if ($clients['ltf_months_unknown'] ?? false) {
+                                                                        echo 'checked';
+                                                                    } ?>>
+                                                                <label class="form-check-label"
+                                                                    for="ltf_months_unknown">Unknown</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="regimen_changed">
-                                                    <label>28. Was the regimen changed during treatment
-                                                        (individualized?)</label>
+                                                <div class="col-sm-4" id="tb_regimen">
+                                                    <label>10g. Which treatment regimen was initiated </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('tb_regimen', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="regimen_changed"
-                                                                        id="regimen_changed<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($clients['regimen_changed'] == $value['id']) {
+                                                                        name="tb_regimen" id="tb_regimen_1_<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($clients['tb_regimen'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
                                                                     <label
@@ -9201,31 +8082,58 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('tb_regimen')">Unset</button>
+                                                        <hr>
+                                                        <input class="form-control" type="text" name="tb_regimen_specify"
+                                                            id="tb_regimen_1_specify" placeholder="Specify Here..." value="<?php if ($clients['tb_regimen_specify']) {
+                                                                print_r($clients['tb_regimen_specify']);
+                                                            } ?>" />
                                                     </div>
-                                                    <button type="button"
-                                                        onclick="unsetRadio('regimen_changed')">Unset</button>
                                                 </div>
+                                            </div>
 
+                                            <hr>
 
-                                                <div class="col-sm-3" id="regimen_name1">
+                                            <div class="row">
+
+                                                <div class="col-sm-6" id="regimen_months1">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>29. If yes, the treatment regimen was changed what was
-                                                                the
-                                                                new regimen</label>
-                                                            <input class="form-control" type="text" name="regimen_name"
-                                                                id="regimen_name" placeholder="Type lastname..."
-                                                                onkeyup="fetchData()" value="<?php if ($clients['regimen_name']) {
-                                                                    print_r($clients['regimen_name']);
-                                                                } ?>" />
+                                                            <label>10g. How long was the treatment regimen</label>
+
+                                                            <!-- Row for Month and Year -->
+                                                            <div class="row">
+                                                                <!-- Month Input -->
+                                                                <div class="col-sm-12">
+                                                                    <label for="regimen_months"
+                                                                        class="form-label">Months</label>
+                                                                    <input class="form-control" type="number"
+                                                                        name="regimen_months" id="regimen_months"
+                                                                        placeholder="Type Month..." min="1" max="12" value="<?php if ($clients['regimen_months']) {
+                                                                            print_r($clients['regimen_months']);
+                                                                        } ?>" />
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Unknown Checkbox -->
+                                                            <div class="form-check mt-3">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    id="regimen_months_unknown"
+                                                                    name="regimen_months_unknown" value="1" <?php if ($clients['regimen_months_unknown'] ?? false) {
+                                                                        echo 'checked';
+                                                                    } ?>>
+                                                                <label class="form-check-label"
+                                                                    for="regimen_months_unknown">Unknown</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="tb_otcome1">
+                                                <div class="col-sm-6" id="tb_otcome1">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>30. What was the treatment outcome?</label>
+                                                            <label>10h. What was the treatment outcome?</label>
                                                             <select id="tb_otcome" name="tb_otcome" class="form-control">
                                                                 <?php $tb_otcome = $override->get('tb_otcome', 'id', $clients['tb_otcome'])[0]; ?>
                                                                 <option value="<?= $tb_otcome['id'] ?>"><?php if ($clients['tb_otcome']) {
@@ -9255,10 +8163,10 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-6">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>31. HIV status </label>
+                                                            <label>11. HIV status </label>
                                                             <select id="hiv_status" name="hiv_status" class="form-control"
                                                                 required>
                                                                 <?php $hiv_status = $override->get('hiv_status', 'id', $clients['hiv_status'])[0]; ?>
@@ -9277,8 +8185,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="immunosuppressive">
-                                                    <label>32. Do you have other immunosuppressive diseases?</label>
+                                                <div class="col-sm-6" id="immunosuppressive">
+                                                    <label>12. Do you have other immunosuppressive diseases?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9299,7 +8207,7 @@ if ($user->isLoggedIn()) {
                                                             onclick="unsetRadio('immunosuppressive')">Unset</button>
 
                                                         <div id="immunosuppressive_specify1">
-                                                            <label>33. If yes specify</label>
+                                                            <label>If yes specify</label>
                                                             <input class="form-control" type="text"
                                                                 name="immunosuppressive_specify"
                                                                 id="immunosuppressive_specify" placeholder="Type here..."
@@ -9311,8 +8219,15 @@ if ($user->isLoggedIn()) {
 
                                                 </div>
 
-                                                <div class="col-sm-3" id="other_diseases">
-                                                    <label>34. Other relevant diseases/medical conditions</label>
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="row">
+
+                                                <div class="col-sm-6" id="other_diseases">
+                                                    <label>13. Other relevant diseases/medical conditions ( Select multiple
+                                                        )</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9335,8 +8250,8 @@ if ($user->isLoggedIn()) {
 
                                                 </div>
 
-                                                <div class="col-sm-3" id="diseases_medical">
-                                                    <label>34. If yes, Select relevant diseases/medical conditions</label>
+                                                <div class="col-sm-6" id="diseases_medical">
+                                                    <label>13b. If yes, Select relevant diseases/medical conditions</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9378,11 +8293,12 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="sputum_collected">
-                                                    <label>35. Were two sputum samples collected? </label>
+                                                    <label>14.After TB was confirmed by a rapid molecular test, were two
+                                                        additional respiratory samples collected?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('respiratory_samples', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
                                                                         name="sputum_collected"
@@ -9401,22 +8317,62 @@ if ($user->isLoggedIn()) {
 
                                                 </div>
 
-                                                <div class="col-sm-3" id="sample_date1">
-                                                    <!-- radio -->
+                                                <div class="col-sm-6">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>36. Date of respiratory sample collection </label>
-                                                            <input class="form-control" type="date" name="sample_date"
-                                                                id="sample_date" value="<?php if ($clients['sample_date']) {
-                                                                    print_r($clients['sample_date']);
-                                                                } ?>" />
+                                                            <label>14b. Date of respiratory sample collection and sample
+                                                                type</label>
+
+                                                            <!-- Row for Date and Sample Type Inputs -->
+                                                            <div class="row">
+                                                                <!-- DST Sample Date Input -->
+                                                                <div class="col-sm-6">
+                                                                    <label for="dst_sample_date" class="form-label">DST
+                                                                        Sample Date</label>
+                                                                    <input class="form-control" type="date"
+                                                                        name="dst_sample_date" id="dst_sample_date" value="<?php if ($clients['dst_sample_date']) {
+                                                                            print_r($clients['dst_sample_date']);
+                                                                        } ?>" />
+
+                                                                    <!-- DST Sample Type Input -->
+                                                                    <label for="dst_sample_type"
+                                                                        class="form-label mt-2">Sample
+                                                                        Type</label>
+                                                                    <input class="form-control" type="text"
+                                                                        name="dst_sample_type" id="dst_sample_type" value="<?php if ($clients['dst_sample_type']) {
+                                                                            print_r($clients['dst_sample_type']);
+                                                                        } ?>" placeholder="Type Sample Type..." />
+                                                                </div>
+
+                                                                <!-- Sequencing Sample Date Input -->
+                                                                <div class="col-sm-6" id="sample_date1">
+                                                                    <label for="sequencing_sample_date"
+                                                                        class="form-label">Sequencing Sample Date</label>
+                                                                    <input class="form-control" type="date"
+                                                                        name="sequencing_sample_date"
+                                                                        id="sequencing_sample_date" value="<?php if ($clients['sequencing_sample_date']) {
+                                                                            print_r($clients['sequencing_sample_date']);
+                                                                        } ?>" />
+
+                                                                    <!-- Sequencing Sample Type Input -->
+                                                                    <label for="sequencing_sample_type"
+                                                                        class="form-label mt-2">Sample Type</label>
+                                                                    <input class="form-control" type="text"
+                                                                        name="sequencing_sample_type"
+                                                                        id="sequencing_sample_type" value="<?php if ($clients['sequencing_sample_type']) {
+                                                                            print_r($clients['sequencing_sample_type']);
+                                                                        } ?>" placeholder="Type Sample Type..." />
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
 
+
+
                                                 <div class="col-sm-3" id="other_samples">
-                                                    <label>37. Were any other diagnostic samples requested? </label>
+                                                    <label>15. Were any other diagnostic samples requested? </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9440,7 +8396,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-3" id="sputum_samples">
-                                                    <label>38. Tick all that apply and fill date for each sample ticked
+                                                    <label>15. Tick all that apply and fill date for each sample ticked
                                                     </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -9467,7 +8423,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Specify Other and Date</label>
+                                                            <label>15. Specify Other and Date</label>
                                                             <input class="form-control" type="text"
                                                                 name="sputum_samples_other" id="sputum_samples_other" value="<?php if ($clients['sputum_samples_other']) {
                                                                     print_r($clients['sputum_samples_other']);
@@ -9493,7 +8449,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Pleural fluid Date</label>
+                                                            <label>15. Pleural fluid Date</label>
                                                             <input class="form-control" type="date"
                                                                 name="pleural_fluid_date" id="pleural_fluid_date" value="<?php if ($clients['pleural_fluid_date']) {
                                                                     print_r($clients['pleural_fluid_date']);
@@ -9506,7 +8462,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Cerebral spinal fluid (CSF) Date</label>
+                                                            <label>15. Cerebral spinal fluid (CSF) Date</label>
                                                             <input class="form-control" type="date" name="csf_date"
                                                                 id="csf_date" value="<?php if ($clients['csf_date']) {
                                                                     print_r($clients['csf_date']);
@@ -9518,7 +8474,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Peritoneal fluid Date</label>
+                                                            <label>15. Peritoneal fluid Date</label>
                                                             <input class="form-control" type="date"
                                                                 name="peritoneal_fluid_date" id="peritoneal_fluid_date"
                                                                 value="<?php if ($clients['peritoneal_fluid_date']) {
@@ -9536,7 +8492,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Pericardial fluid Date</label>
+                                                            <label>15. Pericardial fluid Date</label>
                                                             <input class="form-control" type="date"
                                                                 name="pericardial_fluid_date" id="pericardial_fluid_date"
                                                                 value="<?php if ($clients['pericardial_fluid_date']) {
@@ -9550,7 +8506,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Lymph node aspirate Date</label>
+                                                            <label>15. Lymph node aspirate Date</label>
                                                             <input class="form-control" type="date"
                                                                 name="lymph_node_aspirate_date"
                                                                 id="lymph_node_aspirate_date" value="<?php if ($clients['lymph_node_aspirate_date']) {
@@ -9563,7 +8519,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>38. Stool Date</label>
+                                                            <label>15. Stool Date</label>
                                                             <input class="form-control" type="date" name="stool_date"
                                                                 id="stool_date" value="<?php if ($clients['stool_date']) {
                                                                     print_r($clients['stool_date']);
@@ -9577,7 +8533,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
 
                                                 <div class="col-sm-6" id="chest_x_ray">
-                                                    <label>39. Was chest X-ray requested? </label>
+                                                    <label>16. Was chest X-ray requested? </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9604,7 +8560,7 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>39.If yes,Specify Date</label>
+                                                            <label>16.If yes,Specify Date chest X-ray requested </label>
                                                             <input class="form-control" type="date" name="chest_x_ray_date"
                                                                 id="chest_x_ray_date" value="<?php if ($clients['chest_x_ray_date']) {
                                                                     print_r($clients['chest_x_ray_date']);
@@ -9629,7 +8585,8 @@ if ($user->isLoggedIn()) {
                                                                         id="enrollment_completed<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($clients['enrollment_completed'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?> required>
+                                                                          } ?>         <?php if ($clients['enrollment_completed'] == 3) { ?> readonly
+                                                                        <?php } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
@@ -9642,25 +8599,15 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-4">
+                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>40. This form was completed by (name) </label>
-                                                            <select id="enrollment_completed_by" name="enrollment_completed_by"
-                                                                class="form-control" required>
-                                                                <?php $enrollment_completed = $override->get('user', 'id', $clients['enrollment_completed_by'])[0]; ?>
-                                                                <option value="<?= $enrollment_completed['id'] ?>">
-                                                                    <?php if ($clients['enrollment_completed_by']) {
-                                                                        print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
-                                                                    } else {
-                                                                        echo 'Select';
-                                                                    } ?>
-                                                                </option>
-                                                                <?php foreach ($override->get('user', 'status', 1) as $value) { ?>
-                                                                    <option value="<?= $value['id'] ?>">
-                                                                        <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                    </option>
-                                                                <?php } ?>
-                                                            </select>
+                                                            <label>Form completed Date</label>
+                                                            <input class="form-control" type="date"
+                                                                name="enrollment_completed_date"
+                                                                id="enrollment_completed_date" value="<?php if ($clients['enrollment_completed_date']) {
+                                                                    print_r($clients['enrollment_completed_date']);
+                                                                } ?>" <?php if ($clients['enrollment_completed'] == 3) { ?> readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9669,57 +8616,18 @@ if ($user->isLoggedIn()) {
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>40. Form completed Date</label>
+                                                            <label>40. Form Verified Date</label>
                                                             <input class="form-control" type="date"
-                                                                name="enrollment_completed_date"
-                                                                id="enrollment_completed_date" value="<?php if ($clients['enrollment_completed_date']) {
-                                                                    print_r($clients['enrollment_completed_date']);
-                                                                } ?>" />
+                                                                name="enrollment_verified_date"
+                                                                id="enrollment_verified_date" value="<?php if ($clients['enrollment_verified_date']) {
+                                                                    print_r($clients['enrollment_verified_date']);
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <?php if ($user->data()->position == 3 && $costing['enrollment_completed'] == 1) { ?>
 
-                                                    <div class="col-sm-6">
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>40. This form was Verified by (name) </label>
-                                                                <select id="enrollment_verified_by" name="enrollment_verified_by"
-                                                                    class="form-control" required>
-                                                                    <?php $enrollment_completed = $override->get('user', 'id', $clients['enrollment_verified_by'])[0]; ?>
-                                                                    <option value="<?= $enrollment_completed['id'] ?>">
-                                                                        <?php if ($clients['enrollment_verified_by']) {
-                                                                            print_r($enrollment_completed['firstname'] . ' ' . $enrollment_completed['lastname']);
-                                                                        } else {
-                                                                            echo 'Select';
-                                                                        } ?>
-                                                                    </option>
-                                                                    <?php foreach ($override->getNews('user', 'status', 1, 'position', 3) as $value) { ?>
-                                                                        <option value="<?= $value['id'] ?>">
-                                                                            <?= $value['firstname'] . ' ' . $value['lastname'] ?>
-                                                                        </option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>40. Form Verified Date</label>
-                                                                <input class="form-control" type="date"
-                                                                    name="enrollment_verified_date"
-                                                                    id="enrollment_verified_date" value="<?php if ($clients['enrollment_verified_date']) {
-                                                                        print_r($clients['enrollment_verified_date']);
-                                                                    } ?>" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                <?php } ?>
 
                                             </div>
                                             <hr>
@@ -9727,7 +8635,7 @@ if ($user->isLoggedIn()) {
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <a href="info.php?id=3&status=<?= $_GET['status']; ?>"
+                                            <a href="info.php?id=3&status=<?= $_GET['status'] ?>"
                                                 class="btn btn-default">Back</a>
                                             <input type="submit" name="add_enrollment_form" value="Submit"
                                                 class="btn btn-primary">
@@ -11444,7 +10352,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                        </textarea>
+                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -11517,7 +10425,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 18) { ?>
             <?php
-            $costing = $override->get3('respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sequence', $_GET['sequence'])[0];
+            $costing = $override->get3('respiratory', 'status', 1, 'enrollment_id', $_GET['cid'], 'sequence', $_GET['sequence'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -11967,6 +10875,12 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/enrollment/immunosuppressive.js"></script>
     <script src="myjs/add/enrollment/diseases_medical.js"></script>
     <script src="myjs/add/enrollment/chest_x_ray.js"></script>
+    <script src="myjs/add/enrollment/dob.js"></script>
+    <script src="myjs/add/enrollment/tx_episode.js"></script>
+    <script src="myjs/add/enrollment/tx_ltf_months.js"></script>
+    <script src="myjs/add/enrollment/tx_regimen_months.js"></script>
+    <script src="myjs/add/enrollment/tb_regimen.js"></script>
+
 
 
 
@@ -11984,6 +10898,8 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/respiratory/test_rejected.js"></script>
     <script src="myjs/add/respiratory/test_repeatition.js"></script>
     <script src="myjs/add/respiratory/wrd_test.js"></script>
+    <script src="myjs/add/respiratory/sample_reason.js"></script>
+
 
 
 

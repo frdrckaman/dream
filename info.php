@@ -978,20 +978,20 @@ if ($user->isLoggedIn()) {
                                 <h1>
                                     <?php
                                     if ($_GET['status'] == 1) {
-                                        $data = $override->get('screening', 'status', 1);
-                                    } else if ($_GET['status'] == 2) {
-                                        $data = $override->getNews('screening', 'status', 1, 'eligible', 1);
-                                    } else {
                                         $data = $override->get('enrollment_form', 'status', 1);
+                                    } else if ($_GET['status'] == 2) {
+                                        $data = $override->get('enrollment_form', 'status', 0);
+                                    } else {
+                                        $data = $override->get('enrollment_form', 'status', 0);
                                     }
                                     ?>
                                     <?php
                                     if ($_GET['status'] == 1) {
-                                        echo $title = 'Screening';
+                                        echo $title = 'Enrollment';
                                         ?>
                                         <?php
                                     } elseif ($_GET['status'] == 2) {
-                                        echo $title = 'Eligible';
+                                        echo $title = 'End Study';
                                         ?>
                                         <?php
                                     } elseif ($_GET['status'] == 3) {
@@ -1024,12 +1024,12 @@ if ($user->isLoggedIn()) {
                                                     <div class="card-header">
                                                         <?php
                                                         if ($_GET['status'] == 1) { ?>
-                                                            <h3 class="card-title">List of Screened screening</h3> &nbsp;&nbsp;
-                                                            <span class="badge badge-info right"><?= $screened; ?></span>
+                                                            <h3 class="card-title">List of Enrolled Clients</h3> &nbsp;&nbsp;
+                                                            <span class="badge badge-info right"><?= $enrolled; ?></span>
                                                             <?php
                                                         } elseif ($_GET['status'] == 2) { ?>
-                                                            <h3 class="card-title">List of Eligible Clients</h3> &nbsp;&nbsp;
-                                                            <span class="badge badge-info right"><?= $eligible; ?></span>
+                                                            <h3 class="card-title">List of Enrolled Clients</h3> &nbsp;&nbsp;
+                                                            <span class="badge badge-info right"><?= $enrolled; ?></span>
                                                             <?php
                                                         } elseif ($_GET['status'] == 3) { ?>
                                                             <h3 class="card-title">List of Enrolled Clients</h3> &nbsp;&nbsp;
@@ -1094,14 +1094,12 @@ if ($user->isLoggedIn()) {
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Study Id</th>
+                                                    <th>Enrollment Date</th>
+                                                    <th>PID</th>
+                                                    <th>Date of Birth</th>
                                                     <th>Age</th>
                                                     <th>Sex</th>
-                                                    <?php
-                                                    if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                        ?>
-                                                        <th>Site</th>
-                                                    <?php } ?>
+                                                    <th>Site</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
@@ -1110,81 +1108,73 @@ if ($user->isLoggedIn()) {
                                                 <?php
                                                 $x = 1;
                                                 foreach ($data as $value) {
-                                                    $yes_no = $override->get('yes_no', 'status', 1)[0];
-
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['facility_id'])[0];
+                                                    $sex = $override->getNews('sex', 'status', 1, 'id', $value['sex'])[0];
                                                     ?>
                                                     <tr>
+                                                        <td class="table-user">
+                                                            <?= $value['enrollment_date']; ?>
+                                                        </td>
                                                         <td class="table-user">
                                                             <?= $value['pid']; ?>
                                                         </td>
                                                         <td class="table-user">
+                                                            <?= $value['dob']; ?>
+                                                        </td>
+                                                        <td class="table-user">
                                                             <?= $value['age']; ?>
                                                         </td>
-                                                        <?php if ($value['sex'] == 1) { ?>
-                                                            <td class="table-user">
-                                                                Male
-                                                            </td>
-                                                        <?php } elseif ($value['sex'] == 2) { ?>
-                                                            <td class="table-user">
-                                                                Female
-                                                            </td>
-                                                        <?php } ?>
-                                                        <?php
-                                                        if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                            ?>
-                                                            <td class="table-user">
-                                                                <?= $sites['name']; ?>
-                                                            </td>
-                                                        <?php } ?>
-                                                        <?php if ($value['eligible'] == 1 && $value['age'] >= 18) { ?>
+                                                        <td class="table-user">
+                                                            <?= $sex['name']; ?>
+                                                        </td>
+                                                        <td class="table-user">
+                                                            <?= $sites['name']; ?>
+                                                        </td>
+                                                        <?php if ($value['status'] == 1) { ?>
                                                             <td class="text-center">
                                                                 <a href="#" class="btn btn-success">
                                                                     <i class="ri-edit-box-line">
-                                                                    </i><?php if ($value['age'] >= 18) { ?> Eligible <?php } ?>
+                                                                    </i> Active
                                                                 </a>
                                                             </td>
                                                         <?php } else { ?>
                                                             <td class="text-center">
                                                                 <a href="#" class="btn btn-danger"> <i
-                                                                        class="ri-edit-box-line"></i>Not Eligible</a>
+                                                                        class="ri-edit-box-line"></i>Not Active</a>
                                                             </td>
                                                         <?php } ?>
-                                                        <td class="text-center">
-                                                            <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
-                                                                <a href="add.php?id=4&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    class="btn btn-info"> <i class="ri-edit-box-line"></i>Update
-                                                                    Participant Eligibility form</a>&nbsp;&nbsp;<br>
-                                                            <?php } ?>
-                                                            <br>
-                                                            <?php if ($value['eligible'] == 1 && $value['age'] >= 18) { ?>
-                                                                <?php if ($kap && $history && $results1 && $results2 && $classification1 && $classification2 && $economic1 && $economic2 && $outcome1 && $outcome2) { ?>
-                                                                    <a href="info.php?id=4&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
-                                                                        class="btn btn-success"> <i class="ri-edit-box-line"></i>Update
-                                                                        Study CRF's</a>&nbsp;&nbsp;<br>
-                                                                <?php } else { ?>
-                                                                    <a href="info.php?id=4&cid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
-                                                                        class="btn btn-warning"> <i class="ri-edit-box-line"></i>Add
-                                                                        Study CRF's</a>&nbsp;&nbsp;<br>
-                                                                <?php } ?>
-                                                            <?php } ?>
-                                                            <br>
-                                                        </td>
-                                                    </tr>
+                                                        <!-- <td class="text-center"> -->
+                                                        <td>
+                                                            <?php if ($override->get('enrollment_form', 'status', 1)) { ?>
+                                                                <a href="add.php?id=16&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                    role=" button" class="btn btn-info"> Update Participant
+                                                                    Enrolment Data</a>&nbsp;&nbsp; <br><br>
 
+                                                            <?php } else { ?>
+                                                                <a href="add.php?id=16&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                    role=" button" class="btn btn-warning"> Add Participant
+                                                                    Enrolment Data </a>&nbsp;&nbsp; <br><br>
+
+                                                            <?php } ?>
+
+                                                            <a href="info.php?id=6&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                role=" button" class="btn btn-warning"> Viw Other Forms
+                                                            </a>&nbsp;&nbsp; <br><br>
+                                                        </td>
+                                                        <br>
+                                                        <!-- </td> -->
+                                                    </tr>
                                                     <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Study Id</th>
+                                                    <th>Enrollment Date</th>
+                                                    <th>PID</th>
+                                                    <th>Date of Birth</th>
                                                     <th>Age</th>
                                                     <th>Sex</th>
-                                                    <?php
-                                                    if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                        ?>
-                                                        <th>Site</th>
-                                                    <?php } ?>
+                                                    <th>Site</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
@@ -1231,29 +1221,17 @@ if ($user->isLoggedIn()) {
                                 <div class="card">
                                     <div class="card-header">
                                         <?php
-                                        $patient = $override->get('screening', 'id', $_GET['cid'])[0];
-                                        $cat = '';
-
-                                        if ($patient['sex'] == 1) {
-                                            $gender = 'Male';
-                                        } elseif ($patient['sex'] == 2) {
-                                            $gender = 'Female';
-                                        }
-
-                                        $name = 'Name: ' . $patient['firstname'] . ' ' . $patient['lastname'];
+                                        $patient = $override->get('enrollment_form', 'id', $_GET['enrollment_id'])[0];
+                                        $sex = $override->get('sex', 'id', $_GET['sex'])[0];
                                         $age = 'Age:  ' . $patient['age'];
-                                        $gender = 'Gender: ' . $gender;
-                                        $cat = 'Type: ' . $cat;
                                         ?>
 
 
                                         <div class="row mb-2">
                                             <div class="col-sm-6">
                                                 <h1>Study ID: <?= $patient['pid'] ?></h1>
-                                                <!-- <h4><?= $name ?></h4> -->
                                                 <h4><?= $age ?></h4>
-                                                <h4><?= $gender ?></h4>
-                                                <!-- <h4><?= $cat ?></h4> -->
+                                                <h4><?= $sex ?></h4>
                                             </div>
                                             <div class="col-sm-6">
                                                 <ol class="breadcrumb float-sm-right">
@@ -1293,77 +1271,65 @@ if ($user->isLoggedIn()) {
                                                         <td>
                                                             <?php
                                                             if ($screening['eligible'] == 1) {
-                                                            ?>
-                                                            <?php if ($override->getNews('enrollment_form', 'patient_id', $_GET['cid'], 'status', 1)) { ?>
-                                                                <a href="add.php?id=16&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-info"> Update Participant
-                                                                    Enrolment Data</a>&nbsp;&nbsp; <br><br>
+                                                                ?>
+                                                                <?php if ($override->getNews('respiratory', 'status', 1, 'patient_id', $_GET['cid'])) { ?>
+                                                                    <a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
+                                                                        role=" button" class="btn btn-info"> Update Respiratory Sample
+                                                                        Data </a>&nbsp;&nbsp; <br><br>
 
-                                                            <?php } else { ?>
-                                                                <a href="add.php?id=16&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-warning"> Add Participant
-                                                                    Enrolment Data </a>&nbsp;&nbsp; <br><br>
+                                                                <?php } else { ?>
+                                                                    <a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
+                                                                        role=" button" class="btn btn-warning"> Add Respiratory Sample
+                                                                        Data </a>&nbsp;&nbsp; <br><br>
 
-                                                            <?php } ?>
-
-                                                            <?php if ($override->getNews('respiratory', 'status', 1, 'patient_id', $_GET['cid'])) { ?>
-                                                                <a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-info"> Update Respiratory Sample
-                                                                    Data </a>&nbsp;&nbsp; <br><br>
-
-                                                            <?php } else { ?>
-                                                                <a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-warning"> Add Respiratory Sample
-                                                                    Data </a>&nbsp;&nbsp; <br><br>
-
-                                                            <?php } ?>
+                                                                <?php } ?>
 
 
-                                                            <?php
-                                                            //  if (!$override->get3('respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sample_type', 1)) { 
-                                                            ?>
+                                                                <?php
+                                                                //  if (!$override->get3('respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sample_type', 1)) { 
+                                                                ?>
 
-                                                            <?php if ($override->getNews('non_respiratory', 'status', 1, 'patient_id', $_GET['cid'])) { ?>
-                                                                <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-info"> Update Diagnostic Test
-                                                                    Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
+                                                                <?php if ($override->getNews('non_respiratory', 'status', 1, 'patient_id', $_GET['cid'])) { ?>
+                                                                    <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
+                                                                        role=" button" class="btn btn-info"> Update Diagnostic Test
+                                                                        Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
 
-                                                            <?php } else { ?>
-                                                                <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-warning"> Add Diagnostic Test
-                                                                    Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
+                                                                <?php } else { ?>
+                                                                    <a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
+                                                                        role=" button" class="btn btn-warning"> Add Diagnostic Test
+                                                                        Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
 
-                                                            <?php } ?>
-                                                            <?php
-                                                            //  } 
-                                                            ?>
+                                                                <?php } ?>
+                                                                <?php
+                                                                //  } 
+                                                                ?>
 
-                                                            <?php if ($override->getNews('diagnosis_test', 'status', 1, 'patient_id', $_GET['cid'])) { ?>
-                                                                <a href="add.php?id=14&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-info"> Update Diagnostic Test DST
-                                                                    Data </a>&nbsp;&nbsp; <br><br>
+                                                                <?php if ($override->getNews('diagnosis_test', 'status', 1, 'patient_id', $_GET['cid'])) { ?>
+                                                                    <a href="add.php?id=14&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
+                                                                        role=" button" class="btn btn-info"> Update Diagnostic Test DST
+                                                                        Data </a>&nbsp;&nbsp; <br><br>
 
-                                                            <?php } else { ?>
-                                                                <a href="add.php?id=14&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-warning"> Add Diagnostic Test DST
-                                                                    Data </a>&nbsp;&nbsp; <br><br>
+                                                                <?php } else { ?>
+                                                                    <a href="add.php?id=14&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
+                                                                        role=" button" class="btn btn-warning"> Add Diagnostic Test DST
+                                                                        Data </a>&nbsp;&nbsp; <br><br>
 
-                                                            <?php } ?>
+                                                                <?php } ?>
 
-                                                            <?php if ($override->getNews('diagnosis', 'status', 1, 'patient_id', $_GET['cid'])) { ?>
-                                                                <a href="add.php?id=15&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-info"> Update Diagnosis Data
-                                                                </a>&nbsp;&nbsp; <br><br>
+                                                                <?php if ($override->getNews('diagnosis', 'status', 1, 'patient_id', $_GET['cid'])) { ?>
+                                                                    <a href="add.php?id=15&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
+                                                                        role=" button" class="btn btn-info"> Update Diagnosis Data
+                                                                    </a>&nbsp;&nbsp; <br><br>
 
-                                                            <?php } else { ?>
-                                                                <a href="add.php?id=15&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-warning"> Add Diagnosis Data
-                                                                </a>&nbsp;&nbsp; <br><br>
+                                                                <?php } else { ?>
+                                                                    <a href="add.php?id=15&cid=<?= $_GET['cid'] ?>&study_id=<?= $visit['pid'] ?>&status=<?= $_GET['status'] ?>"
+                                                                        role=" button" class="btn btn-warning"> Add Diagnosis Data
+                                                                    </a>&nbsp;&nbsp; <br><br>
 
-                                                            <?php } ?>
+                                                                <?php } ?>
 
-                                                            <?php
-                                                             }
+                                                                <?php
+                                                            }
                                                             ?>
                                                         </td>
                                                     </tr>
@@ -1403,10 +1369,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                            <?php if ($enrollment['comments']) {
-                                                                                                                                                                echo $enrollment['comments'];
-                                                                                                                                                            } ?>
-                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
+                                                                                                                                                                                                                                        echo $enrollment['comments'];
+                                                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -1619,24 +1585,12 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>
-                                    <?php
-                                    if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                        if ($_GET['site_id'] != null) {
-                                            $clients = $override->getDataDesc2('kap', 'status', 1, 'site_id', $_GET['site_id'], 'id');
-                                        } else {
-                                            $clients = $override->getDataDesc1('kap', 'status', 1, 'id');
-                                        }
-                                    } else {
-                                        $clients = $override->getDataDesc2('kap', 'status', 1, 'site_id', $user->data()->site_id, 'id');
-                                    } ?>
-                                    Kap
-                                </h1>
+                                <h1>Participant Forms</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
-                                    <li class="breadcrumb-item active">Kap</li>
+                                    <li class="breadcrumb-item active">Participant Forms</li>
                                 </ol>
                             </div>
                         </div>
@@ -1649,123 +1603,147 @@ if ($user->isLoggedIn()) {
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
-                                    <section class="content-header">
-                                        <div class="container-fluid">
-                                            <div class="row mb-2">
-                                                <div class="col-sm-3">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">List of kap</h3>&nbsp;&nbsp;
-                                                        <span class="badge badge-info right"><?= $kap; ?></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <?php
-                                                    if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                        ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post"
-                                                            autocomplete="off">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="form-group">
-                                                                            <select class="form-control" name="site_id"
-                                                                                style="width: 100%;" autocomplete="off">
-                                                                                <option value="">Select Site</option>
-                                                                                <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                    <option value="<?= $site['id'] ?>">
-                                                                                        <?= $site['name'] ?>
-                                                                                    </option>
-                                                                                <?php } ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="form-group">
-                                                                            <input type="submit" name="search_by_site"
-                                                                                value="Search" class="btn btn-primary">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    <?php } ?>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <?php
-                                                    if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                        ?>
-                                                        <form id="validation" enctype="multipart/form-data" method="post"
-                                                            autocomplete="off">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="form-group">
-                                                                            <input type="submit" name="download_kap"
-                                                                                value="Download" class="btn btn-info">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    <?php } ?>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <ol class="breadcrumb float-sm-right">
-                                                        <li class="breadcrumb-item">
-                                                            <a href="index1.php">
-                                                                < Back</a>
-                                                        </li>
-                                                        &nbsp;
-                                                        <li class="breadcrumb-item">
-                                                            <a href="index1.php">
-                                                                Go Home > </a>
-                                                        </li>
-                                                    </ol>
-                                                </div>
+                                    <div class="card-header">
+                                        <?php
+                                        $patient = $override->get('enrollment_form', 'id', $_GET['enrollment_id'])[0];
+                                        $sex = $override->get('sex', 'id', $_GET['sex'])[0];
+                                        $site = $override->get('sites', 'id', $_GET['facility_id'])[0];
+                                        $age = 'Age:  ' . $patient['age'];
+                                        ?>
+                                        <div class="row mb-2">
+                                            <div class="col-sm-6">
+                                                <h1>Study ID: <?= $patient['pid'] ?></h1>
+                                                <h4><?= $age ?></h4>
+                                                <h4><?= $sex ?></h4>
                                             </div>
-                                            <hr>
-                                        </div><!-- /.container-fluid -->
-                                    </section>
+                                            <div class="col-sm-6">
+                                                <ol class="breadcrumb float-sm-right">
+                                                    <li class="breadcrumb-item"><a
+                                                            href="info.php?id=3&status=<?= $_GET['status'] ?>">
+                                                            < Back</a>
+                                                    </li>
+                                                    <li class="breadcrumb-item">
+                                                        <a href="index1.php">Go Home</a>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Study Id</th>
+                                                    <th>Enrollment Date</th>
+                                                    <th>PID</th>
+                                                    <th>Date of Birth</th>
+                                                    <th>Age</th>
+                                                    <th>Sex</th>
                                                     <th>Site</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php
-                                                $x = 1;
-                                                foreach ($clients as $value) {
-                                                    $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
-                                                    ?>
-                                                    <tr>
-                                                        <td class="table-user">
-                                                            <?= $value['study_id']; ?>
+                                                <tr>
+                                                    <td class="table-user">
+                                                        <?= $patient['enrollment_date']; ?>
+                                                    </td>
+                                                    <td class="table-user">
+                                                        <?= $patient['pid']; ?>
+                                                    </td>
+                                                    <td class="table-user">
+                                                        <?= $patient['dob']; ?>
+                                                    </td>
+                                                    <td class="table-user">
+                                                        <?= $patient['age']; ?>
+                                                    </td>
+                                                    <td class="table-user">
+                                                        <?= $sex['name']; ?>
+                                                    </td>
+                                                    <td class="table-user">
+                                                        <?= $sites['name']; ?>
+                                                    </td>
+                                                    <?php if ($patient['status'] == 1) { ?>
+                                                        <td class="text-center">
+                                                            <a href="#" class="btn btn-success">
+                                                                <i class="ri-edit-box-line">
+                                                                </i> Active
+                                                            </a>
                                                         </td>
-                                                        <td class="table-user">
-                                                            <?= $sites['name']; ?>
+                                                    <?php } else { ?>
+                                                        <td class="text-center">
+                                                            <a href="#" class="btn btn-danger"> <i
+                                                                    class="ri-edit-box-line"></i>Not Active</a>
                                                         </td>
-                                                        <td class="table-user">
-                                                            <a href="#" class="btn btn-success">Active</a>
-                                                        </td>
-                                                        <td class="table-user">
-                                                            <a href="add.php?id=5&cid=<?= $value['id'] ?>"
-                                                                class="btn btn-info">Update</a>
-                                                        </td>
-                                                    </tr>
-                                                    <?php $x++;
-                                                } ?>
+                                                    <?php } ?>
+                                                    <td>
+                                                        <?php if ($override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
+                                                            <a href="add.php?id=11&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                role=" button" class="btn btn-info"> Update Respiratory Sample
+                                                                Data </a>&nbsp;&nbsp; <br><br>
+
+                                                        <?php } else { ?>
+                                                                    <a href="add.php?id=11&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                role=" button" class="btn btn-warning"> Add Respiratory Sample
+                                                                Data </a>&nbsp;&nbsp; <br><br>
+
+                                                        <?php } ?>
+
+
+                                                        <?php
+                                                        //  if (!$override->get3('respiratory', 'status', 1, 'patient_id', $_GET['cid'], 'sample_type', 1)) { 
+                                                        ?>
+
+                                                        <?php if ($override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
+                                                                    <a href="add.php?id=12&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                role=" button" class="btn btn-info"> Update Diagnostic Test
+                                                                Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
+
+                                                        <?php } else { ?>
+                                                                    <a href="add.php?id=12&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                role=" button" class="btn btn-warning"> Add Diagnostic Test
+                                                                Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
+
+                                                        <?php } ?>
+                                                        <?php
+                                                        //  } 
+                                                        ?>
+
+                                                        <?php if ($override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
+                                                                    <a href="add.php?id=14&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                role=" button" class="btn btn-info"> Update Diagnostic Test DST
+                                                                Data </a>&nbsp;&nbsp; <br><br>
+
+                                                        <?php } else { ?>
+                                                                    <a href="add.php?id=14&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                role=" button" class="btn btn-warning"> Add Diagnostic Test DST
+                                                                Data </a>&nbsp;&nbsp; <br><br>
+
+                                                        <?php } ?>
+
+                                                        <?php if ($override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
+                                                                    <a href="add.php?id=15&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                role=" button" class="btn btn-info"> Update Diagnosis Data
+                                                            </a>&nbsp;&nbsp; <br><br>
+
+                                                        <?php } else { ?>
+                                                                    <a href="add.php?id=15&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                role=" button" class="btn btn-warning"> Add Diagnosis Data
+                                                            </a>&nbsp;&nbsp; <br><br>
+
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Study Id</th>
+                                                    <th>Enrollment Date</th>
+                                                    <th>PID</th>
+                                                    <th>Date of Birth</th>
+                                                    <th>Age</th>
+                                                    <th>Sex</th>
                                                     <th>Site</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
@@ -2969,10 +2947,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                            <?php if ($visit['comments']) {
-                                                                                                                                                                echo $visit['comments'];
-                                                                                                                                                            } ?>
-                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                    <?php if ($visit['comments']) {
+                                                                                                                                                                                                                                        echo $visit['comments'];
+                                                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

@@ -1,23 +1,22 @@
-const test_reasons96 = document.getElementById("test_reasons96");
+const sample_type1 = document.getElementById("sample_type1");
+const sample_type96 = document.getElementById("sample_type96");
 
-const test_reasons_other1 = document.getElementById("test_reasons_other1");
-const test_reasons_other = document.getElementById("test_reasons_other");
+const sample_type_other1 = document.getElementById("sample_type_other1");
+const sample_type_other = document.getElementById("sample_type_other");
 
-test_reasons96.addEventListener("change", function () {
-  if (this.checked) {
-    test_reasons_other1.style.display = "block";
-    test_reasons_other.style.display = "block";
+
+function toggleElementVisibility() {
+  if (sample_type96.checked) {
+    sample_type_other1.style.display = "block";
+    sample_type_other.setAttribute("required", "required");
   } else {
-    test_reasons_other1.style.display = "none";
-    test_reasons_other.style.display = "none";
+    sample_type_other1.style.display = "none";
+    sample_type_other.removeAttribute("required");
   }
-});
+}
+
+sample_type1.addEventListener("change", toggleElementVisibility);
+sample_type96.addEventListener("change", toggleElementVisibility);
 
 // Initial check
-if (test_reasons96.checked) {
-  test_reasons_other1.style.display = "block";
-  test_reasons_other.style.display = "block";
-} else {
-  test_reasons_other1.style.display = "none";
-  test_reasons_other.style.display = "none";
-}
+toggleElementVisibility();
