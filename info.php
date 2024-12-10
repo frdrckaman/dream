@@ -1146,18 +1146,18 @@ if ($user->isLoggedIn()) {
                                                         <!-- <td class="text-center"> -->
                                                         <td>
                                                             <?php if ($override->get('enrollment_form', 'status', 1)) { ?>
-                                                                <a href="add.php?id=16&enrollment_id=<?= $value['id'] ?>"
+                                                                <a href="add.php?id=16&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
                                                                     role=" button" class="btn btn-info"> Update Participant
                                                                     Enrolment Data</a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } else { ?>
-                                                                <a href="add.php?id=16&enrollment_id=<?= $value['id'] ?>"
+                                                                <a href="add.php?id=16&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
                                                                     role=" button" class="btn btn-warning"> Add Participant
                                                                     Enrolment Data </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } ?>
 
-                                                            <a href="info.php?id=6&enrollment_id=<?= $value['id'] ?>"
+                                                            <a href="info.php?id=6&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-warning"> Viw Other Forms
                                                             </a>&nbsp;&nbsp; <br><br>
                                                         </td>
@@ -1680,12 +1680,12 @@ if ($user->isLoggedIn()) {
                                                     <?php } ?>
                                                     <td>
                                                         <?php if ($override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
-                                                            <a href="add.php?id=11&enrollment_id=<?= $_GET['enrollment_id'] ?>"
+                                                            <a href="add.php?id=11&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-info"> Update Respiratory Sample
                                                                 Data </a>&nbsp;&nbsp; <br><br>
 
                                                         <?php } else { ?>
-                                                                    <a href="add.php?id=11&enrollment_id=<?= $_GET['enrollment_id'] ?>"
+                                                                    <a href="add.php?id=11&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-warning"> Add Respiratory Sample
                                                                 Data </a>&nbsp;&nbsp; <br><br>
 
@@ -1697,12 +1697,12 @@ if ($user->isLoggedIn()) {
                                                         ?>
 
                                                         <?php if ($override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
-                                                                    <a href="add.php?id=12&enrollment_id=<?= $_GET['enrollment_id'] ?>"
+                                                                    <a href="add.php?id=12&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-info"> Update Diagnostic Test
                                                                 Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
 
                                                         <?php } else { ?>
-                                                                    <a href="add.php?id=12&enrollment_id=<?= $_GET['enrollment_id'] ?>"
+                                                                    <a href="add.php?id=12&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-warning"> Add Diagnostic Test
                                                                 Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
 
@@ -1712,24 +1712,24 @@ if ($user->isLoggedIn()) {
                                                         ?>
 
                                                         <?php if ($override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
-                                                                    <a href="add.php?id=14&enrollment_id=<?= $_GET['enrollment_id'] ?>"
+                                                                    <a href="add.php?id=14&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-info"> Update Diagnostic Test DST
                                                                 Data </a>&nbsp;&nbsp; <br><br>
 
                                                         <?php } else { ?>
-                                                                    <a href="add.php?id=14&enrollment_id=<?= $_GET['enrollment_id'] ?>"
+                                                                    <a href="add.php?id=14&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-warning"> Add Diagnostic Test DST
                                                                 Data </a>&nbsp;&nbsp; <br><br>
 
                                                         <?php } ?>
 
                                                         <?php if ($override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
-                                                                    <a href="add.php?id=15&enrollment_id=<?= $_GET['enrollment_id'] ?>"
+                                                                    <a href="add.php?id=15&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-info"> Update Diagnosis Data
                                                             </a>&nbsp;&nbsp; <br><br>
 
                                                         <?php } else { ?>
-                                                                    <a href="add.php?id=15&enrollment_id=<?= $_GET['enrollment_id'] ?>"
+                                                                    <a href="add.php?id=15&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-warning"> Add Diagnosis Data
                                                             </a>&nbsp;&nbsp; <br><br>
 

@@ -515,7 +515,7 @@ if ($user->isLoggedIn()) {
 
                             $successMessage = 'Enrollment Form  Added Successful';
                         }
-                        Redirect::to('info.php?id=3&enrollment_id=' . $_GET['enrollment_id'] . '&status=1&msg=' . $successMessage);
+                        Redirect::to('info.php?id=3&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
                     }
 
                 } catch (Exception $e) {
@@ -571,163 +571,168 @@ if ($user->isLoggedIn()) {
                 $nanopore_sequencing = implode(',', Input::get('nanopore_sequencing'));
                 $_1st_line_drugs = implode(',', Input::get('_1st_line_drugs'));
                 $_2st_line_drugs = implode(',', Input::get('_2st_line_drugs'));
-
-                if ($individual) {
-                    $user->updateRecord('diagnosis_test', array(
-                        'sputum_test' => Input::get('sputum_test'),
-                        'anti_tb' => Input::get('anti_tb'),
-                        'mic' => Input::get('mic'),
-                        'culture_performed' => Input::get('culture_performed'),
-                        'culture_type' => Input::get('culture_type'),
-                        'culture_type_other' => Input::get('culture_type_other'),
-                        'phenotypic_performed' => Input::get('phenotypic_performed'),
-                        'sample_methods' => $sample_methods,
-                        'lj_results' => Input::get('lj_results'),
-                        'mgit_results' => Input::get('mgit_results'),
-                        'rifampicin' => Input::get('rifampicin'),
-                        'rifampicin_date' => Input::get('rifampicin_date'),
-                        'isoniazid' => Input::get('isoniazid'),
-                        'isoniazid_date' => Input::get('isoniazid_date'),
-                        'levofloxacin' => Input::get('levofloxacin'),
-                        'levofloxacin_date' => Input::get('levofloxacin_date'),
-                        'moxifloxacin' => Input::get('moxifloxacin'),
-                        'moxifloxacin_date' => Input::get('moxifloxacin_date'),
-                        'bedaquiline' => Input::get('bedaquiline'),
-                        'bedaquiline_date' => Input::get('bedaquiline_date'),
-                        'linezolid' => Input::get('linezolid'),
-                        'linezolid_date' => Input::get('linezolid_date'),
-                        'clofazimine' => Input::get('clofazimine'),
-                        'clofazimine_date' => Input::get('clofazimine_date'),
-                        'cycloserine' => Input::get('cycloserine'),
-                        'cycloserine_date' => Input::get('_date'),
-                        'terizidone' => Input::get('terizidone'),
-                        'terizidone_date' => Input::get('terizidone_date'),
-                        'ethambutol' => Input::get('ethambutol'),
-                        'ethambutol_date' => Input::get('ethambutol_date'),
-                        'delamanid' => Input::get('delamanid'),
-                        'delamanid_date' => Input::get('delamanid_date'),
-                        'pyrazinamide' => Input::get('pyrazinamide'),
-                        'pyrazinamide_date' => Input::get('pyrazinamide_date'),
-                        'imipenem' => Input::get('imipenem'),
-                        'imipenem_date' => Input::get('imipenem_date'),
-                        'cilastatin' => Input::get('cilastatin'),
-                        'cilastatin_date' => Input::get('cilastatin_date'),
-                        'meropenem' => Input::get('meropenem'),
-                        'meropenem_date' => Input::get('meropenem_date'),
-                        'amikacin' => Input::get('amikacin'),
-                        'amikacin_date' => Input::get('amikacin_date'),
-                        'streptomycin' => Input::get('streptomycin'),
-                        'streptomycin_date' => Input::get('streptomycin_date'),
-                        'ethionamide' => Input::get('ethionamide'),
-                        'ethionamide_date' => Input::get('ethionamide_date'),
-                        'prothionamide' => Input::get('prothionamide'),
-                        'prothionamide_date' => Input::get('prothionamide_date'),
-                        'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
-                        'para_aminosalicylic_acid_date' => Input::get('para_aminosalicylic_acid_date'),
-                        'isoniazid2' => Input::get('isoniazid2'),
-                        'fluoroquinolones' => Input::get('fluoroquinolones'),
-                        'amikacin2' => Input::get('amikacin2'),
-                        'kanamycin' => Input::get('kanamycin'),
-                        'capreomycin' => Input::get('capreomycin'),
-                        'ethionamide2' => Input::get('ethionamide2'),
-                        '_1st_line_drugs' => $_1st_line_drugs,
-                        '_2st_line_drugs' => $_2st_line_drugs,
-                        'version_number' => Input::get('version_number'),
-                        'lot_number' => Input::get('lot_number'),
-                        'mutations_detected_list' => Input::get('mutations_detected_list'),
-                        'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
-                        'comments' => Input::get('comments'),
-                        'form_completness' => Input::get('form_completness'),
-                        'date_completed' => Input::get('date_completed'),
-                        'diagnosis_test_verified_by' => $user->data()->id,
-                        'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'facility_id' => $clients['facility_id'],
-                    ), $individual[0]['id']);
-
-                    $successMessage = 'Diagnosis test  Successful Updated';
+                if (Input::get('form_completness') == 3 && Input::get('diagnosis_test_verified_date') == "") {
+                    $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
                 } else {
-                    $user->createRecord('diagnosis_test', array(
-                        'pid' => $clients['pid'],
-                        'sputum_test' => Input::get('sputum_test'),
-                        'anti_tb' => Input::get('anti_tb'),
-                        'mic' => Input::get('mic'),
-                        'culture_performed' => Input::get('culture_performed'),
-                        'culture_type' => Input::get('culture_type'),
-                        'culture_type_other' => Input::get('culture_type_other'),
-                        'phenotypic_performed' => Input::get('phenotypic_performed'),
-                        'sample_methods' => $sample_methods,
-                        'lj_results' => Input::get('lj_results'),
-                        'mgit_results' => Input::get('mgit_results'),
-                        'rifampicin' => Input::get('rifampicin'),
-                        'rifampicin_date' => Input::get('rifampicin_date'),
-                        'isoniazid' => Input::get('isoniazid'),
-                        'isoniazid_date' => Input::get('isoniazid_date'),
-                        'levofloxacin' => Input::get('levofloxacin'),
-                        'levofloxacin_date' => Input::get('levofloxacin_date'),
-                        'moxifloxacin' => Input::get('moxifloxacin'),
-                        'moxifloxacin_date' => Input::get('moxifloxacin_date'),
-                        'bedaquiline' => Input::get('bedaquiline'),
-                        'bedaquiline_date' => Input::get('bedaquiline_date'),
-                        'linezolid' => Input::get('linezolid'),
-                        'linezolid_date' => Input::get('linezolid_date'),
-                        'clofazimine' => Input::get('clofazimine'),
-                        'clofazimine_date' => Input::get('clofazimine_date'),
-                        'cycloserine' => Input::get('cycloserine'),
-                        'cycloserine_date' => Input::get('_date'),
-                        'terizidone' => Input::get('terizidone'),
-                        'terizidone_date' => Input::get('terizidone_date'),
-                        'ethambutol' => Input::get('ethambutol'),
-                        'ethambutol_date' => Input::get('ethambutol_date'),
-                        'delamanid' => Input::get('delamanid'),
-                        'delamanid_date' => Input::get('delamanid_date'),
-                        'pyrazinamide' => Input::get('pyrazinamide'),
-                        'pyrazinamide_date' => Input::get('pyrazinamide_date'),
-                        'imipenem' => Input::get('imipenem'),
-                        'imipenem_date' => Input::get('imipenem_date'),
-                        'cilastatin' => Input::get('cilastatin'),
-                        'cilastatin_date' => Input::get('cilastatin_date'),
-                        'meropenem' => Input::get('meropenem'),
-                        'meropenem_date' => Input::get('meropenem_date'),
-                        'amikacin' => Input::get('amikacin'),
-                        'amikacin_date' => Input::get('amikacin_date'),
-                        'streptomycin' => Input::get('streptomycin'),
-                        'streptomycin_date' => Input::get('streptomycin_date'),
-                        'ethionamide' => Input::get('ethionamide'),
-                        'ethionamide_date' => Input::get('ethionamide_date'),
-                        'prothionamide' => Input::get('prothionamide'),
-                        'prothionamide_date' => Input::get('prothionamide_date'),
-                        'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
-                        'para_aminosalicylic_acid_date' => Input::get('para_aminosalicylic_acid_date'),
-                        'isoniazid2' => Input::get('isoniazid2'),
-                        'fluoroquinolones' => Input::get('fluoroquinolones'),
-                        'amikacin2' => Input::get('amikacin2'),
-                        'kanamycin' => Input::get('kanamycin'),
-                        'capreomycin' => Input::get('capreomycin'),
-                        'ethionamide2' => Input::get('ethionamide2'),
-                        '_1st_line_drugs' => $_1st_line_drugs,
-                        '_2st_line_drugs' => $_2st_line_drugs,
-                        'version_number' => Input::get('version_number'),
-                        'lot_number' => Input::get('lot_number'),
-                        'mutations_detected_list' => Input::get('mutations_detected_list'),
-                        'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
-                        'comments' => Input::get('comments'),
-                        'form_completness' => Input::get('form_completness'),
-                        'date_completed' => Input::get('date_completed'),
-                        'diagnosis_test_verified_by' => $user->data()->id,
-                        'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
-                        'status' => 1,
-                        'enrollment_id' => $_GET['enrollment_id'],
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'facility_id' => $clients['facility_id'],
-                    ));
+                    if ($individual) {
+                        $user->updateRecord('diagnosis_test', array(
+                            'sputum_test' => Input::get('sputum_test'),
+                            'anti_tb' => Input::get('anti_tb'),
+                            'mic' => Input::get('mic'),
+                            'culture_performed' => Input::get('culture_performed'),
+                            'culture_type' => Input::get('culture_type'),
+                            'culture_type_other' => Input::get('culture_type_other'),
+                            'phenotypic_performed' => Input::get('phenotypic_performed'),
+                            'sample_methods' => $sample_methods,
+                            'lj_results' => Input::get('lj_results'),
+                            'mgit_results' => Input::get('mgit_results'),
+                            'rifampicin' => Input::get('rifampicin'),
+                            'rifampicin_date' => Input::get('rifampicin_date'),
+                            'isoniazid' => Input::get('isoniazid'),
+                            'isoniazid_date' => Input::get('isoniazid_date'),
+                            'levofloxacin' => Input::get('levofloxacin'),
+                            'levofloxacin_date' => Input::get('levofloxacin_date'),
+                            'moxifloxacin' => Input::get('moxifloxacin'),
+                            'moxifloxacin_date' => Input::get('moxifloxacin_date'),
+                            'bedaquiline' => Input::get('bedaquiline'),
+                            'bedaquiline_date' => Input::get('bedaquiline_date'),
+                            'linezolid' => Input::get('linezolid'),
+                            'linezolid_date' => Input::get('linezolid_date'),
+                            'clofazimine' => Input::get('clofazimine'),
+                            'clofazimine_date' => Input::get('clofazimine_date'),
+                            'cycloserine' => Input::get('cycloserine'),
+                            'cycloserine_date' => Input::get('_date'),
+                            'terizidone' => Input::get('terizidone'),
+                            'terizidone_date' => Input::get('terizidone_date'),
+                            'ethambutol' => Input::get('ethambutol'),
+                            'ethambutol_date' => Input::get('ethambutol_date'),
+                            'delamanid' => Input::get('delamanid'),
+                            'delamanid_date' => Input::get('delamanid_date'),
+                            'pyrazinamide' => Input::get('pyrazinamide'),
+                            'pyrazinamide_date' => Input::get('pyrazinamide_date'),
+                            'imipenem' => Input::get('imipenem'),
+                            'imipenem_date' => Input::get('imipenem_date'),
+                            'cilastatin' => Input::get('cilastatin'),
+                            'cilastatin_date' => Input::get('cilastatin_date'),
+                            'meropenem' => Input::get('meropenem'),
+                            'meropenem_date' => Input::get('meropenem_date'),
+                            'amikacin' => Input::get('amikacin'),
+                            'amikacin_date' => Input::get('amikacin_date'),
+                            'streptomycin' => Input::get('streptomycin'),
+                            'streptomycin_date' => Input::get('streptomycin_date'),
+                            'ethionamide' => Input::get('ethionamide'),
+                            'ethionamide_date' => Input::get('ethionamide_date'),
+                            'prothionamide' => Input::get('prothionamide'),
+                            'prothionamide_date' => Input::get('prothionamide_date'),
+                            'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
+                            'para_aminosalicylic_acid_date' => Input::get('para_aminosalicylic_acid_date'),
+                            'isoniazid2' => Input::get('isoniazid2'),
+                            'fluoroquinolones' => Input::get('fluoroquinolones'),
+                            'amikacin2' => Input::get('amikacin2'),
+                            'kanamycin' => Input::get('kanamycin'),
+                            'capreomycin' => Input::get('capreomycin'),
+                            'ethionamide2' => Input::get('ethionamide2'),
+                            '_1st_line_drugs' => $_1st_line_drugs,
+                            '_2st_line_drugs' => $_2st_line_drugs,
+                            'version_number' => Input::get('version_number'),
+                            'lot_number' => Input::get('lot_number'),
+                            'mutations_detected_list' => Input::get('mutations_detected_list'),
+                            'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
+                            'comments' => Input::get('comments'),
+                            'form_completness' => Input::get('form_completness'),
+                            'date_completed' => Input::get('date_completed'),
+                            'diagnosis_test_verified_by' => $user->data()->id,
+                            'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $clients['facility_id'],
+                        ), $individual[0]['id']);
 
-                    $successMessage = 'Diagnosis test  Successful Added';
+                        $successMessage = 'Diagnosis test  Successful Updated';
+                    } else {
+                        $user->createRecord('diagnosis_test', array(
+                            'pid' => $clients['pid'],
+                            'sputum_test' => Input::get('sputum_test'),
+                            'anti_tb' => Input::get('anti_tb'),
+                            'mic' => Input::get('mic'),
+                            'culture_performed' => Input::get('culture_performed'),
+                            'culture_type' => Input::get('culture_type'),
+                            'culture_type_other' => Input::get('culture_type_other'),
+                            'phenotypic_performed' => Input::get('phenotypic_performed'),
+                            'sample_methods' => $sample_methods,
+                            'lj_results' => Input::get('lj_results'),
+                            'mgit_results' => Input::get('mgit_results'),
+                            'rifampicin' => Input::get('rifampicin'),
+                            'rifampicin_date' => Input::get('rifampicin_date'),
+                            'isoniazid' => Input::get('isoniazid'),
+                            'isoniazid_date' => Input::get('isoniazid_date'),
+                            'levofloxacin' => Input::get('levofloxacin'),
+                            'levofloxacin_date' => Input::get('levofloxacin_date'),
+                            'moxifloxacin' => Input::get('moxifloxacin'),
+                            'moxifloxacin_date' => Input::get('moxifloxacin_date'),
+                            'bedaquiline' => Input::get('bedaquiline'),
+                            'bedaquiline_date' => Input::get('bedaquiline_date'),
+                            'linezolid' => Input::get('linezolid'),
+                            'linezolid_date' => Input::get('linezolid_date'),
+                            'clofazimine' => Input::get('clofazimine'),
+                            'clofazimine_date' => Input::get('clofazimine_date'),
+                            'cycloserine' => Input::get('cycloserine'),
+                            'cycloserine_date' => Input::get('_date'),
+                            'terizidone' => Input::get('terizidone'),
+                            'terizidone_date' => Input::get('terizidone_date'),
+                            'ethambutol' => Input::get('ethambutol'),
+                            'ethambutol_date' => Input::get('ethambutol_date'),
+                            'delamanid' => Input::get('delamanid'),
+                            'delamanid_date' => Input::get('delamanid_date'),
+                            'pyrazinamide' => Input::get('pyrazinamide'),
+                            'pyrazinamide_date' => Input::get('pyrazinamide_date'),
+                            'imipenem' => Input::get('imipenem'),
+                            'imipenem_date' => Input::get('imipenem_date'),
+                            'cilastatin' => Input::get('cilastatin'),
+                            'cilastatin_date' => Input::get('cilastatin_date'),
+                            'meropenem' => Input::get('meropenem'),
+                            'meropenem_date' => Input::get('meropenem_date'),
+                            'amikacin' => Input::get('amikacin'),
+                            'amikacin_date' => Input::get('amikacin_date'),
+                            'streptomycin' => Input::get('streptomycin'),
+                            'streptomycin_date' => Input::get('streptomycin_date'),
+                            'ethionamide' => Input::get('ethionamide'),
+                            'ethionamide_date' => Input::get('ethionamide_date'),
+                            'prothionamide' => Input::get('prothionamide'),
+                            'prothionamide_date' => Input::get('prothionamide_date'),
+                            'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
+                            'para_aminosalicylic_acid_date' => Input::get('para_aminosalicylic_acid_date'),
+                            'isoniazid2' => Input::get('isoniazid2'),
+                            'fluoroquinolones' => Input::get('fluoroquinolones'),
+                            'amikacin2' => Input::get('amikacin2'),
+                            'kanamycin' => Input::get('kanamycin'),
+                            'capreomycin' => Input::get('capreomycin'),
+                            'ethionamide2' => Input::get('ethionamide2'),
+                            '_1st_line_drugs' => $_1st_line_drugs,
+                            '_2st_line_drugs' => $_2st_line_drugs,
+                            'version_number' => Input::get('version_number'),
+                            'lot_number' => Input::get('lot_number'),
+                            'mutations_detected_list' => Input::get('mutations_detected_list'),
+                            'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
+                            'comments' => Input::get('comments'),
+                            'form_completness' => Input::get('form_completness'),
+                            'date_completed' => Input::get('date_completed'),
+                            'diagnosis_test_verified_by' => $user->data()->id,
+                            'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
+                            'status' => 1,
+                            'enrollment_id' => $_GET['enrollment_id'],
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $clients['facility_id'],
+                        ));
+
+                        $successMessage = 'Diagnosis test  Successful Added';
+                    }
+                    Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
                 }
+
 
                 Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id']);
             } else {
@@ -749,174 +754,178 @@ if ($user->isLoggedIn()) {
                 $test_reasons = implode(',', Input::get('test_reasons'));
                 $sample_type = implode(',', Input::get('sample_type'));
 
-
-                if ($costing) {
-                    $user->updateRecord('respiratory', array(
-                        'lab_name' => Input::get('lab_name'),
-                        'sample_received' => Input::get('sample_received'),
-                        'sample_date_one' => Input::get('sample_date_one'),
-                        'sample_date_two' => Input::get('sample_date_two'),
-                        'sample_reason' => Input::get('sample_reason'),
-                        'sample_reason_other1' => Input::get('sample_reason_other1'),
-                        'sample_one_collected_date' => Input::get('sample_one_collected_date'),
-                        'sample_two_collected_date' => Input::get('sample_two_collected_date'),
-                        'sample_type' => Input::get('sample_type'),
-                        'sample_number' => Input::get('sample_number'),
-                        'sample_type_other' => Input::get('sample_type_other'),
-                        'appearance' => Input::get('appearance'),
-                        'sample_volume' => Input::get('sample_volume'),
-                        'afb_microscopy' => Input::get('afb_microscopy'),
-                        'afb_microscopy_date' => Input::get('afb_microscopy_date'),
-                        'zn_results_a' => Input::get('zn_results_a'),
-                        'zn_results_b' => Input::get('zn_results_b'),
-                        'fm_results_a' => Input::get('fm_results_a'),
-                        'fm_results_b' => Input::get('fm_results_b'),
-                        'wrd_test' => Input::get('wrd_test'),
-                        'wrd_test_date' => Input::get('wrd_test_date'),
-                        'sequence_done' => Input::get('sequence_done'),
-                        'sequence_date' => Input::get('sequence_date'),
-                        'sequence_type' => Input::get('sequence_type'),
-                        'sequence_number' => Input::get('sequence_number'),
-                        'mtb_detection' => Input::get('mtb_detection'),
-                        'rif_resistance' => Input::get('rif_resistance'),
-                        'ct_value' => Input::get('ct_value'),
-                        'test_repeatition' => Input::get('test_repeatition'),
-                        'microscopy_reason' => Input::get('microscopy_reason'),
-                        'microscopy_reason_other' => Input::get('microscopy_reason_other'),
-                        'respiratory_completness' => Input::get('respiratory_completness'),
-                        'comments' => Input::get('comments'),
-                        'date_completed' => Input::get('date_completed'),
-                        'respiratory_completed_by' => $user->data()->id,
-                        'respiratory_verified_by' => $user->data()->id,
-                        'respiratory_verified_date' => Input::get('respiratory_verified_date'),
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'facility_id' => $clients['facility_id'],
-                    ), $costing[0]['id']);
-
-                    $respiratory_repeated_tests = $override->get3('respiratory_repeated_tests', 'enrollment_id', $clients['id'], 'status', 1, 'respiratory_id', $costing[0]['id']);
-
-                    if ($respiratory_repeated_tests) {
-                        $user->updateRecord('respiratory_repeated_tests', array(
-                            'respiratory_id' => $costing[0]['id'],
-                            'sequence_type' => Input::get('sequence_type2'),
-                            'sequence_number' => Input::get('sequence_number2'),
-                            'mtb_detection' => Input::get('mtb_detection2'),
-                            'rif_resistance' => Input::get('rif_resistance2'),
-                            'ct_value' => Input::get('ct_value2'),
-                            'test_repeatition' => Input::get('test_repeatition'),
-                            'enrollment_id' => $_GET['enrollment_id'],
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
-                        ), $respiratory_repeated_tests[0]['id']);
-                    } else {
-                        $user->createRecord('respiratory_repeated_tests', array(
-                            'respiratory_id' => $costing[0]['id'],
-                            'sequence_type' => Input::get('sequence_type2'),
-                            'sequence_number' => Input::get('sequence_number2'),
-                            'mtb_detection' => Input::get('mtb_detection2'),
-                            'rif_resistance' => Input::get('rif_resistance2'),
-                            'ct_value' => Input::get('ct_value2'),
-                            'test_repeatition' => Input::get('test_repeatition'),
-                            'enrollment_id' => $_GET['enrollment_id'],
-                            'status' => 1,
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
-                        ));
-                    }
-
-                    $successMessage = 'Respiratory Data  Successful Updated';
+                if (Input::get('respiratory_completness') == 3 && Input::get('respiratory_verified_date') == "") {
+                    $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
                 } else {
-                    $user->createRecord('respiratory', array(
-                        'pid' => $clients['pid'],
-                        'lab_name' => Input::get('lab_name'),
-                        'sample_received' => Input::get('sample_received'),
-                        'sample_date_one' => Input::get('sample_date_one'),
-                        'sample_date_two' => Input::get('sample_date_two'),
-                        'sample_reason' => Input::get('sample_reason'),
-                        'sample_reason_other1' => Input::get('sample_reason_other1'),
-                        'sample_one_collected_date' => Input::get('sample_one_collected_date'),
-                        'sample_two_collected_date' => Input::get('sample_two_collected_date'),
-                        'sample_type' => Input::get('sample_type'),
-                        'sample_number' => Input::get('sample_number'),
-                        'sample_type_other' => Input::get('sample_type_other'),
-                        'appearance' => Input::get('appearance'),
-                        'sample_volume' => Input::get('sample_volume'),
-                        'afb_microscopy' => Input::get('afb_microscopy'),
-                        'afb_microscopy_date' => Input::get('afb_microscopy_date'),
-                        'zn_results_a' => Input::get('zn_results_a'),
-                        'zn_results_b' => Input::get('zn_results_b'),
-                        'fm_results_a' => Input::get('fm_results_a'),
-                        'fm_results_b' => Input::get('fm_results_b'),
-                        'wrd_test' => Input::get('wrd_test'),
-                        'wrd_test_date' => Input::get('wrd_test_date'),
-                        'sequence_done' => Input::get('sequence_done'),
-                        'sequence_date' => Input::get('sequence_date'),
-                        'sequence_type' => Input::get('sequence_type'),
-                        'sequence_number' => Input::get('sequence_number'),
-                        'mtb_detection' => Input::get('mtb_detection'),
-                        'rif_resistance' => Input::get('rif_resistance'),
-                        'ct_value' => Input::get('ct_value'),
-                        'test_repeatition' => Input::get('test_repeatition'),
-                        'microscopy_reason' => Input::get('microscopy_reason'),
-                        'microscopy_reason_other' => Input::get('microscopy_reason_other'),
-                        'respiratory_completness' => Input::get('respiratory_completness'),
-                        'comments' => Input::get('comments'),
-                        'date_completed' => Input::get('date_completed'),
-                        'respiratory_completed_by' => $user->data()->id,
-                        'respiratory_verified_by' => $user->data()->id,
-                        'respiratory_verified_date' => Input::get('respiratory_verified_date'),
-                        'status' => 1,
-                        'enrollment_id' => $_GET['enrollment_id'],
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'facility_id' => $clients['facility_id'],
-                    ));
-
-                    $last_row = $override->lastRow('respiratory', 'id')[0];
-
-                    $respiratory_repeated_tests = $override->get3('respiratory_repeated_tests', 'enrollment_id', $clients['id'], 'status', 1, 'respiratory_id', $last_row['id']);
-
-                    if ($respiratory_repeated_tests) {
-                        $user->updateRecord('respiratory_repeated_tests', array(
-                            'respiratory_id' => $last_row['id'],
-                            'sequence_type' => Input::get('sequence_type2'),
-                            'sequence_number' => Input::get('sequence_number2'),
-                            'mtb_detection' => Input::get('mtb_detection2'),
-                            'rif_resistance' => Input::get('rif_resistance2'),
-                            'ct_value' => Input::get('ct_value2'),
+                    if ($costing) {
+                        $user->updateRecord('respiratory', array(
+                            'lab_name' => Input::get('lab_name'),
+                            'sample_received' => Input::get('sample_received'),
+                            'sample_date_one' => Input::get('sample_date_one'),
+                            'sample_date_two' => Input::get('sample_date_two'),
+                            'sample_reason' => Input::get('sample_reason'),
+                            'sample_reason_other1' => Input::get('sample_reason_other1'),
+                            'sample_one_collected_date' => Input::get('sample_one_collected_date'),
+                            'sample_two_collected_date' => Input::get('sample_two_collected_date'),
+                            'sample_type' => Input::get('sample_type'),
+                            'sample_number' => Input::get('sample_number'),
+                            'sample_type_other' => Input::get('sample_type_other'),
+                            'appearance' => Input::get('appearance'),
+                            'sample_volume' => Input::get('sample_volume'),
+                            'afb_microscopy' => Input::get('afb_microscopy'),
+                            'afb_microscopy_date' => Input::get('afb_microscopy_date'),
+                            'zn_results_a' => Input::get('zn_results_a'),
+                            'zn_results_b' => Input::get('zn_results_b'),
+                            'fm_results_a' => Input::get('fm_results_a'),
+                            'fm_results_b' => Input::get('fm_results_b'),
+                            'wrd_test' => Input::get('wrd_test'),
+                            'wrd_test_date' => Input::get('wrd_test_date'),
+                            'sequence_done' => Input::get('sequence_done'),
+                            'sequence_date' => Input::get('sequence_date'),
+                            'sequence_type' => Input::get('sequence_type'),
+                            'sequence_number' => Input::get('sequence_number'),
+                            'mtb_detection' => Input::get('mtb_detection'),
+                            'rif_resistance' => Input::get('rif_resistance'),
+                            'ct_value' => Input::get('ct_value'),
                             'test_repeatition' => Input::get('test_repeatition'),
-                            'enrollment_id' => $_GET['enrollment_id'],
+                            'microscopy_reason' => Input::get('microscopy_reason'),
+                            'microscopy_reason_other' => Input::get('microscopy_reason_other'),
+                            'respiratory_completness' => Input::get('respiratory_completness'),
+                            'comments' => Input::get('comments'),
+                            'date_completed' => Input::get('date_completed'),
+                            'respiratory_completed_by' => $user->data()->id,
+                            'respiratory_verified_by' => $user->data()->id,
+                            'respiratory_verified_date' => Input::get('respiratory_verified_date'),
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                             'facility_id' => $clients['facility_id'],
-                        ), $respiratory_repeated_tests[0]['id']);
+                        ), $costing[0]['id']);
+
+                        $respiratory_repeated_tests = $override->get3('respiratory_repeated_tests', 'enrollment_id', $clients['id'], 'status', 1, 'respiratory_id', $costing[0]['id']);
+
+                        if ($respiratory_repeated_tests) {
+                            $user->updateRecord('respiratory_repeated_tests', array(
+                                'respiratory_id' => $costing[0]['id'],
+                                'sequence_type' => Input::get('sequence_type2'),
+                                'sequence_number' => Input::get('sequence_number2'),
+                                'mtb_detection' => Input::get('mtb_detection2'),
+                                'rif_resistance' => Input::get('rif_resistance2'),
+                                'ct_value' => Input::get('ct_value2'),
+                                'test_repeatition' => Input::get('test_repeatition'),
+                                'enrollment_id' => $_GET['enrollment_id'],
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $clients['facility_id'],
+                            ), $respiratory_repeated_tests[0]['id']);
+                        } else {
+                            $user->createRecord('respiratory_repeated_tests', array(
+                                'respiratory_id' => $costing[0]['id'],
+                                'sequence_type' => Input::get('sequence_type2'),
+                                'sequence_number' => Input::get('sequence_number2'),
+                                'mtb_detection' => Input::get('mtb_detection2'),
+                                'rif_resistance' => Input::get('rif_resistance2'),
+                                'ct_value' => Input::get('ct_value2'),
+                                'test_repeatition' => Input::get('test_repeatition'),
+                                'enrollment_id' => $_GET['enrollment_id'],
+                                'status' => 1,
+                                'create_on' => date('Y-m-d H:i:s'),
+                                'staff_id' => $user->data()->id,
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $clients['facility_id'],
+                            ));
+                        }
+
+                        $successMessage = 'Respiratory Data  Successful Updated';
                     } else {
-                        $user->createRecord('respiratory_repeated_tests', array(
-                            'respiratory_id' => $last_row['id'],
-                            'sequence_type' => Input::get('sequence_type2'),
-                            'sequence_number' => Input::get('sequence_number2'),
-                            'mtb_detection' => Input::get('mtb_detection2'),
-                            'rif_resistance' => Input::get('rif_resistance2'),
-                            'ct_value' => Input::get('ct_value2'),
+                        $user->createRecord('respiratory', array(
+                            'pid' => $clients['pid'],
+                            'lab_name' => Input::get('lab_name'),
+                            'sample_received' => Input::get('sample_received'),
+                            'sample_date_one' => Input::get('sample_date_one'),
+                            'sample_date_two' => Input::get('sample_date_two'),
+                            'sample_reason' => Input::get('sample_reason'),
+                            'sample_reason_other1' => Input::get('sample_reason_other1'),
+                            'sample_one_collected_date' => Input::get('sample_one_collected_date'),
+                            'sample_two_collected_date' => Input::get('sample_two_collected_date'),
+                            'sample_type' => Input::get('sample_type'),
+                            'sample_number' => Input::get('sample_number'),
+                            'sample_type_other' => Input::get('sample_type_other'),
+                            'appearance' => Input::get('appearance'),
+                            'sample_volume' => Input::get('sample_volume'),
+                            'afb_microscopy' => Input::get('afb_microscopy'),
+                            'afb_microscopy_date' => Input::get('afb_microscopy_date'),
+                            'zn_results_a' => Input::get('zn_results_a'),
+                            'zn_results_b' => Input::get('zn_results_b'),
+                            'fm_results_a' => Input::get('fm_results_a'),
+                            'fm_results_b' => Input::get('fm_results_b'),
+                            'wrd_test' => Input::get('wrd_test'),
+                            'wrd_test_date' => Input::get('wrd_test_date'),
+                            'sequence_done' => Input::get('sequence_done'),
+                            'sequence_date' => Input::get('sequence_date'),
+                            'sequence_type' => Input::get('sequence_type'),
+                            'sequence_number' => Input::get('sequence_number'),
+                            'mtb_detection' => Input::get('mtb_detection'),
+                            'rif_resistance' => Input::get('rif_resistance'),
+                            'ct_value' => Input::get('ct_value'),
                             'test_repeatition' => Input::get('test_repeatition'),
-                            'enrollment_id' => $_GET['enrollment_id'],
+                            'microscopy_reason' => Input::get('microscopy_reason'),
+                            'microscopy_reason_other' => Input::get('microscopy_reason_other'),
+                            'respiratory_completness' => Input::get('respiratory_completness'),
+                            'comments' => Input::get('comments'),
+                            'date_completed' => Input::get('date_completed'),
+                            'respiratory_completed_by' => $user->data()->id,
+                            'respiratory_verified_by' => $user->data()->id,
+                            'respiratory_verified_date' => Input::get('respiratory_verified_date'),
                             'status' => 1,
+                            'enrollment_id' => $_GET['enrollment_id'],
                             'create_on' => date('Y-m-d H:i:s'),
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                             'facility_id' => $clients['facility_id'],
                         ));
-                    }
 
-                    $successMessage = 'Respiratory Data  Successful Added';
+                        $last_row = $override->lastRow('respiratory', 'id')[0];
+
+                        $respiratory_repeated_tests = $override->get3('respiratory_repeated_tests', 'enrollment_id', $clients['id'], 'status', 1, 'respiratory_id', $last_row['id']);
+
+                        if ($respiratory_repeated_tests) {
+                            $user->updateRecord('respiratory_repeated_tests', array(
+                                'respiratory_id' => $last_row['id'],
+                                'sequence_type' => Input::get('sequence_type2'),
+                                'sequence_number' => Input::get('sequence_number2'),
+                                'mtb_detection' => Input::get('mtb_detection2'),
+                                'rif_resistance' => Input::get('rif_resistance2'),
+                                'ct_value' => Input::get('ct_value2'),
+                                'test_repeatition' => Input::get('test_repeatition'),
+                                'enrollment_id' => $_GET['enrollment_id'],
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $clients['facility_id'],
+                            ), $respiratory_repeated_tests[0]['id']);
+                        } else {
+                            $user->createRecord('respiratory_repeated_tests', array(
+                                'respiratory_id' => $last_row['id'],
+                                'sequence_type' => Input::get('sequence_type2'),
+                                'sequence_number' => Input::get('sequence_number2'),
+                                'mtb_detection' => Input::get('mtb_detection2'),
+                                'rif_resistance' => Input::get('rif_resistance2'),
+                                'ct_value' => Input::get('ct_value2'),
+                                'test_repeatition' => Input::get('test_repeatition'),
+                                'enrollment_id' => $_GET['enrollment_id'],
+                                'status' => 1,
+                                'create_on' => date('Y-m-d H:i:s'),
+                                'staff_id' => $user->data()->id,
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $clients['facility_id'],
+                            ));
+                        }
+
+                        $successMessage = 'Respiratory Data  Successful Added';
+                    }
+                    Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
                 }
 
                 Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id']);
@@ -947,153 +956,156 @@ if ($user->isLoggedIn()) {
 
                 // $test_reasons = implode(',', Input::get('test_reasons'));
                 // $sample_type = implode(',', Input::get('sample_type'));
-
-                if ($costing) {
-                    $user->updateRecord('non_respiratory', array(
-                        'visit_date' => Input::get('visit_date'),
-                        'afb_microscopy' => Input::get('n_afb_microscopy'),
-                        'afb_microscopy_date' => Input::get('n_afb_microscopy_date'),
-                        'zn_results_a' => Input::get('n_zn_results_a'),
-                        'zn_results_b' => Input::get('n_zn_results_b'),
-                        'fm_results_a' => Input::get('n_fm_results_a'),
-                        'fm_results_b' => Input::get('n_fm_results_b'),
-                        'wrd_test' => Input::get('wrd_test2_0'),
-                        'wrd_test_date' => Input::get('wrd_test_date2_2'),
-                        'sequence_done' => Input::get('sequence_done2_0'),
-                        'sequence_date' => Input::get('sequence_date2_2'),
-                        'sequence_type' => Input::get('sequence_type2_0'),
-                        'sequence_number' => Input::get('sequence_number2_2'),
-                        'mtb_detection' => Input::get('mtb_detection2_0'),
-                        'rif_resistance' => Input::get('rif_resistance2_0'),
-                        'ct_value' => Input::get('ct_value2_2'),
-                        'test_repeatition' => Input::get('test_repeatition2_0'),
-                        'microscopy_reason' => Input::get('microscopy_reason2_0'),
-                        'microscopy_reason_other' => Input::get('microscopy_reason_other2_2'),
-                        'comments' => Input::get('comments'),
-                        'form_completness' => Input::get('form_completness'),
-                        'date_completed' => Input::get('date_completed'),
-                        'non_respiratory_completed' => Input::get('non_respiratory_completed'),
-                        'non_respiratory_verified_by' => Input::get('non_respiratory_verified_by'),
-                        'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $clients['facility_id'],
-                    ), $costing[0]['id']);
-
-                    $non_respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'non_respiratory_id', $costing[0]['id']);
-
-                    if ($non_respiratory_repeated_tests) {
-                        $user->updateRecord('non_respiratory_repeated_tests', array(
-                            'non_respiratory_id' => $costing[0]['id'],
-                            'sequence_type' => Input::get('sequence_type3_0'),
-                            'sequence_number' => Input::get('sequence_number3_2'),
-                            'mtb_detection' => Input::get('mtb_detection3_0'),
-                            'rif_resistance' => Input::get('rif_resistance3_0'),
-                            'ct_value' => Input::get('ct_value3_2'),
-                            'test_repeatition' => Input::get('test_repeatition2_0'),
-                            'patient_id' => $clients['id'],
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'site_id' => $clients['facility_id'],
-                        ), $non_respiratory_repeated_tests[0]['id']);
-                    } else {
-                        $user->createRecord('non_respiratory_repeated_tests', array(
-                            'non_respiratory_id' => $costing[0]['id'],
-                            'sequence_type' => Input::get('sequence_type3_0'),
-                            'sequence_number' => Input::get('sequence_number3_2'),
-                            'mtb_detection' => Input::get('mtb_detection3_0'),
-                            'rif_resistance' => Input::get('rif_resistance3_0'),
-                            'ct_value' => Input::get('ct_value3_2'),
-                            'test_repeatition' => Input::get('test_repeatition2_0'),
-                            'patient_id' => $clients['id'],
-                            'status' => 1,
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'site_id' => $clients['facility_id'],
-                        ));
-                    }
-
-                    $successMessage = 'Non Respiratory Data  Successful Updated';
+                if (Input::get('form_completness') == 3 && Input::get('non_respiratory_verified_date') == "") {
+                    $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
                 } else {
-                    $user->createRecord('non_respiratory', array(
-                        'pid' => $clients['pid'],
-                        'visit_date' => Input::get('visit_date'),
-                        'afb_microscopy' => Input::get('n_afb_microscopy'),
-                        'afb_microscopy_date' => Input::get('n_afb_microscopy_date'),
-                        'zn_results_a' => Input::get('n_zn_results_a'),
-                        'zn_results_b' => Input::get('n_zn_results_b'),
-                        'fm_results_a' => Input::get('n_fm_results_a'),
-                        'fm_results_b' => Input::get('n_fm_results_b'),
-                        'wrd_test' => Input::get('wrd_test2_0'),
-                        'wrd_test_date' => Input::get('wrd_test_date2_2'),
-                        'sequence_done' => Input::get('sequence_done2_0'),
-                        'sequence_date' => Input::get('sequence_date2_2'),
-                        'sequence_type' => Input::get('sequence_type2_0'),
-                        'sequence_number' => Input::get('sequence_number2_2'),
-                        'mtb_detection' => Input::get('mtb_detection2_0'),
-                        'rif_resistance' => Input::get('rif_resistance2_0'),
-                        'ct_value' => Input::get('ct_value2_2'),
-                        'test_repeatition' => Input::get('test_repeatition2_0'),
-                        'microscopy_reason' => Input::get('microscopy_reason2_0'),
-                        'microscopy_reason_other' => Input::get('microscopy_reason_other2_2'),
-                        'comments' => Input::get('comments'),
-                        'form_completness' => Input::get('form_completness'),
-                        'date_completed' => Input::get('date_completed'),
-                        'non_respiratory_completed' => Input::get('non_respiratory_completed'),
-                        'non_respiratory_verified_by' => Input::get('non_respiratory_verified_by'),
-                        'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
-                        'status' => 1,
-                        'patient_id' => $clients['id'],
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'site_id' => $clients['facility_id'],
-                    ));
-
-                    $last_row = $override->lastRow('non_respiratory', 'id')[0];
-
-                    $non_respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'non_respiratory_id', $last_row['id']);
-
-                    if ($non_respiratory_repeated_tests) {
-                        $user->updateRecord('non_respiratory_repeated_tests', array(
-                            'non_respiratory_id' => $last_row['id'],
-                            'sequence_type' => Input::get('sequence_type3_0'),
-                            'sequence_number' => Input::get('sequence_number3_2'),
-                            'mtb_detection' => Input::get('mtb_detection3_0'),
-                            'rif_resistance' => Input::get('rif_resistance3_0'),
-                            'ct_value' => Input::get('ct_value3_2'),
+                    if ($costing) {
+                        $user->updateRecord('non_respiratory', array(
+                            'visit_date' => Input::get('visit_date'),
+                            'afb_microscopy' => Input::get('n_afb_microscopy'),
+                            'afb_microscopy_date' => Input::get('n_afb_microscopy_date'),
+                            'zn_results_a' => Input::get('n_zn_results_a'),
+                            'zn_results_b' => Input::get('n_zn_results_b'),
+                            'fm_results_a' => Input::get('n_fm_results_a'),
+                            'fm_results_b' => Input::get('n_fm_results_b'),
+                            'wrd_test' => Input::get('wrd_test2_0'),
+                            'wrd_test_date' => Input::get('wrd_test_date2_2'),
+                            'sequence_done' => Input::get('sequence_done2_0'),
+                            'sequence_date' => Input::get('sequence_date2_2'),
+                            'sequence_type' => Input::get('sequence_type2_0'),
+                            'sequence_number' => Input::get('sequence_number2_2'),
+                            'mtb_detection' => Input::get('mtb_detection2_0'),
+                            'rif_resistance' => Input::get('rif_resistance2_0'),
+                            'ct_value' => Input::get('ct_value2_2'),
                             'test_repeatition' => Input::get('test_repeatition2_0'),
-                            'patient_id' => $clients['id'],
+                            'microscopy_reason' => Input::get('microscopy_reason2_0'),
+                            'microscopy_reason_other' => Input::get('microscopy_reason_other2_2'),
+                            'comments' => Input::get('comments'),
+                            'form_completness' => Input::get('form_completness'),
+                            'date_completed' => Input::get('date_completed'),
+                            'non_respiratory_completed' => Input::get('non_respiratory_completed'),
+                            'non_respiratory_verified_by' => Input::get('non_respiratory_verified_by'),
+                            'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                             'site_id' => $clients['facility_id'],
-                        ), $non_respiratory_repeated_tests[0]['id']);
+                        ), $costing[0]['id']);
+
+                        $non_respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'non_respiratory_id', $costing[0]['id']);
+
+                        if ($non_respiratory_repeated_tests) {
+                            $user->updateRecord('non_respiratory_repeated_tests', array(
+                                'non_respiratory_id' => $costing[0]['id'],
+                                'sequence_type' => Input::get('sequence_type3_0'),
+                                'sequence_number' => Input::get('sequence_number3_2'),
+                                'mtb_detection' => Input::get('mtb_detection3_0'),
+                                'rif_resistance' => Input::get('rif_resistance3_0'),
+                                'ct_value' => Input::get('ct_value3_2'),
+                                'test_repeatition' => Input::get('test_repeatition2_0'),
+                                'patient_id' => $clients['id'],
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'site_id' => $clients['facility_id'],
+                            ), $non_respiratory_repeated_tests[0]['id']);
+                        } else {
+                            $user->createRecord('non_respiratory_repeated_tests', array(
+                                'non_respiratory_id' => $costing[0]['id'],
+                                'sequence_type' => Input::get('sequence_type3_0'),
+                                'sequence_number' => Input::get('sequence_number3_2'),
+                                'mtb_detection' => Input::get('mtb_detection3_0'),
+                                'rif_resistance' => Input::get('rif_resistance3_0'),
+                                'ct_value' => Input::get('ct_value3_2'),
+                                'test_repeatition' => Input::get('test_repeatition2_0'),
+                                'patient_id' => $clients['id'],
+                                'status' => 1,
+                                'create_on' => date('Y-m-d H:i:s'),
+                                'staff_id' => $user->data()->id,
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'site_id' => $clients['facility_id'],
+                            ));
+                        }
+
+                        $successMessage = 'Non Respiratory Data  Successful Updated';
                     } else {
-                        $user->createRecord('non_respiratory_repeated_tests', array(
-                            'non_respiratory_id' => $last_row['id'],
-                            'sequence_type' => Input::get('sequence_type3_0'),
-                            'sequence_number' => Input::get('sequence_number3_2'),
-                            'mtb_detection' => Input::get('mtb_detection3_0'),
-                            'rif_resistance' => Input::get('rif_resistance3_0'),
-                            'ct_value' => Input::get('ct_value3_2'),
+                        $user->createRecord('non_respiratory', array(
+                            'pid' => $clients['pid'],
+                            'visit_date' => Input::get('visit_date'),
+                            'afb_microscopy' => Input::get('n_afb_microscopy'),
+                            'afb_microscopy_date' => Input::get('n_afb_microscopy_date'),
+                            'zn_results_a' => Input::get('n_zn_results_a'),
+                            'zn_results_b' => Input::get('n_zn_results_b'),
+                            'fm_results_a' => Input::get('n_fm_results_a'),
+                            'fm_results_b' => Input::get('n_fm_results_b'),
+                            'wrd_test' => Input::get('wrd_test2_0'),
+                            'wrd_test_date' => Input::get('wrd_test_date2_2'),
+                            'sequence_done' => Input::get('sequence_done2_0'),
+                            'sequence_date' => Input::get('sequence_date2_2'),
+                            'sequence_type' => Input::get('sequence_type2_0'),
+                            'sequence_number' => Input::get('sequence_number2_2'),
+                            'mtb_detection' => Input::get('mtb_detection2_0'),
+                            'rif_resistance' => Input::get('rif_resistance2_0'),
+                            'ct_value' => Input::get('ct_value2_2'),
                             'test_repeatition' => Input::get('test_repeatition2_0'),
-                            'patient_id' => $clients['id'],
+                            'microscopy_reason' => Input::get('microscopy_reason2_0'),
+                            'microscopy_reason_other' => Input::get('microscopy_reason_other2_2'),
+                            'comments' => Input::get('comments'),
+                            'form_completness' => Input::get('form_completness'),
+                            'date_completed' => Input::get('date_completed'),
+                            'non_respiratory_completed' => Input::get('non_respiratory_completed'),
+                            'non_respiratory_verified_by' => Input::get('non_respiratory_verified_by'),
+                            'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
                             'status' => 1,
+                            'patient_id' => $clients['id'],
                             'create_on' => date('Y-m-d H:i:s'),
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                             'site_id' => $clients['facility_id'],
                         ));
+
+                        $last_row = $override->lastRow('non_respiratory', 'id')[0];
+
+                        $non_respiratory_repeated_tests = $override->get3('non_respiratory_repeated_tests', 'patient_id', $clients['id'], 'status', 1, 'non_respiratory_id', $last_row['id']);
+
+                        if ($non_respiratory_repeated_tests) {
+                            $user->updateRecord('non_respiratory_repeated_tests', array(
+                                'non_respiratory_id' => $last_row['id'],
+                                'sequence_type' => Input::get('sequence_type3_0'),
+                                'sequence_number' => Input::get('sequence_number3_2'),
+                                'mtb_detection' => Input::get('mtb_detection3_0'),
+                                'rif_resistance' => Input::get('rif_resistance3_0'),
+                                'ct_value' => Input::get('ct_value3_2'),
+                                'test_repeatition' => Input::get('test_repeatition2_0'),
+                                'patient_id' => $clients['id'],
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'site_id' => $clients['facility_id'],
+                            ), $non_respiratory_repeated_tests[0]['id']);
+                        } else {
+                            $user->createRecord('non_respiratory_repeated_tests', array(
+                                'non_respiratory_id' => $last_row['id'],
+                                'sequence_type' => Input::get('sequence_type3_0'),
+                                'sequence_number' => Input::get('sequence_number3_2'),
+                                'mtb_detection' => Input::get('mtb_detection3_0'),
+                                'rif_resistance' => Input::get('rif_resistance3_0'),
+                                'ct_value' => Input::get('ct_value3_2'),
+                                'test_repeatition' => Input::get('test_repeatition2_0'),
+                                'patient_id' => $clients['id'],
+                                'status' => 1,
+                                'create_on' => date('Y-m-d H:i:s'),
+                                'staff_id' => $user->data()->id,
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'site_id' => $clients['facility_id'],
+                            ));
+                        }
+
+                        $successMessage = 'Non Respiratory Data  Successful Added';
                     }
 
-                    $successMessage = 'Non Respiratory Data  Successful Added';
+                    Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
                 }
-
-                Redirect::to('info.php?id=4&cid=' . $_GET['cid'] . '&study_id=' . $_GET['study_id'] . '&status=' . $_GET['status']);
             } else {
                 $pageError = $validate->errors();
             }
@@ -1111,111 +1123,114 @@ if ($user->isLoggedIn()) {
                 $tb_diagnosed_clinically = implode(',', Input::get('tb_diagnosed_clinically'));
                 $laboratory_test_used = implode(',', Input::get('laboratory_test_used'));
                 $laboratory_test_used2 = implode(',', Input::get('laboratory_test_used2'));
-
-                if ($costing) {
-                    $user->updateRecord('diagnosis', array(
-                        'tb_diagnosis' => Input::get('tb_diagnosis'),
-                        'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
-                        'diagnosis_made_other' => Input::get('diagnosis_made_other'),
-                        'bacteriological_diagnosis' => $bacteriological_diagnosis,
-                        'clinician_received_date' => Input::get('clinician_received_date'),
-                        'xpert_truenat_date' => Input::get('xpert_truenat_date'),
-                        'other_bacteriological' => Input::get('other_bacteriological'),
-                        'other_bacteriological_date' => Input::get('other_bacteriological_date'),
-                        'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
-                        'tb_clinically_other' => Input::get('tb_clinically_other'),
-                        'tb_treatment' => Input::get('tb_treatment'),
-                        'tb_treatment_date' => Input::get('tb_treatment_date'),
-                        'tb_facility' => Input::get('tb_facility'),
-                        'tb_reason' => Input::get('tb_reason'),
-                        'tb_regimen' => Input::get('tb_regimen'),
-                        'tb_regimen_other' => Input::get('tb_regimen_other'),
-                        'tb_regimen_based' => Input::get('tb_regimen_based'),
-                        'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
-                        'regimen_changed' => Input::get('regimen_changed'),
-                        'regimen_changed_other' => Input::get('regimen_changed_other'),
-                        'regimen_changed__date' => Input::get('regimen_changed__date'),
-                        'regimen_removed_name' => Input::get('regimen_removed_name'),
-                        'regimen_added_name' => Input::get('regimen_added_name'),
-                        'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
-                        'regimen_changed__reason' => Input::get('regimen_changed__reason'),
-                        'tb_otcome2' => Input::get('tb_otcome2'),
-                        'tb_otcome2_date' => Input::get('tb_otcome2_date'),
-                        'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
-                        'tb_other_specify' => Input::get('tb_other_specify'),
-                        'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
-                        'laboratory_test_used' => $laboratory_test_used,
-                        'laboratory_test_used2' => $laboratory_test_used2,
-                        'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                        'comments' => Input::get('comments'),
-                        'diagnosis_completness' => Input::get('diagnosis_completness'),
-                        'diagnosis_completed_by' => $user->data()->id,
-                        'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
-                        'diagnosis_verified_by' => $user->data()->id,
-                        'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'facility_id' => $clients['facility_id'],
-                    ), $costing[0]['id']);
-
-                    $successMessage = 'Diagnosis Data  Successful Updated';
+                if (Input::get('diagnosis_completness') == 3 && Input::get('diagnosis_verified_date') == "") {
+                    $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
                 } else {
-                    $user->createRecord('diagnosis', array(
-                        'pid' => $clients['pid'],
-                        'visit_date' => Input::get('visit_date'),
-                        'clinician_name' => Input::get('clinician_name'),
-                        'tb_diagnosis' => Input::get('tb_diagnosis'),
-                        'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
-                        'diagnosis_made_other' => Input::get('diagnosis_made_other'),
-                        'bacteriological_diagnosis' => $bacteriological_diagnosis,
-                        'clinician_received_date' => Input::get('clinician_received_date'),
-                        'xpert_truenat_date' => Input::get('xpert_truenat_date'),
-                        'other_bacteriological' => Input::get('other_bacteriological'),
-                        'other_bacteriological_date' => Input::get('other_bacteriological_date'),
-                        'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
-                        'tb_clinically_other' => Input::get('tb_clinically_other'),
-                        'tb_treatment' => Input::get('tb_treatment'),
-                        'tb_treatment_date' => Input::get('tb_treatment_date'),
-                        'tb_facility' => Input::get('tb_facility'),
-                        'tb_reason' => Input::get('tb_reason'),
-                        'tb_regimen' => Input::get('tb_regimen'),
-                        'tb_regimen_other' => Input::get('tb_regimen_other'),
-                        'tb_regimen_based' => Input::get('tb_regimen_based'),
-                        'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
-                        'regimen_changed' => Input::get('regimen_changed'),
-                        'regimen_changed_other' => Input::get('regimen_changed_other'),
-                        'regimen_changed__date' => Input::get('regimen_changed__date'),
-                        'regimen_removed_name' => Input::get('regimen_removed_name'),
-                        'regimen_added_name' => Input::get('regimen_added_name'),
-                        'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
-                        'regimen_changed__reason' => Input::get('regimen_changed__reason'),
-                        'tb_otcome2' => Input::get('tb_otcome2'),
-                        'tb_otcome2_date' => Input::get('tb_otcome2_date'),
-                        'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
-                        'tb_other_specify' => Input::get('tb_other_specify'),
-                        'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
-                        'laboratory_test_used' => $laboratory_test_used,
-                        'laboratory_test_used2' => $laboratory_test_used2,
-                        'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                        'comments' => Input::get('comments'),
-                        'diagnosis_completness' => Input::get('diagnosis_completness'),
-                        'diagnosis_completed_by' => $user->data()->id,
-                        'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
-                        'diagnosis_verified_by' => $user->data()->id,
-                        'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
-                        'status' => 1,
-                        'enrollment_id' => $_GET['enrollment_id'],
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'staff_id' => $user->data()->id,
-                        'update_on' => date('Y-m-d H:i:s'),
-                        'update_id' => $user->data()->id,
-                        'facility_id' => $clients['facility_id'],
-                    ));
+                    if ($costing) {
+                        $user->updateRecord('diagnosis', array(
+                            'tb_diagnosis' => Input::get('tb_diagnosis'),
+                            'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
+                            'diagnosis_made_other' => Input::get('diagnosis_made_other'),
+                            'bacteriological_diagnosis' => $bacteriological_diagnosis,
+                            'clinician_received_date' => Input::get('clinician_received_date'),
+                            'xpert_truenat_date' => Input::get('xpert_truenat_date'),
+                            'other_bacteriological' => Input::get('other_bacteriological'),
+                            'other_bacteriological_date' => Input::get('other_bacteriological_date'),
+                            'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
+                            'tb_clinically_other' => Input::get('tb_clinically_other'),
+                            'tb_treatment' => Input::get('tb_treatment'),
+                            'tb_treatment_date' => Input::get('tb_treatment_date'),
+                            'tb_facility' => Input::get('tb_facility'),
+                            'tb_reason' => Input::get('tb_reason'),
+                            'tb_regimen' => Input::get('tb_regimen'),
+                            'tb_regimen_other' => Input::get('tb_regimen_other'),
+                            'tb_regimen_based' => Input::get('tb_regimen_based'),
+                            'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
+                            'regimen_changed' => Input::get('regimen_changed'),
+                            'regimen_changed_other' => Input::get('regimen_changed_other'),
+                            'regimen_changed__date' => Input::get('regimen_changed__date'),
+                            'regimen_removed_name' => Input::get('regimen_removed_name'),
+                            'regimen_added_name' => Input::get('regimen_added_name'),
+                            'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
+                            'regimen_changed__reason' => Input::get('regimen_changed__reason'),
+                            'tb_otcome2' => Input::get('tb_otcome2'),
+                            'tb_otcome2_date' => Input::get('tb_otcome2_date'),
+                            'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
+                            'tb_other_specify' => Input::get('tb_other_specify'),
+                            'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
+                            'laboratory_test_used' => $laboratory_test_used,
+                            'laboratory_test_used2' => $laboratory_test_used2,
+                            'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
+                            'comments' => Input::get('comments'),
+                            'diagnosis_completness' => Input::get('diagnosis_completness'),
+                            'diagnosis_completed_by' => $user->data()->id,
+                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
+                            'diagnosis_verified_by' => $user->data()->id,
+                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $clients['facility_id'],
+                        ), $costing[0]['id']);
 
-                    $successMessage = 'Diagnosis Data  Successful Added';
+                        $successMessage = 'Diagnosis Data  Successful Updated';
+                    } else {
+                        $user->createRecord('diagnosis', array(
+                            'pid' => $clients['pid'],
+                            'visit_date' => Input::get('visit_date'),
+                            'clinician_name' => Input::get('clinician_name'),
+                            'tb_diagnosis' => Input::get('tb_diagnosis'),
+                            'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
+                            'diagnosis_made_other' => Input::get('diagnosis_made_other'),
+                            'bacteriological_diagnosis' => $bacteriological_diagnosis,
+                            'clinician_received_date' => Input::get('clinician_received_date'),
+                            'xpert_truenat_date' => Input::get('xpert_truenat_date'),
+                            'other_bacteriological' => Input::get('other_bacteriological'),
+                            'other_bacteriological_date' => Input::get('other_bacteriological_date'),
+                            'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
+                            'tb_clinically_other' => Input::get('tb_clinically_other'),
+                            'tb_treatment' => Input::get('tb_treatment'),
+                            'tb_treatment_date' => Input::get('tb_treatment_date'),
+                            'tb_facility' => Input::get('tb_facility'),
+                            'tb_reason' => Input::get('tb_reason'),
+                            'tb_regimen' => Input::get('tb_regimen'),
+                            'tb_regimen_other' => Input::get('tb_regimen_other'),
+                            'tb_regimen_based' => Input::get('tb_regimen_based'),
+                            'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
+                            'regimen_changed' => Input::get('regimen_changed'),
+                            'regimen_changed_other' => Input::get('regimen_changed_other'),
+                            'regimen_changed__date' => Input::get('regimen_changed__date'),
+                            'regimen_removed_name' => Input::get('regimen_removed_name'),
+                            'regimen_added_name' => Input::get('regimen_added_name'),
+                            'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
+                            'regimen_changed__reason' => Input::get('regimen_changed__reason'),
+                            'tb_otcome2' => Input::get('tb_otcome2'),
+                            'tb_otcome2_date' => Input::get('tb_otcome2_date'),
+                            'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
+                            'tb_other_specify' => Input::get('tb_other_specify'),
+                            'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
+                            'laboratory_test_used' => $laboratory_test_used,
+                            'laboratory_test_used2' => $laboratory_test_used2,
+                            'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
+                            'comments' => Input::get('comments'),
+                            'diagnosis_completness' => Input::get('diagnosis_completness'),
+                            'diagnosis_completed_by' => $user->data()->id,
+                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
+                            'diagnosis_verified_by' => $user->data()->id,
+                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'status' => 1,
+                            'enrollment_id' => $_GET['enrollment_id'],
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $clients['facility_id'],
+                        ));
+
+                        $successMessage = 'Diagnosis Data  Successful Added';
+                    }
+
+                    Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
                 }
-
-                Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id']);
             } else {
                 $pageError = $validate->errors();
             }
@@ -3968,11 +3983,11 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=4&enrollment_id=<?= $_GET['enrollment_id']; ?>">
+                                            href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3">
+                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
                                             Go to Enrollment list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
@@ -4731,7 +4746,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4803,7 +4818,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <a href="info.php?id=6&enrolllment_id=<?= $_GET['enrolllment_id']; ?>"
+                                            <a href="info.php?id=6&enrolllment_id=<?= $_GET['enrolllment_id']; ?>&status=<?= $_GET['status'] ?>"
                                                 class="btn btn-default">Back</a>
                                             <input type="submit" name="add_respiratory" value="Submit"
                                                 class="btn btn-primary">
@@ -4840,11 +4855,11 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=4&enrollment_id=<?= $_GET['enrollment_id']; ?>">
+                                            href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3">
+                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
                                             Go to Enrollment list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
@@ -5391,7 +5406,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5516,7 +5531,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <a href="info.php?id=4&cid=<?= $_GET['cid']; ?>&study_id=<?= $_GET['study_id']; ?>&status=<?= $_GET['status']; ?>"
+                                            <a href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status']; ?>"
                                                 class="btn btn-default">Back</a>
                                             <input type="submit" name="add_non_respiratory" value="Submit"
                                                 class="btn btn-primary">
@@ -5636,10 +5651,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                                                                                                                                                    <?php if ($screening['comments']) {
-                                                                                                                                                                                                                                        print_r($screening['comments']);
-                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                            <?php if ($screening['comments']) {
+                                                                                                                                                                                                                                                print_r($screening['comments']);
+                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5685,11 +5700,11 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=4&enrollment_id=<?= $_GET['enrollment_id']; ?>">
+                                            href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3">
+                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
                                             Go to enrolled list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
@@ -6796,7 +6811,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6826,7 +6841,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6888,15 +6903,15 @@ if ($user->isLoggedIn()) {
                                                                 name="diagnosis_test_verified_date"
                                                                 id="diagnosis_test_verified_date" value="<?php if ($costing['diagnosis_test_verified_date']) {
                                                                     print_r($costing['diagnosis_test_verified_date']);
-                                                                } ?>" <?php if ($user->data()->position != 3) { ?> readonly
-                                                                <?php } ?> />
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- /.card-body -->
                                             <div class="card-footer">
-                                                <a href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>"
+                                                <a href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>"
                                                     class="btn btn-default">Back</a>
                                                 <input type="submit" name="add_diagnosis_test" value="Submit"
                                                     class="btn btn-primary">
@@ -6934,11 +6949,11 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>">
+                                            href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3">
+                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
                                             Go to enrolled list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
@@ -7120,8 +7135,9 @@ if ($user->isLoggedIn()) {
                                                                     class="form-label">Other Specify ?</label>
                                                                 <input type="text" value="<?php if ($costing['tb_clinically_other']) {
                                                                     print_r($costing['tb_clinically_other']);
-                                                                } ?>" id="tb_clinically_other" name="tb_clinically_other"
-                                                                    class="form-control" placeholder="Enter here" />
+                                                                } ?>" id="tb_clinically_other"
+                                                                    name="tb_clinically_other" class="form-control"
+                                                                    placeholder="Enter here" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -7160,8 +7176,8 @@ if ($user->isLoggedIn()) {
                                                                 health facility):</label>
                                                             <input type="text" value="<?php if ($costing['tb_facility']) {
                                                                 print_r($costing['tb_facility']);
-                                                            } ?>" id="tb_facility" name="tb_facility" class="form-control"
-                                                                placeholder="Enter heres" />
+                                                            } ?>" id="tb_facility" name="tb_facility"
+                                                                class="form-control" placeholder="Enter heres" />
                                                             <label for="tb_reason" id="tb_reason1" class="form-label">reason
                                                                 (specify):</label>
                                                             <input type="text" value="<?php if ($costing['tb_reason']) {
@@ -7291,8 +7307,9 @@ if ($user->isLoggedIn()) {
                                                                 class="form-label">Date </label>
                                                             <input type="text" value="<?php if ($costing['regimen_changed__date']) {
                                                                 print_r($costing['regimen_changed__date']);
-                                                            } ?>" id="regimen_changed__date" name="regimen_changed__date"
-                                                                class="form-control" placeholder="Enter here" />
+                                                            } ?>" id="regimen_changed__date"
+                                                                name="regimen_changed__date" class="form-control"
+                                                                placeholder="Enter here" />
                                                             <label for="regimen_added_name" id="regimen_added_name1"
                                                                 class="form-label">Change introduced to the regimen </label>
                                                             <input type="text" value="<?php if ($costing['regimen_added_name']) {
@@ -7438,7 +7455,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7487,8 +7504,7 @@ if ($user->isLoggedIn()) {
                                                                 name="diagnosis_completed_date"
                                                                 id="diagnosis_completed_date" value="<?php if ($costing['diagnosis_completed_date']) {
                                                                     print_r($costing['diagnosis_completed_date']);
-                                                                } ?>" <?php if ($costing['diagnosis_completness'] == 3) { ?>
-                                                                    readonly <?php } ?> />
+                                                                } ?>" <?php if ($costing['diagnosis_completness'] == 3) { ?> readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7502,8 +7518,8 @@ if ($user->isLoggedIn()) {
                                                                 name="diagnosis_verified_date" id="diagnosis_verified_date"
                                                                 value="<?php if ($costing['diagnosis_verified_date']) {
                                                                     print_r($costing['diagnosis_verified_date']);
-                                                                } ?>" <?php if ($user->data()->position != 3) { ?> readonly
-                                                                <?php } ?> />
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7512,7 +7528,7 @@ if ($user->isLoggedIn()) {
                                             <!-- </div> -->
                                             <!-- /.card-body -->
                                             <div class="card-footer">
-                                                <a href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>"
+                                                <a href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>"
                                                     class="btn btn-default">Back</a>
                                                 <input type="submit" name="add_diagnosis" value="Submit"
                                                     class="btn btn-primary">
@@ -7542,12 +7558,12 @@ if ($user->isLoggedIn()) {
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="info.php?id=3">
+                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item">
-                                        <a href="info.php?id=3">
+                                        <a href="info.php?id=3&status=<?= $_GET['status'] ?>">
                                             <?php if ($_GET['status'] == 1) { ?>
                                                 Go to screening list >
                                             <?php } elseif ($_GET['status'] == 2) { ?>
@@ -8659,8 +8675,7 @@ if ($user->isLoggedIn()) {
                                                                 name="enrollment_completed_date"
                                                                 id="enrollment_completed_date" value="<?php if ($clients['enrollment_completed_date']) {
                                                                     print_r($clients['enrollment_completed_date']);
-                                                                } ?>" <?php if ($clients['enrollment_completed'] == 3) { ?>
-                                                                    readonly <?php } ?> />
+                                                                } ?>" <?php if ($clients['enrollment_completed'] == 3) { ?> readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8674,8 +8689,8 @@ if ($user->isLoggedIn()) {
                                                                 name="enrollment_verified_date"
                                                                 id="enrollment_verified_date" value="<?php if ($clients['enrollment_verified_date']) {
                                                                     print_r($clients['enrollment_verified_date']);
-                                                                } ?>" <?php if ($user->data()->position != 3) { ?> readonly
-                                                                <?php } ?> />
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8688,7 +8703,8 @@ if ($user->isLoggedIn()) {
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <a href="info.php?id=3" class="btn btn-default">Back</a>
+                                            <a href="info.php?id=3&status=<?= $_GET['status'] ?>"
+                                                class="btn btn-default">Back</a>
                                             <input type="submit" name="add_enrollment_form" value="Submit"
                                                 class="btn btn-primary">
                                         </div>
@@ -9091,8 +9107,8 @@ if ($user->isLoggedIn()) {
                                                                 results</label>
                                                             <input type="text" value="<?php if ($costing['fm_results']) {
                                                                 print_r($costing['fm_results']);
-                                                            } ?>" id="fm_results" name="fm_results" class="form-control"
-                                                                placeholder="Enter here" />
+                                                            } ?>" id="fm_results" name="fm_results"
+                                                                class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
 
@@ -9175,8 +9191,8 @@ if ($user->isLoggedIn()) {
                                                             ljculres_date</label>
                                                         <input type="date" value="<?php if ($costing['ljculres_date']) {
                                                             print_r($costing['ljculres_date']);
-                                                        } ?>" id="ljculres_date" name="ljculres_date" class="form-control"
-                                                            placeholder="Enter here" />
+                                                        } ?>" id="ljculres_date" name="ljculres_date"
+                                                            class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -9214,8 +9230,8 @@ if ($user->isLoggedIn()) {
                                                             mgitcul_date</label>
                                                         <input type="date" value="<?php if ($costing['mgitcul_date']) {
                                                             print_r($costing['mgitcul_date']);
-                                                        } ?>" id="mgitcul_date" name="mgitcul_date" class="form-control"
-                                                            placeholder="Enter here" />
+                                                        } ?>" id="mgitcul_date" name="mgitcul_date"
+                                                            class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
@@ -9998,8 +10014,8 @@ if ($user->isLoggedIn()) {
                                                             myco_lineage</label>
                                                         <input type="text" value="<?php if ($costing['myco_lineage']) {
                                                             print_r($costing['myco_lineage']);
-                                                        } ?>" id="myco_lineage" name="myco_lineage" class="form-control"
-                                                            placeholder="Enter date" />
+                                                        } ?>" id="myco_lineage" name="myco_lineage"
+                                                            class="form-control" placeholder="Enter date" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -10404,7 +10420,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
