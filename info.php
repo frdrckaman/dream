@@ -1681,13 +1681,13 @@ if ($user->isLoggedIn()) {
                                                     <td>
                                                         <?php if ($override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
                                                             <a href="add.php?id=11&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
-                                                                role=" button" class="btn btn-info"> Update Respiratory Sample
-                                                                Data </a>&nbsp;&nbsp; <br><br>
+                                                                role=" button" class="btn btn-info"> Update Respiratory Sample Data ( Laboratory form )
+                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                         <?php } else { ?>
                                                                     <a href="add.php?id=11&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
-                                                                role=" button" class="btn btn-warning"> Add Respiratory Sample
-                                                                Data </a>&nbsp;&nbsp; <br><br>
+                                                                role=" button" class="btn btn-warning"> Add Respiratory Sample Data ( Laboratory form )
+                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                         <?php } ?>
 
@@ -1699,12 +1699,12 @@ if ($user->isLoggedIn()) {
                                                         <?php if ($override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
                                                                     <a href="add.php?id=12&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-info"> Update Diagnostic Test
-                                                                Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
+                                                                Non-respiratory Samples Data ( Laboratory form ) </a>&nbsp;&nbsp; <br><br>
 
                                                         <?php } else { ?>
                                                                     <a href="add.php?id=12&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-warning"> Add Diagnostic Test
-                                                                Non-respiratory Samples Data </a>&nbsp;&nbsp; <br><br>
+                                                                Non-respiratory Samples Data ( Laboratory form ) </a>&nbsp;&nbsp; <br><br>
 
                                                         <?php } ?>
                                                         <?php
