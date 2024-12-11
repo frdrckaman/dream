@@ -881,10 +881,11 @@ if ($user->isLoggedIn()) {
                             'tests_conducted' => Input::get('tests_conducted'),
                             'tests_conducted_other' => Input::get('tests_conducted_other'),
                             'test_results' => Input::get('test_results'),
+                            'sample_name_2' => Input::get('sample_name_2'),
                             'tests_conducted_2' => Input::get('tests_conducted_2'),
                             'tests_conducted_other2' => Input::get('tests_conducted_other2'),
-                            'remarks' => Input::get('remarks'),
                             'test_results_2' => Input::get('test_results_2'),
+                            'remarks' => Input::get('remarks'),
                             'form_completness' => Input::get('form_completness'),
                             'date_completed' => Input::get('date_completed'),
                             'non_respiratory_completed' => Input::get('non_respiratory_completed'),
@@ -905,10 +906,11 @@ if ($user->isLoggedIn()) {
                             'tests_conducted' => Input::get('tests_conducted'),
                             'tests_conducted_other' => Input::get('tests_conducted_other'),
                             'test_results' => Input::get('test_results'),
+                            'sample_name_2' => Input::get('sample_name_2'),
                             'tests_conducted_2' => Input::get('tests_conducted_2'),
                             'tests_conducted_other2' => Input::get('tests_conducted_other2'),
-                            'remarks' => Input::get('remarks'),
                             'test_results_2' => Input::get('test_results_2'),
+                            'remarks' => Input::get('remarks'),
                             'form_completness' => Input::get('form_completness'),
                             'date_completed' => Input::get('date_completed'),
                             'non_respiratory_completed' => Input::get('non_respiratory_completed'),
@@ -4584,7 +4586,7 @@ if ($user->isLoggedIn()) {
                                                     <div class="mb-2">
                                                         <label for="sample_name" id="sample_name"
                                                             class="form-label">16(1)a. Sample </label>
-                                                        <input type="date" value="<?php if ($costing['sample_name']) {
+                                                        <input type="text" value="<?php if ($costing['sample_name']) {
                                                             print_r($costing['sample_name']);
                                                         } ?>" id="sample_name" name="sample_name"
                                                             class="form-control" placeholder="Enter here" />
@@ -4616,7 +4618,7 @@ if ($user->isLoggedIn()) {
                                                             <textarea class="form-control" name="tests_conducted_other" rows="3"
                                                                 placeholder="Type comments here..."><?php if ($costing['tests_conducted_other']) {
                                                             print_r($costing['tests_conducted_other']);
-                                                        } ?>
+                                                        } ?></textarea>
                                                     </div>
                                                 </div>                                            
 
@@ -4651,16 +4653,16 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-4">
                                                     <div class="mb-2">
                                                         <label for="sample_name2" id="sample_name2"
-                                                            class="form-label">16(1)a. Sample </label>
-                                                        <input type="date" value="<?php if ($costing['sample_name2']) {
-                                                            print_r($costing['sample_name2']);
-                                                        } ?>" id="sample_name2" name="sample_name2"
+                                                            class="form-label">16(2)a. Sample </label>
+                                                        <input type="text" value="<?php if ($costing['sample_name_2']) {
+                                                            print_r($costing['sample_name_2']);
+                                                        } ?>" id="sample_name_2" name="sample_name_2"
                                                             class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-4" id="tests_conducted_2">
-                                                    <label for="tests_conducted_2" class="form-label">16(1)b. Test(s) conducted </label>
+                                                    <label for="tests_conducted_2" class="form-label">16(2)b. Test(s) conducted </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -4681,15 +4683,15 @@ if ($user->isLoggedIn()) {
 
                                                         </div>
                                                          <label>If Other Specify</label>
-                                                            <textarea class="form-control" name="tests_conducted_other" rows="3"
-                                                                placeholder="Type comments here..."><?php if ($costing['tests_conducted_other']) {
-                                                            print_r($costing['tests_conducted_other']);
-                                                        } ?>
+                                                            <textarea class="form-control" name="tests_conducted_other2" rows="3"
+                                                                placeholder="Type comments here..."><?php if ($costing['tests_conducted_other2']) {
+                                                            print_r($costing['tests_conducted_other2']);
+                                                        } ?></textarea>
                                                     </div>
                                                 </div>                                            
 
                                                 <div class="col-sm-4" id="test_results_2">
-                                                    <label for="test_results_2" class="form-label">16(1)c. Test result</label>
+                                                    <label for="test_results_2" class="form-label">16(2)c. Test result</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -4730,7 +4732,7 @@ if ($user->isLoggedIn()) {
                                                             <textarea class="form-control" name="remarks" rows="3"
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
-                                                                } ?>
+                                                                } ?></textarea>
                                                                                                                                                                                                                                                                                         </textarea>
                                                         </div>
                                                     </div>
