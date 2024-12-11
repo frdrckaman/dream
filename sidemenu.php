@@ -246,15 +246,15 @@ if ($user->isLoggedIn()) {
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <!-- <li class="nav-item">
-                            <a href="add.php?id=4&status=1" class="nav-link">
+                        <li class="nav-item">
+                            <a href="add.php?id=6&status=1" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Add
                                     <span class="right badge badge-danger">New Patient</span>
                                 </p>
                             </a>
-                        </li> -->
+                        </li>
                         <li class="nav-item">
                             <a href="info.php?id=3&status=1" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
