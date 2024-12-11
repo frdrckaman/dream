@@ -773,23 +773,24 @@ if ($user->isLoggedIn()) {
                             'appearance' => Input::get('appearance'),
                             'sample_volume' => Input::get('sample_volume'),
                             'afb_microscopy' => Input::get('afb_microscopy'),
-                            'afb_microscopy_date' => Input::get('afb_microscopy_date'),
-                            'zn_results_a' => Input::get('zn_results_a'),
-                            'zn_results_b' => Input::get('zn_results_b'),
-                            'fm_results_a' => Input::get('fm_results_a'),
-                            'fm_results_b' => Input::get('fm_results_b'),
-                            'wrd_test' => Input::get('wrd_test'),
-                            'wrd_test_date' => Input::get('wrd_test_date'),
-                            'sequence_done' => Input::get('sequence_done'),
-                            'sequence_date' => Input::get('sequence_date'),
-                            'sequence_type' => Input::get('sequence_type'),
-                            'sequence_number' => Input::get('sequence_number'),
-                            'mtb_detection' => Input::get('mtb_detection'),
-                            'rif_resistance' => Input::get('rif_resistance'),
+                            'afb_microscopy_a' => Input::get('afb_microscopy_a'),
+                            'afb_a_results' => Input::get('afb_a_results'),
+                            'afb_a_date' => Input::get('afb_a_date'),
+                            'afb_microscopy_b' => Input::get('afb_microscopy_b'),
+                            'afb_b_results' => Input::get('afb_b_results'),
+                            'afb_b_date' => Input::get('afb_b_date'),
+                            'xpert_date' => Input::get('xpert_date'),
+                            'xpert_mtb' => Input::get('xpert_mtb'),
+                            'xpert_error_code' => Input::get('xpert_error_code'),
+                            'xpert_rif' => Input::get('xpert_rif'),
                             'ct_value' => Input::get('ct_value'),
-                            'test_repeatition' => Input::get('test_repeatition'),
-                            'microscopy_reason' => Input::get('microscopy_reason'),
-                            'microscopy_reason_other' => Input::get('microscopy_reason_other'),
+                            'ct_na' => Input::get('ct_na'),
+                            'xpert_date_repeat' => Input::get('xpert_date_repeat'),
+                            'xpert_mtb_repeat' => Input::get('xpert_mtb_repeat'),
+                            'xpert_error_repeat' => Input::get('xpert_error_repeat'),
+                            'xpert_rif_repeat' => Input::get('xpert_rif_repeat'),
+                            'ct_value_repeat' => Input::get('ct_value_repeat'),
+                            'ct_repeat_na' => Input::get('ct_repeat_na'),
                             'respiratory_completness' => Input::get('respiratory_completness'),
                             'comments' => Input::get('comments'),
                             'date_completed' => Input::get('date_completed'),
@@ -799,42 +800,7 @@ if ($user->isLoggedIn()) {
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                             'facility_id' => $clients['facility_id'],
-                        ), $costing[0]['id']);
-
-                        $respiratory_repeated_tests = $override->get3('respiratory_repeated_tests', 'enrollment_id', $clients['id'], 'status', 1, 'respiratory_id', $costing[0]['id']);
-
-                        if ($respiratory_repeated_tests) {
-                            $user->updateRecord('respiratory_repeated_tests', array(
-                                'respiratory_id' => $costing[0]['id'],
-                                'sequence_type' => Input::get('sequence_type2'),
-                                'sequence_number' => Input::get('sequence_number2'),
-                                'mtb_detection' => Input::get('mtb_detection2'),
-                                'rif_resistance' => Input::get('rif_resistance2'),
-                                'ct_value' => Input::get('ct_value2'),
-                                'test_repeatition' => Input::get('test_repeatition'),
-                                'enrollment_id' => $_GET['enrollment_id'],
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'facility_id' => $clients['facility_id'],
-                            ), $respiratory_repeated_tests[0]['id']);
-                        } else {
-                            $user->createRecord('respiratory_repeated_tests', array(
-                                'respiratory_id' => $costing[0]['id'],
-                                'sequence_type' => Input::get('sequence_type2'),
-                                'sequence_number' => Input::get('sequence_number2'),
-                                'mtb_detection' => Input::get('mtb_detection2'),
-                                'rif_resistance' => Input::get('rif_resistance2'),
-                                'ct_value' => Input::get('ct_value2'),
-                                'test_repeatition' => Input::get('test_repeatition'),
-                                'enrollment_id' => $_GET['enrollment_id'],
-                                'status' => 1,
-                                'create_on' => date('Y-m-d H:i:s'),
-                                'staff_id' => $user->data()->id,
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'facility_id' => $clients['facility_id'],
-                            ));
-                        }
+                        ), $costing[0]['id']);                       
 
                         $successMessage = 'Respiratory Data  Successful Updated';
                     } else {
@@ -854,23 +820,27 @@ if ($user->isLoggedIn()) {
                             'appearance' => Input::get('appearance'),
                             'sample_volume' => Input::get('sample_volume'),
                             'afb_microscopy' => Input::get('afb_microscopy'),
-                            'afb_microscopy_date' => Input::get('afb_microscopy_date'),
-                            'zn_results_a' => Input::get('zn_results_a'),
-                            'zn_results_b' => Input::get('zn_results_b'),
-                            'fm_results_a' => Input::get('fm_results_a'),
-                            'fm_results_b' => Input::get('fm_results_b'),
-                            'wrd_test' => Input::get('wrd_test'),
-                            'wrd_test_date' => Input::get('wrd_test_date'),
-                            'sequence_done' => Input::get('sequence_done'),
-                            'sequence_date' => Input::get('sequence_date'),
-                            'sequence_type' => Input::get('sequence_type'),
+                            'afb_microscopy_a' => Input::get('afb_microscopy_a'),
+                            'afb_a_results' => Input::get('afb_a_results'),
+                            'afb_a_date' => Input::get('afb_a_date'),
+                            'afb_microscopy_b' => Input::get('afb_microscopy_b'),
+                            'afb_b_results' => Input::get('afb_b_results'),
+                            'afb_b_date' => Input::get('afb_b_date'),
+                            'xpert_date' => Input::get('xpert_date'),
+                            'xpert_mtb' => Input::get('xpert_mtb'),
+                            'xpert_error_code' => Input::get('xpert_error_code'),
+                            'xpert_rif' => Input::get('xpert_rif'),
                             'sequence_number' => Input::get('sequence_number'),
                             'mtb_detection' => Input::get('mtb_detection'),
                             'rif_resistance' => Input::get('rif_resistance'),
                             'ct_value' => Input::get('ct_value'),
-                            'test_repeatition' => Input::get('test_repeatition'),
-                            'microscopy_reason' => Input::get('microscopy_reason'),
-                            'microscopy_reason_other' => Input::get('microscopy_reason_other'),
+                            'ct_na' => Input::get('ct_na'),
+                            'xpert_date_repeat' => Input::get('xpert_date_repeat'),
+                            'xpert_mtb_repeat' => Input::get('xpert_mtb_repeat'),
+                            'xpert_error_repeat' => Input::get('xpert_error_repeat'),
+                            'xpert_rif_repeat' => Input::get('xpert_rif_repeat'),
+                            'ct_value_repeat' => Input::get('ct_value_repeat'),
+                            'ct_repeat_na' => Input::get('ct_repeat_na'),
                             'respiratory_completness' => Input::get('respiratory_completness'),
                             'comments' => Input::get('comments'),
                             'date_completed' => Input::get('date_completed'),
@@ -884,44 +854,7 @@ if ($user->isLoggedIn()) {
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                             'facility_id' => $clients['facility_id'],
-                        ));
-
-                        $last_row = $override->lastRow('respiratory', 'id')[0];
-
-                        $respiratory_repeated_tests = $override->get3('respiratory_repeated_tests', 'enrollment_id', $clients['id'], 'status', 1, 'respiratory_id', $last_row['id']);
-
-                        if ($respiratory_repeated_tests) {
-                            $user->updateRecord('respiratory_repeated_tests', array(
-                                'respiratory_id' => $last_row['id'],
-                                'sequence_type' => Input::get('sequence_type2'),
-                                'sequence_number' => Input::get('sequence_number2'),
-                                'mtb_detection' => Input::get('mtb_detection2'),
-                                'rif_resistance' => Input::get('rif_resistance2'),
-                                'ct_value' => Input::get('ct_value2'),
-                                'test_repeatition' => Input::get('test_repeatition'),
-                                'enrollment_id' => $_GET['enrollment_id'],
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'facility_id' => $clients['facility_id'],
-                            ), $respiratory_repeated_tests[0]['id']);
-                        } else {
-                            $user->createRecord('respiratory_repeated_tests', array(
-                                'respiratory_id' => $last_row['id'],
-                                'sequence_type' => Input::get('sequence_type2'),
-                                'sequence_number' => Input::get('sequence_number2'),
-                                'mtb_detection' => Input::get('mtb_detection2'),
-                                'rif_resistance' => Input::get('rif_resistance2'),
-                                'ct_value' => Input::get('ct_value2'),
-                                'test_repeatition' => Input::get('test_repeatition'),
-                                'enrollment_id' => $_GET['enrollment_id'],
-                                'status' => 1,
-                                'create_on' => date('Y-m-d H:i:s'),
-                                'staff_id' => $user->data()->id,
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'facility_id' => $clients['facility_id'],
-                            ));
-                        }
+                        ));                      
 
                         $successMessage = 'Respiratory Data  Successful Added';
                     }
@@ -4386,32 +4319,31 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
-                                            <label for="afb_b_date" id="afb_b_date" class="form-label">10. Repeat Xpert
-                                                MTB/RIF (Ultra) test result</label>
+                                            <label for="xpert_results" id="xpert_results" class="form-label">10. Xpert MTB/RIF (Ultra) test Result (at TB clinic)</label>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-4" id="fm_results_b">
+                                                <div class="col-4" id="xpert_date1">
                                                     <div class="mb-3">
-                                                        <label for="afb_b_date" id="afb_b_date" class="form-label">10a.
+                                                        <label for="xpert_date" id="xpert_date" class="form-label">10a.
                                                             Date</label>
-                                                        <input type="date" value="<?php if ($costing['afb_b_date']) {
-                                                            print_r($costing['afb_b_date']);
-                                                        } ?>" id="afb_b_date" name="afb_b_date" class="form-control"
+                                                        <input type="date" value="<?php if ($costing['xpert_date']) {
+                                                            print_r($costing['xpert_date']);
+                                                        } ?>" id="xpert_date" name="xpert_date" class="form-control"
                                                             placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="sequence_type">
-                                                    <label for="sequence_type" class="form-label">10b. MTB</label>
+                                                <div class="col-sm-4" id="xpert_mtb">
+                                                    <label for="xpert_mtb" class="form-label">10b. MTB</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sequence_type', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('mtb_detections', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="sequence_type"
-                                                                        id="sequence_type<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['sequence_type'] == $value['id']) {
+                                                                        name="xpert_mtb"
+                                                                        id="xpert_mtb<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['xpert_mtb'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
                                                                     <label
@@ -4419,21 +4351,21 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                             <button type="button"
-                                                                onclick="unsetRadio('sequence_type')">Unset</button>
+                                                                onclick="unsetRadio('xpert_mtb')">Unset</button>
 
                                                         </div>
-                                                        <label for="sequence_number" id="sequence_number1"
+                                                        <label for="xpert_error_code" id="xpert_error_code1"
                                                             class="form-label">If error, code </label>
-                                                        <input type="text" value="<?php if ($costing['sequence_number']) {
-                                                            print_r($costing['sequence_number']);
-                                                        } ?>" id="sequence_number" name="sequence_number"
+                                                        <input type="text" value="<?php if ($costing['xpert_error_code']) {
+                                                            print_r($costing['xpert_error_code']);
+                                                        } ?>" id="xpert_error_code" name="xpert_error_code"
                                                             class="form-control" placeholder="Enter here" />
                                                     </div>
 
                                                 </div>
 
-                                                <div class="col-sm-4" id="rif_resistance">
-                                                    <label for="rif_resistance" class="form-label">10c. RIF
+                                                <div class="col-sm-4" id="xpert_rif">
+                                                    <label for="xpert_rif" class="form-label">10c. RIF
                                                         resistance</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4441,9 +4373,9 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="rif_resistance"
-                                                                        id="rif_resistance<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['rif_resistance'] == $value['id']) {
+                                                                        name="xpert_rif"
+                                                                        id="xpert_rif<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['xpert_rif'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
                                                                     <label
@@ -4452,7 +4384,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                         <button type="button"
-                                                            onclick="unsetRadio('rif_resistance')">Unset</button>
+                                                            onclick="unsetRadio('xpert_rif')">Unset</button>
 
                                                     </div>
                                                 </div>
@@ -4477,28 +4409,28 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-4" id="fm_results_b">
+                                                <div class="col-4" id="xpert_date_repeat1">
                                                     <div class="mb-3">
-                                                        <label for="afb_b_date" id="afb_b_date" class="form-label">13a.
+                                                        <label for="xpert_date_repeat" id="xpert_date_repeat" class="form-label">13a.
                                                             Date</label>
-                                                        <input type="date" value="<?php if ($costing['afb_b_date']) {
-                                                            print_r($costing['afb_b_date']);
-                                                        } ?>" id="afb_b_date" name="afb_b_date" class="form-control"
+                                                        <input type="date" value="<?php if ($costing['xpert_date_repeat']) {
+                                                            print_r($costing['xpert_date_repeat']);
+                                                        } ?>" id="xpert_date_repeat" name="xpert_date_repeat" class="form-control"
                                                             placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="sequence_type">
-                                                    <label for="sequence_type" class="form-label">13b. MTB</label>
+                                                <div class="col-sm-4" id="xpert_mtb_repeat">
+                                                    <label for="xpert_mtb_repeat" class="form-label">13b. MTB</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('sequence_type', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('mtb_detections', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="sequence_type"
-                                                                        id="sequence_type<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['sequence_type'] == $value['id']) {
+                                                                        name="xpert_mtb_repeat"
+                                                                        id="xpert_mtb_repeat<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['xpert_mtb_repeat'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
                                                                     <label
@@ -4506,22 +4438,21 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                             <button type="button"
-                                                                onclick="unsetRadio('sequence_type')">Unset</button>
+                                                                onclick="unsetRadio('xpert_mtb_repeat')">Unset</button>
 
                                                         </div>
-                                                        <label for="sequence_number" id="sequence_number1"
-                                                            class="form-label">If
-                                                            error, code </label>
-                                                        <input type="text" value="<?php if ($costing['sequence_number']) {
-                                                            print_r($costing['sequence_number']);
-                                                        } ?>" id="sequence_number" name="sequence_number"
+                                                        <label for="xpert_error_repeat" id="xpert_error_repeat"
+                                                            class="form-label">If error, code </label>
+                                                        <input type="text" value="<?php if ($costing['xpert_error_repeat']) {
+                                                            print_r($costing['xpert_error_repeat']);
+                                                        } ?>" id="xpert_error_repeat" name="xpert_error_repeat"
                                                             class="form-control" placeholder="Enter here" />
                                                     </div>
 
                                                 </div>
 
-                                                <div class="col-sm-4" id="rif_resistance">
-                                                    <label for="rif_resistance" class="form-label">13c. RIF
+                                                <div class="col-sm-4" id="xpert_rif_repeat">
+                                                    <label for="xpert_rif_repeat" class="form-label">13c. RIF
                                                         resistance</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4529,9 +4460,9 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="rif_resistance"
-                                                                        id="rif_resistance<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['rif_resistance'] == $value['id']) {
+                                                                        name="xpert_rif_repeat"
+                                                                        id="xpert_rif_repeat<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['xpert_rif_repeat'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
                                                                     <label
@@ -4540,19 +4471,19 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                         <button type="button"
-                                                            onclick="unsetRadio('rif_resistance')">Unset</button>
+                                                            onclick="unsetRadio('xpert_rif_repeat')">Unset</button>
 
                                                     </div>
                                                 </div>
                                             </div>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-12" id="ct_value1">
+                                                <div class="col-12" id="ct_value_repeat1">
                                                     <div class="mb-3">
-                                                        <label for="ct_value" class="form-label">14b. SPC-Ct value</label>
-                                                        <input type="number" value="<?php if ($costing['ct_value']) {
-                                                            print_r($costing['ct_value']);
-                                                        } ?>" id="ct_value" name="ct_value" min="0" max="99"
+                                                        <label for="ct_value_repeat" class="form-label">14b. SPC-Ct value</label>
+                                                        <input type="number" value="<?php if ($costing['ct_value_repeat']) {
+                                                            print_r($costing['ct_value_repeat']);
+                                                        } ?>" id="ct_value_repeat" name="ct_value_repeat" min="0" max="99"
                                                             class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
