@@ -10239,8 +10239,8 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/respiratory/sequence_type2.js"></script>
     <script src="myjs/add/respiratory/test_reasons.js"></script>
     <script src="myjs/add/respiratory/test_rejected.js"></script>
-    <script src="myjs/add/respiratory/test_repeatition.js"></script>
-    <script src="myjs/add/respiratory/wrd_test.js"></script>
+    <script src="myjs/add/respiratory/na.js"></script>
+    <script src="myjs/add/respiratory/na2.js"></script>
     <script src="myjs/add/respiratory/sample_reason.js"></script>
 
 
