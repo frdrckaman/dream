@@ -978,11 +978,11 @@ if ($user->isLoggedIn()) {
                                 <h1>
                                     <?php
                                     if ($_GET['status'] == 1) {
-                                        $data = $override->get('enrollment_form', 'status', 1);
+                                        $data = $override->getNews('enrollment_form', 'status', 1,'facility_id', $user->data()->site_id);
                                     } else if ($_GET['status'] == 2) {
-                                        $data = $override->get('enrollment_form', 'status', 0);
+                                        $data = $override->getNews('enrollment_form', 'status', 0,'facility_id', $user->data()->site_id);
                                     } else {
-                                        $data = $override->get('enrollment_form', 'status', 0);
+                                        $data = $override->getNews('enrollment_form', 'status', 0,'facility_id', $user->data()->site_id);
                                     }
                                     ?>
                                     <?php
