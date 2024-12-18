@@ -12,7 +12,7 @@ const tb_regimen = document.getElementById("tb_regimen");
 const regimen_months1 = document.getElementById("regimen_months1");
 const regimen_changed = document.getElementById("regimen_changed");
 const regimen_name1_1 = document.getElementById("regimen_name1");
-const tb_otcome1 = document.getElementById("tb_otcome1");
+const tb_otcome1_1_1_1 = document.getElementById("tb_otcome1_1_1_1");
 
 const tb_category1_1 = document.getElementById("tb_category1");
 const tb_category1_2 = document.getElementById("tb_category2");
@@ -29,7 +29,7 @@ function toggleElementVisibility() {
     tb_regimen.style.display = "block";
     regimen_months1.style.display = "block";
     regimen_changed.style.display = "block";
-    tb_otcome1.style.display = "block";
+    tb_otcome1_1_1_1.style.display = "block";
     if (tb_category1_1.checked) {
       relapse_years1_1.style.display = "block";
       ltf_months1_1.style.display = "none";
@@ -53,7 +53,7 @@ function toggleElementVisibility() {
     regimen_months1.style.display = "none";
     regimen_changed.style.display = "none";
     regimen_name1_1.style.display = "none";
-    tb_otcome1.style.display = "none";
+    tb_otcome1_1_1_1.style.display = "none";
   } else {
     tx_number1.style.display = "none";
     dr_ds1.style.display = "none";
@@ -64,7 +64,7 @@ function toggleElementVisibility() {
     regimen_months1.style.display = "none";
     regimen_changed.style.display = "none";
     regimen_name1_1.style.display = "none";
-    tb_otcome1.style.display = "none";
+    tb_otcome1_1_1_1.style.display = "none";
   }
 }
 

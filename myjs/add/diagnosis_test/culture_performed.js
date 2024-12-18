@@ -1,18 +1,19 @@
 const culture_performed1 = document.getElementById("culture_performed1");
 const culture_performed2 = document.getElementById("culture_performed2");
 
-const culture_type = document.getElementById("culture_type");
-const sample_methods = document.getElementById("sample_methods");
+
+const culture_method = document.getElementById("culture_method");
+const culture_results = document.getElementById("culture_results");
+
+
 
 function toggleElementVisibility() {
   if (culture_performed1.checked) {
-    culture_type.style.display = "block";
-    // qn05_other.setAttribute("required", "required");
-    sample_methods.style.display = "block";
+    culture_method.style.display = "block";
+    culture_results.style.display = "block";
   } else {
-    culture_type.style.display = "none";
-    // qn05_other.removeAttribute("required");
-    sample_methods.style.display = "none";
+    culture_method.style.display = "none";
+    culture_results.style.display = "none";
   }
 }
 
