@@ -5673,8 +5673,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr>
-                                            <div>
+                                            <hr id="'xpert_xdr_results_r">
+                                            <div id="xpert_xdr_results">
                                                 <div class="row">
                                                     <div class="col-sm-4" id="isoniazid2">
                                                         <label for="isoniazid2" class="form-label">19a. Isoniazid</label>
@@ -10619,30 +10619,10 @@ if ($user->isLoggedIn()) {
 
 
     <!-- Diagnosis Test format numbers Js -->
-    <script src="myjs/add/diagnosis_test/sample_methods.js"></script>
-    <script src="myjs/add/diagnosis_test/qn79.js"></script>
-    <script src="myjs/add/diagnosis_test/qn80.js"></script>
-    <script src="myjs/add/diagnosis_test/qn81.js"></script>
-    <script src="myjs/add/diagnosis_test/qn82.js"></script>
-    <script src="myjs/add/diagnosis_test/qn83.js"></script>
-    <script src="myjs/add/diagnosis_test/qn84.js"></script>
-    <script src="myjs/add/diagnosis_test/qn85.js"></script>
-    <script src="myjs/add/diagnosis_test/qn86.js"></script>
-    <script src="myjs/add/diagnosis_test/qn87.js"></script>
-    <script src="myjs/add/diagnosis_test/qn88.js"></script>
-    <script src="myjs/add/diagnosis_test/qn89.js"></script>
-    <script src="myjs/add/diagnosis_test/qn90.js"></script>
-    <script src="myjs/add/diagnosis_test/qn91.js"></script>
-    <script src="myjs/add/diagnosis_test/qn92.js"></script>
-    <script src="myjs/add/diagnosis_test/qn93.js"></script>
-    <script src="myjs/add/diagnosis_test/amikacin2.js"></script>
-    <script src="myjs/add/diagnosis_test/capreomycin.js"></script>
-    <script src="myjs/add/diagnosis_test/ethionamide2.js"></script>
-    <script src="myjs/add/diagnosis_test/fluoroquinolones.js"></script>
-    <script src="myjs/add/diagnosis_test/isoniazid2.js"></script>
-    <script src="myjs/add/diagnosis_test/kanamycin.js"></script>
-    <script src="myjs/add/diagnosis_test/"></script>
-    <script src="myjs/add/diagnosis_test"></script>
+    <script src="myjs/add/diagnosis_test/culture_performed.js"></script>
+    <script src="myjs/add/diagnosis_test/phenotypic_performed.js"></script>
+    <script src="myjs/add/diagnosis_test/culture_results.js"></script>
+    <script src="myjs/add/diagnosis_test/xpert_xdr_results.js"></script>
 
 
 
