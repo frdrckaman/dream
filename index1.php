@@ -29,10 +29,10 @@ if ($user->isLoggedIn()) {
 
   if ($_GET['site_id'] != null) {
     $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['site_id']);
-    $end = $override->getCount('enrollment_form', 'status', 2);
+    $end = $override->countData('enrollment_form', 'status', 2, 'facility_id', $_GET['site_id']);
   } else {
     $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
-    $end = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
+    $end = $override->countData('enrollment_form', 'status', 2, 'facility_id', $user->data()->site_id);
   }
 } else {
   Redirect::to('index.php');
