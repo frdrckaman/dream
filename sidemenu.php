@@ -36,23 +36,16 @@ if ($user->isLoggedIn()) {
 
 
 
-    if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-        if ($_GET['site_id'] != null) {
-            $screened = $override->getCount('screening', 'status', 1);
-            $eligible = $override->countData('screening', 'status', 1, 'eligible', 1);
-            $enrolled = $override->getCount('enrollment_form', 'status', 1);
-            $validations = $override->getCount('validations', 'status', 1);            
-        } else {
-            $screened = $override->getCount('screening', 'status', 1);
-            $eligible = $override->countData('screening', 'status', 1, 'eligible', 1);
-            $enrolled = $override->getCount('enrollment_form', 'status', 1);
-            $validations = $override->getCount('validations', 'status', 1);            
-        }
+    if ($_GET['site_id'] != null) {
+        $screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['site_id']);
+        $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['site_id']);
+        $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['site_id']);
+        $validations = $override->getCount('validations', 'status', 1);
     } else {
-        $screened = $override->getCount('screening', 'status', 1);
-        $eligible = $override->countData('screening', 'status', 1, 'eligible', 1);
-        $enrolled = $override->getCount('enrollment_form', 'status', 1);
-        $validations = $override->getCount('validations', 'status', 1);            
+        $screened = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
+        $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
+        $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
+        $validations = $override->getCount('validations', 'status', 1);
     }
 } else {
     Redirect::to('index.php');
@@ -64,7 +57,8 @@ if ($user->isLoggedIn()) {
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index1.php" class="brand-link">
-        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
         <span class="brand-text font-weight-light">Dream Database</span>
     </a>
 
@@ -85,7 +79,7 @@ if ($user->isLoggedIn()) {
                 <?php } ?>
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?= $user->data()->firstname . ' - ' . $user->data()->lastname  ?></a>
+                <a href="#" class="d-block"><?= $user->data()->firstname . ' - ' . $user->data()->lastname ?></a>
             </div>
         </div>
 
@@ -130,7 +124,7 @@ if ($user->isLoggedIn()) {
                     </ul>
                 </li>
                 <?php if ($user->data()->power == 1) {
-                ?>
+                    ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -301,7 +295,7 @@ if ($user->isLoggedIn()) {
                     </a> -->
                     <ul class="nav nav-treeview">
                         <?php if ($user->data()->power == 1) {
-                        ?>
+                            ?>
                             <li class="nav-item">
                                 <a href="add.php?id=3" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
@@ -324,7 +318,7 @@ if ($user->isLoggedIn()) {
                 </li>
                 <?php
                 if ($user->data()->power == 1) {
-                ?>
+                    ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -428,7 +422,7 @@ if ($user->isLoggedIn()) {
                     </li>
                 <?php } ?>
                 <?php if ($user->data()->power == 1) {
-                ?>
+                    ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
