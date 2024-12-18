@@ -976,11 +976,11 @@ if ($user->isLoggedIn()) {
 
                         $successMessage = 'Diagnosis Data  Successful Updated';
                     } else {
-                        $user->createRecord('diagnosis', array(
-                            'pid' => $clients['pid'],
-                            'visit_date' => Input::get('visit_date'),
-                            'clinician_name' => Input::get('clinician_name'),
-                            'tb_diagnosis' => Input::get('tb_diagnosis'),
+                        // $user->createRecord('diagnosis', array(
+                        //     'pid' => $clients['pid'],
+                        //     'visit_date' => Input::get('visit_date'),
+                        //     'clinician_name' => Input::get('clinician_name'),
+                        //     'tb_diagnosis' => Input::get('tb_diagnosis'),
                             // 'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
                             // 'diagnosis_made_other' => Input::get('diagnosis_made_other'),
                             // 'bacteriological_diagnosis' => $bacteriological_diagnosis,
@@ -1019,14 +1019,14 @@ if ($user->isLoggedIn()) {
                             // 'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
                             // 'diagnosis_verified_by' => $user->data()->id,
                             // 'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
-                            'status' => 1,
-                            'enrollment_id' => $_GET['enrollment_id'],
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
-                        ));
+                            // 'status' => 1,
+                            // 'enrollment_id' => $_GET['enrollment_id'],
+                            // 'create_on' => date('Y-m-d H:i:s'),
+                            // 'staff_id' => $user->data()->id,
+                            // 'update_on' => date('Y-m-d H:i:s'),
+                            // 'update_id' => $user->data()->id,
+                            // 'facility_id' => $clients['facility_id'],
+                        // ));
 
                         $successMessage = 'Diagnosis Data  Successful Added';
                     }
