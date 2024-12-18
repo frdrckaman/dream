@@ -3,8 +3,8 @@ const sample_received2 = document.getElementById("sample_received2");
 
 const sample_amount = document.getElementById("sample_amount");
 const sample_amount1 = document.getElementById("sample_amount1");
-const sample_reason = document.getElementById("sample_reason");
-const sample_reason1 = document.getElementById("sample_reason1");
+// const sample_reason = document.getElementById("sample_reason");
+// const sample_reason1 = document.getElementById("sample_reason1");
 const sample_received_hides_new = document.getElementById("sample_received_hides_new");
 const sample_received_hides_new_r = document.getElementById("sample_received_hides_new_r");
 
@@ -12,23 +12,23 @@ const sample_received_hides_new_r = document.getElementById("sample_received_hid
 function toggleElementVisibility() {
   if (sample_received1.checked) {
     sample_amount.style.display = "block";
-    sample_amount1.setAttribute("required", "required");
-    sample_reason.style.display = "none";
-    sample_reason1.removeAttribute("required");
+    // sample_amount1.setAttribute("required", "required");
+    // sample_reason.style.display = "none";
+    // sample_reason1.removeAttribute("required");
     sample_received_hides_new_r.style.display = "block";
     sample_received_hides_new.style.display = "block";
   } else if (sample_received2.checked) {
     sample_amount.style.display = "none";
-    sample_amount1.removeAttribute("required");
-    sample_reason.style.display = "block";
-    sample_reason1.setAttribute("required", "required");
+    // sample_amount1.removeAttribute("required");
+    // sample_reason.style.display = "block";
+    // sample_reason1.setAttribute("required", "required");
     sample_received_hides_new_r.style.display = "none";
     sample_received_hides_new.style.display = "none";
   } else {
     sample_amount.style.display = "none";
-    sample_amount1.removeAttribute("required");
-    sample_reason.style.display = "none";
-    sample_reason1.removeAttribute("required");
+    // sample_amount1.removeAttribute("required");
+    // sample_reason.style.display = "none";
+    // sample_reason1.removeAttribute("required");
     sample_received_hides_new_r.style.display = "none";
     sample_received_hides_new.style.display = "none";
   }
