@@ -981,51 +981,51 @@ if ($user->isLoggedIn()) {
                         //     'visit_date' => Input::get('visit_date'),
                         //     'clinician_name' => Input::get('clinician_name'),
                         //     'tb_diagnosis' => Input::get('tb_diagnosis'),
-                            // 'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
-                            // 'diagnosis_made_other' => Input::get('diagnosis_made_other'),
-                            // 'bacteriological_diagnosis' => $bacteriological_diagnosis,
-                            // 'clinician_received_date' => Input::get('clinician_received_date'),
-                            // 'xpert_truenat_date' => Input::get('xpert_truenat_date'),
-                            // 'other_bacteriological' => Input::get('other_bacteriological'),
-                            // 'other_bacteriological_date' => Input::get('other_bacteriological_date'),
-                            // 'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
-                            // 'tb_clinically_other' => Input::get('tb_clinically_other'),
-                            // 'tb_treatment' => Input::get('tb_treatment'),
-                            // 'tb_treatment_date' => Input::get('tb_treatment_date'),
-                            // 'tb_facility' => Input::get('tb_facility'),
-                            // 'tb_reason' => Input::get('tb_reason'),
-                            // 'tb_regimen' => Input::get('tb_regimen'),
-                            // 'tb_regimen_other' => Input::get('tb_regimen_other'),
-                            // 'tb_regimen_based' => Input::get('tb_regimen_based'),
-                            // 'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
-                            // 'regimen_changed' => Input::get('regimen_changed'),
-                            // 'regimen_changed_other' => Input::get('regimen_changed_other'),
-                            // 'regimen_changed__date' => Input::get('regimen_changed__date'),
-                            // 'regimen_removed_name' => Input::get('regimen_removed_name'),
-                            // 'regimen_added_name' => Input::get('regimen_added_name'),
-                            // 'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
-                            // 'regimen_changed__reason' => Input::get('regimen_changed__reason'),
-                            // 'tb_otcome2' => Input::get('tb_otcome2'),
-                            // 'tb_otcome2_date' => Input::get('tb_otcome2_date'),
-                            // 'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
-                            // 'tb_other_specify' => Input::get('tb_other_specify'),
-                            // 'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
-                            // 'laboratory_test_used' => $laboratory_test_used,
-                            // 'laboratory_test_used2' => $laboratory_test_used2,
-                            // 'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                            // 'comments' => Input::get('comments'),
-                            // 'diagnosis_completness' => Input::get('diagnosis_completness'),
-                            // 'diagnosis_completed_by' => $user->data()->id,
-                            // 'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
-                            // 'diagnosis_verified_by' => $user->data()->id,
-                            // 'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
-                            // 'status' => 1,
-                            // 'enrollment_id' => $_GET['enrollment_id'],
-                            // 'create_on' => date('Y-m-d H:i:s'),
-                            // 'staff_id' => $user->data()->id,
-                            // 'update_on' => date('Y-m-d H:i:s'),
-                            // 'update_id' => $user->data()->id,
-                            // 'facility_id' => $clients['facility_id'],
+                        // 'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
+                        // 'diagnosis_made_other' => Input::get('diagnosis_made_other'),
+                        // 'bacteriological_diagnosis' => $bacteriological_diagnosis,
+                        // 'clinician_received_date' => Input::get('clinician_received_date'),
+                        // 'xpert_truenat_date' => Input::get('xpert_truenat_date'),
+                        // 'other_bacteriological' => Input::get('other_bacteriological'),
+                        // 'other_bacteriological_date' => Input::get('other_bacteriological_date'),
+                        // 'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
+                        // 'tb_clinically_other' => Input::get('tb_clinically_other'),
+                        // 'tb_treatment' => Input::get('tb_treatment'),
+                        // 'tb_treatment_date' => Input::get('tb_treatment_date'),
+                        // 'tb_facility' => Input::get('tb_facility'),
+                        // 'tb_reason' => Input::get('tb_reason'),
+                        // 'tb_regimen' => Input::get('tb_regimen'),
+                        // 'tb_regimen_other' => Input::get('tb_regimen_other'),
+                        // 'tb_regimen_based' => Input::get('tb_regimen_based'),
+                        // 'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
+                        // 'regimen_changed' => Input::get('regimen_changed'),
+                        // 'regimen_changed_other' => Input::get('regimen_changed_other'),
+                        // 'regimen_changed__date' => Input::get('regimen_changed__date'),
+                        // 'regimen_removed_name' => Input::get('regimen_removed_name'),
+                        // 'regimen_added_name' => Input::get('regimen_added_name'),
+                        // 'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
+                        // 'regimen_changed__reason' => Input::get('regimen_changed__reason'),
+                        // 'tb_otcome2' => Input::get('tb_otcome2'),
+                        // 'tb_otcome2_date' => Input::get('tb_otcome2_date'),
+                        // 'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
+                        // 'tb_other_specify' => Input::get('tb_other_specify'),
+                        // 'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
+                        // 'laboratory_test_used' => $laboratory_test_used,
+                        // 'laboratory_test_used2' => $laboratory_test_used2,
+                        // 'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
+                        // 'comments' => Input::get('comments'),
+                        // 'diagnosis_completness' => Input::get('diagnosis_completness'),
+                        // 'diagnosis_completed_by' => $user->data()->id,
+                        // 'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
+                        // 'diagnosis_verified_by' => $user->data()->id,
+                        // 'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                        // 'status' => 1,
+                        // 'enrollment_id' => $_GET['enrollment_id'],
+                        // 'create_on' => date('Y-m-d H:i:s'),
+                        // 'staff_id' => $user->data()->id,
+                        // 'update_on' => date('Y-m-d H:i:s'),
+                        // 'update_id' => $user->data()->id,
+                        // 'facility_id' => $clients['facility_id'],
                         // ));
 
                         $successMessage = 'Diagnosis Data  Successful Added';
@@ -3928,9 +3928,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
 
-                                            <hr id="sample_received_hides_r">
-                                            <div id="sample_received_hides">
-
+                                            <hr id="sample_received_hides_new_r">
+                                            <div id="sample_received_hides_new">
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <!-- Common Label -->
@@ -4005,8 +4004,8 @@ if ($user->isLoggedIn()) {
                                                                 respiratory sample(s) received</label>
                                                             <input type="number" value="<?php if ($costing['sample_number']) {
                                                                 print_r($costing['sample_number']);
-                                                            } ?>" id="sample_number" name="sample_number" min="1" max="2"
-                                                                class="form-control" placeholder="Enter here" />
+                                                            } ?>" id="sample_number" name="sample_number" min="1"
+                                                                max="2" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
 
@@ -4045,8 +4044,8 @@ if ($user->isLoggedIn()) {
                                                                 sample</label>
                                                             <input type="number" value="<?php if ($costing['sample_volume']) {
                                                                 print_r($costing['sample_volume']);
-                                                            } ?>" id="sample_volume" name="sample_volume" min="1" max="5"
-                                                                class="form-control" placeholder="Enter here" />
+                                                            } ?>" id="sample_volume" name="sample_volume" min="1"
+                                                                max="5" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                         <span>mL</span>
                                                     </div>
@@ -4422,7 +4421,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4917,10 +4916,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                                                                                                                                                                                                                                    <?php if ($screening['comments']) {
-                                                                                                                                                                                                                                                                                                                        print_r($screening['comments']);
-                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                        <?php if ($screening['comments']) {
+                                                                                                                                                                                                                                                                                                                            print_r($screening['comments']);
+                                                                                                                                                                                                                                                                                                                        } ?>
+                                                                                                                                                                                                                                                                                                                    </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -6452,7 +6451,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6482,7 +6481,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7096,7 +7095,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10062,7 +10061,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
