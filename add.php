@@ -351,7 +351,8 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 try {
-                    $enrollment_form = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id']);
+                    $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+                    $enrollment_form = $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
                     $diseases_medical = implode(',', Input::get('diseases_medical'));
                     $sputum_samples = implode(',', Input::get('sputum_samples'));
                     if (Input::get('enrollment_completed') == 3 && Input::get('enrollment_verified_date') == "") {
@@ -420,14 +421,14 @@ if ($user->isLoggedIn()) {
                                 'enrollment_verified_date' => Input::get('enrollment_verified_date'),
                                 'update_on' => date('Y-m-d H:i:s'),
                                 'update_id' => $user->data()->id,
-                            ), $_GET['enrollment_id']);
+                            ), $enrollment_form['id']);
 
                             $successMessage = 'Enrollment Form Updated Successful';
                         } else {
-                            $std_id = $override->get('study_id', 'status', 0)[0];
 
-                            $user->createRecord('enrollment_form', array(
-                                'pid' => $std_id['study_id'],
+                            $user->createRecord('enrollment_form', array(                                
+                                'enrollment_id' => $_GET['sid'],
+                                'pid' => $screening['pid'],
                                 'enrollment_date' => Input::get('enrollment_date'),
                                 'dob' => Input::get('dob'),
                                 'age' => Input::get('age'),
@@ -697,16 +698,16 @@ if ($user->isLoggedIn()) {
             }
         } elseif (Input::get('add_respiratory')) {
             $validate = $validate->check($_POST, array(
-                'lab_name' => array(
-                    'required' => true,
-                ),
+                // 'lab_name' => array(
+                //     'required' => true,
+                // ),
                 'sample_received' => array(
                     'required' => true,
                 ),
             ));
             if ($validate->passed()) {
-                $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id'])[0];
-                $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id']);
+                $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+                $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid']);
 
                 $test_reasons = implode(',', Input::get('test_reasons'));
                 $sample_type = implode(',', Input::get('sample_type'));
@@ -802,7 +803,7 @@ if ($user->isLoggedIn()) {
                             'respiratory_verified_by' => $user->data()->id,
                             'respiratory_verified_date' => Input::get('respiratory_verified_date'),
                             'status' => 1,
-                            'enrollment_id' => $_GET['enrollment_id'],
+                            'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
@@ -812,7 +813,7 @@ if ($user->isLoggedIn()) {
 
                         $successMessage = 'Respiratory Data  Successful Added';
                     }
-                    Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
+                    Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&msg=' . $successMessage);
                 }
             } else {
                 $pageError = $validate->errors();
@@ -3469,7 +3470,7 @@ if ($user->isLoggedIn()) {
         <?php } elseif ($_GET['id'] == 11) { ?>
             <?php
             $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
-            $lab_name = $override->getNews('sites', 'status', 1, 'id', $costing['facility_id'])[0];
+            $lab_name = $override->getNews('sites', 'status', 1, 'id', $user->data()->site_id)[0];
 
             ?>
             <!-- Content Wrapper. Contains page content -->
@@ -7072,7 +7073,7 @@ if ($user->isLoggedIn()) {
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
+                                    <li class="breadcrumb-item"><a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
@@ -7099,7 +7100,7 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row">
                             <?php
-                            $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['sid'])[0];
+                            $clients = $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
                             // $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
                             $sex = $override->get('sex', 'id', $clients['sex'])[0];
                             $education = $override->get('education', 'id', $clients['education'])[0];
@@ -8218,7 +8219,7 @@ if ($user->isLoggedIn()) {
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <a href="info.php?id=3&status=<?= $_GET['status'] ?>"
+                                            <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>"
                                                 class="btn btn-default">Back</a>
                                             <input type="submit" name="add_enrollment_form" value="Submit"
                                                 class="btn btn-primary">
