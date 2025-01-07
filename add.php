@@ -426,7 +426,7 @@ if ($user->isLoggedIn()) {
                             $successMessage = 'Enrollment Form Updated Successful';
                         } else {
 
-                            $user->createRecord('enrollment_form', array(                                
+                            $user->createRecord('enrollment_form', array(
                                 'enrollment_id' => $_GET['sid'],
                                 'pid' => $screening['pid'],
                                 'enrollment_date' => Input::get('enrollment_date'),
@@ -510,8 +510,8 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id'])[0];
-                $individual = $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['enrollment_id']);
+                $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+                $individual = $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid']);
                 $first_line = 0;
                 $second_line = 0;
                 $third_line = 0;
@@ -678,7 +678,7 @@ if ($user->isLoggedIn()) {
                             'diagnosis_test_verified_by' => $user->data()->id,
                             'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
                             'status' => 1,
-                            'enrollment_id' => $_GET['enrollment_id'],
+                            'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
@@ -688,11 +688,11 @@ if ($user->isLoggedIn()) {
 
                         $successMessage = 'Diagnosis test  Successful Added';
                     }
-                    Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
+                    Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&msg=' . $successMessage);
                 }
 
 
-                Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id']);
+                // Redirect::to('info.php?id=6&sid=' . $_GET['sid']);
             } else {
                 $pageError = $validate->errors();
             }
@@ -825,8 +825,8 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id'])[0];
-                $costing = $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id']);
+                $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+                $costing = $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['sid']);
 
                 // $test_reasons = implode(',', Input::get('test_reasons'));
                 // $sample_type = implode(',', Input::get('sample_type'));
@@ -854,8 +854,6 @@ if ($user->isLoggedIn()) {
                             'facility_id' => $clients['facility_id'],
                         ), $costing[0]['id']);
 
-
-
                         $successMessage = 'Non Respiratory Data  Successful Updated';
                     } else {
                         $user->createRecord('non_respiratory', array(
@@ -875,7 +873,7 @@ if ($user->isLoggedIn()) {
                             'non_respiratory_verified_by' => $user->data()->id,
                             'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
                             'status' => 1,
-                            'enrollment_id' => $_GET['enrollment_id'],
+                            'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
@@ -883,11 +881,10 @@ if ($user->isLoggedIn()) {
                             'facility_id' => $clients['facility_id'],
                         ));
 
-
                         $successMessage = 'Non Respiratory Data  Successful Added';
                     }
 
-                    Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
+                    Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&msg=' . $successMessage);
                 }
             } else {
                 $pageError = $validate->errors();
@@ -899,8 +896,8 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id'])[0];
-                $costing = $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['enrollment_id']);
+                $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+                $costing = $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['sid']);
 
                 $bacteriological_diagnosis = implode(',', Input::get('bacteriological_diagnosis'));
                 $tb_diagnosed_clinically = implode(',', Input::get('tb_diagnosed_clinically'));
@@ -957,62 +954,61 @@ if ($user->isLoggedIn()) {
 
                         $successMessage = 'Diagnosis Data  Successful Updated';
                     } else {
-                        // $user->createRecord('diagnosis', array(
-                        //     'pid' => $clients['pid'],
-                        //     'visit_date' => Input::get('visit_date'),
-                        //     'clinician_name' => Input::get('clinician_name'),
-                        //     'tb_diagnosis' => Input::get('tb_diagnosis'),
-                        // 'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
-                        // 'diagnosis_made_other' => Input::get('diagnosis_made_other'),
-                        // 'bacteriological_diagnosis' => $bacteriological_diagnosis,
-                        // 'clinician_received_date' => Input::get('clinician_received_date'),
-                        // 'xpert_truenat_date' => Input::get('xpert_truenat_date'),
-                        // 'other_bacteriological' => Input::get('other_bacteriological'),
-                        // 'other_bacteriological_date' => Input::get('other_bacteriological_date'),
-                        // 'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
-                        // 'tb_clinically_other' => Input::get('tb_clinically_other'),
-                        // 'tb_treatment' => Input::get('tb_treatment'),
-                        // 'tb_treatment_date' => Input::get('tb_treatment_date'),
-                        // 'tb_facility' => Input::get('tb_facility'),
-                        // 'tb_reason' => Input::get('tb_reason'),
-                        // 'tb_regimen' => Input::get('tb_regimen'),
-                        // 'tb_regimen_other' => Input::get('tb_regimen_other'),
-                        // 'tb_regimen_based' => Input::get('tb_regimen_based'),
-                        // 'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
-                        // 'regimen_changed' => Input::get('regimen_changed'),
-                        // 'regimen_changed_other' => Input::get('regimen_changed_other'),
-                        // 'regimen_changed__date' => Input::get('regimen_changed__date'),
-                        // 'regimen_removed_name' => Input::get('regimen_removed_name'),
-                        // 'regimen_added_name' => Input::get('regimen_added_name'),
-                        // 'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
-                        // 'regimen_changed__reason' => Input::get('regimen_changed__reason'),
-                        // 'tb_otcome2' => Input::get('tb_otcome2'),
-                        // 'tb_otcome2_date' => Input::get('tb_otcome2_date'),
-                        // 'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
-                        // 'tb_other_specify' => Input::get('tb_other_specify'),
-                        // 'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
-                        // 'laboratory_test_used' => $laboratory_test_used,
-                        // 'laboratory_test_used2' => $laboratory_test_used2,
-                        // 'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                        // 'comments' => Input::get('comments'),
-                        // 'diagnosis_completness' => Input::get('diagnosis_completness'),
-                        // 'diagnosis_completed_by' => $user->data()->id,
-                        // 'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
-                        // 'diagnosis_verified_by' => $user->data()->id,
-                        // 'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
-                        // 'status' => 1,
-                        // 'enrollment_id' => $_GET['enrollment_id'],
-                        // 'create_on' => date('Y-m-d H:i:s'),
-                        // 'staff_id' => $user->data()->id,
-                        // 'update_on' => date('Y-m-d H:i:s'),
-                        // 'update_id' => $user->data()->id,
-                        // 'facility_id' => $clients['facility_id'],
-                        // ));
+                        $user->createRecord('diagnosis', array(
+                            'pid' => $clients['pid'],
+                            'entry_date' => Input::get('entry_date'),
+                            'tb_diagnosis' => Input::get('tb_diagnosis'),
+                            'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
+                            'diagnosis_made_other' => Input::get('diagnosis_made_other'),
+                            'bacteriological_diagnosis' => $bacteriological_diagnosis,
+                            'clinician_received_date' => Input::get('clinician_received_date'),
+                            'xpert_truenat_date' => Input::get('xpert_truenat_date'),
+                            'other_bacteriological' => Input::get('other_bacteriological'),
+                            'other_bacteriological_date' => Input::get('other_bacteriological_date'),
+                            'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
+                            'tb_clinically_other' => Input::get('tb_clinically_other'),
+                            'tb_treatment' => Input::get('tb_treatment'),
+                            'tb_treatment_date' => Input::get('tb_treatment_date'),
+                            'tb_facility' => Input::get('tb_facility'),
+                            'tb_reason' => Input::get('tb_reason'),
+                            'tb_regimen' => Input::get('tb_regimen'),
+                            'tb_regimen_other' => Input::get('tb_regimen_other'),
+                            'tb_regimen_based' => Input::get('tb_regimen_based'),
+                            'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
+                            'regimen_changed' => Input::get('regimen_changed'),
+                            'regimen_changed_other' => Input::get('regimen_changed_other'),
+                            'regimen_changed__date' => Input::get('regimen_changed__date'),
+                            'regimen_removed_name' => Input::get('regimen_removed_name'),
+                            'regimen_added_name' => Input::get('regimen_added_name'),
+                            'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
+                            'regimen_changed__reason' => Input::get('regimen_changed__reason'),
+                            'tb_otcome2' => Input::get('tb_otcome2'),
+                            'tb_otcome2_date' => Input::get('tb_otcome2_date'),
+                            'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
+                            'tb_other_specify' => Input::get('tb_other_specify'),
+                            'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
+                            'laboratory_test_used' => $laboratory_test_used,
+                            'laboratory_test_used2' => $laboratory_test_used2,
+                            'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
+                            'comments' => Input::get('comments'),
+                            'diagnosis_completness' => Input::get('diagnosis_completness'),
+                            'diagnosis_completed_by' => $user->data()->id,
+                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
+                            'diagnosis_verified_by' => $user->data()->id,
+                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'status' => 1,
+                            'enrollment_id' => $_GET['sid'],
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $clients['facility_id'],
+                        ));
 
                         $successMessage = 'Diagnosis Data  Successful Added';
                     }
 
-                    Redirect::to('info.php?id=6&enrollment_id=' . $_GET['enrollment_id'] . '&status=' . $_GET['status'] . '&msg=' . $successMessage);
+                    Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&msg=' . $successMessage);
                 }
             } else {
                 $pageError = $validate->errors();
@@ -4123,7 +4119,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4237,7 +4233,7 @@ if ($user->isLoggedIn()) {
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
-                                            Go to Enrollment list > </a>
+                                            Go to Screening list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
                                         <li class="breadcrumb-item active">Add New Non Respiratory sample Data</li>
@@ -4718,7 +4714,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
-                                                </div>                                                
+                                                </div>
                                             </div>
                                             <hr>
                                             <div class="row">
@@ -4730,17 +4726,20 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="tb_follow_up" id="tb_follow_up<?= $value['id']; ?>"
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="tb_follow_up"
+                                                                        id="tb_follow_up<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($screening['tb_follow_up'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="col-sm-4">
                                                     <label for="prisoner" class="form-label">Is the Patient a prisoner
                                                         ?</label>
@@ -4791,10 +4790,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                <?php if ($screening['comments']) {
-                                                                                                    print_r($screening['comments']);
-                                                                                                } ?>
-                                                                                            </textarea>
+                                                                                                    <?php if ($screening['comments']) {
+                                                                                                        print_r($screening['comments']);
+                                                                                                    } ?>
+                                                                                                </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -6326,7 +6325,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6356,7 +6355,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6970,7 +6969,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7073,7 +7072,8 @@ if ($user->isLoggedIn()) {
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>">
+                                    <li class="breadcrumb-item"><a
+                                            href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
@@ -9936,7 +9936,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
