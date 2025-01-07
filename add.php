@@ -3468,7 +3468,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 11) { ?>
             <?php
-            $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])[0];
+            $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             $lab_name = $override->getNews('sites', 'status', 1, 'id', $costing['facility_id'])[0];
 
             ?>
@@ -3488,7 +3488,7 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>">
+                                            href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid']; ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
@@ -4194,7 +4194,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <a href="info.php?id=6&enrolllment_id=<?= $_GET['enrolllment_id']; ?>&status=<?= $_GET['status'] ?>"
+                                            <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid']; ?>"
                                                 class="btn btn-default">Back</a>
                                             <input type="submit" name="add_respiratory" value="Submit"
                                                 class="btn btn-primary">
@@ -4213,7 +4213,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 12) { ?>
             <?php
-            $costing = $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])[0];
+            $costing = $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['status'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -4231,7 +4231,7 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>">
+                                            href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
@@ -4497,7 +4497,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <a href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status']; ?>"
+                                            <a href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>"
                                                 class="btn btn-default">Back</a>
                                             <input type="submit" name="add_non_respiratory" value="Submit"
                                                 class="btn btn-primary">
@@ -4821,7 +4821,7 @@ if ($user->isLoggedIn()) {
 
         <?php } elseif ($_GET['id'] == 14) { ?>
             <?php
-            $costing = $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])[0];
+            $costing = $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -4839,7 +4839,7 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>">
+                                            href="info.php?id=6&sid=<?= $_GET['sid']; ?>&status=<?= $_GET['status'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
@@ -6425,7 +6425,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <!-- /.card-body -->
                                             <div class="card-footer">
-                                                <a href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>"
+                                                <a href="info.php?id=6&sid=<?= $_GET['sid']; ?>&status=<?= $_GET['status'] ?>"
                                                     class="btn btn-default">Back</a>
                                                 <input type="submit" name="add_diagnosis_test" value="Submit"
                                                     class="btn btn-primary">
@@ -6445,7 +6445,7 @@ if ($user->isLoggedIn()) {
 
         <?php } elseif ($_GET['id'] == 15) { ?>
             <?php
-            $costing = $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])[0];
+            $costing = $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -6463,7 +6463,7 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>">
+                                            href="info.php?id=6&sid=<?= $_GET['sid']; ?>&status=<?= $_GET['status'] ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
@@ -7042,7 +7042,7 @@ if ($user->isLoggedIn()) {
                                             <!-- </div> -->
                                             <!-- /.card-body -->
                                             <div class="card-footer">
-                                                <a href="info.php?id=6&enrollment_id=<?= $_GET['enrollment_id']; ?>&status=<?= $_GET['status'] ?>"
+                                                <a href="info.php?id=6&sid=<?= $_GET['sid']; ?>&status=<?= $_GET['status'] ?>"
                                                     class="btn btn-default">Back</a>
                                                 <input type="submit" name="add_diagnosis" value="Submit"
                                                     class="btn btn-primary">
@@ -7099,7 +7099,7 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row">
                             <?php
-                            $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id'])[0];
+                            $clients = $override->getNews('enrollment_form', 'status', 1, 'id', $_GET['sid'])[0];
                             // $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
                             $sex = $override->get('sex', 'id', $clients['sex'])[0];
                             $education = $override->get('education', 'id', $clients['education'])[0];
@@ -10008,7 +10008,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 18) { ?>
             <?php
-            $costing = $override->get3('respiratory', 'status', 1, 'enrollment_id', $_GET['cid'], 'sequence', $_GET['sequence'])[0];
+            $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -10026,7 +10026,7 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=4&cid=<?= $_GET['cid']; ?>&status=<?= $_GET['status']; ?>">
+                                            href="info.php?id=4&sid=<?= $_GET['sid']; ?>&status=<?= $_GET['status']; ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
@@ -10272,7 +10272,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <a href="info.php?id=4&cid=<?= $_GET['cid']; ?>&study_id=<?= $_GET['study_id']; ?>&status=<?= $_GET['status']; ?>"
+                                            <a href="info.php?id=4&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>"
                                                 class="btn btn-default">Back</a>
                                             <input type="submit" name="add_respiratory_test" value="Submit"
                                                 class="btn btn-primary">
