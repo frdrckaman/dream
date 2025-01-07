@@ -1012,11 +1012,11 @@ if ($user->isLoggedIn()) {
                                     } elseif ($_GET['status'] == 2) {
                                         echo $title = 'Eligible';
                                         ?>
-                                            <?php
+                                        <?php
                                     } elseif ($_GET['status'] == 3) {
                                         echo $title = 'Enrollment';
                                         ?>
-                                                <?php
+                                        <?php
                                     } elseif ($_GET['status'] == 4) {
                                         echo $title = 'End Study';
                                         ?>
@@ -1430,10 +1430,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $enrollment['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($enrollment['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $enrollment['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -1736,73 +1736,77 @@ if ($user->isLoggedIn()) {
 
                                                         <?php } ?>
 
-                                                        <?php if ($override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
-                                                            <a href="add.php?id=11&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>"
-                                                                role=" button" class="btn btn-info"> Update Respiratory Sample
-                                                                Data ( Laboratory form )
-                                                            </a>&nbsp;&nbsp; <br><br>
+                                                        <?php if ($override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
 
-                                                        <?php } else { ?>
-                                                            <a href="add.php?id=11&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>"
-                                                                role=" button" class="btn btn-warning"> Add Respiratory Sample
-                                                                Data ( Laboratory form )
-                                                            </a>&nbsp;&nbsp; <br><br>
-
-                                                        <?php } ?>
-
-
-                                                        <?php
-                                                        if ($override->get3('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'], 'other_diseases', 1)) {
-                                                            ?>
-
-                                                            <?php if ($override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
-                                                                <a href="add.php?id=12&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>"
-                                                                    role=" button" class="btn btn-info">
-                                                                    Update Diagnostic Test
-                                                                    Non-respiratory Samples Data ( Laboratory form )
+                                                            <?php if ($override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
+                                                                <a href="add.php?id=11&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>"
+                                                                    role=" button" class="btn btn-info"> Update Respiratory Sample
+                                                                    Data ( Laboratory form )
                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } else { ?>
-                                                                <a href="add.php?id=12&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>"
-                                                                    role=" button" class="btn btn-warning">
-                                                                    Add Diagnostic Test
-                                                                    Non-respiratory Samples Data ( Laboratory form )
+                                                                <a href="add.php?id=11&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>"
+                                                                    role=" button" class="btn btn-warning"> Add Respiratory Sample
+                                                                    Data ( Laboratory form )
                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } ?>
 
+
                                                             <?php
-                                                        } else { ?>
-                                                            <a href="#" role=" button" class="btn btn-default"> Diagnostic Test
-                                                                Non-respiratory Samples Data ( Laboratory form ) ( Not
-                                                                Applicable For this Patient)
-                                                            </a>&nbsp;&nbsp; <br><br>
-                                                        <?php }
-                                                        ?>
+                                                            if ($override->get3('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'], 'other_diseases', 1)) {
+                                                                ?>
 
-                                                        <?php if ($override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
-                                                            <a href="add.php?id=14&sid=<?= $_GET['sid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                role=" button" class="btn btn-info"> Update Diagnostic Test DST
-                                                                Data </a>&nbsp;&nbsp; <br><br>
+                                                                <?php if ($override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
+                                                                    <a href="add.php?id=12&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>"
+                                                                        role=" button" class="btn btn-info">
+                                                                        Update Diagnostic Test
+                                                                        Non-respiratory Samples Data ( Laboratory form )
+                                                                    </a>&nbsp;&nbsp; <br><br>
 
-                                                        <?php } else { ?>
-                                                            <a href="add.php?id=14&sid=<?= $_GET['sid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                role=" button" class="btn btn-warning"> Add Diagnostic Test DST
-                                                                Data </a>&nbsp;&nbsp; <br><br>
+                                                                <?php } else { ?>
+                                                                    <a href="add.php?id=12&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>"
+                                                                        role=" button" class="btn btn-warning">
+                                                                        Add Diagnostic Test
+                                                                        Non-respiratory Samples Data ( Laboratory form )
+                                                                    </a>&nbsp;&nbsp; <br><br>
 
+                                                                <?php } ?>
+
+                                                                <?php
+                                                            } else { ?>
+                                                                <a href="#" role=" button" class="btn btn-default"> Diagnostic Test
+                                                                    Non-respiratory Samples Data ( Laboratory form ) ( Not
+                                                                    Applicable For this Patient)
+                                                                </a>&nbsp;&nbsp; <br><br>
+                                                            <?php }
+                                                            ?>
+
+                                                            <?php if ($override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
+                                                                <a href="add.php?id=14&sid=<?= $_GET['sid'] ?>&status=<?= $_GET['status'] ?>"
+                                                                    role=" button" class="btn btn-info"> Update Diagnostic Test DST
+                                                                    Data </a>&nbsp;&nbsp; <br><br>
+
+                                                            <?php } else { ?>
+                                                                <a href="add.php?id=14&sid=<?= $_GET['sid'] ?>&status=<?= $_GET['status'] ?>"
+                                                                    role=" button" class="btn btn-warning"> Add Diagnostic Test DST
+                                                                    Data </a>&nbsp;&nbsp; <br><br>
+
+                                                            <?php } ?>
+
+                                                            <?php if ($override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
+                                                                <a href="add.php?id=15&sid=<?= $_GET['sid'] ?>&status=<?= $_GET['status'] ?>"
+                                                                    role=" button" class="btn btn-info"> Update Diagnosis Data
+                                                                </a>&nbsp;&nbsp; <br><br>
+
+                                                            <?php } else { ?>
+                                                                <a href="add.php?id=15&sid=<?= $_GET['sid'] ?>&status=<?= $_GET['status'] ?>"
+                                                                    role=" button" class="btn btn-warning"> Add Diagnosis Data
+                                                                </a>&nbsp;&nbsp; <br><br>
+
+                                                            <?php } ?>
                                                         <?php } ?>
 
-                                                        <?php if ($override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
-                                                            <a href="add.php?id=15&sid=<?= $_GET['sid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                role=" button" class="btn btn-info"> Update Diagnosis Data
-                                                            </a>&nbsp;&nbsp; <br><br>
-
-                                                        <?php } else { ?>
-                                                            <a href="add.php?id=15&sid=<?= $_GET['sid'] ?>&status=<?= $_GET['status'] ?>"
-                                                                role=" button" class="btn btn-warning"> Add Diagnosis Data
-                                                            </a>&nbsp;&nbsp; <br><br>
-
-                                                        <?php } ?>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -3012,10 +3016,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($visit['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $visit['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($visit['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $visit['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
