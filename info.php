@@ -1047,7 +1047,7 @@ if ($user->isLoggedIn()) {
                                                             <span class="badge badge-info right"><?= $screening; ?></span>
                                                             <?php
                                                         } elseif ($_GET['status'] == 2) { ?>
-                                                            <h3 class="card-title">List of Enrolled Clients</h3> &nbsp;&nbsp;
+                                                            <h3 class="card-title">List of Eligible Clients</h3> &nbsp;&nbsp;
                                                             <span class="badge badge-info right"><?= $enrolled; ?></span>
                                                             <?php
                                                         } elseif ($_GET['status'] == 3) { ?>
@@ -1055,7 +1055,7 @@ if ($user->isLoggedIn()) {
                                                             <span class="badge badge-info right"><?= $eligible; ?></span>
                                                             <?php
                                                         } elseif ($_GET['status'] == 3) { ?>
-                                                            <h3 class="card-title">List of Enrolled Clients</h3> &nbsp;&nbsp;
+                                                            <h3 class="card-title">List of Terminated Clients</h3> &nbsp;&nbsp;
                                                             <span class="badge badge-info right"><?= $end; ?></span>
                                                             <?php
                                                         } ?>
@@ -1169,7 +1169,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
 
                                                             <?php if ($value['eligible']) { ?>
-                                                                <a href="info.php?id=6&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                <a href="info.php?id=6&sid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
                                                                     role=" button" class="btn btn-warning"> Add Enrollment Forms
                                                                 </a>&nbsp;&nbsp; <br><br>
                                                             <?php } ?>
@@ -1616,16 +1616,16 @@ if ($user->isLoggedIn()) {
                                 <div class="card">
                                     <div class="card-header">
                                         <?php
-                                        $patient = $override->get('enrollment_form', 'id', $_GET['enrollment_id'])[0];
-                                        $sex = $override->get('sex', 'id', $_GET['sex'])[0];
-                                        $site = $override->get('sites', 'id', $_GET['facility_id'])[0];
-                                        $age = 'Age:  ' . $patient['age'];
+                                        $patient = $override->get('enrollment_form', 'id', $_GET['sid'])[0];
+                                        $sex = $override->get('sex', 'id', $patient['sex'])[0];
+                                        $site = $override->get('sites', 'id', $patient['facility_id'])[0];
                                         ?>
                                         <div class="row mb-2">
                                             <div class="col-sm-6">
                                                 <h1>Study ID: <?= $patient['pid'] ?></h1>
-                                                <h4><?= $age ?></h4>
-                                                <h4><?= $sex ?></h4>
+                                                <h4>Date of Birth :<?= $patient['dob'] ?></h4>
+                                                <h4>Age :<?= $patient['age'] ?></h4>
+                                                <h4>Sex: <?= $sex['name'] ?></h4>
                                             </div>
                                             <div class="col-sm-6">
                                                 <ol class="breadcrumb float-sm-right">
@@ -1647,10 +1647,6 @@ if ($user->isLoggedIn()) {
                                             <thead>
                                                 <tr>
                                                     <th>Enrollment Date</th>
-                                                    <th>PID</th>
-                                                    <th>Date of Birth</th>
-                                                    <th>Age</th>
-                                                    <th>Sex</th>
                                                     <th>Site</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
@@ -1662,19 +1658,7 @@ if ($user->isLoggedIn()) {
                                                         <?= $patient['enrollment_date']; ?>
                                                     </td>
                                                     <td class="table-user">
-                                                        <?= $patient['pid']; ?>
-                                                    </td>
-                                                    <td class="table-user">
-                                                        <?= $patient['dob']; ?>
-                                                    </td>
-                                                    <td class="table-user">
-                                                        <?= $patient['age']; ?>
-                                                    </td>
-                                                    <td class="table-user">
-                                                        <?= $sex['name']; ?>
-                                                    </td>
-                                                    <td class="table-user">
-                                                        <?= $sites['name']; ?>
+                                                        <?= $site['name']; ?>
                                                     </td>
                                                     <?php if ($patient['status'] == 1) { ?>
                                                         <td class="text-center">
@@ -1774,10 +1758,6 @@ if ($user->isLoggedIn()) {
                                             <tfoot>
                                                 <tr>
                                                     <th>Enrollment Date</th>
-                                                    <th>PID</th>
-                                                    <th>Date of Birth</th>
-                                                    <th>Age</th>
-                                                    <th>Sex</th>
                                                     <th>Site</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
