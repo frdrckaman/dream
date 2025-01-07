@@ -28,11 +28,15 @@ if ($user->isLoggedIn()) {
   }
 
   if ($_GET['site_id'] != null) {
+    $screening = $override->countData('screening', 'status', 1, 'facility_id', $_GET['site_id']);
+    $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['site_id']);
     $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['site_id']);
-    $end = $override->countData('enrollment_form', 'status', 2, 'facility_id', $_GET['site_id']);
+    $end = $override->countData('termination', 'status', 1, 'facility_id', $_GET['site_id']);
   } else {
+    $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
+    $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
     $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
-    $end = $override->countData('enrollment_form', 'status', 2, 'facility_id', $user->data()->site_id);
+    $end = $override->countData('termination', 'status', 1, 'facility_id', $user->data()->site_id);
   }
 } else {
   Redirect::to('index.php');
@@ -156,8 +160,40 @@ if ($user->isLoggedIn()) {
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          
-          <div class="col-lg-6 col-6">
+
+          <div class="col-lg-3 col-3">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3><?= $screening ?></h3>
+
+                <p>Screening</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="info.php?id=3&status=1" class="small-box-footer">More info <i
+                  class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-3">
+            <!-- small box -->
+            <div class="small-box bg-secondary">
+              <div class="inner">
+                <h3><?= $eligible ?></h3>
+
+                <p>Eligible</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="info.php?id=3&status=1" class="small-box-footer">More info <i
+                  class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-3">
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
@@ -171,20 +207,21 @@ if ($user->isLoggedIn()) {
               <a href="info.php?id=3&status=1" class="small-box-footer">More info <i
                   class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div>       
-          
-          <div class="col-lg-6 col-6">
+          </div>
+
+          <div class="col-lg-3 col-3">
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
                 <h3><?= $end ?></h3>
-          
+
                 <p>Completed</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="info.php?id=3&status=2" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="info.php?id=3&status=2" class="small-box-footer">More info <i
+                  class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
         </div>
