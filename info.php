@@ -1198,19 +1198,22 @@ if ($user->isLoggedIn()) {
 
                                                         <!-- <td class="text-center"> -->
                                                         <td>
-                                                            <?php if ($override->get('enrollment_form', 'status', 1)) { ?>
-                                                                <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>"
-                                                                    role=" button" class="btn btn-info"> Update Screening
-                                                                    Data</a>&nbsp;&nbsp; <br><br>
+                                                            <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
+                                                                <?php if ($override->get('enrollment_form', 'status', 1)) { ?>
+                                                                    <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>"
+                                                                        role=" button" class="btn btn-info"> Update Screening
+                                                                        Data</a>&nbsp;&nbsp; <br><br>
 
-                                                            <?php } else { ?>
-                                                                <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>"
-                                                                    role=" button" class="btn btn-warning"> Add Screening
-                                                                    Data</a>&nbsp;&nbsp; <br><br>
+                                                                <?php } else { ?>
+                                                                    <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>"
+                                                                        role=" button" class="btn btn-warning"> Add Screening
+                                                                        Data</a>&nbsp;&nbsp; <br><br>
 
+                                                                <?php } ?>
                                                             <?php } ?>
 
-                                                            <?php if ($value['eligible']) { ?>
+
+                                                            <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
                                                                 <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>"
                                                                     role=" button" class="btn btn-warning"> Add Enrollment Forms
                                                                 </a>&nbsp;&nbsp; <br><br>
@@ -1430,10 +1433,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($enrollment['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $enrollment['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $enrollment['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3016,10 +3019,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($visit['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $visit['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($visit['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $visit['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
