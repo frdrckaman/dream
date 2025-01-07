@@ -188,7 +188,7 @@ if ($user->isLoggedIn()) {
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="info.php?id=3&status=1" class="small-box-footer">More info <i
+              <a href="info.php?id=3&status=2" class="small-box-footer">More info <i
                   class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
@@ -204,7 +204,7 @@ if ($user->isLoggedIn()) {
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="info.php?id=3&status=1" class="small-box-footer">More info <i
+              <a href="info.php?id=3&status=3" class="small-box-footer">More info <i
                   class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
@@ -220,7 +220,7 @@ if ($user->isLoggedIn()) {
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="info.php?id=3&status=2" class="small-box-footer">More info <i
+              <a href="info.php?id=3&status=4" class="small-box-footer">More info <i
                   class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
