@@ -336,6 +336,15 @@ if ($user->isLoggedIn()) {
                             'status' => 1,
                         ), $pid['id']);
 
+                        // $enrollment_form = $override->get('enrollment_form', 'enrollment_id', $_GET['sid']);
+                        // if($eligible){
+                        //     if ($enrollment_form) {
+                        //         $user->updateRecord('add_enrollment_form', array(
+                        //             'status' => 1,
+                        //         ), $enrollment_form['id']);
+                        //     }
+                        // }
+
                         $successMessage = 'Screening  Successful Added';
                     }
                     Redirect::to('info.php?id=3&status=' . $_GET['status']);
