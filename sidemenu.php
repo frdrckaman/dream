@@ -37,15 +37,15 @@ if ($user->isLoggedIn()) {
 
 
     if ($_GET['site_id'] != null) {
-        $screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['site_id']);
+        $screening = $override->countData('screening', 'status', 1, 'facility_id', $_GET['site_id']);
         $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['site_id']);
         $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['site_id']);
-        $validations = $override->getCount('validations', 'status', 1);
+        $end = $override->countData('termination', 'status', 1, 'facility_id', $_GET['site_id']);
     } else {
-        $screened = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
+        $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
         $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
         $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
-        $validations = $override->getCount('validations', 'status', 1);
+        $end = $override->countData('termination', 'status', 1, 'facility_id', $user->data()->site_id);
     }
 } else {
     Redirect::to('index.php');

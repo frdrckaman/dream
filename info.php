@@ -418,15 +418,16 @@ if ($user->isLoggedIn()) {
             $user->exportData($data, $filename);
         }
     }
-
     if ($_GET['site_id'] != null) {
-        $screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['site_id']);
-        $eligible = $override->countData2('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['site_id']);
+        $screening = $override->countData('screening', 'status', 1, 'facility_id', $_GET['site_id']);
+        $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['site_id']);
         $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['site_id']);
+        $end = $override->countData('termination', 'status', 1, 'facility_id', $_GET['site_id']);
     } else {
-        $screened = $override->getCount('screening', 'status', 1);
-        $eligible = $override->countData('screening', 'status', 1, 'eligible', 1);
-        $enrolled = $override->getCount('enrollment_form', 'status', 1);
+        $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
+        $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
+        $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
+        $end = $override->countData('termination', 'status', 1, 'facility_id', $user->data()->site_id);
     }
 } else {
     Redirect::to('index.php');
@@ -977,22 +978,26 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <h1>
                                     <?php
-                                    if ($_GET['site_id']) {
+                                    if ($_GET['sid']) {
                                         if ($_GET['status'] == 1) {
-                                            $data = $override->getNews('screening', 'status', 1, 'facility_id', $_GET['site_id']);
+                                            $data = $override->getNews('screening', 'status', 1, 'facility_id', $_GET['sid']);
                                         } else if ($_GET['status'] == 2) {
-                                            $data = $override->getNews('enrollment_form', 'status', 0, 'facility_id', $_GET['site_id']);
-                                        } else if ($_GET['status'] == 2) {
-                                            $data = $override->getNews('enrollment_form', 'status', 0, 'facility_id', $_GET['site_id']);
+                                            $data = $override->getNews('enrollment_form', 'status', 0, 'facility_id', $_GET['sid']);
+                                        } else if ($_GET['status'] == 3) {
+                                            $data = $override->getNews('enrollment_form', 'status', 0, 'facility_id', $_GET['sid']);
+                                        } else if ($_GET['status'] == 4) {
+                                            $data = $override->getNews('enrollment_form', 'status', 0, 'facility_id', $_GET['sid']);
                                         } else {
-                                            $data = $override->getNews('enrollment_form', 'status', 0, 'facility_id', $_GET['site_id']);
+                                            $data = $override->getNews('enrollment_form', 'status', 0, 'facility_id', $_GET['sid']);
                                         }
                                     } else {
                                         if ($_GET['status'] == 1) {
                                             $data = $override->getNews('screening', 'status', 1, 'facility_id', $user->data()->site_id);
                                         } else if ($_GET['status'] == 2) {
                                             $data = $override->getNews('enrollment_form', 'status', 0, 'facility_id', $user->data()->site_id);
-                                        } else if ($_GET['status'] == 2) {
+                                        } else if ($_GET['status'] == 3) {
+                                            $data = $override->getNews('enrollment_form', 'status', 0, 'facility_id', $user->data()->site_id);
+                                        } else if ($_GET['status'] == 5) {
                                             $data = $override->getNews('enrollment_form', 'status', 0, 'facility_id', $user->data()->site_id);
                                         } else {
                                             $data = $override->getNews('enrollment_form', 'status', 0, 'facility_id', $user->data()->site_id);
@@ -1039,7 +1044,7 @@ if ($user->isLoggedIn()) {
                                                         <?php
                                                         if ($_GET['status'] == 1) { ?>
                                                             <h3 class="card-title">List of Screened Clients</h3> &nbsp;&nbsp;
-                                                            <span class="badge badge-info right"><?= $enrolled; ?></span>
+                                                            <span class="badge badge-info right"><?= $screening; ?></span>
                                                             <?php
                                                         } elseif ($_GET['status'] == 2) { ?>
                                                             <h3 class="card-title">List of Enrolled Clients</h3> &nbsp;&nbsp;
@@ -1047,11 +1052,11 @@ if ($user->isLoggedIn()) {
                                                             <?php
                                                         } elseif ($_GET['status'] == 3) { ?>
                                                             <h3 class="card-title">List of Enrolled Clients</h3> &nbsp;&nbsp;
-                                                            <span class="badge badge-info right"><?= $enrolled; ?></span>
+                                                            <span class="badge badge-info right"><?= $eligible; ?></span>
                                                             <?php
                                                         } elseif ($_GET['status'] == 3) { ?>
                                                             <h3 class="card-title">List of Enrolled Clients</h3> &nbsp;&nbsp;
-                                                            <span class="badge badge-info right"><?= $enrolled; ?></span>
+                                                            <span class="badge badge-info right"><?= $end; ?></span>
                                                             <?php
                                                         } ?>
                                                     </div>
@@ -1112,11 +1117,8 @@ if ($user->isLoggedIn()) {
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Enrollment Date</th>
+                                                    <th>Screened Date</th>
                                                     <th>PID</th>
-                                                    <th>Date of Birth</th>
-                                                    <th>Age</th>
-                                                    <th>Sex</th>
                                                     <th>Site</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
@@ -1137,57 +1139,41 @@ if ($user->isLoggedIn()) {
                                                             <?= $value['pid']; ?>
                                                         </td>
                                                         <td class="table-user">
-                                                            <?= $value['dob']; ?>
-                                                        </td>
-                                                        <td class="table-user">
-                                                            <?= $value['age']; ?>
-                                                        </td>
-                                                        <td class="table-user">
-                                                            <?= $sex['name']; ?>
-                                                        </td>
-                                                        <td class="table-user">
                                                             <?= $sites['name']; ?>
                                                         </td>
-                                                        <?php if ($value['status'] == 1) { ?>
+                                                        <?php if ($value['eligible'] == 1) { ?>
                                                             <td class="text-center">
                                                                 <a href="#" class="btn btn-success">
                                                                     <i class="ri-edit-box-line">
-                                                                    </i> Active
+                                                                    </i> Eligible
                                                                 </a>
                                                             </td>
                                                         <?php } else { ?>
                                                             <td class="text-center">
                                                                 <a href="#" class="btn btn-danger"> <i
-                                                                        class="ri-edit-box-line"></i>Not Active</a>
+                                                                        class="ri-edit-box-line"></i>Not Eligible</a>
                                                             </td>
                                                         <?php } ?>
                                                         <!-- <td class="text-center"> -->
                                                         <td>
                                                             <?php if ($override->get('enrollment_form', 'status', 1)) { ?>
                                                                 <a href="add.php?id=13&sid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-info"> Update Screening Data</a>&nbsp;&nbsp; <br><br>
+                                                                    role=" button" class="btn btn-info"> Update Screening
+                                                                    Data</a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } else { ?>
                                                                 <a href="add.php?id=13&sid=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-warning"> Add Screening Data</a>&nbsp;&nbsp; <br><br>
+                                                                    role=" button" class="btn btn-warning"> Add Screening
+                                                                    Data</a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } ?>
 
-                                                            <?php if ($override->get('enrollment_form', 'status', 1)) { ?>
-                                                                <a href="add.php?id=16&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-info"> Update Participant
-                                                                    Enrolment Data</a>&nbsp;&nbsp; <br><br>
-
-                                                            <?php } else { ?>
-                                                                <a href="add.php?id=16&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
-                                                                    role=" button" class="btn btn-warning"> Add Participant
-                                                                    Enrolment Data </a>&nbsp;&nbsp; <br><br>
-
+                                                            <?php if ($value['eligible']) { ?>
+                                                                <a href="info.php?id=6&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                    role=" button" class="btn btn-warning"> Add Enrollment Forms
+                                                                </a>&nbsp;&nbsp; <br><br>
                                                             <?php } ?>
 
-                                                            <a href="info.php?id=6&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
-                                                                role=" button" class="btn btn-warning"> View Other Forms
-                                                            </a>&nbsp;&nbsp; <br><br>
                                                         </td>
                                                         <br>
                                                         <!-- </td> -->
@@ -1197,11 +1183,8 @@ if ($user->isLoggedIn()) {
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Enrollment Date</th>
+                                                    <th>Screened Date</th>
                                                     <th>PID</th>
-                                                    <th>Date of Birth</th>
-                                                    <th>Age</th>
-                                                    <th>Sex</th>
                                                     <th>Site</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
@@ -1397,10 +1380,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                            <?php if ($enrollment['comments']) {
-                                                                                                                                                                                                                                                                                echo $enrollment['comments'];
-                                                                                                                                                                                                                                                                            } ?>
-                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                            <?php if ($enrollment['comments']) {
+                                                                                                                                                                                                                                                                                                                echo $enrollment['comments'];
+                                                                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -1707,7 +1690,19 @@ if ($user->isLoggedIn()) {
                                                         </td>
                                                     <?php } ?>
                                                     <td>
-                                                        <?php if ($override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
+                                                        <?php if ($override->getNews('enrollment_form', 'status', 1, 'id', $_GET['sid'])) { ?>
+                                                            <a href="add.php?id=16&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                role=" button" class="btn btn-info"> Update Participant
+                                                                Enrolment Data</a>&nbsp;&nbsp; <br><br>
+
+                                                        <?php } else { ?>
+                                                            <a href="add.php?id=16&enrollment_id=<?= $value['id'] ?>&status=<?= $_GET['status'] ?>"
+                                                                role=" button" class="btn btn-warning"> Add Participant
+                                                                Enrolment Data </a>&nbsp;&nbsp; <br><br>
+
+                                                        <?php } ?>
+
+                                                        <?php if ($override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                             <a href="add.php?id=11&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-info"> Update Respiratory Sample
                                                                 Data ( Laboratory form )
@@ -1723,7 +1718,7 @@ if ($user->isLoggedIn()) {
 
 
                                                         <?php
-                                                        if ($override->get3('enrollment_form', 'status', 1, 'id', $_GET['enrollment_id'], 'other_samples', 2)) {
+                                                        if ($override->get3('enrollment_form', 'status', 1, 'id', $_GET['sid'], 'other_samples', 2)) {
                                                             ?>
                                                             <a href="#" role=" button" class="btn btn-default"> Diagnostic Test
                                                                 Non-respiratory Samples Data ( Laboratory form ) ( Not
@@ -1732,7 +1727,7 @@ if ($user->isLoggedIn()) {
                                                             <?php
                                                         } else { ?>
 
-                                                            <?php if ($override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
+                                                            <?php if ($override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                                 <a href="add.php?id=12&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                     role=" button" class="btn btn-info"> Update Diagnostic Test
                                                                     Non-respiratory Samples Data ( Laboratory form )
@@ -1750,7 +1745,7 @@ if ($user->isLoggedIn()) {
                                                         <?php }
                                                         ?>
 
-                                                        <?php if ($override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
+                                                        <?php if ($override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                             <a href="add.php?id=14&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-info"> Update Diagnostic Test DST
                                                                 Data </a>&nbsp;&nbsp; <br><br>
@@ -1762,7 +1757,7 @@ if ($user->isLoggedIn()) {
 
                                                         <?php } ?>
 
-                                                        <?php if ($override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['enrollment_id'])) { ?>
+                                                        <?php if ($override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                             <a href="add.php?id=15&enrollment_id=<?= $_GET['enrollment_id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 role=" button" class="btn btn-info"> Update Diagnosis Data
                                                             </a>&nbsp;&nbsp; <br><br>
@@ -2986,10 +2981,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                            <?php if ($visit['comments']) {
-                                                                                                                                                                                                                                                                                echo $visit['comments'];
-                                                                                                                                                                                                                                                                            } ?>
-                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                            <?php if ($visit['comments']) {
+                                                                                                                                                                                                                                                                                                                echo $visit['comments'];
+                                                                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

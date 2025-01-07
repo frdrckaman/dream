@@ -273,7 +273,12 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $eligible = 0;
-                $eligible = (Input::get('conset') == 1) ? 1 : 2;
+                if (
+                    (Input::get('conset') == 1 && Input::get('age18years') == 1 && Input::get('produce_resp_sample') == 1) &&
+                    (Input::get('present_symptoms') == 2 && Input::get('tb_follow_up') == 2 && Input::get('patient_ill') == 2 && Input::get('prisoner') == 2 && Input::get('unable_communicate') == 2)
+                ) {
+                    $eligible = 1;
+                }
 
                 if (Input::get('screening_date') <= $screening[0]['conset_date']) {
                     $errorMessage = 'Screaning Date Can not be greater than Screening Date';
@@ -296,7 +301,7 @@ if ($user->isLoggedIn()) {
                             'eligible' => $eligible,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $user->data()->id,
+                            'facility_id' => $user->data()->site_id,
                         ), $screening['id']);
 
                         $successMessage = 'Screening  Successful Updated';
@@ -321,7 +326,7 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $user->data()->id,
+                            'facility_id' => $user->data()->site_id,
                         ));
 
                         $last_row = $override->lastRow('screening', 'id')[0];
@@ -333,7 +338,7 @@ if ($user->isLoggedIn()) {
 
                         $successMessage = 'Screening  Successful Added';
                     }
-                    Redirect::to('info.php?id=3&sid=' . $_GET['sid'] . '&status=' . $_GET['status']);
+                    Redirect::to('info.php?id=3&status=' . $_GET['status']);
                 }
             } else {
                 $pageError = $validate->errors();
@@ -4117,7 +4122,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4511,7 +4516,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 13) { ?>
             <?php
-            $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
+            $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -4610,7 +4615,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-6">
                                                     <label for="age18years" class="form-label">Is the Patient at least 18
                                                         years
                                                         old ?</label>
@@ -4631,31 +4636,8 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <label for="present_symptoms" class="form-label">
-                                                        Does the patient present with
-                                                        signs and symptoms suggestive of pulmonary TB or another pulmonary
-                                                        infection of bacterial, viral, or fungal origin?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="present_symptoms"
-                                                                        id="present_symptoms<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($screening['present_symptoms'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
+
+                                                <div class="col-sm-6">
                                                     <label for="produce_resp_sample" class="form-label">
                                                         Is the patient capable of
                                                         producing a respiratory sample?
@@ -4690,18 +4672,21 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-3">
-                                                    <label for="tb_follow_up" class="form-label">TB Patients on follow
-                                                        up</label>
+                                                <div class="col-sm-6">
+                                                    <label for="present_symptoms" class="form-label">
+                                                        Does the patient present with
+                                                        signs and symptoms suggestive of pulmonary TB or another pulmonary
+                                                        infection of bacterial, viral, or fungal origin?
+                                                    </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="tb_follow_up"
-                                                                        id="tb_follow_up<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($screening['tb_follow_up'] == $value['id']) {
+                                                                        name="present_symptoms"
+                                                                        id="present_symptoms<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($screening['present_symptoms'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
                                                                     <label
@@ -4711,7 +4696,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-6">
                                                     <label for="patient_ill" class="form-label">
                                                         Is the patient Seriously ill/unconscious/patients with mental health
                                                         issues ?
@@ -4732,8 +4717,30 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
+                                                </div>                                                
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="tb_follow_up" class="form-label">TB Patients on follow
+                                                        up</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="tb_follow_up" id="tb_follow_up<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($screening['tb_follow_up'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-sm-3">
+                                                
+                                                <div class="col-sm-4">
                                                     <label for="prisoner" class="form-label">Is the Patient a prisoner
                                                         ?</label>
                                                     <!-- radio -->
@@ -4753,7 +4760,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <label for="unable_communicate" class="form-label">
                                                         Is the Patient Unable to communicate in English/Swahili ?
                                                     </label>
@@ -4783,10 +4790,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                        <?php if ($screening['comments']) {
-                                                                            print_r($screening['comments']);
-                                                                        } ?>
-                                                                    </textarea>
+                                                                                                <?php if ($screening['comments']) {
+                                                                                                    print_r($screening['comments']);
+                                                                                                } ?>
+                                                                                            </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -6318,7 +6325,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6348,7 +6355,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6962,7 +6969,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9928,7 +9935,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
