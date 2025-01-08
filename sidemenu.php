@@ -241,7 +241,25 @@ if ($user->isLoggedIn()) {
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="add.php?id=6&status=1" class="nav-link">
+                            <a href="add.php?id=16&status=3" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Add
+                                    <span class="right badge badge-danger">New Patient</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="info.php?id=3&status=3" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <span class="badge badge-info right"><?= $enrolled; ?></span>
+                                <p>Enrolled Patients</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="add.php?id=13&status=1" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Add
@@ -253,7 +271,7 @@ if ($user->isLoggedIn()) {
                             <a href="info.php?id=3&status=1" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $enrolled; ?></span>
-                                <p>Enrolled Patients</p>
+                                <p>Screened Patients</p>
                             </a>
                         </li>
                     </ul>
