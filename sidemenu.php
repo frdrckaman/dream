@@ -35,14 +35,20 @@ if ($user->isLoggedIn()) {
     $staff_lock_inactive = $override->getDataStaff1Count('user', 'status', 0, 'power', 0, 'count', 4, 'id');
 
 
-
-    if ($_GET['site_id'] != null) {
-        $screening = $override->countData('screening', 'status', 1, 'facility_id', $_GET['site_id']);
-        $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['site_id']);
-        $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['site_id']);
-        $end = $override->countData('termination', 'status', 1, 'facility_id', $_GET['site_id']);
+    if ($user->data()->accessLevel == 1) {
+        if ($_GET['facility_id'] != null) {
+            $screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
+            $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id']);
+            $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+            $end = $override->countData('termination', 'status', 1, 'facility_id', $_GET['facility_id']);
+        } else {
+            $screened = $override->getCount('screening', 'status', 1);
+            $eligible = $override->getCount1('screening', 'status', 1, 'eligible', 1);
+            $enrolled = $override->getCount('enrollment_form', 'status', 1);
+            $end = $override->getCount('termination', 'status', 1);
+        }
     } else {
-        $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
+        $screened = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
         $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
         $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
         $end = $override->countData('termination', 'status', 1, 'facility_id', $user->data()->site_id);
@@ -241,12 +247,26 @@ if ($user->isLoggedIn()) {
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="add.php?id=16&status=3" class="nav-link">
+                            <a href="add.php?id=13&status=1" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Add
-                                    <span class="right badge badge-danger">New Patient</span>
+                                    <span class="right badge badge-success">New Screening Patient</span>
                                 </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="info.php?id=3&status=1" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <span class="badge badge-info right"><?= $screened; ?></span>
+                                <p>Screened Patients</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="info.php?id=3&status=2" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <span class="badge badge-info right"><?= $eligible; ?></span>
+                                <p>Eligible Patients</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -256,53 +276,44 @@ if ($user->isLoggedIn()) {
                                 <p>Enrolled Patients</p>
                             </a>
                         </li>
-                    </ul>
-                    <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="add.php?id=13&status=1" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Add
-                                    <span class="right badge badge-danger">New Patient</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="info.php?id=3&status=1" class="nav-link">
+                            <a href="info.php?id=3&status=4" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <span class="badge badge-info right"><?= $enrolled; ?></span>
-                                <p>Screened Patients</p>
+                                <span class="badge badge-info right"><?= $end; ?></span>
+                                <p>Terminated Patients</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <span class="badge badge-info right"><?= $validations; ?></span>
-                        <p>
-                            Validation Tool <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="add.php?id=17&status=1" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Add
-                                    <span class="right badge badge-danger">New Validation</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="info.php?id=16&status=1" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <span class="badge badge-info right"><?= $validations; ?></span>
-                                <p>Total Validations</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                <?php if ($user->data()->power == 1) { ?>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <span class="badge badge-info right"><?= $validations; ?></span>
+                            <p>
+                                Validation Tool <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="add.php?id=17&status=1" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Add
+                                        <span class="right badge badge-danger">New Validation</span>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="info.php?id=16&status=1" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"><?= $validations; ?></span>
+                                    <p>Total Validations</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                <?php } ?>
                 <li class="nav-item">
                     <!-- <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>

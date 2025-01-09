@@ -27,13 +27,20 @@ if ($user->isLoggedIn()) {
     }
   }
 
-  if ($_GET['site_id'] != null) {
-    $screening = $override->countData('screening', 'status', 1, 'facility_id', $_GET['site_id']);
-    $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['site_id']);
-    $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['site_id']);
-    $end = $override->countData('termination', 'status', 1, 'facility_id', $_GET['site_id']);
-  } else {
-    $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
+  if ($user->data()->accessLevel == 1) {
+    if ($_GET['facility_id'] != null) {
+      $screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
+      $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id']);
+      $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+      $end = $override->countData('termination', 'status', 1, 'facility_id', $_GET['facility_id']);
+    } else {
+      $screened = $override->getCount('screening', 'status', 1);
+      $eligible = $override->getCount1('screening', 'status', 1, 'eligible', 1);
+      $enrolled = $override->getCount('enrollment_form', 'status', 1);
+      $end = $override->getCount('termination', 'status', 1);
+    }
+  }else {
+    $screened = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
     $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
     $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
     $end = $override->countData('termination', 'status', 1, 'facility_id', $user->data()->site_id);
@@ -165,7 +172,7 @@ if ($user->isLoggedIn()) {
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-                <h3><?= $screening ?></h3>
+                <h3><?= $screened ?></h3>
 
                 <p>Screening</p>
               </div>

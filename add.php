@@ -274,8 +274,8 @@ if ($user->isLoggedIn()) {
                 $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $eligible = 0;
                 if (
-                    (Input::get('conset') == 1 && Input::get('age18years') == 1 && Input::get('produce_resp_sample') == 1) &&
-                    (Input::get('present_symptoms') == 2 && Input::get('tb_follow_up') == 2 && Input::get('patient_ill') == 2 && Input::get('prisoner') == 2 && Input::get('unable_communicate') == 2)
+                    (Input::get('conset') == 1 && Input::get('age18years') == 1 && Input::get('produce_resp_sample') == 1 &&
+                        (Input::get('present_symptoms') == 1) && Input::get('tb_follow_up') == 2 && Input::get('patient_ill') == 2 && Input::get('prisoner') == 2 && Input::get('unable_communicate') == 2)
                 ) {
                     $eligible = 1;
                 }
@@ -347,7 +347,7 @@ if ($user->isLoggedIn()) {
 
                         $successMessage = 'Screening  Successful Added';
                     }
-                    Redirect::to('info.php?id=3&status=' . $_GET['status']);
+                    Redirect::to('info.php?id=3&status=' . $_GET['status'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
                 }
             } else {
                 $pageError = $validate->errors();
@@ -505,7 +505,7 @@ if ($user->isLoggedIn()) {
 
                             $successMessage = 'Enrollment Form  Added Successful';
                         }
-                        Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&msg=' . $successMessage);
+                        Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
                     }
 
                 } catch (Exception $e) {
@@ -697,11 +697,8 @@ if ($user->isLoggedIn()) {
 
                         $successMessage = 'Diagnosis test  Successful Added';
                     }
-                    Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&msg=' . $successMessage);
+                    Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
                 }
-
-
-                // Redirect::to('info.php?id=6&sid=' . $_GET['sid']);
             } else {
                 $pageError = $validate->errors();
             }
@@ -822,7 +819,7 @@ if ($user->isLoggedIn()) {
 
                         $successMessage = 'Respiratory Data  Successful Added';
                     }
-                    Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&msg=' . $successMessage);
+                    Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
                 }
             } else {
                 $pageError = $validate->errors();
@@ -893,7 +890,7 @@ if ($user->isLoggedIn()) {
                         $successMessage = 'Non Respiratory Data  Successful Added';
                     }
 
-                    Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&msg=' . $successMessage);
+                    Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
                 }
             } else {
                 $pageError = $validate->errors();
@@ -1017,7 +1014,7 @@ if ($user->isLoggedIn()) {
                         $successMessage = 'Diagnosis Data  Successful Added';
                     }
 
-                    Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&msg=' . $successMessage);
+                    Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
                 }
             } else {
                 $pageError = $validate->errors();
@@ -3494,11 +3491,12 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid']; ?>">
+                                            href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
+                                    <li class="breadcrumb-item"><a
+                                            href="info.php?id=6&status=<?= $_GET['status']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>">
                                             Go to Enrollment list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
@@ -3989,7 +3987,7 @@ if ($user->isLoggedIn()) {
                                                             <!-- Input Field -->
                                                             <input type="number" value="<?php if ($costing['ct_value']) {
                                                                 print_r($costing['ct_value']);
-                                                            } ?>" id="ct_value" name="ct_value" min="0" max="99"
+                                                            } ?>" id="ct_value" name="ct_value" step="0.1" min="0" max="99"
                                                                 class="form-control me-2" placeholder="Enter here" />
 
                                                             <!-- Checkbox -->
@@ -4092,7 +4090,7 @@ if ($user->isLoggedIn()) {
                                                             <!-- Input Field -->
                                                             <input type="number" value="<?php if ($costing['ct_value_repeat']) {
                                                                 print_r($costing['ct_value_repeat']);
-                                                            } ?>" id="ct_value_repeat" name="ct_value_repeat" min="0"
+                                                            } ?>" id="ct_value_repeat" name="ct_value_repeat" step="0.1" min="0"
                                                                 max="99" class="form-control me-2"
                                                                 placeholder="Enter here" />
 
@@ -4128,7 +4126,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4200,7 +4198,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid']; ?>"
+                                            <a href="info.php?id=id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>"
                                                 class="btn btn-default">Back</a>
                                             <input type="submit" name="add_respiratory" value="Submit"
                                                 class="btn btn-primary">
@@ -4237,11 +4235,12 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid'] ?>">
+                                            href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
+                                    <li class="breadcrumb-item"><a
+                                            href="info.php?id=3&status=<?= $_GET['status']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>">
                                             Go to Screening list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
@@ -4503,7 +4502,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <a href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>"
+                                            <a href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>"
                                                 class="btn btn-default">Back</a>
                                             <input type="submit" name="add_non_respiratory" value="Submit"
                                                 class="btn btn-primary">
@@ -4540,14 +4539,16 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item">
-                                        <a href="info.php?id=4&cid=<?= $_GET['cid']; ?>&status=<?= $_GET['status']; ?>">
+                                        <a
+                                            href="info.php?id=3&status=<?= $_GET['status']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item">
                                         <a href="index1.php">Home</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item">
-                                        <a href="info.php?id=3&status=<?= $_GET['status']; ?>">
+                                        <a
+                                            href="info.php?id=3&status=<?= $_GET['status']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>">
                                             Go to screening list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if ($results) { ?>
@@ -4621,7 +4622,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-4">
                                                     <label for="age18years" class="form-label">Is the Patient at least 18
                                                         years
                                                         old ?</label>
@@ -4643,7 +4644,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-4">
                                                     <label for="produce_resp_sample" class="form-label">
                                                         Is the patient capable of
                                                         producing a respiratory sample?
@@ -4666,19 +4667,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <hr>
-                                            <div class="card card-warning">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">
-                                                        Exclusion
-                                                        ( Exclude if patient responds yes to Any of the following )
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-4">
                                                     <label for="present_symptoms" class="form-label">
                                                         Does the patient present with
                                                         signs and symptoms suggestive of pulmonary TB or another pulmonary
@@ -4702,6 +4691,18 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <hr>
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">
+                                                        Exclusion
+                                                        ( Exclude if patient responds yes to Any of the following )
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
                                                 <div class="col-sm-6">
                                                     <label for="patient_ill" class="form-label">
                                                         Is the patient Seriously ill/unconscious/patients with mental health
@@ -4724,10 +4725,8 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4">
+
+                                                <div class="col-sm-6">
                                                     <label for="tb_follow_up" class="form-label">TB Patients on follow
                                                         up</label>
                                                     <!-- radio -->
@@ -4748,8 +4747,11 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
 
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-6">
                                                     <label for="prisoner" class="form-label">Is the Patient a prisoner
                                                         ?</label>
                                                     <!-- radio -->
@@ -4769,7 +4771,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-6">
                                                     <label for="unable_communicate" class="form-label">
                                                         Is the Patient Unable to communicate in English/Swahili ?
                                                     </label>
@@ -4799,17 +4801,17 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                    <?php if ($screening['comments']) {
-                                                                                                        print_r($screening['comments']);
-                                                                                                    } ?>
-                                                                                                </textarea>
+                                                                                                                <?php if ($screening['comments']) {
+                                                                                                                    print_r($screening['comments']);
+                                                                                                                } ?>
+                                                                                                            </textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <a href="info.php?id=4&cid=<?= $_GET['cid']; ?>&status=<?= $_GET['status']; ?>"
+                                            <a href="info.php?id=3&status=<?= $_GET['status'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                 class="btn btn-default">Back</a>
                                             <input type="hidden" name="cid" value="<?= $_GET['cid'] ?>">
                                             <input type="submit" name="add_screening" value="Submit"
@@ -4848,11 +4850,12 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=6&sid=<?= $_GET['sid']; ?>&status=<?= $_GET['status'] ?>">
+                                            href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
+                                    <li class="breadcrumb-item"><a
+                                            href="info.php?id=3&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>">
                                             Go to enrolled list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
@@ -6334,7 +6337,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6364,7 +6367,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6434,7 +6437,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <!-- /.card-body -->
                                             <div class="card-footer">
-                                                <a href="info.php?id=6&sid=<?= $_GET['sid']; ?>&status=<?= $_GET['status'] ?>"
+                                                <a href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>"
                                                     class="btn btn-default">Back</a>
                                                 <input type="submit" name="add_diagnosis_test" value="Submit"
                                                     class="btn btn-primary">
@@ -6472,11 +6475,12 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=6&sid=<?= $_GET['sid']; ?>&status=<?= $_GET['status'] ?>">
+                                            href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status'] ?>">
+                                    <li class="breadcrumb-item"><a
+                                            href="info.php?id=6&status=<?= $_GET['status']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>">
                                             Go to enrolled list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
@@ -6978,7 +6982,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7051,7 +7055,7 @@ if ($user->isLoggedIn()) {
                                             <!-- </div> -->
                                             <!-- /.card-body -->
                                             <div class="card-footer">
-                                                <a href="info.php?id=6&sid=<?= $_GET['sid']; ?>&status=<?= $_GET['status'] ?>"
+                                                <a href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>"
                                                     class="btn btn-default">Back</a>
                                                 <input type="submit" name="add_diagnosis" value="Submit"
                                                     class="btn btn-primary">
@@ -7082,12 +7086,13 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a
-                                            href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>">
+                                            href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>">
                                             < Back</a>
                                     </li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
                                     <li class="breadcrumb-item">
-                                        <a href="info.php?id=3&status=<?= $_GET['status'] ?>">
+                                        <a
+                                            href="info.php?id=6&status=<?= $_GET['status']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>">
                                             <?php if ($_GET['status'] == 1) { ?>
                                                 Go to screening list >
                                             <?php } elseif ($_GET['status'] == 2) { ?>
@@ -8228,7 +8233,7 @@ if ($user->isLoggedIn()) {
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>"
+                                            <a href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>"
                                                 class="btn btn-default">Back</a>
                                             <input type="submit" name="add_enrollment_form" value="Submit"
                                                 class="btn btn-primary">
@@ -9945,7 +9950,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10017,357 +10022,7 @@ if ($user->isLoggedIn()) {
             </div>
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 18) { ?>
-            <?php
-            $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
-            ?>
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <?php if (!$costing) { ?>
-                                    <h1>Add New Respiratory sample Data</h1>
-                                <?php } else { ?>
-                                    <h1>Update Respiratory sample Data</h1>
-                                <?php } ?>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a
-                                            href="info.php?id=4&sid=<?= $_GET['sid']; ?>&status=<?= $_GET['status']; ?>">
-                                            < Back</a>
-                                    </li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                                    <li class="breadcrumb-item"><a href="info.php?id=3&status=<?= $_GET['status']; ?>">
-                                            Go to screening list > </a>
-                                    </li>&nbsp;&nbsp;
-                                    <?php if (!$costing) { ?>
-                                        <li class="breadcrumb-item active">Add New Respiratory sample Data</li>
-                                    <?php } else { ?>
-                                        <li class="breadcrumb-item active">Update Respiratory sample Data</li>
-                                    <?php } ?>
-                                </ol>
-                            </div>
-                        </div>
-                    </div><!-- /.container-fluid -->
-                </section>
-
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <!-- right column -->
-                            <div class="col-md-12">
-                                <!-- general form elements disabled -->
-                                <div class="card card-warning">
-                                    <div class="card-header">
-                                        <h3 class="card-title">General information Form</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
-                                        <div class="card-body">
-                                            <hr>
-
-                                            <div class="card card-warning">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Respiratory sample</h3>
-                                                </div>
-                                            </div>
-
-
-
-                                            <hr>
-
-                                            <!-- Repeatable section starts here -->
-                                            <div id="repeatableSectionContainer">
-                                                <div id="repeatableSection" class="repeatableSection">
-                                                    <div class="row">
-                                                        <input type="hidden" name="row_id[]" value="">
-                                                        <!-- Hidden input to store the row ID for update/delete -->
-
-                                                        <!-- WRD Test Done -->
-                                                        <div class="col-sm-3">
-                                                            <label for="wrd_test" class="form-label">60. WRD test
-                                                                done</label>
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('wrd_test', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="wrd_test[0]" id="wrd_test<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>">
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                                <label for="wrd_test_date" class="form-label">what
-                                                                    date?</label>
-                                                                <input type="date" name="wrd_test_date[0]"
-                                                                    class="form-control">
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- Other questions continue here in similar structure -->
-                                                        <!-- You can also add a delete button per row to allow row deletion -->
-                                                        <button type="button" class="btn btn-danger"
-                                                            onclick="removeSection(this)">Delete Row</button>
-                                                    </div>
-                                                    <hr>
-                                                </div>
-                                            </div>
-
-                                            <!-- Button to add new row -->
-                                            <button type="button" class="btn btn-primary" id="addRowButton">Add Row</button>
-                                            <!-- <div class="row">
-                                                <div class="col-sm-3" id="wrd_test">
-                                                    <label for="wrd_test" class="form-label">60. WRD test done</label>
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('wrd_test', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="wrd_test" id="wrd_test<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['wrd_test'] == $value['id']) {
-                                                                            echo 'checked';
-                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                            <label id="wrd_test_date1" for="wrd_test_date" class="form-label">what date ?</label>
-                                                            <input type="date" value="<?php if ($costing['wrd_test_date']) {
-                                                                print_r($costing['wrd_test_date']);
-                                                            } ?>" id="wrd_test_date" name="wrd_test_date" class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                        <button type="button" onclick="unsetRadio('wrd_test')">Unset</button>
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="sequence_done">
-                                                    <label for="sequence_done" class="form-label">61. If none at the facility has it been done at sequence lab?
-                                                    </label>
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="sequence_done" id="sequence_done<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['sequence_done'] == $value['id']) {
-                                                                            echo 'checked';
-                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <label for="sequence_date" id="sequence_date1" class="form-label">what date ?</label>
-                                                        <input type="date" value="<?php if ($costing['sequence_date']) {
-                                                            print_r($costing['sequence_date']);
-                                                        } ?>" id="sequence_date" name="sequence_date" class="form-control" placeholder="Enter here" />
-                                                    </div>
-                                                    <button type="button" onclick="unsetRadio('sequence_done')">Unset</button>
-
-                                                </div>
-
-
-                                                <div class="col-sm-3" id="sequence_type">
-                                                    <label for="sequence_type" class="form-label">62. If yes (If Invalid/Error/No results skip next two qtn)</label>
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('sequence_type', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="sequence_type" id="sequence_type<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['sequence_type'] == $value['id']) {
-                                                                            echo 'checked';
-                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <label for="sequence_number" id="sequence_number1" class="form-label">(If error, what code/number??) </label>
-                                                        <input type="text" value="<?php if ($costing['sequence_number']) {
-                                                            print_r($costing['sequence_number']);
-                                                        } ?>" id="sequence_number" name="sequence_number" class="form-control" placeholder="Enter here" />
-                                                    </div>
-                                                    <button type="button" onclick="unsetRadio('sequence_type')">Unset</button>
-
-                                                </div>
-
-                                                <div class="col-sm-3" id="mtb_detection">
-                                                    <label for="mtb_detection" class="form-label">63. If MTB detected </label>
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('mtb_detection', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="mtb_detection" id="mtb_detection<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mtb_detection'] == $value['id']) {
-                                                                            echo 'checked';
-                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button" onclick="unsetRadio('mtb_detection')">Unset</button>
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" id="rif_resistance">
-                                                    <label for="rif_resistance" class="form-label">64. If MTB detected, RIF resistance </label>
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="rif_resistance" id="rif_resistance<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['rif_resistance'] == $value['id']) {
-                                                                            echo 'checked';
-                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button" onclick="unsetRadio('rif_resistance')">Unset</button>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <hr>
-                                            <div class="row">
-
-                                                <div class="col-4">
-                                                    <div class="mb-3">
-                                                        <label for="ct_value" class="form-label">65. Sample Cycle threshold (Ct) Value (number, two digits)</label>
-                                                        <input type="number" value="<?php if ($costing['ct_value']) {
-                                                            print_r($costing['ct_value']);
-                                                        } ?>" id="ct_value" name="ct_value" min="0" max="99" class="form-control" placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4" id="test_repeatition">
-                                                    <label for="test_repeatition" class="form-label">66. If Invalid/Error/No result/Indeterminate, was the test repeated?
-                                                    </label>
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="test_repeatition" id="test_repeatition<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['test_repeatition'] == $value['id']) {
-                                                                            echo 'checked';
-                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button" onclick="unsetRadio('test_repeatition')">Unset</button>
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4" id="microscopy_reason">
-                                                    <label for="microscopy_reason" class="form-label">67. If no reason(s) </label>
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('microscopy_reason', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="microscopy_reason" id="microscopy_reason<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['microscopy_reason'] == $value['id']) {
-                                                                            echo 'checked';
-                                                                        } ?>>
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                            <label for="microscopy_reason_other" id="microscopy_reason_other1" class="form-label">If Other Mention</label>
-                                                            <input type="text" value="<?php if ($costing['microscopy_reason_other']) {
-                                                                print_r($costing['microscopy_reason_other']);
-                                                            } ?>" id="microscopy_reason_other" name="microscopy_reason_other" class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
-                                                    <button type="button" onclick="unsetRadio('microscopy_reason')">Unset</button>
-
-                                                </div>
-                                            </div> -->
-                                        </div>
-                                        <!-- /.card-body -->
-                                        <div class="card-footer">
-                                            <a href="info.php?id=4&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>"
-                                                class="btn btn-default">Back</a>
-                                            <input type="submit" name="add_respiratory_test" value="Submit"
-                                                class="btn btn-primary">
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- /.card -->
-                            </div>
-                            <!--/.col (right) -->
-                        </div>
-                        <!-- /.row -->
-                    </div><!-- /.container-fluid -->
-                </section>
-                <!-- /.content -->
-            </div>
-            <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 19) { ?>
-            <!DOCTYPE html>
-            <html lang="en">
-
-            <head>
-                <meta charset="UTF-8">
-                <title>Person Details Form</title>
-                <script>
-                    function toggleEducationRow() {
-                        const education = document.getElementById("education");
-                        const educationDetails = document.getElementById("educationDetails");
-                        if (education.value === "Yes") {
-                            educationDetails.style.display = "block";
-                        } else {
-                            educationDetails.style.display = "none";
-                        }
-                    }
-
-                    function addNewRow() {
-                        const table = document.getElementById("educationTable");
-                        const row = table.insertRow(-1);
-                        const cell1 = row.insertCell(0);
-                        const cell2 = row.insertCell(1);
-                        cell1.innerHTML = '<input type="text" name="education_detail[]">';
-                        cell2.innerHTML = '<button type="button" onclick="removeRow(this)">Remove</button>';
-                    }
-
-                    function removeRow(button) {
-                        const row = button.parentNode.parentNode;
-                        row.parentNode.removeChild(row);
-                    }
-                </script>
-            </head>
-
-            <body>
-
-                <form action="submit.php" method="post">
-                    <label>Age of Person:</label>
-                    <input type="number" name="age" required><br><br>
-
-                    <label>Sex of Person:</label>
-                    <select name="sex" required>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select><br><br>
-
-                    <label>Is the person educated?</label>
-                    <select id="education" name="education" onchange="toggleEducationRow()" required>
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                    </select><br><br>
-
-                    <div id="educationDetails" style="display:none;">
-                        <label>Education Details:</label>
-                        <table id="educationTable">
-                            <tr>
-                                <td><input type="text" name="education_detail[]"></td>
-                                <td><button type="button" onclick="addNewRow()">Add New Row</button></td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <button type="submit">Submit</button>
-                </form>
-
-            </body>
-
-            </html>
-
         <?php } elseif ($_GET['id'] == 20) { ?>
         <?php } elseif ($_GET['id'] == 21) { ?>
         <?php } elseif ($_GET['id'] == 22) { ?>

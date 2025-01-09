@@ -9,16 +9,13 @@
             <a href="index1.php" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="add.php?id=13&status=1" class="nav-link">Add Screening form</a>
+            <a href="add.php?id=13&status=1" class="nav-link">Add Screening</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="info.php?id=3&status=1" class="nav-link">View All Screened Patients</a>
+            <a href="info.php?id=3&status=1" class="nav-link">View Screened</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="add.php?id=16&status=3" class="nav-link">Add Participant enrolment form</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="info.php?id=3&status=3" class="nav-link">View All enrolled Patients</a>
+            <a href="info.php?id=3&status=3" class="nav-link">View enrolled</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="logout.php" class="nav-link">Logout</a>
