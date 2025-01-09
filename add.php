@@ -2237,7 +2237,7 @@ if ($user->isLoggedIn()) {
 
 
                             // $screening = $override->get3('screening', 'status', 1, 'sequence', $_GET['sequence'], 'patient_id', $_GET['cid'])[0];
-                        
+
                             ?>
                             <!-- right column -->
                             <div class="col-md-12">
@@ -4591,6 +4591,75 @@ if ($user->isLoggedIn()) {
                                                             class="form-control" placeholder="Enter date" required />
                                                     </div>
                                                 </div>
+                                              <div class="col-sm-4">
+                                                    <label for="present_symptoms" class="form-label">
+                                                        Does the patient present with
+                                                        signs and symptoms suggestive of pulmonary TB or another pulmonary
+                                                        infection of bacterial, viral, or fungal origin?
+                                                    </label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="present_symptoms"
+                                                                        id="present_symptoms<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($screening['present_symptoms'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?>>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              <div class="col-sm-4">
+                                                    <label for="produce_resp_sample" class="form-label">
+                                                        Is the patient capable of
+                                                        producing a respiratory sample?
+                                                    </label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="produce_resp_sample"
+                                                                        id="produce_resp_sample<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($screening['produce_resp_sample'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?>>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              <div class="row">
+<div class="col-sm-4">
+                                                    <label for="age18years" class="form-label">Is the Patient at least 18
+                                                        years
+                                                        old ?</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="age18years" id="age18years<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($screening['age18years'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?>>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="col-sm-4">
                                                     <label for="conset" class="form-label">Has the patient provided written
                                                         informed consent to participate?</label>
@@ -4622,76 +4691,11 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                             <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <label for="age18years" class="form-label">Is the Patient at least 18
-                                                        years
-                                                        old ?</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="age18years" id="age18years<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($screening['age18years'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-sm-4">
-                                                    <label for="produce_resp_sample" class="form-label">
-                                                        Is the patient capable of
-                                                        producing a respiratory sample?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="produce_resp_sample"
-                                                                        id="produce_resp_sample<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($screening['produce_resp_sample'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <label for="present_symptoms" class="form-label">
-                                                        Does the patient present with
-                                                        signs and symptoms suggestive of pulmonary TB or another pulmonary
-                                                        infection of bacterial, viral, or fungal origin?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="present_symptoms"
-                                                                        id="present_symptoms<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($screening['present_symptoms'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+
+
+
                                             </div>
                                             <hr>
                                             <div class="card card-warning">
@@ -10047,28 +10051,28 @@ if ($user->isLoggedIn()) {
     <?php
     // Specify the directory where your JavaScript files are located
     // $jsDirectory = 'myjs/add/';
-    
+
     // Use glob to get all .js files in the specified directory
     // $jsFiles = glob($jsDirectory . '*.js');
-    
+
     // Loop through the files and output a <script> tag for each one
     // foreach ($jsFiles as $jsFile) {
     //     echo '<script src="' . $jsFile . '"></script>' . PHP_EOL;
     // }
-    
+
 
 
     // // Specify the directory where your JavaScript files are located
     // $jsDirectory = 'myjs/add/';
-    
+
     // // Use glob with recursive pattern to get all .js files in the directory and its subdirectories
     // $jsFiles = glob($jsDirectory . '**/*.js', GLOB_BRACE);
-    
+
     // // Loop through the files and output a <script> tag for each one
     // foreach ($jsFiles as $jsFile) {
     //     echo '<script src="' . $jsFile . '"></script>' . PHP_EOL;
     // }
-    
+
     ?>
 
     <!-- jQuery -->
