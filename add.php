@@ -3987,8 +3987,9 @@ if ($user->isLoggedIn()) {
                                                             <!-- Input Field -->
                                                             <input type="number" value="<?php if ($costing['ct_value']) {
                                                                 print_r($costing['ct_value']);
-                                                            } ?>" id="ct_value" name="ct_value" step="0.1" min="0" max="99"
-                                                                class="form-control me-2" placeholder="Enter here" />
+                                                            } ?>" id="ct_value" name="ct_value" step="0.1" min="0"
+                                                                max="99" class="form-control me-2"
+                                                                placeholder="Enter here" />
 
                                                             <!-- Checkbox -->
                                                             <div class="form-check">
@@ -4090,8 +4091,8 @@ if ($user->isLoggedIn()) {
                                                             <!-- Input Field -->
                                                             <input type="number" value="<?php if ($costing['ct_value_repeat']) {
                                                                 print_r($costing['ct_value_repeat']);
-                                                            } ?>" id="ct_value_repeat" name="ct_value_repeat" step="0.1" min="0"
-                                                                max="99" class="form-control me-2"
+                                                            } ?>" id="ct_value_repeat" name="ct_value_repeat"
+                                                                step="0.1" min="0" max="99" class="form-control me-2"
                                                                 placeholder="Enter here" />
 
                                                             <!-- Checkbox -->
@@ -4126,7 +4127,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4801,10 +4802,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                                <?php if ($screening['comments']) {
-                                                                                                                    print_r($screening['comments']);
-                                                                                                                } ?>
-                                                                                                            </textarea>
+                                                                                                                    <?php if ($screening['comments']) {
+                                                                                                                        print_r($screening['comments']);
+                                                                                                                    } ?>
+                                                                                                                </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -6337,7 +6338,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6367,7 +6368,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6982,7 +6983,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9950,7 +9951,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
