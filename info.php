@@ -1,5 +1,6 @@
 <?php
 require_once 'php/core/init.php';
+
 $user = new User();
 $override = new OverideData();
 $email = new Email();
@@ -377,9 +378,11 @@ if ($user->isLoggedIn()) {
                                         $data = $override->getWithLimit0('user', $page, $numRec);
                                     }
 
-                                    print_r($pagNum);
+                                    $users = $override->getCount('user', 'status', 1);
+
+
                                     ?>
-                                    List of Staff
+                                    List of Staff ( <?= print_r($users); ?> )
                                 </h1>
                             </div>
                             <div class="col-sm-6">
@@ -675,7 +678,7 @@ if ($user->isLoggedIn()) {
                                     <!-- /.card-body -->
                                     <?php
                                     $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-                                    // $currentSite = $_GET['facility_id'];
+                                    $currentSite = $_GET['facility_id'];
                                     // $pages = 10; // Total number of pages (replace with your actual calculation)
                                     $range = 2; // Number of pages to show before and after the current page
                                 
@@ -688,14 +691,14 @@ if ($user->isLoggedIn()) {
                                             <!-- Previous Page -->
                                             <li class="page-item <?php echo ($currentPage <= 1) ? 'disabled' : ''; ?>">
                                                 <a class="page-link"
-                                                    href="info.php?id=1&status=<?= $_GET['status']; ?>&page=<?php echo max($currentPage - 1, 1); ?>">&laquo;</a>
+                                                    href="info.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&facility_id=<?= $currentSite; ?>&page=<?php echo max($currentPage - 1, 1); ?>">&laquo;</a>
                                             </li>
 
                                             <!-- First Page (if outside the range) -->
                                             <?php if ($start > 1): ?>
                                                 <li class="page-item">
                                                     <a class="page-link"
-                                                        href="info.php?id=1&status=<?= $_GET['status']; ?>&page=<?php echo max($currentPage - 1, 1); ?>">&laquo;</a>
+                                                        href="info.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&facility_id=<?= $currentSite; ?>&page=1">1</a>
                                                 </li>
                                                 <?php if ($start > 2): ?>
                                                     <li class="page-item disabled">
@@ -708,7 +711,7 @@ if ($user->isLoggedIn()) {
                                             <?php for ($i = $start; $i <= $end; $i++): ?>
                                                 <li class="page-item <?php echo ($i === $currentPage) ? 'active' : ''; ?>">
                                                     <a class="page-link"
-                                                        href="info.php?id=1&status=<?= $_GET['status']; ?>&page=<?php echo max($currentPage - 1, 1); ?>">&laquo;</a>
+                                                        href="info.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&facility_id=<?= $currentSite; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
                                                 </li>
                                             <?php endfor; ?>
 
@@ -721,24 +724,23 @@ if ($user->isLoggedIn()) {
                                                 <?php endif; ?>
                                                 <li class="page-item">
                                                     <a class="page-link"
-                                                        href="info.php?id=1&status=<?= $_GET['status']; ?>&page=<?php echo max($currentPage - 1, 1); ?>">&laquo;</a>
+                                                        href="info.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&facility_id=<?= $currentSite; ?>&page=<?php echo $pages; ?>"><?php echo $pages; ?></a>
                                                 </li>
                                             <?php endif; ?>
                                             <!-- Next Page -->
                                             <li class="page-item <?php echo ($currentPage >= $pages) ? 'disabled' : ''; ?>">
                                                 <a class="page-link"
-                                                    href="info.php?id=1&status=<?= $_GET['status']; ?>&page=<?php echo max($currentPage - 1, 1); ?>">&laquo;</a>
+                                                    href="info.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&facility_id=<?= $currentSite; ?>&page=<?php echo min($currentPage + 1, $pages); ?>">&raquo;</a>
                                             </li>
                                         </ul>
                                     </div>
+                                    <!-- /.card -->
                                 </div>
-                                <!-- /.card -->
+                                <!--/.col (right) -->
                             </div>
-                            <!--/.col (right) -->
+                            <!-- /.row -->
                         </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
+                        <!-- /.container-fluid -->
                 </section>
                 <!-- /.content -->
             </div>
@@ -1529,10 +1531,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $enrollment['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $enrollment['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3116,10 +3118,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($visit['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $visit['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($visit['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $visit['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
