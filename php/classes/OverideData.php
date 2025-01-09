@@ -445,6 +445,12 @@ class OverideData
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    public function getWithLimit0($table, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     public function getWithLimit1($table, $where, $id, $where2, $id2, $page, $numRec)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' limit $page,$numRec");
