@@ -272,21 +272,21 @@ if ($user->isLoggedIn()) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="info.php?id=3&status=2&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $eligible; ?></span>
                                 <p>Eligible Patients</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="info.php?id=3&status=3&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $enrolled; ?></span>
                                 <p>Enrolled Patients</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="info.php?id=3&status=4&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $end; ?></span>
                                 <p>Terminated Patients</p>

@@ -1144,6 +1144,12 @@ if ($user->isLoggedIn()) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['facility_id'])[0];
                                                     $sex = $override->getNews('sex', 'status', 1, 'id', $value['sex'])[0];
                                                     $staff = $override->getNews('user', 'status', 1, 'id', $value['staff_id'])[0];
+                                                    $sid = '';
+                                                    if($_GET['status']==1 || $_GET['status']==2){
+                                                        $sid = $value['id'];
+                                                    }else{
+                                                        $sid = $value['enrollment_id'];
+                                                    }
                                                     ?>
                                                     <tr>
                                                         <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
@@ -1207,12 +1213,12 @@ if ($user->isLoggedIn()) {
                                                         <td>
                                                             <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
                                                                 <?php if ($override->get('enrollment_form', 'status', 1)) { ?>
-                                                                    <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                    <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                         role=" button" class="btn btn-info"> Update Screening
                                                                         Data</a>&nbsp;&nbsp; <br><br>
 
                                                                 <?php } else { ?>
-                                                                    <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                    <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                         role=" button" class="btn btn-warning"> Add Screening
                                                                         Data</a>&nbsp;&nbsp; <br><br>
 
@@ -1222,43 +1228,43 @@ if ($user->isLoggedIn()) {
                                                             if ($override->get3('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'], 'other_samples', 1)) {
                                                                 ?>
                                                                 <?php if (
-                                                                    $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('respiratory', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $value['id'])
+                                                                    $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('respiratory', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $sid)
                                                                 ) { ?>
 
                                                                     <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
-                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                             role=" button" class="btn btn-info"> View Enrollment Forms
                                                                         </a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
 
                                                                 <?php } else { ?>
                                                                     <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
-                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                             role=" button" class="btn btn-warning"> Add Enrollment Forms
                                                                         </a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
                                                                 <?php } ?>
                                                             <?php } else { ?>
                                                                 <?php if (
-                                                                    $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('respiratory', 'status', 1, 'enrollment_id', $value['id'])
+                                                                    $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('respiratory', 'status', 1, 'enrollment_id', $sid)
                                                                 ) { ?>
 
                                                                     <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
-                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                             role=" button" class="btn btn-info"> View Enrollment Forms
                                                                         </a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
 
                                                                 <?php } else { ?>
                                                                     <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
-                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                             role=" button" class="btn btn-warning"> Add Enrollment Forms
                                                                         </a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
