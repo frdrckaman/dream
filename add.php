@@ -3987,7 +3987,7 @@ if ($user->isLoggedIn()) {
                                                             <!-- Input Field -->
                                                             <input type="number" value="<?php if ($costing['ct_value']) {
                                                                 print_r($costing['ct_value']);
-                                                            } ?>" id="ct_value" name="ct_value" min="0" max="99"
+                                                            } ?>" id="ct_value" name="ct_value" step="0.1" min="0" max="99"
                                                                 class="form-control me-2" placeholder="Enter here" />
 
                                                             <!-- Checkbox -->
@@ -4090,7 +4090,7 @@ if ($user->isLoggedIn()) {
                                                             <!-- Input Field -->
                                                             <input type="number" value="<?php if ($costing['ct_value_repeat']) {
                                                                 print_r($costing['ct_value_repeat']);
-                                                            } ?>" id="ct_value_repeat" name="ct_value_repeat" min="0"
+                                                            } ?>" id="ct_value_repeat" name="ct_value_repeat" step="0.1" min="0"
                                                                 max="99" class="form-control me-2"
                                                                 placeholder="Enter here" />
 
