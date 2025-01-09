@@ -124,7 +124,7 @@ if ($user->isLoggedIn()) {
             <div class="col-sm-3">
 
               <?php
-              if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
+              if ($user->data()->accessLevel == 1) {
                 ?>
                 <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
                   <div class="row">

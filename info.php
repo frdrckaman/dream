@@ -958,7 +958,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <?php
-                                                if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
+                                                if ($user->data()->accessLevel == 1) {
                                                     ?>
                                                     <div class="col-sm-3">
                                                         <form id="validation" enctype="multipart/form-data" method="post"
