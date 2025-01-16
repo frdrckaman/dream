@@ -2237,7 +2237,7 @@ if ($user->isLoggedIn()) {
 
 
                             // $screening = $override->get3('screening', 'status', 1, 'sequence', $_GET['sequence'], 'patient_id', $_GET['cid'])[0];
-
+                        
                             ?>
                             <!-- right column -->
                             <div class="col-md-12">
@@ -4127,7 +4127,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4591,9 +4591,9 @@ if ($user->isLoggedIn()) {
                                                             class="form-control" placeholder="Enter date" required />
                                                     </div>
                                                 </div>
-                                              <div class="col-sm-4">
+                                                <div class="col-sm-4">
                                                     <label for="present_symptoms" class="form-label">
-                                                        Does the patient present with
+                                                        1. Does the patient present with
                                                         signs and symptoms suggestive of pulmonary TB or another pulmonary
                                                         infection of bacterial, viral, or fungal origin?
                                                     </label>
@@ -4615,10 +4615,10 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                              <div class="col-sm-4">
+                                                <div class="col-sm-4">
                                                     <label for="produce_resp_sample" class="form-label">
-                                                        Is the patient capable of
-                                                        producing a respiratory sample?
+                                                        2. Is the patient capable of
+                                                        producing a sputum sample?
                                                     </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4638,9 +4638,10 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                              <div class="row">
-<div class="col-sm-4">
-                                                    <label for="age18years" class="form-label">Is the Patient at least 18
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="age18years" class="form-label">3. Is the Patient at least 18
                                                         years
                                                         old ?</label>
                                                     <!-- radio -->
@@ -4661,7 +4662,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <label for="conset" class="form-label">Has the patient provided written
+                                                    <label for="conset" class="form-label">4. Has the patient provided written
                                                         informed consent to participate?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4680,22 +4681,15 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-4">
+                                                <div class="col-4" id="conset_date1">
                                                     <div class="mb-2">
-                                                        <label for="conset_date" class="form-label">Date of Conset</label>
+                                                        <label for="conset_date" class="form-label">5. Date of Conset</label>
                                                         <input type="date" value="<?php if ($screening) {
                                                             print_r($screening['conset_date']);
                                                         } ?>" id="conset_date" name="conset_date" class="form-control"
                                                             placeholder="Enter date" />
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <hr>
-
-
-
-
-
                                             </div>
                                             <hr>
                                             <div class="card card-warning">
@@ -4710,7 +4704,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <label for="patient_ill" class="form-label">
-                                                        Is the patient Seriously ill/unconscious/patients with mental health
+                                                       6. Is the patient Seriously ill/unconscious/patients with mental health
                                                         issues ?
                                                     </label>
                                                     <!-- radio -->
@@ -4732,7 +4726,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-6">
-                                                    <label for="tb_follow_up" class="form-label">TB Patients on follow
+                                                    <label for="tb_follow_up" class="form-label">7. TB Patients on follow
                                                         up</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4757,7 +4751,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
 
                                                 <div class="col-sm-6">
-                                                    <label for="prisoner" class="form-label">Is the Patient a prisoner
+                                                    <label for="prisoner" class="form-label">8. Is the Patient a prisoner
                                                         ?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4778,7 +4772,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label for="unable_communicate" class="form-label">
-                                                        Is the Patient Unable to communicate in English/Swahili ?
+                                                        9. Is the Patient Unable to communicate in English/Swahili ?
                                                     </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -4806,10 +4800,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                                    <?php if ($screening['comments']) {
-                                                                                                                        print_r($screening['comments']);
-                                                                                                                    } ?>
-                                                                                                                </textarea>
+                                                                                                                            <?php if ($screening['comments']) {
+                                                                                                                                print_r($screening['comments']);
+                                                                                                                            } ?>
+                                                                                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5005,8 +4999,8 @@ if ($user->isLoggedIn()) {
                                                         available)</label>
                                                     <input type="date" value="<?php if ($costing['phenotypic_date_performed']) {
                                                         print_r($costing['phenotypic_date_performed']);
-                                                    } ?>" id="phenotypic_date_performed"
-                                                        name="phenotypic_date_performed" class="form-control" />
+                                                    } ?>" id="phenotypic_date_performed" name="phenotypic_date_performed"
+                                                        class="form-control" />
                                                 </div>
 
                                                 <div class="col-sm-4" id="phenotypic_date_performed2">
@@ -6342,7 +6336,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6372,7 +6366,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6434,8 +6428,8 @@ if ($user->isLoggedIn()) {
                                                                 name="diagnosis_test_verified_date"
                                                                 id="diagnosis_test_verified_date" value="<?php if ($costing['diagnosis_test_verified_date']) {
                                                                     print_r($costing['diagnosis_test_verified_date']);
-                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
-                                                                    readonly <?php } ?> />
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?> readonly
+                                                                <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6667,9 +6661,8 @@ if ($user->isLoggedIn()) {
                                                                     class="form-label">Other Specify ?</label>
                                                                 <input type="text" value="<?php if ($costing['tb_clinically_other']) {
                                                                     print_r($costing['tb_clinically_other']);
-                                                                } ?>" id="tb_clinically_other"
-                                                                    name="tb_clinically_other" class="form-control"
-                                                                    placeholder="Enter here" />
+                                                                } ?>" id="tb_clinically_other" name="tb_clinically_other"
+                                                                    class="form-control" placeholder="Enter here" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -6708,8 +6701,8 @@ if ($user->isLoggedIn()) {
                                                                 health facility):</label>
                                                             <input type="text" value="<?php if ($costing['tb_facility']) {
                                                                 print_r($costing['tb_facility']);
-                                                            } ?>" id="tb_facility" name="tb_facility"
-                                                                class="form-control" placeholder="Enter heres" />
+                                                            } ?>" id="tb_facility" name="tb_facility" class="form-control"
+                                                                placeholder="Enter heres" />
                                                             <label for="tb_reason" id="tb_reason1" class="form-label">reason
                                                                 (specify):</label>
                                                             <input type="text" value="<?php if ($costing['tb_reason']) {
@@ -6839,9 +6832,8 @@ if ($user->isLoggedIn()) {
                                                                 class="form-label">Date </label>
                                                             <input type="text" value="<?php if ($costing['regimen_changed__date']) {
                                                                 print_r($costing['regimen_changed__date']);
-                                                            } ?>" id="regimen_changed__date"
-                                                                name="regimen_changed__date" class="form-control"
-                                                                placeholder="Enter here" />
+                                                            } ?>" id="regimen_changed__date" name="regimen_changed__date"
+                                                                class="form-control" placeholder="Enter here" />
                                                             <label for="regimen_added_name" id="regimen_added_name1"
                                                                 class="form-label">Change introduced to the regimen </label>
                                                             <input type="text" value="<?php if ($costing['regimen_added_name']) {
@@ -6987,7 +6979,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7036,7 +7028,8 @@ if ($user->isLoggedIn()) {
                                                                 name="diagnosis_completed_date"
                                                                 id="diagnosis_completed_date" value="<?php if ($costing['diagnosis_completed_date']) {
                                                                     print_r($costing['diagnosis_completed_date']);
-                                                                } ?>" <?php if ($costing['diagnosis_completness'] == 3) { ?> readonly <?php } ?> />
+                                                                } ?>" <?php if ($costing['diagnosis_completness'] == 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7050,8 +7043,8 @@ if ($user->isLoggedIn()) {
                                                                 name="diagnosis_verified_date" id="diagnosis_verified_date"
                                                                 value="<?php if ($costing['diagnosis_verified_date']) {
                                                                     print_r($costing['diagnosis_verified_date']);
-                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
-                                                                    readonly <?php } ?> />
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?> readonly
+                                                                <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8210,7 +8203,8 @@ if ($user->isLoggedIn()) {
                                                                 name="enrollment_completed_date"
                                                                 id="enrollment_completed_date" value="<?php if ($clients['enrollment_completed_date']) {
                                                                     print_r($clients['enrollment_completed_date']);
-                                                                } ?>" <?php if ($clients['enrollment_completed'] == 3) { ?> readonly <?php } ?> />
+                                                                } ?>" <?php if ($clients['enrollment_completed'] == 3) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8224,8 +8218,8 @@ if ($user->isLoggedIn()) {
                                                                 name="enrollment_verified_date"
                                                                 id="enrollment_verified_date" value="<?php if ($clients['enrollment_verified_date']) {
                                                                     print_r($clients['enrollment_verified_date']);
-                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
-                                                                    readonly <?php } ?> />
+                                                                } ?>" <?php if ($user->data()->position != 3) { ?> readonly
+                                                                <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8642,8 +8636,8 @@ if ($user->isLoggedIn()) {
                                                                 results</label>
                                                             <input type="text" value="<?php if ($costing['fm_results']) {
                                                                 print_r($costing['fm_results']);
-                                                            } ?>" id="fm_results" name="fm_results"
-                                                                class="form-control" placeholder="Enter here" />
+                                                            } ?>" id="fm_results" name="fm_results" class="form-control"
+                                                                placeholder="Enter here" />
                                                         </div>
                                                     </div>
 
@@ -8726,8 +8720,8 @@ if ($user->isLoggedIn()) {
                                                             ljculres_date</label>
                                                         <input type="date" value="<?php if ($costing['ljculres_date']) {
                                                             print_r($costing['ljculres_date']);
-                                                        } ?>" id="ljculres_date" name="ljculres_date"
-                                                            class="form-control" placeholder="Enter here" />
+                                                        } ?>" id="ljculres_date" name="ljculres_date" class="form-control"
+                                                            placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -8765,8 +8759,8 @@ if ($user->isLoggedIn()) {
                                                             mgitcul_date</label>
                                                         <input type="date" value="<?php if ($costing['mgitcul_date']) {
                                                             print_r($costing['mgitcul_date']);
-                                                        } ?>" id="mgitcul_date" name="mgitcul_date"
-                                                            class="form-control" placeholder="Enter here" />
+                                                        } ?>" id="mgitcul_date" name="mgitcul_date" class="form-control"
+                                                            placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
@@ -9549,8 +9543,8 @@ if ($user->isLoggedIn()) {
                                                             myco_lineage</label>
                                                         <input type="text" value="<?php if ($costing['myco_lineage']) {
                                                             print_r($costing['myco_lineage']);
-                                                        } ?>" id="myco_lineage" name="myco_lineage"
-                                                            class="form-control" placeholder="Enter date" />
+                                                        } ?>" id="myco_lineage" name="myco_lineage" class="form-control"
+                                                            placeholder="Enter date" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -9955,7 +9949,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10051,28 +10045,28 @@ if ($user->isLoggedIn()) {
     <?php
     // Specify the directory where your JavaScript files are located
     // $jsDirectory = 'myjs/add/';
-
+    
     // Use glob to get all .js files in the specified directory
     // $jsFiles = glob($jsDirectory . '*.js');
-
+    
     // Loop through the files and output a <script> tag for each one
     // foreach ($jsFiles as $jsFile) {
     //     echo '<script src="' . $jsFile . '"></script>' . PHP_EOL;
     // }
-
+    
 
 
     // // Specify the directory where your JavaScript files are located
     // $jsDirectory = 'myjs/add/';
-
+    
     // // Use glob with recursive pattern to get all .js files in the directory and its subdirectories
     // $jsFiles = glob($jsDirectory . '**/*.js', GLOB_BRACE);
-
+    
     // // Loop through the files and output a <script> tag for each one
     // foreach ($jsFiles as $jsFile) {
     //     echo '<script src="' . $jsFile . '"></script>' . PHP_EOL;
     // }
-
+    
     ?>
 
     <!-- jQuery -->

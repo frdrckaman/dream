@@ -168,6 +168,16 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
+        } elseif (Input::get('invite')) {
+            $staff = $override->get('user', 'id', Input::get('id'))[0];
+            $subject = 'Nanopore WhatsApp Invite';
+            $link = 'https://chat.whatsapp.com/KbhgEsRCew40x5ZHbcac3y';
+            try {
+                $email->userInvite($staff['email_address'], $staff['lastname'], $subject,$link);
+                $successMessage = 'Email Sent Successful';
+            } catch (Exception $e) {
+                $e->getMessage();
+            }
         }
     }
 } else {
@@ -411,6 +421,9 @@ if ($user->isLoggedIn()) {
                                                                 data-toggle="modal">Restore</a>&nbsp;&nbsp;&nbsp;
                                                             <a href="profile.php?id=<?= $staff['id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 class="btn btn-success">Change Password</a>
+                                                            <a href="#invite<?= $staff['id'] ?>" role="button"
+                                                                class="btn btn-orrange"
+                                                                data-toggle="modal">Invite</a>&nbsp;&nbsp;&nbsp;
                                                         </td>
                                                     </tr>
                                                     <div class="modal fade" id="reset<?= $staff['id'] ?>" tabindex="-1"
@@ -548,6 +561,34 @@ if ($user->isLoggedIn()) {
                                                                             value="<?= $staff['id'] ?>">
                                                                         <input type="submit" name="restore_staff"
                                                                             value="Restore" class="btn btn-success">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="invite<?= $staff['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <form method="post">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
+                                                                        <h4>Invite</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>Are you sure you want to Invite this user?
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $staff['id'] ?>">
+                                                                        <input type="submit" name="invite" value="Invite"
+                                                                            class="btn btn-warning">
                                                                         <button class="btn btn-default" data-dismiss="modal"
                                                                             aria-hidden="true">Close</button>
                                                                     </div>
@@ -1438,10 +1479,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($enrollment['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $enrollment['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $enrollment['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3025,10 +3066,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($visit['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $visit['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($visit['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $visit['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
