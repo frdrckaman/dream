@@ -3,7 +3,6 @@ const sputum_samples2 = document.getElementById("sputum_samples2");
 const sputum_samples3 = document.getElementById("sputum_samples3");
 const sputum_samples4 = document.getElementById("sputum_samples4");
 const sputum_samples5 = document.getElementById("sputum_samples5");
-const sputum_samples6 = document.getElementById("sputum_samples6");
 const sputum_samples96 = document.getElementById("sputum_samples96");
 
 const pleural_fluid1 = document.getElementById("pleural_fluid_date1");
@@ -26,8 +25,6 @@ const lymph_node_aspirate_date1 = document.getElementById(
 const lymph_node_aspirate_date = document.getElementById(
   "lymph_node_aspirate_date"
 );
-const stool_date1 = document.getElementById("stool_date1");
-const stool_date = document.getElementById("stool_date");
 const sputum_samples_date1 = document.getElementById("sputum_samples_date1");
 const sputum_samples_date = document.getElementById("sputum_samples_date");
 
@@ -78,16 +75,6 @@ sputum_samples5.addEventListener("change", function () {
   } else {
     lymph_node_aspirate_date1.style.display = "none";
     lymph_node_aspirate_date.removeAttribute("required");
-  }
-});
-
-sputum_samples6.addEventListener("change", function () {
-  if (this.checked) {
-    stool_date1.style.display = "block";
-    stool_date.setAttribute("required", "required");
-  } else {
-    stool_date1.style.display = "none";
-    stool_date.removeAttribute("required");
   }
 });
 
@@ -142,13 +129,6 @@ if (sputum_samples5.checked) {
   lymph_node_aspirate_date.removeAttribute("required");
 }
 
-if (sputum_samples6.checked) {
-  stool_date1.style.display = "block";
-  stool_date.setAttribute("required", "required");
-} else {
-  stool_date1.style.display = "none";
-  stool_date.removeAttribute("required");
-}
 
 if (sputum_samples96.checked) {
   sputum_samples_date1.style.display = "block";

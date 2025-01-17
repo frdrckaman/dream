@@ -1,26 +1,28 @@
 <?php
 require_once 'php/core/init.php';
+
 $user = new User();
 $override = new OverideData();
 $email = new Email();
 $random = new Random();
-
-
 
 $users = $override->getData('user');
 if ($user->isLoggedIn()) {
   if (Input::exists('post')) {
 
     if (Input::get('search_by_site')) {
-      $validate = new validate();
+
       $validate = $validate->check($_POST, array(
-        'site_id' => array(
+        'facility_id' => array(
           'required' => true,
         ),
       ));
       if ($validate->passed()) {
-
-        $url = 'index1.php?&site_id=' . Input::get('site_id');
+        if (Input::get('facility_id')) {
+          $url = 'info.php?id=' . $_GET['id'] . '&status=' . $_GET['status'] . '&facility_id=' . Input::get('facility_id');
+        } else {
+          $url = 'info.php?id=' . $_GET['id'] . '&status=' . $_GET['status'];
+        }
         Redirect::to($url);
         $pageError = $validate->errors();
       }
@@ -122,14 +124,14 @@ if ($user->isLoggedIn()) {
             <div class="col-sm-3">
 
               <?php
-              if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
+              if ($user->data()->accessLevel == 1) {
                 ?>
                 <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="row-form clearfix">
                         <div class="form-group">
-                          <select class="form-control" name="site_id" style="width: 100%;" autocomplete="off">
+                          <select class="form-control" name="facility_id" style="width: 100%;" autocomplete="off">
                             <option value="">Select Site</option>
                             <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
                               <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
@@ -179,8 +181,8 @@ if ($user->isLoggedIn()) {
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="info.php?id=3&status=1&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="small-box-footer">More info <i
-                  class="fas fa-arrow-circle-right"></i></a>
+              <a href="info.php?id=3&status=1&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+                class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -195,8 +197,7 @@ if ($user->isLoggedIn()) {
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i
-                  class="fas fa-arrow-circle-right"></i></a>
+              <a href="info.php?id=3&status=2&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -211,8 +212,7 @@ if ($user->isLoggedIn()) {
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i
-                  class="fas fa-arrow-circle-right"></i></a>
+              <a href="info.php?id=3&status=3&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -227,8 +227,7 @@ if ($user->isLoggedIn()) {
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i
-                  class="fas fa-arrow-circle-right"></i></a>
+              <a href="info.php?id=3&status=4&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
         </div>

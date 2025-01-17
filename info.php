@@ -168,114 +168,16 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        }
-
-
-        if ($_GET['status'] == 16) {
-            $data = null;
-            $filename = null;
-            if (Input::get('download_clients')) {
-                if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                    if ($_GET['site_id'] != null) {
-                        $data = $override->getNews('clients', 'status', 1, 'site_id', $_GET['site_id']);
-                    } else {
-                        $data = $override->get('clients', 'status', 1);
-                    }
-                } else {
-                    $data = $override->getNews('clients', 'status', 1, 'site_id', $user->data()->site_id);
-                }
-                $filename = 'Clients Data';
-            } elseif (Input::get('download_kap')) {
-                if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                    if ($_GET['site_id'] != null) {
-                        $data = $override->getNews('kap', 'status', 1, 'site_id', $_GET['site_id']);
-                    } else {
-                        $data = $override->get('kap', 'status', 1);
-                    }
-                } else {
-                    $data = $override->getNews('kap', 'status', 1, 'site_id', $user->data()->site_id);
-                }
-                $filename = 'Kap Data';
-            } elseif (Input::get('download_history')) {
-                if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                    if ($_GET['site_id'] != null) {
-                        $data = $override->getNews('history', 'status', 1, 'site_id', $_GET['site_id']);
-                    } else {
-                        $data = $override->get('history', 'status', 1);
-                    }
-                } else {
-                    $data = $override->getNews('history', 'status', 1, 'site_id', $user->data()->site_id);
-                }
-                $filename = 'Kap history';
-            } elseif (Input::get('download_results')) {
-                if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                    if ($_GET['site_id'] != null) {
-                        $data = $override->getNews('results', 'status', 1, 'site_id', $_GET['site_id']);
-                    } else {
-                        $data = $override->get('results', 'status', 1);
-                    }
-                } else {
-                    $data = $override->getNews('results', 'status', 1, 'site_id', $user->data()->site_id);
-                }
-                $filename = 'Results Data';
-            } elseif (Input::get('download_classification')) {
-                if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                    if ($_GET['site_id'] != null) {
-                        $data = $override->getNews('classification', 'status', 1, 'site_id', $_GET['site_id']);
-                    } else {
-                        $data = $override->get('classification', 'status', 1);
-                    }
-                } else {
-                    $data = $override->getNews('classification', 'status', 1, 'site_id', $user->data()->site_id);
-                }
-                $filename = 'Classification Data';
-            } elseif (Input::get('download_outcome')) {
-                if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                    if ($_GET['site_id'] != null) {
-                        $data = $override->getNews('outcome', 'status', 1, 'site_id', $_GET['site_id']);
-                    } else {
-                        $data = $override->get('outcome', 'status', 1);
-                    }
-                } else {
-                    $data = $override->getNews('outcome', 'status', 1, 'site_id', $user->data()->site_id);
-                }
-                $filename = 'Outcome Data';
-            } elseif (Input::get('download_economic')) {
-                if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                    if ($_GET['site_id'] != null) {
-                        $data = $override->getNews('economic', 'status', 1, 'site_id', $_GET['site_id']);
-                    } else {
-                        $data = $override->get('economic', 'status', 1);
-                    }
-                } else {
-                    $data = $override->getNews('economic', 'status', 1, 'site_id', $user->data()->site_id);
-                }
-                $filename = 'Economic Data';
-            } elseif (Input::get('download_visit')) {
-                if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                    if ($_GET['site_id'] != null) {
-                        $data = $override->getNews('visit', 'status', 1, 'site_id', $_GET['site_id']);
-                    } else {
-                        $data = $override->get('visit', 'status', 1);
-                    }
-                } else {
-                    $data = $override->getNews('visit', 'status', 1, 'site_id', $user->data()->site_id);
-                }
-                $filename = 'Visits Data';
-            } elseif (Input::get('download_study_id')) {
-                if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                    if ($_GET['site_id'] != null) {
-                        $data = $override->getNews('study_id', 'status', 1, 'site_id', $_GET['site_id']);
-                    } else {
-                        $data = $override->get('study_id', 'status', 1);
-                    }
-                } else {
-                    $data = $override->getNews('study_id', 'status', 1, 'site_id', $user->data()->site_id);
-                }
-                $filename = 'Study Id Data';
+        } elseif (Input::get('invite')) {
+            $staff = $override->get('user', 'id', Input::get('id'))[0];
+            $subject = 'Nanopore WhatsApp Invite';
+            $link = 'https://chat.whatsapp.com/KbhgEsRCew40x5ZHbcac3y';
+            try {
+                $email->userInvite($staff['email_address'], $staff['lastname'], $subject,$link);
+                $successMessage = 'Email Sent Successful';
+            } catch (Exception $e) {
+                $e->getMessage();
             }
-
-            $user->exportData($data, $filename);
         }
     }
 } else {
@@ -378,11 +280,11 @@ if ($user->isLoggedIn()) {
                                         $data = $override->getWithLimit0('user', $page, $numRec);
                                     }
 
-                                    $users = $override->getCount('user', 'status', 1);
+                                    $total_user = $override->getCount('user', 'status', 1);
 
 
                                     ?>
-                                    List of Staff ( <?= print_r($users); ?> )
+                                    List of Staff ( <?= $total_user; ?> )
                                 </h1>
                             </div>
                             <div class="col-sm-6">
@@ -434,6 +336,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Name</th>
                                                     <th>username</th>
                                                     <th>Position</th>
+                                                    <th>Access Level</th>
                                                     <th>Sex</th>
                                                     <th>Site</th>
                                                     <th>Status</th>
@@ -444,7 +347,7 @@ if ($user->isLoggedIn()) {
                                                 <?php
                                                 $x = 1;
                                                 foreach ($data as $staff) {
-
+                                                    // $position = $override->getNews('position', 'status', 1, 'id', $staff['accessLevel'])[0];
                                                     $position = $override->getNews('position', 'status', 1, 'id', $staff['position'])[0];
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $staff['site_id'])[0];
 
@@ -458,6 +361,9 @@ if ($user->isLoggedIn()) {
                                                         </td>
                                                         <td class="table-user">
                                                             <?= $position['name']; ?>
+                                                        </td>
+                                                        <td class="table-user">
+                                                            <?= $staff['accessLevel']; ?>
                                                         </td>
                                                         <?php if ($staff['sex'] == 1) { ?>
                                                             <td class="table-user">
@@ -515,6 +421,9 @@ if ($user->isLoggedIn()) {
                                                                 data-toggle="modal">Restore</a>&nbsp;&nbsp;&nbsp;
                                                             <a href="profile.php?id=<?= $staff['id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 class="btn btn-success">Change Password</a>
+                                                            <a href="#invite<?= $staff['id'] ?>" role="button"
+                                                                class="btn btn-orrange"
+                                                                data-toggle="modal">Invite</a>&nbsp;&nbsp;&nbsp;
                                                         </td>
                                                     </tr>
                                                     <div class="modal fade" id="reset<?= $staff['id'] ?>" tabindex="-1"
@@ -659,6 +568,34 @@ if ($user->isLoggedIn()) {
                                                             </form>
                                                         </div>
                                                     </div>
+                                                    <div class="modal fade" id="invite<?= $staff['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <form method="post">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
+                                                                        <h4>Invite</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>Are you sure you want to Invite this user?
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $staff['id'] ?>">
+                                                                        <input type="submit" name="invite" value="Invite"
+                                                                            class="btn btn-warning">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                     <?php $x++;
                                                 } ?>
                                             </tbody>
@@ -667,6 +604,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Name</th>
                                                     <th>username</th>
                                                     <th>Position</th>
+                                                    <th>Access Level</th>
                                                     <th>Sex</th>
                                                     <th>Site</th>
                                                     <th>Status</th>
@@ -1060,10 +998,10 @@ if ($user->isLoggedIn()) {
                                                         } ?>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3">
-                                                    <?php
-                                                    if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                                                        ?>
+                                                <?php
+                                                if ($user->data()->accessLevel == 1) {
+                                                    ?>
+                                                    <div class="col-sm-3">
                                                         <form id="validation" enctype="multipart/form-data" method="post"
                                                             autocomplete="off">
                                                             <div class="row">
@@ -1092,8 +1030,8 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             </div>
                                                         </form>
-                                                    <?php } ?>
-                                                </div>
+                                                    </div>
+                                                <?php } ?>
                                                 <div class="col-sm-6">
                                                     <ol class="breadcrumb float-sm-right">
                                                         <li class="breadcrumb-item">
@@ -1108,7 +1046,6 @@ if ($user->isLoggedIn()) {
                                                     </ol>
                                                 </div>
                                             </div>
-                                            <hr>
                                         </div><!-- /.container-fluid -->
                                     </section>
                                     <!-- /.card-header -->
@@ -1117,14 +1054,15 @@ if ($user->isLoggedIn()) {
                                             <thead>
                                                 <tr>
                                                     <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
-                                                        <th>Screened Date & Time</th>
+                                                        <th>Termination Date</th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 3) { ?>
-                                                        <th>Enrollment Date & Time</th>
+                                                        <th>Termination Date</th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 4) { ?>
-                                                        <th>Termination Date & Time</th>
+                                                        <th>Termination Date</th>
                                                     <?php } ?>
+                                                    <th>Time</th>
                                                     <th>PID</th>
                                                     <th>Site</th>
                                                     <th>Staff</th>
@@ -1139,23 +1077,32 @@ if ($user->isLoggedIn()) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['facility_id'])[0];
                                                     $sex = $override->getNews('sex', 'status', 1, 'id', $value['sex'])[0];
                                                     $staff = $override->getNews('user', 'status', 1, 'id', $value['staff_id'])[0];
+                                                    $sid = '';
+                                                    if ($_GET['status'] == 1 || $_GET['status'] == 2) {
+                                                        $sid = $value['id'];
+                                                    } else {
+                                                        $sid = $value['enrollment_id'];
+                                                    }
                                                     ?>
                                                     <tr>
                                                         <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
                                                             <td class="table-user">
-                                                                <?= $value['screening_date'] . ' - ' . date("h:i:s A"); ?>
+                                                                <?= $value['screening_date']; ?>
                                                             </td>
                                                         <?php } ?>
                                                         <?php if ($_GET['status'] == 3) { ?>
                                                             <td class="table-user">
-                                                                <?= $value['enrollment_date'] . ' - ' . date("h:i:s A"); ?>
+                                                                <?= $value['enrollment_date']; ?>
                                                             </td>
                                                         <?php } ?>
                                                         <?php if ($_GET['status'] == 4) { ?>
                                                             <td class="table-user">
-                                                                <?= $value['termination_date'] . ' - ' . date("h:i:s A"); ?>
+                                                                <?= $value['termination_date']; ?>
                                                             </td>
                                                         <?php } ?>
+                                                        <td class="table-user">
+                                                            <?= date("h:i:s A"); ?>
+                                                        </td>
                                                         <td class="table-user">
                                                             <?= $value['pid']; ?>
                                                         </td>
@@ -1202,12 +1149,12 @@ if ($user->isLoggedIn()) {
                                                         <td>
                                                             <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
                                                                 <?php if ($override->get('enrollment_form', 'status', 1)) { ?>
-                                                                    <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                    <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                         role=" button" class="btn btn-info"> Update Screening
                                                                         Data</a>&nbsp;&nbsp; <br><br>
 
                                                                 <?php } else { ?>
-                                                                    <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                    <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                         role=" button" class="btn btn-warning"> Add Screening
                                                                         Data</a>&nbsp;&nbsp; <br><br>
 
@@ -1217,43 +1164,43 @@ if ($user->isLoggedIn()) {
                                                             if ($override->get3('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'], 'other_samples', 1)) {
                                                                 ?>
                                                                 <?php if (
-                                                                    $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('respiratory', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $value['id'])
+                                                                    $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('respiratory', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $sid)
                                                                 ) { ?>
 
                                                                     <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
-                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                             role=" button" class="btn btn-info"> View Enrollment Forms
                                                                         </a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
 
                                                                 <?php } else { ?>
                                                                     <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
-                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                             role=" button" class="btn btn-warning"> Add Enrollment Forms
                                                                         </a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
                                                                 <?php } ?>
                                                             <?php } else { ?>
                                                                 <?php if (
-                                                                    $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $value['id']) &&
-                                                                    $override->getNews('respiratory', 'status', 1, 'enrollment_id', $value['id'])
+                                                                    $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $sid) &&
+                                                                    $override->getNews('respiratory', 'status', 1, 'enrollment_id', $sid)
                                                                 ) { ?>
 
                                                                     <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
-                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                             role=" button" class="btn btn-info"> View Enrollment Forms
                                                                         </a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
 
                                                                 <?php } else { ?>
                                                                     <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
-                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                        <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                             role=" button" class="btn btn-warning"> Add Enrollment Forms
                                                                         </a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
@@ -1269,14 +1216,15 @@ if ($user->isLoggedIn()) {
                                             <tfoot>
                                                 <tr>
                                                     <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
-                                                        <th>Screened Date</th>
+                                                        <th>Screened</th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 3) { ?>
-                                                        <th>Enrollment Date</th>
+                                                        <th>Enrollment</th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 4) { ?>
-                                                        <th>Termination Date</th>
+                                                        <th>Termination</th>
                                                     <?php } ?>
+                                                    <th>Time</th>
                                                     <th>PID</th>
                                                     <th>Site</th>
                                                     <th>Staff</th>
@@ -1531,10 +1479,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $enrollment['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $enrollment['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3118,10 +3066,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($visit['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $visit['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($visit['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $visit['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
