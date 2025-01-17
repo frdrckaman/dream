@@ -7187,30 +7187,33 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3" style="flex: 1;">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>4. Date of birth:</label>
-                                                            <input class="form-control" max="<?= date('Y-m-d'); ?>"
-                                                                type="date" min="1970-01-01" max="<?= date('Y-m-d'); ?>"
-                                                                name="dob" id="dob" style="width: 100%;" value="<?php if ($clients['dob']) {
-                                                                    print_r($clients['dob']);
-                                                                } ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-3" style="flex: 1;">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>5. Age (years)</label>
-                                                            <input class="form-control" type="number" min="0" max="100"
-                                                                name="age" id="age" value="<?php if ($clients['age']) {
-                                                                    print_r($clients['age']);
-                                                                } ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                      <div class="col-sm-3" style="flex: 1;">
+    <div class="row-form clearfix">
+        <div class="form-group">
+            <label>4. Date of birth:</label>
+            <input class="form-control" 
+                type="date" 
+                min="1970-01-01" 
+                max="<?= date('Y-m-d'); ?>" name="dob" id="dob"
+                                                    style="width: 100%;" value="<?php if ($clients['dob']) {
+                                                        print_r($clients['dob']);
+                                                    } ?>"
+                                                    onchange="updateAge()" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-3" style="flex: 1;">
+                                        <div class="row-form clearfix">
+                                            <div class="form-group">
+                                                <label>5. Age (years)</label>
+                                                <input class="form-control" type="number" min="0" max="100" name="age" id="age"
+                                                    value="<?php if ($clients['age']) {
+                                                        print_r($clients['age']);
+                                                    } ?>" oninput="updateDob()" />
+                                            </div>
+                                        </div>
+                                    </div>
 
                                                 <div class="col-sm-3" style="flex: 1;">
                                                     <label>6. SEX</label>
@@ -10185,6 +10188,7 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/enrollment/tx_ltf_months.js"></script>
     <script src="myjs/add/enrollment/tx_regimen_months.js"></script>
     <script src="myjs/add/enrollment/tb_regimen.js"></script>
+    <script src="myjs/add/enrollment/dob_age.js"></script>
 
 
 
