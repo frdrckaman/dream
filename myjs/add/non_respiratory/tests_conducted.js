@@ -14,7 +14,7 @@ const tests_conducted_other = document.getElementById(
 
 
 function toggleElementVisibility() {
-    if (microscopy_reason2_96.checked) {
+    if (tests_conducted96.checked) {
         tests_conducted_other1.style.display = "block";
         tests_conducted_other.style.display = "block";
     } else {
