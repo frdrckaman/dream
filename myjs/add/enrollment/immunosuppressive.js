@@ -3,15 +3,15 @@ const immunosuppressive2 = document.getElementById("immunosuppressive2");
 const immunosuppressive99 = document.getElementById("immunosuppressive99");
 
 
-const immunosuppressive_specify1 = document.getElementById(
-  "immunosuppressive_specify1"
+const immunosuppressive_diseases = document.getElementById(
+  "immunosuppressive_diseases"
 );
 
 function toggleElementVisibility() {
   if (immunosuppressive1.checked) {
-    immunosuppressive_specify1.style.display = "block";
+    immunosuppressive_diseases.style.display = "block";
   } else {
-    immunosuppressive_specify1.style.display = "none";
+    immunosuppressive_diseases.style.display = "none";
   }
 }
 

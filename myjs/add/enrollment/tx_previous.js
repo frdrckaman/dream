@@ -28,7 +28,7 @@ function toggleElementVisibility() {
     tb_category.style.display = "block";
     tb_regimen.style.display = "block";
     regimen_months1.style.display = "block";
-    regimen_changed.style.display = "block";
+    // regimen_changed.style.display = "block";
     tb_otcome1_1_1_1.style.display = "block";
     if (tb_category1_1.checked) {
       relapse_years1_1.style.display = "block";
@@ -38,11 +38,11 @@ function toggleElementVisibility() {
       ltf_months1_1.style.display = "block";
     }
 
-    if (regimen_changed1_1.checked) {
-      regimen_name1_1.style.display = "block";
-    } else if (tb_category1_3.checked) {
-      regimen_name1_1.style.display = "none";
-    }
+    // if (regimen_changed1_1.checked) {
+    //   regimen_name1_1.style.display = "block";
+    // } else if (tb_category1_3.checked) {
+    //   regimen_name1_1.style.display = "none";
+    // }
   } else if (tx_previous2.checked) {
     tx_number1.style.display = "none";
     dr_ds1.style.display = "none";
@@ -51,8 +51,8 @@ function toggleElementVisibility() {
     ltf_months1_1.style.display = "none";
     tb_regimen.style.display = "none";
     regimen_months1.style.display = "none";
-    regimen_changed.style.display = "none";
-    regimen_name1_1.style.display = "none";
+    // regimen_changed.style.display = "none";
+    // regimen_name1_1.style.display = "none";
     tb_otcome1_1_1_1.style.display = "none";
   } else {
     tx_number1.style.display = "none";
@@ -62,8 +62,8 @@ function toggleElementVisibility() {
     ltf_months1_1.style.display = "none";
     tb_regimen.style.display = "none";
     regimen_months1.style.display = "none";
-    regimen_changed.style.display = "none";
-    regimen_name1_1.style.display = "none";
+    // regimen_changed.style.display = "none";
+    // regimen_name1_1.style.display = "none";
     tb_otcome1_1_1_1.style.display = "none";
   }
 }

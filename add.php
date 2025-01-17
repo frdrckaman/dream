@@ -363,6 +363,7 @@ if ($user->isLoggedIn()) {
                     $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                     $enrollment_form = $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
                     $diseases_medical = implode(',', Input::get('diseases_medical'));
+                    $immunosuppressive_diseases = implode(',', Input::get('immunosuppressive_diseases'));
                     $sputum_samples = implode(',', Input::get('sputum_samples'));
                     if (Input::get('enrollment_completed') == 3 && Input::get('enrollment_verified_date') == "") {
                         $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
@@ -402,9 +403,10 @@ if ($user->isLoggedIn()) {
                                 'tb_otcome' => Input::get('tb_otcome'),
                                 'hiv_status' => Input::get('hiv_status'),
                                 'immunosuppressive' => Input::get('immunosuppressive'),
+                                'diseases_medical' => $diseases_medical,
                                 'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
                                 'other_diseases' => Input::get('other_diseases'),
-                                'diseases_medical' => $diseases_medical,
+                                'immunosuppressive_diseases' => $immunosuppressive_diseases,
                                 'diseases_specify' => Input::get('diseases_specify'),
                                 'sputum_collected' => Input::get('sputum_collected'),
                                 'dst_sample_date' => Input::get('dst_sample_date'),
@@ -469,6 +471,7 @@ if ($user->isLoggedIn()) {
                                 'tb_otcome' => Input::get('tb_otcome'),
                                 'hiv_status' => Input::get('hiv_status'),
                                 'immunosuppressive' => Input::get('immunosuppressive'),
+                                'immunosuppressive_diseases' => $immunosuppressive_diseases,
                                 'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
                                 'other_diseases' => Input::get('other_diseases'),
                                 'diseases_medical' => $diseases_medical,
@@ -3530,7 +3533,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-12">
                                                     <div class="mb-2">
                                                         <label for="lab_name" class="form-label">1a. Name of
-                                                            laboratory</label>
+                                                            laboratory / Site</label>
                                                         <input type="text" value="<?= $lab_name['name']; ?>" id="lab_name"
                                                             name="lab_name" class="form-control" placeholder="Enter here"
                                                             readonly />
@@ -3755,8 +3758,6 @@ if ($user->isLoggedIn()) {
                                                         <span>mL</span>
                                                     </div>
                                                 </div>
-                                            </div>
-
 
                                             <hr>
                                             <div class="row">
@@ -4003,7 +4004,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            </div>
 
 
                                             <hr>
@@ -7142,7 +7143,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <label>2. Date of enrolment</label>
                                                             <input class="form-control" type="date"
-                                                                max="<?= date('Y-m-d'); ?>" name="enrollment_date"
+                                                                min="2025-01-17" max="<?= date('Y-m-d'); ?>" name="enrollment_date"
                                                                 id="enrollment_date" value="<?php if ($clients['enrollment_date']) {
                                                                     print_r($clients['enrollment_date']);
                                                                 } ?>" required />
@@ -7154,7 +7155,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <label>4. Date of birth:</label>
                                                             <input class="form-control" max="<?= date('Y-m-d'); ?>"
-                                                                type="date" max="<?= date('Y-m-d'); ?>" name="dob" id="dob"
+                                                                type="date" min="1970-01-01" max="<?= date('Y-m-d'); ?>" name="dob" id="dob"
                                                                 style="width: 100%;" value="<?php if ($clients['dob']) {
                                                                     print_r($clients['dob']);
                                                                 } ?>" />
@@ -7560,10 +7561,6 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-
-
-
-
                                                 <div class="col-sm-4" id="dr_ds1">
                                                     <label>10c. Was it DR or DS TB </label>
                                                     <!-- radio -->
@@ -7737,7 +7734,6 @@ if ($user->isLoggedIn()) {
                                                                       echo 'Select';
                                                                   } ?>
                                                                 </option>
-                                                                <option value="">Select</option>
                                                                 <?php foreach ($override->get('tb_otcome', 'status', 1) as $value) { ?>
                                                                     <option value="<?= $value['id'] ?>"><?= $value['name'] ?>
                                                                     </option>
@@ -7758,7 +7754,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-4">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>11. HIV status </label>
@@ -7780,8 +7776,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-6" id="immunosuppressive">
-                                                    <label>12. Do you have other immunosuppressive diseases?</label>
+                                                <div class="col-sm-4" id="immunosuppressive">
+                                                    <label>12(a). Do you have other immunosuppressive diseases?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -7799,19 +7795,34 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                         <button type="button"
-                                                            onclick="unsetRadio('immunosuppressive')">Unset</button>
+                                                            onclick="unsetRadio('immunosuppressive')">Unset</button>                                                        
+                                                    </div>
+                                                </div>
 
-                                                        <div id="immunosuppressive_specify1">
-                                                            <label>If yes specify</label>
-                                                            <input class="form-control" type="text"
-                                                                name="immunosuppressive_specify"
-                                                                id="immunosuppressive_specify" placeholder="Type here..."
-                                                                value="<?php if ($clients['immunosuppressive_specify']) {
+                                                <div class="col-sm-4" id="immunosuppressive_diseases">
+                                                    <label>12(b). If yes, Select relevant immunosuppressive diseases ( Tick all that apply)</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('immunosuppressive_diseases', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" name="immunosuppressive_diseases[]"
+                                                                        id="immunosuppressive_diseases<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php foreach (explode(',', $clients['immunosuppressive_diseases']) as $values) {
+                                                                                if ($values == $value['id']) {
+                                                                                    echo 'checked';
+                                                                                }
+                                                                            } ?>>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                            <label id="immunosuppressive_specify1">12(c). If Other specify</label>
+                                                            <input class="form-control" type="text" name="immunosuppressive_specify" id="immunosuppressive_specify"
+                                                                placeholder="Type here..." value="<?php if ($clients['immunosuppressive_specify']) {
                                                                     print_r($clients['immunosuppressive_specify']);
                                                                 } ?>" />
                                                         </div>
                                                     </div>
-
+                                                
                                                 </div>
 
                                             </div>
@@ -7821,7 +7832,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
 
                                                 <div class="col-sm-6" id="other_diseases">
-                                                    <label>13. Other relevant diseases/medical conditions </label>
+                                                    <label>13(a). Other relevant diseases/medical conditions </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -7845,9 +7856,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-6" id="diseases_medical">
-                                                    <label>13b. If yes, Select relevant diseases/medical conditions ( Select
-                                                        multiple
-                                                        )</label>
+                                                    <label>13(b). If yes, Select relevant diseases/medical conditions ( Tick all that apply)
+                                                        </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -7865,8 +7875,8 @@ if ($user->isLoggedIn()) {
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <label id="diseases_specify1">34. If Other specify</label>
-                                                            <input class="form-control" type="number"
+                                                            <label id="diseases_specify1">13(c). If Other specify</label>
+                                                            <input class="form-control" type="text"
                                                                 name="diseases_specify" id="diseases_specify"
                                                                 placeholder="Type here..." value="<?php if ($clients['diseases_specify']) {
                                                                     print_r($clients['diseases_specify']);
@@ -7888,13 +7898,12 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-3" id="sputum_collected">
-                                                    <label>14.After TB was confirmed by a rapid molecular test, were two
-                                                        additional respiratory samples collected?</label>
+                                                <div class="col-sm-6" id="sputum_collected">
+                                                    <label>14(a). After TB was confirmed by a rapid molecular test, were additional sputum sample(s) collected?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('respiratory_samples', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
                                                                         name="sputum_collected"
@@ -7926,48 +7935,50 @@ if ($user->isLoggedIn()) {
                                                                     <label for="dst_sample_date" class="form-label">DST
                                                                         Sample Date</label>
                                                                     <input class="form-control" type="date"
-                                                                        name="dst_sample_date" id="dst_sample_date" value="<?php if ($clients['dst_sample_date']) {
+                                                                       min="2025-01-17" max="<?= date('Y-m-d'); ?>" name="dst_sample_date" id="dst_sample_date" value="<?php if ($clients['dst_sample_date']) {
                                                                             print_r($clients['dst_sample_date']);
                                                                         } ?>" />
 
                                                                     <!-- DST Sample Type Input -->
-                                                                    <label for="dst_sample_type"
+                                                                    <!-- <label for="dst_sample_type"
                                                                         class="form-label mt-2">Sample
                                                                         Type</label>
                                                                     <input class="form-control" type="text"
                                                                         name="dst_sample_type" id="dst_sample_type" value="<?php if ($clients['dst_sample_type']) {
                                                                             print_r($clients['dst_sample_type']);
-                                                                        } ?>" placeholder="Type Sample Type..." />
+                                                                        } ?>" placeholder="Type Sample Type..." /> -->
                                                                 </div>
 
                                                                 <!-- Sequencing Sample Date Input -->
-                                                                <div class="col-sm-6" id="sample_date1">
+                                                                <!-- <div class="col-sm-6" id="sample_date1"> -->
+                                                                <div class="col-sm-6">
                                                                     <label for="sequencing_sample_date"
                                                                         class="form-label">Sequencing Sample Date</label>
                                                                     <input class="form-control" type="date"
-                                                                        name="sequencing_sample_date"
+                                                                       min="2025-01-17" max="<?= date('Y-m-d'); ?>" name="sequencing_sample_date"
                                                                         id="sequencing_sample_date" value="<?php if ($clients['sequencing_sample_date']) {
                                                                             print_r($clients['sequencing_sample_date']);
                                                                         } ?>" />
 
                                                                     <!-- Sequencing Sample Type Input -->
-                                                                    <label for="sequencing_sample_type"
+                                                                    <!-- <label for="sequencing_sample_type"
                                                                         class="form-label mt-2">Sample Type</label>
                                                                     <input class="form-control" type="text"
                                                                         name="sequencing_sample_type"
                                                                         id="sequencing_sample_type" value="<?php if ($clients['sequencing_sample_type']) {
                                                                             print_r($clients['sequencing_sample_type']);
-                                                                        } ?>" placeholder="Type Sample Type..." />
+                                                                        } ?>" placeholder="Type Sample Type..." /> -->
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                 </div>
+                                            <hr>
 
+                                            <div class="row">
 
-
-
-                                                <div class="col-sm-3" id="other_samples">
+                                                <div class="col-sm-4" id="other_samples">
                                                     <label>15a. Were any other diagnostic samples requested? </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -7991,7 +8002,7 @@ if ($user->isLoggedIn()) {
 
                                                 </div>
 
-                                                <div class="col-sm-3" id="sputum_samples">
+                                                <div class="col-sm-4" id="sputum_samples">
                                                     <label>15b. Tick all that apply and fill date for each sample ticked
                                                     </label>
                                                     <!-- radio -->
@@ -8015,7 +8026,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" id="sputum_samples_date1">
+                                                <div class="col-sm-4" id="sputum_samples_date1">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8111,9 +8122,9 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4" id="stool_date1">
+                                                <!-- <div class="col-sm-4" id="stool_date1"> -->
                                                     <!-- radio -->
-                                                    <div class="row-form clearfix">
+                                                    <!-- <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>15h. Stool Date</label>
                                                             <input class="form-control" type="date" name="stool_date"
@@ -8123,7 +8134,7 @@ if ($user->isLoggedIn()) {
 
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <hr>
                                             <div class="row">
@@ -10120,6 +10131,7 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/enrollment/tb_category.js"></script>
     <script src="myjs/add/enrollment/tx_previous.js"></script>
     <script src="myjs/add/enrollment/immunosuppressive.js"></script>
+    <script src="myjs/add/enrollment/immunosuppressive_diseases.js"></script>
     <script src="myjs/add/enrollment/diseases_medical.js"></script>
     <script src="myjs/add/enrollment/chest_x_ray.js"></script>
     <script src="myjs/add/enrollment/dob.js"></script>
