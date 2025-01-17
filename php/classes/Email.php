@@ -2278,15 +2278,15 @@ class Email {
         $mail->Host = "smtp.zoho.com";
         $mail->isSMTP();
         $mail->SMTPAuth = true;
-        $mail->Username = "info.dream@gmail.com";
-        $mail->Password = "Data@2025";
+        $mail->Username = "";
+        $mail->Password = "";
         $mail->SMTPSecure = "tls"; //TLS
         $mail->Port = 587; //587
         $mail->addAddress($email);
-        $mail->setFrom('info.dream@gmail.com', 'Dream Nanopore Study');
-        $mail->addReplyTo('info.dream@gmail.com');
-        $mail->addCC('manquiz92@gmail.com');
-        $mail->addBCC('manquiz92@gmail.com');
+        $mail->setFrom('', 'Dream Nanopore Study');
+        $mail->addReplyTo('');
+        $mail->addCC('');
+        $mail->addBCC('');
         $mail->Subject = $subject;
         $mail->isHTML(true);
         $mail->Body = $body;
