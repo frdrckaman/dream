@@ -1,12 +1,12 @@
-function handleCheckbox() {
-    const ct_value_not_applicablecheckbox = document.getElementById('ct_value_not_applicable');
-    const inputField = document.getElementById('ct_value');
+function handleCheckbox1() {
+    const ct_value_not_applicable = document.getElementById('ct_value_not_applicable');
+    const ct_value_not_repeat = document.getElementById('ct_value_not_repeat');
 
     // Clear the input field if checkbox is checked
-    if (ct_value_not_applicablecheckbox.checked) {
-        inputField.value = '';
-        inputField.disabled = true; // Disable the input when checked
+    if (ct_value_not_applicable.checked) {
+        ct_value_not_repeat.value = '';
+        ct_value_not_repeat.disabled = true; // Disable the input when checked
     } else {
-        inputField.disabled = false; // Enable the input when unchecked
+        ct_value_not_repeat.disabled = false; // Enable the input when unchecked
     }
 }

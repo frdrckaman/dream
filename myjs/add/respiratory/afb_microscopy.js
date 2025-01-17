@@ -1,77 +1,49 @@
 const afb_microscopy1 = document.getElementById("afb_microscopy1");
 const afb_microscopy2 = document.getElementById("afb_microscopy2");
-const afb_microscopy3 = document.getElementById("afb_microscopy3");
 
 
-const afb_microscopy_date0 = document.getElementById("afb_microscopy_date0");
-const afb_microscopy_date1 = document.getElementById("afb_microscopy_date1");
-const afb_microscopy_date2 = document.getElementById("afb_microscopy_date2");
+const afb_technique_a_1 = document.getElementById("afb_technique_a_1");
+const afb_technique_a = document.getElementById("afb_technique_a");
+const afb_results_a_1_1 = document.getElementById("afb_results_a_1_1");
+const afb_results_a = document.getElementById("afb_results_a");
+const afb_date_a_1 = document.getElementById("afb_date_a_1");
 
-
-const zn = document.getElementById("zn");
-const zn_results_a = document.getElementById("zn_results_a");
-const zn_results_a1 = document.getElementById("zn_results_a1");
-const zn_results_b = document.getElementById("zn_results_b");
-const zn_results_b1 = document.getElementById("zn_results_b1");
-
-const fm = document.getElementById("fm");
-const fm_results_a = document.getElementById("fm_results_a");
-const fm_results_a1 = document.getElementById("fm_results_a1");
-const fm_results_b = document.getElementById("fm_results_b");
-const fm_results_b1 = document.getElementById("fm_results_b1");
+const afb_technique_b_1 = document.getElementById("afb_technique_b_1");
+const afb_technique_b = document.getElementById("afb_technique_b");
+const afb_results_b_1 = document.getElementById("afb_results_b_1");
+const afb_results_b = document.getElementById("afb_results_b");
+const afb_date_b_1 = document.getElementById("afb_date_b_1");
 
 function toggleElementVisibility() {
   if (afb_microscopy1.checked) {
-    afb_microscopy_date0.style.display = "block";
-    afb_microscopy_date1.style.display = "block";
-    afb_microscopy_date2.style.display = "none";
+    afb_technique_a_1.style.display = "block";
+    afb_technique_a.style.display = "block";
+    afb_results_a_1_1.style.display = "block";
+    afb_results_a.style.display = "block";
+    afb_date_a_1.style.display = "block";
 
-    zn.style.display = "block";
-    zn_results_a.style.display = "block";
-    zn_results_a1.setAttribute("required", "required");
-    zn_results_b.style.display = "block";
-    zn_results_b1.setAttribute("required", "required");
-    fm.style.display = "block";
-    fm_results_a.style.display = "block";
-    fm_results_a1.removeAttribute("required");
-    fm_results_b.style.display = "block";
-    fm_results_b1.removeAttribute("required");
-  } else if (afb_microscopy2.checked) {
-    afb_microscopy_date0.style.display = "none";
-    afb_microscopy_date1.style.display = "none";
-    afb_microscopy_date2.style.display = "none";
-
-    zn.style.display = "none";
-    zn_results_a.style.display = "none";
-    zn_results_a1.removeAttribute("required");
-    zn_results_b.style.display = "none";
-    zn_results_b1.removeAttribute("required");
-    fm.style.display = "none";
-    fm_results_a.style.display = "none";
-    fm_results_a1.setAttribute("required", "required");
-    fm_results_b.style.display = "none";
-    fm_results_b1.setAttribute("required", "required");
+    afb_technique_b_1.style.display = "block";
+    afb_technique_b.style.display = "block";
+    afb_results_b_1.style.display = "block";
+    afb_results_b.style.display = "block";
+    afb_date_b_1.style.display = "block";
   } else {
-    afb_microscopy_date0.style.display = "none";
-    afb_microscopy_date1.style.display = "none";
-    afb_microscopy_date2.style.display = "none";
+    afb_technique_a_1.style.display = "none";
+    afb_technique_a.style.display = "none";
+    afb_results_a_1_1.style.display = "none";
+    afb_results_a.style.display = "none";
+    afb_date_a_1.style.display = "none";
 
-    zn.style.display = "none";
-    zn_results_a.style.display = "none";
-    zn_results_a1.removeAttribute("required");
-    zn_results_b.style.display = "none";
-    zn_results_b1.removeAttribute("required");
-    fm.style.display = "none";
-    fm_results_a.style.display = "none";
-    fm_results_a1.removeAttribute("required");
-    fm_results_b.style.display = "none";
-    fm_results_b1.removeAttribute("required");
+    afb_technique_b_1.style.display = "none";
+    afb_technique_b.style.display = "none";
+    afb_results_b_1.style.display = "none";
+    afb_results_b.style.display = "none";
+    afb_date_b_1.style.display = "none";
   }
 }
 
 afb_microscopy1.addEventListener("change", toggleElementVisibility);
 afb_microscopy2.addEventListener("change", toggleElementVisibility);
-afb_microscopy3.addEventListener("change", toggleElementVisibility);
 
 // Initial check
 toggleElementVisibility();
