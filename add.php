@@ -298,15 +298,46 @@ if ($user->isLoggedIn()) {
                             'prisoner' => Input::get('prisoner'),
                             'unable_communicate' => Input::get('unable_communicate'),
                             'comments' => Input::get('comments'),
+                            'region' => Input::get('region'),
+                            'district' => Input::get('district'),
+                            'ward' => Input::get('ward'),
+                            'village_street' => Input::get('village_street'),
                             'eligible' => $eligible,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $user->data()->site_id,
+                            'facility_id' => $screening['facility_id'],
                         ), $screening['id']);
+
+                        $user->createRecord('screening_records', array(
+                            'screening_id' => $screening['id'],
+                            'pid' => $screening['pid'],
+                            'screening_date' => Input::get('screening_date'),
+                            'conset' => Input::get('conset'),
+                            'conset_date' => Input::get('conset_date'),
+                            'age18years' => Input::get('age18years'),
+                            'present_symptoms' => Input::get('present_symptoms'),
+                            'produce_resp_sample' => Input::get('produce_resp_sample'),
+                            'tb_follow_up' => Input::get('tb_follow_up'),
+                            'patient_ill' => Input::get('patient_ill'),
+                            'prisoner' => Input::get('prisoner'),
+                            'unable_communicate' => Input::get('unable_communicate'),
+                            'comments' => Input::get('comments'),
+                            'region' => Input::get('region'),
+                            'district' => Input::get('district'),
+                            'ward' => Input::get('ward'),
+                            'village_street' => Input::get('village_street'),
+                            'eligible' => $eligible,
+                            'status' => 1,
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $screening['facility_id'],
+                        ));
 
                         $successMessage = 'Screening  Successful Updated';
                     } else {
-                        $pid = $override->get('study_id', 'status', 0)[0];
+                        $pid = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
                         $user->createRecord('screening', array(
                             'pid' => $pid['study_id'],
                             'screening_date' => Input::get('screening_date'),
@@ -320,6 +351,10 @@ if ($user->isLoggedIn()) {
                             'prisoner' => Input::get('prisoner'),
                             'unable_communicate' => Input::get('unable_communicate'),
                             'comments' => Input::get('comments'),
+                            'region' => Input::get('region'),
+                            'district' => Input::get('district'),
+                            'ward' => Input::get('ward'),
+                            'village_street' => Input::get('village_street'),
                             'eligible' => $eligible,
                             'status' => 1,
                             'create_on' => date('Y-m-d H:i:s'),
@@ -336,14 +371,32 @@ if ($user->isLoggedIn()) {
                             'status' => 1,
                         ), $pid['id']);
 
-                        // $enrollment_form = $override->get('enrollment_form', 'enrollment_id', $_GET['sid']);
-                        // if($eligible){
-                        //     if ($enrollment_form) {
-                        //         $user->updateRecord('add_enrollment_form', array(
-                        //             'status' => 1,
-                        //         ), $enrollment_form['id']);
-                        //     }
-                        // }
+                        $user->createRecord('screening_records', array(
+                            'screening_id' => $last_row['id'],
+                            'pid' => $pid['study_id'],
+                            'screening_date' => Input::get('screening_date'),
+                            'conset' => Input::get('conset'),
+                            'conset_date' => Input::get('conset_date'),
+                            'age18years' => Input::get('age18years'),
+                            'present_symptoms' => Input::get('present_symptoms'),
+                            'produce_resp_sample' => Input::get('produce_resp_sample'),
+                            'tb_follow_up' => Input::get('tb_follow_up'),
+                            'patient_ill' => Input::get('patient_ill'),
+                            'prisoner' => Input::get('prisoner'),
+                            'unable_communicate' => Input::get('unable_communicate'),
+                            'comments' => Input::get('comments'),
+                            'region' => Input::get('region'),
+                            'district' => Input::get('district'),
+                            'ward' => Input::get('ward'),
+                            'village_street' => Input::get('village_street'),
+                            'eligible' => $eligible,
+                            'status' => 1,
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $screening['facility_id'],
+                        ));
 
                         $successMessage = 'Screening  Successful Added';
                     }
@@ -434,6 +487,76 @@ if ($user->isLoggedIn()) {
                                 'update_id' => $user->data()->id,
                             ), $enrollment_form['id']);
 
+                            $user->createRecord('enrollment_form_records', array(
+                                'enroll_id' => $enrollment_form['id'],
+                                'enrollment_id' => $_GET['sid'],
+                                'pid' => $screening['pid'],
+                                'enrollment_date' => Input::get('enrollment_date'),
+                                'dob' => Input::get('dob'),
+                                'age' => Input::get('age'),
+                                'sex' => Input::get('sex'),
+                                'region' => Input::get('region'),
+                                'district' => Input::get('district'),
+                                'ward' => Input::get('ward'),
+                                'village_street' => Input::get('village_street'),
+                                'cough2weeks' => Input::get('cough2weeks'),
+                                'chest_xray' => Input::get('chest_xray'),
+                                'poor_weight' => Input::get('poor_weight'),
+                                'coughing_blood' => Input::get('coughing_blood'),
+                                'unexplained_fever' => Input::get('unexplained_fever'),
+                                'night_sweats' => Input::get('night_sweats'),
+                                'neck_lymph' => Input::get('neck_lymph'),
+                                'date_information_collected' => Input::get('date_information_collected'),
+                                'history_tb' => Input::get('history_tb'),
+                                'tx_previous' => Input::get('tx_previous'),
+                                'tx_month' => Input::get('tx_month'),
+                                'tx_year' => Input::get('tx_year'),
+                                'tx_unknown' => Input::get('tx_unknown'),
+                                'dr_ds' => Input::get('dr_ds'),
+                                'tb_category' => Input::get('tb_category'),
+                                'relapse_years' => Input::get('relapse_years'),
+                                'ltf_months' => Input::get('ltf_months'),
+                                'tb_regimen' => Input::get('tb_regimen'),
+                                'tb_regimen_specify' => Input::get('tb_regimen_specify'),
+                                'regimen_months' => Input::get('regimen_months'),
+                                'tb_otcome' => Input::get('tb_otcome'),
+                                'hiv_status' => Input::get('hiv_status'),
+                                'immunosuppressive' => Input::get('immunosuppressive'),
+                                'immunosuppressive_diseases' => $immunosuppressive_diseases,
+                                'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
+                                'other_diseases' => Input::get('other_diseases'),
+                                'diseases_medical' => $diseases_medical,
+                                'diseases_specify' => Input::get('diseases_specify'),
+                                'sputum_collected' => Input::get('sputum_collected'),
+                                'dst_sample_date' => Input::get('dst_sample_date'),
+                                'dst_sample_type' => Input::get('dst_sample_type'),
+                                'sequencing_sample_date' => Input::get('sequencing_sample_date'),
+                                'sequencing_sample_type' => Input::get('sequencing_sample_type'),
+                                'other_samples' => Input::get('other_samples'),
+                                'sputum_samples' => $sputum_samples,
+                                'pleural_fluid_date' => Input::get('pleural_fluid_date'),
+                                'csf_date' => Input::get('csf_date'),
+                                'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
+                                'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
+                                'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
+                                'stool_date' => Input::get('stool_date'),
+                                'sputum_samples_other' => Input::get('sputum_samples_other'),
+                                'sputum_samples_date' => Input::get('sputum_samples_date'),
+                                'chest_x_ray' => Input::get('chest_x_ray'),
+                                'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                                'enrollment_completed' => Input::get('enrollment_completed'),
+                                'enrollment_completed_by' => $user->data()->id,
+                                'enrollment_completed_date' => Input::get('enrollment_completed_date'),
+                                'enrollment_verified_by' => $user->data()->id,
+                                'enrollment_verified_date' => Input::get('enrollment_verified_date'),
+                                'status' => 1,
+                                'create_on' => date('Y-m-d H:i:s'),
+                                'staff_id' => $user->data()->id,
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $screening['facility_id'],
+                            ));
+
                             $successMessage = 'Enrollment Form Updated Successful';
                         } else {
 
@@ -503,7 +626,79 @@ if ($user->isLoggedIn()) {
                                 'staff_id' => $user->data()->id,
                                 'update_on' => date('Y-m-d H:i:s'),
                                 'update_id' => $user->data()->id,
-                                'facility_id' => $user->data()->site_id,
+                                'facility_id' => $screening['facility_id'],
+                            ));
+
+                            $last_row = $override->lastRow('enrollment_form', 'id')[0];
+
+                            $user->createRecord('enrollment_form_records', array(
+                                'enroll_id' => $last_row['id'],
+                                'enrollment_id' => $_GET['sid'],
+                                'pid' => $screening['pid'],
+                                'enrollment_date' => Input::get('enrollment_date'),
+                                'dob' => Input::get('dob'),
+                                'age' => Input::get('age'),
+                                'sex' => Input::get('sex'),
+                                'region' => Input::get('region'),
+                                'district' => Input::get('district'),
+                                'ward' => Input::get('ward'),
+                                'village_street' => Input::get('village_street'),
+                                'cough2weeks' => Input::get('cough2weeks'),
+                                'chest_xray' => Input::get('chest_xray'),
+                                'poor_weight' => Input::get('poor_weight'),
+                                'coughing_blood' => Input::get('coughing_blood'),
+                                'unexplained_fever' => Input::get('unexplained_fever'),
+                                'night_sweats' => Input::get('night_sweats'),
+                                'neck_lymph' => Input::get('neck_lymph'),
+                                'date_information_collected' => Input::get('date_information_collected'),
+                                'history_tb' => Input::get('history_tb'),
+                                'tx_previous' => Input::get('tx_previous'),
+                                'tx_month' => Input::get('tx_month'),
+                                'tx_year' => Input::get('tx_year'),
+                                'tx_unknown' => Input::get('tx_unknown'),
+                                'dr_ds' => Input::get('dr_ds'),
+                                'tb_category' => Input::get('tb_category'),
+                                'relapse_years' => Input::get('relapse_years'),
+                                'ltf_months' => Input::get('ltf_months'),
+                                'tb_regimen' => Input::get('tb_regimen'),
+                                'tb_regimen_specify' => Input::get('tb_regimen_specify'),
+                                'regimen_months' => Input::get('regimen_months'),
+                                'tb_otcome' => Input::get('tb_otcome'),
+                                'hiv_status' => Input::get('hiv_status'),
+                                'immunosuppressive' => Input::get('immunosuppressive'),
+                                'immunosuppressive_diseases' => $immunosuppressive_diseases,
+                                'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
+                                'other_diseases' => Input::get('other_diseases'),
+                                'diseases_medical' => $diseases_medical,
+                                'diseases_specify' => Input::get('diseases_specify'),
+                                'sputum_collected' => Input::get('sputum_collected'),
+                                'dst_sample_date' => Input::get('dst_sample_date'),
+                                'dst_sample_type' => Input::get('dst_sample_type'),
+                                'sequencing_sample_date' => Input::get('sequencing_sample_date'),
+                                'sequencing_sample_type' => Input::get('sequencing_sample_type'),
+                                'other_samples' => Input::get('other_samples'),
+                                'sputum_samples' => $sputum_samples,
+                                'pleural_fluid_date' => Input::get('pleural_fluid_date'),
+                                'csf_date' => Input::get('csf_date'),
+                                'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
+                                'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
+                                'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
+                                'stool_date' => Input::get('stool_date'),
+                                'sputum_samples_other' => Input::get('sputum_samples_other'),
+                                'sputum_samples_date' => Input::get('sputum_samples_date'),
+                                'chest_x_ray' => Input::get('chest_x_ray'),
+                                'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                                'enrollment_completed' => Input::get('enrollment_completed'),
+                                'enrollment_completed_by' => $user->data()->id,
+                                'enrollment_completed_date' => Input::get('enrollment_completed_date'),
+                                'enrollment_verified_by' => $user->data()->id,
+                                'enrollment_verified_date' => Input::get('enrollment_verified_date'),
+                                'status' => 1,
+                                'create_on' => date('Y-m-d H:i:s'),
+                                'staff_id' => $user->data()->id,
+                                'update_on' => date('Y-m-d H:i:s'),
+                                'update_id' => $user->data()->id,
+                                'facility_id' => $screening['facility_id'],
                             ));
 
                             $successMessage = 'Enrollment Form  Added Successful';
@@ -522,7 +717,7 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+                $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $individual = $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid']);
                 $first_line = 0;
                 $second_line = 0;
@@ -618,13 +813,12 @@ if ($user->isLoggedIn()) {
                             'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
+                            'facility_id' => $screening['facility_id'],
                         ), $individual[0]['id']);
 
-                        $successMessage = 'Diagnosis test  Successful Updated';
-                    } else {
-                        $user->createRecord('diagnosis_test', array(
-                            'pid' => $clients['pid'],
+                        $user->createRecord('diagnosis_test_records', array(
+                            'diagnosis_test_id' => $individual[0]['id'],
+                            'pid' => $screening['pid'],
                             'culture_performed' => Input::get('culture_performed'),
                             'culture_method' => Input::get('culture_method'),
                             'culture_results' => Input::get('culture_results'),
@@ -695,7 +889,162 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
+                            'facility_id' => $screening['facility_id'],
+                        ));
+
+                        $successMessage = 'Diagnosis test  Successful Updated';
+                    } else {
+                        $user->createRecord('diagnosis_test', array(
+                            'pid' => $screening['pid'],
+                            'culture_performed' => Input::get('culture_performed'),
+                            'culture_method' => Input::get('culture_method'),
+                            'culture_results' => Input::get('culture_results'),
+                            'phenotypic_performed' => Input::get('phenotypic_performed'),
+                            'phenotypic_date_performed' => Input::get('phenotypic_date_performed'),
+                            'phenotypic_date_results' => Input::get('phenotypic_date_results'),
+                            'rifampicin' => Input::get('rifampicin'),
+                            'isoniazid' => Input::get('isoniazid'),
+                            'levofloxacin' => Input::get('levofloxacin'),
+                            'moxifloxacin' => Input::get('moxifloxacin'),
+                            'bedaquiline' => Input::get('bedaquiline'),
+                            'linezolid' => Input::get('linezolid'),
+                            'clofazimine' => Input::get('clofazimine'),
+                            'cycloserine' => Input::get('cycloserine'),
+                            'terizidone' => Input::get('terizidone'),
+                            'ethambutol' => Input::get('ethambutol'),
+                            'delamanid' => Input::get('delamanid'),
+                            'pyrazinamide' => Input::get('pyrazinamide'),
+                            'imipenem' => Input::get('imipenem'),
+                            'cilastatin' => Input::get('cilastatin'),
+                            'meropenem' => Input::get('meropenem'),
+                            'amikacin' => Input::get('amikacin'),
+                            'streptomycin' => Input::get('streptomycin'),
+                            'ethionamide' => Input::get('ethionamide'),
+                            'prothionamide' => Input::get('prothionamide'),
+                            'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
+                            'nano_rifampicin' => Input::get('nano_rifampicin'),
+                            'nano_isoniazid' => Input::get('nano_isoniazid'),
+                            'nano_levofloxacin' => Input::get('nano_levofloxacin'),
+                            'nano_moxifloxacin' => Input::get('nano_moxifloxacin'),
+                            'nano_bedaquiline' => Input::get('nano_bedaquiline'),
+                            'nano_linezolid' => Input::get('nano_linezolid'),
+                            'nano_clofazimine' => Input::get('nano_clofazimine'),
+                            'nano_cycloserine' => Input::get('nano_cycloserine'),
+                            'nano_delamanid' => Input::get('nano_delamanid'),
+                            'nano_terizidone' => Input::get('nano_terizidone'),
+                            'nano_ethambutol' => Input::get('nano_ethambutol'),
+                            'nano_pyrazinamide' => Input::get('nano_pyrazinamide'),
+                            'nano_cilastatin' => Input::get('nano_cilastatin'),
+                            'nano_imipenem' => Input::get('nano_imipenem'),
+                            'nano_meropenem' => Input::get('nano_meropenem'),
+                            'nano_amikacin' => Input::get('nano_amikacin'),
+                            'nano_streptomycin' => Input::get('nano_streptomycin'),
+                            'nano_ethionamide' => Input::get('nano_ethionamide'),
+                            'nano_prothionamide' => Input::get('nano_prothionamide'),
+                            'nano_para_aminosalicylic_acid' => Input::get('nano_para_aminosalicylic_acid'),
+                            'xpert_xdr_performed' => Input::get('xpert_xdr_performed'),
+                            'isoniazid2' => Input::get('isoniazid2'),
+                            'fluoroquinolones' => Input::get('fluoroquinolones'),
+                            'amikacin2' => Input::get('amikacin2'),
+                            'kanamycin' => Input::get('kanamycin'),
+                            'capreomycin' => Input::get('capreomycin'),
+                            'ethionamide2' => Input::get('ethionamide2'),
+                            '_1st_line_drugs' => $_1st_line_drugs,
+                            '_2st_line_drugs' => $_2st_line_drugs,
+                            'version_number' => Input::get('version_number'),
+                            'lot_number' => Input::get('lot_number'),
+                            'mutations_detected_list' => Input::get('mutations_detected_list'),
+                            'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
+                            'comments' => Input::get('comments'),
+                            'form_completness' => Input::get('form_completness'),
+                            'date_completed' => Input::get('date_completed'),
+                            'diagnosis_test_verified_by' => $user->data()->id,
+                            'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
+                            'status' => 1,
+                            'enrollment_id' => $_GET['sid'],
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $screening['facility_id'],
+                        ));
+
+                        $last_row = $override->lastRow('diagnosis_test', 'id')[0];
+
+                        $user->createRecord('diagnosis_test_records', array(
+                            'diagnosis_test_id' => $last_row['id'],
+                            'pid' => $screening['pid'],
+                            'culture_performed' => Input::get('culture_performed'),
+                            'culture_method' => Input::get('culture_method'),
+                            'culture_results' => Input::get('culture_results'),
+                            'phenotypic_performed' => Input::get('phenotypic_performed'),
+                            'phenotypic_date_performed' => Input::get('phenotypic_date_performed'),
+                            'phenotypic_date_results' => Input::get('phenotypic_date_results'),
+                            'rifampicin' => Input::get('rifampicin'),
+                            'isoniazid' => Input::get('isoniazid'),
+                            'levofloxacin' => Input::get('levofloxacin'),
+                            'moxifloxacin' => Input::get('moxifloxacin'),
+                            'bedaquiline' => Input::get('bedaquiline'),
+                            'linezolid' => Input::get('linezolid'),
+                            'clofazimine' => Input::get('clofazimine'),
+                            'cycloserine' => Input::get('cycloserine'),
+                            'terizidone' => Input::get('terizidone'),
+                            'ethambutol' => Input::get('ethambutol'),
+                            'delamanid' => Input::get('delamanid'),
+                            'pyrazinamide' => Input::get('pyrazinamide'),
+                            'imipenem' => Input::get('imipenem'),
+                            'cilastatin' => Input::get('cilastatin'),
+                            'meropenem' => Input::get('meropenem'),
+                            'amikacin' => Input::get('amikacin'),
+                            'streptomycin' => Input::get('streptomycin'),
+                            'ethionamide' => Input::get('ethionamide'),
+                            'prothionamide' => Input::get('prothionamide'),
+                            'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
+                            'nano_rifampicin' => Input::get('nano_rifampicin'),
+                            'nano_isoniazid' => Input::get('nano_isoniazid'),
+                            'nano_levofloxacin' => Input::get('nano_levofloxacin'),
+                            'nano_moxifloxacin' => Input::get('nano_moxifloxacin'),
+                            'nano_bedaquiline' => Input::get('nano_bedaquiline'),
+                            'nano_linezolid' => Input::get('nano_linezolid'),
+                            'nano_clofazimine' => Input::get('nano_clofazimine'),
+                            'nano_cycloserine' => Input::get('nano_cycloserine'),
+                            'nano_delamanid' => Input::get('nano_delamanid'),
+                            'nano_terizidone' => Input::get('nano_terizidone'),
+                            'nano_ethambutol' => Input::get('nano_ethambutol'),
+                            'nano_pyrazinamide' => Input::get('nano_pyrazinamide'),
+                            'nano_cilastatin' => Input::get('nano_cilastatin'),
+                            'nano_imipenem' => Input::get('nano_imipenem'),
+                            'nano_meropenem' => Input::get('nano_meropenem'),
+                            'nano_amikacin' => Input::get('nano_amikacin'),
+                            'nano_streptomycin' => Input::get('nano_streptomycin'),
+                            'nano_ethionamide' => Input::get('nano_ethionamide'),
+                            'nano_prothionamide' => Input::get('nano_prothionamide'),
+                            'nano_para_aminosalicylic_acid' => Input::get('nano_para_aminosalicylic_acid'),
+                            'xpert_xdr_performed' => Input::get('xpert_xdr_performed'),
+                            'isoniazid2' => Input::get('isoniazid2'),
+                            'fluoroquinolones' => Input::get('fluoroquinolones'),
+                            'amikacin2' => Input::get('amikacin2'),
+                            'kanamycin' => Input::get('kanamycin'),
+                            'capreomycin' => Input::get('capreomycin'),
+                            'ethionamide2' => Input::get('ethionamide2'),
+                            '_1st_line_drugs' => $_1st_line_drugs,
+                            '_2st_line_drugs' => $_2st_line_drugs,
+                            'version_number' => Input::get('version_number'),
+                            'lot_number' => Input::get('lot_number'),
+                            'mutations_detected_list' => Input::get('mutations_detected_list'),
+                            'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
+                            'comments' => Input::get('comments'),
+                            'form_completness' => Input::get('form_completness'),
+                            'date_completed' => Input::get('date_completed'),
+                            'diagnosis_test_verified_by' => $user->data()->id,
+                            'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
+                            'status' => 1,
+                            'enrollment_id' => $_GET['sid'],
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $screening['facility_id'],
                         ));
 
                         $successMessage = 'Diagnosis test  Successful Added';
@@ -715,7 +1064,7 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+                $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid']);
 
                 $test_reasons = implode(',', Input::get('test_reasons'));
@@ -766,13 +1115,13 @@ if ($user->isLoggedIn()) {
                             'respiratory_verified_date' => Input::get('respiratory_verified_date'),
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
+                            'facility_id' => $screening['facility_id'],
                         ), $costing[0]['id']);
 
-                        $successMessage = 'Respiratory Data  Successful Updated';
-                    } else {
+
                         $user->createRecord('respiratory', array(
-                            'pid' => $clients['pid'],
+                            'respiratory_id' => $costing[0]['id'],
+                            'pid' => $screening['pid'],
                             'lab_name' => Input::get('lab_name'),
                             'sample_received' => Input::get('sample_received'),
                             'sample_date_one' => Input::get('sample_date_one'),
@@ -817,7 +1166,110 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
+                            'facility_id' => $screening['facility_id'],
+                        ));
+                        $successMessage = 'Respiratory Data  Successful Updated';
+                    } else {
+                        $user->createRecord('respiratory', array(
+                            'pid' => $screening['pid'],
+                            'lab_name' => Input::get('lab_name'),
+                            'sample_received' => Input::get('sample_received'),
+                            'sample_date_one' => Input::get('sample_date_one'),
+                            'sample_date_two' => Input::get('sample_date_two'),
+                            'sample_reason' => Input::get('sample_reason'),
+                            'sample_reason_other1' => Input::get('sample_reason_other1'),
+                            'sample_one_collected_date' => Input::get('sample_one_collected_date'),
+                            'sample_two_collected_date' => Input::get('sample_two_collected_date'),
+                            'sample_type' => Input::get('sample_type'),
+                            'sample_number' => Input::get('sample_number'),
+                            'sample_type_other' => Input::get('sample_type_other'),
+                            'appearance' => Input::get('appearance'),
+                            'sample_volume' => Input::get('sample_volume'),
+                            'afb_microscopy' => Input::get('afb_microscopy'),
+                            'afb_microscopy_a' => Input::get('afb_microscopy_a'),
+                            'afb_a_results' => Input::get('afb_a_results'),
+                            'afb_a_date' => Input::get('afb_a_date'),
+                            'afb_microscopy_b' => Input::get('afb_microscopy_b'),
+                            'afb_b_results' => Input::get('afb_b_results'),
+                            'afb_b_date' => Input::get('afb_b_date'),
+                            'xpert_date' => Input::get('xpert_date'),
+                            'xpert_mtb' => Input::get('xpert_mtb'),
+                            'xpert_error_code' => Input::get('xpert_error_code'),
+                            'xpert_rif' => Input::get('xpert_rif'),
+                            'ct_value' => Input::get('ct_value'),
+                            'ct_na' => Input::get('ct_na'),
+                            'xpert_date_repeat' => Input::get('xpert_date_repeat'),
+                            'xpert_mtb_repeat' => Input::get('xpert_mtb_repeat'),
+                            'xpert_error_repeat' => Input::get('xpert_error_repeat'),
+                            'xpert_rif_repeat' => Input::get('xpert_rif_repeat'),
+                            'ct_value_repeat' => Input::get('ct_value_repeat'),
+                            'ct_repeat_na' => Input::get('ct_repeat_na'),
+                            'respiratory_completness' => Input::get('respiratory_completness'),
+                            'comments' => Input::get('comments'),
+                            'date_completed' => Input::get('date_completed'),
+                            'respiratory_completed_by' => $user->data()->id,
+                            'respiratory_verified_by' => $user->data()->id,
+                            'respiratory_verified_date' => Input::get('respiratory_verified_date'),
+                            'status' => 1,
+                            'enrollment_id' => $_GET['sid'],
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $screening['facility_id'],
+                        ));
+
+
+                        $last_row = $override->lastRow('respiratory', 'id')[0];
+
+                        $user->createRecord('respiratory_records', array(
+                            'respiratory_id' => $last_row['id'],
+                            'pid' => $screening['pid'],
+                            'lab_name' => Input::get('lab_name'),
+                            'sample_received' => Input::get('sample_received'),
+                            'sample_date_one' => Input::get('sample_date_one'),
+                            'sample_date_two' => Input::get('sample_date_two'),
+                            'sample_reason' => Input::get('sample_reason'),
+                            'sample_reason_other1' => Input::get('sample_reason_other1'),
+                            'sample_one_collected_date' => Input::get('sample_one_collected_date'),
+                            'sample_two_collected_date' => Input::get('sample_two_collected_date'),
+                            'sample_type' => Input::get('sample_type'),
+                            'sample_number' => Input::get('sample_number'),
+                            'sample_type_other' => Input::get('sample_type_other'),
+                            'appearance' => Input::get('appearance'),
+                            'sample_volume' => Input::get('sample_volume'),
+                            'afb_microscopy' => Input::get('afb_microscopy'),
+                            'afb_microscopy_a' => Input::get('afb_microscopy_a'),
+                            'afb_a_results' => Input::get('afb_a_results'),
+                            'afb_a_date' => Input::get('afb_a_date'),
+                            'afb_microscopy_b' => Input::get('afb_microscopy_b'),
+                            'afb_b_results' => Input::get('afb_b_results'),
+                            'afb_b_date' => Input::get('afb_b_date'),
+                            'xpert_date' => Input::get('xpert_date'),
+                            'xpert_mtb' => Input::get('xpert_mtb'),
+                            'xpert_error_code' => Input::get('xpert_error_code'),
+                            'xpert_rif' => Input::get('xpert_rif'),
+                            'ct_value' => Input::get('ct_value'),
+                            'ct_na' => Input::get('ct_na'),
+                            'xpert_date_repeat' => Input::get('xpert_date_repeat'),
+                            'xpert_mtb_repeat' => Input::get('xpert_mtb_repeat'),
+                            'xpert_error_repeat' => Input::get('xpert_error_repeat'),
+                            'xpert_rif_repeat' => Input::get('xpert_rif_repeat'),
+                            'ct_value_repeat' => Input::get('ct_value_repeat'),
+                            'ct_repeat_na' => Input::get('ct_repeat_na'),
+                            'respiratory_completness' => Input::get('respiratory_completness'),
+                            'comments' => Input::get('comments'),
+                            'date_completed' => Input::get('date_completed'),
+                            'respiratory_completed_by' => $user->data()->id,
+                            'respiratory_verified_by' => $user->data()->id,
+                            'respiratory_verified_date' => Input::get('respiratory_verified_date'),
+                            'status' => 1,
+                            'enrollment_id' => $_GET['sid'],
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $screening['facility_id'],
                         ));
 
                         $successMessage = 'Respiratory Data  Successful Added';
@@ -834,7 +1286,7 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+                $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $costing = $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['sid']);
 
                 // $test_reasons = implode(',', Input::get('test_reasons'));
@@ -860,13 +1312,12 @@ if ($user->isLoggedIn()) {
                             'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
+                            'facility_id' => $screening['facility_id'],
                         ), $costing[0]['id']);
 
-                        $successMessage = 'Non Respiratory Data  Successful Updated';
-                    } else {
-                        $user->createRecord('non_respiratory', array(
-                            'pid' => $clients['pid'],
+                          $user->createRecord('non_respiratory_records', array(
+                                                        'non_respiratory_id' => $costing[0]['id'],
+                            'pid' => $screening['pid'],
                             'sample_name' => Input::get('sample_name'),
                             'tests_conducted' => Input::get('tests_conducted'),
                             'tests_conducted_other' => Input::get('tests_conducted_other'),
@@ -887,8 +1338,64 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
+                            'facility_id' => $screening['facility_id'],
                         ));
+
+                        $successMessage = 'Non Respiratory Data  Successful Updated';
+                    } else {
+                        $user->createRecord('non_respiratory', array(
+                            'pid' => $screening['pid'],
+                            'sample_name' => Input::get('sample_name'),
+                            'tests_conducted' => Input::get('tests_conducted'),
+                            'tests_conducted_other' => Input::get('tests_conducted_other'),
+                            'test_results' => Input::get('test_results'),
+                            'sample_name_2' => Input::get('sample_name_2'),
+                            'tests_conducted_2' => Input::get('tests_conducted_2'),
+                            'tests_conducted_other2' => Input::get('tests_conducted_other2'),
+                            'test_results_2' => Input::get('test_results_2'),
+                            'remarks' => Input::get('remarks'),
+                            'form_completness' => Input::get('form_completness'),
+                            'date_completed' => Input::get('date_completed'),
+                            'non_respiratory_completed' => Input::get('non_respiratory_completed'),
+                            'non_respiratory_verified_by' => $user->data()->id,
+                            'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
+                            'status' => 1,
+                            'enrollment_id' => $_GET['sid'],
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $screening['facility_id'],
+                        ));
+
+                                                $last_row = $override->lastRow('non_respiratory', 'id')[0];
+
+                        $user->createRecord('non_respiratory_records', array(
+                                                        'non_respiratory_id' => $last_row['id'],
+                            'pid' => $screening['pid'],
+                            'sample_name' => Input::get('sample_name'),
+                            'tests_conducted' => Input::get('tests_conducted'),
+                            'tests_conducted_other' => Input::get('tests_conducted_other'),
+                            'test_results' => Input::get('test_results'),
+                            'sample_name_2' => Input::get('sample_name_2'),
+                            'tests_conducted_2' => Input::get('tests_conducted_2'),
+                            'tests_conducted_other2' => Input::get('tests_conducted_other2'),
+                            'test_results_2' => Input::get('test_results_2'),
+                            'remarks' => Input::get('remarks'),
+                            'form_completness' => Input::get('form_completness'),
+                            'date_completed' => Input::get('date_completed'),
+                            'non_respiratory_completed' => Input::get('non_respiratory_completed'),
+                            'non_respiratory_verified_by' => $user->data()->id,
+                            'non_respiratory_verified_date' => Input::get('non_respiratory_verified_date'),
+                            'status' => 1,
+                            'enrollment_id' => $_GET['sid'],
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $screening['facility_id'],
+                        ));
+
 
                         $successMessage = 'Non Respiratory Data  Successful Added';
                     }
@@ -905,7 +1412,7 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+                $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $costing = $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['sid']);
 
                 $bacteriological_diagnosis = implode(',', Input::get('bacteriological_diagnosis'));
@@ -958,13 +1465,12 @@ if ($user->isLoggedIn()) {
                             'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
+                            'facility_id' => $screening['facility_id'],
                         ), $costing[0]['id']);
 
-                        $successMessage = 'Diagnosis Data  Successful Updated';
-                    } else {
                         $user->createRecord('diagnosis', array(
-                            'pid' => $clients['pid'],
+                            'diagnosis_id' => $costing[0]['id'],
+                            'pid' => $screening['pid'],
                             'entry_date' => Input::get('entry_date'),
                             'tb_diagnosis' => Input::get('tb_diagnosis'),
                             'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
@@ -1011,8 +1517,116 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $clients['facility_id'],
+                            'facility_id' => $screening['facility_id'],
                         ));
+
+                        $successMessage = 'Diagnosis Data  Successful Updated';
+                    } else {
+                        $user->createRecord('diagnosis', array(
+                            'pid' => $screening['pid'],
+                            'entry_date' => Input::get('entry_date'),
+                            'tb_diagnosis' => Input::get('tb_diagnosis'),
+                            'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
+                            'diagnosis_made_other' => Input::get('diagnosis_made_other'),
+                            'bacteriological_diagnosis' => $bacteriological_diagnosis,
+                            'clinician_received_date' => Input::get('clinician_received_date'),
+                            'xpert_truenat_date' => Input::get('xpert_truenat_date'),
+                            'other_bacteriological' => Input::get('other_bacteriological'),
+                            'other_bacteriological_date' => Input::get('other_bacteriological_date'),
+                            'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
+                            'tb_clinically_other' => Input::get('tb_clinically_other'),
+                            'tb_treatment' => Input::get('tb_treatment'),
+                            'tb_treatment_date' => Input::get('tb_treatment_date'),
+                            'tb_facility' => Input::get('tb_facility'),
+                            'tb_reason' => Input::get('tb_reason'),
+                            'tb_regimen' => Input::get('tb_regimen'),
+                            'tb_regimen_other' => Input::get('tb_regimen_other'),
+                            'tb_regimen_based' => Input::get('tb_regimen_based'),
+                            'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
+                            'regimen_changed' => Input::get('regimen_changed'),
+                            'regimen_changed_other' => Input::get('regimen_changed_other'),
+                            'regimen_changed__date' => Input::get('regimen_changed__date'),
+                            'regimen_removed_name' => Input::get('regimen_removed_name'),
+                            'regimen_added_name' => Input::get('regimen_added_name'),
+                            'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
+                            'regimen_changed__reason' => Input::get('regimen_changed__reason'),
+                            'tb_otcome2' => Input::get('tb_otcome2'),
+                            'tb_otcome2_date' => Input::get('tb_otcome2_date'),
+                            'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
+                            'tb_other_specify' => Input::get('tb_other_specify'),
+                            'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
+                            'laboratory_test_used' => $laboratory_test_used,
+                            'laboratory_test_used2' => $laboratory_test_used2,
+                            'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
+                            'comments' => Input::get('comments'),
+                            'diagnosis_completness' => Input::get('diagnosis_completness'),
+                            'diagnosis_completed_by' => $user->data()->id,
+                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
+                            'diagnosis_verified_by' => $user->data()->id,
+                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'status' => 1,
+                            'enrollment_id' => $_GET['sid'],
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $screening['facility_id'],
+                        ));
+
+                        $last_row = $override->lastRow('diagnosis', 'id')[0];
+
+                        $user->createRecord('diagnosis', array(
+                            'diagnosis_id' => $last_row['id'],
+                            'pid' => $screening['pid'],
+                            'entry_date' => Input::get('entry_date'),
+                            'tb_diagnosis' => Input::get('tb_diagnosis'),
+                            'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
+                            'diagnosis_made_other' => Input::get('diagnosis_made_other'),
+                            'bacteriological_diagnosis' => $bacteriological_diagnosis,
+                            'clinician_received_date' => Input::get('clinician_received_date'),
+                            'xpert_truenat_date' => Input::get('xpert_truenat_date'),
+                            'other_bacteriological' => Input::get('other_bacteriological'),
+                            'other_bacteriological_date' => Input::get('other_bacteriological_date'),
+                            'tb_diagnosed_clinically' => $tb_diagnosed_clinically,
+                            'tb_clinically_other' => Input::get('tb_clinically_other'),
+                            'tb_treatment' => Input::get('tb_treatment'),
+                            'tb_treatment_date' => Input::get('tb_treatment_date'),
+                            'tb_facility' => Input::get('tb_facility'),
+                            'tb_reason' => Input::get('tb_reason'),
+                            'tb_regimen' => Input::get('tb_regimen'),
+                            'tb_regimen_other' => Input::get('tb_regimen_other'),
+                            'tb_regimen_based' => Input::get('tb_regimen_based'),
+                            'tb_regimen_based_other' => Input::get('tb_regimen_based_other'),
+                            'regimen_changed' => Input::get('regimen_changed'),
+                            'regimen_changed_other' => Input::get('regimen_changed_other'),
+                            'regimen_changed__date' => Input::get('regimen_changed__date'),
+                            'regimen_removed_name' => Input::get('regimen_removed_name'),
+                            'regimen_added_name' => Input::get('regimen_added_name'),
+                            'laboratory_test_used_other' => Input::get('laboratory_test_used_other'),
+                            'regimen_changed__reason' => Input::get('regimen_changed__reason'),
+                            'tb_otcome2' => Input::get('tb_otcome2'),
+                            'tb_otcome2_date' => Input::get('tb_otcome2_date'),
+                            'tb_other_diagnosis' => Input::get('tb_other_diagnosis'),
+                            'tb_other_specify' => Input::get('tb_other_specify'),
+                            'tb_diagnosis_made2' => Input::get('tb_diagnosis_made2'),
+                            'laboratory_test_used' => $laboratory_test_used,
+                            'laboratory_test_used2' => $laboratory_test_used2,
+                            'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
+                            'comments' => Input::get('comments'),
+                            'diagnosis_completness' => Input::get('diagnosis_completness'),
+                            'diagnosis_completed_by' => $user->data()->id,
+                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
+                            'diagnosis_verified_by' => $user->data()->id,
+                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'status' => 1,
+                            'enrollment_id' => $_GET['sid'],
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
+                            'update_on' => date('Y-m-d H:i:s'),
+                            'update_id' => $user->data()->id,
+                            'facility_id' => $screening['facility_id'],
+                        ));
+
 
                         $successMessage = 'Diagnosis Data  Successful Added';
                     }
@@ -4145,7 +4759,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4543,6 +5157,10 @@ if ($user->isLoggedIn()) {
         <?php } elseif ($_GET['id'] == 13) { ?>
             <?php
             $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+               $regions = $override->get('regions', 'id', $screening['region'])[0];
+                            $districts = $override->get('districts', 'id', $screening['district'])[0];
+                            // $wards = $override->get('wards', 'id', $client['ward'])[0];
+                            // $relations = $override->get('relation', 'id', $client['relation'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -4816,6 +5434,82 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
+                                              <div class="card card-warning">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Patient Address</h3>
+                                                    </div>
+                                                </div>
+                                                <hr>
+
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <label>Region</label>
+                                                                <select id="region" name="region" class="form-control" required>
+                                                                    <option value="<?= $regions['id'] ?>"><?php if ($screening['region']) {
+                                                                      print_r($regions['name']);
+                                                                  } else {
+                                                                      echo 'Select region';
+                                                                  } ?>
+                                                                </option>
+                                                                <?php foreach ($override->get('regions', 'status', 1) as $region) { ?>
+                                                                    <option value="<?= $region['id'] ?>"><?= $region['name'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                                <div class="col-sm-3">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>District</label>
+                                                            <select id="district" name="district" class="form-control" required>
+                                                                <option value="<?= $districts['id'] ?>"><?php if ($screening['district']) {
+                                                                      print_r($districts['name']);
+                                                                  } else {
+                                                                      echo 'Select district';
+                                                                  } ?>
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                                <div class="col-3">
+                                                    <div class="mb-2">
+                                                        <label for="ward" class="form-label">Ward
+                                                            </label>
+                                                        <input type="text" value="<?php if ($screening) {
+                                                            print_r($screening['ward']);
+                                                        } ?>" id="ward" name="ward" class="form-control"
+                                                            placeholder="Enter here" />
+                                                    </div>
+                                                </div>
+                                                <?php
+                                                //  if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) { 
+                                                    ?>
+                                            
+                                                    <div class="col-sm-3">
+                                                        <div class="row-form clearfix">
+                                                            <!-- select -->
+                                                            <div class="form-group">
+                                                                <label>Street/Village</label>
+                                                                <textarea class="form-control" id="village_street" placeholder="Type physical address here"
+                                                                    name="village_street" rows="3" style="width: 100%;" required>
+                                                                                                                    <?php if ($screening['village_street']) {
+                                                                                                                        print_r($screening['village_street']);
+                                                                                                                    } ?>
+                                                                                                                </textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            
+                                                <?php 
+                                            // } 
+                                            ?>
+                                            </div>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-12">
@@ -4823,10 +5517,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="ldct_results" class="form-label">Comments</label>
                                                         <textarea class="form-control" name="comments" id="comments"
                                                             rows="4" placeholder="Enter here" required>
-                                                                                                                                                <?php if ($screening['comments']) {
-                                                                                                                                                    print_r($screening['comments']);
-                                                                                                                                                } ?>
-                                                                                                                                            </textarea>
+                                                                                                                                                    <?php if ($screening['comments']) {
+                                                                                                                                                        print_r($screening['comments']);
+                                                                                                                                                    } ?>
+                                                                                                                                                </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -6359,7 +7053,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6389,7 +7083,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7018,7 +7712,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7187,33 +7881,30 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                      <div class="col-sm-3" style="flex: 1;">
-    <div class="row-form clearfix">
-        <div class="form-group">
-            <label>4. Date of birth:</label>
-            <input class="form-control" 
-                type="date" 
-                min="1970-01-01" 
-                max="<?= date('Y-m-d'); ?>" name="dob" id="dob"
-                                                    style="width: 100%;" value="<?php if ($clients['dob']) {
-                                                        print_r($clients['dob']);
-                                                    } ?>"
-                                                    onchange="updateAge()" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-sm-3" style="flex: 1;">
-                                        <div class="row-form clearfix">
-                                            <div class="form-group">
-                                                <label>5. Age (years)</label>
-                                                <input class="form-control" type="number" min="0" max="100" name="age" id="age"
-                                                    value="<?php if ($clients['age']) {
-                                                        print_r($clients['age']);
-                                                    } ?>" oninput="updateDob()" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                                <div class="col-sm-3" style="flex: 1;">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>4. Date of birth:</label>
+                                                            <input class="form-control" type="date" min="1970-01-01"
+                                                                max="<?= date('Y-m-d'); ?>" name="dob" id="dob"
+                                                                style="width: 100%;" value="<?php if ($clients['dob']) {
+                                                                    print_r($clients['dob']);
+                                                                } ?>" onchange="updateAge()" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" style="flex: 1;">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>5. Age (years)</label>
+                                                            <input class="form-control" type="number" min="0" max="100"
+                                                                name="age" id="age" value="<?php if ($clients['age']) {
+                                                                    print_r($clients['age']);
+                                                                } ?>" oninput="updateDob()" />
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                                 <div class="col-sm-3" style="flex: 1;">
                                                     <label>6. SEX</label>
@@ -10009,7 +10700,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
