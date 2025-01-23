@@ -13,15 +13,15 @@ for ($site_id = 1; $site_id <= 24; $site_id++) { // Loop through 24 sites
         // Generate study_id dynamically based on site_id and $x
         if ($x < 10) {
             if ($site_id < 10) {
-                $study_id = $Substudy . '_0' . $site_id . '-00' . $x;
+                $study_id = $Substudy . '_0' . $site_id . '_00' . $x;
             } else {
-                $study_id = $Substudy . '_' . $site_id . '-00' . $x;
+                $study_id = $Substudy . '_' . $site_id . '_00' . $x;
             }
         } elseif ($x < 100) {
             if ($site_id < 10) {
-                $study_id = $Substudy . '_0' . $site_id . '-0' . $x;
+                $study_id = $Substudy . '_0' . $site_id . '_0' . $x;
             } else {
-                $study_id = $Substudy . '_' . $site_id . '-0' . $x;
+                $study_id = $Substudy . '_' . $site_id . '_0' . $x;
             }
         }
 
