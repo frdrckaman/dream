@@ -1119,7 +1119,7 @@ if ($user->isLoggedIn()) {
                         ), $costing[0]['id']);
 
 
-                        $user->createRecord('respiratory', array(
+                        $user->createRecord('respiratory_records', array(
                             'respiratory_id' => $costing[0]['id'],
                             'pid' => $screening['pid'],
                             'lab_name' => Input::get('lab_name'),
