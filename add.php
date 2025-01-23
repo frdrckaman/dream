@@ -1468,7 +1468,7 @@ if ($user->isLoggedIn()) {
                             'facility_id' => $screening['facility_id'],
                         ), $costing[0]['id']);
 
-                        $user->createRecord('diagnosis', array(
+                        $user->createRecord('diagnosis_records', array(
                             'diagnosis_id' => $costing[0]['id'],
                             'pid' => $screening['pid'],
                             'entry_date' => Input::get('entry_date'),
@@ -1575,7 +1575,7 @@ if ($user->isLoggedIn()) {
 
                         $last_row = $override->lastRow('diagnosis', 'id')[0];
 
-                        $user->createRecord('diagnosis', array(
+                        $user->createRecord('diagnosis_records', array(
                             'diagnosis_id' => $last_row['id'],
                             'pid' => $screening['pid'],
                             'entry_date' => Input::get('entry_date'),
