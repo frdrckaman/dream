@@ -1103,7 +1103,7 @@ if ($user->isLoggedIn()) {
                                                         <td class="table-user">
                                                             <?php
                                                             // print_r (date("h:i:s A"));
-                                                            print_r($value['create_on']);
+                                                            print_r(date('H:i', strtotime($value['create_on'])));
                                                             ?>
                                                         </td>
                                                         <td class="table-user">
