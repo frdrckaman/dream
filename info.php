@@ -1151,7 +1151,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- <td class="text-center"> -->
                                                         <td>
                                                             <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
-                                                                <?php if ($override->get('enrollment_form', 'status', 1)) { ?>
+                                                                <?php if ($override->get('screening', 'status', 1)) { ?>
                                                                     <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                         role=" button" class="btn btn-info"> Update Screening
                                                                         Data</a>&nbsp;&nbsp; <br><br>
