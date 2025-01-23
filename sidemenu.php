@@ -409,6 +409,31 @@ if ($user->isLoggedIn()) {
                             </li>
                         </ul> -->
                     </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Reports <i class="fas fa-angle-left right"></i>
+
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="summary.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"></span>
+                                    <p>Summary</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pids.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"><?= $registered1; ?></span>
+                                    <p>PID's</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 <?php } ?>
                 <?php if ($user->data()->power == 1) {
                     ?>
