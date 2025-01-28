@@ -22,6 +22,14 @@ if ($user->isLoggedIn()) {
                 'salt' => $salt,
             ), Input::get('id'));
             $successMessage = 'Password Reset Successful';
+        } elseif (Input::get('change_pass')) {
+            $salt = $random->get_rand_alphanumeric(32);
+            $password = Input::get('password');
+            $user->updateRecord('user', array(
+                'password' => Hash::make($password, $salt),
+                'salt' => $salt,
+            ), Input::get('id'));
+            $successMessage = 'Password Changed Successful';
         } elseif (Input::get('lock_account')) {
             $user->updateRecord('user', array(
                 'count' => 4,
@@ -410,6 +418,8 @@ if ($user->isLoggedIn()) {
                                                                 class="btn btn-info">Update</a>
                                                             <a href="#reset<?= $staff['id'] ?>" role="button"
                                                                 class="btn btn-default" data-toggle="modal">Reset</a>
+                                                                 <a href="#change<?= $staff['id'] ?>" role="button"
+                                                                class="btn btn-success" data-toggle="modal">Change</a>
                                                             <a href="#lock<?= $staff['id'] ?>" role="button"
                                                                 class="btn btn-warning" data-toggle="modal">Lock</a>
                                                             <a href="#unlock<?= $staff['id'] ?>" role="button"
@@ -446,6 +456,34 @@ if ($user->isLoggedIn()) {
                                                                         <input type="hidden" name="id"
                                                                             value="<?= $staff['id'] ?>">
                                                                         <input type="submit" name="reset_pass" value="Reset"
+                                                                            class="btn btn-warning">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="change<?= $staff['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <form method="post">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
+                                                                        <h4>Change Password</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <input type="text" name="password"
+                                                                            value="">
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $staff['id'] ?>">
+                                                                        <input type="submit" name="change_pass" value="Change"
                                                                             class="btn btn-warning">
                                                                         <button class="btn btn-default" data-dismiss="modal"
                                                                             aria-hidden="true">Close</button>
