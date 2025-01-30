@@ -256,7 +256,10 @@ if ($user->isLoggedIn()) {
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="add.php?id=13&status=1&sid=&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
+                            <!-- <a href="add.php?id=13&status=1&sid=&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+                                class="nav-link"> -->
+                            <a href="add.php?id=13&status=1"
+                                class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Add
@@ -265,28 +268,32 @@ if ($user->isLoggedIn()) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="info.php?id=3&status=1&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
+                            <a href="info.php?id=3&status=1&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+                                class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $screened; ?></span>
                                 <p>Screened Patients</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="info.php?id=3&status=2&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
+                            <a href="info.php?id=3&status=2&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+                                class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $eligible; ?></span>
                                 <p>Eligible Patients</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="info.php?id=3&status=3&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
+                            <a href="info.php?id=3&status=3&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+                                class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $enrolled; ?></span>
                                 <p>Enrolled Patients</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="info.php?id=3&status=4&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
+                            <a href="info.php?id=3&status=4&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+                                class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $end; ?></span>
                                 <p>Terminated Patients</p>
@@ -372,7 +379,7 @@ if ($user->isLoggedIn()) {
                                     <span class="badge badge-info right"><?= $registered1; ?></span>
                                     <p>Download</p>
                                 </a>
-                            </li>                           
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">
