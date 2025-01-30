@@ -4762,7 +4762,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5224,29 +5224,43 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
                                                 <div class="col-4">
                                                     <div class="mb-2">
-                                                        <label for="test_date" class="form-label">1. Date of Screening</label>
-                                                        <input type="date" value="<?php if ($screening['screening_date']) {
-                                                            print_r($screening['screening_date']);
-                                                        } ?>" id="screening_date" name="screening_date"
-                                                            class="form-control" placeholder="Enter date" required />
+                                                        <label for="test_date" class="form-label">1. Date of
+                                                            Screening</label>
+                                                        <input type="date"
+                                                            value="<?php if ($screening['screening_date']) {
+                                                                print_r($screening['screening_date']);
+                                                            } ?>"
+                                                            id="screening_date" name="screening_date" class="form-control"
+                                                            placeholder="Enter date" required />
+                                                        <small id="screening_date_error" class="text-danger"
+                                                            style="display: none;">Screening date cannot be more than
+                                                            today.</small>
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="mb-2">
                                                         <label for="pid1" class="form-label">2. PID</label>
-                                                        <input type="text" value="<?php if ($screening['pid1']) {
-                                                            print_r($screening['pid1']);
-                                                        } ?>" id="pid1" name="pid1"
-                                                            class="form-control" placeholder="Enter Last Three Digits" required />
+                                                        <input type="text"
+                                                            value="<?php if ($screening['pid1']) {
+                                                                print_r($screening['pid1']);
+                                                            } ?>"
+                                                            id="pid1" name="pid1" class="form-control"
+                                                            placeholder="Enter Last Three Digits" required />
+                                                        <small id="pid1_error" class="text-danger"
+                                                            style="display: none;">PID1 and PID2 do not match.</small>
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="mb-2">
                                                         <label for="pid2" class="form-label">3. Re-enter PID</label>
-                                                        <input type="text" value="<?php if ($screening['pid2']) {
-                                                            print_r($screening['pid2']);
-                                                        } ?>" id="pid2" name="pid2"
-                                                            class="form-control" placeholder="Re-Enter Last Three Digits" required />
+                                                        <input type="text"
+                                                            value="<?php if ($screening['pid2']) {
+                                                                print_r($screening['pid2']);
+                                                            } ?>"
+                                                            id="pid2" name="pid2" class="form-control"
+                                                            placeholder="Re-Enter Last Three Digits" required />
+                                                        <small id="pid2_error" class="text-danger"
+                                                            style="display: none;">PID1 and PID2 do not match.</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5313,8 +5327,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <label for="age18years" class="form-label">6. Is the Patient at least 18
-                                                        years
-                                                        old ?</label>
+                                                        years old ?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -5334,8 +5347,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label for="conset" class="form-label">7. Has the patient provided
-                                                        written
-                                                        informed consent to participate?</label>
+                                                        written informed consent to participate?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -5356,11 +5368,16 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-4" id="conset_date1">
                                                     <div class="mb-2">
                                                         <label for="conset_date" class="form-label">8. Date of
-                                                            Conset</label>
-                                                        <input type="date" value="<?php if ($screening) {
-                                                            print_r($screening['conset_date']);
-                                                        } ?>" id="conset_date" name="conset_date" class="form-control"
+                                                            Consent</label>
+                                                        <input type="date"
+                                                            value="<?php if ($screening) {
+                                                                print_r($screening['conset_date']);
+                                                            } ?>"
+                                                            id="conset_date" name="conset_date" class="form-control"
                                                             placeholder="Enter date" />
+                                                        <small id="conset_date_error" class="text-danger"
+                                                            style="display: none;">Consent date is required if consent is
+                                                            selected as "Yes".</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5377,8 +5394,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <label for="not_willing" class="form-label">9. Not willing to sign the
-                                                        informed consent form
-                                                        ?</label>
+                                                        informed consent form ?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -6950,7 +6966,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6980,7 +6996,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7610,7 +7626,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10602,7 +10618,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10761,7 +10777,7 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/clients/validate_required_radio_checkboxes.js"></script>  -->
 
     <!-- SCREENING Js -->
-         <script src="js/screening/screening.js"></script>
+    <script src="js/screening/screening.js"></script>
     <!-- <script src="myjs/add/screening/conset.js"></script>
     <script src="myjs/add/screening/art.js"></script> -->
 
