@@ -15,11 +15,13 @@ document.getElementById('validation').addEventListener('submit', function (event
         isValid = false;
     }
 
-    // Check if screening date is not more than today
+    // Check if screening date is between 2025-01-20 and today
     const screeningDate = new Date(document.getElementById('screening_date').value);
+    const startDate = new Date('2025-01-20'); // Start date
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Reset time part to ensure comparison is based on date only
-    if (screeningDate > today) {
+
+    if (screeningDate < startDate || screeningDate > today) {
         document.getElementById('screening_date_error').style.display = 'block';
         isValid = false;
     }
