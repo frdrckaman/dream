@@ -49,8 +49,8 @@ document.getElementById('validation').addEventListener('submit', function (event
     }
 
     // Check if consent date is required
-    const consentYes = document.querySelector('input[name="conset"]:checked');
-    if (consentYes && consentYes.value === '1') { // Assuming '1' is the value for 'Yes'
+    const consetYes = document.querySelector('input[name="conset"]:checked');
+    if (consetYes && consetYes.value === '1') { // Assuming '1' is the value for 'Yes'
         const consentDate = document.getElementById('conset_date').value;
         if (!consentDate) {
             document.getElementById('conset_date_error').style.display = 'block';
