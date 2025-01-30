@@ -5365,7 +5365,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-4" id="conset_date1">
+            <div class="col-4" id="conset_date_container" style="display: none;">
                                                     <div class="mb-2">
                                                         <label for="conset_date" class="form-label">8. Date of
                                                             Consent</label>
