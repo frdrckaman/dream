@@ -17,8 +17,28 @@ document.querySelectorAll('input[name="conset"]').forEach(function (radio) {
 // Initial check to set conset_date visibility on page load
 toggleConsetDate();
 
+// Function to check if PID exists in the database
+async function checkIfPidExists(pid) {
+    try {
+        const response = await fetch('check_pid.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ pid: pid }),
+        });
+        const data = await response.json();
+        return data.exists; // Assume the server returns { exists: true/false }
+    } catch (error) {
+        console.error('Error checking PID:', error);
+        return false;
+    }
+}
+
 // Form submission validation
-document.getElementById('validation').addEventListener('submit', function (event) {
+document.getElementById('validation').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevent form submission until all validations are complete
+
     let isValid = true;
 
     // Clear previous error messages
@@ -26,13 +46,28 @@ document.getElementById('validation').addEventListener('submit', function (event
         error.style.display = 'none';
     });
 
+    // Retrive Sreening ID
+    // const sid = document.getElementById('id').value;
+
     // Check if PID1 and PID2 match
     const pid1 = document.getElementById('pid1').value;
     const pid2 = document.getElementById('pid2').value;
     if (pid1 !== pid2) {
+        document.getElementById('pid1_error').textContent = 'PID1 and PID2 do not match.';
         document.getElementById('pid1_error').style.display = 'block';
+        document.getElementById('pid2_error').textContent = 'PID1 and PID2 do not match.';
         document.getElementById('pid2_error').style.display = 'block';
         isValid = false;
+    }
+
+    // Check if PID exists in the database
+    if (isValid && pid1) {
+        const pidExists = await checkIfPidExists(pid1);
+        if (!pidExists) {
+            document.getElementById('pid1_error').textContent = 'PID does not exist in the database.';
+            document.getElementById('pid1_error').style.display = 'block';
+            isValid = false;
+        }
     }
 
     // Validate screening_date
@@ -78,8 +113,8 @@ document.getElementById('validation').addEventListener('submit', function (event
         }
     }
 
-    // Prevent form submission if any validation fails
-    if (!isValid) {
-        event.preventDefault();
+    // Submit the form if all validations pass
+    if (isValid) {
+        event.target.submit(); // Submit the form
     }
 });
