@@ -46,12 +46,11 @@ document.getElementById('validation').addEventListener('submit', async function 
         error.style.display = 'none';
     });
 
-    // Retrive Sreening ID
-    // const sid = document.getElementById('id').value;
-
-    // Check if PID1 and PID2 match
+    // Retrieve PID1 and PID2
     const pid1 = document.getElementById('pid1').value;
     const pid2 = document.getElementById('pid2').value;
+
+    // Check if PID1 and PID2 match
     if (pid1 !== pid2) {
         document.getElementById('pid1_error').textContent = 'PID1 and PID2 do not match.';
         document.getElementById('pid1_error').style.display = 'block';
@@ -60,11 +59,11 @@ document.getElementById('validation').addEventListener('submit', async function 
         isValid = false;
     }
 
-    // Check if PID exists in the database
+    // Check if PID1 already exists in the database
     if (isValid && pid1) {
         const pidExists = await checkIfPidExists(pid1);
-        if (!pidExists) {
-            document.getElementById('pid1_error').textContent = 'PID does not exist in the database.';
+        if (pidExists) {
+            document.getElementById('pid1_error').textContent = 'PID already exists in the database.';
             document.getElementById('pid1_error').style.display = 'block';
             isValid = false;
         }

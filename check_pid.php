@@ -14,22 +14,26 @@ $successMessage = null;
 $pageError = null;
 $errorMessage = null;
 $numRec = 10;
+
 if ($user->isLoggedIn()) {
 
-// Get PID from the request
-$data = json_decode(file_get_contents('php://input'), true);
-$pid1 = $data['pid1'];
+    header('Content-Type: application/json');
 
-// Query to check if PID exists
-    $all_pid = $override->getData('screening')[0];
-    $pid_exists = $pid['pid'] . '_' . $pid1;
+    // Get PID from the request
+    $data = json_decode(file_get_contents('php://input'), true);
+    $pid = $data['pid'];
 
-// Return JSON response
-header('Content-Type: application/json');
-echo json_encode(['exists' => $row['count'] > 0]);
+    // Query to check if PID exists
+    $facility_code = $override->get('pids', 'facility_id', $user->data()->site_id)[0];
+    $full_pid = $facility_code['pid'] . '_' . $pid;
+    $pid_exists = $override->getCount('screening', 'pid', $full_pid);
 
-$stmt->close();
-$conn->close();
+    $exists = false;
+    if ($pid_exists) {
+        return true;
+    }
+
+    echo json_encode(['exists' => $exists]);
 
 } else {
     Redirect::to('index.php');
