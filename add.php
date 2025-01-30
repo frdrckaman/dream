@@ -4088,7 +4088,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 11) { ?>
             <?php
-                                                                $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+            $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
             $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             $lab_name = $override->getNews('sites', 'status', 1, 'id', $user->data()->site_id)[0];
 
@@ -4760,7 +4760,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4851,7 +4851,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 12) { ?>
             <?php
-                                                    $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+            $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
             $costing = $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
@@ -5216,8 +5216,7 @@ if ($user->isLoggedIn()) {
                                 <div class="card card-warning">
                                     <div class="card-header">
                                         <h3 class="card-title">
-                                            Inclusion
-                                            ( Include if patient responds yes to ALL of the following )
+                                           Screening
                                         </h3>
                                     </div>
                                     <!-- /.card-header -->
@@ -5234,19 +5233,37 @@ if ($user->isLoggedIn()) {
                                                             class="form-control" placeholder="Enter date" required />
                                                     </div>
                                                 </div>
-                                                                                                </div>
-                                                   <hr>
-                                            <div class="row">
                                                 <div class="col-4">
                                                     <div class="mb-2">
-                                                        <label for="test_date" class="form-label">Date of Screening</label>
-                                                        <input type="date" value="<?php if ($screening['screening_date']) {
+                                                        <label for="test_date" class="form-label">PID</label>
+                                                        <input type="text" value="<?php if ($screening['screening_date']) {
                                                             print_r($screening['screening_date']);
                                                         } ?>" id="screening_date" name="screening_date"
                                                             class="form-control" placeholder="Enter date" required />
                                                     </div>
                                                 </div>
+                                                <div class="col-4">
+                                                    <div class="mb-2">
+                                                        <label for="test_date" class="form-label">Re-enter PID</label>
+                                                        <input type="text" value="<?php if ($screening['screening_date']) {
+                                                            print_r($screening['screening_date']);
+                                                        } ?>" id="screening_date" name="screening_date"
+                                                            class="form-control" placeholder="Enter date" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+ <hr>
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">
+                                                      Inclusion
+                                            ( Include if patient responds yes to ALL of the following )
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            <hr>                                         
 
+                                            <div class="row">
                                                 <div class="col-sm-6">
                                                     <label for="present_symptoms" class="form-label">
                                                         1. Does the patient present with
@@ -5358,18 +5375,19 @@ if ($user->isLoggedIn()) {
                                                     </h3>
                                                 </div>
                                             </div>
-                                            <hr>                                            
+                                            <hr>
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <label for="not_willing" class="form-label">8. Not willing to sign the informed consent form
+                                                    <label for="not_willing" class="form-label">8. Not willing to sign the
+                                                        informed consent form
                                                         ?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="not_willing"
-                                                                        id="not_willing<?= $value['id']; ?>"
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="not_willing" id="not_willing<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($screening['not_willing'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
@@ -5382,7 +5400,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label for="unable_understand" class="form-label">
-                                                        9. Unable to understand the informed consent form and/or the study procedures ?
+                                                        9. Unable to understand the informed consent form and/or the study
+                                                        procedures ?
                                                     </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5402,7 +5421,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>                                           
+                                            </div>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
@@ -5427,7 +5446,7 @@ if ($user->isLoggedIn()) {
 
         <?php } elseif ($_GET['id'] == 14) { ?>
             <?php
-                                        $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+            $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
             $costing = $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
@@ -6933,7 +6952,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6963,7 +6982,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7053,7 +7072,7 @@ if ($user->isLoggedIn()) {
 
         <?php } elseif ($_GET['id'] == 15) { ?>
             <?php
-                            $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+            $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
             $costing = $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
@@ -7593,7 +7612,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10585,7 +10604,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
