@@ -265,9 +265,6 @@ if ($user->isLoggedIn()) {
                 'screening_date' => array(
                     'required' => true,
                 ),
-                'conset' => array(
-                    'required' => true,
-                ),
             ));
 
             if ($validate->passed()) {
@@ -4154,20 +4151,14 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-
-
                                             <hr>
-
                                             <div class="card card-warning">
                                                 <div class="card-header">
                                                     <h3 class="card-title">Respiratory sample</h3>
                                                 </div>
                                             </div>
-
                                             <hr>
-
                                             <div class="row">
-
                                                 <div class="col-sm-6" id="sample_received">
                                                     <label for="sample_received" class="form-label">2. Is at least one
                                                         respiratory sample received?</label>
@@ -5158,8 +5149,7 @@ if ($user->isLoggedIn()) {
         <?php } elseif ($_GET['id'] == 13) { ?>
             <?php
             $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
-            $pid = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
-
+            // $pid = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -5171,7 +5161,7 @@ if ($user->isLoggedIn()) {
                                 <?php if ($screening) { ?>
                                     <h1>Update Screening (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } else { ?>
-                                    <h1>Add Screening (PID : <?= $pid['study_id'] ?>)
+                                    <h1>Add Screening
                                     </h1>
                                 <?php } ?>
                             </div>
