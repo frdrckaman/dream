@@ -38,9 +38,11 @@ document.getElementById('validation').addEventListener('submit', function (event
     // Validate screening_date
     const screeningDateInput = document.getElementById('screening_date');
     const screeningDate = new Date(screeningDateInput.value);
+    screeningDate.setHours(0, 0, 0, 0); // Normalize time to midnight
     const startDate = new Date('2025-01-20'); // Start date
+    startDate.setHours(0, 0, 0, 0); // Normalize time to midnight
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Reset time part to ensure comparison is based on date only
+    today.setHours(0, 0, 0, 0); // Normalize time to midnight
 
     if (screeningDate < startDate || screeningDate > today) {
         document.getElementById('screening_date_error').textContent = 'Screening date must be between 2025-01-20 and today.';
@@ -53,6 +55,7 @@ document.getElementById('validation').addEventListener('submit', function (event
     if (consetYes && consetYes.value === '1') { // Assuming '1' is the value for 'Yes'
         const consentDateInput = document.getElementById('conset_date');
         const consentDate = new Date(consentDateInput.value);
+        consentDate.setHours(0, 0, 0, 0); // Normalize time to midnight
 
         if (!consentDateInput.value) {
             // If consent date is empty
