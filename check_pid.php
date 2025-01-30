@@ -15,7 +15,6 @@ $pageError = null;
 $errorMessage = null;
 
 if ($user->isLoggedIn()) {
-
     header('Content-Type: application/json');
 
     // Get PID from the request
@@ -27,12 +26,11 @@ if ($user->isLoggedIn()) {
     $full_pid = $facility_code['pid'] . '_' . $pid;
     $pid_exists = $override->getCount('screening', 'pid', $full_pid);
 
-    // $exists = False;
-    // if ($pid_exists > 0) {
-    //     return $exists = True;
-    // }
+    // Set $exists based on whether PID exists
+    $exists = ($pid_exists > 0);
 
-    echo json_encode(['exists' => $pid_exists]);
+    // Return the result as JSON
+    echo json_encode(['exists' => $exists]);
 
 } else {
     Redirect::to('index.php');
