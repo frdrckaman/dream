@@ -289,6 +289,7 @@ if ($user->isLoggedIn()) {
                 } else {
                     if ($screening) {
                         $user->updateRecord('screening', array(
+                                                        'pid' => $screening['pid'],
                             'screening_date' => Input::get('screening_date'),
                             'conset' => Input::get('conset'),
                             'conset_date' => Input::get('conset_date'),
@@ -339,9 +340,11 @@ if ($user->isLoggedIn()) {
 
                         $successMessage = 'Screening  Successful Updated';
                     } else {
-                        $pid = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
+                        $pid = $override->getNews('pids', 'facility_id', $user->data()->site_id, 'status', 1)[0];
+                        $pid_merged = $pid['pid'].'_'.Input::get('pid1');
+
                         $user->createRecord('screening', array(
-                            'pid' => $pid['study_id'],
+                            'pid' => $pid_merged,
                             'screening_date' => Input::get('screening_date'),
                             'conset' => Input::get('conset'),
                             'conset_date' => Input::get('conset_date'),
@@ -368,14 +371,9 @@ if ($user->isLoggedIn()) {
 
                         $last_row = $override->lastRow('screening', 'id')[0];
 
-                        $user->updateRecord('study_id', array(
-                            'client_id' => $last_row['id'],
-                            'status' => 1,
-                        ), $pid['id']);
-
                         $user->createRecord('screening_records', array(
                             'screening_id' => $last_row['id'],
-                            'pid' => $pid['study_id'],
+                            'pid' => $pid_merged,
                             'screening_date' => Input::get('screening_date'),
                             'conset' => Input::get('conset'),
                             'conset_date' => Input::get('conset_date'),
