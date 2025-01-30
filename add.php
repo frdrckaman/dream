@@ -275,7 +275,7 @@ if ($user->isLoggedIn()) {
                 $eligible = 0;
                 if (
                     (Input::get('conset') == 1 && Input::get('age18years') == 1 && Input::get('produce_resp_sample') == 1 &&
-                        (Input::get('present_symptoms') == 1) && Input::get('tb_follow_up') == 2 && Input::get('patient_ill') == 2 && Input::get('prisoner') == 2 && Input::get('unable_communicate') == 2)
+                        (Input::get('present_symptoms') == 1) && Input::get('unable_understand') == 2 && Input::get('not_willing') == 2)
                 ) {
                     $eligible = 1;
                 }
@@ -284,6 +284,8 @@ if ($user->isLoggedIn()) {
                     $errorMessage = 'Screaning Date Can not be greater than Screening Date';
                 } elseif (Input::get('conset') == 2 && !empty(trim(Input::get('conset_date')))) {
                     $errorMessage = 'Please Remove Screening date before Submit again';
+                } elseif ((Input::get('pid1') != Input::get('pid2')) && !empty(trim(Input::get('pid1')))) {
+                    $errorMessage = 'PID"s are not Matching please re-check and Submit again';
                 } else {
                     if ($screening) {
                         $user->updateRecord('screening', array(
@@ -293,10 +295,10 @@ if ($user->isLoggedIn()) {
                             'age18years' => Input::get('age18years'),
                             'present_symptoms' => Input::get('present_symptoms'),
                             'produce_resp_sample' => Input::get('produce_resp_sample'),
-                            'tb_follow_up' => Input::get('tb_follow_up'),
-                            'patient_ill' => Input::get('patient_ill'),
-                            'prisoner' => Input::get('prisoner'),
-                            'unable_communicate' => Input::get('unable_communicate'),
+                            'pid1' => Input::get('pid1'),
+                            'pid2' => Input::get('pid2'),
+                            'unable_understand' => Input::get('unable_understand'),
+                            'not_willing' => Input::get('not_willing'),
                             'comments' => Input::get('comments'),
                             'region' => Input::get('region'),
                             'district' => Input::get('district'),
@@ -317,10 +319,10 @@ if ($user->isLoggedIn()) {
                             'age18years' => Input::get('age18years'),
                             'present_symptoms' => Input::get('present_symptoms'),
                             'produce_resp_sample' => Input::get('produce_resp_sample'),
-                            'tb_follow_up' => Input::get('tb_follow_up'),
-                            'patient_ill' => Input::get('patient_ill'),
-                            'prisoner' => Input::get('prisoner'),
-                            'unable_communicate' => Input::get('unable_communicate'),
+                            'pid1' => Input::get('pid1'),
+                            'pid2' => Input::get('pid2'),
+                            'unable_understand' => Input::get('unable_understand'),
+                            'not_willing' => Input::get('not_willing'),
                             'comments' => Input::get('comments'),
                             'region' => Input::get('region'),
                             'district' => Input::get('district'),
@@ -346,10 +348,10 @@ if ($user->isLoggedIn()) {
                             'age18years' => Input::get('age18years'),
                             'present_symptoms' => Input::get('present_symptoms'),
                             'produce_resp_sample' => Input::get('produce_resp_sample'),
-                            'tb_follow_up' => Input::get('tb_follow_up'),
-                            'patient_ill' => Input::get('patient_ill'),
-                            'prisoner' => Input::get('prisoner'),
-                            'unable_communicate' => Input::get('unable_communicate'),
+                            'pid1' => Input::get('pid1'),
+                            'pid2' => Input::get('pid2'),
+                            'unable_understand' => Input::get('unable_understand'),
+                            'not_willing' => Input::get('not_willing'),
                             'comments' => Input::get('comments'),
                             'region' => Input::get('region'),
                             'district' => Input::get('district'),
@@ -380,10 +382,10 @@ if ($user->isLoggedIn()) {
                             'age18years' => Input::get('age18years'),
                             'present_symptoms' => Input::get('present_symptoms'),
                             'produce_resp_sample' => Input::get('produce_resp_sample'),
-                            'tb_follow_up' => Input::get('tb_follow_up'),
-                            'patient_ill' => Input::get('patient_ill'),
-                            'prisoner' => Input::get('prisoner'),
-                            'unable_communicate' => Input::get('unable_communicate'),
+                            'pid1' => Input::get('pid1'),
+                            'pid2' => Input::get('pid2'),
+                            'unable_understand' => Input::get('unable_understand'),
+                            'not_willing' => Input::get('not_willing'),
                             'comments' => Input::get('comments'),
                             'region' => Input::get('region'),
                             'district' => Input::get('district'),
@@ -1315,8 +1317,8 @@ if ($user->isLoggedIn()) {
                             'facility_id' => $screening['facility_id'],
                         ), $costing[0]['id']);
 
-                          $user->createRecord('non_respiratory_records', array(
-                                                        'non_respiratory_id' => $costing[0]['id'],
+                        $user->createRecord('non_respiratory_records', array(
+                            'non_respiratory_id' => $costing[0]['id'],
                             'pid' => $screening['pid'],
                             'sample_name' => Input::get('sample_name'),
                             'tests_conducted' => Input::get('tests_conducted'),
@@ -1368,10 +1370,10 @@ if ($user->isLoggedIn()) {
                             'facility_id' => $screening['facility_id'],
                         ));
 
-                                                $last_row = $override->lastRow('non_respiratory', 'id')[0];
+                        $last_row = $override->lastRow('non_respiratory', 'id')[0];
 
                         $user->createRecord('non_respiratory_records', array(
-                                                        'non_respiratory_id' => $last_row['id'],
+                            'non_respiratory_id' => $last_row['id'],
                             'pid' => $screening['pid'],
                             'sample_name' => Input::get('sample_name'),
                             'tests_conducted' => Input::get('tests_conducted'),
@@ -4088,6 +4090,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 11) { ?>
             <?php
+            $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
             $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             $lab_name = $override->getNews('sites', 'status', 1, 'id', $user->data()->site_id)[0];
 
@@ -4100,9 +4103,9 @@ if ($user->isLoggedIn()) {
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <?php if (!$costing) { ?>
-                                    <h1>Add New Respiratory sample Data</h1>
+                                    <h1>Add Respiratory (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } else { ?>
-                                    <h1>Update Respiratory sample Data</h1>
+                                    <h1>Update Respiratory (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } ?>
                             </div>
                             <div class="col-sm-6">
@@ -4759,7 +4762,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4850,6 +4853,7 @@ if ($user->isLoggedIn()) {
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 12) { ?>
             <?php
+            $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
             $costing = $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
@@ -4859,10 +4863,10 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <?php if (!$costing) { ?>
-                                    <h1>Add New Non Respiratory sample Data</h1>
+                                <?php if ($costing) { ?>
+                                    <h1>Update Non Respiratory (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } else { ?>
-                                    <h1>Update Non Respiratory sample Data</h1>
+                                    <h1>Add Non Respiratory (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } ?>
                             </div>
                             <div class="col-sm-6">
@@ -5157,10 +5161,8 @@ if ($user->isLoggedIn()) {
         <?php } elseif ($_GET['id'] == 13) { ?>
             <?php
             $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
-               $regions = $override->get('regions', 'id', $screening['region'])[0];
-                            $districts = $override->get('districts', 'id', $screening['district'])[0];
-                            // $wards = $override->get('wards', 'id', $client['ward'])[0];
-                            // $relations = $override->get('relation', 'id', $client['relation'])[0];
+            $pid = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
+
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -5170,9 +5172,10 @@ if ($user->isLoggedIn()) {
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <?php if ($screening) { ?>
-                                    <h1>Add New Screening</h1>
+                                    <h1>Update Screening (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } else { ?>
-                                    <h1>Update Screening</h1>
+                                    <h1>Add Screening (PID : <?= $pid['study_id'] ?>)
+                                    </h1>
                                 <?php } ?>
                             </div>
                             <div class="col-sm-6">
@@ -5191,7 +5194,7 @@ if ($user->isLoggedIn()) {
                                             Go to screening list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if ($results) { ?>
-                                        <li class="breadcrumb-item active">Add New Screening</li>
+                                        <li class="breadcrumb-item active">Add New Screening </li>
                                     <?php } else { ?>
                                         <li class="breadcrumb-item active">Update Screening</li>
                                     <?php } ?>
@@ -5211,8 +5214,7 @@ if ($user->isLoggedIn()) {
                                 <div class="card card-warning">
                                     <div class="card-header">
                                         <h3 class="card-title">
-                                            Inclusion
-                                            ( Include if patient responds yes to ALL of the following )
+                                            Screening
                                         </h3>
                                     </div>
                                     <!-- /.card-header -->
@@ -5222,16 +5224,61 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
                                                 <div class="col-4">
                                                     <div class="mb-2">
-                                                        <label for="test_date" class="form-label">Date of Screening</label>
-                                                        <input type="date" value="<?php if ($screening['screening_date']) {
-                                                            print_r($screening['screening_date']);
-                                                        } ?>" id="screening_date" name="screening_date"
-                                                            class="form-control" placeholder="Enter date" required />
+                                                        <label for="test_date" class="form-label">1. Date of
+                                                            Screening</label>
+                                                        <input type="date"
+                                                            value="<?php if ($screening['screening_date']) {
+                                                                print_r($screening['screening_date']);
+                                                            } ?>"
+                                                            id="screening_date" name="screening_date" class="form-control"
+                                                            placeholder="Enter date" required />
+                                                        <small id="screening_date_error" class="text-danger"
+                                                            style="display: none;">Screening date cannot be more than
+                                                            today.</small>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-4">
+                                                    <div class="mb-2">
+                                                        <label for="pid1" class="form-label">2. PID</label>
+                                                        <input type="text"
+                                                            value="<?php if ($screening['pid1']) {
+                                                                print_r($screening['pid1']);
+                                                            } ?>"
+                                                            id="pid1" name="pid1" class="form-control"
+                                                            placeholder="Enter Last Three Digits" required />
+                                                        <small id="pid1_error" class="text-danger"
+                                                            style="display: none;">PID1 and PID2 do not match.</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="mb-2">
+                                                        <label for="pid2" class="form-label">3. Re-enter PID</label>
+                                                        <input type="text"
+                                                            value="<?php if ($screening['pid2']) {
+                                                                print_r($screening['pid2']);
+                                                            } ?>"
+                                                            id="pid2" name="pid2" class="form-control"
+                                                            placeholder="Re-Enter Last Three Digits" required />
+                                                        <small id="pid2_error" class="text-danger"
+                                                            style="display: none;">PID1 and PID2 do not match.</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">
+                                                        Inclusion
+                                                        ( Include if patient responds yes to ALL of the following )
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
                                                     <label for="present_symptoms" class="form-label">
-                                                        1. Does the patient present with
+                                                        4. Does the patient present with
                                                         signs and symptoms suggestive of pulmonary TB or another pulmonary
                                                         infection of bacterial, viral, or fungal origin?
                                                     </label>
@@ -5245,7 +5292,7 @@ if ($user->isLoggedIn()) {
                                                                         id="present_symptoms<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($screening['present_symptoms'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?>>
+                                                                          } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
@@ -5253,9 +5300,9 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-6">
                                                     <label for="produce_resp_sample" class="form-label">
-                                                        2. Is the patient capable of
+                                                        5. Is the patient capable of
                                                         producing a sputum sample?
                                                     </label>
                                                     <!-- radio -->
@@ -5268,7 +5315,7 @@ if ($user->isLoggedIn()) {
                                                                         id="produce_resp_sample<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($screening['produce_resp_sample'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?>>
+                                                                          } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
@@ -5279,9 +5326,8 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-4">
-                                                    <label for="age18years" class="form-label">3. Is the Patient at least 18
-                                                        years
-                                                        old ?</label>
+                                                    <label for="age18years" class="form-label">6. Is the Patient at least 18
+                                                        years old ?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -5291,7 +5337,7 @@ if ($user->isLoggedIn()) {
                                                                         name="age18years" id="age18years<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($screening['age18years'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?>>
+                                                                          } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
@@ -5300,9 +5346,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <label for="conset" class="form-label">4. Has the patient provided
-                                                        written
-                                                        informed consent to participate?</label>
+                                                    <label for="conset" class="form-label">7. Has the patient provided
+                                                        written informed consent to participate?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -5312,7 +5357,7 @@ if ($user->isLoggedIn()) {
                                                                         id="conset<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($screening['conset'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?>>
+                                                                          } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
@@ -5320,14 +5365,19 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-4" id="conset_date1">
+            <div class="col-4" id="conset_date_container" style="display: none;">
                                                     <div class="mb-2">
-                                                        <label for="conset_date" class="form-label">5. Date of
-                                                            Conset</label>
-                                                        <input type="date" value="<?php if ($screening) {
-                                                            print_r($screening['conset_date']);
-                                                        } ?>" id="conset_date" name="conset_date" class="form-control"
+                                                        <label for="conset_date" class="form-label">8. Date of
+                                                            Consent</label>
+                                                        <input type="date"
+                                                            value="<?php if ($screening) {
+                                                                print_r($screening['conset_date']);
+                                                            } ?>"
+                                                            id="conset_date" name="conset_date" class="form-control"
                                                             placeholder="Enter date" />
+                                                        <small id="conset_date_error" class="text-danger"
+                                                            style="display: none;">Consent date is required if consent is
+                                                            selected as "Yes".</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5343,10 +5393,29 @@ if ($user->isLoggedIn()) {
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <label for="patient_ill" class="form-label">
-                                                        6. Is the patient Seriously ill/unconscious/patients with mental
-                                                        health
-                                                        issues ?
+                                                    <label for="not_willing" class="form-label">9. Not willing to sign the
+                                                        informed consent form ?</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="not_willing" id="not_willing<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($screening['not_willing'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?> required>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="unable_understand" class="form-label">
+                                                        10. Unable to understand the informed consent form and/or the study
+                                                        procedures ?
                                                     </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
@@ -5354,173 +5423,16 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="patient_ill" id="patient_ill<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($screening['patient_ill'] == $value['id']) {
+                                                                        name="unable_understand"
+                                                                        id="unable_understand<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($screening['unable_understand'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?>>
+                                                                          } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-6">
-                                                    <label for="tb_follow_up" class="form-label">7. TB Patients on follow
-                                                        up</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="tb_follow_up"
-                                                                        id="tb_follow_up<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($screening['tb_follow_up'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-
-                                                <div class="col-sm-6">
-                                                    <label for="prisoner" class="form-label">8. Is the Patient a prisoner
-                                                        ?</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="prisoner"
-                                                                        id="prisoner<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($screening['prisoner'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label for="unable_communicate" class="form-label">
-                                                        9. Is the Patient Unable to communicate in English/Swahili ?
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="unable_communicate"
-                                                                        id="unable_communicate<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($screening['unable_communicate'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                              <div class="card card-warning">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Patient Address</h3>
-                                                    </div>
-                                                </div>
-                                                <hr>
-
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>Region</label>
-                                                                <select id="region" name="region" class="form-control" required>
-                                                                    <option value="<?= $regions['id'] ?>"><?php if ($screening['region']) {
-                                                                      print_r($regions['name']);
-                                                                  } else {
-                                                                      echo 'Select region';
-                                                                  } ?>
-                                                                </option>
-                                                                <?php foreach ($override->get('regions', 'status', 1) as $region) { ?>
-                                                                    <option value="<?= $region['id'] ?>"><?= $region['name'] ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            
-                                                <div class="col-sm-3">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>District</label>
-                                                            <select id="district" name="district" class="form-control" required>
-                                                                <option value="<?= $districts['id'] ?>"><?php if ($screening['district']) {
-                                                                      print_r($districts['name']);
-                                                                  } else {
-                                                                      echo 'Select district';
-                                                                  } ?>
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            
-                                                <div class="col-3">
-                                                    <div class="mb-2">
-                                                        <label for="ward" class="form-label">Ward
-                                                            </label>
-                                                        <input type="text" value="<?php if ($screening) {
-                                                            print_r($screening['ward']);
-                                                        } ?>" id="ward" name="ward" class="form-control"
-                                                            placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-                                                <?php
-                                                //  if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) { 
-                                                    ?>
-                                            
-                                                    <div class="col-sm-3">
-                                                        <div class="row-form clearfix">
-                                                            <!-- select -->
-                                                            <div class="form-group">
-                                                                <label>Street/Village</label>
-                                                                <textarea class="form-control" id="village_street" placeholder="Type physical address here"
-                                                                    name="village_street" rows="3" style="width: 100%;" required>
-                                                                                                                    <?php if ($screening['village_street']) {
-                                                                                                                        print_r($screening['village_street']);
-                                                                                                                    } ?>
-                                                                                                                </textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            
-                                                <?php 
-                                            // } 
-                                            ?>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="mb-2">
-                                                        <label for="ldct_results" class="form-label">Comments</label>
-                                                        <textarea class="form-control" name="comments" id="comments"
-                                                            rows="4" placeholder="Enter here" required>
-                                                                                                                                                    <?php if ($screening['comments']) {
-                                                                                                                                                        print_r($screening['comments']);
-                                                                                                                                                    } ?>
-                                                                                                                                                </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5548,6 +5460,7 @@ if ($user->isLoggedIn()) {
 
         <?php } elseif ($_GET['id'] == 14) { ?>
             <?php
+            $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
             $costing = $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
@@ -5557,10 +5470,10 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <?php if (!$costing) { ?>
-                                    <h1>Add New Diagnostic Test DST Data</h1>
+                                <?php if ($costing) { ?>
+                                    <h1>Update Diagnostic DST (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } else { ?>
-                                    <h1>Update Diagnostic Test DST Data</h1>
+                                    <h1>Add Diagnostic DST (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } ?>
                             </div>
                             <div class="col-sm-6">
@@ -7053,7 +6966,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7083,7 +6996,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7173,6 +7086,7 @@ if ($user->isLoggedIn()) {
 
         <?php } elseif ($_GET['id'] == 15) { ?>
             <?php
+            $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
             $costing = $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
@@ -7182,10 +7096,10 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <?php if (!$costing) { ?>
-                                    <h1>Add New Diagnosis Data</h1>
+                                <?php if ($costing) { ?>
+                                    <h1>Update New Diagnosis (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } else { ?>
-                                    <h1>Update Diagnosis Data</h1>
+                                    <h1>Add Diagnosis (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } ?>
                             </div>
                             <div class="col-sm-6">
@@ -7712,7 +7626,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7806,12 +7720,28 @@ if ($user->isLoggedIn()) {
         <?php } elseif ($_GET['id'] == 16) { ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
+                <?php
+                $clients = $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
+                $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+                $sex = $override->get('sex', 'id', $clients['sex'])[0];
+                $education = $override->get('education', 'id', $clients['education'])[0];
+                $occupation = $override->get('occupation', 'id', $clients['occupation'])[0];
+                $regions = $override->get('regions', 'id', $clients['region'])[0];
+                $districts = $override->get('districts', 'id', $clients['district'])[0];
+                $wards = $override->get('wards', 'id', $clients['ward'])[0];
+                $facility = $override->get('districts', 'id', $clients['facility_district'])[0];
+                $site = $override->get('sites', 'id', $clients['facility_id'])[0];
+                ?>
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Add Participant enrolment form</h1>
+                                <?php if ($clients) { ?>
+                                    <h1>Update enrolment form (PID :<?= $screening['pid'] ?>)</h1>
+                                <?php } else { ?>
+                                    <h1>Add enrolment form (PID :<?= $screening['pid'] ?>)</h1>
+                                <?php } ?>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -7843,18 +7773,6 @@ if ($user->isLoggedIn()) {
                 <section class="content">
                     <div class="container-fluid">
                         <div class="row">
-                            <?php
-                            $clients = $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
-                            // $clients = $override->getNews('screening', 'status', 1, 'id', $_GET['cid'])[0];
-                            $sex = $override->get('sex', 'id', $clients['sex'])[0];
-                            $education = $override->get('education', 'id', $clients['education'])[0];
-                            $occupation = $override->get('occupation', 'id', $clients['occupation'])[0];
-                            $regions = $override->get('regions', 'id', $clients['region'])[0];
-                            $districts = $override->get('districts', 'id', $clients['district'])[0];
-                            $wards = $override->get('wards', 'id', $clients['ward'])[0];
-                            $facility = $override->get('districts', 'id', $clients['facility_district'])[0];
-                            $site = $override->get('sites', 'id', $clients['facility_id'])[0];
-                            ?>
                             <!-- right column -->
                             <div class="col-md-12">
                                 <!-- general form elements disabled -->
@@ -9010,10 +8928,10 @@ if ($user->isLoggedIn()) {
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <?php if (!$costing) { ?>
-                                    <h1>Add New validations Data</h1>
+                                <?php if ($costing) { ?>
+                                    <h1>Update New validations Data (PID :<?= $costing['pid'] ?>)</h1>
                                 <?php } else { ?>
-                                    <h1>Update validations Data</h1>
+                                    <h1>Add validations Data (PID :<?= $costing['pid'] ?>)</h1>
                                 <?php } ?>
                             </div>
                             <div class="col-sm-6">
@@ -10700,7 +10618,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10859,8 +10777,9 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/clients/validate_required_radio_checkboxes.js"></script>  -->
 
     <!-- SCREENING Js -->
-    <script src="myjs/add/screening/conset.js"></script>
-    <script src="myjs/add/screening/art.js"></script>
+    <script src="js/screening/screening.js"></script>
+    <!-- <script src="myjs/add/screening/conset.js"></script>
+    <script src="myjs/add/screening/art.js"></script> -->
 
     <!-- Enrollment Js -->
     <script src="myjs/add/enrollment/other_diseases.js"></script>
