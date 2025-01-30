@@ -111,14 +111,14 @@ $(document).ready(function () {
                 $('#conset_date').prop('disabled', true);
             }
 
-            console.log('Final validation status:', isValid);
+            // console.log('Final validation status:', isValid);
 
             // Submit the form if all validations pass
             if (isValid) {
-                setTimeout(() => {
+                // setTimeout(() => {
                     console.log('Form is valid. Submitting now...'); // Debugging line
                     event.target.submit();
-                }, 0);
+                // }, 0);
             } else {
                 console.log('Form is invalid. Please fix the errors.'); // Debugging line
             }

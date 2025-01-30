@@ -938,40 +938,40 @@ if ($user->isLoggedIn()) {
                                     if ($user->data()->accessLevel == 1) {
                                         if ($_GET['facility_id'] != null) {
                                             if ($_GET['status'] == 1) {
-                                                $data = $override->getWithLimit1('screening', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                                $data = $override->getWithLimit1Desc('screening', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
                                             } else if ($_GET['status'] == 2) {
-                                                $data = $override->getWithLimit2('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                                $data = $override->getWithLimit2Desc('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
                                             } else if ($_GET['status'] == 3) {
-                                                $data = $override->getWithLimit1('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                                $data = $override->getWithLimit1Desc('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
                                             } else if ($_GET['status'] == 4) {
-                                                $data = $override->getWithLimit1('termination', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                                $data = $override->getWithLimit1Desc('termination', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
                                             } else {
-                                                $data = $override->getWithLimit('screening', 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                                $data = $override->getWithLimitDesc('screening', 'facility_id', $_GET['facility_id'], $page, $numRec);
                                             }
                                         } else {
                                             if ($_GET['status'] == 1) {
-                                                $data = $override->getWithLimit('screening', 'status', 1, $page, $numRec);
+                                                $data = $override->getWithLimitDesc('screening', 'status', 1, $page, $numRec);
                                             } else if ($_GET['status'] == 2) {
-                                                $data = $override->getWithLimit1('screening', 'status', 1, 'eligible', 1, $page, $numRec);
+                                                $data = $override->getWithLimit1Desc('screening', 'status', 1, 'eligible', 1, $page, $numRec);
                                             } else if ($_GET['status'] == 3) {
-                                                $data = $override->getWithLimit('enrollment_form', 'status', 1, $page, $numRec);
+                                                $data = $override->getWithLimitDesc('enrollment_form', 'status', 1, $page, $numRec);
                                             } else if ($_GET['status'] == 4) {
-                                                $data = $override->getWithLimit('termination', 'status', 1, $page, $numRec);
+                                                $data = $override->getWithLimitDesc('termination', 'status', 1, $page, $numRec);
                                             } else {
-                                                $data = $override->getWithLimit0('screening', $page, $numRec);
+                                                $data = $override->getWithLimit0Desc('screening', $page, $numRec);
                                             }
                                         }
                                     } else {
                                         if ($_GET['status'] == 1) {
-                                            $data = $override->getWithLimit1('screening', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                            $data = $override->getWithLimit1Desc('screening', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
                                         } else if ($_GET['status'] == 2) {
-                                            $data = $override->getWithLimit2('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                            $data = $override->getWithLimit2Desc('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
                                         } else if ($_GET['status'] == 3) {
-                                            $data = $override->getWithLimit1('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                            $data = $override->getWithLimit1Desc('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
                                         } else if ($_GET['status'] == 4) {
-                                            $data = $override->getWithLimit1('termination', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                            $data = $override->getWithLimit1Desc('termination', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
                                         } else {
-                                            $data = $override->getWithLimit0('screening', $page, $numRec);
+                                            $data = $override->getWithLimit0Desc('screening', $page, $numRec);
                                         }
                                     }
                                     ?>
@@ -1111,6 +1111,7 @@ if ($user->isLoggedIn()) {
                                             <tbody>
                                                 <?php
                                                 $x = 1;
+                                                // print_r($data);
                                                 foreach ($data as $value) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['facility_id'])[0];
                                                     $sex = $override->getNews('sex', 'status', 1, 'id', $value['sex'])[0];
