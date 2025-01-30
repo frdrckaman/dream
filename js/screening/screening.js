@@ -17,8 +17,6 @@ document.querySelectorAll('input[name="conset"]').forEach(function (radio) {
 // Initial check to set conset_date visibility on page load
 toggleConsetDate();
 
-
-
 // Form submission validation
 document.getElementById('validation').addEventListener('submit', function (event) {
     let isValid = true;
@@ -52,9 +50,20 @@ document.getElementById('validation').addEventListener('submit', function (event
     const consetYes = document.querySelector('input[name="conset"]:checked');
     if (consetYes && consetYes.value === '1') { // Assuming '1' is the value for 'Yes'
         const consentDate = document.getElementById('conset_date').value;
+        const consentDateObj = new Date(consentDate);
+
         if (!consentDate) {
+            // If consent date is empty
             document.getElementById('conset_date_error').style.display = 'block';
             isValid = false;
+        } else if (consentDateObj > today) {
+            // If consent date is in the future
+            document.getElementById('conset_date_error').textContent = 'Consent date cannot be in the future.';
+            document.getElementById('conset_date_error').style.display = 'block';
+            isValid = false;
+        } else {
+            // If consent date is valid (today or earlier)
+            document.getElementById('conset_date_error').style.display = 'none';
         }
     }
 
