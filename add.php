@@ -5149,7 +5149,6 @@ if ($user->isLoggedIn()) {
         <?php } elseif ($_GET['id'] == 13) { ?>
             <?php
             $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
-            // $pid = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -5205,7 +5204,7 @@ if ($user->isLoggedIn()) {
                                         </h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                    <form id="screening" enctype="multipart/form-data" method="post" autocomplete="off">
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">

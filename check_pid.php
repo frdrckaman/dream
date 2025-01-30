@@ -28,9 +28,9 @@ if ($user->isLoggedIn()) {
     $full_pid = $facility_code['pid'] . '_' . $pid;
     $pid_exists = $override->getCount('screening', 'pid', $full_pid);
 
-    $exists = false;
-    if ($pid_exists) {
-        return $exists = true;
+    $exists = False;
+    if ($pid_exists > 0) {
+        return $exists = True;
     }
 
     echo json_encode(['exists' => $exists]);

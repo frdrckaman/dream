@@ -36,7 +36,7 @@ async function checkIfPidExists(pid) {
 }
 
 // Form submission validation
-document.getElementById('validation').addEventListener('submit', async function (event) {
+document.getElementById('screening').addEventListener('submit', async function (event) {
     event.preventDefault(); // Prevent form submission until all validations are complete
 
     let isValid = true;
@@ -116,7 +116,8 @@ document.getElementById('validation').addEventListener('submit', async function 
     // Submit the form if all validations pass
     if (isValid) {
         console.log('Form is valid. Submitting...'); // Debugging line
-
         event.target.submit(); // Submit the form
+    } else {
+        console.log('Form is invalid. Please fix the errors.'); // Debugging line
     }
 });

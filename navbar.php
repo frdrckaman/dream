@@ -8,10 +8,10 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="index1.php" class="nav-link">Home</a>
         </li>
-        <!-- <li class="nav-item d-none d-sm-inline-block">
-            <a href="add.php?id=13&status=1&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="add.php?id=13&status=1&sid=&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
                 class="nav-link">Add Screening</a>
-        </li> -->
+        </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="info.php?id=3&status=1&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
                 class="nav-link">Screened</a>

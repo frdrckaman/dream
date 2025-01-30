@@ -256,7 +256,7 @@ if ($user->isLoggedIn()) {
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="add.php?id=13&status=1&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
+                            <a href="add.php?id=13&status=1&sid=&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Add
