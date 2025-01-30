@@ -35,34 +35,42 @@ document.getElementById('validation').addEventListener('submit', function (event
         isValid = false;
     }
 
-    // Check if screening date is between 2025-01-20 and today
-    const screeningDate = new Date(document.getElementById('screening_date').value);
+    // Validate screening_date
+    const screeningDateInput = document.getElementById('screening_date');
+    const screeningDate = new Date(screeningDateInput.value);
     const startDate = new Date('2025-01-20'); // Start date
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Reset time part to ensure comparison is based on date only
 
     if (screeningDate < startDate || screeningDate > today) {
+        document.getElementById('screening_date_error').textContent = 'Screening date must be between 2025-01-20 and today.';
         document.getElementById('screening_date_error').style.display = 'block';
         isValid = false;
     }
 
-    // Check if consent date is required
+    // Validate conset_date (if consent is "Yes")
     const consetYes = document.querySelector('input[name="conset"]:checked');
     if (consetYes && consetYes.value === '1') { // Assuming '1' is the value for 'Yes'
-        const consentDate = document.getElementById('conset_date').value;
-        const consentDateObj = new Date(consentDate);
+        const consentDateInput = document.getElementById('conset_date');
+        const consentDate = new Date(consentDateInput.value);
 
-        if (!consentDate) {
+        if (!consentDateInput.value) {
             // If consent date is empty
+            document.getElementById('conset_date_error').textContent = 'Consent date is required if consent is selected as "Yes".';
             document.getElementById('conset_date_error').style.display = 'block';
             isValid = false;
-        } else if (consentDateObj > today) {
+        } else if (consentDate < screeningDate) {
+            // If consent date is earlier than screening date
+            document.getElementById('conset_date_error').textContent = 'Consent date cannot be earlier than the screening date.';
+            document.getElementById('conset_date_error').style.display = 'block';
+            isValid = false;
+        } else if (consentDate > today) {
             // If consent date is in the future
             document.getElementById('conset_date_error').textContent = 'Consent date cannot be in the future.';
             document.getElementById('conset_date_error').style.display = 'block';
             isValid = false;
         } else {
-            // If consent date is valid (today or earlier)
+            // If consent date is valid (between screening date and today)
             document.getElementById('conset_date_error').style.display = 'none';
         }
     }
