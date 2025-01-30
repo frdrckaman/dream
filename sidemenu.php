@@ -256,11 +256,11 @@ if ($user->isLoggedIn()) {
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="add.php?id=13&status=1" class="nav-link">
+                            <a href="add.php?id=13&status=1&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Add
-                                    <span class="right badge badge-success">New Screening Patient</span>
+                                    <span class="right badge badge-success">New Patient</span>
                                 </p>
                             </a>
                         </li>

@@ -1,21 +1,21 @@
-// Function to toggle conset_date visibility
-function toggleConsetDate() {
-    const consetYes = document.querySelector('input[name="conset"]:checked');
-    const consetDateContainer = document.getElementById('conset_date_container');
-    if (consetYes && consetYes.value === '1') { // Assuming '1' is the value for 'Yes'
-        consetDateContainer.style.display = 'block';
+// Function to toggle consent_date visibility
+function toggleConsentDate() {
+    const consentYes = document.querySelector('input[name="conset"]:checked');
+    const consentDateContainer = document.getElementById('conset_date_container');
+    if (consentYes && consentYes.value === '1') { // Assuming '1' is the value for 'Yes'
+        consentDateContainer.style.display = 'block';
     } else {
-        consetDateContainer.style.display = 'none';
+        consentDateContainer.style.display = 'none';
     }
 }
 
-// Add event listeners to conset radio buttons
+// Add event listeners to consent radio buttons
 document.querySelectorAll('input[name="conset"]').forEach(function (radio) {
-    radio.addEventListener('change', toggleConsetDate);
+    radio.addEventListener('change', toggleConsentDate);
 });
 
-// Initial check to set conset_date visibility on page load
-toggleConsetDate();
+// Initial check to set consent_date visibility on page load
+toggleConsentDate();
 
 // Function to check if PID exists in the database
 async function checkIfPidExists(pid) {
@@ -44,11 +44,12 @@ document.getElementById('validation').addEventListener('submit', async function 
     // Clear previous error messages
     document.querySelectorAll('.text-danger').forEach(function (error) {
         error.style.display = 'none';
+        error.textContent = '';
     });
 
-    // Retrieve PID1 and PID2
-    const pid1 = document.getElementById('pid1').value;
-    const pid2 = document.getElementById('pid2').value;
+    // Retrieve PID1 and PID2 values
+    const pid1 = document.getElementById('pid1').value.trim();
+    const pid2 = document.getElementById('pid2').value.trim();
 
     // Check if PID1 and PID2 match
     if (pid1 !== pid2) {
@@ -63,7 +64,7 @@ document.getElementById('validation').addEventListener('submit', async function 
     if (isValid && pid1) {
         const pidExists = await checkIfPidExists(pid1);
         if (pidExists) {
-            document.getElementById('pid1_error').textContent = 'PID already exists in the database.';
+            document.getElementById('pid1_error').textContent = 'PID already exists in the database. Please use a different PID.';
             document.getElementById('pid1_error').style.display = 'block';
             isValid = false;
         }
@@ -84,9 +85,9 @@ document.getElementById('validation').addEventListener('submit', async function 
         isValid = false;
     }
 
-    // Validate conset_date (if consent is "Yes")
-    const consetYes = document.querySelector('input[name="conset"]:checked');
-    if (consetYes && consetYes.value === '1') { // Assuming '1' is the value for 'Yes'
+    // Validate consent_date (if consent is "Yes")
+    const consentYes = document.querySelector('input[name="conset"]:checked');
+    if (consentYes && consentYes.value === '1') { // Assuming '1' is the value for 'Yes'
         const consentDateInput = document.getElementById('conset_date');
         const consentDate = new Date(consentDateInput.value);
         consentDate.setHours(0, 0, 0, 0); // Normalize time to midnight
