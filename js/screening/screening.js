@@ -1,3 +1,25 @@
+// Function to toggle conset_date visibility
+function toggleConsetDate() {
+    const consetYes = document.querySelector('input[name="conset"]:checked');
+    const consetDateContainer = document.getElementById('conset_date_container');
+    if (consetYes && consetYes.value === '1') { // Assuming '1' is the value for 'Yes'
+        consetDateContainer.style.display = 'block';
+    } else {
+        consetDateContainer.style.display = 'none';
+    }
+}
+
+// Add event listeners to conset radio buttons
+document.querySelectorAll('input[name="conset"]').forEach(function (radio) {
+    radio.addEventListener('change', toggleConsetDate);
+});
+
+// Initial check to set conset_date visibility on page load
+toggleConsetDate();
+
+
+
+// Form submission validation
 document.getElementById('validation').addEventListener('submit', function (event) {
     let isValid = true;
 
