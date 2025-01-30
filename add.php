@@ -287,9 +287,11 @@ if ($user->isLoggedIn()) {
                 } elseif ((Input::get('pid1') != Input::get('pid2')) && !empty(trim(Input::get('pid1')))) {
                     $errorMessage = 'PID"s are not Matching please re-check and Submit again';
                 } else {
+                    $pid = $override->getNews('pids', 'facility_id', $user->data()->site_id, 'status', 1)[0];
+                    $pid_merged = $pid['pid'] . '_' . Input::get('pid1');
                     if ($screening) {
                         $user->updateRecord('screening', array(
-                                                        'pid' => $screening['pid'],
+                            'pid' => $pid_merged,
                             'screening_date' => Input::get('screening_date'),
                             'conset' => Input::get('conset'),
                             'conset_date' => Input::get('conset_date'),
@@ -313,7 +315,7 @@ if ($user->isLoggedIn()) {
 
                         $user->createRecord('screening_records', array(
                             'screening_id' => $screening['id'],
-                            'pid' => $screening['pid'],
+                            'pid' => $pid_merged,
                             'screening_date' => Input::get('screening_date'),
                             'conset' => Input::get('conset'),
                             'conset_date' => Input::get('conset_date'),
@@ -340,9 +342,6 @@ if ($user->isLoggedIn()) {
 
                         $successMessage = 'Screening  Successful Updated';
                     } else {
-                        $pid = $override->getNews('pids', 'facility_id', $user->data()->site_id, 'status', 1)[0];
-                        $pid_merged = $pid['pid'].'_'.Input::get('pid1');
-
                         $user->createRecord('screening', array(
                             'pid' => $pid_merged,
                             'screening_date' => Input::get('screening_date'),
