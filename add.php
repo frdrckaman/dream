@@ -277,15 +277,18 @@ if ($user->isLoggedIn()) {
                     $eligible = 1;
                 }
 
-                if (Input::get('screening_date') <= $screening[0]['conset_date']) {
+                $pid = $override->getNews('pids', 'facility_id', $user->data()->site_id, 'status', 1)[0];
+                $pid_merged = $pid['pid'] . '_' . Input::get('pid1');
+
+                if (Input::get('screening_date') <= $screening['conset_date']) {
                     $errorMessage = 'Screaning Date Can not be greater than Screening Date';
                 } elseif (Input::get('conset') == 2 && !empty(trim(Input::get('conset_date')))) {
                     $errorMessage = 'Please Remove Screening date before Submit again';
                 } elseif ((Input::get('pid1') != Input::get('pid2')) && !empty(trim(Input::get('pid1')))) {
                     $errorMessage = 'PID"s are not Matching please re-check and Submit again';
+                } elseif ($screening['pid'] == $pid_merged) {
+                    $errorMessage = 'PID"s Exists Please use Another';
                 } else {
-                    $pid = $override->getNews('pids', 'facility_id', $user->data()->site_id, 'status', 1)[0];
-                    $pid_merged = $pid['pid'] . '_' . Input::get('pid1');
                     if ($screening) {
                         $user->updateRecord('screening', array(
                             'pid' => $pid_merged,
@@ -4750,7 +4753,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5208,61 +5211,67 @@ if ($user->isLoggedIn()) {
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">
+                                                <!-- Screening Date -->
                                                 <div class="col-4">
                                                     <div class="mb-2">
-                                                        <label for="test_date" class="form-label">1. Date of
+                                                        <label for="screening_date" class="form-label">1. Date of
                                                             Screening</label>
                                                         <input type="date" value="<?php if ($screening['screening_date']) {
-                                                            print_r($screening['screening_date']);
-                                                        } ?>" id="screening_date" name="screening_date"
-                                                            class="form-control" placeholder="Enter date" required />
+                                                            echo $screening['screening_date'];
+                                                        } ?>" id="screening_date" name="screening_date" class="form-control" placeholder="Enter date"
+                                                            required />
                                                         <small id="screening_date_error" class="text-danger"
-                                                            style="display: none;">Screening date cannot be more than
-                                                            today.</small>
+                                                            style="display: none;">Screening date must be
+                                                            between 2025-01-20 and today.</small>
                                                     </div>
                                                 </div>
+
+                                                <!-- PID1 -->
                                                 <div class="col-4">
                                                     <div class="mb-2">
                                                         <label for="pid1" class="form-label">2. PID</label>
                                                         <input type="text" value="<?php if ($screening['pid1']) {
-                                                            print_r($screening['pid1']);
-                                                        } ?>" id="pid1" name="pid1" class="form-control"
-                                                            placeholder="Enter Last Three Digits" required />
+                                                            echo $screening['pid1'];
+                                                        } ?>" id="pid1" name="pid1" class="form-control" placeholder="Enter Last Three Digits" required />
                                                         <small id="pid1_error" class="text-danger"
-                                                            style="display: none;">PID1 and PID2 do not match.</small>
+                                                            style="display: none;">PID1 and PID2 do not
+                                                            match.</small>
                                                     </div>
                                                 </div>
+
+                                                <!-- PID2 -->
                                                 <div class="col-4">
                                                     <div class="mb-2">
                                                         <label for="pid2" class="form-label">3. Re-enter PID</label>
                                                         <input type="text" value="<?php if ($screening['pid2']) {
-                                                            print_r($screening['pid2']);
-                                                        } ?>" id="pid2" name="pid2" class="form-control"
-                                                            placeholder="Re-Enter Last Three Digits" required />
+                                                            echo $screening['pid2'];
+                                                        } ?>" id="pid2" name="pid2" class="form-control" placeholder="Re-Enter Last Three Digits"
+                                                            required />
                                                         <small id="pid2_error" class="text-danger"
-                                                            style="display: none;">PID1 and PID2 do not match.</small>
+                                                            style="display: none;">PID1 and PID2 do not
+                                                            match.</small>
                                                     </div>
                                                 </div>
                                             </div>
                                             <hr>
+
+                                            <!-- Inclusion Section -->
                                             <div class="card card-warning">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">
-                                                        Inclusion
-                                                        ( Include if patient responds yes to ALL of the following )
-                                                    </h3>
+                                                    <h3 class="card-title">Inclusion (Include if patient responds yes to ALL
+                                                        of the following)</h3>
                                                 </div>
                                             </div>
                                             <hr>
 
+                                            <!-- Present Symptoms -->
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <label for="present_symptoms" class="form-label">
-                                                        4. Does the patient present with
-                                                        signs and symptoms suggestive of pulmonary TB or another pulmonary
-                                                        infection of bacterial, viral, or fungal origin?
-                                                    </label>
-                                                    <!-- radio -->
+                                                    <label for="present_symptoms" class="form-label">4. Does the patient
+                                                        present with signs and symptoms
+                                                        suggestive of pulmonary TB or another pulmonary infection of
+                                                        bacterial, viral, or fungal
+                                                        origin?</label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
@@ -5280,12 +5289,12 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <!-- Produce Respiratory Sample -->
                                                 <div class="col-sm-6">
-                                                    <label for="produce_resp_sample" class="form-label">
-                                                        5. Is the patient capable of
-                                                        producing a sputum sample?
-                                                    </label>
-                                                    <!-- radio -->
+                                                    <label for="produce_resp_sample" class="form-label">5. Is the patient
+                                                        capable of producing a sputum
+                                                        sample?</label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
@@ -5304,11 +5313,12 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <!-- Age 18 Years and Consent -->
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <label for="age18years" class="form-label">6. Is the Patient at least 18
-                                                        years old ?</label>
-                                                    <!-- radio -->
+                                                        years old?</label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
@@ -5325,10 +5335,12 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <!-- Consent -->
                                                 <div class="col-sm-4">
                                                     <label for="conset" class="form-label">7. Has the patient provided
-                                                        written informed consent to participate?</label>
-                                                    <!-- radio -->
+                                                        written informed consent to
+                                                        participate?</label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
@@ -5345,35 +5357,37 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <!-- Consent Date -->
                                                 <div class="col-4" id="conset_date_container" style="display: none;">
                                                     <div class="mb-2">
                                                         <label for="conset_date" class="form-label">8. Date of
                                                             Consent</label>
                                                         <input type="date" value="<?php if ($screening) {
-                                                            print_r($screening['conset_date']);
-                                                        } ?>" id="conset_date" name="conset_date"
-                                                            class="form-control" placeholder="Enter date" />
+                                                            echo $screening['conset_date'];
+                                                        } ?>" id="conset_date" name="conset_date" class="form-control" placeholder="Enter date" />
                                                         <small id="conset_date_error" class="text-danger"
-                                                            style="display: none;">Consent date is required if consent is
-                                                            selected as "Yes".</small>
+                                                            style="display: none;">Consent date is required if
+                                                            consent is selected as "Yes".</small>
                                                     </div>
                                                 </div>
                                             </div>
                                             <hr>
+
+                                            <!-- Exclusion Section -->
                                             <div class="card card-warning">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">
-                                                        Exclusion
-                                                        ( Exclude if patient responds yes to Any of the following )
-                                                    </h3>
+                                                    <h3 class="card-title">Exclusion (Exclude if patient responds yes to Any
+                                                        of the following)</h3>
                                                 </div>
                                             </div>
                                             <hr>
+
+                                            <!-- Not Willing -->
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <label for="not_willing" class="form-label">9. Not willing to sign the
-                                                        informed consent form ?</label>
-                                                    <!-- radio -->
+                                                        informed consent form?</label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
@@ -5390,12 +5404,12 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <!-- Unable to Understand -->
                                                 <div class="col-sm-6">
-                                                    <label for="unable_understand" class="form-label">
-                                                        10. Unable to understand the informed consent form and/or the study
-                                                        procedures ?
-                                                    </label>
-                                                    <!-- radio -->
+                                                    <label for="unable_understand" class="form-label">10. Unable to
+                                                        understand the informed consent form
+                                                        and/or the study procedures?</label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
@@ -5416,6 +5430,8 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
+
+                                        <!-- Card Footer -->
                                         <div class="card-footer">
                                             <a href="info.php?id=3&status=<?= $_GET['status'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                 class="btn btn-default">Back</a>
@@ -6944,7 +6960,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6974,7 +6990,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7604,7 +7620,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10596,7 +10612,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>

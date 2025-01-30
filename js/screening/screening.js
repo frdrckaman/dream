@@ -62,10 +62,13 @@ document.getElementById('screening').addEventListener('submit', async function (
 
     // Check if PID1 already exists in the database
     if (isValid && pid1) {
+        alert('HI1');
         const pidExists = await checkIfPidExists(pid1);
+        alert('HI2');
         if (pidExists) {
-            document.getElementById('pid1_error').textContent = 'PID already exists in the database. Please use a different PID.';
-            document.getElementById('pid1_error').style.display = 'block';
+            // document.getElementById('pid1_error').textContent = 'PID already exists in the database. Please use a different PID.';
+            // document.getElementById('pid1_error').style.display = 'block';
+            alert('HI3');
             isValid = false;
         }
     }
