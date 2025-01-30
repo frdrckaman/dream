@@ -115,6 +115,8 @@ document.getElementById('validation').addEventListener('submit', async function 
 
     // Submit the form if all validations pass
     if (isValid) {
+        console.log('Form is valid. Submitting...'); // Debugging line
+
         event.target.submit(); // Submit the form
     }
 });
