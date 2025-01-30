@@ -30,7 +30,7 @@ if ($user->isLoggedIn()) {
 
     $exists = false;
     if ($pid_exists) {
-        return true;
+        return $exists = true;
     }
 
     echo json_encode(['exists' => $exists]);
