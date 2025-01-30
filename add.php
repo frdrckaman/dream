@@ -284,7 +284,7 @@ if ($user->isLoggedIn()) {
                     $errorMessage = 'Screaning Date Can not be greater than Screening Date';
                 } elseif (Input::get('conset') == 2 && !empty(trim(Input::get('conset_date')))) {
                     $errorMessage = 'Please Remove Screening date before Submit again';
-                } elseif ((Input::get('pid1') == Input::get('pid2')) && !empty(trim(Input::get('pid1')))) {
+                } elseif ((Input::get('pid1') != Input::get('pid2')) && !empty(trim(Input::get('pid1')))) {
                     $errorMessage = 'PID"s are not Matching please re-check and Submit again';
                 } else {
                     if ($screening) {
@@ -5161,10 +5161,6 @@ if ($user->isLoggedIn()) {
         <?php } elseif ($_GET['id'] == 13) { ?>
             <?php
             $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
-            // $regions = $override->get('regions', 'id', $screening['region'])[0];
-            // $districts = $override->get('districts', 'id', $screening['district'])[0];
-            // $wards = $override->get('wards', 'id', $client['ward'])[0];
-            // $relations = $override->get('relation', 'id', $client['relation'])[0];
             $pid = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
 
             ?>
@@ -10765,8 +10761,9 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/clients/validate_required_radio_checkboxes.js"></script>  -->
 
     <!-- SCREENING Js -->
-    <script src="myjs/add/screening/conset.js"></script>
-    <script src="myjs/add/screening/art.js"></script>
+         <script src="js/screening/screening.js"></script>
+    <!-- <script src="myjs/add/screening/conset.js"></script>
+    <script src="myjs/add/screening/art.js"></script> -->
 
     <!-- Enrollment Js -->
     <script src="myjs/add/enrollment/other_diseases.js"></script>
