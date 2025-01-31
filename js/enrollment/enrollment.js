@@ -75,8 +75,6 @@ function validateEnrollmentDate() {
 
         if (enrollmentDate < window.consentDate) {
             enrollmentDateError.textContent = "Enrollment date cannot be less than consent date.";
-            // if (enrollmentDate < window.screeningDate || enrollmentDate < window.consentDate) {
-            //     enrollmentDateError.textContent = "Enrollment date cannot be less than screening or consent date.";
             return false;
         } else if (enrollmentDate > new Date()) {
             enrollmentDateError.textContent = "Enrollment date cannot be more than today's date.";
@@ -89,9 +87,96 @@ function validateEnrollmentDate() {
     return false;
 }
 
+// Function to validate date_information_collected
+function validateInformationDate() {
+    const informationDateInput = document.getElementById('date_information_collected');
+    const enrollmentDateInput = document.getElementById('enrollment_date');
+    const informationDateError = document.getElementById('information_date_error');
+    const today = new Date(); // Get current date
+
+    if (informationDateInput.value && enrollmentDateInput.value) {
+        const informationDate = new Date(informationDateInput.value);
+        const enrollmentDate = new Date(enrollmentDateInput.value);
+
+        // Reset error message
+        informationDateError.textContent = '';
+
+        // Check if information date is in the future
+        if (informationDate > today) {
+            informationDateError.textContent = "Information collected date cannot be in the future.";
+            return false;
+        }
+        // Check if information date is before enrollment date
+        else if (informationDate < enrollmentDate) {
+            informationDateError.textContent = "Information collected date cannot be earlier than enrollment date.";
+            return false;
+        }
+        // Valid case
+        else {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const yearInput = document.getElementById("tx_year");
+    const monthInput = document.getElementById("tx_month");
+    const unknownYearCheckbox = document.getElementById("tx_unknown_year");
+    const unknownMonthCheckbox = document.getElementById("tx_unknown_month");
+
+    function toggleInputs() {
+        if (unknownYearCheckbox.checked) {
+            // Disable and clear both inputs when Year is unknown
+            yearInput.disabled = true;
+            yearInput.value = '';
+            monthInput.disabled = true;
+            monthInput.value = '';
+            unknownMonthCheckbox.checked = false;
+            unknownMonthCheckbox.disabled = true;
+        } else {
+            // Enable Year input and allow toggling Month
+            yearInput.disabled = false;
+            unknownMonthCheckbox.disabled = false;
+
+            if (unknownMonthCheckbox.checked) {
+                monthInput.disabled = true;
+                monthInput.value = '';
+            } else {
+                monthInput.disabled = false;
+            }
+        }
+    }
+
+    // Event Listeners
+    unknownYearCheckbox.addEventListener("change", function () {
+        toggleInputs();
+        // Clear year input when checkbox is unchecked
+        if (!this.checked) {
+            yearInput.value = '';
+        }
+    });
+
+    unknownMonthCheckbox.addEventListener("change", function () {
+        monthInput.disabled = this.checked;
+        // Clear month input when checkbox is unchecked
+        if (!this.checked) {
+            monthInput.value = '';
+        }
+    });
+
+    // Initialize on page load
+    toggleInputs();
+});
+
 // Form submission validation
 document.getElementById('enrollment').addEventListener('submit', function (event) {
     if (!validateEnrollmentDate()) {
+        event.preventDefault();
+    }
+
+    if (!validateInformationDate()) {
         event.preventDefault();
     }
 
