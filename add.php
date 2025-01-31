@@ -8825,12 +8825,6 @@ if ($user->isLoggedIn()) {
                                         <div class="card-footer">
                                             <a href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>"
                                                 class="btn btn-default">Back</a>
-                                            <input type="hidden" id="sid" name="<?= $_GET['sid']; ?>"
-                                                value="<?= $clients['screening_date'] ?>">
-                                            <input type="hidden" id="screeningDate" name="screeningDate"
-                                                value="<?= $clients['screening_date'] ?>">
-                                            <input type="hidden" id="consentDate" name="consentDate"
-                                                value="<?= $clients['conset_date'] ?>">
                                             <input type="submit" name="add_enrollment_form" value="Submit"
                                                 class="btn btn-primary">
                                         </div>

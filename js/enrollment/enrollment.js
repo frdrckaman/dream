@@ -73,8 +73,10 @@ function validateEnrollmentDate() {
     if (enrollmentDateInput.value && window.screeningDate && window.consentDate) {
         const enrollmentDate = new Date(enrollmentDateInput.value);
 
-        if (enrollmentDate < window.screeningDate || enrollmentDate < window.consentDate) {
-            enrollmentDateError.textContent = "Enrollment date cannot be less than screening or consent date.";
+        if (enrollmentDate < window.consentDate) {
+            enrollmentDateError.textContent = "Enrollment date cannot be less than consent date.";
+            // if (enrollmentDate < window.screeningDate || enrollmentDate < window.consentDate) {
+            //     enrollmentDateError.textContent = "Enrollment date cannot be less than screening or consent date.";
             return false;
         } else if (enrollmentDate > new Date()) {
             enrollmentDateError.textContent = "Enrollment date cannot be more than today's date.";
