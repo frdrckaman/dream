@@ -1818,13 +1818,11 @@ if ($user->isLoggedIn()) {
                                                     <td>
                                                         <?php if ($override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                             <a href="add.php?id=16&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                role=" button" class="btn btn-info"> Update Participant
-                                                                Enrolment Data</a>&nbsp;&nbsp; <br><br>
+                                                                role=" button" class="btn btn-info"> Update Enrolment Form</a>&nbsp;&nbsp; <br><br>
 
                                                         <?php } else { ?>
                                                             <a href="add.php?id=16&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                role=" button" class="btn btn-warning"> Add Participant
-                                                                Enrolment Data </a>&nbsp;&nbsp; <br><br>
+                                                                role=" button" class="btn btn-warning"> Add Enrolment Form </a>&nbsp;&nbsp; <br><br>
 
                                                         <?php } ?>
 
@@ -1832,14 +1830,12 @@ if ($user->isLoggedIn()) {
 
                                                             <?php if ($override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                                 <a href="add.php?id=11&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                    role=" button" class="btn btn-info"> Update Respiratory Sample
-                                                                    Data ( Laboratory form )
+                                                                    role=" button" class="btn btn-info"> Update Laboratory form
                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } else { ?>
                                                                 <a href="add.php?id=11&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                    role=" button" class="btn btn-warning"> Add Respiratory Sample
-                                                                    Data ( Laboratory form )
+                                                                    role=" button" class="btn btn-warning"> Add Laboratory form
                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } ?>
@@ -1852,23 +1848,20 @@ if ($user->isLoggedIn()) {
                                                                 <?php if ($override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                                     <a href="add.php?id=12&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                         role=" button" class="btn btn-info">
-                                                                        Update Diagnostic Test
-                                                                        Non-respiratory Samples Data ( Laboratory form )
+                                                                        Update Laboratory form 2
                                                                     </a>&nbsp;&nbsp; <br><br>
 
                                                                 <?php } else { ?>
                                                                     <a href="add.php?id=12&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                         role=" button" class="btn btn-warning">
-                                                                        Add Diagnostic Test
-                                                                        Non-respiratory Samples Data ( Laboratory form )
+                                                                        Add Diagnostic Laboratory form 2
                                                                     </a>&nbsp;&nbsp; <br><br>
 
                                                                 <?php } ?>
 
                                                                 <?php
                                                             } else { ?>
-                                                                <a href="#" role=" button" class="btn btn-default"> Diagnostic Test
-                                                                    Non-respiratory Samples Data ( Laboratory form ) ( Not
+                                                                <a href="#" role=" button" class="btn btn-default">Laboratory form 2 ( Not
                                                                     Applicable For this Patient)
                                                                 </a>&nbsp;&nbsp; <br><br>
                                                             <?php }
@@ -1877,23 +1870,23 @@ if ($user->isLoggedIn()) {
                                                             <?php if ($override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                                 <a href="add.php?id=14&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                     role=" button" class="btn btn-info"> Update Diagnostic Test DST
-                                                                    Data </a>&nbsp;&nbsp; <br><br>
+                                                                    Form </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } else { ?>
                                                                 <a href="add.php?id=14&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                     role=" button" class="btn btn-warning"> Add Diagnostic Test DST
-                                                                    Data </a>&nbsp;&nbsp; <br><br>
+                                                                    Form </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } ?>
 
                                                             <?php if ($override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                                 <a href="add.php?id=15&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                    role=" button" class="btn btn-info"> Update Diagnosis Data
+                                                                    role=" button" class="btn btn-info"> Update Diagnosis Form
                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } else { ?>
                                                                 <a href="add.php?id=15&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                    role=" button" class="btn btn-warning"> Add Diagnosis Data
+                                                                    role=" button" class="btn btn-warning"> Add Diagnosis Form
                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } ?>

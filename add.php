@@ -8116,7 +8116,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="dr_ds1">
+                                                <div class="col-sm-4" id="dr_ds">
                                                     <label>10c. Was it DR or DS TB </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
