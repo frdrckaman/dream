@@ -10577,6 +10577,104 @@ if ($user->isLoggedIn()) {
             </div>
             <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 18) { ?>
+                        <?php
+            $costing = $override->getData('users')[0];
+
+            ?>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <?php if ($costing) { ?>
+                                    <h1>Update New validations Data (PID :<?= $costing['id'] ?>)</h1>
+                                <?php } else { ?>
+                                    <h1>Add validations Data (PID :<?= $costing['id'] ?>)</h1>
+                                <?php } ?>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a
+                                            href="info.php?id=17">
+                                            < Back</a>
+                                    </li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item"><a href="info.php?id=17">
+                                            Go to Users list > </a>
+                                    </li>&nbsp;&nbsp;
+                                    <?php if (!$costing) { ?>
+                                        <li class="breadcrumb-item active">Add New Users</li>
+                                    <?php } else { ?>
+                                        <li class="breadcrumb-item active">Update Users</li>
+                                    <?php } ?>
+                                </ol>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- right column -->
+                            <div class="col-md-12">
+                                <!-- general form elements disabled -->
+                                <div class="card card-warning">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Users Form</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <form id="userForm">
+                                        <div class="card-body">
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="mb-2">
+                                                        <label for="date_collect" class="form-label">Name</label>
+                                                        <input type="text" value="<?php if ($costing['name']) {
+                                                            print_r($costing['name']);
+                                                        } ?>" id="name" name="name"
+                                                            class="form-control"
+                                                            placeholder="Enter here" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label for="date_receictrl" class="form-label">email</label>
+                                                        <input type="email" value="<?php if ($costing['email']) {
+                                                            print_r($costing['email']);
+                                                        } ?>" id="email" name="email"
+                                                             class="form-control"
+                                                            placeholder="Enter here" required />
+                                                    </div>
+                                                </div>
+                                            </div>                                                                                       
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            <a href="info.php?id=17"
+                                                class="btn btn-default">Back</a>
+                                            <!-- <input type="submit" name="add_Offline" value="Submit"
+                                                class="btn btn-primary"> -->
+                                                        <button type="submit">Submit</button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!--/.col (right) -->
+                        </div>
+                        <!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </section>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
         <?php } elseif ($_GET['id'] == 19) { ?>
         <?php } elseif ($_GET['id'] == 20) { ?>
         <?php } elseif ($_GET['id'] == 21) { ?>
@@ -10631,6 +10729,7 @@ if ($user->isLoggedIn()) {
 
     <!-- SCREENING Js -->
     <script src="js/screening/screening.js"></script>
+    <script src="js/screening/offlineMode.js"></script>
 
     <!-- Enrollment Js -->
     <script src="js/enrollment/enrollment.js"></script>

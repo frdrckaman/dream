@@ -29,6 +29,7 @@ if ($user->isLoggedIn()) {
     $sites = $override->getNo('sites');
     $position = $override->getNo('position');
 
+    $Offline_Users = $override->getNo('users');
 
     $staff_all = $override->getNo('user');
     $staff_active = $override->getCount('user', 'status', 1);
@@ -325,6 +326,33 @@ if ($user->isLoggedIn()) {
                                     <i class="far fa-circle nav-icon"></i>
                                     <span class="badge badge-info right"><?= $validations; ?></span>
                                     <p>Total Validations</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <span class="badge badge-info right"><?= $validations; ?></span>
+                            <p>
+                                Test Offline Mode <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="add.php?id=18" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Add
+                                        <span class="right badge badge-danger">New User</span>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="info.php?id=17" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"><?= $Offline_Users; ?></span>
+                                    <p>Total Users</p>
                                 </a>
                             </li>
                         </ul>
