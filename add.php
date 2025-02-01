@@ -8167,16 +8167,16 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>10f. If LTF for how long the participant received TB
-                                                                treatment?</label>
+                                                                treatment? ( Months) </label>
 
                                                             <!-- Row for Month and Year -->
                                                             <div class="row">
                                                                 <!-- Month Input -->
                                                                 <div class="col-sm-12">
-                                                                    <label for="tx_month" class="form-label">Months</label>
+                                                                    <!-- <label for="tx_month" class="form-label"></label> -->
                                                                     <input class="form-control" type="number"
                                                                         name="ltf_months" id="ltf_months"
-                                                                        placeholder="Type Month..." min="1" max="12" value="<?php if ($clients['ltf_months']) {
+                                                                        placeholder="Type Month..." min="1" max="10000" value="<?php if ($clients['ltf_months']) {
                                                                             print_r($clients['ltf_months']);
                                                                         } ?>" />
                                                                 </div>
@@ -8227,20 +8227,19 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-6" id="regimen_months1">
+                                                <div class="col-sm-6" id="regimen_months">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>10g. How long was the treatment regimen</label>
+                                                            <label>10h. How long was the treatment regimen( Months) </label>
 
                                                             <!-- Row for Month and Year -->
                                                             <div class="row">
                                                                 <!-- Month Input -->
                                                                 <div class="col-sm-12">
-                                                                    <label for="regimen_months"
-                                                                        class="form-label">Months</label>
+                                                                    <!-- <label for="regimen_months" class="form-label"></label> -->
                                                                     <input class="form-control" type="number"
                                                                         name="regimen_months" id="regimen_months"
-                                                                        placeholder="Type Month..." min="1" max="12" value="<?php if ($clients['regimen_months']) {
+                                                                        placeholder="Type Month..." min="1" max="10000" value="<?php if ($clients['regimen_months']) {
                                                                             print_r($clients['regimen_months']);
                                                                         } ?>" />
                                                                 </div>
@@ -8263,7 +8262,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-6" id="tb_otcome1_1_1_1">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>10h. What was the treatment outcome?</label>
+                                                            <label>10i. What was the treatment outcome?</label>
                                                             <select id="tb_otcome" name="tb_otcome" class="form-control">
                                                                 <?php $tb_otcome = $override->get('tb_otcome', 'id', $clients['tb_otcome'])[0]; ?>
                                                                 <option value="<?= $tb_otcome['id'] ?>"><?php if ($clients['tb_otcome']) {
@@ -8292,7 +8291,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-3">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>11. HIV status </label>
@@ -8314,69 +8313,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="immunosuppressive">
-                                                    <label>12(a). Do you have other immunosuppressive diseases?</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no_unknown', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="immunosuppressive"
-                                                                        id="immunosuppressive<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($clients['immunosuppressive'] == $value['id']) {
-                                                                              echo 'checked' . ' ' . 'required';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('immunosuppressive')">Unset</button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4" id="immunosuppressive_diseases">
-                                                    <label>12(b). If yes, Select relevant immunosuppressive diseases ( Tick
-                                                        all that apply)</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('immunosuppressive_diseases', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        name="immunosuppressive_diseases[]"
-                                                                        id="immunosuppressive_diseases<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php foreach (explode(',', $clients['immunosuppressive_diseases']) as $values) {
-                                                                              if ($values == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              }
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                            <label id="immunosuppressive_specify1">12(c). If Other
-                                                                specify</label>
-                                                            <input class="form-control" type="text"
-                                                                name="immunosuppressive_specify"
-                                                                id="immunosuppressive_specify" placeholder="Type here..."
-                                                                value="<?php if ($clients['immunosuppressive_specify']) {
-                                                                    print_r($clients['immunosuppressive_specify']);
-                                                                } ?>" />
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <hr>
-
-                                            <div class="row">
-                                                <div class="col-sm-6" id="other_diseases">
-                                                    <label>13(a). Other relevant diseases/medical conditions </label>
+                                                <div class="col-sm-3" id="other_diseases">
+                                                    <label>11. Any other relevant diseases/conditions ?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8393,20 +8331,19 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('other_diseases')">Unset</button>
                                                     </div>
-                                                    <button type="button"
-                                                        onclick="unsetRadio('other_diseases')">Unset</button>
-
-                                                </div>
-
+                                                </div>                                             
+                                                
                                                 <div class="col-sm-6" id="diseases_medical">
-                                                    <label>13(b). If yes, Select relevant diseases/medical conditions ( Tick
-                                                        all that apply)
+                                                    <label>12. If yes, Select relevant diseases/medical conditions
+                                                         ( Tick all that apply)
                                                     </label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <?php foreach ($override->get('diseases_medical', 'status', 1) as $value) { ?>
+                                                            <?php foreach ($override->get('diseases_conditions', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="checkbox"
                                                                         name="diseases_medical[]"
@@ -8420,9 +8357,8 @@ if ($user->isLoggedIn()) {
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <label id="diseases_specify1">13(c). If Other specify</label>
                                                             <input class="form-control" type="text" name="diseases_specify"
-                                                                id="diseases_specify" placeholder="Type here..." value="<?php if ($clients['diseases_specify']) {
+                                                                id="diseases_specify" placeholder="If Other specify here..." value="<?php if ($clients['diseases_specify']) {
                                                                     print_r($clients['diseases_specify']);
                                                                 } ?>" />
                                                         </div>
@@ -8521,208 +8457,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr>
 
-                                            <div class="row">
-                                                <div class="col-sm-4" id="other_samples">
-                                                    <label>15a. Were any other diagnostic samples requested? </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="other_samples"
-                                                                        id="other_samples<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($clients['other_samples'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                    <button type="button"
-                                                        onclick="unsetRadio('other_samples')">Unset</button>
-
-                                                </div>
-
-                                                <div class="col-sm-4" id="sputum_samples">
-                                                    <label>15b. Tick all that apply and fill date for each sample ticked
-                                                    </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('sputum_samples', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        name="sputum_samples[]"
-                                                                        id="sputum_samples<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php foreach (explode(',', $clients['sputum_samples']) as $values) {
-                                                                              if ($values == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              }
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4" id="sputum_samples_date1">
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>15c. Specify Other and Date</label>
-                                                            <input class="form-control" type="text"
-                                                                name="sputum_samples_other" id="sputum_samples_other" value="<?php if ($clients['sputum_samples_other']) {
-                                                                    print_r($clients['sputum_samples_other']);
-                                                                } ?>" placeholder="Write here..." />
-
-                                                            <br>
-
-                                                            <input class="form-control" type="date"
-                                                                name="sputum_samples_date" id="sputum_samples_date" value="<?php if ($clients['sputum_samples_date']) {
-                                                                    print_r($clients['sputum_samples_date']);
-                                                                } ?>" />
-
-
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-
-                                            <div class="row">
-                                                <div class="col-sm-4" id="pleural_fluid_date1">
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>15d. Pleural fluid Date</label>
-                                                            <input class="form-control" type="date"
-                                                                name="pleural_fluid_date" id="pleural_fluid_date" value="<?php if ($clients['pleural_fluid_date']) {
-                                                                    print_r($clients['pleural_fluid_date']);
-                                                                } ?>" />
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-sm-4" id="csf_date1">
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>15e. Cerebral spinal fluid (CSF) Date</label>
-                                                            <input class="form-control" type="date" name="csf_date"
-                                                                id="csf_date" value="<?php if ($clients['csf_date']) {
-                                                                    print_r($clients['csf_date']);
-                                                                } ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4" id="peritoneal_fluid_date1">
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>15. Peritoneal fluid Date</label>
-                                                            <input class="form-control" type="date"
-                                                                name="peritoneal_fluid_date" id="peritoneal_fluid_date"
-                                                                value="<?php if ($clients['peritoneal_fluid_date']) {
-                                                                    print_r($clients['peritoneal_fluid_date']);
-                                                                } ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
-
-                                            <div class="row">
-
-                                                <div class="col-sm-4" id="pericardial_fluid_date1">
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>15f. Pericardial fluid Date</label>
-                                                            <input class="form-control" type="date"
-                                                                name="pericardial_fluid_date" id="pericardial_fluid_date"
-                                                                value="<?php if ($clients['pericardial_fluid_date']) {
-                                                                    print_r($clients['pericardial_fluid_date']);
-                                                                } ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4" id="lymph_node_aspirate_date1">
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>15g. Lymph node aspirate Date</label>
-                                                            <input class="form-control" type="date"
-                                                                name="lymph_node_aspirate_date"
-                                                                id="lymph_node_aspirate_date" value="<?php if ($clients['lymph_node_aspirate_date']) {
-                                                                    print_r($clients['lymph_node_aspirate_date']);
-                                                                } ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="col-sm-4" id="stool_date1"> -->
-                                                <!-- radio -->
-                                                <!-- <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>15h. Stool Date</label>
-                                                            <input class="form-control" type="date" name="stool_date"
-                                                                id="stool_date" value="<?php if ($clients['stool_date']) {
-                                                                    print_r($clients['stool_date']);
-                                                                } ?>" />
-
-                                                        </div>
-                                                    </div>
-                                                </div> -->
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-
-                                                <div class="col-sm-6" id="chest_x_ray">
-                                                    <label>16a. Was chest X-ray requested? </label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="chest_x_ray" id="chest_x_ray<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($clients['chest_x_ray'] == $value['id']) {
-                                                                              echo 'checked' . ' ' . 'required';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('chest_x_ray')">Unset</button>
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-6" id="chest_x_ray_date1">
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>16b.If yes,Specify Date chest X-ray requested </label>
-                                                            <input class="form-control" type="date" name="chest_x_ray_date"
-                                                                id="chest_x_ray_date" value="<?php if ($clients['chest_x_ray_date']) {
-                                                                    print_r($clients['chest_x_ray_date']);
-                                                                } ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
                                             <hr>
                                             <div class="row">
 
