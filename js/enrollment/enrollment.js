@@ -170,6 +170,145 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleInputs();
 });
 
+
+// Function to toggle visibility and required attributes based on tx_previous selection
+document.addEventListener("DOMContentLoaded", function () {
+    const txPreviousInputs = document.querySelectorAll("input[name='tx_previous']");
+    const conditionalFields = [
+        "tx_number1", "dr_ds", "tb_category", "ltf_months_section",
+        "tb_regimen", "regimen_months", "tb_otcome1_1_1_1"
+    ];
+    const requiredInputs = document.querySelectorAll(
+        "#tx_month, #tx_year, input[name='dr_ds'], input[name='tb_category'], " +
+        "#ltf_months, input[name='tb_regimen'], #regimen_months, #tb_otcome"
+    );
+
+    function toggleFields() {
+        const isTxPreviousYes = document.querySelector("input[name='tx_previous']:checked")?.value === "1";
+
+        conditionalFields.forEach(id => {
+            const field = document.getElementById(id);
+            if (field) {
+                field.style.display = isTxPreviousYes ? "block" : "none";
+            }
+        });
+
+        requiredInputs.forEach(input => {
+            input.required = isTxPreviousYes;
+        });
+    }
+
+    txPreviousInputs.forEach(input => {
+        input.addEventListener("change", toggleFields);
+    });
+
+    toggleFields(); // Initialize on page load
+});
+
+
+// Function to toggle visibility of fields based on other_diseases selection
+document.addEventListener("DOMContentLoaded", function () {
+    const otherDiseasesInputs = document.querySelectorAll("input[name='other_diseases']");
+    const diseasesMedicalSection = document.getElementById("diseases_medical_section");
+    const diseasesMedicalInputs = document.querySelectorAll("input[name='diseases_medical']");
+    const diseasesSpecifyInput = document.getElementById("diseases_specify");
+
+    function toggleFields() {
+        const selectedValue = document.querySelector("input[name='other_diseases']:checked")?.value;
+        const isOtherChecked = [...diseasesMedicalInputs].some(input => input.checked && input.value === "Other");
+
+        // Show diseases_medical_section if "Yes" is selected, hide otherwise
+        if (selectedValue === "Yes") {
+            diseasesMedicalSection.style.display = "block";
+        } else {
+            diseasesMedicalSection.style.display = "none";
+            diseasesSpecifyInput.style.display = "none";
+            diseasesSpecifyInput.required = false;
+            diseasesSpecifyInput.value = ""; // Clear input when hidden
+        }
+
+        // Show/hide diseases_specify based on "Other" checkbox selection
+        if (isOtherChecked) {
+            diseasesSpecifyInput.style.display = "block";
+            diseasesSpecifyInput.required = true;
+        } else {
+            diseasesSpecifyInput.style.display = "none";
+            diseasesSpecifyInput.required = false;
+            diseasesSpecifyInput.value = ""; // Clear input when hidden
+        }
+    }
+
+    otherDiseasesInputs.forEach(input => {
+        input.addEventListener("change", toggleFields);
+    });
+
+    diseasesMedicalInputs.forEach(input => {
+        input.addEventListener("change", toggleFields);
+    });
+
+    toggleFields(); // Initialize on page load
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const tbCategoryInputs = document.querySelectorAll("input[name='tb_category']");
+    const ltfMonthsSection = document.getElementById("ltf_months_section");
+    const tbCategorySpecifyInput = document.getElementById("tb_category_specify");
+
+    function toggleTbCategoryFields() {
+        const selectedValue = document.querySelector("input[name='tb_category']:checked")?.value;
+
+        // Show ltf_months_section if tb_category is 3
+        if (selectedValue === "3") {
+            ltfMonthsSection.style.display = "block";
+        } else {
+            ltfMonthsSection.style.display = "none";
+        }
+
+        // Show tb_category_specify if tb_category is 96 and make it required
+        if (selectedValue === "96") {
+            tbCategorySpecifyInput.style.display = "block";
+            tbCategorySpecifyInput.required = true;
+        } else {
+            tbCategorySpecifyInput.style.display = "none";
+            tbCategorySpecifyInput.required = false;
+            tbCategorySpecifyInput.value = ""; // Clear input when hidden
+        }
+    }
+
+    tbCategoryInputs.forEach(input => {
+        input.addEventListener("change", toggleTbCategoryFields);
+    });
+
+    toggleTbCategoryFields(); // Initialize on page load
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const tbRegimenInputs = document.querySelectorAll("input[name='tb_regimen']");
+    const tbRegimenSpecifyInput = document.getElementById("tb_regimen_1_specify");
+
+    function toggleTbRegimenSpecify() {
+        const selectedValue = document.querySelector("input[name='tb_regimen']:checked")?.value;
+
+        if (selectedValue === "7") {
+            tbRegimenSpecifyInput.style.display = "block";
+            tbRegimenSpecifyInput.required = true;
+        } else {
+            tbRegimenSpecifyInput.style.display = "none";
+            tbRegimenSpecifyInput.required = false;
+            tbRegimenSpecifyInput.value = ""; // Clear input when hidden
+        }
+    }
+
+    tbRegimenInputs.forEach(input => {
+        input.addEventListener("change", toggleTbRegimenSpecify);
+    });
+
+    toggleTbRegimenSpecify(); // Initialize on page load
+});
+
+
 // Form submission validation
 document.getElementById('enrollment').addEventListener('submit', function (event) {
     if (!validateEnrollmentDate()) {
