@@ -456,29 +456,12 @@ if ($user->isLoggedIn()) {
                                 'regimen_months_unknown' => Input::get('regimen_months_unknown'),
                                 'tb_otcome' => Input::get('tb_otcome'),
                                 'hiv_status' => Input::get('hiv_status'),
-                                'immunosuppressive' => Input::get('immunosuppressive'),
-                                'diseases_medical' => $diseases_medical,
-                                'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
                                 'other_diseases' => Input::get('other_diseases'),
-                                'immunosuppressive_diseases' => $immunosuppressive_diseases,
+                                'diseases_medical' => $diseases_medical,
                                 'diseases_specify' => Input::get('diseases_specify'),
                                 'sputum_collected' => Input::get('sputum_collected'),
-                                'dst_sample_date' => Input::get('dst_sample_date'),
-                                'dst_sample_type' => Input::get('dst_sample_type'),
-                                'sequencing_sample_date' => Input::get('sequencing_sample_date'),
-                                'sequencing_sample_type' => Input::get('sequencing_sample_type'),
-                                'other_samples' => Input::get('other_samples'),
-                                'sputum_samples' => $sputum_samples,
-                                'pleural_fluid_date' => Input::get('pleural_fluid_date'),
-                                'csf_date' => Input::get('csf_date'),
-                                'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
-                                'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
-                                'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
-                                'stool_date' => Input::get('stool_date'),
-                                'sputum_samples_other' => Input::get('sputum_samples_other'),
-                                'sputum_samples_date' => Input::get('sputum_samples_date'),
-                                'chest_x_ray' => Input::get('chest_x_ray'),
-                                'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                                'sputum_date' => Input::get('sputum_date'),
+                                'sputum_reasons' => Input::get('sputum_reasons'),
                                 'enrollment_completed' => Input::get('enrollment_completed'),
                                 'enrollment_completed_by' => $user->data()->id,
                                 'enrollment_completed_date' => Input::get('enrollment_completed_date'),
@@ -522,29 +505,12 @@ if ($user->isLoggedIn()) {
                                 'regimen_months' => Input::get('regimen_months'),
                                 'tb_otcome' => Input::get('tb_otcome'),
                                 'hiv_status' => Input::get('hiv_status'),
-                                'immunosuppressive' => Input::get('immunosuppressive'),
-                                'immunosuppressive_diseases' => $immunosuppressive_diseases,
-                                'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
                                 'other_diseases' => Input::get('other_diseases'),
                                 'diseases_medical' => $diseases_medical,
                                 'diseases_specify' => Input::get('diseases_specify'),
                                 'sputum_collected' => Input::get('sputum_collected'),
-                                'dst_sample_date' => Input::get('dst_sample_date'),
-                                'dst_sample_type' => Input::get('dst_sample_type'),
-                                'sequencing_sample_date' => Input::get('sequencing_sample_date'),
-                                'sequencing_sample_type' => Input::get('sequencing_sample_type'),
-                                'other_samples' => Input::get('other_samples'),
-                                'sputum_samples' => $sputum_samples,
-                                'pleural_fluid_date' => Input::get('pleural_fluid_date'),
-                                'csf_date' => Input::get('csf_date'),
-                                'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
-                                'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
-                                'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
-                                'stool_date' => Input::get('stool_date'),
-                                'sputum_samples_other' => Input::get('sputum_samples_other'),
-                                'sputum_samples_date' => Input::get('sputum_samples_date'),
-                                'chest_x_ray' => Input::get('chest_x_ray'),
-                                'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                                'sputum_date' => Input::get('sputum_date'),
+                                'sputum_reasons' => Input::get('sputum_reasons'),
                                 'enrollment_completed' => Input::get('enrollment_completed'),
                                 'enrollment_completed_by' => $user->data()->id,
                                 'enrollment_completed_date' => Input::get('enrollment_completed_date'),
@@ -594,29 +560,12 @@ if ($user->isLoggedIn()) {
                                 'regimen_months' => Input::get('regimen_months'),
                                 'tb_otcome' => Input::get('tb_otcome'),
                                 'hiv_status' => Input::get('hiv_status'),
-                                'immunosuppressive' => Input::get('immunosuppressive'),
-                                'immunosuppressive_diseases' => $immunosuppressive_diseases,
-                                'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
                                 'other_diseases' => Input::get('other_diseases'),
                                 'diseases_medical' => $diseases_medical,
                                 'diseases_specify' => Input::get('diseases_specify'),
                                 'sputum_collected' => Input::get('sputum_collected'),
-                                'dst_sample_date' => Input::get('dst_sample_date'),
-                                'dst_sample_type' => Input::get('dst_sample_type'),
-                                'sequencing_sample_date' => Input::get('sequencing_sample_date'),
-                                'sequencing_sample_type' => Input::get('sequencing_sample_type'),
-                                'other_samples' => Input::get('other_samples'),
-                                'sputum_samples' => $sputum_samples,
-                                'pleural_fluid_date' => Input::get('pleural_fluid_date'),
-                                'csf_date' => Input::get('csf_date'),
-                                'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
-                                'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
-                                'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
-                                'stool_date' => Input::get('stool_date'),
-                                'sputum_samples_other' => Input::get('sputum_samples_other'),
-                                'sputum_samples_date' => Input::get('sputum_samples_date'),
-                                'chest_x_ray' => Input::get('chest_x_ray'),
-                                'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                                'sputum_date' => Input::get('sputum_date'),
+                                'sputum_reasons' => Input::get('sputum_reasons'),
                                 'enrollment_completed' => Input::get('enrollment_completed'),
                                 'enrollment_completed_by' => $user->data()->id,
                                 'enrollment_completed_date' => Input::get('enrollment_completed_date'),
@@ -666,29 +615,12 @@ if ($user->isLoggedIn()) {
                                 'regimen_months' => Input::get('regimen_months'),
                                 'tb_otcome' => Input::get('tb_otcome'),
                                 'hiv_status' => Input::get('hiv_status'),
-                                'immunosuppressive' => Input::get('immunosuppressive'),
-                                'immunosuppressive_diseases' => $immunosuppressive_diseases,
-                                'immunosuppressive_specify' => Input::get('immunosuppressive_specify'),
                                 'other_diseases' => Input::get('other_diseases'),
                                 'diseases_medical' => $diseases_medical,
                                 'diseases_specify' => Input::get('diseases_specify'),
                                 'sputum_collected' => Input::get('sputum_collected'),
-                                'dst_sample_date' => Input::get('dst_sample_date'),
-                                'dst_sample_type' => Input::get('dst_sample_type'),
-                                'sequencing_sample_date' => Input::get('sequencing_sample_date'),
-                                'sequencing_sample_type' => Input::get('sequencing_sample_type'),
-                                'other_samples' => Input::get('other_samples'),
-                                'sputum_samples' => $sputum_samples,
-                                'pleural_fluid_date' => Input::get('pleural_fluid_date'),
-                                'csf_date' => Input::get('csf_date'),
-                                'peritoneal_fluid_date' => Input::get('peritoneal_fluid_date'),
-                                'pericardial_fluid_date' => Input::get('pericardial_fluid_date'),
-                                'lymph_node_aspirate_date' => Input::get('lymph_node_aspirate_date'),
-                                'stool_date' => Input::get('stool_date'),
-                                'sputum_samples_other' => Input::get('sputum_samples_other'),
-                                'sputum_samples_date' => Input::get('sputum_samples_date'),
-                                'chest_x_ray' => Input::get('chest_x_ray'),
-                                'chest_x_ray_date' => Input::get('chest_x_ray_date'),
+                                'sputum_date' => Input::get('sputum_date'),
+                                'sputum_reasons' => Input::get('sputum_reasons'),
                                 'enrollment_completed' => Input::get('enrollment_completed'),
                                 'enrollment_completed_by' => $user->data()->id,
                                 'enrollment_completed_date' => Input::get('enrollment_completed_date'),
@@ -8378,9 +8310,8 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
-                                                <div class="col-sm-6" id="sputum_collected">
-                                                    <label>14(a). After TB was confirmed by a rapid molecular test, were
-                                                        additional sputum sample(s) collected?</label>
+                                                <div class="col-sm-9" id="sputum_collected">
+                                                    <label>14(a).After TB was confirmed by a rapid molecular test, was an additional sputum sample collected?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -8395,67 +8326,42 @@ if ($user->isLoggedIn()) {
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
-                                                            <?php } ?>
-                                                        </div>
+                                                            <?php } ?>                                                          
+                                                       
                                                     </div>
                                                     <button type="button"
                                                         onclick="unsetRadio('sputum_collected')">Unset</button>
+                                                         </div>
+                                                         <br>
+                                                        <textarea class="form-control" name="sputum_reasons" rows="3"
+                                                                placeholder="Type reasons here...">
+                                                         <?php if ($clients['sputum_reasons']) {
+                                                                                                                            print_r($clients['sputum_reasons']);
+                                                                                                                        } ?>
+                                                                                                                </textarea>
 
                                                 </div>
 
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-3">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>14b. Date of respiratory sample collection and sample
-                                                                type</label>
-
+                                                            <label>14b. Date of sputum collection</label>
                                                             <!-- Row for Date and Sample Type Inputs -->
                                                             <div class="row">
                                                                 <!-- DST Sample Date Input -->
                                                                 <div class="col-sm-6">
-                                                                    <label for="dst_sample_date" class="form-label">DST
-                                                                        Sample Date</label>
+                                                                    <!-- <label for="dst_sample_date" class="form-label">DST
+                                                                        Sample Date</label> -->
                                                                     <input class="form-control" type="date" min="2025-01-17"
-                                                                        max="<?= date('Y-m-d'); ?>" name="dst_sample_date"
-                                                                        id="dst_sample_date" value="<?php if ($clients['dst_sample_date']) {
-                                                                            print_r($clients['dst_sample_date']);
+                                                                        max="<?= date('Y-m-d'); ?>" name="sputum_date"
+                                                                        id="sputum_date" value="<?php if ($clients['sputum_date']) {
+                                                                            print_r($clients['sputum_date']);
                                                                         } ?>" />
-
-                                                                    <!-- DST Sample Type Input -->
-                                                                    <!-- <label for="dst_sample_type"
-                                                                        class="form-label mt-2">Sample
-                                                                        Type</label>
-                                                                    <input class="form-control" type="text"
-                                                                        name="dst_sample_type" id="dst_sample_type" value="<?php if ($clients['dst_sample_type']) {
-                                                                            print_r($clients['dst_sample_type']);
-                                                                        } ?>" placeholder="Type Sample Type..." /> -->
-                                                                </div>
-
-                                                                <!-- Sequencing Sample Date Input -->
-                                                                <!-- <div class="col-sm-6" id="sample_date1"> -->
-                                                                <div class="col-sm-6">
-                                                                    <label for="sequencing_sample_date"
-                                                                        class="form-label">Sequencing Sample Date</label>
-                                                                    <input class="form-control" type="date" min="2025-01-17"
-                                                                        max="<?= date('Y-m-d'); ?>"
-                                                                        name="sequencing_sample_date"
-                                                                        id="sequencing_sample_date" value="<?php if ($clients['sequencing_sample_date']) {
-                                                                            print_r($clients['sequencing_sample_date']);
-                                                                        } ?>" />
-
-                                                                    <!-- Sequencing Sample Type Input -->
-                                                                    <!-- <label for="sequencing_sample_type"
-                                                                        class="form-label mt-2">Sample Type</label>
-                                                                    <input class="form-control" type="text"
-                                                                        name="sequencing_sample_type"
-                                                                        id="sequencing_sample_type" value="<?php if ($clients['sequencing_sample_type']) {
-                                                                            print_r($clients['sequencing_sample_type']);
-                                                                        } ?>" placeholder="Type Sample Type..." /> -->
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>                                                
                                             </div>
 
                                             <hr>
