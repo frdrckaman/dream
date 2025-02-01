@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const isNewSampleNo = document.querySelector('input[name="new_sample"]:checked')?.value === "2";
 
         const showFields = ["date_collected", "date_received", "appearance", "sample_volume", "afb_microscopy"];
-        const hideFields = ["sample_reason", "new_sample"];
+        const hideFields = ["other_reason", "new_sample"];
 
         showFields.forEach(id => {
             document.getElementById(id).style.display = isSampleReceived ? "block" : "none";
@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll(`#${id} input`).forEach(input => input.required = !isSampleReceived);
         });
 
-        document.getElementById("sample_reason").style.display = (!isSampleReceived || sampleReasonValue === "96") ? "block" : "none";
-        document.querySelectorAll("#sample_reason input").forEach(input => input.required = (!isSampleReceived || sampleReasonValue === "96"));
+        document.getElementById("other_reason").style.display = (!isSampleReceived || sampleReasonValue === "96") ? "block" : "none";
+        document.querySelectorAll("#other_reason input").forEach(input => input.required = (!isSampleReceived || sampleReasonValue === "96"));
 
         document.getElementById("new_reason").style.display = (!isSampleReceived && isNewSampleNo) ? "block" : "none";
         document.querySelectorAll("#new_reason input").forEach(input => input.required = (!isSampleReceived && isNewSampleNo));

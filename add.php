@@ -4145,9 +4145,9 @@ if ($user->isLoggedIn()) {
                                                         <button type="button"
                                                             onclick="unsetRadio('sample_reason')">Unset</button>
                                                     </div>
-                                                    <input type="text" value="<?php if ($costing['sample_reason_other']) {
-                                                        print_r($costing['sample_reason_other']);
-                                                    } ?>" id="sample_reason" name="sample_reason_other"
+                                                    <input type="text" value="<?php if ($costing['other_reason']) {
+                                                        print_r($costing['other_reason']);
+                                                    } ?>" id="other_reason" name="other_reason"
                                                         class="form-control" placeholder="If No give reasons here" />
                                                 </div>
 
