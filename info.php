@@ -1841,34 +1841,6 @@ if ($user->isLoggedIn()) {
 
                                                             <?php } ?>
 
-
-                                                            <?php
-                                                            if ($override->get3('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'], 'other_samples', 1)) {
-                                                                ?>
-
-                                                                <?php if ($override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
-                                                                    <a href="add.php?id=12&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                        role=" button" class="btn btn-info">
-                                                                        Update Laboratory form 2
-                                                                    </a>&nbsp;&nbsp; <br><br>
-
-                                                                <?php } else { ?>
-                                                                    <a href="add.php?id=12&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                        role=" button" class="btn btn-warning">
-                                                                        Add Diagnostic Laboratory form 2
-                                                                    </a>&nbsp;&nbsp; <br><br>
-
-                                                                <?php } ?>
-
-                                                                <?php
-                                                            } else { ?>
-                                                                <a href="#" role=" button" class="btn btn-default">Laboratory form 2
-                                                                    ( Not
-                                                                    Applicable For this Patient)
-                                                                </a>&nbsp;&nbsp; <br><br>
-                                                            <?php }
-                                                            ?>
-
                                                             <?php if ($override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                                 <a href="add.php?id=14&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                     role=" button" class="btn btn-info"> Update Diagnostic Test DST
