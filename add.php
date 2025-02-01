@@ -4100,7 +4100,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-4" id="sample_received">
+                                                <div class="col-sm-4">
                                                     <label for="sample_received" class="form-label">2. Is at least one
                                                         sputum sample received?</label>
                                                     <!-- radio -->
@@ -4152,7 +4152,7 @@ if ($user->isLoggedIn()) {
                                                         class="form-control" placeholder="If No give reasons here" />
                                                 </div>
 
-                                                <div class="col-sm-4" id="sample_reason">
+                                                <div class="col-sm-4" id="new_sample">
                                                     <label for="tested_this_month" class="form-label">2(d). was a new sample
                                                         collected?</label>
                                                     <!-- radio -->
@@ -4172,16 +4172,16 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                         <button type="button"
-                                                            onclick="unsetRadio('sample_reason')">Unset</button>
+                                                            onclick="unsetRadio('new_sample')">Unset</button>
                                                     </div>
 
-                                                    <input type="text" value="<?php if ($costing['sample_reason_other']) {
-                                                        print_r($costing['sample_reason_other']);
-                                                    } ?>" id="sample_reason_other" name="sample_reason_other"
+                                                    <input type="text" value="<?php if ($costing['new_reason']) {
+                                                        print_r($costing['new_reason']);
+                                                    } ?>" id="new_reason" name="new_reason"
                                                         class="form-control" placeholder="If No give reasons here" />
                                                 </div>
 
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-4" id="date_collected">
                                                     <!-- Common Label -->
                                                     <div class="col-12">
                                                         <label class="form-label">3. Date sample(s) collected?</label>
@@ -4195,7 +4195,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="sample_amount">
+                                                <div class="col-sm-4" id="date_received">
                                                         <label class="form-label">3. Date sample(s) Received?</label>
                                                     <div class="mb-3">
                                                         <input type="date" value="<?php if ($costing['sample_one_date']) {
@@ -4269,8 +4269,6 @@ if ($user->isLoggedIn()) {
                                                             onclick="unsetRadio('afb_microscopy')">Unset</button>
                                                     </div>
                                                 </div>
-
-
                                                 <hr>
 
                                                 <div id="afb_technique_a_1">
