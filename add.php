@@ -4038,9 +4038,9 @@ if ($user->isLoggedIn()) {
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <?php if (!$costing) { ?>
-                                    <h1>Add Respiratory (PID :<?= $screening['pid'] ?>)</h1>
+                                    <h1>Add sputum (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } else { ?>
-                                    <h1>Update Respiratory (PID :<?= $screening['pid'] ?>)</h1>
+                                    <h1>Update sputum (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } ?>
                             </div>
                             <div class="col-sm-6">
@@ -4055,9 +4055,9 @@ if ($user->isLoggedIn()) {
                                             Go to Enrollment list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
-                                        <li class="breadcrumb-item active">Add New Respiratory sample Data</li>
+                                        <li class="breadcrumb-item active">Add New sputum sample</li>
                                     <?php } else { ?>
-                                        <li class="breadcrumb-item active">Update Respiratory sample Data</li>
+                                        <li class="breadcrumb-item active">Update sputum sample</li>
                                     <?php } ?>
                                 </ol>
                             </div>
@@ -4095,14 +4095,14 @@ if ($user->isLoggedIn()) {
                                             <hr>
                                             <div class="card card-warning">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Respiratory sample</h3>
+                                                    <h3 class="card-title">Sputum sample</h3>
                                                 </div>
                                             </div>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-6" id="sample_received">
                                                     <label for="sample_received" class="form-label">2. Is at least one
-                                                        respiratory sample received?</label>
+                                                        sputum sample received?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -4671,32 +4671,6 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <hr>
-
-
-                                            <div class="card card-warning">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">ANY COMENT OR REMARKS</h3>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="row-form clearfix">
-                                                        <!-- select -->
-                                                        <div class="form-group">
-                                                            <label>Remarks / Comments:</label>
-                                                            <textarea class="form-control" name="comments" rows="3"
-                                                                placeholder="Type comments here..."><?php if ($costing['comments']) {
-                                                                    print_r($costing['comments']);
-                                                                } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
