@@ -4122,31 +4122,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                     <button type="button"
                                                         onclick="unsetRadio('sample_received')">Unset</button>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <!-- Common Label -->
-                                                    <div class="col-12">
-                                                        <label class="form-label">3. Date sample(s) collected?</label>
-                                                        <div class="mb-3">
-                                                            <input type="date" value="<?php if ($costing['sample_one_collected_date']) {
-                                                                print_r($costing['sample_one_collected_date']);
-                                                            } ?>" id="sample_one_collected_date"
-                                                                name="sample_one_collected_date" class="form-control"
-                                                                placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4" id="sample_amount">
-                                                        <label class="form-label">3. Date sample(s) Received?</label>
-                                                    <div class="mb-3">
-                                                        <input type="date" value="<?php if ($costing['sample_one_date']) {
-                                                            print_r($costing['sample_one_date']);
-                                                        } ?>" id="sample_one_date" name="sample_one_date"
-                                                            class="form-control" placeholder="Enter here" />
-                                                    </div>
-                                                </div>
+                                                </div>                                                
 
                                                 <div class="col-sm-4" id="sample_reason">
                                                     <label for="tested_this_month" class="form-label">2(c). If no give
@@ -4204,11 +4180,33 @@ if ($user->isLoggedIn()) {
                                                     } ?>" id="sample_reason_other" name="sample_reason_other"
                                                         class="form-control" placeholder="If No give reasons here" />
                                                 </div>
+
+                                                <div class="col-sm-4">
+                                                    <!-- Common Label -->
+                                                    <div class="col-12">
+                                                        <label class="form-label">3. Date sample(s) collected?</label>
+                                                        <div class="mb-3">
+                                                            <input type="date" value="<?php if ($costing['sample_one_collected_date']) {
+                                                                print_r($costing['sample_one_collected_date']);
+                                                            } ?>" id="sample_one_collected_date"
+                                                                name="sample_one_collected_date" class="form-control"
+                                                                placeholder="Enter here" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4" id="sample_amount">
+                                                        <label class="form-label">3. Date sample(s) Received?</label>
+                                                    <div class="mb-3">
+                                                        <input type="date" value="<?php if ($costing['sample_one_date']) {
+                                                            print_r($costing['sample_one_date']);
+                                                        } ?>" id="sample_one_date" name="sample_one_date"
+                                                            class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <hr id="sample_received_hides_new_r">
-                                            <div id="sample_received_hides_new">
-                                                <hr>
+                                            <hr>
                                                 <div class="row">
                                                     <div class="col-4">
                                                         <label for="appearance" class="form-label">7. Appearance</label>
@@ -4506,7 +4504,6 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
 
                                             <hr>
