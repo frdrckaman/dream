@@ -8,24 +8,40 @@ document.addEventListener("DOMContentLoaded", function () {
         const sampleReasonValue = document.querySelector('input[name="sample_reason"]:checked')?.value;
         const isNewSampleNo = document.querySelector('input[name="new_sample"]:checked')?.value === "2";
 
+        // Fields to show when a sample is received
         const showFields = ["date_collected", "date_received", "appearance", "sample_volume", "afb_microscopy"];
-        const hideFields = ["other_reason", "new_sample"];
+        // Fields to hide when a sample is received
+        const hideFields = ["sample_reason", "new_sample"];
 
         showFields.forEach(id => {
-            document.getElementById(id).style.display = isSampleReceived ? "block" : "none";
-            document.querySelectorAll(`#${id} input`).forEach(input => input.required = isSampleReceived);
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.display = isSampleReceived ? "block" : "none";
+                element.querySelectorAll("input").forEach(input => input.required = isSampleReceived);
+            }
         });
 
         hideFields.forEach(id => {
-            document.getElementById(id).style.display = isSampleReceived ? "none" : "block";
-            document.querySelectorAll(`#${id} input`).forEach(input => input.required = !isSampleReceived);
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.display = isSampleReceived ? "none" : "block";
+                element.querySelectorAll("input").forEach(input => input.required = !isSampleReceived);
+            }
         });
 
-        document.getElementById("other_reason").style.display = (!isSampleReceived || sampleReasonValue === "96") ? "block" : "none";
-        document.querySelectorAll("#other_reason input").forEach(input => input.required = (!isSampleReceived || sampleReasonValue === "96"));
+        // Toggle "other_reason" visibility based on sample_reason
+        const otherReasonElement = document.getElementById("other_reason");
+        if (otherReasonElement) {
+            otherReasonElement.style.display = (!isSampleReceived || sampleReasonValue === "96") ? "block" : "none";
+            otherReasonElement.required = (!isSampleReceived || sampleReasonValue === "96");
+        }
 
-        document.getElementById("new_reason").style.display = (!isSampleReceived && isNewSampleNo) ? "block" : "none";
-        document.querySelectorAll("#new_reason input").forEach(input => input.required = (!isSampleReceived && isNewSampleNo));
+        // Toggle "new_reason" visibility based on new_sample
+        const newReasonElement = document.getElementById("new_reason");
+        if (newReasonElement) {
+            newReasonElement.style.display = (!isSampleReceived && isNewSampleNo) ? "block" : "none";
+            newReasonElement.required = (!isSampleReceived && isNewSampleNo);
+        }
     }
 
     sampleReceivedRadios.forEach(radio => radio.addEventListener("change", toggleFields));
