@@ -10316,7 +10316,7 @@ if ($user->isLoggedIn()) {
     <script src="myjs/add/diagnosis/tb_diagnosis_made.js"></script>
 
 
-    <script src="myjs/add/radio.js"></script>
+    <script src="js/radio.js"></script>
 
 
 
