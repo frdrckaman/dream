@@ -190,3 +190,62 @@ document.addEventListener('DOMContentLoaded', function () {
     // Call the function on page load to ensure the correct state is applied
     toggleSections();
 });
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const dateCollectedInput = document.getElementById("date_collected_input");
+    const dateReceivedInput = document.getElementById("date_received_input");
+    const enrollmentDateInput = document.getElementById("enrollment_date_hidded");
+    const dateCollectedError = document.getElementById("date_collected_error");
+    const dateReceivedError = document.getElementById("date_received_error");
+    const form = document.querySelector("form");
+
+    function validateDates() {
+        const dateCollected = new Date(dateCollectedInput.value);
+        const dateReceived = new Date(dateReceivedInput.value);
+        const enrollmentDate = new Date(enrollmentDateInput.value);
+        const today = new Date();
+
+        let isValid = true;
+
+        // Reset errors
+        dateCollectedError.textContent = "";
+        dateReceivedError.textContent = "";
+
+        // Validation: date_collected must not be before enrollment_date
+        if (dateCollected < enrollmentDate) {
+            dateCollectedError.textContent = "Date collected cannot be before enrollment date.";
+            isValid = false;
+        }
+
+        // Validation: date_collected must not be after date_received
+        if (dateCollectedInput.value && dateReceivedInput.value && dateCollected > dateReceived) {
+            dateCollectedError.textContent = "Date collected cannot be after date received.";
+            isValid = false;
+        }
+
+        // Validation: no future dates allowed
+        if (dateCollected > today) {
+            dateCollectedError.textContent = "Date collected cannot be a future date.";
+            isValid = false;
+        }
+        if (dateReceived > today) {
+            dateReceivedError.textContent = "Date received cannot be a future date.";
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    // Add event listeners for validation on input change
+    dateCollectedInput.addEventListener("change", validateDates);
+    dateReceivedInput.addEventListener("change", validateDates);
+
+    // Prevent form submission if validation fails
+    form.addEventListener("submit", function (e) {
+        if (!validateDates()) {
+            e.preventDefault();
+        }
+    });
+});
