@@ -1982,112 +1982,24 @@ if ($user->isLoggedIn()) {
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
 
     <style>
-        .hidden {
-            display: none;
+        .afb-section {
+            border: 2px solid #000;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
         }
 
-
-        #medication_table {
-            border-collapse: collapse;
+        .afb-header {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
-        #medication_table th,
-        #medication_table td {
-            padding: 8px;
-            border: 1px solid #ddd;
+        .afb-subheader {
+            font-weight: bold;
+            margin-bottom: 10px;
         }
-
-        #medication_table th {
-            text-align: left;
-            background-color: #f2f2f2;
-        }
-
-        #medication_table {
-            border-collapse: collapse;
-        }
-
-        #medication_list th,
-        #medication_list td {
-            padding: 8px;
-            border: 1px solid #ddd;
-        }
-
-        #medication_list th {
-            text-align: left;
-            background-color: #f2f2f2;
-        }
-
-        .remove-row {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .remove-row:hover {
-            background-color: #da190b;
-        }
-
-        .edit-row {
-            background-color: #3FF22F;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .edit-row:hover {
-            background-color: #da190b;
-        }
-
-        #hospitalization_details_table {
-            border-collapse: collapse;
-        }
-
-        #hospitalization_details_table th,
-        #hospitalization_details_table td {
-            padding: 8px;
-            border: 1px solid #ddd;
-        }
-
-        #hospitalization_details_table th,
-        #hospitalization_details_table td {
-            padding: 8px;
-            border: 1px solid #ddd;
-        }
-
-        #hospitalization_details_table th {
-            text-align: left;
-            background-color: #f2f2f2;
-        }
-
-        #sickle_cell_table {
-            border-collapse: collapse;
-        }
-
-        #sickle_cell_table th,
-        #sickle_cell_table td {
-            padding: 8px;
-            border: 1px solid #ddd;
-        }
-
-        #sickle_cell_table th,
-        #sickle_cell_table td {
-            padding: 8px;
-            border: 1px solid #ddd;
-        }
-
-        #sickle_cell_table th {
-            text-align: left;
-            background-color: #f2f2f2;
-        }
-
-        /* .hidden {
-            display: none;
-        } */
     </style>
 </head>
 
@@ -4147,8 +4059,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                     <input type="text" value="<?php if ($costing['other_reason']) {
                                                         print_r($costing['other_reason']);
-                                                    } ?>" id="other_reason" name="other_reason"
-                                                        class="form-control" placeholder="If No give reasons here" />
+                                                    } ?>" id="other_reason" name="other_reason" class="form-control"
+                                                        placeholder="If No give reasons here" />
                                                 </div>
 
                                                 <div class="col-sm-4" id="new_sample">
@@ -4160,8 +4072,7 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="new_sample"
-                                                                        id="new_sample<?= $value['id']; ?>"
+                                                                        name="new_sample" id="new_sample<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($costing['new_sample'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
@@ -4180,7 +4091,7 @@ if ($user->isLoggedIn()) {
                                                         placeholder="If No give reasons here" />
                                                 </div>
 
-                                                </div>
+                                            </div>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-6" id="date_collected">
@@ -4240,15 +4151,15 @@ if ($user->isLoggedIn()) {
                                                             sample</label>
                                                         <input type="number" value="<?php if ($costing['sample_volume']) {
                                                             print_r($costing['sample_volume']);
-                                                        } ?>" id="sample_volume" name="sample_volume" min="1"
-                                                            max="5" class="form-control" placeholder="Enter here" />
+                                                        } ?>" id="sample_volume" name="sample_volume" min="1" max="5"
+                                                            class="form-control" placeholder="Enter here" />
                                                     </div>
                                                     <span>mL</span>
                                                 </div>
 
                                                 <div class="col-4" id="afb_microscopy">
-                                                    <label for="afb_microscopy" class="form-label">9. AFB microscopy (if
-                                                        tested at clinic)</label>
+                                                    <label for="afb_microscopy" class="form-label">6(a). Was AFB microscopy
+                                                        conducted at TB clinic?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -4272,260 +4183,164 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
 
-                                                <div class="row">
+                                            <div class="afb-header">
+                                                <h3><strong>AFB Microscopy</strong></h3>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <!-- Column A -->
+                                                <div class="col-md-6">
+                                                    <div class="afb-section">
+                                                        <h4 class="afb-subheader">Slide A:</h4>
 
-                                                    <div class="col-4" id="afb_technique_a_section">
-                                                        <label for="afb_technique_a" class="form-label">6(b). AFB technique used (A)</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('afb_microscopy', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="afb_microscopy_a"
-                                                                            id="afb_technique_a<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy_a'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
+                                                        <div id="afb_technique_a_section">
+                                                            <label class="form-label"><strong>6(b). AFB technique used
+                                                                </strong></label>
+                                                            <div class="row-form clearfix">
+                                                                <div class="form-group">
+                                                                    <?php foreach ($override->get('afb_microscopy', 'status', 1) as $value) { ?>
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="afb_microscopy_a"
+                                                                                id="afb_technique_a<?= $value['id']; ?>"
+                                                                                value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy_a'] == $value['id']) {
+                                                                                      echo 'checked';
+                                                                                  } ?>>
+                                                                            <label
+                                                                                class="form-check-label"><?= $value['name']; ?></label>
+                                                                        </div>
+                                                                    <?php } ?>
+                                                                </div>
                                                             </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('afb_microscopy_a')">Unset</button>
                                                         </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('afb_microscopy_a')">Unset</button>
-                                                    </div>
-
-                                                    <div class="col-4" id="afb_a_date_section">
-                                                        <div class="mb-3">
-                                                            <label for="afb_date_a" id="afb_date_a_l"
-                                                                class="form-label">6(b). Date of AFB microscopy (A)</label>
+                                                        <hr>
+                                                        <div id="afb_a_date_section">
+                                                            <label class="form-label"><strong>6(b). Date of AFB microscopy
+                                                                </strong></label>
                                                             <input type="date" value="<?php if ($costing['afb_a_date']) {
                                                                 print_r($costing['afb_a_date']);
                                                             } ?>" id="afb_date_a" name="afb_a_date"
-                                                                class="form-control" placeholder="Enter here" />
+                                                                class="form-control" />
                                                         </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4" id="afb_results_a_section">
-                                                        <label for="afb_results_a" class="form-label">6(d). AFB microscopy result (A)</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="afb_a_results"
-                                                                            id="afb_results_a<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['afb_a_results'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
+                                                        <hr>
+                                                        <div id="afb_results_a_section">
+                                                            <label class="form-label"><strong>6(d). AFB microscopy result
+                                                                </strong></label>
+                                                            <div class="row-form clearfix">
+                                                                <div class="form-group">
+                                                                    <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="afb_a_results"
+                                                                                id="afb_results_a<?= $value['id']; ?>"
+                                                                                value="<?= $value['id']; ?>" <?php if ($costing['afb_a_results'] == $value['id']) {
+                                                                                      echo 'checked';
+                                                                                  } ?>>
+                                                                            <label
+                                                                                class="form-check-label"><?= $value['name']; ?></label>
+                                                                        </div>
+                                                                    <?php } ?>
+                                                                </div>
                                                             </div>
                                                             <button type="button"
                                                                 onclick="unsetRadio('afb_a_results')">Unset</button>
-
                                                         </div>
-                                                    </div>                                                    
+                                                    </div>
+                                                    <hr>
                                                 </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-4" id="afb_b_date_section">
-                                                        <div class="mb-3">
-                                                            <label for="afb_date_b" id="afb_date_b_l"
-                                                                class="form-label">6(b). Date of AFB microscopy (B)</label>
+
+                                                <!-- Column B -->
+                                                <div class="col-md-6">
+                                                    <div class="afb-section">
+                                                        <h4 class="afb-subheader">Slide B:</h4>
+
+                                                        <div id="afb_technique_b_section">
+                                                            <label class="form-label"><strong>6(b). AFB technique used
+                                                                </strong></label>
+                                                            <div class="row-form clearfix">
+                                                                <div class="form-group">
+                                                                    <?php foreach ($override->get('afb_microscopy', 'status', 1) as $value) { ?>
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="afb_microscopy_b"
+                                                                                id="afb_technique_b<?= $value['id']; ?>"
+                                                                                value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy_b'] == $value['id']) {
+                                                                                      echo 'checked';
+                                                                                  } ?>>
+                                                                            <label
+                                                                                class="form-check-label"><?= $value['name']; ?></label>
+                                                                        </div>
+                                                                    <?php } ?>
+                                                                </div>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('afb_microscopy_b')">Unset</button>
+                                                        </div>
+                                                        <hr>
+                                                        <div id="afb_b_date_section">
+                                                            <label class="form-label"><strong>6(b). Date of AFB microscopy
+                                                                </strong></label>
                                                             <input type="date" value="<?php if ($costing['afb_b_date']) {
                                                                 print_r($costing['afb_b_date']);
                                                             } ?>" id="afb_date_b" name="afb_b_date"
-                                                                class="form-control" placeholder="Enter here" />
+                                                                class="form-control" />
                                                         </div>
-                                                    </div>
-
-                                                    <div class="col-4" id="afb_technique_b_section">
-                                                        <label for="afb_technique_b" class="form-label">6(b). AFB technique used (B)</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('afb_microscopy', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="afb_microscopy_b"
-                                                                            id="afb_technique_b<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy_b'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('afb_microscopy_b')">Unset</button>
-                                                    </div>
-
-                                                    <div class="col-sm-4" id="afb_results_b_section">
-                                                        <label for="afb_results_a" class="form-label">6(d). AFB microscopy result (B)</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="afb_b_results"
-                                                                            id="afb_results_b<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['afb_b_results'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
+                                                        <hr>
+                                                        <div id="afb_results_b_section">
+                                                            <label class="form-label"><strong>6(d). AFB microscopy result
+                                                                </strong></label>
+                                                            <div class="row-form clearfix">
+                                                                <div class="form-group">
+                                                                    <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="afb_b_results"
+                                                                                id="afb_results_b<?= $value['id']; ?>"
+                                                                                value="<?= $value['id']; ?>" <?php if ($costing['afb_b_results'] == $value['id']) {
+                                                                                      echo 'checked';
+                                                                                  } ?>>
+                                                                            <label
+                                                                                class="form-check-label"><?= $value['name']; ?></label>
+                                                                        </div>
+                                                                    <?php } ?>
+                                                                </div>
                                                             </div>
                                                             <button type="button"
                                                                 onclick="unsetRadio('afb_b_results')">Unset</button>
-
                                                         </div>
                                                     </div>
-                                                </div>
-
-                                            <hr>
-                                            <label for="xpert_results" id="xpert_results" class="form-label">10. Xpert
-                                                MTB/RIF (Ultra) test Result (at TB clinic)</label>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-4" id="xpert_date1">
-                                                    <div class="mb-3">
-                                                        <label for="xpert_date" id="xpert_date" class="form-label">10a.
-                                                            Date</label>
-                                                        <input type="date" value="<?php if ($costing['xpert_date']) {
-                                                            print_r($costing['xpert_date']);
-                                                        } ?>" id="xpert_date" name="xpert_date"
-                                                            class="form-control" placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4" id="xpert_mtb">
-                                                    <label for="xpert_mtb" class="form-label">10b. MTB</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('mtb_detections', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="xpert_mtb" id="xpert_mtb_new<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['xpert_mtb'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('xpert_mtb')">Unset</button>
-
-                                                        </div>
-                                                        <label for="xpert_error_code" id="xpert_error_code_new1"
-                                                            class="form-label">If error, code </label>
-                                                        <input type="text" value="<?php if ($costing['xpert_error_code']) {
-                                                            print_r($costing['xpert_error_code']);
-                                                        } ?>" id="xpert_error_code_new" name="xpert_error_code"
-                                                            class="form-control" placeholder="Enter here" />
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="col-sm-4" id="xpert_rif">
-                                                    <label for="xpert_rif" class="form-label">10c. RIF
-                                                        resistance</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="xpert_rif" id="xpert_rif<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['xpert_rif'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('xpert_rif')">Unset</button>
-
-                                                    </div>
+                                                    <hr>
                                                 </div>
                                             </div>
-                                            <hr>
-
                                             <div class="row">
-                                                <div class="col-6" id="ct_value1">
-                                                    <div class="mb-3">
-                                                        <label for="ct_value" class="form-label">
-                                                            11b. Sample Processing Control (SPC) Cycle threshold (Ct)
-                                                            value
-                                                        </label>
-                                                        <div class="d-flex align-items-center">
-                                                            <!-- Input Field -->
-                                                            <input type="number" value="<?php if ($costing['ct_value']) {
-                                                                print_r($costing['ct_value']);
-                                                            } ?>" id="ct_value_not_repeat" name="ct_value"
-                                                                step="0.1" min="0" max="99" class="form-control me-2"
-                                                                placeholder="Enter here" />
-
-                                                            <!-- Checkbox -->
-                                                            <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="ct_value_not_applicable" name="not_applicable"
-                                                                    onclick="handleCheckbox()">
-                                                                <label class="form-check-label" for="not_applicable">no
-                                                                    SPC-Ct value (no result)</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <hr>
-                                            <label for="xpert_date_repeat_new1" id="xpert_date_repeat_new1"
-                                                class="form-label">13. Repeat Xpert
-                                                MTB/RIF (Ultra) test result</label>
-                                            <hr>
-
-                                            <div id="xpert_date_repeat_new">
-
+                                                <label for="xpert_results" id="xpert_results" class="form-label">10. Xpert
+                                                    MTB/RIF (Ultra) test Result (at TB clinic)</label>
+                                                <hr>
                                                 <div class="row">
-                                                    <div class="col-4" id="xpert_date_repeat1">
+                                                    <div class="col-4" id="xpert_date1">
                                                         <div class="mb-3">
-                                                            <label for="xpert_date_repeat" id="xpert_date_repeat"
-                                                                class="form-label">13a.
+                                                            <label for="xpert_date" id="xpert_date" class="form-label">10a.
                                                                 Date</label>
-                                                            <input type="date" value="<?php if ($costing['xpert_date_repeat']) {
-                                                                print_r($costing['xpert_date_repeat']);
-                                                            } ?>" id="xpert_date_repeat" name="xpert_date_repeat"
+                                                            <input type="date" value="<?php if ($costing['xpert_date']) {
+                                                                print_r($costing['xpert_date']);
+                                                            } ?>" id="xpert_date" name="xpert_date"
                                                                 class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-4" id="xpert_mtb_repeat">
-                                                        <label for="xpert_mtb_repeat" class="form-label">13b. MTB</label>
+                                                    <div class="col-sm-4" id="xpert_mtb">
+                                                        <label for="xpert_mtb" class="form-label">10b. MTB</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <?php foreach ($override->get('mtb_detections', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="xpert_mtb_repeat"
-                                                                            id="xpert_mtb_repeat<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['xpert_mtb_repeat'] == $value['id']) {
+                                                                            name="xpert_mtb"
+                                                                            id="xpert_mtb_new<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['xpert_mtb'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label
@@ -4533,21 +4348,21 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                                 <button type="button"
-                                                                    onclick="unsetRadio('xpert_mtb_repeat')">Unset</button>
+                                                                    onclick="unsetRadio('xpert_mtb')">Unset</button>
 
                                                             </div>
-                                                            <label for="xpert_error_repeat" id="xpert_error_repeat1"
+                                                            <label for="xpert_error_code" id="xpert_error_code_new1"
                                                                 class="form-label">If error, code </label>
-                                                            <input type="text" value="<?php if ($costing['xpert_error_repeat']) {
-                                                                print_r($costing['xpert_error_repeat']);
-                                                            } ?>" id="xpert_error_repeat" name="xpert_error_repeat"
+                                                            <input type="text" value="<?php if ($costing['xpert_error_code']) {
+                                                                print_r($costing['xpert_error_code']);
+                                                            } ?>" id="xpert_error_code_new" name="xpert_error_code"
                                                                 class="form-control" placeholder="Enter here" />
                                                         </div>
 
                                                     </div>
 
-                                                    <div class="col-sm-4" id="xpert_rif_repeat">
-                                                        <label for="xpert_rif_repeat" class="form-label">13c. RIF
+                                                    <div class="col-sm-4" id="xpert_rif">
+                                                        <label for="xpert_rif" class="form-label">10c. RIF
                                                             resistance</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -4555,9 +4370,8 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="xpert_rif_repeat"
-                                                                            id="xpert_rif_repeat<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['xpert_rif_repeat'] == $value['id']) {
+                                                                            name="xpert_rif" id="xpert_rif<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['xpert_rif'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label
@@ -4566,33 +4380,146 @@ if ($user->isLoggedIn()) {
                                                                 <?php } ?>
                                                             </div>
                                                             <button type="button"
-                                                                onclick="unsetRadio('xpert_rif_repeat')">Unset</button>
+                                                                onclick="unsetRadio('xpert_rif')">Unset</button>
 
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <hr>
+
                                                 <div class="row">
-                                                    <div class="col-6" id="ct_value_repeat1">
+                                                    <div class="col-6" id="ct_value1">
                                                         <div class="mb-3">
-                                                            <label for="ct_value_repeat" class="form-label">
-                                                                14b. SPC-Ct
-                                                                value </label>
+                                                            <label for="ct_value" class="form-label">
+                                                                11b. Sample Processing Control (SPC) Cycle threshold (Ct)
+                                                                value
+                                                            </label>
                                                             <div class="d-flex align-items-center">
                                                                 <!-- Input Field -->
-                                                                <input type="number" value="<?php if ($costing['ct_value_repeat']) {
-                                                                    print_r($costing['ct_value_repeat']);
-                                                                } ?>" id="ct_value_repeat" name="ct_value_repeat"
+                                                                <input type="number" value="<?php if ($costing['ct_value']) {
+                                                                    print_r($costing['ct_value']);
+                                                                } ?>" id="ct_value_not_repeat" name="ct_value"
                                                                     step="0.1" min="0" max="99" class="form-control me-2"
                                                                     placeholder="Enter here" />
 
                                                                 <!-- Checkbox -->
                                                                 <div class="form-check">
                                                                     <input type="checkbox" class="form-check-input"
-                                                                        id="ct_value_not_applicable2" name="not_applicable"
+                                                                        id="ct_value_not_applicable" name="not_applicable"
                                                                         onclick="handleCheckbox()">
                                                                     <label class="form-check-label" for="not_applicable">no
                                                                         SPC-Ct value (no result)</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <hr>
+                                                <label for="xpert_date_repeat_new1" id="xpert_date_repeat_new1"
+                                                    class="form-label">13. Repeat Xpert
+                                                    MTB/RIF (Ultra) test result</label>
+                                                <hr>
+
+                                                <div id="xpert_date_repeat_new">
+
+                                                    <div class="row">
+                                                        <div class="col-4" id="xpert_date_repeat1">
+                                                            <div class="mb-3">
+                                                                <label for="xpert_date_repeat" id="xpert_date_repeat"
+                                                                    class="form-label">13a.
+                                                                    Date</label>
+                                                                <input type="date" value="<?php if ($costing['xpert_date_repeat']) {
+                                                                    print_r($costing['xpert_date_repeat']);
+                                                                } ?>" id="xpert_date_repeat" name="xpert_date_repeat"
+                                                                    class="form-control" placeholder="Enter here" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-4" id="xpert_mtb_repeat">
+                                                            <label for="xpert_mtb_repeat" class="form-label">13b.
+                                                                MTB</label>
+                                                            <!-- radio -->
+                                                            <div class="row-form clearfix">
+                                                                <div class="form-group">
+                                                                    <?php foreach ($override->get('mtb_detections', 'status', 1) as $value) { ?>
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="xpert_mtb_repeat"
+                                                                                id="xpert_mtb_repeat<?= $value['id']; ?>"
+                                                                                value="<?= $value['id']; ?>" <?php if ($costing['xpert_mtb_repeat'] == $value['id']) {
+                                                                                      echo 'checked';
+                                                                                  } ?>>
+                                                                            <label
+                                                                                class="form-check-label"><?= $value['name']; ?></label>
+                                                                        </div>
+                                                                    <?php } ?>
+                                                                    <button type="button"
+                                                                        onclick="unsetRadio('xpert_mtb_repeat')">Unset</button>
+
+                                                                </div>
+                                                                <label for="xpert_error_repeat" id="xpert_error_repeat1"
+                                                                    class="form-label">If error, code </label>
+                                                                <input type="text" value="<?php if ($costing['xpert_error_repeat']) {
+                                                                    print_r($costing['xpert_error_repeat']);
+                                                                } ?>" id="xpert_error_repeat" name="xpert_error_repeat"
+                                                                    class="form-control" placeholder="Enter here" />
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="col-sm-4" id="xpert_rif_repeat">
+                                                            <label for="xpert_rif_repeat" class="form-label">13c. RIF
+                                                                resistance</label>
+                                                            <!-- radio -->
+                                                            <div class="row-form clearfix">
+                                                                <div class="form-group">
+                                                                    <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="xpert_rif_repeat"
+                                                                                id="xpert_rif_repeat<?= $value['id']; ?>"
+                                                                                value="<?= $value['id']; ?>" <?php if ($costing['xpert_rif_repeat'] == $value['id']) {
+                                                                                      echo 'checked';
+                                                                                  } ?>>
+                                                                            <label
+                                                                                class="form-check-label"><?= $value['name']; ?></label>
+                                                                        </div>
+                                                                    <?php } ?>
+                                                                </div>
+                                                                <button type="button"
+                                                                    onclick="unsetRadio('xpert_rif_repeat')">Unset</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-6" id="ct_value_repeat1">
+                                                            <div class="mb-3">
+                                                                <label for="ct_value_repeat" class="form-label">
+                                                                    14b. SPC-Ct
+                                                                    value </label>
+                                                                <div class="d-flex align-items-center">
+                                                                    <!-- Input Field -->
+                                                                    <input type="number" value="<?php if ($costing['ct_value_repeat']) {
+                                                                        print_r($costing['ct_value_repeat']);
+                                                                    } ?>" id="ct_value_repeat" name="ct_value_repeat"
+                                                                        step="0.1" min="0" max="99"
+                                                                        class="form-control me-2"
+                                                                        placeholder="Enter here" />
+
+                                                                    <!-- Checkbox -->
+                                                                    <div class="form-check">
+                                                                        <input type="checkbox" class="form-check-input"
+                                                                            id="ct_value_not_applicable2"
+                                                                            name="not_applicable"
+                                                                            onclick="handleCheckbox()">
+                                                                        <label class="form-check-label"
+                                                                            for="not_applicable">no
+                                                                            SPC-Ct value (no result)</label>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -6802,7 +6729,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6832,7 +6759,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7462,7 +7389,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8262,10 +8189,10 @@ if ($user->isLoggedIn()) {
                                                     <br>
                                                     <textarea class="form-control" name="sputum_reasons" rows="3"
                                                         placeholder="Type reasons here...">
-                                                                             <?php if ($clients['sputum_reasons']) {
-                                                                                 print_r($clients['sputum_reasons']);
-                                                                             } ?>
-                                                                                                                                    </textarea>
+                                                                                                     <?php if ($clients['sputum_reasons']) {
+                                                                                                         print_r($clients['sputum_reasons']);
+                                                                                                     } ?>
+                                                                                                                                                            </textarea>
 
                                                 </div>
 
@@ -10073,7 +10000,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
