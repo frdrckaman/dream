@@ -1014,36 +1014,26 @@ if ($user->isLoggedIn()) {
                         $user->updateRecord('respiratory', array(
                             'lab_name' => Input::get('lab_name'),
                             'sample_received' => Input::get('sample_received'),
-                            'sample_date_one' => Input::get('sample_date_one'),
-                            'sample_date_two' => Input::get('sample_date_two'),
                             'sample_reason' => Input::get('sample_reason'),
-                            'sample_reason_other1' => Input::get('sample_reason_other1'),
-                            'sample_one_collected_date' => Input::get('sample_one_collected_date'),
-                            'sample_two_collected_date' => Input::get('sample_two_collected_date'),
-                            'sample_type' => Input::get('sample_type'),
-                            'sample_number' => Input::get('sample_number'),
-                            'sample_type_other' => Input::get('sample_type_other'),
+                            'other_reason' => Input::get('other_reason'),
+                            'new_sample' => Input::get('new_sample'),
+                            'new_reason' => Input::get('new_reason'),
+                            'date_collected' => Input::get('date_collected'),
+                            'date_received' => Input::get('date_received'),
                             'appearance' => Input::get('appearance'),
                             'sample_volume' => Input::get('sample_volume'),
                             'afb_microscopy' => Input::get('afb_microscopy'),
-                            'afb_microscopy_a' => Input::get('afb_microscopy_a'),
+                            'technique_a' => Input::get('technique_a'),
                             'afb_a_results' => Input::get('afb_a_results'),
                             'afb_a_date' => Input::get('afb_a_date'),
-                            'afb_microscopy_b' => Input::get('afb_microscopy_b'),
+                            'technique_b' => Input::get('technique_b'),
                             'afb_b_results' => Input::get('afb_b_results'),
                             'afb_b_date' => Input::get('afb_b_date'),
                             'xpert_date' => Input::get('xpert_date'),
                             'xpert_mtb' => Input::get('xpert_mtb'),
-                            'xpert_error_code' => Input::get('xpert_error_code'),
                             'xpert_rif' => Input::get('xpert_rif'),
                             'ct_value' => Input::get('ct_value'),
                             'ct_na' => Input::get('ct_na'),
-                            'xpert_date_repeat' => Input::get('xpert_date_repeat'),
-                            'xpert_mtb_repeat' => Input::get('xpert_mtb_repeat'),
-                            'xpert_error_repeat' => Input::get('xpert_error_repeat'),
-                            'xpert_rif_repeat' => Input::get('xpert_rif_repeat'),
-                            'ct_value_repeat' => Input::get('ct_value_repeat'),
-                            'ct_repeat_na' => Input::get('ct_repeat_na'),
                             'respiratory_completness' => Input::get('respiratory_completness'),
                             'comments' => Input::get('comments'),
                             'date_completed' => Input::get('date_completed'),
@@ -1061,36 +1051,26 @@ if ($user->isLoggedIn()) {
                             'pid' => $screening['pid'],
                             'lab_name' => Input::get('lab_name'),
                             'sample_received' => Input::get('sample_received'),
-                            'sample_date_one' => Input::get('sample_date_one'),
-                            'sample_date_two' => Input::get('sample_date_two'),
                             'sample_reason' => Input::get('sample_reason'),
-                            'sample_reason_other1' => Input::get('sample_reason_other1'),
-                            'sample_one_collected_date' => Input::get('sample_one_collected_date'),
-                            'sample_two_collected_date' => Input::get('sample_two_collected_date'),
-                            'sample_type' => Input::get('sample_type'),
-                            'sample_number' => Input::get('sample_number'),
-                            'sample_type_other' => Input::get('sample_type_other'),
+                            'other_reason' => Input::get('other_reason'),
+                            'new_sample' => Input::get('new_sample'),
+                            'new_reason' => Input::get('new_reason'),
+                            'date_collected' => Input::get('date_collected'),
+                            'date_received' => Input::get('date_received'),
                             'appearance' => Input::get('appearance'),
                             'sample_volume' => Input::get('sample_volume'),
                             'afb_microscopy' => Input::get('afb_microscopy'),
-                            'afb_microscopy_a' => Input::get('afb_microscopy_a'),
+                            'technique_a' => Input::get('technique_a'),
                             'afb_a_results' => Input::get('afb_a_results'),
                             'afb_a_date' => Input::get('afb_a_date'),
-                            'afb_microscopy_b' => Input::get('afb_microscopy_b'),
+                            'technique_b' => Input::get('technique_b'),
                             'afb_b_results' => Input::get('afb_b_results'),
                             'afb_b_date' => Input::get('afb_b_date'),
                             'xpert_date' => Input::get('xpert_date'),
                             'xpert_mtb' => Input::get('xpert_mtb'),
-                            'xpert_error_code' => Input::get('xpert_error_code'),
                             'xpert_rif' => Input::get('xpert_rif'),
                             'ct_value' => Input::get('ct_value'),
                             'ct_na' => Input::get('ct_na'),
-                            'xpert_date_repeat' => Input::get('xpert_date_repeat'),
-                            'xpert_mtb_repeat' => Input::get('xpert_mtb_repeat'),
-                            'xpert_error_repeat' => Input::get('xpert_error_repeat'),
-                            'xpert_rif_repeat' => Input::get('xpert_rif_repeat'),
-                            'ct_value_repeat' => Input::get('ct_value_repeat'),
-                            'ct_repeat_na' => Input::get('ct_repeat_na'),
                             'respiratory_completness' => Input::get('respiratory_completness'),
                             'comments' => Input::get('comments'),
                             'date_completed' => Input::get('date_completed'),
@@ -1110,37 +1090,27 @@ if ($user->isLoggedIn()) {
                         $user->createRecord('respiratory', array(
                             'pid' => $screening['pid'],
                             'lab_name' => Input::get('lab_name'),
-                            'sample_received' => Input::get('sample_received'),
-                            'sample_date_one' => Input::get('sample_date_one'),
-                            'sample_date_two' => Input::get('sample_date_two'),
+                                                     'sample_received' => Input::get('sample_received'),
                             'sample_reason' => Input::get('sample_reason'),
-                            'sample_reason_other1' => Input::get('sample_reason_other1'),
-                            'sample_one_collected_date' => Input::get('sample_one_collected_date'),
-                            'sample_two_collected_date' => Input::get('sample_two_collected_date'),
-                            'sample_type' => Input::get('sample_type'),
-                            'sample_number' => Input::get('sample_number'),
-                            'sample_type_other' => Input::get('sample_type_other'),
+                            'other_reason' => Input::get('other_reason'),
+                            'new_sample' => Input::get('new_sample'),
+                            'new_reason' => Input::get('new_reason'),
+                            'date_collected' => Input::get('date_collected'),
+                            'date_received' => Input::get('date_received'),
                             'appearance' => Input::get('appearance'),
                             'sample_volume' => Input::get('sample_volume'),
                             'afb_microscopy' => Input::get('afb_microscopy'),
-                            'afb_microscopy_a' => Input::get('afb_microscopy_a'),
+                            'technique_a' => Input::get('technique_a'),
                             'afb_a_results' => Input::get('afb_a_results'),
                             'afb_a_date' => Input::get('afb_a_date'),
-                            'afb_microscopy_b' => Input::get('afb_microscopy_b'),
+                            'technique_b' => Input::get('technique_b'),
                             'afb_b_results' => Input::get('afb_b_results'),
                             'afb_b_date' => Input::get('afb_b_date'),
                             'xpert_date' => Input::get('xpert_date'),
                             'xpert_mtb' => Input::get('xpert_mtb'),
-                            'xpert_error_code' => Input::get('xpert_error_code'),
                             'xpert_rif' => Input::get('xpert_rif'),
                             'ct_value' => Input::get('ct_value'),
                             'ct_na' => Input::get('ct_na'),
-                            'xpert_date_repeat' => Input::get('xpert_date_repeat'),
-                            'xpert_mtb_repeat' => Input::get('xpert_mtb_repeat'),
-                            'xpert_error_repeat' => Input::get('xpert_error_repeat'),
-                            'xpert_rif_repeat' => Input::get('xpert_rif_repeat'),
-                            'ct_value_repeat' => Input::get('ct_value_repeat'),
-                            'ct_repeat_na' => Input::get('ct_repeat_na'),
                             'respiratory_completness' => Input::get('respiratory_completness'),
                             'comments' => Input::get('comments'),
                             'date_completed' => Input::get('date_completed'),
@@ -1164,36 +1134,26 @@ if ($user->isLoggedIn()) {
                             'pid' => $screening['pid'],
                             'lab_name' => Input::get('lab_name'),
                             'sample_received' => Input::get('sample_received'),
-                            'sample_date_one' => Input::get('sample_date_one'),
-                            'sample_date_two' => Input::get('sample_date_two'),
                             'sample_reason' => Input::get('sample_reason'),
-                            'sample_reason_other1' => Input::get('sample_reason_other1'),
-                            'sample_one_collected_date' => Input::get('sample_one_collected_date'),
-                            'sample_two_collected_date' => Input::get('sample_two_collected_date'),
-                            'sample_type' => Input::get('sample_type'),
-                            'sample_number' => Input::get('sample_number'),
-                            'sample_type_other' => Input::get('sample_type_other'),
+                            'other_reason' => Input::get('other_reason'),
+                            'new_sample' => Input::get('new_sample'),
+                            'new_reason' => Input::get('new_reason'),
+                            'date_collected' => Input::get('date_collected'),
+                            'date_received' => Input::get('date_received'),
                             'appearance' => Input::get('appearance'),
                             'sample_volume' => Input::get('sample_volume'),
                             'afb_microscopy' => Input::get('afb_microscopy'),
-                            'afb_microscopy_a' => Input::get('afb_microscopy_a'),
+                            'technique_a' => Input::get('technique_a'),
                             'afb_a_results' => Input::get('afb_a_results'),
                             'afb_a_date' => Input::get('afb_a_date'),
-                            'afb_microscopy_b' => Input::get('afb_microscopy_b'),
+                            'technique_b' => Input::get('technique_b'),
                             'afb_b_results' => Input::get('afb_b_results'),
                             'afb_b_date' => Input::get('afb_b_date'),
                             'xpert_date' => Input::get('xpert_date'),
                             'xpert_mtb' => Input::get('xpert_mtb'),
-                            'xpert_error_code' => Input::get('xpert_error_code'),
                             'xpert_rif' => Input::get('xpert_rif'),
                             'ct_value' => Input::get('ct_value'),
                             'ct_na' => Input::get('ct_na'),
-                            'xpert_date_repeat' => Input::get('xpert_date_repeat'),
-                            'xpert_mtb_repeat' => Input::get('xpert_mtb_repeat'),
-                            'xpert_error_repeat' => Input::get('xpert_error_repeat'),
-                            'xpert_rif_repeat' => Input::get('xpert_rif_repeat'),
-                            'ct_value_repeat' => Input::get('ct_value_repeat'),
-                            'ct_repeat_na' => Input::get('ct_repeat_na'),
                             'respiratory_completness' => Input::get('respiratory_completness'),
                             'comments' => Input::get('comments'),
                             'date_completed' => Input::get('date_completed'),
@@ -4099,11 +4059,10 @@ if ($user->isLoggedIn()) {
                                                     <div class="col-12">
                                                         <label class="form-label">3. Date sample(s) collected?</label>
                                                         <div class="mb-3">
-                                                            <input type="date" value="<?php if ($costing['sample_one_collected_date']) {
-                                                                print_r($costing['sample_one_collected_date']);
-                                                            } ?>" id="sample_one_collected_date"
-                                                                name="sample_one_collected_date" class="form-control"
-                                                                placeholder="Enter here" />
+                                                            <input type="date" value="<?php if ($costing['date_collected']) {
+                                                                print_r($costing['date_collected']);
+                                                            } ?>" id="date_collected" name="date_collected"
+                                                                class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4111,9 +4070,9 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-6" id="date_received">
                                                     <label class="form-label">3. Date sample(s) Received?</label>
                                                     <div class="mb-3">
-                                                        <input type="date" value="<?php if ($costing['sample_one_date']) {
-                                                            print_r($costing['sample_one_date']);
-                                                        } ?>" id="sample_one_date" name="sample_one_date"
+                                                        <input type="date" value="<?php if ($costing['date_received']) {
+                                                            print_r($costing['date_received']);
+                                                        } ?>" id="date_received" name="date_received"
                                                             class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
@@ -4201,9 +4160,9 @@ if ($user->isLoggedIn()) {
                                                                     <?php foreach ($override->get('afb_microscopy', 'status', 1) as $value) { ?>
                                                                         <div class="form-check">
                                                                             <input class="form-check-input" type="radio"
-                                                                                name="afb_microscopy_a"
-                                                                                id="afb_technique_a<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy_a'] == $value['id']) {
+                                                                                name="technique_a"
+                                                                                id="technique_a<?= $value['id']; ?>"
+                                                                                value="<?= $value['id']; ?>" <?php if ($costing['technique_a'] == $value['id']) {
                                                                                       echo 'checked';
                                                                                   } ?>>
                                                                             <label
@@ -4213,7 +4172,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             </div>
                                                             <button type="button"
-                                                                onclick="unsetRadio('afb_microscopy_a')">Unset</button>
+                                                                onclick="unsetRadio('technique_a')">Unset</button>
                                                         </div>
                                                         <hr>
                                                         <div id="afb_a_date_section">
@@ -4221,7 +4180,7 @@ if ($user->isLoggedIn()) {
                                                                 </strong></label>
                                                             <input type="date" value="<?php if ($costing['afb_a_date']) {
                                                                 print_r($costing['afb_a_date']);
-                                                            } ?>" id="afb_date_a" name="afb_a_date"
+                                                            } ?>" id="afb_a_date" name="afb_a_date"
                                                                 class="form-control" />
                                                         </div>
                                                         <hr>
@@ -4234,7 +4193,7 @@ if ($user->isLoggedIn()) {
                                                                         <div class="form-check">
                                                                             <input class="form-check-input" type="radio"
                                                                                 name="afb_a_results"
-                                                                                id="afb_results_a<?= $value['id']; ?>"
+                                                                                id="afb_a_results<?= $value['id']; ?>"
                                                                                 value="<?= $value['id']; ?>" <?php if ($costing['afb_a_results'] == $value['id']) {
                                                                                       echo 'checked';
                                                                                   } ?>>
@@ -4264,9 +4223,9 @@ if ($user->isLoggedIn()) {
                                                                     <?php foreach ($override->get('afb_microscopy', 'status', 1) as $value) { ?>
                                                                         <div class="form-check">
                                                                             <input class="form-check-input" type="radio"
-                                                                                name="afb_microscopy_b"
-                                                                                id="afb_technique_b<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy_b'] == $value['id']) {
+                                                                                name="technique_b"
+                                                                                id="technique_b<?= $value['id']; ?>"
+                                                                                value="<?= $value['id']; ?>" <?php if ($costing['technique_b'] == $value['id']) {
                                                                                       echo 'checked';
                                                                                   } ?>>
                                                                             <label
@@ -4276,7 +4235,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             </div>
                                                             <button type="button"
-                                                                onclick="unsetRadio('afb_microscopy_b')">Unset</button>
+                                                                onclick="unsetRadio('technique_b')">Unset</button>
                                                         </div>
                                                         <hr>
                                                         <div id="afb_b_date_section">
@@ -4329,8 +4288,8 @@ if ($user->isLoggedIn()) {
                                                                 conducting Xpert MTB/RIF (Ultra)</strong></label>
                                                         <input type="date" value="<?php if ($costing['xpert_date']) {
                                                             print_r($costing['xpert_date']);
-                                                        } ?>" id="xpert_date" name="xpert_date"
-                                                            class="form-control" placeholder="Enter here" />
+                                                        } ?>" id="xpert_date" name="xpert_date" class="form-control"
+                                                            placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
@@ -4343,9 +4302,10 @@ if ($user->isLoggedIn()) {
                                                     </h5>
                                                     <hr>
                                                     <span>
-                                                     <small class="text-center d-block text-danger fw-bold">
-    Note: if initial test result was non-determinate, include data for the final test result here.
-</small>                                                     
+                                                        <small class="text-center d-block text-danger fw-bold">
+                                                            Note: if initial test result was non-determinate, include data
+                                                            for the final test result here.
+                                                        </small>
                                                     </span>
                                                     <div class="row">
                                                         <!-- MTB Column -->
@@ -4405,15 +4365,15 @@ if ($user->isLoggedIn()) {
                                                                 Threshold (Ct) Value</strong></label>
                                                         <input type="number" value="<?php if ($costing['ct_value']) {
                                                             print_r($costing['ct_value']);
-                                                        } ?>" id="ct_value" name="ct_value" step="0.1" min="0"
-                                                            max="99" class="form-control" placeholder="Enter here" />
+                                                        } ?>" id="ct_value" name="ct_value" step="0.1" min="0" max="99"
+                                                            class="form-control" placeholder="Enter here" />
 
                                                         <!-- Checkbox below input -->
                                                         <div class="form-check mt-2">
                                                             <input type="checkbox" class="form-check-input"
-                                                                id="ct_value_not_applicable" name="not_applicable"
+                                                                id="ct_na" name="ct_na"
                                                                 onclick="handleCheckbox()">
-                                                            <label class="form-check-label" for="not_applicable">No SPC-Ct
+                                                            <label class="form-check-label" for="ct_na">No SPC-Ct
                                                                 value (no result)</label>
                                                         </div>
                                                     </div>
@@ -4429,9 +4389,6 @@ if ($user->isLoggedIn()) {
                                                         placeholder="Enter any additional remarks here..."></textarea>
                                                 </div>
                                             </div>
-
-
-
 
                                             <hr>
 
@@ -6637,7 +6594,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6667,7 +6624,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7297,7 +7254,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8097,10 +8054,10 @@ if ($user->isLoggedIn()) {
                                                     <br>
                                                     <textarea class="form-control" name="sputum_reasons" rows="3"
                                                         placeholder="Type reasons here...">
-                                                                                                                     <?php if ($clients['sputum_reasons']) {
-                                                                                                                         print_r($clients['sputum_reasons']);
-                                                                                                                     } ?>
-                                                                                                                                                                            </textarea>
+                                                                                                                         <?php if ($clients['sputum_reasons']) {
+                                                                                                                             print_r($clients['sputum_reasons']);
+                                                                                                                         } ?>
+                                                                                                                                                                                </textarea>
 
                                                 </div>
 
@@ -9908,7 +9865,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>

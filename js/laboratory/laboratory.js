@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const sampleReceivedRadios = document.getElementsByName("sample_received");
     const sampleReasonRadios = document.getElementsByName("sample_reason");
     const newSampleRadios = document.getElementsByName("new_sample");
-    const ctValueInput = document.getElementById("ct_value_not_repeat");
-    const ctNotApplicableCheckbox = document.getElementById("ct_value_not_applicable");
+    const ctValueInput = document.getElementById("ct_value");
+    const ctNotApplicableCheckbox = document.getElementById("ct_na");
 
     function toggleFields() {
         const isSampleReceivedYes = document.querySelector('input[name="sample_received"]:checked')?.value === "1";
@@ -142,11 +142,11 @@ document.addEventListener('DOMContentLoaded', function () {
             afbHeaderB.style.display = 'block';  // Show headers
 
             // Make the fields required
-            document.getElementById('afb_date_a').required = true;
-            document.getElementById('afb_date_b').required = true;
+            document.getElementById('afb_a_date').required = true;
+            document.getElementById('afb_b_date').required = true;
 
-            const afbMicroscopyARadios = document.querySelectorAll('input[name="afb_microscopy_a"]');
-            const afbMicroscopyBRadios = document.querySelectorAll('input[name="afb_microscopy_b"]');
+            const afbMicroscopyARadios = document.querySelectorAll('input[name="technique_a"]');
+            const afbMicroscopyBRadios = document.querySelectorAll('input[name="technique_b"]');
             const afbResultsARadios = document.querySelectorAll('input[name="afb_a_results"]');
             const afbResultsBRadios = document.querySelectorAll('input[name="afb_b_results"]');
 
@@ -167,11 +167,11 @@ document.addEventListener('DOMContentLoaded', function () {
             afbSubheaderB.style.display = 'none';  // Hide headers
 
             // Remove required fields
-            document.getElementById('afb_date_a').required = false;
-            document.getElementById('afb_date_b').required = false;
+            document.getElementById('afb_a_date').required = false;
+            document.getElementById('afb_b_date').required = false;
 
-            const afbMicroscopyARadios = document.querySelectorAll('input[name="afb_microscopy_a"]');
-            const afbMicroscopyBRadios = document.querySelectorAll('input[name="afb_microscopy_b"]');
+            const afbMicroscopyARadios = document.querySelectorAll('input[name="technique_a"]');
+            const afbMicroscopyBRadios = document.querySelectorAll('input[name="technique_b"]');
             const afbResultsARadios = document.querySelectorAll('input[name="afb_a_results"]');
             const afbResultsBRadios = document.querySelectorAll('input[name="afb_b_results"]');
 
