@@ -4180,7 +4180,10 @@ if ($user->isLoggedIn()) {
                                                         placeholder="If No give reasons here" />
                                                 </div>
 
-                                                <div class="col-sm-4" id="date_collected">
+                                                </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-6" id="date_collected">
                                                     <!-- Common Label -->
                                                     <div class="col-12">
                                                         <label class="form-label">3. Date sample(s) collected?</label>
@@ -4194,7 +4197,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="date_received">
+                                                <div class="col-sm-6" id="date_received">
                                                     <label class="form-label">3. Date sample(s) Received?</label>
                                                     <div class="mb-3">
                                                         <input type="date" value="<?php if ($costing['sample_one_date']) {
@@ -4269,13 +4272,10 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
 
-                                            <div id="afb_technique_a_1">
                                                 <div class="row">
 
-                                                    <div class="col-4">
-                                                        <label for="afb_technique_a" class="form-label">9a(1). AFB
-                                                            technique
-                                                            slide A</label>
+                                                    <div class="col-4" id="afb_technique_a_section">
+                                                        <label for="afb_technique_a" class="form-label">6(b). AFB technique used (A)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -4297,9 +4297,19 @@ if ($user->isLoggedIn()) {
                                                             onclick="unsetRadio('afb_microscopy_a')">Unset</button>
                                                     </div>
 
-                                                    <div class="col-sm-4" id="afb_results_a_1_1">
-                                                        <label for="afb_results_a" class="form-label">9a(2). Results A
-                                                        </label>
+                                                    <div class="col-4" id="afb_a_date_section">
+                                                        <div class="mb-3">
+                                                            <label for="afb_date_a" id="afb_date_a_l"
+                                                                class="form-label">6(b). Date of AFB microscopy (A)</label>
+                                                            <input type="date" value="<?php if ($costing['afb_a_date']) {
+                                                                print_r($costing['afb_a_date']);
+                                                            } ?>" id="afb_date_a" name="afb_a_date"
+                                                                class="form-control" placeholder="Enter here" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-4" id="afb_results_a_section">
+                                                        <label for="afb_results_a" class="form-label">6(d). AFB microscopy result (A)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -4320,26 +4330,23 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('afb_a_results')">Unset</button>
 
                                                         </div>
-                                                    </div>
-
-                                                    <div class="col-4" id="afb_date_a_1">
-                                                        <div class="mb-3">
-                                                            <label for="afb_date_a" id="afb_date_a_l"
-                                                                class="form-label">9a(3).
-                                                                Date?</label>
-                                                            <input type="date" value="<?php if ($costing['afb_a_date']) {
-                                                                print_r($costing['afb_a_date']);
-                                                            } ?>" id="afb_date_a" name="afb_a_date"
-                                                                class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
+                                                    </div>                                                    
                                                 </div>
                                                 <hr>
                                                 <div class="row">
-                                                    <div class="col-4" id="afb_technique_b_1">
-                                                        <label for="afb_technique_b" class="form-label">9b(1). AFB
-                                                            technique
-                                                            slide B</label>
+                                                    <div class="col-4" id="afb_b_date_section">
+                                                        <div class="mb-3">
+                                                            <label for="afb_date_b" id="afb_date_b_l"
+                                                                class="form-label">6(b). Date of AFB microscopy (B)</label>
+                                                            <input type="date" value="<?php if ($costing['afb_b_date']) {
+                                                                print_r($costing['afb_b_date']);
+                                                            } ?>" id="afb_date_b" name="afb_b_date"
+                                                                class="form-control" placeholder="Enter here" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-4" id="afb_technique_b_section">
+                                                        <label for="afb_technique_b" class="form-label">6(b). AFB technique used (B)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -4361,9 +4368,8 @@ if ($user->isLoggedIn()) {
                                                             onclick="unsetRadio('afb_microscopy_b')">Unset</button>
                                                     </div>
 
-                                                    <div class="col-sm-4" id="afb_results_b_1">
-                                                        <label for="afb_results_b" class="form-label">9b(2). Results B
-                                                        </label>
+                                                    <div class="col-sm-4" id="afb_results_b_section">
+                                                        <label for="afb_results_a" class="form-label">6(d). AFB microscopy result (B)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -4385,20 +4391,7 @@ if ($user->isLoggedIn()) {
 
                                                         </div>
                                                     </div>
-
-                                                    <div class="col-4" id="afb_date_b_1">
-                                                        <div class="mb-3">
-                                                            <label for="afb_date_b" id="afb_date_b_l"
-                                                                class="form-label">9b(3).
-                                                                Date?</label>
-                                                            <input type="date" value="<?php if ($costing['afb_b_date']) {
-                                                                print_r($costing['afb_b_date']);
-                                                            } ?>" id="afb_date_b" name="afb_b_date"
-                                                                class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
                                                 </div>
-                                            </div>
 
                                             <hr>
                                             <label for="xpert_results" id="xpert_results" class="form-label">10. Xpert
