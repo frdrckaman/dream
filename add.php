@@ -3947,7 +3947,8 @@ if ($user->isLoggedIn()) {
                                         <h3 class="card-title">General information Form</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <form id="labForm_clinic" enctype="multipart/form-data" method="post" autocomplete="off">
+                                    <form id="labForm_clinic" enctype="multipart/form-data" method="post"
+                                        autocomplete="off">
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">
@@ -4053,12 +4054,12 @@ if ($user->isLoggedIn()) {
                                             <hr>
                                             <div class="row">
                                                 <?php
-                                                    // Fetch enrollment_date from database
-                                                    $enrollment_date = ''; // Replace with actual query to fetch enrollment_date
-                                                    if ($enrollment['enrollment_date']) {
-                                                        $enrollment_date = $enrollment['enrollment_date'];
-                                                    }
-                                                    ?>
+                                                // Fetch enrollment_date from database
+                                                $enrollment_date = ''; // Replace with actual query to fetch enrollment_date
+                                                if ($enrollment['enrollment_date']) {
+                                                    $enrollment_date = $enrollment['enrollment_date'];
+                                                }
+                                                ?>
                                                 <input type="hidden" id="enrollment_date_hidded"
                                                     value="<?php echo $enrollment_date; ?>" />
 
@@ -4311,10 +4312,10 @@ if ($user->isLoggedIn()) {
                                                     </h5>
                                                     <hr>
                                                     <span>
-                                                        <small class="text-center d-block text-success fw-bold">
+                                                        <strong class="text-center d-block text-success fw-bold">
                                                             Note: if initial test result was non-determinate, include data
                                                             for the final test result here.
-                                                        </small>
+                                                        </strong>
                                                     </span>
                                                     <div class="row">
                                                         <!-- MTB Column -->
@@ -4380,9 +4381,9 @@ if ($user->isLoggedIn()) {
                                                         <!-- Checkbox below input -->
                                                         <div class="form-check mt-2">
                                                             <input type="checkbox" class="form-check-input" id="ct_na"
-                                                                name="ct_na" onclick="handleCheckbox()" <?php 
-                                                                    if ($costing['ct_na']) {
-                                                                        echo 'checked';                                                                    
+                                                                name="ct_na" onclick="handleCheckbox()" <?php
+                                                                if ($costing['ct_na']) {
+                                                                    echo 'checked';
                                                                 } ?>>
                                                             <label class="form-check-label" for="ct_na">No SPC-Ct
                                                                 value (no result)</label>
@@ -6605,7 +6606,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6635,7 +6636,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7265,7 +7266,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8065,10 +8066,10 @@ if ($user->isLoggedIn()) {
                                                     <br>
                                                     <textarea class="form-control" name="sputum_reasons" rows="3"
                                                         placeholder="Type reasons here...">
-                                                                                                                             <?php if ($clients['sputum_reasons']) {
-                                                                                                                                 print_r($clients['sputum_reasons']);
-                                                                                                                             } ?>
-                                                                                                                                                                                    </textarea>
+                                                                                                                                 <?php if ($clients['sputum_reasons']) {
+                                                                                                                                     print_r($clients['sputum_reasons']);
+                                                                                                                                 } ?>
+                                                                                                                                                                                        </textarea>
 
                                                 </div>
 
@@ -9876,7 +9877,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10104,6 +10105,9 @@ if ($user->isLoggedIn()) {
 
     <!-- RESPIRATORY format numbers Js -->
     <script src="js/laboratory/laboratory.js"></script>
+    <!-- <script src="js/laboratory/utils.js"></script>
+    <script src="js/laboratory/formVisibility.js"></script>
+    <script src="js/laboratory/formValidation.js"></script> -->
 
     <!-- Diagnosis Test format numbers Js -->
     <script src="myjs/add/diagnosis_test/culture_performed.js"></script>
@@ -10198,51 +10202,6 @@ if ($user->isLoggedIn()) {
             $("input[data-bootstrap-switch]").each(function () {
                 $(this).bootstrapSwitch('state', $(this).prop('checked'));
             })
-
-            $('#regions_id').change(function () {
-                var region_id = $(this).val();
-                $.ajax({
-                    url: "process.php?content=region_id",
-                    method: "GET",
-                    data: {
-                        region_id: region_id
-                    },
-                    dataType: "text",
-                    success: function (data) {
-                        $('#districts_id').html(data);
-                    }
-                });
-            });
-
-            $('#region').change(function () {
-                var region = $(this).val();
-                $.ajax({
-                    url: "process.php?content=region_id",
-                    method: "GET",
-                    data: {
-                        region_id: region
-                    },
-                    dataType: "text",
-                    success: function (data) {
-                        $('#district').html(data);
-                    }
-                });
-            });
-
-            $('#district').change(function () {
-                var district_id = $(this).val();
-                $.ajax({
-                    url: "process.php?content=district_id",
-                    method: "GET",
-                    data: {
-                        district_id: district_id
-                    },
-                    dataType: "text",
-                    success: function (data) {
-                        $('#ward').html(data);
-                    }
-                });
-            });
 
         })
 
