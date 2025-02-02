@@ -85,21 +85,30 @@ document.addEventListener("DOMContentLoaded", function () {
             remarksField.required = false;
         }
 
-        // Handle ct_value and ct_value_not_applicable logic
+        // Handle ct_value and ct_na logic
         handleCtValueRequirement();
     }
 
     function handleCtValueRequirement() {
         if (ctNotApplicableCheckbox.checked) {
-            // Disable and clear ct_value if "Not Applicable" is checked
+            // If "Not Applicable" is checked
             ctValueInput.value = "";
             ctValueInput.disabled = true;
             ctValueInput.required = false;
+            ctNotApplicableCheckbox.required = false; // Ensure checkbox itself isn't required if checked
         } else {
-            // Make ct_value required if checkbox is unchecked
             ctValueInput.disabled = false;
-            ctValueInput.required = document.getElementById("xpert_rif_test_section").style.display === "block";
+            ctValueInput.required = !ctValueInput.value; // Make required only if empty
+            ctNotApplicableCheckbox.required = !ctValueInput.value; // Require checkbox if value is empty
         }
+    }
+
+    function handleCtValueInput() {
+        if (ctValueInput.value) {
+            ctNotApplicableCheckbox.checked = false; // Uncheck checkbox if value is entered
+            ctNotApplicableCheckbox.required = false; // Make checkbox not required
+        }
+        handleCtValueRequirement();
     }
 
     // Event Listeners
@@ -107,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sampleReasonRadios.forEach(radio => radio.addEventListener("change", toggleFields));
     newSampleRadios.forEach(radio => radio.addEventListener("change", toggleFields));
     ctNotApplicableCheckbox.addEventListener("change", handleCtValueRequirement);
+    ctValueInput.addEventListener("input", handleCtValueInput);
 
     toggleFields(); // Initial call to set the correct visibility state on page load
 });
@@ -328,7 +338,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Event listeners
     ctNaCheckbox.addEventListener("change", handleCheckbox);
     ctValueInput.addEventListener("input", handleCtValueInput);
-    
+
     // Add event listeners for validation on input change
     dateCollectedInput.addEventListener("change", validateDates);
     dateReceivedInput.addEventListener("change", validateDates);

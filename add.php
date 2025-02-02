@@ -4311,7 +4311,7 @@ if ($user->isLoggedIn()) {
                                                     </h5>
                                                     <hr>
                                                     <span>
-                                                        <small class="text-center d-block text-danger fw-bold">
+                                                        <small class="text-center d-block text-success fw-bold">
                                                             Note: if initial test result was non-determinate, include data
                                                             for the final test result here.
                                                         </small>
