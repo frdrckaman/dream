@@ -4314,218 +4314,90 @@ if ($user->isLoggedIn()) {
                                                     <hr>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <label for="xpert_results" id="xpert_results" class="form-label">10. Xpert
-                                                    MTB/RIF (Ultra) test Result (at TB clinic)</label>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-4" id="xpert_date1">
-                                                        <div class="mb-3">
-                                                            <label for="xpert_date" id="xpert_date" class="form-label">10a.
-                                                                Date</label>
-                                                            <input type="date" value="<?php if ($costing['xpert_date']) {
-                                                                print_r($costing['xpert_date']);
-                                                            } ?>" id="xpert_date" name="xpert_date"
-                                                                class="form-control" placeholder="Enter here" />
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="col-sm-4" id="xpert_mtb">
-                                                        <label for="xpert_mtb" class="form-label">10b. MTB</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('mtb_detections', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="xpert_mtb"
-                                                                            id="xpert_mtb_new<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['xpert_mtb'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('xpert_mtb')">Unset</button>
+<div class="text-center">
+    <h3><strong>Xpert MTB/RIF (Ultra) Test</strong></h3>
+</div>
 
-                                                            </div>
-                                                            <label for="xpert_error_code" id="xpert_error_code_new1"
-                                                                class="form-label">If error, code </label>
-                                                            <input type="text" value="<?php if ($costing['xpert_error_code']) {
-                                                                print_r($costing['xpert_error_code']);
-                                                            } ?>" id="xpert_error_code_new" name="xpert_error_code"
-                                                                class="form-control" placeholder="Enter here" />
-                                                        </div>
+<hr>
 
-                                                    </div>
+<div class="row">
+    <!-- Date Column -->
+    <div class="col-3 border p-3 rounded" id="xpert_date_section">
+        <div class="mb-3">
+            <label for="xpert_date" class="form-label"><strong>7(a). Date of conducting Xpert MTB/RIF (Ultra)</strong></label>
+            <input type="date" value="<?php if ($costing['xpert_date']) { print_r($costing['xpert_date']); } ?>" id="xpert_date" name="xpert_date" class="form-control" placeholder="Enter here" />
+        </div>
+    </div>
 
-                                                    <div class="col-sm-4" id="xpert_rif">
-                                                        <label for="xpert_rif" class="form-label">10c. RIF
-                                                            resistance</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="xpert_rif" id="xpert_rif<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['xpert_rif'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('xpert_rif')">Unset</button>
+    <!-- Xpert Results Subtitle -->
+    <div class="col-6">
+        <h5 class="text-center"><strong>7(b). Xpert MTB/RIF (Ultra) Test Result</strong></h5>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr>
+        <div class="row">
+            <!-- MTB Column -->
+            <div class="col-6 border p-3 rounded" id="xpert_mtb">
+                <label for="xpert_mtb" class="form-label"><strong>MTB</strong></label>
+                <div class="row-form clearfix">
+                    <div class="form-group">
+                        <?php foreach ($override->get('mtb_detections', 'status', 1) as $value) { ?>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="xpert_mtb" id="xpert_mtb_new<?= $value['id']; ?>" value="<?= $value['id']; ?>" 
+                                    <?php if ($costing['xpert_mtb'] == $value['id']) { echo 'checked'; } ?>>
+                                <label class="form-check-label"><?= $value['name']; ?></label>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+                <button type="button" onclick="unsetRadio('xpert_mtb')">Unset</button>
+            </div>
 
-                                                <div class="row">
-                                                    <div class="col-6" id="ct_value1">
-                                                        <div class="mb-3">
-                                                            <label for="ct_value" class="form-label">
-                                                                11b. Sample Processing Control (SPC) Cycle threshold (Ct)
-                                                                value
-                                                            </label>
-                                                            <div class="d-flex align-items-center">
-                                                                <!-- Input Field -->
-                                                                <input type="number" value="<?php if ($costing['ct_value']) {
-                                                                    print_r($costing['ct_value']);
-                                                                } ?>" id="ct_value_not_repeat" name="ct_value"
-                                                                    step="0.1" min="0" max="99" class="form-control me-2"
-                                                                    placeholder="Enter here" />
+            <!-- RIF Resistance Column -->
+            <div class="col-6 border p-3 rounded" id="xpert_rif">
+                <label for="xpert_rif" class="form-label"><strong>RIF Resistance</strong></label>
+                <div class="row-form clearfix">
+                    <div class="form-group">
+                        <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="xpert_rif" id="xpert_rif<?= $value['id']; ?>" value="<?= $value['id']; ?>" 
+                                    <?php if ($costing['xpert_rif'] == $value['id']) { echo 'checked'; } ?>>
+                                <label class="form-check-label"><?= $value['name']; ?></label>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+                <button type="button" onclick="unsetRadio('xpert_rif')">Unset</button>
+            </div>
+        </div>
+    </div>
 
-                                                                <!-- Checkbox -->
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input"
-                                                                        id="ct_value_not_applicable" name="not_applicable"
-                                                                        onclick="handleCheckbox()">
-                                                                    <label class="form-check-label" for="not_applicable">no
-                                                                        SPC-Ct value (no result)</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+    <!-- CT Value Column -->
+    <div class="col-3 border p-3 rounded" id="ct_value_section">
+        <div class="mb-3">
+            <label for="ct_value" class="form-label"><strong>11(b). SPC Cycle Threshold (Ct) Value</strong></label>
+            <input type="number" value="<?php if ($costing['ct_value']) { print_r($costing['ct_value']); } ?>" id="ct_value_not_repeat" name="ct_value" step="0.1" min="0" max="99" class="form-control" placeholder="Enter here" />
+            
+            <!-- Checkbox below input -->
+            <div class="form-check mt-2">
+                <input type="checkbox" class="form-check-input" id="ct_value_not_applicable" name="not_applicable" onclick="handleCheckbox()">
+                <label class="form-check-label" for="not_applicable">No SPC-Ct value (no result)</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Remarks Row -->
+<div class="row mt-3">
+    <div class="col-12 border p-3 rounded">
+        <label for="remarks" class="form-label"><strong>Remarks</strong></label>
+        <textarea id="remarks" name="remarks" class="form-control" rows="3" placeholder="Enter any additional remarks here..."></textarea>
+    </div>
+</div>
 
 
-                                                <hr>
-                                                <label for="xpert_date_repeat_new1" id="xpert_date_repeat_new1"
-                                                    class="form-label">13. Repeat Xpert
-                                                    MTB/RIF (Ultra) test result</label>
-                                                <hr>
 
-                                                <div id="xpert_date_repeat_new">
 
-                                                    <div class="row">
-                                                        <div class="col-4" id="xpert_date_repeat1">
-                                                            <div class="mb-3">
-                                                                <label for="xpert_date_repeat" id="xpert_date_repeat"
-                                                                    class="form-label">13a.
-                                                                    Date</label>
-                                                                <input type="date" value="<?php if ($costing['xpert_date_repeat']) {
-                                                                    print_r($costing['xpert_date_repeat']);
-                                                                } ?>" id="xpert_date_repeat" name="xpert_date_repeat"
-                                                                    class="form-control" placeholder="Enter here" />
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-4" id="xpert_mtb_repeat">
-                                                            <label for="xpert_mtb_repeat" class="form-label">13b.
-                                                                MTB</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('mtb_detections', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="xpert_mtb_repeat"
-                                                                                id="xpert_mtb_repeat<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['xpert_mtb_repeat'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                    <button type="button"
-                                                                        onclick="unsetRadio('xpert_mtb_repeat')">Unset</button>
-
-                                                                </div>
-                                                                <label for="xpert_error_repeat" id="xpert_error_repeat1"
-                                                                    class="form-label">If error, code </label>
-                                                                <input type="text" value="<?php if ($costing['xpert_error_repeat']) {
-                                                                    print_r($costing['xpert_error_repeat']);
-                                                                } ?>" id="xpert_error_repeat" name="xpert_error_repeat"
-                                                                    class="form-control" placeholder="Enter here" />
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-4" id="xpert_rif_repeat">
-                                                            <label for="xpert_rif_repeat" class="form-label">13c. RIF
-                                                                resistance</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('rif_resistance', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="xpert_rif_repeat"
-                                                                                id="xpert_rif_repeat<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['xpert_rif_repeat'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('xpert_rif_repeat')">Unset</button>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="row">
-                                                        <div class="col-6" id="ct_value_repeat1">
-                                                            <div class="mb-3">
-                                                                <label for="ct_value_repeat" class="form-label">
-                                                                    14b. SPC-Ct
-                                                                    value </label>
-                                                                <div class="d-flex align-items-center">
-                                                                    <!-- Input Field -->
-                                                                    <input type="number" value="<?php if ($costing['ct_value_repeat']) {
-                                                                        print_r($costing['ct_value_repeat']);
-                                                                    } ?>" id="ct_value_repeat" name="ct_value_repeat"
-                                                                        step="0.1" min="0" max="99"
-                                                                        class="form-control me-2"
-                                                                        placeholder="Enter here" />
-
-                                                                    <!-- Checkbox -->
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input"
-                                                                            id="ct_value_not_applicable2"
-                                                                            name="not_applicable"
-                                                                            onclick="handleCheckbox()">
-                                                                        <label class="form-check-label"
-                                                                            for="not_applicable">no
-                                                                            SPC-Ct value (no result)</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <hr>
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
@@ -6729,7 +6601,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6759,7 +6631,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7389,7 +7261,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8189,10 +8061,10 @@ if ($user->isLoggedIn()) {
                                                     <br>
                                                     <textarea class="form-control" name="sputum_reasons" rows="3"
                                                         placeholder="Type reasons here...">
-                                                                                                     <?php if ($clients['sputum_reasons']) {
-                                                                                                         print_r($clients['sputum_reasons']);
-                                                                                                     } ?>
-                                                                                                                                                            </textarea>
+                                                                                                             <?php if ($clients['sputum_reasons']) {
+                                                                                                                 print_r($clients['sputum_reasons']);
+                                                                                                             } ?>
+                                                                                                                                                                    </textarea>
 
                                                 </div>
 
@@ -10000,7 +9872,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
