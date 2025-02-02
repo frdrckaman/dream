@@ -1004,9 +1004,6 @@ if ($user->isLoggedIn()) {
                 $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid']);
 
-                $test_reasons = implode(',', Input::get('test_reasons'));
-                $sample_type = implode(',', Input::get('sample_type'));
-
                 if (Input::get('respiratory_completness') == 3 && Input::get('respiratory_verified_date') == "") {
                     $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
                 } else {
@@ -4318,7 +4315,7 @@ if ($user->isLoggedIn()) {
                                                                         <div class="form-check">
                                                                             <input class="form-check-input" type="radio"
                                                                                 name="xpert_mtb"
-                                                                                id="xpert_mtb_new<?= $value['id']; ?>"
+                                                                                id="xpert_mtb<?= $value['id']; ?>"
                                                                                 value="<?= $value['id']; ?>" <?php if ($costing['xpert_mtb'] == $value['id']) {
                                                                                       echo 'checked';
                                                                                   } ?>>
