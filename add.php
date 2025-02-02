@@ -4183,7 +4183,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
 
-                                            <div class="afb-header">
+                                            <div class="afb-header" id="afb-header">
                                                 <h3><strong>AFB Microscopy</strong></h3>
                                             </div>
                                             <hr>
@@ -4191,7 +4191,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- Column A -->
                                                 <div class="col-md-6">
                                                     <div class="afb-section">
-                                                        <h4 class="afb-subheader">Slide A:</h4>
+                                                        <h4 class="afb-subheader-A" id="afb-subheader-A">Slide A:</h4>
 
                                                         <div id="afb_technique_a_section">
                                                             <label class="form-label"><strong>6(b). AFB technique used
@@ -4254,7 +4254,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- Column B -->
                                                 <div class="col-md-6">
                                                     <div class="afb-section">
-                                                        <h4 class="afb-subheader">Slide B:</h4>
+                                                        <h4 class="afb-subheader-B" id="afb-subheader-B">Slide B:</h4>
 
                                                         <div id="afb_technique_b_section">
                                                             <label class="form-label"><strong>6(b). AFB technique used
@@ -4315,7 +4315,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
 
-                                            <div class="text-center">
+                                            <div class="text-center" id="xpert_rif_test_section">
                                                 <h3><strong>Xpert MTB/RIF (Ultra) Test</strong></h3>
                                             </div>
 
@@ -4338,7 +4338,7 @@ if ($user->isLoggedIn()) {
 
                                                 <!-- Xpert Results Subtitle -->
                                                 <div class="col-6">
-                                                    <h5 class="text-center"><strong>7(b). Xpert MTB/RIF (Ultra) Test
+                                                    <h5 class="text-center" id="xpert_rif_results_section"><strong>7(b). Xpert MTB/RIF (Ultra) Test
                                                             Result</strong></h5>
 
                                                     <div class="row">
@@ -4419,7 +4419,7 @@ if ($user->isLoggedIn()) {
                                             <!-- Remarks Row -->
                                             <div class="row mt-3">
                                                 <div class="col-12 border p-3 rounded">
-                                                    <label for="remarks" class="form-label"><strong>Remarks</strong></label>
+                                                    <label for="remarks" class="form-label"><strong>Any comments or remarks about the patient or sample</strong></label>
                                                     <textarea id="remarks" name="remarks" class="form-control" rows="3"
                                                         placeholder="Enter any additional remarks here..."></textarea>
                                                 </div>
