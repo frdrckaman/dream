@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const sampleReceivedRadios = document.getElementsByName("sample_received");
     const sampleReasonRadios = document.getElementsByName("sample_reason");
     const newSampleRadios = document.getElementsByName("new_sample");
+    const ctValueInput = document.getElementById("ct_value_not_repeat");
+    const ctNotApplicableCheckbox = document.getElementById("ct_value_not_applicable");
 
     function toggleFields() {
         const isSampleReceivedYes = document.querySelector('input[name="sample_received"]:checked')?.value === "1";
@@ -49,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // ---- Xpert MTB/RIF (Ultra) Test Section ----
         const xpertSection = document.getElementById("xpert_rif_test_section");
-        const xpertSectionResults = document.getElementById("xpert_rif_results_section");
         const xpertFields = [
             "xpert_date_section",
             "xpert_mtb",
@@ -57,17 +58,10 @@ document.addEventListener("DOMContentLoaded", function () {
             "ct_value_section"
         ];
 
-        // Show when either:
-        // 1. sample_received = "No" AND new_sample = "Yes"
-        // 2. sample_received = "Yes" (this hides new_sample, so it should also be visible)
         const shouldShowXpert = isSampleReceivedYes || (isSampleReceivedNo && isNewSampleYes);
 
         if (xpertSection) {
             xpertSection.style.display = shouldShowXpert ? "block" : "none";
-        }
-
-        if (xpertSectionResults) {
-            xpertSectionResults.style.display = shouldShowXpert ? "block" : "none";
         }
 
         xpertFields.forEach(id => {
@@ -85,11 +79,29 @@ document.addEventListener("DOMContentLoaded", function () {
         if (remarksField) {
             remarksField.required = false;
         }
+
+        // Handle ct_value and ct_value_not_applicable logic
+        handleCtValueRequirement();
     }
 
+    function handleCtValueRequirement() {
+        if (ctNotApplicableCheckbox.checked) {
+            // Disable and clear ct_value if "Not Applicable" is checked
+            ctValueInput.value = "";
+            ctValueInput.disabled = true;
+            ctValueInput.required = false;
+        } else {
+            // Make ct_value required if checkbox is unchecked
+            ctValueInput.disabled = false;
+            ctValueInput.required = document.getElementById("xpert_rif_test_section").style.display === "block";
+        }
+    }
+
+    // Event Listeners
     sampleReceivedRadios.forEach(radio => radio.addEventListener("change", toggleFields));
     sampleReasonRadios.forEach(radio => radio.addEventListener("change", toggleFields));
     newSampleRadios.forEach(radio => radio.addEventListener("change", toggleFields));
+    ctNotApplicableCheckbox.addEventListener("change", handleCtValueRequirement);
 
     toggleFields(); // Initial call to set the correct visibility state on page load
 });

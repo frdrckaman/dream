@@ -4401,7 +4401,7 @@ if ($user->isLoggedIn()) {
                                                             value="<?php if ($costing['ct_value']) {
                                                                 print_r($costing['ct_value']);
                                                             } ?>"
-                                                            id="ct_value_not_repeat" name="ct_value" step="0.1" min="0"
+                                                            id="ct_value" name="ct_value" step="0.1" min="0"
                                                             max="99" class="form-control" placeholder="Enter here" />
 
                                                         <!-- Checkbox below input -->
