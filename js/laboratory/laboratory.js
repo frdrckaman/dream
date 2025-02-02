@@ -192,19 +192,42 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
 document.addEventListener("DOMContentLoaded", function () {
     const dateCollectedInput = document.getElementById("date_collected_input");
     const dateReceivedInput = document.getElementById("date_received_input");
     const enrollmentDateInput = document.getElementById("enrollment_date_hidded");
+    const afbADateInput = document.getElementById("afb_a_date");
+    const afbBDateInput = document.getElementById("afb_date_b");
+    const xpertDateInput = document.getElementById("xpert_date");
+    const ctValueInput = document.getElementById("ct_value");
+    const ctNaCheckbox = document.getElementById("ct_na");
+
     const dateCollectedError = document.getElementById("date_collected_error");
     const dateReceivedError = document.getElementById("date_received_error");
-    const form = document.querySelector("form");
+    const afbADateError = document.createElement("span");
+    const afbBDateError = document.createElement("span");
+    const xpertDateError = document.createElement("span");
+    const ctValueError = document.createElement("span");
+
+    afbADateError.classList.add("text-danger");
+    afbBDateError.classList.add("text-danger");
+    xpertDateError.classList.add("text-danger");
+    ctValueError.classList.add("text-danger");
+
+    afbADateInput.parentNode.appendChild(afbADateError);
+    afbBDateInput.parentNode.appendChild(afbBDateError);
+    xpertDateInput.parentNode.appendChild(xpertDateError);
+    ctValueInput.parentNode.appendChild(ctValueError);
+
+    const form = document.querySelector("labForm_clinic");
 
     function validateDates() {
         const dateCollected = new Date(dateCollectedInput.value);
         const dateReceived = new Date(dateReceivedInput.value);
         const enrollmentDate = new Date(enrollmentDateInput.value);
+        const afbADate = new Date(afbADateInput.value);
+        const afbBDate = new Date(afbBDateInput.value);
+        const xpertDate = new Date(xpertDateInput.value);
         const today = new Date();
 
         let isValid = true;
@@ -212,6 +235,10 @@ document.addEventListener("DOMContentLoaded", function () {
         // Reset errors
         dateCollectedError.textContent = "";
         dateReceivedError.textContent = "";
+        afbADateError.textContent = "";
+        afbBDateError.textContent = "";
+        xpertDateError.textContent = "";
+        ctValueError.textContent = "";
 
         // Validation: date_collected must not be before enrollment_date
         if (dateCollected < enrollmentDate) {
@@ -235,12 +262,81 @@ document.addEventListener("DOMContentLoaded", function () {
             isValid = false;
         }
 
+        // Validation: afb_a_date must not be before date_received
+        if (afbADateInput.value && afbADate < dateReceived) {
+            afbADateError.textContent = "AFB A date cannot be before date received.";
+            isValid = false;
+        }
+
+        // Validation: afb_b_date must not be before date_received
+        if (afbBDateInput.value && afbBDate < dateReceived) {
+            afbBDateError.textContent = "AFB B date cannot be before date received.";
+            isValid = false;
+        }
+
+        // Validation: afb_a_date must not be in the future
+        if (afbADate > today) {
+            afbADateError.textContent = "AFB A date cannot be a future date.";
+            isValid = false;
+        }
+
+        // Validation: afb_b_date must not be in the future
+        if (afbBDate > today) {
+            afbBDateError.textContent = "AFB B date cannot be a future date.";
+            isValid = false;
+        }
+
+        // Validation: xpert_date must not be before date_received
+        if (xpertDateInput.value && xpertDate < dateReceived) {
+            xpertDateError.textContent = "Xpert date cannot be before date received.";
+            isValid = false;
+        }
+
+        // Validation: xpert_date must not be in the future
+        if (xpertDate > today) {
+            xpertDateError.textContent = "Xpert date cannot be a future date.";
+            isValid = false;
+        }
+
+        // Validation: ct_value must not be greater than 5
+        if (ctValueInput.value && parseFloat(ctValueInput.value) > 5) {
+            ctValueError.textContent = "Ct value cannot be greater than 5.";
+            isValid = false;
+        }
+
         return isValid;
     }
 
+    // Function to handle ct_na checkbox
+    function handleCheckbox() {
+        if (ctNaCheckbox.checked) {
+            ctValueInput.value = "";
+            ctValueInput.disabled = true;
+            ctValueInput.required = false; // Remove required if checked
+        } else {
+            ctValueInput.disabled = false;
+            ctValueInput.required = true; // Require again if unchecked
+        }
+    }
+
+    function handleCtValueInput() {
+        if (ctValueInput.value) {
+            ctNaCheckbox.checked = false; // Uncheck checkbox if value is entered
+        }
+    }
+
+    // Event listeners
+    ctNaCheckbox.addEventListener("change", handleCheckbox);
+    ctValueInput.addEventListener("input", handleCtValueInput);
+    
     // Add event listeners for validation on input change
     dateCollectedInput.addEventListener("change", validateDates);
     dateReceivedInput.addEventListener("change", validateDates);
+    afbADateInput.addEventListener("change", validateDates);
+    afbBDateInput.addEventListener("change", validateDates);
+    xpertDateInput.addEventListener("change", validateDates);
+    ctValueInput.addEventListener("change", validateDates);
+    ctNaCheckbox.addEventListener("change", handleCheckbox);
 
     // Prevent form submission if validation fails
     form.addEventListener("submit", function (e) {

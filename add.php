@@ -3947,7 +3947,7 @@ if ($user->isLoggedIn()) {
                                         <h3 class="card-title">General information Form</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                    <form id="labForm_clinic" enctype="multipart/form-data" method="post" autocomplete="off">
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">
@@ -4380,7 +4380,10 @@ if ($user->isLoggedIn()) {
                                                         <!-- Checkbox below input -->
                                                         <div class="form-check mt-2">
                                                             <input type="checkbox" class="form-check-input" id="ct_na"
-                                                                name="ct_na" onclick="handleCheckbox()">
+                                                                name="ct_na" onclick="handleCheckbox()" <?php 
+                                                                    if ($costing['ct_na']) {
+                                                                        echo 'checked';                                                                    
+                                                                } ?>>
                                                             <label class="form-check-label" for="ct_na">No SPC-Ct
                                                                 value (no result)</label>
                                                         </div>
