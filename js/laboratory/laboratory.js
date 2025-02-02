@@ -51,6 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // ---- Xpert MTB/RIF (Ultra) Test Section ----
         const xpertSection = document.getElementById("xpert_rif_test_section");
+        const xpertSectionResults = document.getElementById("xpert_rif_results_section");
+
         const xpertFields = [
             "xpert_date_section",
             "xpert_mtb",
@@ -64,6 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
             xpertSection.style.display = shouldShowXpert ? "block" : "none";
         }
 
+        if (xpertSectionResults) {
+            xpertSectionResults.style.display = shouldShowXpert ? "block" : "none";
+        }
         xpertFields.forEach(id => {
             const element = document.getElementById(id);
             if (element) {
