@@ -55,3 +55,81 @@ document.addEventListener("DOMContentLoaded", function () {
 
     toggleFields(); // Initial call to set the correct visibility state on page load
 });
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const afbMicroscopyRadioButtons = document.querySelectorAll('input[name="afb_microscopy"]');
+    const afbMicroscopyDiv = document.getElementById('afb_microscopy');
+    const afbSectionA = document.getElementById('afb_technique_a_section');
+    const afbSectionB = document.getElementById('afb_technique_b_section');
+    const afbDateA = document.getElementById('afb_a_date_section');
+    const afbDateB = document.getElementById('afb_b_date_section');
+    const afbResultsA = document.getElementById('afb_results_a_section');
+    const afbResultsB = document.getElementById('afb_results_b_section');
+    const afbHeaderA = document.querySelector('h4.afb-subheader[data-slide="A"]');  // Slide A header
+    const afbHeaderB = document.querySelector('h4.afb-subheader[data-slide="B"]');  // Slide B header
+    const afbSubheaderA = document.querySelector('h4.afb-subheader[data-slide="A"]');
+    const afbSubheaderB = document.querySelector('h4.afb-subheader[data-slide="B"]');
+
+    // Function to toggle visibility and required status
+    function toggleSections() {
+        const afbMicroscopyValue = document.querySelector('input[name="afb_microscopy"]:checked');
+
+    if (afbMicroscopyValue && afbMicroscopyValue.value === "1") {  // "Yes" is selected
+        afbSectionA.style.display = 'block';
+    afbSectionB.style.display = 'block';
+    afbDateA.style.display = 'block';
+    afbDateB.style.display = 'block';
+    afbResultsA.style.display = 'block';
+    afbResultsB.style.display = 'block';
+    afbHeaderA.style.display = 'block';  // Show headers
+    afbHeaderB.style.display = 'block';  // Show headers
+
+    // Make the fields required
+    document.getElementById('afb_date_a').required = true;
+    document.getElementById('afb_date_b').required = true;
+
+    const afbMicroscopyARadios = document.querySelectorAll('input[name="afb_microscopy_a"]');
+    const afbMicroscopyBRadios = document.querySelectorAll('input[name="afb_microscopy_b"]');
+    const afbResultsARadios = document.querySelectorAll('input[name="afb_a_results"]');
+    const afbResultsBRadios = document.querySelectorAll('input[name="afb_b_results"]');
+            
+            afbMicroscopyARadios.forEach(radio => radio.required = true);
+            afbMicroscopyBRadios.forEach(radio => radio.required = true);
+            afbResultsARadios.forEach(radio => radio.required = true);
+            afbResultsBRadios.forEach(radio => radio.required = true);
+        } else {
+        afbSectionA.style.display = 'none';
+    afbSectionB.style.display = 'none';
+    afbDateA.style.display = 'none';
+    afbDateB.style.display = 'none';
+    afbResultsA.style.display = 'none';
+    afbResultsB.style.display = 'none';
+    afbHeaderA.style.display = 'none';  // Hide headers
+    afbHeaderB.style.display = 'none';  // Hide headers
+
+    // Remove required fields
+    document.getElementById('afb_date_a').required = false;
+    document.getElementById('afb_date_b').required = false;
+
+    const afbMicroscopyARadios = document.querySelectorAll('input[name="afb_microscopy_a"]');
+    const afbMicroscopyBRadios = document.querySelectorAll('input[name="afb_microscopy_b"]');
+    const afbResultsARadios = document.querySelectorAll('input[name="afb_a_results"]');
+    const afbResultsBRadios = document.querySelectorAll('input[name="afb_b_results"]');
+            
+            afbMicroscopyARadios.forEach(radio => radio.required = false);
+            afbMicroscopyBRadios.forEach(radio => radio.required = false);
+            afbResultsARadios.forEach(radio => radio.required = false);
+            afbResultsBRadios.forEach(radio => radio.required = false);
+        }
+    }
+
+    // Event listener for when the user changes their selection
+    afbMicroscopyRadioButtons.forEach(radio => {
+        radio.addEventListener('change', toggleSections);
+    });
+
+    // Call the function on page load to ensure the correct state is applied
+    toggleSections();
+});
