@@ -418,7 +418,7 @@ if ($user->isLoggedIn()) {
                                                                 class="btn btn-info">Update</a>
                                                             <a href="#reset<?= $staff['id'] ?>" role="button"
                                                                 class="btn btn-default" data-toggle="modal">Reset</a>
-                                                                 <a href="#change<?= $staff['id'] ?>" role="button"
+                                                            <a href="#change<?= $staff['id'] ?>" role="button"
                                                                 class="btn btn-success" data-toggle="modal">Change</a>
                                                             <a href="#lock<?= $staff['id'] ?>" role="button"
                                                                 class="btn btn-warning" data-toggle="modal">Lock</a>
@@ -477,8 +477,7 @@ if ($user->isLoggedIn()) {
                                                                         <h4>Change Password</h4>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <input type="text" name="password"
-                                                                            value="">
+                                                                        <input type="text" name="password" value="">
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <input type="hidden" name="id"
@@ -938,40 +937,40 @@ if ($user->isLoggedIn()) {
                                     if ($user->data()->accessLevel == 1) {
                                         if ($_GET['facility_id'] != null) {
                                             if ($_GET['status'] == 1) {
-                                                $data = $override->getWithLimit1('screening', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                                $data = $override->getWithLimit1Desc('screening', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
                                             } else if ($_GET['status'] == 2) {
-                                                $data = $override->getWithLimit2('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                                $data = $override->getWithLimit2Desc('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
                                             } else if ($_GET['status'] == 3) {
-                                                $data = $override->getWithLimit1('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                                $data = $override->getWithLimit1Desc('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
                                             } else if ($_GET['status'] == 4) {
-                                                $data = $override->getWithLimit1('termination', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                                $data = $override->getWithLimit1Desc('termination', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
                                             } else {
-                                                $data = $override->getWithLimit('screening', 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                                $data = $override->getWithLimitDesc('screening', 'facility_id', $_GET['facility_id'], $page, $numRec);
                                             }
                                         } else {
                                             if ($_GET['status'] == 1) {
-                                                $data = $override->getWithLimit('screening', 'status', 1, $page, $numRec);
+                                                $data = $override->getWithLimitDesc('screening', 'status', 1, $page, $numRec);
                                             } else if ($_GET['status'] == 2) {
-                                                $data = $override->getWithLimit1('screening', 'status', 1, 'eligible', 1, $page, $numRec);
+                                                $data = $override->getWithLimit1Desc('screening', 'status', 1, 'eligible', 1, $page, $numRec);
                                             } else if ($_GET['status'] == 3) {
-                                                $data = $override->getWithLimit('enrollment_form', 'status', 1, $page, $numRec);
+                                                $data = $override->getWithLimitDesc('enrollment_form', 'status', 1, $page, $numRec);
                                             } else if ($_GET['status'] == 4) {
-                                                $data = $override->getWithLimit('termination', 'status', 1, $page, $numRec);
+                                                $data = $override->getWithLimitDesc('termination', 'status', 1, $page, $numRec);
                                             } else {
-                                                $data = $override->getWithLimit0('screening', $page, $numRec);
+                                                $data = $override->getWithLimit0Desc('screening', $page, $numRec);
                                             }
                                         }
                                     } else {
                                         if ($_GET['status'] == 1) {
-                                            $data = $override->getWithLimit1('screening', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                            $data = $override->getWithLimit1Desc('screening', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
                                         } else if ($_GET['status'] == 2) {
-                                            $data = $override->getWithLimit2('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                            $data = $override->getWithLimit2Desc('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
                                         } else if ($_GET['status'] == 3) {
-                                            $data = $override->getWithLimit1('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                            $data = $override->getWithLimit1Desc('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
                                         } else if ($_GET['status'] == 4) {
-                                            $data = $override->getWithLimit1('termination', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                            $data = $override->getWithLimit1Desc('termination', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
                                         } else {
-                                            $data = $override->getWithLimit0('screening', $page, $numRec);
+                                            $data = $override->getWithLimit0Desc('screening', $page, $numRec);
                                         }
                                     }
                                     ?>
@@ -1111,6 +1110,7 @@ if ($user->isLoggedIn()) {
                                             <tbody>
                                                 <?php
                                                 $x = 1;
+                                                // print_r($data);
                                                 foreach ($data as $value) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['facility_id'])[0];
                                                     $sex = $override->getNews('sex', 'status', 1, 'id', $value['sex'])[0];
@@ -1520,10 +1520,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $enrollment['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($enrollment['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $enrollment['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -1817,13 +1817,13 @@ if ($user->isLoggedIn()) {
                                                     <td>
                                                         <?php if ($override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                             <a href="add.php?id=16&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                role=" button" class="btn btn-info"> Update Participant
-                                                                Enrolment Data</a>&nbsp;&nbsp; <br><br>
+                                                                role=" button" class="btn btn-info"> Update Enrolment
+                                                                Form</a>&nbsp;&nbsp; <br><br>
 
                                                         <?php } else { ?>
                                                             <a href="add.php?id=16&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                role=" button" class="btn btn-warning"> Add Participant
-                                                                Enrolment Data </a>&nbsp;&nbsp; <br><br>
+                                                                role=" button" class="btn btn-warning"> Add Enrolment Form
+                                                            </a>&nbsp;&nbsp; <br><br>
 
                                                         <?php } ?>
 
@@ -1831,68 +1831,36 @@ if ($user->isLoggedIn()) {
 
                                                             <?php if ($override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                                 <a href="add.php?id=11&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                    role=" button" class="btn btn-info"> Update Respiratory Sample
-                                                                    Data ( Laboratory form )
+                                                                    role=" button" class="btn btn-info"> Update Laboratory form
                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } else { ?>
                                                                 <a href="add.php?id=11&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                    role=" button" class="btn btn-warning"> Add Respiratory Sample
-                                                                    Data ( Laboratory form )
+                                                                    role=" button" class="btn btn-warning"> Add Laboratory form
                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } ?>
 
-
-                                                            <?php
-                                                            if ($override->get3('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'], 'other_samples', 1)) {
-                                                                ?>
-
-                                                                <?php if ($override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
-                                                                    <a href="add.php?id=12&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                        role=" button" class="btn btn-info">
-                                                                        Update Diagnostic Test
-                                                                        Non-respiratory Samples Data ( Laboratory form )
-                                                                    </a>&nbsp;&nbsp; <br><br>
-
-                                                                <?php } else { ?>
-                                                                    <a href="add.php?id=12&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                        role=" button" class="btn btn-warning">
-                                                                        Add Diagnostic Test
-                                                                        Non-respiratory Samples Data ( Laboratory form )
-                                                                    </a>&nbsp;&nbsp; <br><br>
-
-                                                                <?php } ?>
-
-                                                                <?php
-                                                            } else { ?>
-                                                                <a href="#" role=" button" class="btn btn-default"> Diagnostic Test
-                                                                    Non-respiratory Samples Data ( Laboratory form ) ( Not
-                                                                    Applicable For this Patient)
-                                                                </a>&nbsp;&nbsp; <br><br>
-                                                            <?php }
-                                                            ?>
-
                                                             <?php if ($override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                                 <a href="add.php?id=14&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                     role=" button" class="btn btn-info"> Update Diagnostic Test DST
-                                                                    Data </a>&nbsp;&nbsp; <br><br>
+                                                                    Form </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } else { ?>
                                                                 <a href="add.php?id=14&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                     role=" button" class="btn btn-warning"> Add Diagnostic Test DST
-                                                                    Data </a>&nbsp;&nbsp; <br><br>
+                                                                    Form </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } ?>
 
                                                             <?php if ($override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                                 <a href="add.php?id=15&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                    role=" button" class="btn btn-info"> Update Diagnosis Data
+                                                                    role=" button" class="btn btn-info"> Update Diagnosis Form
                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } else { ?>
                                                                 <a href="add.php?id=15&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                    role=" button" class="btn btn-warning"> Add Diagnosis Data
+                                                                    role=" button" class="btn btn-warning"> Add Diagnosis Form
                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } ?>
@@ -3107,10 +3075,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($visit['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $visit['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($visit['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $visit['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3583,6 +3551,117 @@ if ($user->isLoggedIn()) {
                         </div>
                         <!-- /.row -->
                     </div><!-- /.container-fluid -->
+                </section>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+        <?php } elseif ($_GET['id'] == 17) { ?>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>
+                                    <?php
+                                    $pagNum = $override->getNO('users');
+
+                                    $data = $override->getData('users');
+
+                                    ?>
+                                    Total Users
+                                </h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
+                                    <li class="breadcrumb-item active">Total Users</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <section class="content-header">
+                                        <div class="container-fluid">
+                                            <div class="row mb-2">
+                                                <div class="col-sm-3">
+                                                    <div class="card-header">
+                                              <h3 class="card-title">List of Users</h3> &nbsp;&nbsp;
+                                                            <span class="badge badge-info right"><?= $pagNum; ?></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <ol class="breadcrumb float-sm-right">
+                                                        <li class="breadcrumb-item">
+                                                            <a href="index1.php">
+                                                                < Back</a>
+                                                        </li>
+                                                        &nbsp;
+                                                        <li class="breadcrumb-item">
+                                                            <a href="index1.php">
+                                                                Go Home > </a>
+                                                        </li>
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.container-fluid -->
+                                    </section>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <!-- <th class="text-center">Action</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $x = 1;
+                                                foreach ($data as $value) {
+                                                    ?>
+                                                    <tr>                                                        
+                                                        <td class="table-user">
+                                                            <?= $value['id']; ?>
+                                                        </td>
+                                                        <td class="table-user">
+                                                            <?= $sites['name']; ?>
+                                                        </td>
+                                                        <td class="table-user">
+                                                            <?= $sites['email']; ?>
+                                                        </td>
+                                                    </tr>
+                                                    <?php $x++;
+                                                } ?>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <!-- <th class="text-center">Action</th> -->
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!--/.col (right) -->
+                    </div>
                 </section>
                 <!-- /.content -->
             </div>

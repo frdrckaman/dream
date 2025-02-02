@@ -333,36 +333,7 @@ if ($user->isLoggedIn()) {
         <?php } elseif ($_GET['id'] == 2) { ?>
             <?php
             $table_name = $_GET['table'];
-          
-            $form_name = $table_name;
-            $form_title = $table_name;
-
-            // if ($user->data()->power == 1) {
-                // if ($_GET['search_item']) {
-                //     $searchTerm = $_GET['search_item'];
-                //     $pagNum = 0;
-                //     if ($table_name == 'screening') {
-                //         $pagNum = $override->getWithLimit0SearchCount($table_name, $searchTerm, 'id', 'facility_id', 'pid', 'facility_id');
-                //     } elseif ($table_name == 'visit') {
-                //         $pagNum = $override->getWithLimit0SearchCount($table_name, $searchTerm, 'id', 'client_id', 'pid', 'facility_id');
-                //     } else {
-                //         $pagNum = $override->getWithLimit0SearchCount($table_name, $searchTerm, 'id', 'patient_id', 'pid', 'facility_id');
-                //     }
-                //     $pages = ceil($pagNum / $numRec);
-                //     if (!$_GET['page'] || $_GET['page'] == 1) {
-                //         $page = 0;
-                //     } else {
-                //         $page = ($_GET['page'] * $numRec) - $numRec;
-                //     }
-                //     if ($table_name == 'clients') {
-                //         $data = $override->getWithLimitSearch0($table_name,  $page, $numRec, $searchTerm, 'id', 'facility_id', 'pid', 'facility_id');
-                //     } elseif ($table_name == 'visit') {
-                //         $data = $override->getWithLimitSearch0($table_name,  $page, $numRec, $searchTerm, 'id', 'client_id', 'pid', 'facility_id');
-                //     } else {
-                //         $data = $override->getWithLimitSearch0($table_name,  $page, $numRec, $searchTerm, 'id', 'patient_id', 'pid', 'facility_id');
-                //     }
-                // } else {
-                    $pagNum = 0;
+                              $pagNum = 0;
                     $pagNum = $override->getNo($table_name);
                     $pages = ceil($pagNum / $numRec);
                     if (!$_GET['page'] || $_GET['page'] == 1) {
@@ -370,115 +341,7 @@ if ($user->isLoggedIn()) {
                     } else {
                         $page = ($_GET['page'] * $numRec) - $numRec;
                     }
-                    $data = $override->getWithLimit0($table_name, $page, $numRec);
-                // }
-            // } 
-            // else 
-            // if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-                // if ($_GET['facility_id'] != null) {
-                //     $pagNum = 0;
-
-                //     if ($table_name == 'clients') {
-                //         $pagNum = $override->getWithLimit1SearchCount($table_name, 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec, $searchTerm, 'id', 'facility_id');
-                //     } elseif ($table_name == 'visit') {
-                //         $pagNum = $override->getWithLimit1SearchCount($table_name, 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec, $searchTerm, 'id', 'client_id');
-                //     } else {
-                //         $pagNum = $override->getWithLimit1SearchCount($table_name, 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec, $searchTerm, 'id', 'patient_id');
-                //     }
-                //     $pages = ceil($pagNum / $numRec);
-                //     if (!$_GET['page'] || $_GET['page'] == 1) {
-                //         $page = 0;
-                //     } else {
-                //         $page = ($_GET['page'] * $numRec) - $numRec;
-                //     }
-
-                //     if ($_GET['search_item']) {
-                //         $searchTerm = $_GET['search_item'];
-                //         if ($table_name == 'clients') {
-                //             $data = $override->getWithLimit1Search($table_name, 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec, $searchTerm, 'id', 'facility_id', 'pid', 'facility_id');
-                //         } elseif ($table_name == 'visit') {
-                //             $data = $override->getWithLimit1Search($table_name, 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec, $searchTerm, 'id', 'client_id', 'pid', 'facility_id');
-                //         } else {
-                //             $data = $override->getWithLimit1Search($table_name, 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec, $searchTerm, 'id', 'patient_id', 'pid', 'facility_id');
-                //         }
-                //     } else {
-                //         if ($table_name == 'clients') {
-                //             $data = $override->getWithLimit1($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec);
-                //         } else {
-                //             $data = $override->getWithLimit1($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec);
-                //         }
-                //     }
-                // } else {
-
-                    // $pagNum = 0;
-                    // if ($table_name == 'screening') {
-                    //     $pagNum = $override->getWithLimitSearchCount($table_name, 'status', 1, $searchTerm, 'id', 'facility_id', 'pid', 'facility_id');
-                    // } elseif ($table_name == 'visit') {
-                    //     $pagNum = $override->getWithLimitSearchCount($table_name, 'status', 1, $searchTerm, 'id', 'client_id', 'pid', 'facility_id');
-                    // } else {
-                    //     $pagNum = $override->getWithLimitSearchCount($table_name, 'status', 1, $searchTerm, 'id', 'patient_id', 'pid', 'facility_id');
-                    // }
-                    // $pages = ceil($pagNum / $numRec);
-                    // if (!$_GET['page'] || $_GET['page'] == 1) {
-                    //     $page = 0;
-                    // } else {
-                    //     $page = ($_GET['page'] * $numRec) - $numRec;
-                    // }
-
-                //     if ($_GET['search_item']) {
-                //         $searchTerm = $_GET['search_item'];
-                //         if ($table_name == 'clients') {
-                //             $data = $override->getWithLimitSearch($table_name, 'status', 1, $page, $numRec, $searchTerm, 'id', 'facility_id', 'pid', 'facility_id');
-                //         } elseif ($table_name == 'visit') {
-                //             $data = $override->getWithLimitSearch($table_name, 'status', 1, $page, $numRec, $searchTerm, 'id', 'client_id', 'pid', 'facility_id');
-                //         } else {
-                //             $data = $override->getWithLimitSearch($table_name, 'status', 1, $page, $numRec, $searchTerm, 'id', 'patient_id', 'pid', 'facility_id');
-                //         }
-                //     } else {
-                        // if ($table_name == 'clients') {
-                        //     $data = $override->getWithLimit1($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec);
-                        // } elseif ($table_name == 'visit') {
-                        //     $data = $override->getWithLimit1($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec);
-                        // } else {
-                        //     $data = $override->getWithLimit1($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec);
-                        // }
-                //     }
-                // }
-            // } else {
-                // $pagNum = 0;
-                // if ($table_name == 'screening') {
-                //     $pagNum = $override->getWithLimit1SearchCount($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec, $searchTerm, 'id', 'facility_id');
-                // } elseif ($table_name == 'visit') {
-                //     $pagNum = $override->getWithLimit1SearchCount($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec, $searchTerm, 'id', 'client_id');
-                // } else {
-                //     $pagNum = $override->getWithLimit1SearchCount($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec, $searchTerm, 'id', 'patient_id');
-                // }
-                // $pages = ceil($pagNum / $numRec);
-                // if (!$_GET['page'] || $_GET['page'] == 1) {
-                //     $page = 0;
-                // } else {
-                //     $page = ($_GET['page'] * $numRec) - $numRec;
-                // }
-
-                // if ($_GET['search_item']) {
-                //     $searchTerm = $_GET['search_item'];
-                //     if ($table_name == 'clients') {
-                //         $data = $override->getWithLimit1Search($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec, $searchTerm, 'id', 'facility_id', 'pid', 'facility_id');
-                //     } elseif ($table_name == 'visit') {
-                //         $data = $override->getWithLimit1Search($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec, $searchTerm, 'id', 'client_id', 'pid', 'facility_id');
-                //     } else {
-                //         $data = $override->getWithLimit1Search($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec, $searchTerm, 'id', 'patient_id', 'pid', 'facility_id');
-                //     }
-                // } else {
-                    // if ($table_name == 'clients') {
-                    //     $data = $override->getWithLimit1($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec);
-                    // } elseif ($table_name == 'visit') {
-                    //     $data = $override->getWithLimit1($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec);
-                    // } else {
-                    //     $data = $override->getWithLimit1($table_name, 'status', 1, 'facility_id', $user->data()->facility_id, $page, $numRec);
-                    // }
-                // }
-            // }
+                    $data = $override->getWithLimit0($table_name, $page, $numRec);               
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">

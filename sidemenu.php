@@ -29,6 +29,7 @@ if ($user->isLoggedIn()) {
     $sites = $override->getNo('sites');
     $position = $override->getNo('position');
 
+    $Offline_Users = $override->getNo('users');
 
     $staff_all = $override->getNo('user');
     $staff_active = $override->getCount('user', 'status', 1);
@@ -256,37 +257,44 @@ if ($user->isLoggedIn()) {
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="add.php?id=13&status=1" class="nav-link">
+                            <!-- <a href="add.php?id=13&status=1&sid=&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+                                class="nav-link"> -->
+                            <a href="add.php?id=13&status=1"
+                                class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Add
-                                    <span class="right badge badge-success">New Screening Patient</span>
+                                    <span class="right badge badge-success">New Patient</span>
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="info.php?id=3&status=1&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
+                            <a href="info.php?id=3&status=1&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+                                class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $screened; ?></span>
                                 <p>Screened Patients</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="info.php?id=3&status=2&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
+                            <a href="info.php?id=3&status=2&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+                                class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $eligible; ?></span>
                                 <p>Eligible Patients</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="info.php?id=3&status=3&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
+                            <a href="info.php?id=3&status=3&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+                                class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $enrolled; ?></span>
                                 <p>Enrolled Patients</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="info.php?id=3&status=4&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="nav-link">
+                            <a href="info.php?id=3&status=4&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+                                class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $end; ?></span>
                                 <p>Terminated Patients</p>
@@ -318,6 +326,33 @@ if ($user->isLoggedIn()) {
                                     <i class="far fa-circle nav-icon"></i>
                                     <span class="badge badge-info right"><?= $validations; ?></span>
                                     <p>Total Validations</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <span class="badge badge-info right"><?= $validations; ?></span>
+                            <p>
+                                Test Offline Mode <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="add.php?id=18" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Add
+                                        <span class="right badge badge-danger">New User</span>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="info.php?id=17" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"><?= $Offline_Users; ?></span>
+                                    <p>Total Users</p>
                                 </a>
                             </li>
                         </ul>
@@ -372,7 +407,7 @@ if ($user->isLoggedIn()) {
                                     <span class="badge badge-info right"><?= $registered1; ?></span>
                                     <p>Download</p>
                                 </a>
-                            </li>                           
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">

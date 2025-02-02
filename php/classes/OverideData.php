@@ -445,21 +445,51 @@ class OverideData
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function getWithLimit2Desc($table, $field, $value, $field1, $value1, $value2, $field2, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $value2 = '$field2' ORDER BY 'id' DESC LIMIT $page, $numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getWithLimit0Desc($table, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table ORDER BY 'id' DESC LIMIT $page, $numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getWithLimit0($table, $page, $numRec)
     {
         $query = $this->_pdo->query("SELECT * FROM $table limit $page,$numRec");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
     public function getWithLimit1($table, $where, $id, $where2, $id2, $page, $numRec)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' limit $page,$numRec");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function getWithLimit1Desc($table, $where, $id, $where2, $id2, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' ORDER BY 'id' DESC LIMIT $page, $numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getWithLimit($table, $where, $id, $page, $numRec)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getWithLimitDesc($table, $where, $id, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' ORDER BY id DESC LIMIT $page, $numRec");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
@@ -648,7 +678,7 @@ class OverideData
         return $result;
     }
 
-        public function getDataRegister4($where, $value,$where1, $value1)
+    public function getDataRegister4($where, $value, $where1, $value1)
     {
         $query = $this->_pdo->query("SELECT MONTHNAME(date_registered) AS monthname, site_id as site_id, COUNT(*) AS count FROM clients WHERE $where = '$value' AND $where1 = '$value1' GROUP BY monthname, site_id");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -663,7 +693,7 @@ class OverideData
         return $result;
     }
 
-        public function getDataStaffCount($table, $where, $id, $where2, $id2, $where3, $id3, $name)
+    public function getDataStaffCount($table, $where, $id, $where2, $id2, $where3, $id3, $name)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' AND $where3 < '$id3' ORDER BY $name ASC");
         $num = $query->rowCount();
@@ -677,7 +707,7 @@ class OverideData
         return $result;
     }
 
-        public function getDataStaff1Count($table, $where, $id, $where2, $id2, $where3, $id3, $name)
+    public function getDataStaff1Count($table, $where, $id, $where2, $id2, $where3, $id3, $name)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' AND $where3 >= '$id3' ORDER BY $name ASC");
         $num = $query->rowCount();
