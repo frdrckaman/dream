@@ -280,17 +280,17 @@ if ($user->isLoggedIn()) {
                 $pid = $override->getNews('pids', 'facility_id', $user->data()->site_id, 'status', 1)[0];
                 $pid_merged = $pid['pid'] . '_' . Input::get('pid1');
 
-                if (Input::get('conset') == 1 && (Input::get('screening_date') > $screening['conset_date'])) {
-                    $errorMessage = 'Screaning Date Can not be greater than Conset Date';
-                } elseif (Input::get('conset') == 2 && !empty(trim(Input::get('conset_date')))) {
-                    $errorMessage = 'Please Remove Screening date before Submit again';
-                } elseif ((Input::get('pid1') != Input::get('pid2')) && !empty(trim(Input::get('pid1')))) {
-                    $errorMessage = 'PID"s are not Matching please re-check and Submit again';
-                }
-                 elseif ($screening['pid'] == $pid_merged) {
-                    $errorMessage = 'PID"s Exists Please use Another';
-                } 
-                else {
+                // if (Input::get('conset') == 1 && (Input::get('screening_date') > $screening['conset_date'])) {
+                //     $errorMessage = 'Screaning Date Can not be greater than Conset Date';
+                // } elseif (Input::get('conset') == 2 && !empty(trim(Input::get('conset_date')))) {
+                //     $errorMessage = 'Please Remove Screening date before Submit again';
+                // } elseif ((Input::get('pid1') != Input::get('pid2')) && !empty(trim(Input::get('pid1')))) {
+                //     $errorMessage = 'PID"s are not Matching please re-check and Submit again';
+                // }
+                //  elseif ($screening['pid'] == $pid_merged) {
+                //     $errorMessage = 'PID"s Exists Please use Another';
+                // } 
+                // else {
                     if ($screening) {
                         $user->updateRecord('screening', array(
                             'pid' => $pid_merged,
@@ -400,7 +400,7 @@ if ($user->isLoggedIn()) {
                         ));
 
                         $successMessage = 'Screening  Successful Added';
-                    }
+                    // }
                     Redirect::to('info.php?id=3&status=' . $_GET['status'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
                 }
             } else {
