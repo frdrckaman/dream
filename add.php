@@ -291,115 +291,115 @@ if ($user->isLoggedIn()) {
                 //     $errorMessage = 'PID"s Exists Please use Another';
                 // } 
                 // else {
-                    if ($screening) {
-                        $user->updateRecord('screening', array(
-                            'pid' => $pid_merged,
-                            'screening_date' => Input::get('screening_date'),
-                            'conset' => Input::get('conset'),
-                            'conset_date' => Input::get('conset_date'),
-                            'age18years' => Input::get('age18years'),
-                            'present_symptoms' => Input::get('present_symptoms'),
-                            'produce_resp_sample' => Input::get('produce_resp_sample'),
-                            'pid1' => Input::get('pid1'),
-                            'pid2' => Input::get('pid2'),
-                            'unable_understand' => Input::get('unable_understand'),
-                            'not_willing' => Input::get('not_willing'),
-                            'comments' => Input::get('comments'),
-                            'region' => Input::get('region'),
-                            'district' => Input::get('district'),
-                            'ward' => Input::get('ward'),
-                            'village_street' => Input::get('village_street'),
-                            'eligible' => $eligible,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $screening['facility_id'],
-                        ), $screening['id']);
+                if ($screening) {
+                    $user->updateRecord('screening', array(
+                        'pid' => $pid_merged,
+                        'screening_date' => Input::get('screening_date'),
+                        'conset' => Input::get('conset'),
+                        'conset_date' => Input::get('conset_date'),
+                        'age18years' => Input::get('age18years'),
+                        'present_symptoms' => Input::get('present_symptoms'),
+                        'produce_resp_sample' => Input::get('produce_resp_sample'),
+                        'pid1' => Input::get('pid1'),
+                        'pid2' => Input::get('pid2'),
+                        'unable_understand' => Input::get('unable_understand'),
+                        'not_willing' => Input::get('not_willing'),
+                        'comments' => Input::get('comments'),
+                        'region' => Input::get('region'),
+                        'district' => Input::get('district'),
+                        'ward' => Input::get('ward'),
+                        'village_street' => Input::get('village_street'),
+                        'eligible' => $eligible,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'facility_id' => $screening['facility_id'],
+                    ), $screening['id']);
 
-                        $user->createRecord('screening_records', array(
-                            'screening_id' => $screening['id'],
-                            'pid' => $pid_merged,
-                            'screening_date' => Input::get('screening_date'),
-                            'conset' => Input::get('conset'),
-                            'conset_date' => Input::get('conset_date'),
-                            'age18years' => Input::get('age18years'),
-                            'present_symptoms' => Input::get('present_symptoms'),
-                            'produce_resp_sample' => Input::get('produce_resp_sample'),
-                            'pid1' => Input::get('pid1'),
-                            'pid2' => Input::get('pid2'),
-                            'unable_understand' => Input::get('unable_understand'),
-                            'not_willing' => Input::get('not_willing'),
-                            'comments' => Input::get('comments'),
-                            'region' => Input::get('region'),
-                            'district' => Input::get('district'),
-                            'ward' => Input::get('ward'),
-                            'village_street' => Input::get('village_street'),
-                            'eligible' => $eligible,
-                            'status' => 1,
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $screening['facility_id'],
-                        ));
+                    $user->createRecord('screening_records', array(
+                        'screening_id' => $screening['id'],
+                        'pid' => $pid_merged,
+                        'screening_date' => Input::get('screening_date'),
+                        'conset' => Input::get('conset'),
+                        'conset_date' => Input::get('conset_date'),
+                        'age18years' => Input::get('age18years'),
+                        'present_symptoms' => Input::get('present_symptoms'),
+                        'produce_resp_sample' => Input::get('produce_resp_sample'),
+                        'pid1' => Input::get('pid1'),
+                        'pid2' => Input::get('pid2'),
+                        'unable_understand' => Input::get('unable_understand'),
+                        'not_willing' => Input::get('not_willing'),
+                        'comments' => Input::get('comments'),
+                        'region' => Input::get('region'),
+                        'district' => Input::get('district'),
+                        'ward' => Input::get('ward'),
+                        'village_street' => Input::get('village_street'),
+                        'eligible' => $eligible,
+                        'status' => 1,
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'facility_id' => $screening['facility_id'],
+                    ));
 
-                        $successMessage = 'Screening  Successful Updated';
-                    } else {
-                        $user->createRecord('screening', array(
-                            'pid' => $pid_merged,
-                            'screening_date' => Input::get('screening_date'),
-                            'conset' => Input::get('conset'),
-                            'conset_date' => Input::get('conset_date'),
-                            'age18years' => Input::get('age18years'),
-                            'present_symptoms' => Input::get('present_symptoms'),
-                            'produce_resp_sample' => Input::get('produce_resp_sample'),
-                            'pid1' => Input::get('pid1'),
-                            'pid2' => Input::get('pid2'),
-                            'unable_understand' => Input::get('unable_understand'),
-                            'not_willing' => Input::get('not_willing'),
-                            'comments' => Input::get('comments'),
-                            'region' => Input::get('region'),
-                            'district' => Input::get('district'),
-                            'ward' => Input::get('ward'),
-                            'village_street' => Input::get('village_street'),
-                            'eligible' => $eligible,
-                            'status' => 1,
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $user->data()->site_id,
-                        ));
+                    $successMessage = 'Screening  Successful Updated';
+                } else {
+                    $user->createRecord('screening', array(
+                        'pid' => $pid_merged,
+                        'screening_date' => Input::get('screening_date'),
+                        'conset' => Input::get('conset'),
+                        'conset_date' => Input::get('conset_date'),
+                        'age18years' => Input::get('age18years'),
+                        'present_symptoms' => Input::get('present_symptoms'),
+                        'produce_resp_sample' => Input::get('produce_resp_sample'),
+                        'pid1' => Input::get('pid1'),
+                        'pid2' => Input::get('pid2'),
+                        'unable_understand' => Input::get('unable_understand'),
+                        'not_willing' => Input::get('not_willing'),
+                        'comments' => Input::get('comments'),
+                        'region' => Input::get('region'),
+                        'district' => Input::get('district'),
+                        'ward' => Input::get('ward'),
+                        'village_street' => Input::get('village_street'),
+                        'eligible' => $eligible,
+                        'status' => 1,
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'facility_id' => $user->data()->site_id,
+                    ));
 
-                        $last_row = $override->lastRow('screening', 'id')[0];
+                    $last_row = $override->lastRow('screening', 'id')[0];
 
-                        $user->createRecord('screening_records', array(
-                            'screening_id' => $last_row['id'],
-                            'pid' => $pid_merged,
-                            'screening_date' => Input::get('screening_date'),
-                            'conset' => Input::get('conset'),
-                            'conset_date' => Input::get('conset_date'),
-                            'age18years' => Input::get('age18years'),
-                            'present_symptoms' => Input::get('present_symptoms'),
-                            'produce_resp_sample' => Input::get('produce_resp_sample'),
-                            'pid1' => Input::get('pid1'),
-                            'pid2' => Input::get('pid2'),
-                            'unable_understand' => Input::get('unable_understand'),
-                            'not_willing' => Input::get('not_willing'),
-                            'comments' => Input::get('comments'),
-                            'region' => Input::get('region'),
-                            'district' => Input::get('district'),
-                            'ward' => Input::get('ward'),
-                            'village_street' => Input::get('village_street'),
-                            'eligible' => $eligible,
-                            'status' => 1,
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $screening['facility_id'],
-                        ));
+                    $user->createRecord('screening_records', array(
+                        'screening_id' => $last_row['id'],
+                        'pid' => $pid_merged,
+                        'screening_date' => Input::get('screening_date'),
+                        'conset' => Input::get('conset'),
+                        'conset_date' => Input::get('conset_date'),
+                        'age18years' => Input::get('age18years'),
+                        'present_symptoms' => Input::get('present_symptoms'),
+                        'produce_resp_sample' => Input::get('produce_resp_sample'),
+                        'pid1' => Input::get('pid1'),
+                        'pid2' => Input::get('pid2'),
+                        'unable_understand' => Input::get('unable_understand'),
+                        'not_willing' => Input::get('not_willing'),
+                        'comments' => Input::get('comments'),
+                        'region' => Input::get('region'),
+                        'district' => Input::get('district'),
+                        'ward' => Input::get('ward'),
+                        'village_street' => Input::get('village_street'),
+                        'eligible' => $eligible,
+                        'status' => 1,
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'facility_id' => $screening['facility_id'],
+                    ));
 
-                        $successMessage = 'Screening  Successful Added';
+                    $successMessage = 'Screening  Successful Added';
                     // }
                     Redirect::to('info.php?id=3&status=' . $_GET['status'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
                 }
@@ -5148,7 +5148,7 @@ if ($user->isLoggedIn()) {
                                 <!-- general form elements disabled -->
                                 <div class="card card-warning">
                                     <div class="card-header">
-                                        <h3 class="card-title">zonal/CTRL laboratory</h3>
+                                        <h3 class="card-title">Administration</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
@@ -5164,6 +5164,104 @@ if ($user->isLoggedIn()) {
                                                             name="lab_name" class="form-control" placeholder="Enter here"
                                                             readonly />
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <?php
+                                            // Fetch enrollment_date from database
+                                            $enrollment_date = ''; // Replace with actual query to fetch enrollment_date
+                                            if ($enrollment['enrollment_date']) {
+                                                $enrollment_date = $enrollment['enrollment_date'];
+                                            }
+                                            ?>
+                                            <input type="hidden" id="enrollment_date_hidded"
+                                                value="<?php echo $enrollment_date; ?>" />
+
+                                            <div class="col-sm-6" id="date_collected">
+                                                <div class=" col-12">
+                                                    <label class="form-label">3. Date sample(s) collected?</label>
+                                                    <div class="mb-3">
+                                                        <input type="date" value="
+                                                        <?php echo $costing['date_collected'] ?? ''; ?>"
+                                                            id="date_collected_input" name="date_collected"
+                                                            class="form-control" placeholder="Enter here" />
+                                                        <span id="date_collected_error" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-4" id="appearance">
+                                                    <label for="appearance" class="form-label">7. Appearance</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('appearance', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="appearance" id="appearance<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['appearance'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?>>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('appearance')">Unset</button>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4" id="sample_volume">
+                                                    <div class="mb-3">
+                                                        <label for="sample_volume" class="form-label">8. Approximate
+                                                            volume
+                                                            sample</label>
+                                                        <input type="number" value="<?php if ($costing['sample_volume']) {
+                                                            print_r($costing['sample_volume']);
+                                                        } ?>" id="sample_volume" name="sample_volume" min="1" max="5"
+                                                            class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                    <span>mL</span>
+                                                </div>
+
+                                                <div class="col-4" id="sample_volume">
+                                                    <div class="mb-3">
+                                                        <label for="sample_volume" class="form-label">8. Approximate
+                                                            volume
+                                                            sample</label>
+                                                        <input type="number" value="<?php if ($costing['sample_volume']) {
+                                                            print_r($costing['sample_volume']);
+                                                        } ?>" id="sample_volume" name="sample_volume" min="1" max="5"
+                                                            class="form-control" placeholder="Enter here" />
+                                                    </div>
+                                                    <span>mL</span>
+                                                </div>
+
+                                                <div class="col-4" id="afb_microscopy">
+                                                    <label for="afb_microscopy" class="form-label">6(a). Was AFB microscopy
+                                                        conducted at TB clinic?</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="afb_microscopy"
+                                                                        id="afb_microscopy<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy'] == $value['id']) {
+                                                                              echo 'checked';
+                                                                          } ?>>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button"
+                                                        onclick="unsetRadio('afb_microscopy')">Unset</button>
                                                 </div>
                                             </div>
                                             <hr>
@@ -6618,7 +6716,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type here..."><?php if ($costing['mutations_detected_list']) {
                                                                     print_r($costing['mutations_detected_list']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6648,7 +6746,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7278,7 +7376,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8078,10 +8176,10 @@ if ($user->isLoggedIn()) {
                                                     <br>
                                                     <textarea class="form-control" name="sputum_reasons" rows="3"
                                                         placeholder="Type reasons here...">
-                                                                                                                                 <?php if ($clients['sputum_reasons']) {
-                                                                                                                                     print_r($clients['sputum_reasons']);
-                                                                                                                                 } ?>
-                                                                                                                                                                                        </textarea>
+                                                                                                                                             <?php if ($clients['sputum_reasons']) {
+                                                                                                                                                 print_r($clients['sputum_reasons']);
+                                                                                                                                             } ?>
+                                                                                                                                                                                                    </textarea>
 
                                                 </div>
 
@@ -9889,7 +9987,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
