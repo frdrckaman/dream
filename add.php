@@ -6538,7 +6538,7 @@ if ($user->isLoggedIn()) {
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <label for="tb_diagnosis" class="form-label">101. Was a TB diagnosis
+                                                <label for="tb_diagnosis" class="form-label">4. Was a TB diagnosis
                                                     made?</label>
                                                 <div class="row-form clearfix">
                                                     <div class="form-group">
@@ -6560,7 +6560,7 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <div class="col-sm-3" id="tb_diagnosis_made">
-                                                <label for="tb_diagnosis_made" class="form-label">102. How was the TB
+                                                <label for="tb_diagnosis_made" class="form-label">5. How was the TB
                                                     diagnosis made? </label>
                                                 <div class="row-form clearfix">
                                                     <div class="form-group">
@@ -6590,8 +6590,9 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <div class="col-sm-3" id="bacteriological_diagnosis">
-                                                <label for="bacteriological_diagnosis" class="form-label">103. On what
-                                                    test result(s) was the bacteriological diagnosis based?</label>
+                                                <label for="bacteriological_diagnosis" class="form-label">6. On what
+                                                    test result(s) was the bacteriological diagnosis based?<br>
+                                                <small>Positive test result:</small></label>
                                                 <div class="row-form clearfix">
                                                     <div class="form-group">
                                                         <?php foreach ($override->get('bacteriological_diagnosis', 'status', 1) as $value) { ?>
@@ -6612,50 +6613,23 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <div class="col-sm-3" id="other_bacteriological_date1">
                                                 <div class="mb-3">
-                                                    <label for="other_bacteriological" class="form-label">103. Specify
-                                                        and Date</label>
-                                                    <input type="text" value="<?php if ($costing['other_bacteriological']) {
+                                                    <label for="other_bacteriological" class="form-label">Date result received by clinician:</label>
+                                                                                                        <label for="other_bacteriological" class="form-label">Xpert Date</label>
+                                                    <input type="date" value="<?php if ($costing['other_bacteriological']) {
                                                         print_r($costing['other_bacteriological']);
                                                     } ?>" id="other_bacteriological" name="other_bacteriological"
-                                                        class="form-control" placeholder="Speficy here" />
+                                                        class="form-control" placeholder="Xpert Date" />
                                                     <br>
+                                                                                                        <label for="other_bacteriological" class="form-label">Smear Date</label>
                                                     <input type="date" value="<?php if ($costing['other_bacteriological_date']) {
                                                         print_r($costing['other_bacteriological_date']);
                                                     } ?>" id="other_bacteriological_date"
                                                         name="other_bacteriological_date" class="form-control"
-                                                        placeholder="Enter here" />
+                                                        placeholder="Smear Date" />
 
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div id="tb_diagnosis_hides">
-                                            <hr>
-                                            <div class="row">
-
-                                                <div class="col-sm-6" id="clinician_received_date1">
-                                                    <div class="mb-3">
-                                                        <label for="clinician_received_date" class="form-label">103. If
-                                                            Positive test result ,Date result received by clinician
-                                                        </label>
-                                                        <input type="date" value="<?php if ($costing['clinician_received_date']) {
-                                                            print_r($costing['clinician_received_date']);
-                                                        } ?>" id="clinician_received_date"
-                                                            name="clinician_received_date" class="form-control"
-                                                            placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6" id="xpert_truenat_date1">
-                                                    <div class="mb-3">
-                                                        <label for="xpert_truenat_date" class="form-label">103. If
-                                                            Xpert/Truenat on sputum/NGA (Date?)</label>
-                                                        <input type="date" value="<?php if ($costing['xpert_truenat_date']) {
-                                                            print_r($costing['xpert_truenat_date']);
-                                                        } ?>" id="xpert_truenat_date" name="xpert_truenat_date"
-                                                            class="form-control" placeholder="Enter here" />
-                                                    </div>
-                                                </div>
-                                            </div>
 
                                             <hr>
                                             <div class="row">
@@ -6770,10 +6744,7 @@ if ($user->isLoggedIn()) {
 
                                                 </div>
                                             </div>
-
-                                            <hr id="tb_regimen_new1">
-                                            <div id="tb_regimen_new">
-
+                                        <hr>
                                                 <div class="row">
                                                     <div class="col-sm-3" id="regimen_changed">
                                                         <label for="regimen_changed" class="form-label">11b. Was the
@@ -6923,8 +6894,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                 </div>
-                                            </div>
-                                        </div>
+         
                                         <hr>
                                         <div class="card card-warning">
                                             <div class="card-header">
