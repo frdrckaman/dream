@@ -5102,6 +5102,7 @@ if ($user->isLoggedIn()) {
             <?php
             $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
             $costing = $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
+            $lab_name = $override->getNews('sites', 'status', 1, 'id', $user->data()->site_id)[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -5153,6 +5154,18 @@ if ($user->isLoggedIn()) {
                                     <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
                                         <div class="card-body">
 
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="mb-2">
+                                                        <label for="lab_name" class="form-label">1a. Name of
+                                                            laboratory / Site</label>
+                                                        <input type="text" value="<?= $lab_name['name']; ?>" id="lab_name"
+                                                            name="lab_name" class="form-control" placeholder="Enter here"
+                                                            readonly />
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-4">
