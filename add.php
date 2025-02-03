@@ -1321,7 +1321,7 @@ if ($user->isLoggedIn()) {
                             'tb_diagnosis' => Input::get('tb_diagnosis'),
                             'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
                             'diagnosis_made_other' => Input::get('diagnosis_made_other'),
-                            'bacteriological_diagnosis' => $bacteriological_diagnosis,
+                            'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
                             'clinician_received_date' => Input::get('clinician_received_date'),
                             'xpert_truenat_date' => Input::get('xpert_truenat_date'),
                             'other_bacteriological' => Input::get('other_bacteriological'),
@@ -1369,7 +1369,7 @@ if ($user->isLoggedIn()) {
                             'tb_diagnosis' => Input::get('tb_diagnosis'),
                             'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
                             'diagnosis_made_other' => Input::get('diagnosis_made_other'),
-                            'bacteriological_diagnosis' => $bacteriological_diagnosis,
+                            'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
                             'clinician_received_date' => Input::get('clinician_received_date'),
                             'xpert_truenat_date' => Input::get('xpert_truenat_date'),
                             'other_bacteriological' => Input::get('other_bacteriological'),
@@ -1422,7 +1422,7 @@ if ($user->isLoggedIn()) {
                             'tb_diagnosis' => Input::get('tb_diagnosis'),
                             'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
                             'diagnosis_made_other' => Input::get('diagnosis_made_other'),
-                            'bacteriological_diagnosis' => $bacteriological_diagnosis,
+                            'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
                             'clinician_received_date' => Input::get('clinician_received_date'),
                             'xpert_truenat_date' => Input::get('xpert_truenat_date'),
                             'other_bacteriological' => Input::get('other_bacteriological'),
@@ -1476,7 +1476,7 @@ if ($user->isLoggedIn()) {
                             'tb_diagnosis' => Input::get('tb_diagnosis'),
                             'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
                             'diagnosis_made_other' => Input::get('diagnosis_made_other'),
-                            'bacteriological_diagnosis' => $bacteriological_diagnosis,
+                            'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
                             'clinician_received_date' => Input::get('clinician_received_date'),
                             'xpert_truenat_date' => Input::get('xpert_truenat_date'),
                             'other_bacteriological' => Input::get('other_bacteriological'),
@@ -6597,13 +6597,11 @@ if ($user->isLoggedIn()) {
                                                     <div class="form-group">
                                                         <?php foreach ($override->get('bacteriological_diagnosis', 'status', 1) as $value) { ?>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="bacteriological_diagnosis[]"
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="bacteriological_diagnosis"
                                                                     id="bacteriological_diagnosis<?= $value['id']; ?>"
-                                                                    value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['bacteriological_diagnosis']) as $values) {
-                                                                          if ($values == $value['id']) {
-                                                                              echo 'checked';
-                                                                          }
+                                                                    value="<?= $value['id']; ?>" <?php if ($costing['bacteriological_diagnosis'] == $value['id']) {
+                                                                          echo 'checked';
                                                                       } ?>>
                                                                 <label class="form-check-label"><?= $value['name']; ?></label>
                                                             </div>
@@ -6611,23 +6609,14 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-3" id="other_bacteriological_date1">
+                                            <div class="col-sm-3" id="date_results_received">
                                                 <div class="mb-3">
-                                                    <label for="other_bacteriological" class="form-label">Date result
+                                                    <label for="date_results_received" class="form-label">Date result
                                                         received by clinician:</label>
-                                                    <label for="other_bacteriological" class="form-label">Xpert Date</label>
-                                                    <input type="date" value="<?php if ($costing['other_bacteriological']) {
-                                                        print_r($costing['other_bacteriological']);
-                                                    } ?>" id="other_bacteriological" name="other_bacteriological"
-                                                        class="form-control" placeholder="Xpert Date" />
-                                                    <br>
-                                                    <label for="other_bacteriological" class="form-label">Smear Date</label>
-                                                    <input type="date" value="<?php if ($costing['other_bacteriological_date']) {
-                                                        print_r($costing['other_bacteriological_date']);
-                                                    } ?>" id="other_bacteriological_date"
-                                                        name="other_bacteriological_date" class="form-control"
-                                                        placeholder="Smear Date" />
-
+                                                    <input type="date" value="<?php if ($costing['date_results_received']) {
+                                                        print_r($costing['date_results_received']);
+                                                    } ?>" id="date_results_received" name="date_results_received"
+                                                        class="form-control" placeholder="date_results_received" />
                                                 </div>
                                             </div>
                                         </div>
@@ -6846,66 +6835,10 @@ if ($user->isLoggedIn()) {
 
                                         </div>
                                         <hr>
-                                        <div class="row">
-
-                                            <div class="col-sm-3" id="laboratory_test_used">
-                                                <label for="laboratory_test_used" class="form-label">11a. On
-                                                    what
-                                                    test
-                                                    result was the treatment regimen changed and when did this
-                                                    test
-                                                    result
-                                                    become available to you? (dd / mm / yyyy)</label>
-                                                <!-- radio -->
-                                                <div class="row-form clearfix">
-                                                    <div class="form-group">
-                                                        <?php foreach ($override->get('laboratory_test_used', 'status', 1) as $value) { ?>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="laboratory_test_used[]"
-                                                                    id="laboratory_test_used<?= $value['id']; ?>"
-                                                                    value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['laboratory_test_used']) as $values) {
-                                                                          if ($values == $value['id']) {
-                                                                              echo 'checked';
-                                                                          }
-                                                                      } ?>>
-                                                                <label class="form-check-label"><?= $value['name']; ?></label>
-                                                            </div>
-                                                        <?php } ?>
-                                                    </div>
-
-                                                    <label for="laboratory_test_used_other" id="laboratory_test_used_other1"
-                                                        class="form-label">Other
-                                                        Specify </label>
-                                                    <input type="text" value="<?php if ($costing['laboratory_test_used_other']) {
-                                                        print_r($costing['laboratory_test_used_other']);
-                                                    } ?>" id="laboratory_test_used_other"
-                                                        name="laboratory_test_used_other" class="form-control"
-                                                        placeholder="Enter here" />
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-3" id="laboratory_test_used_date">
-                                                <div class="mb-2">
-                                                    <label for="laboratory_test_used_date" class="form-label">Date
-                                                        of
-                                                        the results</label>
-                                                    <input type="date" value="<?php if ($costing['laboratory_test_used_date']) {
-                                                        print_r($costing['laboratory_test_used_date']);
-                                                    } ?>" id="laboratory_test_used_date"
-                                                        name="laboratory_test_used_date" max="<?= date('Y-m-d') ?>"
-                                                        class="form-control" placeholder="Enter date" required />
-                                                </div>
-                                            </div>
-
-
-
-
-
+                                        <div class="row">                                         
                                             <div class="col-sm-3" id="tb_otcome2">
-                                                <label for="tb_otcome2" class="form-label">11c. Treatment
-                                                    outcomes</label>
+                                                <label for="tb_otcome2" class="form-label">11(a). Treatment
+                                                    outcome</label>
                                                 <!-- radio -->
                                                 <div class="row-form clearfix">
                                                     <div class="form-group">
@@ -6923,15 +6856,8 @@ if ($user->isLoggedIn()) {
                                                     <button type="button" onclick="unsetRadio('tb_otcome2')">Unset</button>
                                                 </div>
                                                 <br>
-                                                <!-- <label for="tb_otcome2_date_completed"
-                                                            id="tb_otcome2_date_completed" class="form-label">Date
-                                                            Completed</label>
-                                                        <label for="tb_otcome2_date_died" id="tb_otcome2_date_died"
-                                                            class="form-label">Date Of Deathn</label>
-                                                        <label for="tb_otcome2_date_ltf" id="tb_otcome2_date_ltf"
-                                                            class="form-label">Last date Known to be alive</label> -->
                                                 <label for="tb_otcome2_date_ltf" id="tb_otcome2_date_ltf"
-                                                    class="form-label">Date</label>
+                                                    class="form-label">11(b). Date treatment outcome assigned</label>
                                                 <input type="date" value="<?php if ($costing['tb_otcome2_date']) {
                                                     print_r($costing['tb_otcome2_date']);
                                                 } ?>" id="tb_otcome2_date" name="tb_otcome2_date"
@@ -7021,7 +6947,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="row-form clearfix">
                                                     <!-- select -->
                                                     <div class="form-group">
-                                                        <label>Remarks / Comments:</label>
+                                                        <label>Any comments or remarks regarding this patient</label>
                                                         <textarea class="form-control" name="comments" rows="3"
                                                             placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                 print_r($costing['comments']);
