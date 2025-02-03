@@ -5111,9 +5111,9 @@ if ($user->isLoggedIn()) {
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <?php if ($costing) { ?>
-                                    <h1>Update Diagnostic DST (PID :<?= $screening['pid'] ?>)</h1>
+                                    <h1>Update zonal/CTRL laboratory <br> (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } else { ?>
-                                    <h1>Add Diagnostic DST (PID :<?= $screening['pid'] ?>)</h1>
+                                    <h1>Add zonal/CTRL laboratory <br> (PID :<?= $screening['pid'] ?>)</h1>
                                 <?php } ?>
                             </div>
                             <div class="col-sm-6">
@@ -5128,9 +5128,9 @@ if ($user->isLoggedIn()) {
                                             Go to enrolled list > </a>
                                     </li>&nbsp;&nbsp;
                                     <?php if (!$costing) { ?>
-                                        <li class="breadcrumb-item active">Add New Diagnostic Test DST Data</li>
+                                        <li class="breadcrumb-item active">Add New zonal/CTRL laboratory</li>
                                     <?php } else { ?>
-                                        <li class="breadcrumb-item active">Update Diagnostic Test DST Data</li>
+                                        <li class="breadcrumb-item active">Update zonal/CTRL laboratory</li>
                                     <?php } ?>
                                 </ol>
                             </div>
@@ -5147,8 +5147,7 @@ if ($user->isLoggedIn()) {
                                 <!-- general form elements disabled -->
                                 <div class="card card-warning">
                                     <div class="card-header">
-                                        <h3 class="card-title">Drug susceptibility test (DST) done and results on sputum of
-                                            this participant (fill if applicable)</h3>
+                                        <h3 class="card-title">zonal/CTRL laboratory</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
