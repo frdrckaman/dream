@@ -3897,7 +3897,6 @@ if ($user->isLoggedIn()) {
             $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             $lab_name = $override->getNews('sites', 'status', 1, 'id', $user->data()->site_id)[0];
             $enrollment = $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
-
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -3993,7 +3992,7 @@ if ($user->isLoggedIn()) {
                                                         onclick="unsetRadio('sample_received')">Unset</button>
                                                 </div>
 
-                                                <div class="col-sm-3" id="sample_reason">
+                                                <div class="col-sm-3" id="sample_reason_section">
                                                     <label for="tested_this_month" class="form-label">2(b). If no what was
                                                         the
                                                         reason?</label>
@@ -7761,7 +7760,7 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('tb_regimen')">Unset</button>
                                                             <hr>
                                                             <input class="form-control" type="text"
-                                                                name="tb_regimen_specify" id="tb_regimen_1_specify"
+                                                                name="tb_regimen_specify" id="tb_regimen_specify"
                                                                 placeholder="Specify Here..." value="<?php if ($clients['tb_regimen_specify']) {
                                                                     print_r($clients['tb_regimen_specify']);
                                                                 } ?>" />

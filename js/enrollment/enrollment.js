@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const otherDiseasesRadios = document.querySelectorAll("input[name='other_diseases']");
     const sputumCollectedRadios = document.querySelectorAll("input[name='sputum_collected']");
     const diseasesMedicalCheckboxes = document.querySelectorAll("input[name='diseases_medical[]']"); // Assuming checkbox is an array
+    const tbRegimenRadios = document.querySelectorAll("input[name='tb_regimen']"); // Assuming tb_regimen is a radio button group
 
     const tbCategorySection = document.getElementById("tb_category_section");
     const txNumberSection = document.getElementById("tx_number_section");
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const diseasesSpecify = document.getElementById("diseases_specify");
     const tbCategorySpecify = document.getElementById("tb_category_specify");
     const ltfMonthsSection = document.getElementById("ltf_months_section"); // Assuming the section ID
+    const tbRegimenSpecify = document.getElementById("tb_regimen_specify"); // The section to toggle based on tb_regimen
 
     function toggleTxSections() {
         let isTxPreviousYes = Array.from(txPreviousRadios).some(radio => radio.checked && radio.value === "1");
@@ -54,6 +56,12 @@ document.addEventListener("DOMContentLoaded", function () {
         diseasesSpecify.style.display = isDisease96Checked ? "block" : "none";
     }
 
+    function toggleTbRegimenSpecify() {
+        let isTbRegimen7 = Array.from(tbRegimenRadios).some(radio => radio.checked && radio.value === "7");
+
+        tbRegimenSpecify.style.display = isTbRegimen7 ? "block" : "none";
+    }
+
     // Attach event listeners
     txPreviousRadios.forEach(radio => radio.addEventListener("change", toggleTxSections));
     tbCategoryRadios.forEach(radio => {
@@ -65,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
     otherDiseasesRadios.forEach(radio => radio.addEventListener("change", toggleDiseaseSection));
     sputumCollectedRadios.forEach(radio => radio.addEventListener("change", toggleSputumSection));
     diseasesMedicalCheckboxes.forEach(checkbox => checkbox.addEventListener("change", toggleDiseasesSpecify));
+    tbRegimenRadios.forEach(radio => radio.addEventListener("change", toggleTbRegimenSpecify));
 
     // Run on page load to initialize the correct visibility
     toggleTxSections();
@@ -73,4 +82,5 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleDiseaseSection();
     toggleSputumSection();
     toggleDiseasesSpecify();
+    toggleTbRegimenSpecify();
 });
