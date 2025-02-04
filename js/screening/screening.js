@@ -54,13 +54,13 @@ $(document).ready(function () {
         }
 
         // Check PID existence
-        if (isValid && pid1) {
-            const pidExists = await checkIfPidExists(pid1);
-            if (pidExists) {
-                $('#pid1_error').text('PID already exists').show();
-                isValid = false;
-            }
-        }
+        // if (isValid && pid1) {
+        //     const pidExists = await checkIfPidExists(pid1);
+        //     if (pidExists) {
+        //         $('#pid1_error').text('PID already exists').show();
+        //         isValid = false;
+        //     }
+        // }
 
         // Validate screening date
         const screeningDateInput = $('#screening_date').val();

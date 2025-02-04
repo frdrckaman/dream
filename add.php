@@ -271,7 +271,7 @@ if ($user->isLoggedIn()) {
                 $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $eligible = 0;
                 if (
-                    (Input::get('conset') == 1 && Input::get('age18years') == 1 && Input::get('produce_resp_sample') == 1 &&
+                    (Input::get('consent') == 1 && Input::get('age18years') == 1 && Input::get('produce_resp_sample') == 1 &&
                         (Input::get('present_symptoms') == 1) && Input::get('unable_understand') == 2 && Input::get('not_willing') == 2)
                 ) {
                     $eligible = 1;
@@ -280,9 +280,9 @@ if ($user->isLoggedIn()) {
                 $pid = $override->getNews('pids', 'facility_id', $user->data()->site_id, 'status', 1)[0];
                 $pid_merged = $pid['pid'] . '_' . Input::get('pid1');
 
-                // if (Input::get('conset') == 1 && (Input::get('screening_date') > $screening['conset_date'])) {
-                //     $errorMessage = 'Screaning Date Can not be greater than Conset Date';
-                // } elseif (Input::get('conset') == 2 && !empty(trim(Input::get('conset_date')))) {
+                // if (Input::get('consent') == 1 && (Input::get('screening_date') > $screening['consent_date'])) {
+                //     $errorMessage = 'Screaning Date Can not be greater than consent Date';
+                // } elseif (Input::get('consent') == 2 && !empty(trim(Input::get('consent_date')))) {
                 //     $errorMessage = 'Please Remove Screening date before Submit again';
                 // } elseif ((Input::get('pid1') != Input::get('pid2')) && !empty(trim(Input::get('pid1')))) {
                 //     $errorMessage = 'PID"s are not Matching please re-check and Submit again';
@@ -295,8 +295,8 @@ if ($user->isLoggedIn()) {
                     $user->updateRecord('screening', array(
                         'pid' => $pid_merged,
                         'screening_date' => Input::get('screening_date'),
-                        'conset' => Input::get('conset'),
-                        'conset_date' => Input::get('conset_date'),
+                        'consent' => Input::get('consent'),
+                        'consent_date' => Input::get('consent_date'),
                         'age18years' => Input::get('age18years'),
                         'present_symptoms' => Input::get('present_symptoms'),
                         'produce_resp_sample' => Input::get('produce_resp_sample'),
@@ -319,8 +319,8 @@ if ($user->isLoggedIn()) {
                         'screening_id' => $screening['id'],
                         'pid' => $pid_merged,
                         'screening_date' => Input::get('screening_date'),
-                        'conset' => Input::get('conset'),
-                        'conset_date' => Input::get('conset_date'),
+                        'consent' => Input::get('consent'),
+                        'consent_date' => Input::get('consent_date'),
                         'age18years' => Input::get('age18years'),
                         'present_symptoms' => Input::get('present_symptoms'),
                         'produce_resp_sample' => Input::get('produce_resp_sample'),
@@ -347,8 +347,8 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('screening', array(
                         'pid' => $pid_merged,
                         'screening_date' => Input::get('screening_date'),
-                        'conset' => Input::get('conset'),
-                        'conset_date' => Input::get('conset_date'),
+                        'consent' => Input::get('consent'),
+                        'consent_date' => Input::get('consent_date'),
                         'age18years' => Input::get('age18years'),
                         'present_symptoms' => Input::get('present_symptoms'),
                         'produce_resp_sample' => Input::get('produce_resp_sample'),
@@ -376,8 +376,8 @@ if ($user->isLoggedIn()) {
                         'screening_id' => $last_row['id'],
                         'pid' => $pid_merged,
                         'screening_date' => Input::get('screening_date'),
-                        'conset' => Input::get('conset'),
-                        'conset_date' => Input::get('conset_date'),
+                        'consent' => Input::get('consent'),
+                        'consent_date' => Input::get('consent_date'),
                         'age18years' => Input::get('age18years'),
                         'present_symptoms' => Input::get('present_symptoms'),
                         'produce_resp_sample' => Input::get('produce_resp_sample'),
@@ -5068,9 +5068,9 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="conset"
-                                                                        id="conset<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($screening['conset'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="consent"
+                                                                        id="consent<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($screening['consent'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?> required>
                                                                     <label
@@ -5082,15 +5082,15 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <!-- Consent Date -->
-                                                <div class="col-4" id="conset_date_container" style="display: none;">
+                                                <div class="col-4" id="consent_date_container" style="display: none;">
                                                     <div class="mb-2">
                                                         <label for="conset_date" class="form-label">8. Date of
                                                             Consent</label>
                                                         <input type="date" value="<?php if ($screening) {
-                                                            echo $screening['conset_date'];
-                                                        } ?>" id="conset_date" name="conset_date" class="form-control"
+                                                            echo $screening['consent_date'];
+                                                        } ?>" id="consent_date" name="consent_date" class="form-control"
                                                             placeholder="Enter date" />
-                                                        <small id="conset_date_error" class="text-danger"
+                                                        <small id="consent_date_date_error" class="text-danger"
                                                             style="display: none;">Consent date is required if
                                                             consent is selected as "Yes".</small>
                                                     </div>
@@ -9919,7 +9919,7 @@ if ($user->isLoggedIn()) {
 
 
     <!-- SCREENING Js -->
-    <script src="js/screening/screening.js"></script>
+    <!-- <script src="js/screening/screening.js"></script> -->
     <!-- <script src="js/screening/offlineMode.js"></script> -->
 
     <!-- Enrollment Js -->
