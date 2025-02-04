@@ -6836,19 +6836,19 @@ if ($user->isLoggedIn()) {
 
 
                                                         <label for="tb_treatment_date" id="tb_treatment_date1"
-                                                            class="form-label">8(a). What was treatment start date ?</label>
+                                                            class="form-label">8(b). What was treatment start date ?</label>
                                                         <input type="date" value="<?php if ($costing['tb_treatment_date']) {
                                                             print_r($costing['tb_treatment_date']);
                                                         } ?>" id="tb_treatment_date" name="tb_treatment_date"
                                                             class="form-control" placeholder="Enters here" />
-                                                        <label for="tb_facility" id="tb_facility1" class="form-label">8(b).
+                                                        <label for="tb_facility" id="tb_facility1" class="form-label">8(c).
                                                             (Name
                                                             health facility):</label>
                                                         <input type="text" value="<?php if ($costing['tb_facility']) {
                                                             print_r($costing['tb_facility']);
                                                         } ?>" id="tb_facility" name="tb_facility" class="form-control"
                                                             placeholder="Enter heres" />
-                                                        <label for="tb_reason" id="tb_reason1" class="form-label">8(c).
+                                                        <label for="tb_reason" id="tb_reason1" class="form-label">8(d).
                                                             reason
                                                             (specify):</label>
                                                         <input type="text" value="<?php if ($costing['tb_reason']) {
@@ -6940,7 +6940,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
                                             <div class="row">
-                                                <label class="fw-bold text-center d-block">List all treatment changes in the
+                                                <label class="fw-bold text-center d-block">10(b). List all treatment changes in the
                                                     below table.</label>
                                                 <table class="table table-bordered rounded">
                                                     <thead>
@@ -7004,9 +7004,18 @@ if ($user->isLoggedIn()) {
                                                     Row</button>
 
                                             </div>
+
                                             <hr>
-                                            <div class="row">
-                                                <div class="col-sm-3" id="tb_otcome2">
+
+
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">ANY COMENT OR REMARKS</h3>
+                                                </div>
+                                            </div>
+                                            <hr>                   
+                                                                     <div class="row">
+                                                <div class="col-sm-6" id="tb_otcome2">
                                                     <label for="tb_otcome2" class="form-label">11(a). Treatment
                                                         outcome</label>
                                                     <!-- radio -->
@@ -7026,14 +7035,23 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                         <button type="button"
                                                             onclick="unsetRadio('tb_otcome2')">Unset</button>
-                                                    </div>
-                                                    <br>
-                                                    <label for="tb_otcome2_date_ltf" id="tb_otcome2_date_ltf"
+                                                    </div>                                                
+                                                </div>
+
+                                                <div class="col-sm-6" id="tb_otcome2">
+                                           <label for="tb_otcome2_date_ltf" id="tb_otcome2_date_ltf"
                                                         class="form-label">11(b). Date treatment outcome assigned</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                                <div class="form-check">                                                                                               
                                                     <input type="date" value="<?php if ($costing['tb_otcome2_date']) {
                                                         print_r($costing['tb_otcome2_date']);
                                                     } ?>" id="tb_otcome2_date" name="tb_otcome2_date"
                                                         class="form-control" />
+                                                                </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -7116,13 +7134,14 @@ if ($user->isLoggedIn()) {
                                                     <h3 class="card-title">ANY COMENT OR REMARKS</h3>
                                                 </div>
                                             </div>
+                                            <hr>
 
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="row-form clearfix">
                                                         <!-- select -->
                                                         <div class="form-group">
-                                                            <label>Any comments or remarks regarding this patient</label>
+                                                            <label>13. Any comments or remarks regarding this patient</label>
                                                             <textarea class="form-control" name="comments" rows="3"
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
