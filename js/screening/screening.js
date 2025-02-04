@@ -1,13 +1,13 @@
 $(document).ready(function () {
     // Function to toggle consent_date visibility
     function toggleConsentDate() {
-        const consentYes = $('input[name="conset"]:checked').val();
-        const consentDateContainer = $('#conset_date_container');
+        const consentYes = $('input[name="consent"]:checked').val();
+        const consentDateContainer = $('#consent_date_container');
         consentDateContainer.toggle(consentYes === '1');
     }
 
     // Add event listeners to consent radio buttons
-    $('input[name="conset"]').on('change', toggleConsentDate);
+    $('input[name="consent"]').on('change', toggleConsentDate);
     toggleConsentDate(); // Initial check
 
     // PID validation pattern
@@ -86,27 +86,27 @@ $(document).ready(function () {
         }
 
         // Validate consent date if needed
-        const consentYes = $('input[name="conset"]:checked').val() === '1';
+        const consentYes = $('input[name="consent"]:checked').val() === '1';
         if (consentYes) {
-            const consentDateInput = $('#conset_date').val();
+            const consentDateInput = $('#consent_date').val();
             const screeningDate = new Date($('#screening_date').val());
             screeningDate.setHours(0, 0, 0, 0);
 
             if (!consentDateInput) {
-                $('#conset_date_error').text('Consent date is required').show();
+                $('#consent_date_error').text('Consent date is required').show();
                 isValid = false;
             } else {
                 const consentDate = new Date(consentDateInput);
                 consentDate.setHours(0, 0, 0, 0);
 
                 if (isNaN(consentDate.getTime())) {
-                    $('#conset_date_error').text('Invalid date format').show();
+                    $('#consent_date_error').text('Invalid date format').show();
                     isValid = false;
                 } else if (consentDate < screeningDate) {
-                    $('#conset_date_error').text('Cannot be before screening date').show();
+                    $('#consent_date_error').text('Cannot be before screening date').show();
                     isValid = false;
                 } else if (consentDate > today) {
-                    $('#conset_date_error').text('Cannot be in the future').show();
+                    $('#consent_date_error').text('Cannot be in the future').show();
                     isValid = false;
                 }
             }
