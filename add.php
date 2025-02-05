@@ -1423,6 +1423,7 @@ if ($user->isLoggedIn()) {
                             'diagnosis_made_other' => Input::get('diagnosis_made_other'),
                             'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
                             'clinician_received_date' => Input::get('clinician_received_date'),
+                                                        'tb_register_number' => Input::get('tb_register_number'),
                             'xpert_truenat_date' => Input::get('xpert_truenat_date'),
                             'other_bacteriological' => Input::get('other_bacteriological'),
                             'other_bacteriological_date' => Input::get('other_bacteriological_date'),
@@ -1471,6 +1472,7 @@ if ($user->isLoggedIn()) {
                             'diagnosis_made_other' => Input::get('diagnosis_made_other'),
                             'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
                             'clinician_received_date' => Input::get('clinician_received_date'),
+                                                                                    'tb_register_number' => Input::get('tb_register_number'),
                             'xpert_truenat_date' => Input::get('xpert_truenat_date'),
                             'other_bacteriological' => Input::get('other_bacteriological'),
                             'other_bacteriological_date' => Input::get('other_bacteriological_date'),
@@ -1524,6 +1526,7 @@ if ($user->isLoggedIn()) {
                             'diagnosis_made_other' => Input::get('diagnosis_made_other'),
                             'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
                             'clinician_received_date' => Input::get('clinician_received_date'),
+                                                                                    'tb_register_number' => Input::get('tb_register_number'),
                             'xpert_truenat_date' => Input::get('xpert_truenat_date'),
                             'other_bacteriological' => Input::get('other_bacteriological'),
                             'other_bacteriological_date' => Input::get('other_bacteriological_date'),
@@ -1578,6 +1581,7 @@ if ($user->isLoggedIn()) {
                             'diagnosis_made_other' => Input::get('diagnosis_made_other'),
                             'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
                             'clinician_received_date' => Input::get('clinician_received_date'),
+                                                                                    'tb_register_number' => Input::get('tb_register_number'),
                             'xpert_truenat_date' => Input::get('xpert_truenat_date'),
                             'other_bacteriological' => Input::get('other_bacteriological'),
                             'other_bacteriological_date' => Input::get('other_bacteriological_date'),
@@ -6899,22 +6903,21 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3" id="date_results_received">
+                                                <div class="col-sm-3" id="clinician_received_date_section">
                                                     <div class="mb-3">
-                                                        <label for="date_results_received" class="form-label">Date result
+                                                        <label for="clinician_received_date" class="form-label">Date result
                                                             received by clinician:</label>
-                                                        <input type="date" value="<?php if ($costing['date_results_received']) {
-                                                            print_r($costing['date_results_received']);
-                                                        } ?>" id="date_results_received" name="date_results_received"
-                                                            class="form-control" placeholder="date_results_received" />
+                                                        <input type="date" value="<?php if ($costing['clinician_received_date']) {
+                                                            print_r($costing['clinician_received_date']);
+                                                        } ?>" id="clinician_received_date" name="clinician_received_date"
+                                                            class="form-control" placeholder="clinician_received_date" />
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <hr>
                                             <div class="row">
-
-                                                <div class="col-sm-4" id="tb_diagnosed_clinically">
+                                                <div class="col-sm-6" id="tb_diagnosed_clinically">
                                                     <label for="tb_diagnosed_clinically" class="form-label">7. In case TB
                                                         was diagnosed clinically, based on what information was the
                                                         diagnosis made? </label>
@@ -6945,7 +6948,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="tb_treatment">
+                                                <div class="col-sm-6" id="tb_treatment">
                                                     <label for="tb_treatment" class="form-label">8(a). Was TB treatment
                                                         started?</label>
                                                     <!-- radio -->
@@ -6991,28 +6994,27 @@ if ($user->isLoggedIn()) {
 
                                                     </div>
 
-                                                </div>
-
-                                                <div class="col-sm-4" id="tb_regimen_prescribed">
-                                                    <label for="tb_regimen" class="form-label">9(a). TB register
-                                                        number</label>
-                                                    <!-- radio -->
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <div class="form-check">
-                                                                <input type="text" value="<?php if ($costing['tb_regimen_other']) {
-                                                                    print_r($costing['tb_regimen_other']);
-                                                                } ?>" id="tb_regimen_other" name="tb_regimen_other"
-                                                                    class="form-control" placeholder="Enter here" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </div>                                               
 
                                             </div>
 
                                             <hr>
                                             <div class="row">
+                                                <div class="col-sm-4" id="tb_register_number_section">
+                                                    <label for="tb_register_number" class="form-label">9(a). TB register
+                                                        number</label>
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <div class="form-check">
+                                                                <input type="text" value="<?php if ($costing['tb_register_number']) {
+                                                                    print_r($costing['tb_register_number']);
+                                                                } ?>" id="tb_register_number" name="tb_register_number"
+                                                                    class="form-control" placeholder="Enter here" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="col-sm-4" id="tb_regimen_prescribed">
                                                     <label for="tb_regimen" class="form-label">9(b). What treatment
                                                         regimen
@@ -7044,10 +7046,8 @@ if ($user->isLoggedIn()) {
 
 
                                                 </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-3" id="regimen_changed">
+
+                                                <div class="col-sm-4" id="regimen_changed">
                                                     <label for="regimen_changed" class="form-label">10(a). Was the regimen
                                                         changed during the treatment?</label>
                                                     <!-- radio -->
