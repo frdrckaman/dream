@@ -790,7 +790,8 @@ if ($user->isLoggedIn()) {
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>N0</th>
+                                                    <th>No</th>
+                                                    <th>Facility Id</th>
                                                     <th>Name</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
@@ -807,6 +808,9 @@ if ($user->isLoggedIn()) {
                                                             <?= $x; ?>
                                                         </td>
                                                         <td class="table-user">
+                                                            <?= $value['id']; ?>
+                                                        </td>
+                                                         <td class="table-user">
                                                             <?= $value['name']; ?>
                                                         </td>
                                                         <td class="table-user">
@@ -1845,7 +1849,7 @@ if ($user->isLoggedIn()) {
 
                                                             <?php } ?>
 
-                                                            <?php if ($user->data()->site_id==7 || $user->data()->site_id==13 || $user->data()->site_id==20 || $user->data()->site_id==22) { ?>
+                                                            <?php if ($user->data()->site_id==6 || $user->data()->site_id==13 || $user->data()->site_id==20 || $user->data()->site_id==22) { ?>
 
                                                                 <?php if ($override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
                                                                     <a href="add.php?id=14&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
