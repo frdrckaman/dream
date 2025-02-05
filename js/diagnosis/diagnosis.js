@@ -1,111 +1,66 @@
-// document.addEventListener("DOMContentLoaded", function () {
-//     const sid = getSIDFromURL();
-//     fetchTreatmentChanges(sid);
-// });
+document.addEventListener("DOMContentLoaded", function () {
+    const tbDiagnosisRadios = document.querySelectorAll('input[name="tb_diagnosis"]');
+    const tbDiagnosisMadeRadios = document.querySelectorAll('input[name="tb_diagnosis_made"]');
+    const tbDiagnosedClinicallyCheckbox = document.getElementById("tb_diagnosed_clinically_96");
 
-// function getSIDFromURL() {
-//     const params = new URLSearchParams(window.location.search);
-//     return params.get('sid');
-// }
+    const tbDiagnosisSection = document.getElementById("tb_diagnosis_made_section");
+    const bacteriologicalDiagnosisSection = document.getElementById("bacteriological_diagnosis_section");
+    const clinicianReceivedDateSection = document.getElementById("clinician_received_date_section");
+    const diagnosisMadeOtherSection = document.getElementById("diagnosis_made_other_section");
+    const tbDiagnosedClinicallySection = document.getElementById("tb_diagnosed_clinically_section");
+    const tbClinicallyOtherSection = document.getElementById("tb_clinically_other_section");
 
-// function fetchTreatmentChanges(sid) {
-//     if (!sid) return;
+    function toggleTbDiagnosisSection() {
+        const selectedValue = document.querySelector('input[name="tb_diagnosis"]:checked')?.value;
+        if (selectedValue === "1") {
+            tbDiagnosisSection.style.display = "block";
+            toggleTbDiagnosisMadeSections(); // Ensure related sections update
+        } else {
+            tbDiagnosisSection.style.display = "none";
+            // Hide all dependent sections when tb_diagnosis is not 1
+            bacteriologicalDiagnosisSection.style.display = "none";
+            clinicianReceivedDateSection.style.display = "none";
+            diagnosisMadeOtherSection.style.display = "none";
+            tbDiagnosedClinicallySection.style.display = "none";
+            tbClinicallyOtherSection.style.display = "none";
+        }
+    }
 
-//     fetch(`fetch_treatment_changes.php?sid=${sid}`)
-//         .then(response => response.json())
-//         .then(data => populateTable(data))
-//         .catch(error => console.error('Error fetching data:', error));
-// }
+    function toggleTbDiagnosisMadeSections() {
+        const selectedValue = document.querySelector('input[name="tb_diagnosis_made"]:checked')?.value;
 
-// function populateTable(data) {
-//     let table = document.getElementById('treatmentChangesTable');
-//     table.innerHTML = ''; // Clear existing rows
+        // Show or hide sections based on tb_diagnosis_made selection
+        bacteriologicalDiagnosisSection.style.display = selectedValue === "2" ? "block" : "none";
+        clinicianReceivedDateSection.style.display = selectedValue === "2" ? "block" : "none";
+        diagnosisMadeOtherSection.style.display = selectedValue === "96" ? "block" : "none";
+        tbDiagnosedClinicallySection.style.display = selectedValue === "2" ? "block" : "none";  // Show for tb_diagnosis_made=2
+        tbDiagnosedClinicallySection.style.display = selectedValue === "1" ? "none" : tbDiagnosedClinicallySection.style.display;  // Hide for tb_diagnosis_made=1
 
-//     data.forEach(row => {
-//         addRow(row);
-//     });
-// }
+        // Ensure tb_clinically_other_section updates correctly
+        toggleTbClinicallyOtherSection();
+    }
 
-// function addRow(data = {}) {
-//     let table = document.getElementById('treatmentChangesTable');
-//     let newRow = table.insertRow();
-//     newRow.dataset.id = data.id || ''; // Store row ID for updates
+    function toggleTbClinicallyOtherSection() {
+        if (tbDiagnosedClinicallyCheckbox.checked) {
+            tbClinicallyOtherSection.style.display = "block";
+        } else {
+            tbClinicallyOtherSection.style.display = "none";
+        }
+    }
 
-//     newRow.innerHTML = `
-//         <td><input type="date" name="regimen_changed__date[]" class="form-control" value="${data.date || ''}" /></td>
-//         <td><input type="text" name="regimen_added_name[]" class="form-control" value="${data.drug || ''}" /></td>
-//         <td>
-//             <div class="form-check">
-//                 ${generateRadioButtons('regimen_added_type[]', data.change_type, ['Dose lowered', 'Dose increased', 'Interrupted', 'Withdrawn'])}
-//             </div>
-//         </td>
-//         <td>
-//             <div class="form-check">
-//                 ${generateRadioButtons('regimen_changed__reason[]', data.reason, ['Drug resistance', 'Drug intolerance', '96'])}
-//             </div>
-//         </td>
-//         <td><input type="text" name="regimen_changed_other_reason[]" class="form-control" placeholder="Specify here" value="${data.other_reason || ''}" ${data.reason === '96' ? '' : 'disabled'} /></td>
-//         <td>
-//             <button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>
-//         </td>
-//     `;
+    // Attach event listeners
+    tbDiagnosisRadios.forEach(radio => {
+        radio.addEventListener("change", toggleTbDiagnosisSection);
+    });
 
-//     attachReasonEventListeners();
-// }
+    tbDiagnosisMadeRadios.forEach(radio => {
+        radio.addEventListener("change", toggleTbDiagnosisMadeSections);
+    });
 
-// function generateRadioButtons(name, selectedValue, options) {
-//     return options.map(value => `
-//         <input class="form-check-input" type="radio" name="${name}" value="${value}" ${selectedValue === value ? 'checked' : ''}> ${value}<br>
-//     `).join('');
-// }
+    tbDiagnosedClinicallyCheckbox.addEventListener("change", toggleTbClinicallyOtherSection);
 
-// function attachReasonEventListeners() {
-//     document.querySelectorAll('.other-reason').forEach(radio => {
-//         radio.addEventListener('change', function () {
-//             let input = this.closest('tr').querySelector('[name="regimen_changed_other_reason[]"]');
-//             input.disabled = !this.checked;
-//             input.required = this.checked;
-//         });
-//     });
-// }
-
-// function removeRow(button) {
-//     let row = button.closest('tr');
-//     row.remove();
-// }
-
-// function saveTreatmentChanges() {
-//     let tableRows = document.querySelectorAll('#treatmentChangesTable tr');
-//     let sid = getSIDFromURL();
-//     let changes = [];
-
-//     tableRows.forEach(row => {
-//         let rowData = {
-//             id: row.dataset.id || '', // Existing ID or empty for new rows
-//             sid: sid,
-//             date: row.querySelector('[name="regimen_changed__date[]"]').value,
-//             drug: row.querySelector('[name="regimen_added_name[]"]').value,
-//             change_type: getSelectedRadioValue(row, 'regimen_added_type[]'),
-//             reason: getSelectedRadioValue(row, 'regimen_changed__reason[]'),
-//             other_reason: row.querySelector('[name="regimen_changed_other_reason[]"]').value
-//         };
-//         changes.push(rowData);
-//     });
-
-//     fetch('save_treatment_changes.php', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(changes)
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             alert(data.message);
-//             fetchTreatmentChanges(sid); // Refresh table
-//         })
-//         .catch(error => console.error('Error saving data:', error));
-// }
-
-// function getSelectedRadioValue(row, name) {
-//     let selected = row.querySelector(`input[name="${name}"]:checked`);
-//     return selected ? selected.value : '';
-// }
+    // Run functions on page load to check initial selections
+    toggleTbDiagnosisSection();
+    toggleTbDiagnosisMadeSections();
+    toggleTbClinicallyOtherSection();
+});
