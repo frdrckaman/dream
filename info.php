@@ -1277,9 +1277,9 @@ if ($user->isLoggedIn()) {
                                                                         role=" button" class="btn btn-warning"> Add Screening
                                                                         Data</a>&nbsp;&nbsp; <br><br>
                                                                 <?php } ?>
-                                                                <a href="#delete_record<?= $sid ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete Record</a>
-                                                                <a href="#restore_record<?= $sid ?>" role="button" class="btn btn-warning" data-toggle="modal">Restore
-                                                                    Record</a>
+                                                                <a href="#delete_record<?= $sid ?>" role="button" class="btn btn-primary" data-toggle="modal">Delete Record</a>
+                                                                <!-- <a href="#restore_record<?= $sid ?>" role="button" class="btn btn-warning" data-toggle="modal">Restore -->
+                                                                    <!-- Record</a> -->
                                                             <?php } ?>
                                                             <?php
                                                             if ($override->get3('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'], 'other_samples', 1)) {
