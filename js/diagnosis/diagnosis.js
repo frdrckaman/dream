@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
             bacteriologicalDiagnosisSection.style.display = "none";
             clinicianReceivedDateSection.style.display = "none";
             diagnosisMadeOtherSection.style.display = "none";
-            tbDiagnosedClinicallySection.style.display = "none";
+            tbDiagnosedClinicallySection.style.display = "none"; // Hide tb_diagnosed_clinically_section if tb_diagnosis is not 1
             tbClinicallyOtherSection.style.display = "none";
             tbTreatmentSection.style.display = "none"; // Hide tb_treatment_section if tb_diagnosis is not 1
         }
@@ -51,8 +51,13 @@ document.addEventListener("DOMContentLoaded", function () {
         bacteriologicalDiagnosisSection.style.display = selectedValue === "2" ? "block" : "none";
         clinicianReceivedDateSection.style.display = selectedValue === "2" ? "block" : "none";
         diagnosisMadeOtherSection.style.display = selectedValue === "96" ? "block" : "none";
-        tbDiagnosedClinicallySection.style.display = selectedValue === "2" ? "block" : "none";  // Show for tb_diagnosis_made=2
-        tbDiagnosedClinicallySection.style.display = selectedValue === "1" ? "none" : tbDiagnosedClinicallySection.style.display;  // Hide for tb_diagnosis_made=1
+
+        // Show or hide tb_diagnosed_clinically_section based on tb_diagnosis_made
+        if (selectedValue === "1") {
+            tbDiagnosedClinicallySection.style.display = "block"; // Show if tb_diagnosis_made=1
+        } else {
+            tbDiagnosedClinicallySection.style.display = "none"; // Hide otherwise
+        }
 
         // Ensure tb_clinically_other_section updates correctly
         toggleTbClinicallyOtherSection();
@@ -60,7 +65,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function toggleTbOtherSpecifySection() {
         const selectedValue = document.querySelector('input[name="tb_other_diagnosis"]:checked')?.value;
-        tbOtherSpecifySection.style.display = selectedValue === "1" ? "block" : "none"; // Show tb_other_specify_section if tb_other_diagnosis=1
+        // Show tb_other_specify_section if tb_other_diagnosis=96, hide otherwise
+        tbOtherSpecifySection.style.display = selectedValue === "96" ? "block" : "none";
     }
 
     function toggleTbRegimenOtherSection() {
