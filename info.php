@@ -14,6 +14,7 @@ $numRec = 10;
 if ($user->isLoggedIn()) {
     if (Input::exists('post')) {
         $validate = new validate();
+
         if (Input::get('reset_pass')) {
             $salt = $random->get_rand_alphanumeric(32);
             $password = '12345678';
@@ -186,6 +187,16 @@ if ($user->isLoggedIn()) {
             } catch (Exception $e) {
                 $e->getMessage();
             }
+        }else if (Input::get('delete_record')) {
+            $user->updateRecord('screening', array(
+                'status' => 0,
+            ), Input::get('id'));
+            $successMessage = 'Recored Deleted Successful';
+        }else if (Input::get('restore_record')) {
+            $user->updateRecord('screening', array(
+                'status' => 1,
+            ), Input::get('id'));
+            $successMessage = 'Recored Restored Successful';
         }
     }
 } else {
