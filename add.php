@@ -5469,7 +5469,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-2">
+                                                <div class="col-4">
                                                     <label for="culture_performed" class="form-label">6(a). Was culture
                                                         performed?</label>
                                                     <!-- radio -->
@@ -5494,7 +5494,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
 
-                                                <div class="col-sm-2" id="culture_method_section">
+                                                <div class="col-sm-4" id="culture_method_section">
                                                     <label for="culture_method" class="form-label">6(b). Culture Method ?
                                                     </label>
                                                     <!-- radio -->
@@ -5518,7 +5518,7 @@ if ($user->isLoggedIn()) {
                                                         onclick="unsetRadio('culture_method')">Unset</button>
                                                 </div>
 
-                                                <div class="col-sm-2" id="culture_type_section">
+                                                <div class="col-sm-4" id="culture_type_section">
                                                     <label for="culture_method" class="form-label">7(a). Type
                                                         Microscopy conducted ?
                                                     </label>
@@ -5543,7 +5543,11 @@ if ($user->isLoggedIn()) {
                                                         onclick="unsetRadio('culture_type')">Unset</button>
                                                 </div>
 
+                                            </div>
 
+                                            <hr>
+
+                                            <div class="row">
                                                 <div class="col-sm-3" id="culture_performed_date_section">
                                                     <label for="culture_results" class="form-label">7(b). Date
                                                         Microscopy conducted
@@ -5584,11 +5588,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                 </div>
 
-                                            </div>
-
-                                            <hr>
-
-                                            <div class="row">
+                                            
                                                 <div class="col-sm-3" id="culture_inoculation_date_section">
                                                     <label for="phenotypic_date_performed" class="form-label">8. Date of
                                                         culture inoculation</label>
@@ -5606,7 +5606,13 @@ if ($user->isLoggedIn()) {
                                                     } ?>" id="culture_results_date" name="culture_results_date"
                                                         class="form-control" />
                                                 </div>
-                                                <div class="col-sm-3" id="culture_results_sections">
+
+                                                </div>
+
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-6" id="culture_results_sections">
                                                     <label for="culture_results" class="form-label">10. Culture result
                                                     </label>
                                                     <!-- radio -->
@@ -5630,7 +5636,7 @@ if ($user->isLoggedIn()) {
                                                         onclick="unsetRadio('culture_results')">Unset</button>
                                                 </div>
 
-                                                <div class="col-sm-3" id="culture_isolate_section">
+                                                <div class="col-sm-6" id="culture_isolate_section">
                                                     <label for="culture_isolate_section" class="form-label">11. Was the
                                                         culture
                                                         isolate submitted to CTRL for phenotypic DST testing?
