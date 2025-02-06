@@ -1,164 +1,95 @@
-from the above three files adjust this inputs from form with id "labForm_clinic" so it can work perfectly i will give
-rest of forms inputs later start with this first"
-<hr>
 <div class="row">
     <div class="col-sm-4">
-        <label for="sample_received" class="form-label">2. Is at least one
-            sputum sample received?</label>
+        <label>10a. Was the participant treated for TB before?</label>
         <!-- radio -->
         <div class="row-form clearfix">
             <div class="form-group">
-                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                <?php foreach ($override->get('yes_no_unknown', 'status', 1) as $value) { ?>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sample_received"
-                            id="sample_received<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['sample_received'] == $value['id']) {
-                                    echo 'checked';
-                                } ?>>
+                        <input class="form-check-input" type="radio" name="tx_previous" id="tx_previous<?= $value['id']; ?>"
+                            value="<?= $value['id']; ?>" <?php if ($clients['tx_previous'] == $value['id']) {
+                                  echo 'checked';
+                              } ?> required>
                         <label class="form-check-label"><?= $value['name']; ?></label>
                     </div>
                 <?php } ?>
             </div>
         </div>
-        <button type="button" onclick="unsetRadio('sample_received')">Unset</button>
+        <button type="button" onclick="unsetRadio('tx_previous')">Unset</button>
     </div>
-
-    <div class="col-sm-4" id="sample_reason">
-        <label for="tested_this_month" class="form-label">2(c). If no give
-            reason</label>
+    <div class="col-sm-4" id="tb_category_section">
+        <label>10b. What category is the previously treated patient </label>
         <!-- radio -->
         <div class="row-form clearfix">
             <div class="form-group">
-                <?php foreach ($override->get('sample_reason', 'status', 1) as $value) { ?>
+                <?php foreach ($override->get('tb_category', 'status', 1) as $value) { ?>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sample_reason"
-                            id="sample_reason<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['sample_reason'] == $value['id']) {
-                                    echo 'checked';
-                                } ?>>
-                        <label class="form-check-label"><?= $value['name']; ?></label>
-                    </div>
-                <?php } ?>
-            </div>
-            <button type="button" onclick="unsetRadio('sample_reason')">Unset</button>
-        </div>
-        <input type="text" value="<?php if ($costing['other_reason']) {
-            print_r($costing['other_reason']);
-        } ?>" id="other_reason" name="other_reason" class="form-control"
-            placeholder="If No give reasons here" />
-    </div>
-
-    <div class="col-sm-4" id="new_sample">
-        <label for="new_sample" class="form-label">2(d). was a new sample
-            collected?</label>
-        <!-- radio -->
-        <div class="row-form clearfix">
-            <div class="form-group">
-                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="new_sample" id="new_sample<?= $value['id']; ?>"
-                            value="<?= $value['id']; ?>" <?php if ($costing['new_sample'] == $value['id']) {
+                        <input class="form-check-input" type="radio" name="tb_category" id="tb_category<?= $value['id']; ?>"
+                            value="<?= $value['id']; ?>" <?php if ($clients['tb_category'] == $value['id']) {
                                   echo 'checked';
                               } ?>>
                         <label class="form-check-label"><?= $value['name']; ?></label>
                     </div>
                 <?php } ?>
             </div>
-            <button type="button" onclick="unsetRadio('new_sample')">Unset</button>
+            <button type="button" onclick="unsetRadio('tb_category')">Unset</button>
         </div>
-
-        <input type="text" value="<?php if ($costing['new_reason']) {
-            print_r($costing['new_reason']);
-        } ?>" id="new_reason" name="new_reason" class="form-control"
-            placeholder="If No give reasons here" />
+        <input class="form-control" type="text" name="tb_category_specify" id="tb_category_specify"
+            placeholder="Specify Here..." value="<?php if ($clients['tb_category_specify']) {
+                print_r($clients['tb_category_specify']);
+            } ?>" />
     </div>
 
-</div>
-<hr>
-<div class="row">
-    <?php
-    // Fetch enrollment_date from database
-    $enrollment_date = ''; // Replace with actual query to fetch enrollment_date
-    if ($enrollment['enrollment_date']) {
-        $enrollment_date = $enrollment['enrollment_date'];
-    }
-    ?>
-    <input type="hidden" id="enrollment_date_hidded" value="<?php echo $enrollment_date; ?>" />
-
-    <div class="col-sm-6" id="date_collected">
-        <div class="col-12">
-            <label class="form-label">3. Date sample(s) collected?</label>
-            <div class="mb-3">
-                <input type="date" value="<?php echo $costing['date_collected'] ?? ''; ?>" id="date_collected_input"
-                    name="date_collected" class="form-control" placeholder="Enter here" />
-                <span id="date_collected_error" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-6" id="date_received">
-        <label class="form-label">3. Date sample(s) Received?</label>
-        <div class="mb-3">
-            <input type="date" value="<?php echo $costing['date_received'] ?? ''; ?>" id="date_received_input"
-                name="date_received" class="form-control" placeholder="Enter here" />
-            <span id="date_received_error" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-
-<hr>
-<div class="row">
-    <div class="col-4" id="appearance">
-        <label for="appearance" class="form-label">7. Appearance</label>
-        <!-- radio -->
+    <div class="col-sm-4" id="tx_number_section">
         <div class="row-form clearfix">
             <div class="form-group">
-                <?php foreach ($override->get('appearance', 'status', 1) as $value) { ?>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="appearance" id="appearance<?= $value['id']; ?>"
-                            value="<?= $value['id']; ?>" <?php if ($costing['appearance'] == $value['id']) {
-                                  echo 'checked';
-                              } ?>>
-                        <label class="form-check-label"><?= $value['name']; ?></label>
-                    </div>
-                <?php } ?>
-            </div>
-            <button type="button" onclick="unsetRadio('appearance')">Unset</button>
+                <label for="tx_month">10c. When did the patient’s last treatment
+                    episode end?</label>
 
-        </div>
-    </div>
+                <!-- Row for Month and Year -->
+                <div class="row">
+                    <!-- Month Input -->
+                    <div class="col-sm-6">
+                        <label for="tx_month" class="form-label">Month</label>
+                        <input class="form-control" type="number" name="tx_month" id="tx_month"
+                            placeholder="Type Month..." min="1" max="12" value="<?php if ($clients['tx_month']) {
+                                print_r($clients['tx_month']);
+                            } ?>" />
 
-    <div class="col-4" id="sample_volume">
-        <div class="mb-3">
-            <label for="sample_volume" class="form-label">8. Approximate
-                volume
-                sample</label>
-            <input type="number" value="<?php if ($costing['sample_volume']) {
-                print_r($costing['sample_volume']);
-            } ?>" id="sample_volume" name="sample_volume" min="1" max="5"
-                class="form-control" placeholder="Enter here" />
-        </div>
-        <span>mL</span>
-    </div>
-
-    <div class="col-4" id="afb_microscopy">
-        <label for="afb_microscopy" class="form-label">6(a). Was AFB microscopy
-            conducted at TB clinic?</label>
-        <!-- radio -->
-        <div class="row-form clearfix">
-            <div class="form-group">
-                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="afb_microscopy"
-                            id="afb_microscopy<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy'] == $value['id']) {
+                        <!-- Unknown Month Checkbox -->
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="tx_unknown_month"
+                                name="tx_unknown_month" value="1" <?php if ($clients['tx_unknown_month'] ?? false) {
                                     echo 'checked';
                                 } ?>>
-                        <label class="form-check-label"><?= $value['name']; ?></label>
+                            <label class="form-check-label" for="tx_unknown_month">if month unknown Check
+                                Unknown, fill 99 for month on paper</label>
+                        </div>
                     </div>
-                <?php } ?>
+
+                    <!-- Year Input -->
+                    <div class="col-sm-6">
+                        <label for="tx_year" class="form-label">Year</label>
+                        <input class="form-control" type="number" name="tx_year" id="tx_year" placeholder="Type Year..."
+                            min="1970" max="2025" value="<?php if ($clients['tx_year']) {
+                                print_r($clients['tx_year']);
+                            } ?>" />
+
+                        <!-- Unknown Year Checkbox -->
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="tx_unknown_year" name="tx_unknown_year"
+                                value="1" <?php if ($clients['tx_unknown_year'] ?? false) {
+                                    echo 'checked';
+                                } ?>>
+                            <label class="form-check-label" for="tx_unknown_year">Month and year
+                                unknown</label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <button type="button" onclick="unsetRadio('afb_microscopy')">Unset</button>
     </div>
 </div>
-<hr>
 
-"
+<div id="tx_previous_section">
+</div>
