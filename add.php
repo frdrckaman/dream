@@ -7105,7 +7105,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                             <hr>
-                                            <div class="row">
+                                            <div class="row" id="table_section">
                                                 <label class="fw-bold text-center d-block">10(b). List all treatment changes
                                                     below.</label>
                                                 <table class="table table-bordered rounded">

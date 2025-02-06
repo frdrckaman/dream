@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tbRegimenRadios = document.querySelectorAll('input[name="tb_regimen"]');
     const tbTreatmentRadios = document.querySelectorAll('input[name="tb_treatment"]');
     const tbDiagnosedClinicallyCheckbox = document.getElementById("tb_diagnosed_clinically96");
+    const regimenChangedRadios = document.querySelectorAll('input[name="regimen_changed"]'); // New section for regimen_changed
 
     const tbDiagnosisSection = document.getElementById("tb_diagnosis_made_section");
     const bacteriologicalDiagnosisSection = document.getElementById("bacteriological_diagnosis_section");
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tbRegisterNumberSection = document.getElementById("tb_register_number_section");
     const tbRegimenPrescribedSection = document.getElementById("tb_regimen_prescribed_section");
     const regimenChangedSection = document.getElementById("regimen_changed_section");
+    const tableSection = document.getElementById("table_section"); // The section to show/hide based on regimen_changed
 
     function toggleTbDiagnosisSection() {
         const selectedValue = document.querySelector('input[name="tb_diagnosis"]:checked')?.value;
@@ -89,6 +91,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function toggleTableSection() {
+        const selectedValue = document.querySelector('input[name="regimen_changed"]:checked')?.value;
+        tableSection.style.display = selectedValue === "1" ? "block" : "none"; // Show table_section if regimen_changed=1
+    }
+
     // Attach event listeners
     tbDiagnosisRadios.forEach(radio => {
         radio.addEventListener("change", toggleTbDiagnosisSection);
@@ -112,6 +119,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     tbDiagnosedClinicallyCheckbox.addEventListener("change", toggleTbClinicallyOtherSection);
 
+    regimenChangedRadios.forEach(radio => {
+        radio.addEventListener("change", toggleTableSection); // Event listener for regimen_changed
+    });
+
     // Run functions on page load to check initial selections
     toggleTbDiagnosisSection();
     toggleTbDiagnosisMadeSections();
@@ -119,4 +130,5 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleTbOtherSpecifySection();
     toggleTbRegimenOtherSection();
     toggleTbTreatmentSections(); // Ensure treatment sections are initialized
+    toggleTableSection(); // Ensure table_section is initialized based on regimen_changed value
 });
