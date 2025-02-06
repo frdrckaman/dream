@@ -7130,7 +7130,7 @@ if ($user->isLoggedIn()) {
                                             <hr>
                                             <div class="card card-warning">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">ANY COMENT OR REMARKS</h3>
+                                                    <h3 class="card-title"> Treatment outcome </h3>
                                                 </div>
                                             </div>
                                             <hr>
