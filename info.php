@@ -1080,7 +1080,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                                 <?php
-                                                if ($user->data()->accessLevel == 1) {
+                                                // if ($user->data()->accessLevel == 1) {
                                                     ?>
                                                     <div class="col-sm-3">
                                                         <form id="validation" enctype="multipart/form-data" method="post"
@@ -1131,7 +1131,9 @@ if ($user->isLoggedIn()) {
                                                             </form>
                                                         </div>
                                                     </div>
-                                                <?php } ?>
+                                                <?php
+                                            //  } 
+                                             ?>
                                                 <div class="col-sm-6">
                                                     <ol class="breadcrumb float-sm-right">
                                                         <li class="breadcrumb-item">
