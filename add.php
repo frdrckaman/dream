@@ -4661,7 +4661,8 @@ if ($user->isLoggedIn()) {
                                                             <input class="form-control" type="date" name="date_completed"
                                                                 id="date_completed" value="<?php if ($costing['date_completed']) {
                                                                     print_r($costing['date_completed']);
-                                                                } ?>" <?php if ($costing['respiratory_completness'] == 3) { ?> readonly <?php } ?> />
+                                                                } ?>"  <?php if ($costing['respiratory_completness'] == $user->data()->id) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6714,7 +6715,7 @@ if ($user->isLoggedIn()) {
                                                                 name="diagnosis_test_verified_date"
                                                                 id="diagnosis_test_verified_date" value="<?php if ($costing['diagnosis_test_verified_date']) {
                                                                     print_r($costing['diagnosis_test_verified_date']);
-                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
+                                                                } ?>" <?php if ($costing['diagnosis_test_completed'] == $user->data()->id) { ?>
                                                                     readonly <?php } ?> />
                                                         </div>
                                                     </div>
@@ -7282,7 +7283,7 @@ if ($user->isLoggedIn()) {
                                                                 name="diagnosis_completed_date"
                                                                 id="diagnosis_completed_date" value="<?php if ($costing['diagnosis_completed_date']) {
                                                                     print_r($costing['diagnosis_completed_date']);
-                                                                } ?>" <?php if ($costing['diagnosis_completness'] == 3) { ?> readonly <?php } ?> />
+                                                                } ?>" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7296,7 +7297,7 @@ if ($user->isLoggedIn()) {
                                                                 name="diagnosis_verified_date" id="diagnosis_verified_date"
                                                                 value="<?php if ($costing['diagnosis_verified_date']) {
                                                                     print_r($costing['diagnosis_verified_date']);
-                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
+                                                                } ?>" <?php if ($costing['diagnosis_completness'] == $user->data()->id) { ?>
                                                                     readonly <?php } ?> />
                                                         </div>
                                                     </div>
@@ -8098,8 +8099,7 @@ if ($user->isLoggedIn()) {
                                                                         id="enrollment_completed<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($clients['enrollment_completed'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?>         <?php if ($clients['enrollment_completed'] == 3) { ?> readonly
-                                                                        <?php } ?> required>
+                                                                          } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
@@ -8120,7 +8120,8 @@ if ($user->isLoggedIn()) {
                                                                 name="enrollment_completed_date"
                                                                 id="enrollment_completed_date" value="<?php if ($clients['enrollment_completed_date']) {
                                                                     print_r($clients['enrollment_completed_date']);
-                                                                } ?>" <?php if ($clients['enrollment_completed'] == 3) { ?> readonly <?php } ?> />
+                                                                } ?>"<?php if ($costing['enrollment_completed'] == $user->data()->id) { ?>
+                                                                    readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>

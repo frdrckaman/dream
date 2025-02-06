@@ -1178,8 +1178,6 @@ if ($user->isLoggedIn()) {
                                             <tbody>
                                                 <?php
                                                 $x = 1;
-                                                // print_r($data);
-                                                print_r($pagNum);
                                                 foreach ($data as $value) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['facility_id'])[0];
                                                     $sex = $override->getNews('sex', 'status', 1, 'id', $value['sex'])[0];
@@ -1267,8 +1265,10 @@ if ($user->isLoggedIn()) {
                                                                     <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                         role=" button" class="btn btn-warning"> Add Screening
                                                                         Data</a>&nbsp;&nbsp; <br><br>
-
                                                                 <?php } ?>
+                                                                <a href="#delete_record<?= $sid ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete Record</a>
+                                                                <a href="#restore_record<?= $sid ?>" role="button" class="btn btn-warning" data-toggle="modal">Restore
+                                                                    Record</a>
                                                             <?php } ?>
                                                             <?php
                                                             if ($override->get3('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'], 'other_samples', 1)) {
@@ -1320,6 +1320,66 @@ if ($user->isLoggedIn()) {
                                                         <br>
                                                         <!-- </td> -->
                                                     </tr>
+                                                    <div class="modal fade" id="delete_record<?= $sid ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <form method="post">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <h4>Delete Record</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <strong style="font-weight: bold;color: red">
+                                                                            <p>Are you sure you want to delete this Record ?</p>
+                                                                        </strong>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <input type="hidden" name="id" value="<?= $sid ?>">
+                                                                        <?php
+                                                                        //  if ($user->data()->accessLevel == 1) { 
+                                                                            ?>
+                                                                            <input type="submit" name="delete_record" value="Delete" class="btn btn-danger">
+                                                                        <?php
+                                                                    //  } 
+                                                                     ?>
+                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="restore_record<?= $sid ?>" tabindex="-1" role="dialog"
+                                                        aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <form method="post">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <h4>Restore Record</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <strong style="font-weight: bold;color: green">
+                                                                            <p>Are you sure you want to Restore this Record ?</p>
+                                                                        </strong>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                                                                        <?php
+                                                                        //  if ($user->data()->accessLevel == 1) { 
+                                                                            ?>
+                                                                            <input type="submit" name="restore_record" value="Restore" class="btn btn-warning">
+                                                                        <?php
+                                                                    //  } 
+                                                                     ?>
+                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                     <?php $x++;
                                                 } ?>
                                             </tbody>
