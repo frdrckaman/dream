@@ -945,9 +945,9 @@ class OverideData
         return $num;
     }
 
-    public function getWithLimitSearchNewsCount1($table, $searchTerm, $where, $where1, $id1)
+    public function getWithLimitSearchNewsCount1($table, $where, $id, $pid, $searchTerm)
     {
-        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where1 = '$id1' AND ($where LIKE '%$searchTerm%')");
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND ($pid LIKE '%$searchTerm%')");
         $num = $query->rowCount();
         return $num;
     }
@@ -967,9 +967,9 @@ class OverideData
         return $result;
     }
 
-    public function getWithLimitSearchNews1($table, $searchTerm, $where, $where1, $id1, $where2, $id2)
+    public function getWithLimitSearchNews1($table, $where, $id, $pid, $searchTerm)
     {
-        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where1 = '$id1' AND $where2 = '$id2' AND ($where LIKE '%$searchTerm%')");
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND ($pid LIKE '%$searchTerm%')");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }

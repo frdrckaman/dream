@@ -898,7 +898,7 @@ if ($user->isLoggedIn()) {
                                         } else if ($_GET['status'] == 3) {
                                             // $pagNum = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
 
-                                            $pagNum = $override->getWithLimitSearchNewsCount1('enrollment_form', 'status', 1, $searchTerm, 'pid');
+                                            $pagNum = $override->getWithLimitSearchNewsCount1('enrollment_form', 'status', 1,'pid', $searchTerm);
                                         } else if ($_GET['status'] == 4) {
                                             $pagNum = $override->getWithLimitSearchNewsCount1('termination', 'status', 1, $searchTerm, 'pid');
                                         } else {
@@ -918,8 +918,8 @@ if ($user->isLoggedIn()) {
                                             $data = $override->getWithLimitSearchNews2('screening', 'status', 1, 'eligible', 1, $page, $numRec, $searchTerm, 'pid');
                                         } else if ($_GET['status'] == 3) {
                                             // $data = $override->getWithLimit1Desc('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
-
-                                            $data = $override->getWithLimitSearchNews1('enrollment_form', 'status', 1, $page, $numRec, $searchTerm, 'pid');
+                                
+                                            $data = $override->getWithLimitSearchNews1('enrollment_form', 'status', 1, 'pid', $searchTerm);
                                         } else if ($_GET['status'] == 4) {
                                             $data = $override->getWithLimitSearchNews1('termination', 'status', 1, $page, $numRec, $searchTerm, 'pid');
                                         } else {
@@ -1174,6 +1174,7 @@ if ($user->isLoggedIn()) {
                                                 <?php
                                                 $x = 1;
                                                 // print_r($data);
+                                                print_r($pagNum);
                                                 foreach ($data as $value) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['facility_id'])[0];
                                                     $sex = $override->getNews('sex', 'status', 1, 'id', $value['sex'])[0];
