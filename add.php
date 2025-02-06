@@ -5674,607 +5674,532 @@ if ($user->isLoggedIn()) {
                                             </div>
 
 
-                                            <?php if ($user->data()->site_id == 20) { ?>
-                                                <div id="phenotypic_dst_section">
-                                                    <div class="card card-warning">
-                                                        <div class="card-header">
-                                                            <h3 class="card-title">
-                                                                12. Phenotypic DST (CTRL ONLY)
-                                                            </h3>
-                                                        </div>
-                                                    </div>
+                                            <?php
+                                            //  if ($user->data()->site_id == 20) { 
+                                            $disabled = ($user->data()->site_id != 20) ? 'disabled' : '';
 
-                                                    <hr>
-                                                    <div class="row">
-                                                        <div class="col-sm-4" id="phenotypic_performed_section">
-                                                            <label for="phenotypic_performed" class="form-label">12a. Was
-                                                                phenotypic
-                                                                DST
-                                                                performed?
-                                                            </label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="phenotypic_performed"
-                                                                                id="phenotypic_performed<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['phenotypic_performed'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('phenotypic_performed')">Unset</button>
-
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-4" id="phenotypic_date_performed_section">
-                                                            <label for="phenotypic_date_performed" class="form-label">12(b).
-                                                                Date of
-                                                                performing phenotypic DST ?</label>
-                                                            <input type="date" value="<?php if ($costing['phenotypic_date_performed']) {
-                                                                print_r($costing['phenotypic_date_performed']);
-                                                            } ?>" id="phenotypic_date_performed"
-                                                                name="phenotypic_date_performed" class="form-control" />
-                                                        </div>
-
-                                                        <div class="col-sm-4" id="phenotypic_date_results_section">
-                                                            <label for="phenotypic_date_results" class="form-label">12(c). Date
-                                                                of
-                                                                phenotypic DST Results?</label>
-                                                            <input type="date" value="<?php if ($costing['phenotypic_date_results']) {
-                                                                print_r($costing['phenotypic_date_results']);
-                                                            } ?>" id="phenotypic_date_results"
-                                                                name="phenotypic_date_results" class="form-control" />
-                                                        </div>
-
+                                            ?>
+                                            <div id="phenotypic_dst_section">
+                                                <div class="card card-warning">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">
+                                                            12. Phenotypic DST (CTRL ONLY)
+                                                        </h3>
                                                     </div>
                                                 </div>
 
-                                                <div id="phenotypic_performed_results_section">
-                                                    <hr>
-
-                                                    <div class="card card-warning">
-                                                        <div class="card-header">
-                                                            <h3 class="card-title">
-                                                                13. Phenotypic DST results
-                                                            </h3>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="col-sm-4" id="phenotypic_performed_section">
+                                                        <label for="phenotypic_performed" class="form-label">12a. Was
+                                                            phenotypic DST performed?</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('yes_no_na', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="phenotypic_performed"
+                                                                            id="phenotypic_performed<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['phenotypic_performed'] == $value['id']) {
+                                                                                             echo 'checked';
+                                                                                         } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('phenotypic_performed')" <?= $disabled; ?>>Unset</button>
                                                         </div>
                                                     </div>
 
-                                                    <hr>
+                                                    <div class="col-sm-4" id="phenotypic_date_performed_section">
+                                                        <label for="phenotypic_date_performed" class="form-label">12(b).
+                                                            Date of performing phenotypic DST?</label>
+                                                        <input type="date"
+                                                            value="<?= $costing['phenotypic_date_performed'] ?? ''; ?>"
+                                                            id="phenotypic_date_performed" name="phenotypic_date_performed"
+                                                            class="form-control" <?= $disabled; ?> />
+                                                    </div>
 
-                                                    <div class="row">
-                                                        <div class="col-sm-3" id="rifampicin">
-                                                            <label for="rifampicin" class="form-label">13(a). Rifampicin</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="rifampicin"
-                                                                                id="rifampicin<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['rifampicin'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('rifampicin')">Unset</button>
+                                                    <div class="col-sm-4" id="phenotypic_date_results_section">
+                                                        <label for="phenotypic_date_results" class="form-label">12(c). Date
+                                                            of phenotypic DST Results?</label>
+                                                        <input type="date"
+                                                            value="<?= $costing['phenotypic_date_results'] ?? ''; ?>"
+                                                            id="phenotypic_date_results" name="phenotypic_date_results"
+                                                            class="form-control" <?= $disabled; ?> />
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                            <div id="phenotypic_performed_results_section">
+                                                <hr>
+
+                                                <div class="card card-warning">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">
+                                                            13. Phenotypic DST results
+                                                        </h3>
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="row">
+                                                    <div class="col-sm-3" id="rifampicin">
+                                                        <label for="rifampicin" class="form-label">13(a). Rifampicin</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="rifampicin"
+                                                                            id="rifampicin<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['rifampicin'] == $value['id']) {
+                                                                                             echo 'checked';
+                                                                                         } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
                                                             </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-3" id="isoniazid">
-                                                            <label for="isoniazid" class="form-label">13(b). Isoniazid</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="isoniazid" id="isoniazid<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['isoniazid'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('isoniazid')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-3" id="levofloxacin">
-                                                            <label for="levofloxacin" class="form-label">13(c).
-                                                                Levofloxacin</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="levofloxacin"
-                                                                                id="levofloxacin<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['levofloxacin'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('levofloxacin')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-3" id="moxifloxacin">
-                                                            <label for="moxifloxacin" class="form-label">13(d).
-                                                                Moxifloxacin</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="moxifloxacin"
-                                                                                id="moxifloxacin<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['moxifloxacin'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('moxifloxacin')">Unset</button>
-
-                                                            </div>
+                                                            <button type="button" onclick="unsetRadio('rifampicin')"
+                                                                <?= $disabled; ?>>Unset</button>
                                                         </div>
                                                     </div>
 
-                                                    <hr>
-                                                    <div class="row">
-                                                        <div class="col-sm-3" id="bedaquiline">
-                                                            <label for="bedaquiline" class="form-label">13(e).
-                                                                Bedaquiline</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="bedaquiline"
-                                                                                id="bedaquiline<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['bedaquiline'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('bedaquiline')">Unset</button>
-
+                                                    <div class="col-sm-3" id="isoniazid">
+                                                        <label for="isoniazid" class="form-label">13(b). Isoniazid</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="isoniazid" id="isoniazid<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['isoniazid'] == $value['id']) {
+                                                                                             echo 'checked';
+                                                                                         } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
                                                             </div>
-
+                                                            <button type="button" onclick="unsetRadio('isoniazid')"
+                                                                <?= $disabled; ?>>Unset</button>
                                                         </div>
-
-                                                        <div class="col-sm-3" id="linezolid">
-                                                            <label for="linezolid" class="form-label">13(f). Linezolid</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="linezolid" id="linezolid<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['linezolid'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('linezolid')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-3" id="clofazimine">
-                                                            <label for="clofazimine" class="form-label">13(g).
-                                                                Clofazimine</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="clofazimine"
-                                                                                id="clofazimine<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['clofazimine'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('clofazimine')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-3" id="cycloserine">
-                                                            <label for="cycloserine" class="form-label">13(h).
-                                                                Cycloserine</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="cycloserine"
-                                                                                id="cycloserine<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['cycloserine'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('cycloserine')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
                                                     </div>
 
-                                                    <hr>
-
-                                                    <div class="row">
-                                                        <div class="col-sm-3" id="terizidone">
-                                                            <label for="terizidone" class="form-label">13(i). Terizidone</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="terizidone"
-                                                                                id="terizidone<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['terizidone'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('terizidone')">Unset</button>
-
+                                                    <div class="col-sm-3" id="levofloxacin">
+                                                        <label for="levofloxacin" class="form-label">13(c).
+                                                            Levofloxacin</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="levofloxacin"
+                                                                            id="levofloxacin<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['levofloxacin'] == $value['id']) {
+                                                                                             echo 'checked';
+                                                                                         } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
                                                             </div>
-
+                                                            <button type="button" onclick="unsetRadio('levofloxacin')"
+                                                                <?= $disabled; ?>>Unset</button>
                                                         </div>
-
-                                                        <div class="col-sm-3" id="ethambutol">
-                                                            <label for="ethambutol" class="form-label">13(j). Ethambutol</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="ethambutol"
-                                                                                id="ethambutol<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['ethambutol'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('ethambutol')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-3" id="delamanid">
-                                                            <label for="clofazimine" class="form-label">13(k). Delamanid</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="delamanid" id="delamanid<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['delamanid'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('delamanid')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-3" id="pyrazinamide">
-                                                            <label for="pyrazinamide" class="form-label">13(l).
-                                                                Pyrazinamide</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="pyrazinamide"
-                                                                                id="pyrazinamide<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['pyrazinamide'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('pyrazinamide')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
                                                     </div>
 
-                                                    <hr>
-
-                                                    <div class="row">
-                                                        <div class="col-sm-3" id="imipenem">
-                                                            <label for="imipenem" class="form-label">13(m). Imipenem</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="imipenem" id="imipenem<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['imipenem'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('imipenem')">Unset</button>
-
+                                                    <div class="col-sm-3" id="moxifloxacin">
+                                                        <label for="moxifloxacin" class="form-label">13(d).
+                                                            Moxifloxacin</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="moxifloxacin"
+                                                                            id="moxifloxacin<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['moxifloxacin'] == $value['id']) {
+                                                                                             echo 'checked';
+                                                                                         } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
                                                             </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-3" id="cilastatin">
-                                                            <label for="cilastatin" class="form-label">13(n). Cilastatin</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="cilastatin"
-                                                                                id="cilastatin<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['cilastatin'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('cilastatin')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-3" id="meropenem">
-                                                            <label for="meropenem" class="form-label">13(o). Meropenem</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="meropenem" id="meropenem<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['meropenem'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('meropenem')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-3" id="amikacin">
-                                                            <label for="amikacin" class="form-label">13(p). Amikacin</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="amikacin" id="amikacin<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['amikacin'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('amikacin')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <hr>
-
-                                                    <div class="row">
-                                                        <div class="col-sm-3" id="streptomycin">
-                                                            <label for="streptomycin" class="form-label">13(q).
-                                                                Streptomycin</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="streptomycin"
-                                                                                id="streptomycin<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['streptomycin'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('streptomycin')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-3" id="ethionamide">
-                                                            <label for="ethionamide" class="form-label">13(r).
-                                                                Ethionamide</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="ethionamide"
-                                                                                id="ethionamide<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['ethionamide'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('ethionamide')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-3" id="prothionamide">
-                                                            <label for="prothionamide" class="form-label">13(s).
-                                                                Prothionamide</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="prothionamide"
-                                                                                id="prothionamide<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['prothionamide'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('prothionamide')">Unset</button>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="col-sm-3" id="para_aminosalicylic_acid">
-                                                            <label for="para_aminosalicylic_acid" class="form-label">13(t).
-                                                                Para-
-                                                                aminosalicylic acid</label>
-                                                            <!-- radio -->
-                                                            <div class="row-form clearfix">
-                                                                <div class="form-group">
-                                                                    <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="para_aminosalicylic_acid"
-                                                                                id="para_aminosalicylic_acid<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['para_aminosalicylic_acid'] == $value['id']) {
-                                                                                      echo 'checked';
-                                                                                  } ?>>
-                                                                            <label
-                                                                                class="form-check-label"><?= $value['name']; ?></label>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                                <button type="button"
-                                                                    onclick="unsetRadio('para_aminosalicylic_acid')">Unset</button>
-                                                            </div>
-
+                                                            <button type="button" onclick="unsetRadio('moxifloxacin')"
+                                                                <?= $disabled; ?>>Unset</button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            <?php } ?>
+
+                                                <hr>
+
+                                                <div class="row">
+                                                    <div class="col-sm-3" id="bedaquiline">
+                                                        <label for="bedaquiline" class="form-label">13(e).
+                                                            Bedaquiline</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="bedaquiline"
+                                                                            id="bedaquiline<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['bedaquiline'] == $value['id']) {
+                                                                                             echo 'checked';
+                                                                                         } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button" onclick="unsetRadio('bedaquiline')"
+                                                                <?= $disabled; ?>>Unset</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="linezolid">
+                                                        <label for="linezolid" class="form-label">13(f). Linezolid</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="linezolid" id="linezolid<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['linezolid'] == $value['id']) {
+                                                                                             echo 'checked';
+                                                                                         } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button" onclick="unsetRadio('linezolid')"
+                                                                <?= $disabled; ?>>Unset</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="clofazimine">
+                                                        <label for="clofazimine" class="form-label">13(g).
+                                                            Clofazimine</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="clofazimine"
+                                                                            id="clofazimine<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['clofazimine'] == $value['id']) {
+                                                                                             echo 'checked';
+                                                                                         } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button" onclick="unsetRadio('clofazimine')"
+                                                                <?= $disabled; ?>>Unset</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="cycloserine">
+                                                        <label for="cycloserine" class="form-label">13(h).
+                                                            Cycloserine</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="cycloserine"
+                                                                            id="cycloserine<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['cycloserine'] == $value['id']) {
+                                                                                             echo 'checked';
+                                                                                         } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button" onclick="unsetRadio('cycloserine')"
+                                                                <?= $disabled; ?>>Unset</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="row">
+                                                    <div class="col-sm-3" id="terizidone">
+                                                        <label for="terizidone" class="form-label">13(i). Terizidone</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="terizidone"
+                                                                            id="terizidone<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['terizidone'] == $value['id'])
+                                                                                             echo 'checked'; ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('terizidone')">Unset</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="ethambutol">
+                                                        <label for="ethambutol" class="form-label">13(j). Ethambutol</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="ethambutol"
+                                                                            id="ethambutol<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['ethambutol'] == $value['id'])
+                                                                                             echo 'checked'; ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('ethambutol')">Unset</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="delamanid">
+                                                        <label for="delamanid" class="form-label">13(k). Delamanid</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="delamanid" id="delamanid<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['delamanid'] == $value['id'])
+                                                                                             echo 'checked'; ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('delamanid')">Unset</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="pyrazinamide">
+                                                        <label for="pyrazinamide" class="form-label">13(l).
+                                                            Pyrazinamide</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="pyrazinamide"
+                                                                            id="pyrazinamide<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['pyrazinamide'] == $value['id'])
+                                                                                             echo 'checked'; ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('pyrazinamide')">Unset</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="row">
+                                                    <div class="col-sm-3" id="imipenem">
+                                                        <label for="imipenem" class="form-label">13(m). Imipenem</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="imipenem" id="imipenem<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['imipenem'] == $value['id'])
+                                                                                             echo 'checked'; ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('imipenem')">Unset</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="cilastatin">
+                                                        <label for="cilastatin" class="form-label">13(n). Cilastatin</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="cilastatin"
+                                                                            id="cilastatin<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['cilastatin'] == $value['id'])
+                                                                                             echo 'checked'; ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('cilastatin')">Unset</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="meropenem">
+                                                        <label for="meropenem" class="form-label">13(o). Meropenem</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="meropenem" id="meropenem<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['meropenem'] == $value['id'])
+                                                                                             echo 'checked'; ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('meropenem')">Unset</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="amikacin">
+                                                        <label for="amikacin" class="form-label">13(p). Amikacin</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="amikacin" id="amikacin<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?= $disabled; ?>         <?php if ($costing['amikacin'] == $value['id'])
+                                                                                             echo 'checked'; ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('amikacin')">Unset</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="row">
+                                                    <div class="col-sm-3" id="streptomycin">
+                                                        <label for="streptomycin" class="form-label">13(q).
+                                                            Streptomycin</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="streptomycin"
+                                                                            id="streptomycin<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>"
+                                                                            <?= ($costing['streptomycin'] == $value['id']) ? 'checked' : ''; ?>         <?= $disabled; ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button" onclick="unsetRadio('streptomycin')"
+                                                                <?= $disabled; ?>>Unset</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="ethionamide">
+                                                        <label for="ethionamide" class="form-label">13(r).
+                                                            Ethionamide</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="ethionamide"
+                                                                            id="ethionamide<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>"
+                                                                            <?= ($costing['ethionamide'] == $value['id']) ? 'checked' : ''; ?>         <?= $disabled; ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button" onclick="unsetRadio('ethionamide')"
+                                                                <?= $disabled; ?>>Unset</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="prothionamide">
+                                                        <label for="prothionamide" class="form-label">13(s).
+                                                            Prothionamide</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="prothionamide"
+                                                                            id="prothionamide<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>"
+                                                                            <?= ($costing['prothionamide'] == $value['id']) ? 'checked' : ''; ?>         <?= $disabled; ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button" onclick="unsetRadio('prothionamide')"
+                                                                <?= $disabled; ?>>Unset</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3" id="para_aminosalicylic_acid">
+                                                        <label for="para_aminosalicylic_acid" class="form-label">13(t).
+                                                            Para-aminosalicylic acid</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('phenotypic_dst', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="para_aminosalicylic_acid"
+                                                                            id="para_aminosalicylic_acid<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>"
+                                                                            <?= ($costing['para_aminosalicylic_acid'] == $value['id']) ? 'checked' : ''; ?>         <?= $disabled; ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('para_aminosalicylic_acid')"
+                                                                <?= $disabled; ?>>Unset</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            // }
+                                            ?>
                                             <hr>
 
 
@@ -6727,7 +6652,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6800,8 +6725,12 @@ if ($user->isLoggedIn()) {
                                         <div class="card-footer">
                                             <a href="info.php?id=6&status=<?= $_GET['status']; ?>&sid=<?= $_GET['sid']; ?>&facility_id=<?= $_GET['facility_id']; ?>&page=<?= $_GET['page']; ?>"
                                                 class="btn btn-default">Back</a>
-                                            <input type="submit" name="add_diagnosis_test" value="Submit"
-                                                class="btn btn-primary">
+                                            <?php
+                                            if ($user->data()->site_id == 6 || $user->data()->site_id == 13 || $user->data()->site_id == 20 || $user->data()->site_id == 22) {
+                                                ?>
+                                                <input type="submit" name="add_diagnosis_test" value="Submit"
+                                                    class="btn btn-primary">
+                                            <?php } ?>
                                         </div>
                                     </form>
                                 </div>
@@ -7304,7 +7233,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8146,7 +8075,7 @@ if ($user->isLoggedIn()) {
                                                                         placeholder="Type reasons here...">                                                                                                                                                                                                                                                                                              <?php if ($clients['sputum_reasons']) {
                                                                             print_r($clients['sputum_reasons']);
                                                                         } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -9936,7 +9865,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>

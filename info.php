@@ -897,8 +897,8 @@ if ($user->isLoggedIn()) {
                                             $pagNum = $override->getWithLimitSearchNewsCount2('screening', 'status', 1, 'eligible', 1, $searchTerm, 'pid');
                                         } else if ($_GET['status'] == 3) {
                                             // $pagNum = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
-
-                                            $pagNum = $override->getWithLimitSearchNewsCount1('enrollment_form', 'status', 1,'pid', $searchTerm);
+                                
+                                            $pagNum = $override->getWithLimitSearchNewsCount1('enrollment_form', 'status', 1, 'pid', $searchTerm);
                                         } else if ($_GET['status'] == 4) {
                                             $pagNum = $override->getWithLimitSearchNewsCount1('termination', 'status', 1, $searchTerm, 'pid');
                                         } else {
@@ -1081,59 +1081,62 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                                 <?php
                                                 // if ($user->data()->accessLevel == 1) {
-                                                    ?>
-                                                    <div class="col-sm-3">
-                                                        <form id="validation" enctype="multipart/form-data" method="post"
-                                                            autocomplete="off">
-                                                            <div class="row">
-                                                                <div class="col-sm-4">
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="form-group">
-                                                                            <select class="form-control" name="facility_id"
-                                                                                style="width: 100%;" autocomplete="off">
-                                                                                <option value="">Select Site</option>
-                                                                                <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                    <option value="<?= $site['id'] ?>">
-                                                                                        <?= $site['name'] ?>
-                                                                                    </option>
-                                                                                <?php } ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="form-group">
-                                                                            <input type="submit" name="search_by_site"
-                                                                                value="Search by Site" class="btn btn-primary">
-                                                                        </div>
+                                                ?>
+                                                <div class="col-sm-3">
+                                                    <form id="validation" enctype="multipart/form-data" method="post"
+                                                        autocomplete="off">
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <div class="row-form clearfix">
+                                                                    <div class="form-group">
+                                                                        <select class="form-control" name="facility_id"
+                                                                            style="width: 100%;" autocomplete="off">
+                                                                            <option value="">Select Site</option>
+                                                                            <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
+                                                                                <option value="<?= $site['id'] ?>">
+                                                                                    <?= $site['name'] ?>
+                                                                                </option>
+                                                                            <?php } ?>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="row-form clearfix">
+                                                                    <div class="form-group">
+                                                                        <input type="submit" name="search_by_site"
+                                                                            value="Search by Site" class="btn btn-primary">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="card-tools">
+                                                    <div class="input-group input-group-sm float-right"
+                                                        style="width: 350px;">
+                                                        <form method="get">
+                                                            <div class="form-inline">
+                                                                <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
+                                                                <input type="hidden" name="status"
+                                                                    value="<?= $_GET['status'] ?>">
+                                                                <input type="hidden" name="sid" value="<?= $_GET['sid'] ?>">
+                                                                <input type="hidden" name="facility_id"
+                                                                    value="<?= $_GET['facility_id'] ?>">
+                                                                <input type="hidden" name="page"
+                                                                    value="<?= $_GET['page'] ?>">
+                                                                <input type="text" name="search_name" id="search_name"
+                                                                    class="form-control float-right"
+                                                                    placeholder="Search here PID">
+                                                                <input type="submit" value="Search"
+                                                                    class="btn btn-default"><i class="fas fa-search"></i>
+                                                            </div>
                                                         </form>
                                                     </div>
-                                                    <div class="card-tools">
-                                                        <div class="input-group input-group-sm float-right"
-                                                            style="width: 350px;">
-                                                            <form method="get">
-                                                                <div class="form-inline">
-                                                                    <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
-                                                                    <input type="hidden" name="status" value="<?= $_GET['status'] ?>">
-                                                                    <input type="hidden" name="sid" value="<?= $_GET['sid'] ?>">
-                                                                    <input type="hidden" name="facility_id" value="<?= $_GET['facility_id'] ?>">
-                                                                    <input type="hidden" name="page" value="<?= $_GET['page'] ?>">
-                                                                    <input type="text" name="search_name" id="search_name"
-                                                                        class="form-control float-right"
-                                                                        placeholder="Search here PID">
-                                                                    <input type="submit" value="Search"
-                                                                        class="btn btn-default"><i class="fas fa-search"></i>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
+                                                </div>
                                                 <?php
-                                            //  } 
-                                             ?>
+                                                //  } 
+                                                ?>
                                                 <div class="col-sm-6">
                                                     <ol class="breadcrumb float-sm-right">
                                                         <li class="breadcrumb-item">
@@ -1586,10 +1589,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($enrollment['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $enrollment['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $enrollment['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -1911,22 +1914,26 @@ if ($user->isLoggedIn()) {
 
                                                             <?php } ?>
 
-                                                            <?php if ($user->data()->site_id == 6 || $user->data()->site_id == 13 || $user->data()->site_id == 20 || $user->data()->site_id == 22) { ?>
+                                                            <?php
+                                                            //  if ($user->data()->site_id == 6 || $user->data()->site_id == 13 || $user->data()->site_id == 20 || $user->data()->site_id == 22) {
+                                                            ?>
 
-                                                                <?php if ($override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
-                                                                    <a href="add.php?id=14&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                        role=" button" class="btn btn-info"> Update Laboratory form <br>
-                                                                        (zonal laboratory/CTRL)
-                                                                    </a>&nbsp;&nbsp; <br><br>
+                                                            <?php if ($override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
+                                                                <a href="add.php?id=14&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                    role=" button" class="btn btn-info"> Update Laboratory form <br>
+                                                                    (zonal laboratory/CTRL)
+                                                                </a>&nbsp;&nbsp; <br><br>
 
-                                                                <?php } else { ?>
-                                                                    <a href="add.php?id=14&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                        role=" button" class="btn btn-warning"> Add Laboratory form <br>
-                                                                        (zonal laboratory/CTRL)
-                                                                    </a>&nbsp;&nbsp; <br><br>
+                                                            <?php } else { ?>
+                                                                <a href="add.php?id=14&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                    role=" button" class="btn btn-warning"> Add Laboratory form <br>
+                                                                    (zonal laboratory/CTRL)
+                                                                </a>&nbsp;&nbsp; <br><br>
 
-                                                                <?php } ?>
                                                             <?php } ?>
+                                                            <?php
+                                                            //  } 
+                                                            ?>
 
 
                                                             <?php if ($override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['sid'])) { ?>
@@ -1942,7 +1949,9 @@ if ($user->isLoggedIn()) {
                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } ?>
-                                                        <?php } ?>
+                                                        <?php
+                                                        }
+                                                        ?>
 
                                                     </td>
                                                 </tr>
@@ -3153,10 +3162,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($visit['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $visit['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($visit['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $visit['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
