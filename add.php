@@ -6689,7 +6689,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6944,24 +6944,23 @@ if ($user->isLoggedIn()) {
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                                                                            <div id="tb_clinically_other_section">
-                                                            <label for="tb_clinically_other"
-                                                                class="form-label">Other
-                                                                Specify ?</label>
-                                                            <input type="text" value="<?php if ($costing['tb_clinically_other']) {
-                                                                print_r($costing['tb_clinically_other']);
-                                                            } ?>" id="tb_clinically_other" name="tb_clinically_other"
-                                                                class="form-control" placeholder="Enter here" />
+                                                            <div id="tb_clinically_other_section">
+                                                                <label for="tb_clinically_other" class="form-label">Other
+                                                                    Specify ?</label>
+                                                                <input type="text" value="<?php if ($costing['tb_clinically_other']) {
+                                                                    print_r($costing['tb_clinically_other']);
+                                                                } ?>" id="tb_clinically_other"
+                                                                    name="tb_clinically_other" class="form-control"
+                                                                    placeholder="Enter here" />
+                                                            </div>
                                                         </div>
-                                                                                                                </div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <hr>
                                             <div class="row">
-
-                                                <div class="col-sm-6" id="tb_treatment_section">
+                                                <div class="col-sm-4" id="tb_treatment_section">
                                                     <label for="tb_treatment" class="form-label">8(a). Was TB treatment
                                                         started?</label>
                                                     <!-- radio -->
@@ -6982,37 +6981,52 @@ if ($user->isLoggedIn()) {
                                                             <button type="button"
                                                                 onclick="unsetRadio('tb_treatment')">Unset</button>
                                                         </div>
-
-
-                                                        <label for="tb_treatment_date" id="tb_treatment_date1"
-                                                            class="form-label">8(b). What was treatment start date ?</label>
-                                                        <input type="date" value="<?php if ($costing['tb_treatment_date']) {
-                                                            print_r($costing['tb_treatment_date']);
-                                                        } ?>" id="tb_treatment_date" name="tb_treatment_date"
-                                                            class="form-control" placeholder="Enters here" />
-                                                        <label for="tb_facility" id="tb_facility1" class="form-label">8(c).
-                                                            (Name
-                                                            health facility):</label>
-                                                        <input type="text" value="<?php if ($costing['tb_facility']) {
-                                                            print_r($costing['tb_facility']);
-                                                        } ?>" id="tb_facility" name="tb_facility" class="form-control"
-                                                            placeholder="Enter heres" />
-                                                        <label for="tb_reason" id="tb_reason1" class="form-label">8(d).
-                                                            reason
-                                                            (specify):</label>
-                                                        <input type="text" value="<?php if ($costing['tb_reason']) {
-                                                            print_r($costing['tb_reason']);
-                                                        } ?>" id="tb_reason" name="tb_reason" class="form-control"
-                                                            placeholder="Enter here" />
-
                                                     </div>
-
                                                 </div>
 
-                                            </div>
+                                                <div class="col-sm-4" id="tb_treatment_section">
+                                                    <!-- <label for="tb_treatment" class="form-label">8(a). Was TB
+                                                        treatment
+                                                        started?</label> -->
+                                                    <!-- radio -->
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <div class="form-check">
+                                                                <div id="tb_treatment_date_section">
+                                                                    <label for="tb_treatment_date" class="form-label">8(b).
+                                                                        What was
+                                                                        treatment start date ?</label>
+                                                                    <input type="date" value="<?php if ($costing['tb_treatment_date']) {
+                                                                        print_r($costing['tb_treatment_date']);
+                                                                    } ?>" id="tb_treatment_date"
+                                                                        name="tb_treatment_date" class="form-control"
+                                                                        placeholder="Enters here" />
+                                                                </div>
 
-                                            <hr>
-                                            <div class="row">
+                                                                <div id="tb_facility_section">
+                                                                    <label for="tb_facility" class="form-label">8(c).
+                                                                        (Name
+                                                                        health facility):</label>
+                                                                    <input type="text" value="<?php if ($costing['tb_facility']) {
+                                                                        print_r($costing['tb_facility']);
+                                                                    } ?>" id="tb_facility" name="tb_facility"
+                                                                        class="form-control" placeholder="Enter heres" />
+                                                                </div>
+
+                                                                <div id="tb_reason_section">
+                                                                    <label for="tb_reason" class="form-label">8(d).
+                                                                        reason
+                                                                        (specify):</label>
+                                                                    <input type="text" value="<?php if ($costing['tb_reason']) {
+                                                                        print_r($costing['tb_reason']);
+                                                                    } ?>" id="tb_reason" name="tb_reason"
+                                                                        class="form-control" placeholder="Enter here" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-sm-4" id="tb_register_number_section">
                                                     <label for="tb_register_number" class="form-label">9(a). TB register
                                                         number</label>
@@ -7028,7 +7042,12 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4" id="tb_regimen_prescribed">
+                                            </div>
+
+                                            <hr>
+                                            <div class="row">
+
+                                                <div class="col-sm-6" id="tb_regimen_prescribed_section">
                                                     <label for="tb_regimen" class="form-label">9(b). What treatment
                                                         regimen
                                                         was prescribed? </label>
@@ -7050,18 +7069,18 @@ if ($user->isLoggedIn()) {
                                                         <button type="button"
                                                             onclick="unsetRadio('tb_regimen')">Unset</button>
                                                     </div>
-                                                                                                    <div id="tb_regimen_other_section1">
-                                                    <label for="tb_regimen_other"
-                                                        class="form-label">Regimens specify</label>
-                                                    <input type="text" value="<?php if ($costing['tb_regimen_other']) {
-                                                        print_r($costing['tb_regimen_other']);
-                                                    } ?>" id="tb_regimen_other" name="tb_regimen_other"
-                                                        class="form-control" placeholder="Enter here" />
+                                                    <div id="tb_regimen_other_section">
+                                                        <label for="tb_regimen_other" class="form-label">Regimens
+                                                            specify</label>
+                                                        <input type="text" value="<?php if ($costing['tb_regimen_other']) {
+                                                            print_r($costing['tb_regimen_other']);
+                                                        } ?>" id="tb_regimen_other" name="tb_regimen_other"
+                                                            class="form-control" placeholder="Enter here" />
 
-                                                </div>
+                                                    </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="regimen_changed">
+                                                <div class="col-sm-6" id="regimen_changed_section">
                                                     <label for="regimen_changed" class="form-label">10(a). Was the regimen
                                                         changed during the treatment?</label>
                                                     <!-- radio -->
@@ -7140,8 +7159,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <div class="col-sm-6" id="tb_otcome2_section">
-                                                    <label for="tb_otcome2_date_ltf"
-                                                        class="form-label">11(b). Date treatment outcome assigned</label>
+                                                    <label for="tb_otcome2_date_ltf" class="form-label">11(b). Date
+                                                        treatment outcome assigned</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -7189,15 +7208,14 @@ if ($user->isLoggedIn()) {
                                                         <button type="button"
                                                             onclick="unsetRadio('tb_other_diagnosis')">Unset</button>
                                                     </div>
-                                                <div id="tb_other_specify_section">
-                                                    <label for="tb_other_specify"
-                                                        class="form-label">If
-                                                        Other Mention</label>
-                                                    <input type="text" value="<?php if ($costing['tb_other_specify']) {
-                                                        print_r($costing['tb_other_specify']);
-                                                    } ?>" id="tb_other_specify" name="tb_other_specify"
-                                                        class="form-control" placeholder="Enter here" />
-                                                </div>
+                                                    <div id="tb_other_specify_section">
+                                                        <label for="tb_other_specify" class="form-label">If
+                                                            Other Mention</label>
+                                                        <input type="text" value="<?php if ($costing['tb_other_specify']) {
+                                                            print_r($costing['tb_other_specify']);
+                                                        } ?>" id="tb_other_specify" name="tb_other_specify"
+                                                            class="form-control" placeholder="Enter here" />
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-sm-6" id="tb_diagnosis_made2">
@@ -7248,7 +7266,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8090,7 +8108,7 @@ if ($user->isLoggedIn()) {
                                                                         placeholder="Type reasons here...">                                                                                                                                                                                                                                                                                              <?php if ($clients['sputum_reasons']) {
                                                                             print_r($clients['sputum_reasons']);
                                                                         } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -9880,7 +9898,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
