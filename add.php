@@ -6630,7 +6630,7 @@ if ($user->isLoggedIn()) {
                                                                     <input class="form-check-input" type="radio"
                                                                         name="nanopore_done"
                                                                         id="nanopore_done<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['kanamycin'] == $value['id']) {
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['nanopore_done'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
                                                                     <label
