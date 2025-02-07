@@ -45,18 +45,28 @@ if ($user->isLoggedIn()) {
             $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
             $end = $override->countData('termination', 'status', 1, 'facility_id', $_GET['facility_id']);
 
-            $Incompletes_Screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
+            $Incompletes = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+            $Incompletes_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
             $Incompletes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Incompletes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Incompletes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Incompletes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
 
-            $Completes_Screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
+            $Completes = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+            $Completes_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
             $Completes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Completes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Completes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Completes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
 
+            $Un_Verified = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+            $Un_Verified_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+            $Un_Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+            $Un_Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
+            $Un_Verified_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
+            $Un_Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
+
+            $Verified = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
             $Verified_Screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
@@ -68,43 +78,55 @@ if ($user->isLoggedIn()) {
             $enrolled = $override->getCount('enrollment_form', 'status', 1);
             $end = $override->getCount('termination', 'status', 1);
 
-            $Incompletes_Screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
+            $Incompletes_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
             $Incompletes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Incompletes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Incompletes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Incompletes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
 
-            $Completes_Screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
+            $Completes_Screened = $override->countData1('screening', 'status', 1, 'facility_id', 'form_status', 1, $_GET['facility_id']);
             $Completes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Completes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Completes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Completes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
 
-            $Verified_Screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
+            $Un_Verified_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+            $Un_Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+            $Un_Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
+            $Un_Verified_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
+            $Un_Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
+
+            $Verified_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
             $Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Verified_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
             $Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
         }
     } else {
-        $screened = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
+        $screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $user->data()->site_id);
         $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
         $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
         $end = $override->countData('termination', 'status', 1, 'facility_id', $user->data()->site_id);
 
-        $Incompletes_Screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
+        $Incompletes_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
         $Incompletes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
         $Incompletes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
         $Incompletes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
         $Incompletes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
 
-        $Completes_Screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
+        $Completes_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
         $Completes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
         $Completes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
         $Completes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
         $Completes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
 
-        $Verified_Screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
+        $Un_Verified_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+        $Un_Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+        $Un_Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
+        $Un_Verified_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
+        $Un_Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
+
+        $Verified_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
         $Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
         $Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
         $Verified_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
@@ -356,9 +378,59 @@ if ($user->isLoggedIn()) {
                     </ul>
                 </li>
                 <li class="nav-header">Records</li>
-                 <li class="nav-item">
+                <?php foreach ($override->get('form_completness', 'status', 1) as $form_status) { ?>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-circle"></i>
+                            <span class="badge badge-info right"><?= $Incompletes; ?></span>
+                            <p>
+                                <?= $form_status['name']; ?>
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
+                                    <p>Screening</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
+                                    <p>Enrollment</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
+                                    <p>Laboratory (Clinic)</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
+                                    <p>Laboratory (ZONAL/CTRL)</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
+                                    <p>Diganosis</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                <?php } ?>
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-circle"></i>
+                        <span class="badge badge-info right"><?= $Incompletes; ?></span>
                         <p>
                             Incompletes
                             <i class="right fas fa-angle-left"></i>
@@ -368,113 +440,35 @@ if ($user->isLoggedIn()) {
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
+                                <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
                                 <p>Screening</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
+                                <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
                                 <p>Enrollment</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
+                                <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
                                 <p>Laboratory (Clinic)</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
+                                <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
                                 <p>Laboratory (ZONAL/CTRL)</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Diganosis</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-circle"></i>
-                        <p>
-                            Complete
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Screening</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Enrollment</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Laboratory (Clinic)</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Laboratory (ZONAL/CTRL)</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Diganosis</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-circle"></i>
-                        <p>
-                            Verified
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Screening</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Enrollment</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Laboratory (Clinic)</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Laboratory (ZONAL/CTRL)</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
                                 <p>Diganosis</p>
                             </a>
                         </li>
