@@ -389,41 +389,37 @@ if ($user->isLoggedIn()) {
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
-                                    <p>Screening</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
-                                    <p>Enrollment</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
-                                    <p>Laboratory (Clinic)</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
-                                    <p>Laboratory (ZONAL/CTRL)</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
-                                    <p>Diganosis</p>
-                                </a>
-                            </li>
+                            <?php foreach ($override->AllTables() as $table_name) {
+                                if (
+                                    $table_name['Tables_in_dream'] == 'screening' || $table_name['Tables_in_dream'] == 'enrollment_form' || $table_name['Tables_in_dream'] == 'respiratory' ||
+                                    $table_name['Tables_in_dream'] == 'diagnosis' ||
+                                    $table_name['Tables_in_dream'] == 'diagnosis_test'
+                                ) {
+                                    if (
+                                        $table_name['Tables_in_dream'] == 'screening'
+                                    ) {
+                                        $table = 'Screening';
+                                    } else if ($table_name['Tables_in_dream'] == 'enrollment_form') {
+                                        $table = 'Enrollment';
+                                    } else if ($table_name['Tables_in_dream'] == 'respiratory') {
+                                        $table = 'Laboratory (Clinic)';
+                                    } else if ($table_name['Tables_in_dream'] == 'diagnosis_test') {
+                                        $table = 'Laboratory (Zonal/CTRL)';
+                                    } else if ($table_name['Tables_in_dream'] == 'diagnosis') {
+                                        $table = 'Diagnosis';
+                                    }
+                                    ?>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <span class="badge badge-info right">
+                                                <?= $override->getCount($table_name['Tables_in_dream'], 'status', 1); ?>
+                                            </span>
+                                            <p><?= $table; ?></p>
+                                        </a>
+                                    </li>
+                                <?php }
+                            } ?>
                         </ul>
                     </li>
                 <?php } ?>
