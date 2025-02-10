@@ -7224,6 +7224,7 @@ if ($user->isLoggedIn()) {
                                                     onclick="saveTreatmentChanges()">Save Changes</button>
                                             </div>
                                             <!-- <script src="treatmentChanges.js"></script> -->
+                                                                                         <div id="tb_otcome_section">
                                             <hr>
                                             <div class="card card-warning">
                                                 <div class="card-header">
@@ -7232,7 +7233,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-6" id="tb_otcome2">
+                                                <div class="col-sm-6">
                                                     <label for="tb_otcome2" class="form-label">11(a). Treatment
                                                         outcome</label>
                                                     <!-- radio -->
@@ -7272,6 +7273,9 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                             </div>
+                                                                                        </div>
+
+                                            <div id="tb_other_diagnosis_section">
 
                                             <hr>
                                             <div class="card card-warning">
@@ -7282,7 +7286,7 @@ if ($user->isLoggedIn()) {
 
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-6" id="tb_other_diagnosis">
+                                                <div class="col-sm-6">
                                                     <label for="tb_other_diagnosis" class="form-label">12a. What diagnosis
                                                         other
                                                         than TB was made? </label>
@@ -7340,6 +7344,7 @@ if ($user->isLoggedIn()) {
 
                                                 </div>
 
+                                            </div>
                                             </div>
 
                                             <hr>
