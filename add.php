@@ -7004,6 +7004,8 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                        <button type="button"
+                                                                onclick="unsetRadio('bacteriological_diagnosis')">Unset</button>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="clinician_received_date_section">
