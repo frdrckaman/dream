@@ -277,18 +277,99 @@ if ($user->isLoggedIn()) {
                     $eligible = 1;
                 }
 
+                $date_completed = "";
+                $completed_by = "";
+                $date_verified = "";
+                $verified_by = "";
+
+                if (
+                    (Input::get('form_status') == 1)
+                ) {
+                    $date_completed = "";
+                    $completed_by = "";
+                    $date_verified = "";
+                    $verified_by = "";
+                } elseif (Input::get('form_status') == 2) {
+                    $date_completed = Input::get('date_completed');
+                    $completed_by = $user->data()->id;
+                    $date_verified = "";
+                    $verified_by = "";
+                } elseif (Input::get('form_status') == 3) {                    
+                    $date_completed = $screening['date_completed'];
+                    $completed_by = $screening['completed_by'];
+                    $date_verified = Input::get('date_completed');
+                    $verified_by = $user->data()->id;
+                }
+
                 $pid = $override->getNews('pids', 'facility_id', $user->data()->site_id, 'status', 1)[0];
                 $pid_merged = $pid['pid'] . '_' . Input::get('pid1');
 
-                if (Input::get('consent') == 1 && (Input::get('consent_date') < $screening['screening_date'])) {
-                    $errorMessage = 'Consent Date Can not be less than Screening Date';
-                } elseif (Input::get('consent') == 2 && !empty(trim(Input::get('consent_date')))) {
-                    $errorMessage = 'Please Remove Consent date before Submit again';
-                } elseif ((Input::get('pid1') != Input::get('pid2')) && !empty(trim(Input::get('pid1')))) {
-                    $errorMessage = 'PID"s are not Matching please re-check and Submit again';
+                // if (Input::get('consent') == 1 && (Input::get('consent_date') < $screening['screening_date'])) {
+                //     $errorMessage = 'Consent Date Can not be less than Screening Date';
+                // } elseif (Input::get('consent') == 2 && !empty(trim(Input::get('consent_date')))) {
+                //     $errorMessage = 'Please Remove Consent date before Submit again';
+                // } elseif ((Input::get('pid1') != Input::get('pid2')) && !empty(trim(Input::get('pid1')))) {
+                //     $errorMessage = 'PID"s are not Matching please re-check and Submit again';
+                // } else {
+                if ($screening) {
+                    $user->updateRecord('screening', array(
+                        'pid' => $pid_merged,
+                        'screening_date' => Input::get('screening_date'),
+                        'consent' => Input::get('consent'),
+                        'consent_date' => Input::get('consent_date'),
+                        'age18years' => Input::get('age18years'),
+                        'present_symptoms' => Input::get('present_symptoms'),
+                        'produce_resp_sample' => Input::get('produce_resp_sample'),
+                        'pid1' => Input::get('pid1'),
+                        'pid2' => Input::get('pid2'),
+                        'unable_understand' => Input::get('unable_understand'),
+                        'not_willing' => Input::get('not_willing'),
+                        'remarks' => Input::get('remarks'),
+                        'form_status' => Input::get('form_status'),
+                        'date_completed' => $date_completed,
+                        'completed_by' => $completed_by,
+                        'date_verified' => $date_verified,
+                        'verified_by' => $verified_by,
+                        'eligible' => $eligible,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'facility_id' => $screening['facility_id'],
+                    ), $screening['id']);
+
+                    $user->createRecord('screening_records', array(
+                        'screening_id' => $screening['id'],
+                        'pid' => $pid_merged,
+                        'screening_date' => Input::get('screening_date'),
+                        'consent' => Input::get('consent'),
+                        'consent_date' => Input::get('consent_date'),
+                        'age18years' => Input::get('age18years'),
+                        'present_symptoms' => Input::get('present_symptoms'),
+                        'produce_resp_sample' => Input::get('produce_resp_sample'),
+                        'pid1' => Input::get('pid1'),
+                        'pid2' => Input::get('pid2'),
+                        'unable_understand' => Input::get('unable_understand'),
+                        'not_willing' => Input::get('not_willing'),
+                        'remarks' => Input::get('remarks'),
+                        'form_status' => Input::get('form_status'),
+                        'date_completed' => $date_completed,
+                        'completed_by' => $completed_by,
+                        'date_verified' => $date_verified,
+                        'verified_by' => $verified_by,
+                        'eligible' => $eligible,
+                        'status' => 1,
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'facility_id' => $screening['facility_id'],
+                    ));
+
+                    $successMessage = 'Screening  Successful Updated';
                 } else {
-                    if ($screening) {
-                        $user->updateRecord('screening', array(
+                    if ($screening['pid'] == $pid_merged) {
+                        $errorMessage = 'PID"s Exists Please use Another';
+                    } else {
+                        $user->createRecord('screening', array(
                             'pid' => $pid_merged,
                             'screening_date' => Input::get('screening_date'),
                             'consent' => Input::get('consent'),
@@ -302,18 +383,23 @@ if ($user->isLoggedIn()) {
                             'not_willing' => Input::get('not_willing'),
                             'remarks' => Input::get('remarks'),
                             'form_status' => Input::get('form_status'),
-                            'date_completed' => Input::get('date_completed'),
-                            'completed_by' => $user->data()->id,
-                            'date_verified' => Input::get('date_verified'),
-                            'verified_by' => $user->data()->id,
+                        'date_completed' => $date_completed,
+                        'completed_by' => $completed_by,
+                        'date_verified' => $date_verified,
+                        'verified_by' => $verified_by,
                             'eligible' => $eligible,
+                            'status' => 1,
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $screening['facility_id'],
-                        ), $screening['id']);
+                            'facility_id' => $user->data()->site_id,
+                        ));
+
+                        $last_row = $override->lastRow('screening', 'id')[0];
 
                         $user->createRecord('screening_records', array(
-                            'screening_id' => $screening['id'],
+                            'screening_id' => $last_row['id'],
                             'pid' => $pid_merged,
                             'screening_date' => Input::get('screening_date'),
                             'consent' => Input::get('consent'),
@@ -327,10 +413,10 @@ if ($user->isLoggedIn()) {
                             'not_willing' => Input::get('not_willing'),
                             'remarks' => Input::get('remarks'),
                             'form_status' => Input::get('form_status'),
-                            'date_completed' => Input::get('date_completed'),
-                            'completed_by' => Input::get('completed_by'),
-                            'date_verified' => Input::get('date_verified'),
-                            'verified_by' => Input::get('verified_by'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'eligible' => $eligible,
                             'status' => 1,
                             'create_on' => date('Y-m-d H:i:s'),
@@ -340,73 +426,11 @@ if ($user->isLoggedIn()) {
                             'facility_id' => $screening['facility_id'],
                         ));
 
-                        $successMessage = 'Screening  Successful Updated';
-                    } else {
-                        if ($screening['pid'] == $pid_merged) {
-                            $errorMessage = 'PID"s Exists Please use Another';
-                        } else {
-                            $user->createRecord('screening', array(
-                                'pid' => $pid_merged,
-                                'screening_date' => Input::get('screening_date'),
-                                'consent' => Input::get('consent'),
-                                'consent_date' => Input::get('consent_date'),
-                                'age18years' => Input::get('age18years'),
-                                'present_symptoms' => Input::get('present_symptoms'),
-                                'produce_resp_sample' => Input::get('produce_resp_sample'),
-                                'pid1' => Input::get('pid1'),
-                                'pid2' => Input::get('pid2'),
-                                'unable_understand' => Input::get('unable_understand'),
-                                'not_willing' => Input::get('not_willing'),
-                                'remarks' => Input::get('remarks'),
-                                'form_status' => Input::get('form_status'),
-                                'date_completed' => Input::get('date_completed'),
-                                'completed_by' => Input::get('completed_by'),
-                                'date_verified' => Input::get('date_verified'),
-                                'verified_by' => Input::get('verified_by'),
-                                'eligible' => $eligible,
-                                'status' => 1,
-                                'create_on' => date('Y-m-d H:i:s'),
-                                'staff_id' => $user->data()->id,
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'facility_id' => $user->data()->site_id,
-                            ));
-
-                            $last_row = $override->lastRow('screening', 'id')[0];
-
-                            $user->createRecord('screening_records', array(
-                                'screening_id' => $last_row['id'],
-                                'pid' => $pid_merged,
-                                'screening_date' => Input::get('screening_date'),
-                                'consent' => Input::get('consent'),
-                                'consent_date' => Input::get('consent_date'),
-                                'age18years' => Input::get('age18years'),
-                                'present_symptoms' => Input::get('present_symptoms'),
-                                'produce_resp_sample' => Input::get('produce_resp_sample'),
-                                'pid1' => Input::get('pid1'),
-                                'pid2' => Input::get('pid2'),
-                                'unable_understand' => Input::get('unable_understand'),
-                                'not_willing' => Input::get('not_willing'),
-                                'remarks' => Input::get('remarks'),
-                                'form_status' => Input::get('form_status'),
-                                'date_completed' => Input::get('date_completed'),
-                                'completed_by' => Input::get('completed_by'),
-                                'date_verified' => Input::get('date_verified'),
-                                'verified_by' => Input::get('verified_by'),
-                                'eligible' => $eligible,
-                                'status' => 1,
-                                'create_on' => date('Y-m-d H:i:s'),
-                                'staff_id' => $user->data()->id,
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'facility_id' => $screening['facility_id'],
-                            ));
-
-                            $successMessage = 'Screening  Successful Added';
-                        }
+                        $successMessage = 'Screening  Successful Added';
                     }
-                    Redirect::to('info.php?id=3&status=' . $_GET['status'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
                 }
+                Redirect::to('info.php?id=3&status=' . $_GET['status'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
+                // }
             } else {
                 $pageError = $validate->errors();
             }
@@ -5321,7 +5345,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($screening['remarks']) {
                                                                     print_r($screening['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6757,7 +6781,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7337,7 +7361,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8179,7 +8203,7 @@ if ($user->isLoggedIn()) {
                                                                         placeholder="Type reasons here...">                                                                                                                                                                                                                                                                                              <?php if ($clients['sputum_reasons']) {
                                                                             print_r($clients['sputum_reasons']);
                                                                         } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -9969,7 +9993,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
