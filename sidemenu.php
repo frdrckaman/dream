@@ -382,7 +382,6 @@ if ($user->isLoggedIn()) {
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-circle"></i>
-                            <span class="badge badge-info right"><?= $Incompletes; ?></span>
                             <p>
                                 <?= $form_status['name']; ?>
                                 <i class="right fas fa-angle-left"></i>
@@ -412,8 +411,8 @@ if ($user->isLoggedIn()) {
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <span class="badge badge-info right">
-                                                <?= $override->getCount($table_name['Tables_in_dream'], 'status', 1); ?>
+                                            <span class="badge badge-danger right">
+                                                <?= $override->countData2($table_name['Tables_in_dream'], 'status', 1, 'form_status', $form_status['id'],'facility_id', $user->data()->site_id); ?>
                                             </span>
                                             <p><?= $table; ?></p>
                                         </a>
@@ -423,53 +422,6 @@ if ($user->isLoggedIn()) {
                         </ul>
                     </li>
                 <?php } ?>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-circle"></i>
-                        <span class="badge badge-info right"><?= $Incompletes; ?></span>
-                        <p>
-                            Incompletes
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
-                                <p>Screening</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
-                                <p>Enrollment</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
-                                <p>Laboratory (Clinic)</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
-                                <p>Laboratory (ZONAL/CTRL)</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <span class="badge badge-info right"><?= $Incompletes_Screened; ?></span>
-                                <p>Diganosis</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
                 <?php if ($user->data()->power == 1) { ?>
 
                     <li class="nav-item">
