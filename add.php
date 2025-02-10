@@ -277,18 +277,99 @@ if ($user->isLoggedIn()) {
                     $eligible = 1;
                 }
 
+                $date_completed = "";
+                $completed_by = "";
+                $date_verified = "";
+                $verified_by = "";
+
+                if (
+                    (Input::get('form_status') == 1)
+                ) {
+                    $date_completed = "";
+                    $completed_by = "";
+                    $date_verified = "";
+                    $verified_by = "";
+                } elseif (Input::get('form_status') == 2) {
+                    $date_completed = Input::get('date_completed');
+                    $completed_by = $user->data()->id;
+                    $date_verified = "";
+                    $verified_by = "";
+                } elseif (Input::get('form_status') == 3) {                    
+                    $date_completed = $screening['date_completed'];
+                    $completed_by = $screening['completed_by'];
+                    $date_verified = Input::get('date_completed');
+                    $verified_by = $user->data()->id;
+                }
+
                 $pid = $override->getNews('pids', 'facility_id', $user->data()->site_id, 'status', 1)[0];
                 $pid_merged = $pid['pid'] . '_' . Input::get('pid1');
 
-                if (Input::get('consent') == 1 && (Input::get('consent_date') < $screening['screening_date'])) {
-                    $errorMessage = 'Consent Date Can not be less than Screening Date';
-                } elseif (Input::get('consent') == 2 && !empty(trim(Input::get('consent_date')))) {
-                    $errorMessage = 'Please Remove Consent date before Submit again';
-                } elseif ((Input::get('pid1') != Input::get('pid2')) && !empty(trim(Input::get('pid1')))) {
-                    $errorMessage = 'PID"s are not Matching please re-check and Submit again';
+                // if (Input::get('consent') == 1 && (Input::get('consent_date') < $screening['screening_date'])) {
+                //     $errorMessage = 'Consent Date Can not be less than Screening Date';
+                // } elseif (Input::get('consent') == 2 && !empty(trim(Input::get('consent_date')))) {
+                //     $errorMessage = 'Please Remove Consent date before Submit again';
+                // } elseif ((Input::get('pid1') != Input::get('pid2')) && !empty(trim(Input::get('pid1')))) {
+                //     $errorMessage = 'PID"s are not Matching please re-check and Submit again';
+                // } else {
+                if ($screening) {
+                    $user->updateRecord('screening', array(
+                        'pid' => $pid_merged,
+                        'screening_date' => Input::get('screening_date'),
+                        'consent' => Input::get('consent'),
+                        'consent_date' => Input::get('consent_date'),
+                        'age18years' => Input::get('age18years'),
+                        'present_symptoms' => Input::get('present_symptoms'),
+                        'produce_resp_sample' => Input::get('produce_resp_sample'),
+                        'pid1' => Input::get('pid1'),
+                        'pid2' => Input::get('pid2'),
+                        'unable_understand' => Input::get('unable_understand'),
+                        'not_willing' => Input::get('not_willing'),
+                        'remarks' => Input::get('remarks'),
+                        'form_status' => Input::get('form_status'),
+                        'date_completed' => $date_completed,
+                        'completed_by' => $completed_by,
+                        'date_verified' => $date_verified,
+                        'verified_by' => $verified_by,
+                        'eligible' => $eligible,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'facility_id' => $screening['facility_id'],
+                    ), $screening['id']);
+
+                    $user->createRecord('screening_records', array(
+                        'screening_id' => $screening['id'],
+                        'pid' => $pid_merged,
+                        'screening_date' => Input::get('screening_date'),
+                        'consent' => Input::get('consent'),
+                        'consent_date' => Input::get('consent_date'),
+                        'age18years' => Input::get('age18years'),
+                        'present_symptoms' => Input::get('present_symptoms'),
+                        'produce_resp_sample' => Input::get('produce_resp_sample'),
+                        'pid1' => Input::get('pid1'),
+                        'pid2' => Input::get('pid2'),
+                        'unable_understand' => Input::get('unable_understand'),
+                        'not_willing' => Input::get('not_willing'),
+                        'remarks' => Input::get('remarks'),
+                        'form_status' => Input::get('form_status'),
+                        'date_completed' => $date_completed,
+                        'completed_by' => $completed_by,
+                        'date_verified' => $date_verified,
+                        'verified_by' => $verified_by,
+                        'eligible' => $eligible,
+                        'status' => 1,
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'facility_id' => $screening['facility_id'],
+                    ));
+
+                    $successMessage = 'Screening  Successful Updated';
                 } else {
-                    if ($screening) {
-                        $user->updateRecord('screening', array(
+                    if ($screening['pid'] == $pid_merged) {
+                        $errorMessage = 'PID"s Exists Please use Another';
+                    } else {
+                        $user->createRecord('screening', array(
                             'pid' => $pid_merged,
                             'screening_date' => Input::get('screening_date'),
                             'consent' => Input::get('consent'),
@@ -300,19 +381,25 @@ if ($user->isLoggedIn()) {
                             'pid2' => Input::get('pid2'),
                             'unable_understand' => Input::get('unable_understand'),
                             'not_willing' => Input::get('not_willing'),
-                            'comments' => Input::get('comments'),
-                            'region' => Input::get('region'),
-                            'district' => Input::get('district'),
-                            'ward' => Input::get('ward'),
-                            'village_street' => Input::get('village_street'),
+                            'remarks' => Input::get('remarks'),
+                            'form_status' => Input::get('form_status'),
+                        'date_completed' => $date_completed,
+                        'completed_by' => $completed_by,
+                        'date_verified' => $date_verified,
+                        'verified_by' => $verified_by,
                             'eligible' => $eligible,
+                            'status' => 1,
+                            'create_on' => date('Y-m-d H:i:s'),
+                            'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
-                            'facility_id' => $screening['facility_id'],
-                        ), $screening['id']);
+                            'facility_id' => $user->data()->site_id,
+                        ));
+
+                        $last_row = $override->lastRow('screening', 'id')[0];
 
                         $user->createRecord('screening_records', array(
-                            'screening_id' => $screening['id'],
+                            'screening_id' => $last_row['id'],
                             'pid' => $pid_merged,
                             'screening_date' => Input::get('screening_date'),
                             'consent' => Input::get('consent'),
@@ -324,11 +411,12 @@ if ($user->isLoggedIn()) {
                             'pid2' => Input::get('pid2'),
                             'unable_understand' => Input::get('unable_understand'),
                             'not_willing' => Input::get('not_willing'),
-                            'comments' => Input::get('comments'),
-                            'region' => Input::get('region'),
-                            'district' => Input::get('district'),
-                            'ward' => Input::get('ward'),
-                            'village_street' => Input::get('village_street'),
+                            'remarks' => Input::get('remarks'),
+                            'form_status' => Input::get('form_status'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'eligible' => $eligible,
                             'status' => 1,
                             'create_on' => date('Y-m-d H:i:s'),
@@ -338,71 +426,11 @@ if ($user->isLoggedIn()) {
                             'facility_id' => $screening['facility_id'],
                         ));
 
-                        $successMessage = 'Screening  Successful Updated';
-                    } else {
-                        if ($screening['pid'] == $pid_merged) {
-                            $errorMessage = 'PID"s Exists Please use Another';
-                        } else {
-                            $user->createRecord('screening', array(
-                                'pid' => $pid_merged,
-                                'screening_date' => Input::get('screening_date'),
-                                'consent' => Input::get('consent'),
-                                'consent_date' => Input::get('consent_date'),
-                                'age18years' => Input::get('age18years'),
-                                'present_symptoms' => Input::get('present_symptoms'),
-                                'produce_resp_sample' => Input::get('produce_resp_sample'),
-                                'pid1' => Input::get('pid1'),
-                                'pid2' => Input::get('pid2'),
-                                'unable_understand' => Input::get('unable_understand'),
-                                'not_willing' => Input::get('not_willing'),
-                                'comments' => Input::get('comments'),
-                                'region' => Input::get('region'),
-                                'district' => Input::get('district'),
-                                'ward' => Input::get('ward'),
-                                'village_street' => Input::get('village_street'),
-                                'eligible' => $eligible,
-                                'status' => 1,
-                                'create_on' => date('Y-m-d H:i:s'),
-                                'staff_id' => $user->data()->id,
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'facility_id' => $user->data()->site_id,
-                            ));
-
-                            $last_row = $override->lastRow('screening', 'id')[0];
-
-                            $user->createRecord('screening_records', array(
-                                'screening_id' => $last_row['id'],
-                                'pid' => $pid_merged,
-                                'screening_date' => Input::get('screening_date'),
-                                'consent' => Input::get('consent'),
-                                'consent_date' => Input::get('consent_date'),
-                                'age18years' => Input::get('age18years'),
-                                'present_symptoms' => Input::get('present_symptoms'),
-                                'produce_resp_sample' => Input::get('produce_resp_sample'),
-                                'pid1' => Input::get('pid1'),
-                                'pid2' => Input::get('pid2'),
-                                'unable_understand' => Input::get('unable_understand'),
-                                'not_willing' => Input::get('not_willing'),
-                                'comments' => Input::get('comments'),
-                                'region' => Input::get('region'),
-                                'district' => Input::get('district'),
-                                'ward' => Input::get('ward'),
-                                'village_street' => Input::get('village_street'),
-                                'eligible' => $eligible,
-                                'status' => 1,
-                                'create_on' => date('Y-m-d H:i:s'),
-                                'staff_id' => $user->data()->id,
-                                'update_on' => date('Y-m-d H:i:s'),
-                                'update_id' => $user->data()->id,
-                                'facility_id' => $screening['facility_id'],
-                            ));
-
-                            $successMessage = 'Screening  Successful Added';
-                        }
+                        $successMessage = 'Screening  Successful Added';
                     }
-                    Redirect::to('info.php?id=3&status=' . $_GET['status'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
                 }
+                Redirect::to('info.php?id=3&status=' . $_GET['status'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
+                // }
             } else {
                 $pageError = $validate->errors();
             }
@@ -2060,6 +2088,12 @@ if ($user->isLoggedIn()) {
         .afb-subheader {
             font-weight: bold;
             margin-bottom: 10px;
+        }
+
+        .is-invalid {
+            border: 2px solid red !important;
+            background-color: #ffe6e6;
+            /* Light red background for error indication */
         }
     </style>
 </head>
@@ -4661,8 +4695,7 @@ if ($user->isLoggedIn()) {
                                                             <input class="form-control" type="date" name="date_completed"
                                                                 id="date_completed" value="<?php if ($costing['date_completed']) {
                                                                     print_r($costing['date_completed']);
-                                                                } ?>"  <?php if ($costing['respiratory_completness'] == $user->data()->id) { ?>
-                                                                    readonly <?php } ?> />
+                                                                } ?>" <?php if ($costing['respiratory_completness'] == $user->data()->id) { ?> readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5202,7 +5235,7 @@ if ($user->isLoggedIn()) {
 
                                                 <!-- Consent -->
                                                 <div class="col-sm-4">
-                                                    <label for="conset" class="form-label">7. Has the patient provided
+                                                    <label for="consent" class="form-label">7. Has the patient provided
                                                         written informed consent to
                                                         participate?</label>
                                                     <div class="row-form clearfix">
@@ -5225,13 +5258,13 @@ if ($user->isLoggedIn()) {
                                                 <!-- Consent Date -->
                                                 <div class="col-4" id="consent_date_container" style="display: none;">
                                                     <div class="mb-2">
-                                                        <label for="conset_date" class="form-label">8. Date of
+                                                        <label for="consent_date" class="form-label">8. Date of
                                                             Consent</label>
                                                         <input type="date" value="<?php if ($screening) {
                                                             echo $screening['consent_date'];
                                                         } ?>" id="consent_date" name="consent_date"
                                                             class="form-control" placeholder="Enter date" />
-                                                        <small id="consent_date_date_error" class="text-danger"
+                                                        <small id="consent_date_error" class="text-danger"
                                                             style="display: none;">Consent date is required if
                                                             consent is selected as "Yes".</small>
                                                     </div>
@@ -5293,6 +5326,101 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <hr>
+
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Remarks</h3>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>11. Any remarks or comments on patient:</label>
+                                                            <textarea class="form-control" name="remarks" rows="3"
+                                                                placeholder="Type comments here..."><?php if ($screening['remarks']) {
+                                                                    print_r($screening['remarks']);
+                                                                } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">FORM STATUS</h3>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label>Complete?</label>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="form_status" id="form_status<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>"
+                                                                        <?= ($screening['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('form_status')">Unset</button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Completed Date</label>
+                                                            <input class="form-control" type="date" name="date_completed"
+                                                                id="date_completed"
+                                                                value="<?= ($screening['date_completed']) ? $screening['date_completed'] : ''; ?>" />
+                                                            <span id="date_completed_error" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Completed By</label>
+                                                            <input class="form-control" type="text"
+                                                                value="<?= $override->get('user', 'id', $screening['completed_by'])[0]['username']; ?>"
+                                                                readonly />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Verified Date</label>
+                                                            <input class="form-control" type="date" name="date_verified"
+                                                                id="date_verified"
+                                                                value="<?= ($screening['date_verified']) ? $screening['date_verified'] : ''; ?>" />
+                                                            <span id="date_verified_error" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Verified By</label>
+                                                            <input class="form-control" type="text"
+                                                                value="<?= $override->get('user', 'id', $screening['verified_by'])[0]['username']; ?>"
+                                                                readonly />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                         </div>
                                         <!-- /.card-body -->
 
@@ -6653,7 +6781,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6715,8 +6843,7 @@ if ($user->isLoggedIn()) {
                                                                 name="diagnosis_test_verified_date"
                                                                 id="diagnosis_test_verified_date" value="<?php if ($costing['diagnosis_test_verified_date']) {
                                                                     print_r($costing['diagnosis_test_verified_date']);
-                                                                } ?>" <?php if ($costing['diagnosis_test_completed'] == $user->data()->id) { ?>
-                                                                    readonly <?php } ?> />
+                                                                } ?>" <?php if ($costing['diagnosis_test_completed'] == $user->data()->id) { ?> readonly <?php } ?> />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6877,6 +7004,8 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
+                                                        <button type="button"
+                                                                onclick="unsetRadio('bacteriological_diagnosis')">Unset</button>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3" id="clinician_received_date_section">
@@ -7095,6 +7224,7 @@ if ($user->isLoggedIn()) {
                                                     onclick="saveTreatmentChanges()">Save Changes</button>
                                             </div>
                                             <!-- <script src="treatmentChanges.js"></script> -->
+                                                                                         <div id="tb_otcome_section">
                                             <hr>
                                             <div class="card card-warning">
                                                 <div class="card-header">
@@ -7103,7 +7233,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-6" id="tb_otcome2">
+                                                <div class="col-sm-6">
                                                     <label for="tb_otcome2" class="form-label">11(a). Treatment
                                                         outcome</label>
                                                     <!-- radio -->
@@ -7143,6 +7273,9 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                             </div>
+                                                                                        </div>
+
+                                            <div id="tb_other_diagnosis_section">
 
                                             <hr>
                                             <div class="card card-warning">
@@ -7153,7 +7286,7 @@ if ($user->isLoggedIn()) {
 
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-6" id="tb_other_diagnosis">
+                                                <div class="col-sm-6">
                                                     <label for="tb_other_diagnosis" class="form-label">12a. What diagnosis
                                                         other
                                                         than TB was made? </label>
@@ -7212,6 +7345,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                             </div>
+                                            </div>
 
                                             <hr>
 
@@ -7234,7 +7368,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8076,7 +8210,7 @@ if ($user->isLoggedIn()) {
                                                                         placeholder="Type reasons here...">                                                                                                                                                                                                                                                                                              <?php if ($clients['sputum_reasons']) {
                                                                             print_r($clients['sputum_reasons']);
                                                                         } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -8120,7 +8254,7 @@ if ($user->isLoggedIn()) {
                                                                 name="enrollment_completed_date"
                                                                 id="enrollment_completed_date" value="<?php if ($clients['enrollment_completed_date']) {
                                                                     print_r($clients['enrollment_completed_date']);
-                                                                } ?>"<?php if ($costing['enrollment_completed'] == $user->data()->id) { ?>
+                                                                } ?>" <?php if ($costing['enrollment_completed'] == $user->data()->id) { ?>
                                                                     readonly <?php } ?> />
                                                         </div>
                                                     </div>
@@ -9866,7 +10000,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -10086,6 +10220,7 @@ if ($user->isLoggedIn()) {
 
     <!-- SCREENING Js -->
     <script src="js/screening/screening.js"></script>
+    <script src="js/screening/form_status.js"></script>
     <!-- <script src="js/screening/offlineMode.js"></script> -->
 
     <!-- Enrollment Js -->
