@@ -2,8 +2,7 @@ $(document).ready(function () {
     // Function to toggle consent_date visibility
     function toggleConsentDate() {
         const consentYes = $('input[name="consent"]:checked').val();
-        const consentDateContainer = $('#consent_date_container');
-        consentDateContainer.toggle(consentYes === '1');
+        $('#consent_date_container').toggle(consentYes === '1');
     }
 
     // Add event listeners to consent radio buttons
@@ -31,7 +30,6 @@ $(document).ready(function () {
 
     // Form submission validation
     $('#screening').on('submit', async function (event) {
-        event.preventDefault(); // Prevent default form submission
         let isValid = true;
 
         // Clear previous errors
@@ -41,26 +39,24 @@ $(document).ready(function () {
         const pid1 = $('#pid1').val().trim();
         const pid2 = $('#pid2').val().trim();
 
-        // Validate PID format
         if (!pidPattern.test(pid1) || !pidPattern.test(pid2)) {
             $('#pid1_error, #pid2_error').text('PID must be exactly 3 digits').show();
             isValid = false;
         }
 
-        // Validate PID match
         if (pid1 !== pid2) {
             $('#pid1_error, #pid2_error').text('PID values do not match').show();
             isValid = false;
         }
 
         // Check PID existence
-        // if (isValid && pid1) {
-        //     const pidExists = await checkIfPidExists(pid1);
-        //     if (pidExists) {
-        //         $('#pid1_error').text('PID already exists').show();
-        //         isValid = false;
-        //     }
-        // }
+        if (isValid && pid1) {
+            const pidExists = await checkIfPidExists(pid1);
+            if (pidExists) {
+                $('#pid1_error').text('PID already exists').show();
+                isValid = false;
+            }
+        }
 
         // Validate screening date
         const screeningDateInput = $('#screening_date').val();
@@ -112,9 +108,13 @@ $(document).ready(function () {
             }
         }
 
-        // Submit form if valid
-        if (isValid) {
-            this.submit(); // Use native form submission
+        // **Prevent form from resetting inputs**
+        if (!isValid) {
+            event.preventDefault(); // Stop form submission
+            return;
         }
+
+        // **Submit form naturally if valid**
+        this.submit();
     });
 });
