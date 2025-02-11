@@ -16,11 +16,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const tbClinicallyOtherSection = document.getElementById("tb_clinically_other_section");
     const tbTreatmentSection = document.getElementById("tb_treatment_section");
     const tbOtherSpecifySection = document.getElementById("tb_other_specify_section");
+    const tbBacterialSection = document.getElementById("tb_bacterial_section"); // New section for tb_other_diagnosis = 3
+    const tbOtherSection = document.getElementById("tb_other_section"); // New section for tb_other_diagnosis = 96
     const tbRegimenOtherSection = document.getElementById("tb_regimen_other_section");
     const tbTreatmentDateSection = document.getElementById("tb_treatment_date_section");
     const tbFacilitySection = document.getElementById("tb_facility_section");
     const tbReasonSection = document.getElementById("tb_reason_section");
     const tbOutcomeSection = document.getElementById("tb_otcome_section"); // Ensure correct ID spelling
+    const tbDiagnosisDateSection = document.getElementById("tb_diagnosis_date_section");
 
     const tbRegisterNumberSection = document.getElementById("tb_register_number_section");
     const tbRegimenPrescribedSection = document.getElementById("tb_regimen_prescribed_section");
@@ -33,14 +36,15 @@ document.addEventListener("DOMContentLoaded", function () {
         if (selectedValue === "1") {
             tbDiagnosisSection.style.display = "block";
             tbOtherDiagnosisSection.style.display = "none";
-            tbOutcomeSection.style.display = "block";
             tbTreatmentSection.style.display = "block";
+            tbDiagnosisDateSection.style.display = "block"; // Show tb_diagnosis_date_section
             toggleTbDiagnosisMadeSections();
         } else if (selectedValue === "2") {
             tbDiagnosisSection.style.display = "none";
             tbOtherDiagnosisSection.style.display = "block";
             tbOutcomeSection.style.display = "none";
             tbTreatmentSection.style.display = "none";
+            tbDiagnosisDateSection.style.display = "none"; // Hide tb_diagnosis_date_section
             bacteriologicalDiagnosisSection.style.display = "none";
             clinicianReceivedDateSection.style.display = "none";
             diagnosisMadeOtherSection.style.display = "none";
@@ -51,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
             tbOtherDiagnosisSection.style.display = "none";
             tbOutcomeSection.style.display = "none";
             tbTreatmentSection.style.display = "none";
+            tbDiagnosisDateSection.style.display = "none"; // Hide tb_diagnosis_date_section
         }
     }
 
@@ -65,7 +70,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function toggleTbOtherSpecifySection() {
         const selectedValue = document.querySelector('input[name="tb_other_diagnosis"]:checked')?.value;
-        tbOtherSpecifySection.style.display = selectedValue === "96" ? "block" : "none";
+        tbOtherSpecifySection.style.display = selectedValue === "96" || selectedValue === "3" ? "block" : "none";
+        tbBacterialSection.style.display = selectedValue === "3" ? "block" : "none"; // Show tb_bacterial_section if value is 3
+        tbOtherSection.style.display = selectedValue === "96" ? "block" : "none"; // Show tb_other_section if value is 96
     }
 
     function toggleTbRegimenOtherSection() {
@@ -81,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tbRegisterNumberSection.style.display = selectedValue === "1" ? "block" : "none";
         tbRegimenPrescribedSection.style.display = selectedValue === "1" ? "block" : "none";
         regimenChangedSection.style.display = selectedValue === "1" ? "block" : "none";
+        tbOutcomeSection.style.display = selectedValue === "1" && tbTreatmentRadios[0].checked ? "block" : "none"; // Show/Hide based on tb_treatment value and selected option
     }
 
     function toggleTbClinicallyOtherSection() {

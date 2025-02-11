@@ -447,6 +447,33 @@ if ($user->isLoggedIn()) {
                     $diseases_medical = implode(',', Input::get('diseases_medical'));
                     $immunosuppressive_diseases = implode(',', Input::get('immunosuppressive_diseases'));
                     $sputum_samples = implode(',', Input::get('sputum_samples'));
+
+
+                    $date_completed = "";
+                    $completed_by = "";
+                    $date_verified = "";
+                    $verified_by = "";
+
+                    if (
+                        (Input::get('form_status') == 1)
+                    ) {
+                        $date_completed = "";
+                        $completed_by = "";
+                        $date_verified = "";
+                        $verified_by = "";
+                    } elseif (Input::get('form_status') == 2) {
+                        $date_completed = Input::get('date_completed');
+                        $completed_by = $user->data()->id;
+                        $date_verified = "";
+                        $verified_by = "";
+                    } elseif (Input::get('form_status') == 3) {
+                        $date_completed = $screening['date_completed'];
+                        $completed_by = $screening['completed_by'];
+                        $date_verified = Input::get('date_completed');
+                        $verified_by = $user->data()->id;
+                    }
+
+
                     if (Input::get('enrollment_completed') == 3 && Input::get('enrollment_verified_date') == "") {
                         $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
                     } else {
@@ -491,11 +518,12 @@ if ($user->isLoggedIn()) {
                                 'sputum_collected' => Input::get('sputum_collected'),
                                 'sputum_date' => Input::get('sputum_date'),
                                 'sputum_reasons' => Input::get('sputum_reasons'),
-                                'enrollment_completed' => Input::get('enrollment_completed'),
-                                'enrollment_completed_by' => $user->data()->id,
-                                'enrollment_completed_date' => Input::get('enrollment_completed_date'),
-                                'enrollment_verified_by' => $user->data()->id,
-                                'enrollment_verified_date' => Input::get('enrollment_verified_date'),
+                                'remarks' => Input::get('remarks'),
+                                'form_status' => Input::get('form_status'),
+                                'date_completed' => $date_completed,
+                                'completed_by' => $completed_by,
+                                'date_verified' => $date_verified,
+                                'verified_by' => $verified_by,
                                 'update_on' => date('Y-m-d H:i:s'),
                                 'update_id' => $user->data()->id,
                             ), $enrollment_form['id']);
@@ -541,11 +569,12 @@ if ($user->isLoggedIn()) {
                                 'sputum_collected' => Input::get('sputum_collected'),
                                 'sputum_date' => Input::get('sputum_date'),
                                 'sputum_reasons' => Input::get('sputum_reasons'),
-                                'enrollment_completed' => Input::get('enrollment_completed'),
-                                'enrollment_completed_by' => $user->data()->id,
-                                'enrollment_completed_date' => Input::get('enrollment_completed_date'),
-                                'enrollment_verified_by' => $user->data()->id,
-                                'enrollment_verified_date' => Input::get('enrollment_verified_date'),
+                                'remarks' => Input::get('remarks'),
+                                'form_status' => Input::get('form_status'),
+                                'date_completed' => $date_completed,
+                                'completed_by' => $completed_by,
+                                'date_verified' => $date_verified,
+                                'verified_by' => $verified_by,
                                 'status' => 1,
                                 'create_on' => date('Y-m-d H:i:s'),
                                 'staff_id' => $user->data()->id,
@@ -597,11 +626,12 @@ if ($user->isLoggedIn()) {
                                 'sputum_collected' => Input::get('sputum_collected'),
                                 'sputum_date' => Input::get('sputum_date'),
                                 'sputum_reasons' => Input::get('sputum_reasons'),
-                                'enrollment_completed' => Input::get('enrollment_completed'),
-                                'enrollment_completed_by' => $user->data()->id,
-                                'enrollment_completed_date' => Input::get('enrollment_completed_date'),
-                                'enrollment_verified_by' => $user->data()->id,
-                                'enrollment_verified_date' => Input::get('enrollment_verified_date'),
+                                'remarks' => Input::get('remarks'),
+                                'form_status' => Input::get('form_status'),
+                                'date_completed' => $date_completed,
+                                'completed_by' => $completed_by,
+                                'date_verified' => $date_verified,
+                                'verified_by' => $verified_by,
                                 'status' => 1,
                                 'create_on' => date('Y-m-d H:i:s'),
                                 'staff_id' => $user->data()->id,
@@ -653,11 +683,12 @@ if ($user->isLoggedIn()) {
                                 'sputum_collected' => Input::get('sputum_collected'),
                                 'sputum_date' => Input::get('sputum_date'),
                                 'sputum_reasons' => Input::get('sputum_reasons'),
-                                'enrollment_completed' => Input::get('enrollment_completed'),
-                                'enrollment_completed_by' => $user->data()->id,
-                                'enrollment_completed_date' => Input::get('enrollment_completed_date'),
-                                'enrollment_verified_by' => $user->data()->id,
-                                'enrollment_verified_date' => Input::get('enrollment_verified_date'),
+                                'remarks' => Input::get('remarks'),
+                                'form_status' => Input::get('form_status'),
+                                'date_completed' => $date_completed,
+                                'completed_by' => $completed_by,
+                                'date_verified' => $date_verified,
+                                'verified_by' => $verified_by,
                                 'status' => 1,
                                 'create_on' => date('Y-m-d H:i:s'),
                                 'staff_id' => $user->data()->id,
@@ -707,6 +738,32 @@ if ($user->isLoggedIn()) {
 
                 $first_line_drugs = implode(',', Input::get('first_line_drugs'));
                 $second_line_drugs = implode(',', Input::get('second_line_drugs'));
+
+
+                $date_completed = "";
+                $completed_by = "";
+                $date_verified = "";
+                $verified_by = "";
+
+                if (
+                    (Input::get('form_status') == 1)
+                ) {
+                    $date_completed = "";
+                    $completed_by = "";
+                    $date_verified = "";
+                    $verified_by = "";
+                } elseif (Input::get('form_status') == 2) {
+                    $date_completed = Input::get('date_completed');
+                    $completed_by = $user->data()->id;
+                    $date_verified = "";
+                    $verified_by = "";
+                } elseif (Input::get('form_status') == 3) {
+                    $date_completed = $screening['date_completed'];
+                    $completed_by = $screening['completed_by'];
+                    $date_verified = Input::get('date_completed');
+                    $verified_by = $user->data()->id;
+                }
+
                 if (Input::get('form_completness') == 3 && Input::get('diagnosis_test_verified_date') == "") {
                     $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
                 } else {
@@ -789,12 +846,12 @@ if ($user->isLoggedIn()) {
                             'first_line_lpa_date' => Input::get('first_line_lpa_date'),
                             'second_line_lpa' => Input::get('second_line_lpa'),
                             'second_line_lpa_date' => Input::get('second_line_lpa_date'),
-                            'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
                             'remarks' => Input::get('remarks'),
-                            'form_completness' => Input::get('form_completness'),
-                            'date_completed' => Input::get('date_completed'),
-                            'diagnosis_test_verified_by' => $user->data()->id,
-                            'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
+                            'form_status' => Input::get('form_status'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                             'facility_id' => $screening['facility_id'],
@@ -882,10 +939,11 @@ if ($user->isLoggedIn()) {
                             'second_line_lpa_date' => Input::get('second_line_lpa_date'),
                             'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
                             'remarks' => Input::get('remarks'),
-                            'form_completness' => Input::get('form_completness'),
-                            'date_completed' => Input::get('date_completed'),
-                            'diagnosis_test_verified_by' => $user->data()->id,
-                            'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
+                            'form_status' => Input::get('form_status'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'status' => 1,
                             'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
@@ -976,12 +1034,12 @@ if ($user->isLoggedIn()) {
                             'first_line_lpa_date' => Input::get('first_line_lpa_date'),
                             'second_line_lpa' => Input::get('second_line_lpa'),
                             'second_line_lpa_date' => Input::get('second_line_lpa_date'),
-                            'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
-                            'remarks' => Input::get('remarks'),
-                            'form_completness' => Input::get('form_completness'),
-                            'date_completed' => Input::get('date_completed'),
-                            'diagnosis_test_verified_by' => $user->data()->id,
-                            'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
+                                'remarks' => Input::get('remarks'),
+                                'form_status' => Input::get('form_status'),
+                                'date_completed' => $date_completed,
+                                'completed_by' => $completed_by,
+                                'date_verified' => $date_verified,
+                                'verified_by' => $verified_by,
                             'status' => 1,
                             'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
@@ -1073,12 +1131,12 @@ if ($user->isLoggedIn()) {
                             'first_line_lpa_date' => Input::get('first_line_lpa_date'),
                             'second_line_lpa' => Input::get('second_line_lpa'),
                             'second_line_lpa_date' => Input::get('second_line_lpa_date'),
-                            'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
                             'remarks' => Input::get('remarks'),
-                            'form_completness' => Input::get('form_completness'),
-                            'date_completed' => Input::get('date_completed'),
-                            'diagnosis_test_verified_by' => $user->data()->id,
-                            'diagnosis_test_verified_date' => Input::get('diagnosis_test_verified_date'),
+                            'form_status' => Input::get('form_status'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'status' => 1,
                             'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
@@ -1104,6 +1162,31 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $costing = $override->getNews('respiratory', 'status', 1, 'enrollment_id', $_GET['sid']);
+
+
+                $date_completed = "";
+                $completed_by = "";
+                $date_verified = "";
+                $verified_by = "";
+
+                if (
+                    (Input::get('form_status') == 1)
+                ) {
+                    $date_completed = "";
+                    $completed_by = "";
+                    $date_verified = "";
+                    $verified_by = "";
+                } elseif (Input::get('form_status') == 2) {
+                    $date_completed = Input::get('date_completed');
+                    $completed_by = $user->data()->id;
+                    $date_verified = "";
+                    $verified_by = "";
+                } elseif (Input::get('form_status') == 3) {
+                    $date_completed = $screening['date_completed'];
+                    $completed_by = $screening['completed_by'];
+                    $date_verified = Input::get('date_completed');
+                    $verified_by = $user->data()->id;
+                }
 
                 if (Input::get('respiratory_completness') == 3 && Input::get('respiratory_verified_date') == "") {
                     $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
@@ -1139,12 +1222,12 @@ if ($user->isLoggedIn()) {
                             'xpert_rif' => Input::get('xpert_rif'),
                             'ct_value' => Input::get('ct_value'),
                             'ct_na' => Input::get('ct_na'),
-                            'respiratory_completness' => Input::get('respiratory_completness'),
-                            'comments' => Input::get('comments'),
-                            'date_completed' => Input::get('date_completed'),
-                            'respiratory_completed_by' => $user->data()->id,
-                            'respiratory_verified_by' => $user->data()->id,
-                            'respiratory_verified_date' => Input::get('respiratory_verified_date'),
+                                'remarks' => Input::get('remarks'),
+                                'form_status' => Input::get('form_status'),
+                                'date_completed' => $date_completed,
+                                'completed_by' => $completed_by,
+                                'date_verified' => $date_verified,
+                                'verified_by' => $verified_by,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                             'facility_id' => $screening['facility_id'],
@@ -1183,12 +1266,12 @@ if ($user->isLoggedIn()) {
                             'xpert_rif' => Input::get('xpert_rif'),
                             'ct_value' => Input::get('ct_value'),
                             'ct_na' => Input::get('ct_na'),
-                            'respiratory_completness' => Input::get('respiratory_completness'),
-                            'comments' => Input::get('comments'),
-                            'date_completed' => Input::get('date_completed'),
-                            'respiratory_completed_by' => $user->data()->id,
-                            'respiratory_verified_by' => $user->data()->id,
-                            'respiratory_verified_date' => Input::get('respiratory_verified_date'),
+                                'remarks' => Input::get('remarks'),
+                                'form_status' => Input::get('form_status'),
+                                'date_completed' => $date_completed,
+                                'completed_by' => $completed_by,
+                                'date_verified' => $date_verified,
+                                'verified_by' => $verified_by,
                             'status' => 1,
                             'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
@@ -1229,12 +1312,12 @@ if ($user->isLoggedIn()) {
                             'xpert_rif' => Input::get('xpert_rif'),
                             'ct_value' => Input::get('ct_value'),
                             'ct_na' => Input::get('ct_na'),
-                            'respiratory_completness' => Input::get('respiratory_completness'),
-                            'comments' => Input::get('comments'),
-                            'date_completed' => Input::get('date_completed'),
-                            'respiratory_completed_by' => $user->data()->id,
-                            'respiratory_verified_by' => $user->data()->id,
-                            'respiratory_verified_date' => Input::get('respiratory_verified_date'),
+                            'remarks' => Input::get('remarks'),
+                            'form_status' => Input::get('form_status'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'status' => 1,
                             'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
@@ -1279,12 +1362,12 @@ if ($user->isLoggedIn()) {
                             'xpert_rif' => Input::get('xpert_rif'),
                             'ct_value' => Input::get('ct_value'),
                             'ct_na' => Input::get('ct_na'),
-                            'respiratory_completness' => Input::get('respiratory_completness'),
-                            'comments' => Input::get('comments'),
-                            'date_completed' => Input::get('date_completed'),
-                            'respiratory_completed_by' => $user->data()->id,
-                            'respiratory_verified_by' => $user->data()->id,
-                            'respiratory_verified_date' => Input::get('respiratory_verified_date'),
+                            'remarks' => Input::get('remarks'),
+                            'form_status' => Input::get('form_status'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'status' => 1,
                             'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
@@ -1437,6 +1520,30 @@ if ($user->isLoggedIn()) {
                 $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $costing = $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['sid']);
 
+                $date_completed = "";
+                $completed_by = "";
+                $date_verified = "";
+                $verified_by = "";
+
+                if (
+                    (Input::get('form_status') == 1)
+                ) {
+                    $date_completed = "";
+                    $completed_by = "";
+                    $date_verified = "";
+                    $verified_by = "";
+                } elseif (Input::get('form_status') == 2) {
+                    $date_completed = Input::get('date_completed');
+                    $completed_by = $user->data()->id;
+                    $date_verified = "";
+                    $verified_by = "";
+                } elseif (Input::get('form_status') == 3) {
+                    $date_completed = $screening['date_completed'];
+                    $completed_by = $screening['completed_by'];
+                    $date_verified = Input::get('date_completed');
+                    $verified_by = $user->data()->id;
+                }
+
                 $bacteriological_diagnosis = implode(',', Input::get('bacteriological_diagnosis'));
                 $tb_diagnosed_clinically = implode(',', Input::get('tb_diagnosed_clinically'));
                 $laboratory_test_used = implode(',', Input::get('laboratory_test_used'));
@@ -1447,6 +1554,7 @@ if ($user->isLoggedIn()) {
                     if ($costing) {
                         $user->updateRecord('diagnosis', array(
                             'tb_diagnosis' => Input::get('tb_diagnosis'),
+                            'tb_diagnosis_date' => Input::get('tb_diagnosis_date'),
                             'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
                             'diagnosis_made_other' => Input::get('diagnosis_made_other'),
                             'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
@@ -1480,12 +1588,12 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used' => $laboratory_test_used,
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                            'comments' => Input::get('comments'),
-                            'diagnosis_completness' => Input::get('diagnosis_completness'),
-                            'diagnosis_completed_by' => $user->data()->id,
-                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
-                            'diagnosis_verified_by' => $user->data()->id,
-                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'remarks' => Input::get('remarks'),
+                            'form_status' => Input::get('form_status'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                             'facility_id' => $screening['facility_id'],
@@ -1496,6 +1604,7 @@ if ($user->isLoggedIn()) {
                             'pid' => $screening['pid'],
                             'entry_date' => Input::get('entry_date'),
                             'tb_diagnosis' => Input::get('tb_diagnosis'),
+                            'tb_diagnosis_date' => Input::get('tb_diagnosis_date'),
                             'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
                             'diagnosis_made_other' => Input::get('diagnosis_made_other'),
                             'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
@@ -1529,12 +1638,12 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used' => $laboratory_test_used,
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                            'comments' => Input::get('comments'),
-                            'diagnosis_completness' => Input::get('diagnosis_completness'),
-                            'diagnosis_completed_by' => $user->data()->id,
-                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
-                            'diagnosis_verified_by' => $user->data()->id,
-                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'remarks' => Input::get('remarks'),
+                            'form_status' => Input::get('form_status'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'status' => 1,
                             'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
@@ -1543,13 +1652,13 @@ if ($user->isLoggedIn()) {
                             'update_id' => $user->data()->id,
                             'facility_id' => $screening['facility_id'],
                         ));
-
                         $successMessage = 'Diagnosis Data  Successful Updated';
                     } else {
                         $user->createRecord('diagnosis', array(
                             'pid' => $screening['pid'],
                             'entry_date' => Input::get('entry_date'),
                             'tb_diagnosis' => Input::get('tb_diagnosis'),
+                            'tb_diagnosis_date' => Input::get('tb_diagnosis_date'),
                             'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
                             'diagnosis_made_other' => Input::get('diagnosis_made_other'),
                             'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
@@ -1583,12 +1692,12 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used' => $laboratory_test_used,
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                            'comments' => Input::get('comments'),
-                            'diagnosis_completness' => Input::get('diagnosis_completness'),
-                            'diagnosis_completed_by' => $user->data()->id,
-                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
-                            'diagnosis_verified_by' => $user->data()->id,
-                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'remarks' => Input::get('remarks'),
+                            'form_status' => Input::get('form_status'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'status' => 1,
                             'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
@@ -1605,6 +1714,7 @@ if ($user->isLoggedIn()) {
                             'pid' => $screening['pid'],
                             'entry_date' => Input::get('entry_date'),
                             'tb_diagnosis' => Input::get('tb_diagnosis'),
+                            'tb_diagnosis_date' => Input::get('tb_diagnosis_date'),
                             'tb_diagnosis_made' => Input::get('tb_diagnosis_made'),
                             'diagnosis_made_other' => Input::get('diagnosis_made_other'),
                             'bacteriological_diagnosis' => Input::get('bacteriological_diagnosis'),
@@ -1638,12 +1748,12 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used' => $laboratory_test_used,
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                            'comments' => Input::get('comments'),
-                            'diagnosis_completness' => Input::get('diagnosis_completness'),
-                            'diagnosis_completed_by' => $user->data()->id,
-                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
-                            'diagnosis_verified_by' => $user->data()->id,
-                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'remarks' => Input::get('remarks'),
+                            'form_status' => Input::get('form_status'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'status' => 1,
                             'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
@@ -5345,7 +5455,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($screening['remarks']) {
                                                                     print_r($screening['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6781,7 +6891,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6929,7 +7039,7 @@ if ($user->isLoggedIn()) {
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <label for="tb_diagnosis" class="form-label">4. Was a TB diagnosis
+                                                    <label for="tb_diagnosis" class="form-label">4(a). Was a TB diagnosis
                                                         made?</label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -6949,6 +7059,17 @@ if ($user->isLoggedIn()) {
                                                         <button type="button"
                                                             onclick="unsetRadio('tb_diagnosis')">Unset</button>
 
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3" id="tb_diagnosis_date_section">
+                                                    <div class="mb-3">
+                                                        <label for="tb_diagnosis_date" class="form-label">4(b). Date of TB
+                                                            diagnosis:</label>
+                                                        <input type="date" value="<?php if ($costing['tb_diagnosis_date']) {
+                                                            print_r($costing['tb_diagnosis_date']);
+                                                        } ?>" id="tb_diagnosis_date" name="tb_diagnosis_date"
+                                                            class="form-control" placeholder="tb_diagnosis_date" />
                                                     </div>
                                                 </div>
 
@@ -7008,17 +7129,6 @@ if ($user->isLoggedIn()) {
                                                             onclick="unsetRadio('bacteriological_diagnosis')">Unset</button>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3" id="clinician_received_date_section">
-                                                    <div class="mb-3">
-                                                        <label for="clinician_received_date" class="form-label">Date result
-                                                            received by clinician:</label>
-                                                        <input type="date" value="<?php if ($costing['clinician_received_date']) {
-                                                            print_r($costing['clinician_received_date']);
-                                                        } ?>" id="clinician_received_date"
-                                                            name="clinician_received_date" class="form-control"
-                                                            placeholder="clinician_received_date" />
-                                                    </div>
-                                                </div>
 
                                                 <div class="col-sm-3" id="tb_diagnosed_clinically_section">
                                                     <label for="tb_diagnosed_clinically" class="form-label">7. In case TB
@@ -7054,9 +7164,21 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-                                                                                            <hr>
+                                            <hr>
 
                                             <div class="row">
+                                                <div class="col-sm-4" id="clinician_received_date_section">
+                                                    <div class="mb-3">
+                                                        <label for="clinician_received_date" class="form-label">6(a). Date
+                                                            result
+                                                            received by clinician:</label>
+                                                        <input type="date" value="<?php if ($costing['clinician_received_date']) {
+                                                            print_r($costing['clinician_received_date']);
+                                                        } ?>" id="clinician_received_date"
+                                                            name="clinician_received_date" class="form-control"
+                                                            placeholder="clinician_received_date" />
+                                                    </div>
+                                                </div>
                                                 <div class="col-sm-4" id="tb_treatment_section">
                                                     <label for="tb_treatment" class="form-label">8(a). Was TB treatment
                                                         started?</label>
@@ -7123,7 +7245,9 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                            </div>
+                                            <hr>
+                                            <div class="row">
                                                 <div class="col-sm-4" id="tb_register_number_section">
                                                     <label for="tb_register_number" class="form-label">9(a). TB register
                                                         number</label>
@@ -7139,12 +7263,8 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                                                            <hr>
-                                            </div>
 
-                                            <div class="row">
-
-                                                <div class="col-sm-6" id="tb_regimen_prescribed_section">
+                                                <div class="col-sm-4" id="tb_regimen_prescribed_section">
                                                     <label for="tb_regimen" class="form-label">9(b). What treatment
                                                         regimen
                                                         was prescribed? </label>
@@ -7177,7 +7297,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-6" id="regimen_changed_section">
+                                                <div class="col-sm-4" id="regimen_changed_section">
                                                     <label for="regimen_changed" class="form-label">10(a). Was the regimen
                                                         changed during the treatment?</label>
                                                     <!-- radio -->
@@ -7202,7 +7322,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                             <div class="row" id="table_section">
-                                                                                            <hr>
+                                                <hr>
                                                 <label class="fw-bold text-center d-block">10(b). List all treatment changes
                                                     below.</label>
                                                 <table class="table table-bordered rounded">
@@ -7274,17 +7394,15 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                 </div>
-                                                                                                <hr>
+                                                <hr>
                                             </div>
 
                                             <div id="tb_other_diagnosis_section">
-
                                                 <div class="card card-warning">
                                                     <div class="card-header">
                                                         <h3 class="card-title">Diagnosis other than TB</h3>
                                                     </div>
                                                 </div>
-
                                                 <hr>
                                                 <div class="row">
                                                     <div class="col-sm-6">
@@ -7312,8 +7430,13 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('tb_other_diagnosis')">Unset</button>
                                                         </div>
                                                         <div id="tb_other_specify_section">
-                                                            <label for="tb_other_specify" class="form-label">If
+                                                            <label for="tb_other_specify" id="tb_other_section"
+                                                                class="form-label">If
                                                                 Other Mention</label>
+                                                            <label for="tb_other_specify" id="tb_bacterial_section"
+                                                                class="form-label">If
+                                                                Bacterial pneumonia, specify causative species if
+                                                                known</label>
                                                             <input type="text" value="<?php if ($costing['tb_other_specify']) {
                                                                 print_r($costing['tb_other_specify']);
                                                             } ?>" id="tb_other_specify" name="tb_other_specify"
@@ -7347,10 +7470,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                 </div>
-                                                                                            <hr>
+                                                <hr>
                                             </div>
-
-
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
@@ -7370,7 +7491,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7383,58 +7504,63 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                             <hr>
-
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <label>Complete?</label>
-                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="diagnosis_completness"
-                                                                        id="diagnosis_completness<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['diagnosis_completness'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?>         <?php if ($costing['diagnosis_completness'] == 3) { ?> readonly
-                                                                        <?php } ?> required>
+                                                                        name="form_status" id="form_status<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>"
+                                                                        <?= ($costing['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
                                                         <button type="button"
-                                                            onclick="unsetRadio('diagnosis_completness')">Unset</button>
-
+                                                            onclick="unsetRadio('form_status')">Unset</button>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-4">
-                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Form completed Date</label>
-                                                            <input class="form-control" type="date"
-                                                                name="diagnosis_completed_date"
-                                                                id="diagnosis_completed_date" value="<?php if ($costing['diagnosis_completed_date']) {
-                                                                    print_r($costing['diagnosis_completed_date']);
-                                                                } ?>" />
+                                                            <label>Completed Date</label>
+                                                            <input class="form-control" type="date" name="date_completed"
+                                                                id="date_completed"
+                                                                value="<?= ($costing['date_completed']) ? $costing['date_completed'] : ''; ?>" />
+                                                            <span id="date_completed_error" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Completed By</label>
+                                                            <input class="form-control" type="text"
+                                                                value="<?= $override->get('user', 'id', $costing['completed_by'])[0]['username']; ?>"
+                                                                readonly />
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-4">
-                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Form Verified Date</label>
-                                                            <input class="form-control" type="date"
-                                                                name="diagnosis_verified_date" id="diagnosis_verified_date"
-                                                                value="<?php if ($costing['diagnosis_verified_date']) {
-                                                                    print_r($costing['diagnosis_verified_date']);
-                                                                } ?>" <?php if ($costing['diagnosis_completness'] == $user->data()->id) { ?>
-                                                                    readonly <?php } ?> />
+                                                            <label>Verified Date</label>
+                                                            <input class="form-control" type="date" name="date_verified"
+                                                                id="date_verified"
+                                                                value="<?= ($costing['date_verified']) ? $costing['date_verified'] : ''; ?>" />
+                                                            <span id="date_verified_error" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Verified By</label>
+                                                            <input class="form-control" type="text"
+                                                                value="<?= $override->get('user', 'id', $costing['verified_by'])[0]['username']; ?>"
+                                                                readonly />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8212,7 +8338,7 @@ if ($user->isLoggedIn()) {
                                                                         placeholder="Type reasons here...">                                                                                                                                                                                                                                                                                              <?php if ($clients['sputum_reasons']) {
                                                                             print_r($clients['sputum_reasons']);
                                                                         } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -8221,64 +8347,72 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <hr>
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">FORM STATUS</h3>
+                                                </div>
+                                            </div>
+                                            <hr>
                                             <div class="row">
-
                                                 <div class="col-sm-4">
                                                     <label>Complete?</label>
-                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="enrollment_completed"
-                                                                        id="enrollment_completed<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($clients['enrollment_completed'] == $value['id']) {
-                                                                              echo 'checked';
-                                                                          } ?> required>
+                                                                        name="form_status" id="form_status<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>"
+                                                                        <?= ($clients['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
                                                         <button type="button"
-                                                            onclick="unsetRadio('enrollment_completed')">Unset</button>
-
+                                                            onclick="unsetRadio('form_status')">Unset</button>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-4">
-                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>Form completed Date</label>
-                                                            <input class="form-control" type="date"
-                                                                name="enrollment_completed_date"
-                                                                id="enrollment_completed_date" value="<?php if ($clients['enrollment_completed_date']) {
-                                                                    print_r($clients['enrollment_completed_date']);
-                                                                } ?>" <?php if ($costing['enrollment_completed'] == $user->data()->id) { ?>
-                                                                    readonly <?php } ?> />
+                                                            <label>Completed Date</label>
+                                                            <input class="form-control" type="date" name="date_completed"
+                                                                id="date_completed"
+                                                                value="<?= ($clients['date_completed']) ? $clients['date_completed'] : ''; ?>" />
+                                                            <span id="date_completed_error" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Completed By</label>
+                                                            <input class="form-control" type="text"
+                                                                value="<?= $override->get('user', 'id', $clients['completed_by'])[0]['username']; ?>"
+                                                                readonly />
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-4">
-                                                    <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label>40. Form Verified Date</label>
-                                                            <input class="form-control" type="date"
-                                                                name="enrollment_verified_date"
-                                                                id="enrollment_verified_date" value="<?php if ($clients['enrollment_verified_date']) {
-                                                                    print_r($clients['enrollment_verified_date']);
-                                                                } ?>" <?php if ($user->data()->position != 3) { ?>
-                                                                    readonly <?php } ?> />
+                                                            <label>Verified Date</label>
+                                                            <input class="form-control" type="date" name="date_verified"
+                                                                id="date_verified"
+                                                                value="<?= ($clients['date_verified']) ? $clients['date_verified'] : ''; ?>" />
+                                                            <span id="date_verified_error" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Verified By</label>
+                                                            <input class="form-control" type="text"
+                                                                value="<?= $override->get('user', 'id', $clients['verified_by'])[0]['username']; ?>"
+                                                                readonly />
                                                         </div>
                                                     </div>
                                                 </div>
-
-
-
                                             </div>
                                             <hr>
                                         </div>
@@ -10002,7 +10136,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
