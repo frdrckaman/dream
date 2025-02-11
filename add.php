@@ -7124,7 +7124,7 @@ if ($user->isLoggedIn()) {
 
                                                     <div class="col-sm-3" id="nano_levofloxacin">
                                                         <label for="nano_levofloxacin"
-                                                            class="form-label">Levofloxacin</label>
+                                                            class="form-label">22(j). Levofloxacin(LFX)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7149,7 +7149,7 @@ if ($user->isLoggedIn()) {
 
                                                     <div class="col-sm-3" id="nano_moxifloxacin">
                                                         <label for="nano_moxifloxacin"
-                                                            class="form-label">Moxifloxacin</label>
+                                                            class="form-label">22(l). Moxifloxacin(MXF)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7177,7 +7177,7 @@ if ($user->isLoggedIn()) {
                                                 <hr>
                                                 <div class="row">
                                                     <div class="col-sm-3" id="nano_bedaquiline">
-                                                        <label for="nano_bedaquiline" class="form-label">Bedaquiline</label>
+                                                        <label for="nano_bedaquiline" class="form-label">22(b).Bedaquiline(BDQ)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7201,7 +7201,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_linezolid">
-                                                        <label for="nano_linezolid" class="form-label">Linezolid</label>
+                                                        <label for="nano_linezolid" class="form-label">22(k). Linezolid(LZD)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7225,7 +7225,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_clofazimine">
-                                                        <label for="nano_clofazimine" class="form-label">Clofazimine</label>
+                                                        <label for="nano_clofazimine" class="form-label">22(d). Clofazimine(CFZ)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7249,7 +7249,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_cycloserine">
-                                                        <label for="nano_cycloserine" class="form-label">Cycloserine</label>
+                                                        <label for="nano_cycloserine" class="form-label">22(). Cycloserine</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7278,7 +7278,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="row">
                                                     <div class="col-sm-3" id="nano_terizidone">
-                                                        <label for="nano_terizidone" class="form-label">Terizidone</label>
+                                                        <label for="nano_terizidone" class="form-label">22(). Terizidone</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7302,7 +7302,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_ethambutol">
-                                                        <label for="nano_ethambutol" class="form-label">Ethambutol</label>
+                                                        <label for="nano_ethambutol" class="form-label">22(F). Ethambutol(EMB)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7326,7 +7326,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_delamanid">
-                                                        <label for="clofazimine" class="form-label">Delamanid</label>
+                                                        <label for="clofazimine" class="form-label">22(e). Delamanid(DLM)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7351,7 +7351,7 @@ if ($user->isLoggedIn()) {
 
                                                     <div class="col-sm-3" id="nano_pyrazinamide">
                                                         <label for="nano_pyrazinamide"
-                                                            class="form-label">Pyrazinamide</label>
+                                                            class="form-label">22(n). Pyrazinamide(PZA)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7380,7 +7380,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="row">
                                                     <div class="col-sm-3" id="nano_imipenem">
-                                                        <label for="nano_imipenem" class="form-label">Imipenem</label>
+                                                        <label for="nano_imipenem" class="form-label">22(). Imipenem</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7404,7 +7404,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_cilastatin">
-                                                        <label for="nano_cilastatin" class="form-label">Cilastatin</label>
+                                                        <label for="nano_cilastatin" class="form-label">22(). Cilastatin</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7428,7 +7428,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_meropenem">
-                                                        <label for="nano_meropenem" class="form-label">Meropenem</label>
+                                                        <label for="nano_meropenem" class="form-label">22(). Meropenem</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7452,7 +7452,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_amikacin">
-                                                        <label for="nano_amikacin" class="form-label">Amikacin</label>
+                                                        <label for="nano_amikacin" class="form-label">22(a). Amikacin(AMK)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7482,7 +7482,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="row">
                                                     <div class="col-sm-3" id="nano_streptomycin">
                                                         <label for="nano_streptomycin"
-                                                            class="form-label">Streptomycin</label>
+                                                            class="form-label">22(p). Streptomycin(STM)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7506,7 +7506,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_ethionamide">
-                                                        <label for="nano_ethionamide" class="form-label">Ethionamide</label>
+                                                        <label for="nano_ethionamide" class="form-label">22(g). Ethionamide(ETO)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7531,7 +7531,7 @@ if ($user->isLoggedIn()) {
 
                                                     <div class="col-sm-3" id="nano_prothionamide">
                                                         <label for="nano_prothionamide"
-                                                            class="form-label">Prothionamide</label>
+                                                            class="form-label">22(). Prothionamide</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7555,7 +7555,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_para_aminosalicylic_acid">
-                                                        <label for="nano_para_aminosalicylic_acid" class="form-label">Para-
+                                                        <label for="nano_para_aminosalicylic_acid" class="form-label">22(). Para-
                                                             aminosalicylic acid</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
