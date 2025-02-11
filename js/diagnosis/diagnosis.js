@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const tbTreatmentDateSection = document.getElementById("tb_treatment_date_section");
     const tbFacilitySection = document.getElementById("tb_facility_section");
     const tbReasonSection = document.getElementById("tb_reason_section");
+    const tbOutcomeSection = document.getElementById("tb_otcome_section");
+
 
     const tbRegisterNumberSection = document.getElementById("tb_register_number_section");
     const tbRegimenPrescribedSection = document.getElementById("tb_regimen_prescribed_section");
