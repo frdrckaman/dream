@@ -1532,7 +1532,7 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
                             'comments' => Input::get('comments'),
-                        'form_status' => Input::get('form_status'),
+                            'form_status' => Input::get('form_status'),
                             'diagnosis_completed_by' => $user->data()->id,
                             'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
                             'diagnosis_verified_by' => $user->data()->id,
@@ -1586,7 +1586,7 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
                             'comments' => Input::get('comments'),
-                        'form_status' => Input::get('form_status'),
+                            'form_status' => Input::get('form_status'),
                             'diagnosis_completed_by' => $user->data()->id,
                             'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
                             'diagnosis_verified_by' => $user->data()->id,
@@ -1642,7 +1642,7 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
                             'comments' => Input::get('comments'),
-                        'form_status' => Input::get('form_status'),
+                            'form_status' => Input::get('form_status'),
                             'diagnosis_completed_by' => $user->data()->id,
                             'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
                             'diagnosis_verified_by' => $user->data()->id,
@@ -5348,7 +5348,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($screening['remarks']) {
                                                                     print_r($screening['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6784,7 +6784,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6932,7 +6932,7 @@ if ($user->isLoggedIn()) {
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <label for="tb_diagnosis" class="form-label">4. Was a TB diagnosis
+                                                    <label for="tb_diagnosis" class="form-label">4(a). Was a TB diagnosis
                                                         made?</label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -7021,18 +7021,7 @@ if ($user->isLoggedIn()) {
                                                         <button type="button"
                                                             onclick="unsetRadio('bacteriological_diagnosis')">Unset</button>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-3" id="clinician_received_date_section">
-                                                    <div class="mb-3">
-                                                        <label for="clinician_received_date" class="form-label">Date result
-                                                            received by clinician:</label>
-                                                        <input type="date" value="<?php if ($costing['clinician_received_date']) {
-                                                            print_r($costing['clinician_received_date']);
-                                                        } ?>" id="clinician_received_date"
-                                                            name="clinician_received_date" class="form-control"
-                                                            placeholder="clinician_received_date" />
-                                                    </div>
-                                                </div>
+                                                </div>                                                
 
                                                 <div class="col-sm-3" id="tb_diagnosed_clinically_section">
                                                     <label for="tb_diagnosed_clinically" class="form-label">7. In case TB
@@ -7071,6 +7060,16 @@ if ($user->isLoggedIn()) {
                                             <hr>
 
                                             <div class="row">
+                                                <div class="col-sm-4" id="clinician_received_date_section">
+                                                    <div class="mb-3">
+                                                        <label for="clinician_received_date" class="form-label">6(a). Date result
+                                                            received by clinician:</label>
+                                                        <input type="date" value="<?php if ($costing['clinician_received_date']) {
+                                                            print_r($costing['clinician_received_date']);
+                                                        } ?>" id="clinician_received_date"
+                                                            name="clinician_received_date" class="form-control" placeholder="clinician_received_date" />
+                                                    </div>
+                                                </div>
                                                 <div class="col-sm-4" id="tb_treatment_section">
                                                     <label for="tb_treatment" class="form-label">8(a). Was TB treatment
                                                         started?</label>
@@ -7136,8 +7135,10 @@ if ($user->isLoggedIn()) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-
+                                                </div>                                                
+                                            </div>
+                                                                                                <hr>
+                                            <div class="row">
                                                 <div class="col-sm-4" id="tb_register_number_section">
                                                     <label for="tb_register_number" class="form-label">9(a). TB register
                                                         number</label>
@@ -7153,12 +7154,8 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <hr>
-                                            </div>
 
-                                            <div class="row">
-
-                                                <div class="col-sm-6" id="tb_regimen_prescribed_section">
+                                                <div class="col-sm-4" id="tb_regimen_prescribed_section">
                                                     <label for="tb_regimen" class="form-label">9(b). What treatment
                                                         regimen
                                                         was prescribed? </label>
@@ -7191,7 +7188,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-6" id="regimen_changed_section">
+                                                <div class="col-sm-4" id="regimen_changed_section">
                                                     <label for="regimen_changed" class="form-label">10(a). Was the regimen
                                                         changed during the treatment?</label>
                                                     <!-- radio -->
@@ -7292,13 +7289,11 @@ if ($user->isLoggedIn()) {
                                             </div>
 
                                             <div id="tb_other_diagnosis_section">
-
                                                 <div class="card card-warning">
                                                     <div class="card-header">
                                                         <h3 class="card-title">Diagnosis other than TB</h3>
                                                     </div>
                                                 </div>
-
                                                 <hr>
                                                 <div class="row">
                                                     <div class="col-sm-6">
@@ -7364,8 +7359,6 @@ if ($user->isLoggedIn()) {
                                                 <hr>
                                             </div>
 
-
-
                                             <div class="card card-warning">
                                                 <div class="card-header">
                                                     <h3 class="card-title">ANY COMENT OR REMARKS</h3>
@@ -7384,14 +7377,14 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <hr>
 
-<div class="card card-warning">
+                                            <div class="card card-warning">
                                                 <div class="card-header">
                                                     <h3 class="card-title">FORM STATUS</h3>
                                                 </div>
@@ -7402,55 +7395,62 @@ if ($user->isLoggedIn()) {
                                                     <label>Complete?</label>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                    <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="form_status" id="form_status<?= $value['id']; ?>"
-                            value="<?= $value['id']; ?>" <?= ($screening['form_status'] == $value['id']) ? 'checked' : ''; ?>
-                            required onchange="updateFormStatus()">
-                        <label class="form-check-label"><?= $value['name']; ?></label>
-                    </div>
-                <?php } ?>
-            </div>
-            <button type="button" onclick="unsetRadio('form_status')">Unset</button>
-        </div>
-    </div>
+                                                            <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="form_status" id="form_status<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>"
+                                                                        <?= ($screening['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('form_status')">Unset</button>
+                                                    </div>
+                                                </div>
 
-    <div class="col-sm-4">
-        <div class="row-form clearfix">
-            <div class="form-group">
-                <label>Completed Date</label>
-                <input class="form-control" type="date" name="date_completed" id="date_completed"
-                    value="<?= ($screening['date_completed']) ? $screening['date_completed'] : ''; ?>" />
-                <span id="date_completed_error" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="row-form clearfix">
-            <div class="form-group">
-                <label>Completed By</label>
-                <input class="form-control" type="text"
-                    value="<?= $override->get('user', 'id', $screening['completed_by'])[0]['username']; ?>" readonly />
-            </div>
-        </div>
-    </div>
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Completed Date</label>
+                                                            <input class="form-control" type="date" name="date_completed"
+                                                                id="date_completed"
+                                                                value="<?= ($screening['date_completed']) ? $screening['date_completed'] : ''; ?>" />
+                                                            <span id="date_completed_error" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Completed By</label>
+                                                            <input class="form-control" type="text"
+                                                                value="<?= $override->get('user', 'id', $screening['completed_by'])[0]['username']; ?>"
+                                                                readonly />
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-    <div class="col-sm-4">
-        <div class="row-form clearfix">
-            <div class="form-group">
-                <label>Verified Date</label>
-                <input class="form-control" type="date" name="date_verified" id="date_verified"
-                    value="<?= ($screening['date_verified']) ? $screening['date_verified'] : ''; ?>" />
-                <span id="date_verified_error" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="row-form clearfix">
-            <div class="form-group">
-                <label>Verified By</label>
-                <input class="form-control" type="text"
-                    value="<?= $override->get('user', 'id', $screening['verified_by'])[0]['username']; ?>" readonly />
-            </div>
-        </div>
-    </div>
-</div>
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Verified Date</label>
+                                                            <input class="form-control" type="date" name="date_verified"
+                                                                id="date_verified"
+                                                                value="<?= ($screening['date_verified']) ? $screening['date_verified'] : ''; ?>" />
+                                                            <span id="date_verified_error" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Verified By</label>
+                                                            <input class="form-control" type="text"
+                                                                value="<?= $override->get('user', 'id', $screening['verified_by'])[0]['username']; ?>"
+                                                                readonly />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <hr>
                                             <!-- </div> -->
                                             <!-- /.card-body -->
@@ -8224,7 +8224,7 @@ if ($user->isLoggedIn()) {
                                                                         placeholder="Type reasons here...">                                                                                                                                                                                                                                                                                              <?php if ($clients['sputum_reasons']) {
                                                                             print_r($clients['sputum_reasons']);
                                                                         } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -10014,7 +10014,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
