@@ -31,16 +31,16 @@ if ($user->isLoggedIn()) {
 
   if ($user->data()->accessLevel == 1) {
     if ($_GET['facility_id'] != null) {
-      $screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
+      $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
       $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id']);
       $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
     } else {
-      $screened = $override->getCount('screening', 'status', 1);
+      $screening = $override->getCount('screening', 'status', 1);
       $eligible = $override->getCount1('screening', 'status', 1, 'eligible', 1);
       $enrolled = $override->getCount('enrollment_form', 'status', 1);
     }
   } else {
-    $screened = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
+    $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
     $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
     $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
   }
