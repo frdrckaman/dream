@@ -6763,7 +6763,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('mtb_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="lpa1_mtb" id="lpa1_mtb<?= $value['id']; ?>"
@@ -6784,7 +6784,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('rif_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="lpa1_rif" id="lpa1_rif<?= $value['id']; ?>"
@@ -6887,7 +6887,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('mtb_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="lpa2_mtb" id="lpa2_mtb<?= $value['id']; ?>"
@@ -6908,7 +6908,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+u                                                                <?php foreach ($override->get('rif_reslts', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="lpa2_rfluoroquinolones"
