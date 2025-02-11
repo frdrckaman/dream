@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const tbClinicallyOtherSection = document.getElementById("tb_clinically_other_section");
     const tbTreatmentSection = document.getElementById("tb_treatment_section");
     const tbOtherSpecifySection = document.getElementById("tb_other_specify_section");
+    const tbBacterialSection = document.getElementById("tb_bacterial_section"); // New section for tb_other_diagnosis = 3
+    const tbOtherSection = document.getElementById("tb_other_section"); // New section for tb_other_diagnosis = 96
     const tbRegimenOtherSection = document.getElementById("tb_regimen_other_section");
     const tbTreatmentDateSection = document.getElementById("tb_treatment_date_section");
     const tbFacilitySection = document.getElementById("tb_facility_section");
@@ -69,6 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function toggleTbOtherSpecifySection() {
         const selectedValue = document.querySelector('input[name="tb_other_diagnosis"]:checked')?.value;
         tbOtherSpecifySection.style.display = selectedValue === "96" ? "block" : "none";
+        tbBacterialSection.style.display = selectedValue === "3" ? "block" : "none"; // Show tb_bacterial_section if value is 3
+        tbOtherSection.style.display = selectedValue === "96" ? "block" : "none"; // Show tb_other_section if value is 96
     }
 
     function toggleTbRegimenOtherSection() {
