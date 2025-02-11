@@ -4785,7 +4785,7 @@ if ($user->isLoggedIn()) {
                                                             about the patient or sample</strong></label>
                                                     <textarea id="remarks" name="remarks" class="form-control" rows="3"
                                                         placeholder="Enter any additional remarks here..."><?= print_r($costing['remarks']) ?>
-                                                                            </textarea>
+                                                                                </textarea>
                                                 </div>
                                             </div>
 
@@ -5490,7 +5490,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($screening['remarks']) {
                                                                     print_r($screening['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6754,8 +6754,7 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="lpa1_mtb"
-                                                                            id="lpa1_mtb<?= $value['id']; ?>"
+                                                                            name="lpa1_mtb" id="lpa1_mtb<?= $value['id']; ?>"
                                                                             value="<?= $value['id']; ?>" <?php if ($costing['lpa1_mtb'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
@@ -6776,8 +6775,7 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="lpa1_rif"
-                                                                            id="lpa1_rif<?= $value['id']; ?>"
+                                                                            name="lpa1_rif" id="lpa1_rif<?= $value['id']; ?>"
                                                                             value="<?= $value['id']; ?>" <?php if ($costing['lpa1_rif'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
@@ -6798,8 +6796,7 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="lpa1_inh"
-                                                                            id="lpa1_inh<?= $value['id']; ?>"
+                                                                            name="lpa1_inh" id="lpa1_inh<?= $value['id']; ?>"
                                                                             value="<?= $value['id']; ?>" <?php if ($costing['lpa1_inh'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
@@ -6881,8 +6878,7 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="lpa2_mtb"
-                                                                            id="lpa2_mtb<?= $value['id']; ?>"
+                                                                            name="lpa2_mtb" id="lpa2_mtb<?= $value['id']; ?>"
                                                                             value="<?= $value['id']; ?>" <?php if ($costing['lpa2_mtb'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
@@ -7075,26 +7071,32 @@ if ($user->isLoggedIn()) {
                                             <div id="nano_pore_results">
                                                 <div class="row">
                                                     <div class="col-sm-3" id="nano_amikacin">
-                                                        <label for="nano_amikacin" class="form-label">22(a). Amikacin(AMK)</label>
+                                                        <label for="nano_amikacin" class="form-label">22(a).
+                                                            Amikacin(AMK)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="nano_amikacin" id="nano_amikacin<?= $value['id']; ?>"
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="nano_amikacin"
+                                                                            id="nano_amikacin<?= $value['id']; ?>"
                                                                             value="<?= $value['id']; ?>" <?php if ($costing['nano_amikacin'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
-                                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
-                                                            <button type="button" onclick="unsetRadio('nano_amikacin')">Unset</button>
-                                                    
+                                                            <button type="button"
+                                                                onclick="unsetRadio('nano_amikacin')">Unset</button>
+
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3" id="nano_bedaquiline">
-                                                        <label for="nano_bedaquiline" class="form-label">22(b).Bedaquiline(BDQ)</label>
+                                                        <label for="nano_bedaquiline"
+                                                            class="form-label">22(b).Bedaquiline(BDQ)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7117,7 +7119,8 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3" id="nano_clofazimine">
-                                                        <label for="nano_clofazimine" class="form-label">22(d). Clofazimine(CFZ)</label>
+                                                        <label for="nano_clofazimine" class="form-label">22(d).
+                                                            Clofazimine(CFZ)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7138,13 +7141,14 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('nano_clofazimine')">Unset</button>
 
                                                         </div>
-                                                    </div>                                                 
+                                                    </div>
                                                 </div>
 
                                                 <hr>
                                                 <div class="row">
                                                     <div class="col-sm-3" id="nano_delamanid">
-                                                        <label for="clofazimine" class="form-label">22(e). Delamanid(DLM)</label>
+                                                        <label for="clofazimine" class="form-label">22(e).
+                                                            Delamanid(DLM)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7167,7 +7171,8 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3" id="nano_ethambutol">
-                                                        <label for="nano_ethambutol" class="form-label">22(F). Ethambutol(EMB)</label>
+                                                        <label for="nano_ethambutol" class="form-label">22(F).
+                                                            Ethambutol(EMB)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7191,7 +7196,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_ethionamide">
-                                                        <label for="nano_ethionamide" class="form-label">22(g). Ethionamide(ETO)</label>
+                                                        <label for="nano_ethionamide" class="form-label">22(g).
+                                                            Ethionamide(ETO)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7215,7 +7221,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_isoniazid">
-                                                        <label for="nano_isoniazid" class="form-label">22(h). Isoniazid (INH)</label>
+                                                        <label for="nano_isoniazid" class="form-label">22(h). Isoniazid
+                                                            (INH)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7236,38 +7243,15 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('nano_isoniazid')">Unset</button>
 
                                                         </div>
-                                                    </div>                                                                                
+                                                    </div>
                                                 </div>
 
                                                 <hr>
 
                                                 <div class="row">
-                                                    <div class="col-sm-3" id="nano_linezolid">
-                                                        <label for="nano_linezolid" class="form-label">22(k). Linezolid(LZD)</label>
-                                                        <!-- radio -->
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="nano_linezolid"
-                                                                            id="nano_linezolid<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['nano_linezolid'] == $value['id']) {
-                                                                                  echo 'checked';
-                                                                              } ?>>
-                                                                        <label
-                                                                            class="form-check-label"><?= $value['name']; ?></label>
-                                                                    </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <button type="button"
-                                                                onclick="unsetRadio('nano_linezolid')">Unset</button>
-
-                                                        </div>
-                                                    </div>
                                                     <div class="col-sm-3" id="nano_levofloxacin">
-                                                        <label for="nano_levofloxacin"
-                                                            class="form-label">22(j). Levofloxacin(LFX)</label>
+                                                        <label for="nano_levofloxacin" class="form-label">22(j).
+                                                            Levofloxacin(LFX)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7289,10 +7273,34 @@ if ($user->isLoggedIn()) {
 
                                                         </div>
                                                     </div>
+                                                    <div class="col-sm-3" id="nano_linezolid">
+                                                        <label for="nano_linezolid" class="form-label">22(k).
+                                                            Linezolid(LZD)</label>
+                                                        <!-- radio -->
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('nanopore_results', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="nano_linezolid"
+                                                                            id="nano_linezolid<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['nano_linezolid'] == $value['id']) {
+                                                                                  echo 'checked';
+                                                                              } ?>>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('nano_linezolid')">Unset</button>
+
+                                                        </div>
+                                                    </div>
 
                                                     <div class="col-sm-3" id="nano_moxifloxacin">
-                                                        <label for="nano_moxifloxacin"
-                                                            class="form-label">22(l). Moxifloxacin(MXF)</label>
+                                                        <label for="nano_moxifloxacin" class="form-label">22(l).
+                                                            Moxifloxacin(MXF)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7314,15 +7322,14 @@ if ($user->isLoggedIn()) {
 
                                                         </div>
                                                     </div>
-                                                    
+                                                </div>
 
-                                                    
+                                                <hr>
 
-                                                    
-
+                                                <div class="row">
                                                     <div class="col-sm-3" id="nano_pyrazinamide">
-                                                        <label for="nano_pyrazinamide"
-                                                            class="form-label">22(n). Pyrazinamide(PZA)</label>
+                                                        <label for="nano_pyrazinamide" class="form-label">22(n).
+                                                            Pyrazinamide(PZA)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7346,7 +7353,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_rifampicin">
-                                                        <label for="nano_rifampicin" class="form-label">22(o). Rifampicin (RIF)</label>
+                                                        <label for="nano_rifampicin" class="form-label">22(o). Rifampicin
+                                                            (RIF)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7371,8 +7379,8 @@ if ($user->isLoggedIn()) {
 
 
                                                     <div class="col-sm-3" id="nano_streptomycin">
-                                                        <label for="nano_streptomycin"
-                                                            class="form-label">22(p). Streptomycin(STM)</label>
+                                                        <label for="nano_streptomycin" class="form-label">22(p).
+                                                            Streptomycin(STM)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7394,14 +7402,14 @@ if ($user->isLoggedIn()) {
 
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                                 <hr>
 
                                                 <div class="row">
                                                     <div class="col-sm-3" id="nano_cycloserine">
-                                                        <label for="nano_cycloserine" class="form-label">22(). Cycloserine</label>
+                                                        <label for="nano_cycloserine" class="form-label">22().
+                                                            Cycloserine</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7424,7 +7432,8 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3" id="nano_terizidone">
-                                                        <label for="nano_terizidone" class="form-label">22(). Terizidone</label>
+                                                        <label for="nano_terizidone" class="form-label">22().
+                                                            Terizidone</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7471,7 +7480,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_cilastatin">
-                                                        <label for="nano_cilastatin" class="form-label">22(). Cilastatin</label>
+                                                        <label for="nano_cilastatin" class="form-label">22().
+                                                            Cilastatin</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7493,9 +7503,14 @@ if ($user->isLoggedIn()) {
 
                                                         </div>
                                                     </div>
+                                                </div>
 
+                                                <hr>
+
+                                                <div class="row">
                                                     <div class="col-sm-3" id="nano_meropenem">
-                                                        <label for="nano_meropenem" class="form-label">22(). Meropenem</label>
+                                                        <label for="nano_meropenem" class="form-label">22().
+                                                            Meropenem</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7518,19 +7533,10 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
 
-                                                    
 
-                                                </div>
-
-                                                <hr>
-
-                                                <div class="row">
-                                                    
-
-                                                    
                                                     <div class="col-sm-3" id="nano_prothionamide">
-                                                        <label for="nano_prothionamide"
-                                                            class="form-label">22(). Prothionamide</label>
+                                                        <label for="nano_prothionamide" class="form-label">22().
+                                                            Prothionamide</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7554,7 +7560,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_para_aminosalicylic_acid">
-                                                        <label for="nano_para_aminosalicylic_acid" class="form-label">22(). Para-
+                                                        <label for="nano_para_aminosalicylic_acid" class="form-label">22().
+                                                            Para-
                                                             aminosalicylic acid</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -7595,7 +7602,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7868,8 +7875,9 @@ if ($user->isLoggedIn()) {
                                                                     Specify ?</label>
                                                                 <input type="text" value="<?php if ($costing['tb_clinically_other']) {
                                                                     print_r($costing['tb_clinically_other']);
-                                                                } ?>" id="tb_clinically_other" name="tb_clinically_other"
-                                                                    class="form-control" placeholder="Enter here" />
+                                                                } ?>" id="tb_clinically_other"
+                                                                    name="tb_clinically_other" class="form-control"
+                                                                    placeholder="Enter here" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -7885,8 +7893,9 @@ if ($user->isLoggedIn()) {
                                                             received by clinician:</label>
                                                         <input type="date" value="<?php if ($costing['clinician_received_date']) {
                                                             print_r($costing['clinician_received_date']);
-                                                        } ?>" id="clinician_received_date" name="clinician_received_date"
-                                                            class="form-control" placeholder="clinician_received_date" />
+                                                        } ?>" id="clinician_received_date"
+                                                            name="clinician_received_date" class="form-control"
+                                                            placeholder="clinician_received_date" />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4" id="tb_treatment_section">
@@ -7927,8 +7936,9 @@ if ($user->isLoggedIn()) {
                                                                         treatment start date ?</label>
                                                                     <input type="date" value="<?php if ($costing['tb_treatment_date']) {
                                                                         print_r($costing['tb_treatment_date']);
-                                                                    } ?>" id="tb_treatment_date" name="tb_treatment_date"
-                                                                        class="form-control" placeholder="Enters here" />
+                                                                    } ?>" id="tb_treatment_date"
+                                                                        name="tb_treatment_date" class="form-control"
+                                                                        placeholder="Enters here" />
                                                                 </div>
 
                                                                 <div id="tb_facility_section">
@@ -8200,7 +8210,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9041,7 +9051,7 @@ if ($user->isLoggedIn()) {
                                                                         placeholder="Type reasons here...">                                                                                                                                                                                                                                                                                              <?php if ($clients['sputum_reasons']) {
                                                                             print_r($clients['sputum_reasons']);
                                                                         } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -9526,8 +9536,8 @@ if ($user->isLoggedIn()) {
                                                                 results</label>
                                                             <input type="text" value="<?php if ($costing['fm_results']) {
                                                                 print_r($costing['fm_results']);
-                                                            } ?>" id="fm_results" name="fm_results" class="form-control"
-                                                                placeholder="Enter here" />
+                                                            } ?>" id="fm_results" name="fm_results"
+                                                                class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
 
@@ -9610,8 +9620,8 @@ if ($user->isLoggedIn()) {
                                                             ljculres_date</label>
                                                         <input type="date" value="<?php if ($costing['ljculres_date']) {
                                                             print_r($costing['ljculres_date']);
-                                                        } ?>" id="ljculres_date" name="ljculres_date" class="form-control"
-                                                            placeholder="Enter here" />
+                                                        } ?>" id="ljculres_date" name="ljculres_date"
+                                                            class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -9649,8 +9659,8 @@ if ($user->isLoggedIn()) {
                                                             mgitcul_date</label>
                                                         <input type="date" value="<?php if ($costing['mgitcul_date']) {
                                                             print_r($costing['mgitcul_date']);
-                                                        } ?>" id="mgitcul_date" name="mgitcul_date" class="form-control"
-                                                            placeholder="Enter here" />
+                                                        } ?>" id="mgitcul_date" name="mgitcul_date"
+                                                            class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
@@ -10433,8 +10443,8 @@ if ($user->isLoggedIn()) {
                                                             myco_lineage</label>
                                                         <input type="text" value="<?php if ($costing['myco_lineage']) {
                                                             print_r($costing['myco_lineage']);
-                                                        } ?>" id="myco_lineage" name="myco_lineage" class="form-control"
-                                                            placeholder="Enter date" />
+                                                        } ?>" id="myco_lineage" name="myco_lineage"
+                                                            class="form-control" placeholder="Enter date" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -10839,7 +10849,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
