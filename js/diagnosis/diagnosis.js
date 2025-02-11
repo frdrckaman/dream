@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function toggleTbOtherSpecifySection() {
         const selectedValue = document.querySelector('input[name="tb_other_diagnosis"]:checked')?.value;
-        tbOtherSpecifySection.style.display = selectedValue === "96" ? "block" : "none";
+        tbOtherSpecifySection.style.display = selectedValue === "96" || selectedValue === "3" ? "block" : "none";
         tbBacterialSection.style.display = selectedValue === "3" ? "block" : "none"; // Show tb_bacterial_section if value is 3
         tbOtherSection.style.display = selectedValue === "96" ? "block" : "none"; // Show tb_other_section if value is 96
     }
