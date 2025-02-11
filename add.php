@@ -1032,7 +1032,7 @@ if ($user->isLoggedIn()) {
                             'nano_ethionamide' => Input::get('nano_ethionamide'),
                             'nano_prothionamide' => Input::get('nano_prothionamide'),
                             'nano_para_aminosalicylic_acid' => Input::get('nano_para_aminosalicylic_acid'),
-                                                                                    'nano_capreomycin' => Input::get('nano_capreomycin'),
+                            'nano_capreomycin' => Input::get('nano_capreomycin'),
                             'nano_kanamycin' => Input::get('nano_kanamycin'),
                             'nano_pretomanid' => Input::get('nano_pretomanid'),
                             'xpert_xdr_performed' => Input::get('xpert_xdr_performed'),
