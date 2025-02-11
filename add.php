@@ -937,7 +937,6 @@ if ($user->isLoggedIn()) {
                             'first_line_lpa_date' => Input::get('first_line_lpa_date'),
                             'second_line_lpa' => Input::get('second_line_lpa'),
                             'second_line_lpa_date' => Input::get('second_line_lpa_date'),
-                            'diagnosis_test_completed' => Input::get('diagnosis_test_completed'),
                             'remarks' => Input::get('remarks'),
                             'form_status' => Input::get('form_status'),
                             'date_completed' => $date_completed,
