@@ -7138,10 +7138,7 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('nano_clofazimine')">Unset</button>
 
                                                         </div>
-                                                    </div>
-                                                    
-                                                    
-
+                                                    </div>                                                 
                                                 </div>
 
                                                 <hr>
@@ -7239,17 +7236,7 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('nano_isoniazid')">Unset</button>
 
                                                         </div>
-                                                    </div>
-
-                                                    
-
-
-                                                    
-
-                                                    
-
-                                                    
-
+                                                    </div>                                                                                
                                                 </div>
 
                                                 <hr>
