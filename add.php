@@ -6805,7 +6805,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('inh_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="lpa1_inh" id="lpa1_inh<?= $value['id']; ?>"
@@ -6908,7 +6908,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-u                                                                <?php foreach ($override->get('rif_reslts', 'status', 1) as $value) { ?>
+u                                                                <?php foreach ($override->get('rif_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="lpa2_rfluoroquinolones"
@@ -6930,7 +6930,7 @@ u                                                                <?php foreach (
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('rif_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="lpa2_aminoglycosides"
@@ -6952,7 +6952,7 @@ u                                                                <?php foreach (
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('rif_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="lpa2_kanamycin"
