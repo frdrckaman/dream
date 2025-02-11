@@ -20,8 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tbTreatmentDateSection = document.getElementById("tb_treatment_date_section");
     const tbFacilitySection = document.getElementById("tb_facility_section");
     const tbReasonSection = document.getElementById("tb_reason_section");
-    const tbOutcomeSection = document.getElementById("tb_otcome_section");
-
+    const tbOutcomeSection = document.getElementById("tb_otcome_section"); // Ensure correct ID spelling
 
     const tbRegisterNumberSection = document.getElementById("tb_register_number_section");
     const tbRegimenPrescribedSection = document.getElementById("tb_regimen_prescribed_section");
@@ -30,20 +29,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function toggleTbDiagnosisSection() {
         const selectedValue = document.querySelector('input[name="tb_diagnosis"]:checked')?.value;
+
         if (selectedValue === "1") {
             tbDiagnosisSection.style.display = "block";
             tbOtherDiagnosisSection.style.display = "none";
-            toggleTbDiagnosisMadeSections();
+            tbOutcomeSection.style.display = "block";
             tbTreatmentSection.style.display = "block";
-        } else {
+            toggleTbDiagnosisMadeSections();
+        } else if (selectedValue === "2") {
             tbDiagnosisSection.style.display = "none";
             tbOtherDiagnosisSection.style.display = "block";
+            tbOutcomeSection.style.display = "none";
+            tbTreatmentSection.style.display = "none";
             bacteriologicalDiagnosisSection.style.display = "none";
             clinicianReceivedDateSection.style.display = "none";
             diagnosisMadeOtherSection.style.display = "none";
             tbDiagnosedClinicallySection.style.display = "none";
             tbClinicallyOtherSection.style.display = "none";
-            tbTreatmentSection.style.display = "none";
+        } else {
+            tbDiagnosisSection.style.display = "none";
+            tbOtherDiagnosisSection.style.display = "none";
+            tbOutcomeSection.style.display = "none";
         }
     }
 
@@ -93,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tbDiagnosedClinicallyCheckbox.addEventListener("change", toggleTbClinicallyOtherSection);
     regimenChangedRadios.forEach(radio => radio.addEventListener("change", toggleTableSection));
 
+    // Initialize section visibility on page load
     toggleTbDiagnosisSection();
     toggleTbDiagnosisMadeSections();
     toggleTbClinicallyOtherSection();
