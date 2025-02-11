@@ -1437,6 +1437,30 @@ if ($user->isLoggedIn()) {
                 $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $costing = $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $_GET['sid']);
 
+                                $date_completed = "";
+                $completed_by = "";
+                $date_verified = "";
+                $verified_by = "";
+
+                if (
+                    (Input::get('form_status') == 1)
+                ) {
+                    $date_completed = "";
+                    $completed_by = "";
+                    $date_verified = "";
+                    $verified_by = "";
+                } elseif (Input::get('form_status') == 2) {
+                    $date_completed = Input::get('date_completed');
+                    $completed_by = $user->data()->id;
+                    $date_verified = "";
+                    $verified_by = "";
+                } elseif (Input::get('form_status') == 3) {
+                    $date_completed = $screening['date_completed'];
+                    $completed_by = $screening['completed_by'];
+                    $date_verified = Input::get('date_completed');
+                    $verified_by = $user->data()->id;
+                }
+
                 $bacteriological_diagnosis = implode(',', Input::get('bacteriological_diagnosis'));
                 $tb_diagnosed_clinically = implode(',', Input::get('tb_diagnosed_clinically'));
                 $laboratory_test_used = implode(',', Input::get('laboratory_test_used'));
@@ -1481,12 +1505,12 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used' => $laboratory_test_used,
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                            'comments' => Input::get('comments'),
+                            'remarks' => Input::get('remarks'),
                             'form_status' => Input::get('form_status'),
-                            'diagnosis_completed_by' => $user->data()->id,
-                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
-                            'diagnosis_verified_by' => $user->data()->id,
-                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                             'facility_id' => $screening['facility_id'],
@@ -1531,12 +1555,12 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used' => $laboratory_test_used,
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                            'comments' => Input::get('comments'),
+                            'remarks' => Input::get('remarks'),
                             'form_status' => Input::get('form_status'),
-                            'diagnosis_completed_by' => $user->data()->id,
-                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
-                            'diagnosis_verified_by' => $user->data()->id,
-                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'status' => 1,
                             'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
@@ -1585,12 +1609,12 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used' => $laboratory_test_used,
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                            'comments' => Input::get('comments'),
+                            'remarks' => Input::get('remarks'),
                             'form_status' => Input::get('form_status'),
-                            'diagnosis_completed_by' => $user->data()->id,
-                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
-                            'diagnosis_verified_by' => $user->data()->id,
-                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'status' => 1,
                             'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
@@ -1641,12 +1665,12 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used' => $laboratory_test_used,
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
-                            'comments' => Input::get('comments'),
+                            'remarks' => Input::get('remarks'),
                             'form_status' => Input::get('form_status'),
-                            'diagnosis_completed_by' => $user->data()->id,
-                            'diagnosis_completed_date' => Input::get('diagnosis_completed_date'),
-                            'diagnosis_verified_by' => $user->data()->id,
-                            'diagnosis_verified_date' => Input::get('diagnosis_verified_date'),
+                            'date_completed' => $date_completed,
+                            'completed_by' => $completed_by,
+                            'date_verified' => $date_verified,
+                            'verified_by' => $verified_by,
                             'status' => 1,
                             'enrollment_id' => $_GET['sid'],
                             'create_on' => date('Y-m-d H:i:s'),
