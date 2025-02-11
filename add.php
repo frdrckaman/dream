@@ -7424,7 +7424,7 @@ if ($user->isLoggedIn()) {
                                                                     <input class="form-check-input" type="radio"
                                                                         name="form_status" id="form_status<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>"
-                                                                        <?= ($screening['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
+                                                                        <?= ($costing['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
@@ -7441,7 +7441,7 @@ if ($user->isLoggedIn()) {
                                                             <label>Completed Date</label>
                                                             <input class="form-control" type="date" name="date_completed"
                                                                 id="date_completed"
-                                                                value="<?= ($screening['date_completed']) ? $screening['date_completed'] : ''; ?>" />
+                                                                value="<?= ($costing['date_completed']) ? $costing['date_completed'] : ''; ?>" />
                                                             <span id="date_completed_error" class="text-danger"></span>
                                                         </div>
                                                     </div>
@@ -7449,7 +7449,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <label>Completed By</label>
                                                             <input class="form-control" type="text"
-                                                                value="<?= $override->get('user', 'id', $screening['completed_by'])[0]['username']; ?>"
+                                                                value="<?= $override->get('user', 'id', $costing['completed_by'])[0]['username']; ?>"
                                                                 readonly />
                                                         </div>
                                                     </div>
@@ -7461,7 +7461,7 @@ if ($user->isLoggedIn()) {
                                                             <label>Verified Date</label>
                                                             <input class="form-control" type="date" name="date_verified"
                                                                 id="date_verified"
-                                                                value="<?= ($screening['date_verified']) ? $screening['date_verified'] : ''; ?>" />
+                                                                value="<?= ($costing['date_verified']) ? $costing['date_verified'] : ''; ?>" />
                                                             <span id="date_verified_error" class="text-danger"></span>
                                                         </div>
                                                     </div>
@@ -7469,7 +7469,7 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <label>Verified By</label>
                                                             <input class="form-control" type="text"
-                                                                value="<?= $override->get('user', 'id', $screening['verified_by'])[0]['username']; ?>"
+                                                                value="<?= $override->get('user', 'id', $costing['verified_by'])[0]['username']; ?>"
                                                                 readonly />
                                                         </div>
                                                     </div>
