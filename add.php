@@ -5810,7 +5810,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3" id="sediments_results_section">
-                                                        <label for="phenotypic_performed" class="form-label">7(c).
+                                                        <label for="sediments_results" class="form-label">7(c).
                                                             Microscopy results</sediments_results>
                                                             <!-- radio -->
                                                             <div class="row-form clearfix">
@@ -6718,7 +6718,7 @@ if ($user->isLoggedIn()) {
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <label for="nanopore_done" class="form-label">17(c). MTB result on
+                                                        <label for="lpa1_mtb_results" class="form-label">17(c). MTB result on
                                                             LPA1</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -6726,9 +6726,9 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="nanopore_done"
-                                                                            id="nanopore_done<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['nanopore_done'] == $value['id']) {
+                                                                            name="lpa1_mtb_results"
+                                                                            id="lpa1_mtb_results<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa1_mtb_results'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label
@@ -6736,7 +6736,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                                 <button type="button"
-                                                                    onclick="unsetRadio('nanopore_done')">Unset</button>
+                                                                    onclick="unsetRadio('lpa1_mtb_results')">Unset</button>
                                                             </div>
                                                         </div>
                                                         <hr>
