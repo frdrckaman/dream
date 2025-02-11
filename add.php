@@ -6903,12 +6903,11 @@ if ($user->isLoggedIn()) {
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <label for="lpa2_rfluoroquinolones" class="form-label">19(d).
-                                                            RFluoroquinolones</label>
+                                                        <label for="lpa2_rfluoroquinolones" class="form-label">19(d). RFluoroquinolones</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-u                                                                <?php foreach ($override->get('rif_results', 'status', 1) as $value) { ?>
+                                                                <?php foreach ($override->get('rif_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
                                                                             name="lpa2_rfluoroquinolones"
