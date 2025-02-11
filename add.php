@@ -8304,12 +8304,6 @@ if ($user->isLoggedIn()) {
                 $clients = $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
                 $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $sex = $override->get('sex', 'id', $clients['sex'])[0];
-                // $education = $override->get('education', 'id', $clients['education'])[0];
-                // $occupation = $override->get('occupation', 'id', $clients['occupation'])[0];
-                // $regions = $override->get('regions', 'id', $clients['region'])[0];
-                // $districts = $override->get('districts', 'id', $clients['district'])[0];
-                // $wards = $override->get('wards', 'id', $clients['ward'])[0];
-                // $facility = $override->get('districts', 'id', $clients['facility_district'])[0];
                 $site = $override->get('sites', 'id', $clients['facility_id'])[0];
                 ?>
                 <!-- Content Header (Page header) -->
