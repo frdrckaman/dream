@@ -846,6 +846,13 @@ if ($user->isLoggedIn()) {
                             'first_line_lpa_date' => Input::get('first_line_lpa_date'),
                             'second_line_lpa' => Input::get('second_line_lpa'),
                             'second_line_lpa_date' => Input::get('second_line_lpa_date'),
+                            'lpa1_mtb' => Input::get('lpa1_mtb'),
+                            'lpa1_rif' => Input::get('lpa1_rif'),
+                            'lpa1_inh' => Input::get('lpa1_inh'),
+                            'lpa2_mtb' => Input::get('lpa2_mtb'),
+                            'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
+                            'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
+                            'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
                             'remarks' => Input::get('remarks'),
                             'form_status' => Input::get('form_status'),
                             'date_completed' => $date_completed,
@@ -937,6 +944,13 @@ if ($user->isLoggedIn()) {
                             'first_line_lpa_date' => Input::get('first_line_lpa_date'),
                             'second_line_lpa' => Input::get('second_line_lpa'),
                             'second_line_lpa_date' => Input::get('second_line_lpa_date'),
+                            'lpa1_mtb' => Input::get('lpa1_mtb'),
+                            'lpa1_rif' => Input::get('lpa1_rif'),
+                            'lpa1_inh' => Input::get('lpa1_inh'),
+                            'lpa2_mtb' => Input::get('lpa2_mtb'),
+                            'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
+                            'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
+                            'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
                             'remarks' => Input::get('remarks'),
                             'form_status' => Input::get('form_status'),
                             'date_completed' => $date_completed,
@@ -1033,6 +1047,13 @@ if ($user->isLoggedIn()) {
                             'first_line_lpa_date' => Input::get('first_line_lpa_date'),
                             'second_line_lpa' => Input::get('second_line_lpa'),
                             'second_line_lpa_date' => Input::get('second_line_lpa_date'),
+                            'lpa1_mtb' => Input::get('lpa1_mtb'),
+                            'lpa1_rif' => Input::get('lpa1_rif'),
+                            'lpa1_inh' => Input::get('lpa1_inh'),
+                            'lpa2_mtb' => Input::get('lpa2_mtb'),
+                            'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
+                            'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
+                            'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
                             'remarks' => Input::get('remarks'),
                             'form_status' => Input::get('form_status'),
                             'date_completed' => $date_completed,
@@ -1130,6 +1151,13 @@ if ($user->isLoggedIn()) {
                             'first_line_lpa_date' => Input::get('first_line_lpa_date'),
                             'second_line_lpa' => Input::get('second_line_lpa'),
                             'second_line_lpa_date' => Input::get('second_line_lpa_date'),
+                            'lpa1_mtb' => Input::get('lpa1_mtb'),
+                            'lpa1_rif' => Input::get('lpa1_rif'),
+                            'lpa1_inh' => Input::get('lpa1_inh'),
+                            'lpa2_mtb' => Input::get('lpa2_mtb'),
+                            'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
+                            'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
+                            'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
                             'remarks' => Input::get('remarks'),
                             'form_status' => Input::get('form_status'),
                             'date_completed' => $date_completed,
@@ -6718,7 +6746,7 @@ if ($user->isLoggedIn()) {
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <label for="lpa1_mtb_results" class="form-label">17(c). MTB result on
+                                                        <label for="lpa1_mtb" class="form-label">17(c). MTB result on
                                                             LPA1</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -6726,9 +6754,9 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="lpa1_mtb_results"
-                                                                            id="lpa1_mtb_results<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa1_mtb_results'] == $value['id']) {
+                                                                            name="lpa1_mtb"
+                                                                            id="lpa1_mtb<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa1_mtb'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label
@@ -6736,11 +6764,11 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                                 <button type="button"
-                                                                    onclick="unsetRadio('lpa1_mtb_results')">Unset</button>
+                                                                    onclick="unsetRadio('lpa1_mtb')">Unset</button>
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <label for="lpa1_rif_results" class="form-label">17(d). RIF
+                                                        <label for="lpa1_rif" class="form-label">17(d). RIF
                                                             result</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -6748,9 +6776,9 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="lpa1_rif_results"
-                                                                            id="lpa1_rif_results<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa1_rif_results'] == $value['id']) {
+                                                                            name="lpa1_rif"
+                                                                            id="lpa1_rif<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa1_rif'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label
@@ -6758,11 +6786,11 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                                 <button type="button"
-                                                                    onclick="unsetRadio('lpa1_rif_results')">Unset</button>
+                                                                    onclick="unsetRadio('lpa1_rif')">Unset</button>
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <label for="lpa1_inh_results" class="form-label">17(e). INH
+                                                        <label for="lpa1_inh" class="form-label">17(e). INH
                                                             result</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -6770,9 +6798,9 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="lpa1_inh_results"
-                                                                            id="lpa1_inh_results<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa1_inh_results'] == $value['id']) {
+                                                                            name="lpa1_inh"
+                                                                            id="lpa1_inh<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa1_inh'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label
@@ -6780,7 +6808,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                                 <button type="button"
-                                                                    onclick="unsetRadio('lpa1_inh_results')">Unset</button>
+                                                                    onclick="unsetRadio('lpa1_inh')">Unset</button>
                                                             </div>
                                                         </div>
                                                         <hr>
@@ -6845,7 +6873,7 @@ if ($user->isLoggedIn()) {
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <label for="lpa2_mtb_results" class="form-label">19(c). MTB result on
+                                                        <label for="lpa2_mtb" class="form-label">19(c). MTB result on
                                                             LPA1</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -6853,9 +6881,9 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="lpa2_mtb_results"
-                                                                            id="lpa2_mtb_results<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa2_mtb_results'] == $value['id']) {
+                                                                            name="lpa2_mtb"
+                                                                            id="lpa2_mtb<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa2_mtb'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label
@@ -6863,11 +6891,11 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                                 <button type="button"
-                                                                    onclick="unsetRadio('lpa2_mtb_results')">Unset</button>
+                                                                    onclick="unsetRadio('lpa2_mtb')">Unset</button>
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <label for="lpa2_rfluoroquinolones_results" class="form-label">19(d).
+                                                        <label for="lpa2_rfluoroquinolones" class="form-label">19(d).
                                                             RFluoroquinolones</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -6875,9 +6903,9 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="lpa2_rfluoroquinolones_results"
-                                                                            id="lpa2_rfluoroquinolones_results<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa2_rfluoroquinolones_results'] == $value['id']) {
+                                                                            name="lpa2_rfluoroquinolones"
+                                                                            id="lpa2_rfluoroquinolones<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa2_rfluoroquinolones'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label
@@ -6885,11 +6913,11 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                                 <button type="button"
-                                                                    onclick="unsetRadio('lpa2_rfluoroquinolones_results')">Unset</button>
+                                                                    onclick="unsetRadio('lpa2_rfluoroquinolones')">Unset</button>
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <label for="lpa2_aminoglycosides_results" class="form-label">19(e).
+                                                        <label for="lpa2_aminoglycosides" class="form-label">19(e).
                                                             Aminoglycosides</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -6897,9 +6925,9 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="lpa2_aminoglycosides_results"
-                                                                            id="lpa2_aminoglycosides_results<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa2_aminoglycosides_results'] == $value['id']) {
+                                                                            name="lpa2_aminoglycosides"
+                                                                            id="lpa2_aminoglycosides<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa2_aminoglycosides'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label
@@ -6907,11 +6935,11 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                                 <button type="button"
-                                                                    onclick="unsetRadio('lpa2_aminoglycosides_results')">Unset</button>
+                                                                    onclick="unsetRadio('lpa2_aminoglycosides')">Unset</button>
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <label for="lpa2_kanamycin_results" class="form-label">19(f).
+                                                        <label for="lpa2_kanamycin" class="form-label">19(f).
                                                             Kanamycin</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
@@ -6919,9 +6947,9 @@ if ($user->isLoggedIn()) {
                                                                 <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="lpa2_kanamycin_results"
-                                                                            id="lpa2_kanamycin_results<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa2_kanamycin_results'] == $value['id']) {
+                                                                            name="lpa2_kanamycin"
+                                                                            id="lpa2_kanamycin<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lpa2_kanamycin'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label
@@ -6929,7 +6957,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 <?php } ?>
                                                                 <button type="button"
-                                                                    onclick="unsetRadio('lpa2_kanamycin_results')">Unset</button>
+                                                                    onclick="unsetRadio('lpa2_kanamycin')">Unset</button>
                                                             </div>
                                                         </div>
                                                         <hr>
