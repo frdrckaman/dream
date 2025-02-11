@@ -7075,7 +7075,7 @@ if ($user->isLoggedIn()) {
                                             <div id="nano_pore_results">
                                                 <div class="row">
                                                     <div class="col-sm-3" id="nano_rifampicin">
-                                                        <label for="nano_rifampicin" class="form-label">Rifampicin</label>
+                                                        <label for="nano_rifampicin" class="form-label">22(o). Rifampicin (RIF)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
@@ -7099,7 +7099,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                     <div class="col-sm-3" id="nano_isoniazid">
-                                                        <label for="nano_isoniazid" class="form-label">Isoniazid</label>
+                                                        <label for="nano_isoniazid" class="form-label">22(h). Isoniazid (INH)</label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
