@@ -7054,8 +7054,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
+                                                                                            <hr>
 
-                                            <hr>
                                             <div class="row">
                                                 <div class="col-sm-4" id="tb_treatment_section">
                                                     <label for="tb_treatment" class="form-label">8(a). Was TB treatment
@@ -7139,9 +7139,9 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                                                            <hr>
                                             </div>
 
-                                            <hr>
                                             <div class="row">
 
                                                 <div class="col-sm-6" id="tb_regimen_prescribed_section">
@@ -7201,8 +7201,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr>
                                             <div class="row" id="table_section">
+                                                                                            <hr>
                                                 <label class="fw-bold text-center d-block">10(b). List all treatment changes
                                                     below.</label>
                                                 <table class="table table-bordered rounded">
@@ -7274,11 +7274,11 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                 </div>
+                                                                                                <hr>
                                             </div>
 
                                             <div id="tb_other_diagnosis_section">
 
-                                                <hr>
                                                 <div class="card card-warning">
                                                     <div class="card-header">
                                                         <h3 class="card-title">Diagnosis other than TB</h3>
@@ -7347,9 +7347,9 @@ if ($user->isLoggedIn()) {
                                                     </div>
 
                                                 </div>
+                                                                                            <hr>
                                             </div>
 
-                                            <hr>
 
 
                                             <div class="card card-warning">
