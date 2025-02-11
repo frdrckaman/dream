@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
             tbDiagnosisSection.style.display = "none";
             tbOtherDiagnosisSection.style.display = "none";
             tbOutcomeSection.style.display = "none";
+            tbTreatmentSection.style.display = "none";
         }
     }
 
