@@ -34,7 +34,7 @@ if ($user->isLoggedIn()) {
       $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
       $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id']);
       $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
-      $eligible = $override->countData1('diagnosis', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id']);
+      $completed = $override->countData1('diagnosis', 'status', 1, 'outcome2', 1, 'facility_id', $_GET['facility_id']);
     } else {
       $screening = $override->getCount('screening', 'status', 1);
       $eligible = $override->getCount1('screening', 'status', 1, 'eligible', 1);
@@ -221,7 +221,7 @@ if ($user->isLoggedIn()) {
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3><?= $end ?></h3>
+                <h3>0</h3>
 
                 <p>Completed</p>
               </div>
