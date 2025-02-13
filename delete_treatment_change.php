@@ -16,3 +16,15 @@ if (!empty($data['id'])) {
 
 echo json_encode($response);
 ?>
+
+
+<?php
+// $pdo = new PDO("mysql:host=localhost;dbname=your_database", "username", "password");
+
+// $id = $_POST['id'];
+
+// $stmt = $pdo->prepare("DELETE FROM treatment_changes WHERE id = ?");
+// $stmt->execute([$id]);
+
+// echo "Record deleted successfully!";
+?>

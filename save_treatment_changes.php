@@ -1,65 +1,64 @@
 <?php
-require_once 'php/core/init.php';
-$user = new User();
-$override = new OverideData();
-$email = new Email();
-$random = new Random();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-$data = json_decode(file_get_contents("php://input"), true);
-$response = ['message' => 'No changes saved.'];
+    require_once 'php/core/init.php';
+    $user = new User();
+    $override = new OverideData();
+    $email = new Email();
+    $random = new Random();
 
-if (!empty($data)) {
-    foreach ($data as $row) {
-        if (!empty($row['id'])) {
+    $users = $override->getData('user');
+
+    $ids = $_POST['id'];
+    $dates = $_POST['date'];
+    $drugs = $_POST['drug'];
+    $changes = $_POST['changes'];
+    $reasons = $_POST['reason'];
+    $specify = $_POST['specify'];
+
+    for ($i = 0; $i < count($dates); $i++) {
+        $date = $dates[$i];
+        $date = $dates[$i];
+        $drug = $drugs[$i];
+        $change = $changes[$i];
+        $reason = $reasons[$i];
+        $specify_value = !empty($specify[$i]) ? $specify[$i] : NULL;
+        $enrollment_id = $enrollment_id[$i];
+        $facility_id = $facility_id[$i];
+
+        if ($id) {
             // Update existing record
             $user->updateRecord('treatment_changes', array(
-                'date' => $row['date'],
-                'drug' => $row['drug'],
-                'change_type' => $row['change_type'],
-                'reason' => $row['reason'],
-                'other_reason' => $row['other_reason'],
-                'sid' => $row['sid'],
-                'diagnosis_completness' => 1,
-                'diagnosis_completed_by' => $user->data()->id,
-                'diagnosis_completed_date' => 1,
-                'diagnosis_verified_by' => $user->data()->id,
-                'diagnosis_verified_date' => 1,
+                'diagnosis_id' => 1,
+                'date' => $date,
+                'drug' => $drug,
+                'changes' => $change,
+                'reason' => $reason,
+                'specify' => $specify_value,
+                'enrollment_id' => 1,
                 'status' => 1,
-                'enrollment_id' => $_GET['sid'],
-                'create_on' => date('Y-m-d H:i:s'),
-                'staff_id' => $user->data()->id,
-                'update_on' => date('Y-m-d H:i:s'),
-                'update_id' => $user->data()->id,
-                'facility_id' => $row['facility_id'],
-            ), $row['id']);
-            $successMessage = 'Position Successful Updated';
+                'facility_id' => 1,
+            ), $id);
+            $successMessage = 'Account locked Successful';
         } else {
             // Insert new record
             $user->createRecord('treatment_changes', array(
-                'date' => $row['date'],
-                'drug' => $row['drug'],
-                'change_type' => $row['change_type'],
-                'reason' => $row['reason'],
-                'other_reason' => $row['other_reason'],
-                'sid' => $row['sid'],
-                'diagnosis_completness' => 1,
-                'diagnosis_completed_by' => $user->data()->id,
-                'diagnosis_completed_date' => 1,
-                'diagnosis_verified_by' => $user->data()->id,
-                'diagnosis_verified_date' => 1,
+                'diagnosis_id' => 1,
+                'date' => $date,
+                'drug' => $drug,
+                'changes' => $change,
+                'reason' => $reason,
+                'specify' => $specify_value,
+                'enrollment_id' => 1,
                 'status' => 1,
-                'enrollment_id' => $_GET['sid'],
-                'create_on' => date('Y-m-d H:i:s'),
-                'staff_id' => $user->data()->id,
-                'update_on' => date('Y-m-d H:i:s'),
-                'update_id' => $user->data()->id,
-                'facility_id' => $row['facility_id'],
+                'facility_id' => 1,
             ));
-            $successMessage = 'Position Successful Added';
+            $successMessage = 'Account locked Successful';
         }
-    }
-    $response['message'] = 'Changes saved successfully!';
-}
 
-echo json_encode($response);
+        echo "Treatment changes saved successfully!";
+    }
+
+    echo "Success";
+}
 ?>
