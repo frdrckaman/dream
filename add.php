@@ -8121,7 +8121,11 @@ if ($user->isLoggedIn()) {
                                                 <hr>
                                                 <label class="fw-bold text-center d-block">10(b). List all treatment changes
                                                     below.</label>
-
+                                                <?php if ($costing['id']) {
+                                                $diagnosis_id = $costing['id'];
+                                             }
+                                                 else { echo 0; } 
+                                                ?>
                                                 <table class="table table-bordered rounded">
                                                     <thead>
                                                         <tr class="text-center fw-bold">
@@ -8136,7 +8140,7 @@ if ($user->isLoggedIn()) {
                                                     <tbody id="treatmentChangesTable"></tbody>
                                                 </table>
 
-                                                <button type="button" class="btn btn-primary" onclick="addRow()">Add
+                                                <button type="button" class="btn btn-primary" onclick="addRow('new', '', '', '', '', '', <?= $diagnosis_id ?>,<?= $_GET['sid'] ?>)">Add
                                                     Row</button>
                                                 <!-- <button type="button" class="btn btn-success"
                                                     onclick="saveTreatmentChanges()">Save Changes</button> -->

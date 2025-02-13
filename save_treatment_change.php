@@ -9,6 +9,8 @@ header('Content-Type: application/json');
 
 // Receive POST data
 $id = $_POST['id'] ?? '';  // If this is empty, we're adding a new record.
+$diagnosis_id = $_POST['diagnosis_id'] ?? '';
+$enrollment_id = $_POST['enrollment_id'] ?? '';
 $date = $_POST['date'] ?? '';
 $drug = $_POST['drug'] ?? '';
 $changes = $_POST['changes'] ?? '';
@@ -23,8 +25,8 @@ if (empty($date) || empty($drug) || empty($changes) || empty($reason)) {
 if ($id) {
     // Update existing record
     $user->updateRecord('treatment_changes', array(
-        'diagnosis_id' => 1,  // You can replace this with a dynamic value
-        'enrollment_id' => 1,  // You can replace this with a dynamic value
+        'diagnosis_id' => $diagnosis_id,  // You can replace this with a dynamic value
+        'enrollment_id' => $enrollment_id,  // You can replace this with a dynamic value
         'date' => $date,
         'drug' => $drug,
         'changes' => $changes,
@@ -38,8 +40,8 @@ if ($id) {
 } else {
     // Insert new record
     $user->createRecord('treatment_changes', array(
-        'diagnosis_id' => 1,  // You can replace this with a dynamic value
-        'enrollment_id' => 1,  // You can replace this with a dynamic value
+        'diagnosis_id' => $diagnosis_id,  // You can replace this with a dynamic value
+        'enrollment_id' => $enrollment_id,  // You can replace this with a dynamic value
         'date' => $date,
         'drug' => $drug,
         'changes' => $changes,
