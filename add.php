@@ -4797,7 +4797,7 @@ if ($user->isLoggedIn()) {
                                                             about the patient or sample</strong></label>
                                                     <textarea id="remarks" name="remarks" class="form-control" rows="3"
                                                         placeholder="Enter any additional remarks here..."><?= print_r($costing['remarks']) ?>
-                                                                                        </textarea>
+                                                                                            </textarea>
                                                 </div>
                                             </div>
 
@@ -5502,7 +5502,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($screening['remarks']) {
                                                                     print_r($screening['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7679,7 +7679,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8117,27 +8117,30 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-<div class="row" id="table_section">
-    <hr>
-    <label class="fw-bold text-center d-block">10(b). List all treatment changes below.</label>
-    
-    <table class="table table-bordered rounded">
-        <thead>
-            <tr class="text-center fw-bold">
-                <th>Date</th>
-                <th>Drug</th>
-                <th>Type of Change</th>
-                <th>Reason for Change</th>
-                <th>Specify (if Other)</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="treatmentChangesTable"></tbody>
-    </table>
+                                            <div class="row" id="table_section">
+                                                <hr>
+                                                <label class="fw-bold text-center d-block">10(b). List all treatment changes
+                                                    below.</label>
 
-    <button type="button" class="btn btn-primary" onclick="addRow()">Add Row</button>
-    <button type="button" class="btn btn-success" onclick="saveTreatmentChanges()">Save Changes</button>
-</div>
+                                                <table class="table table-bordered rounded">
+                                                    <thead>
+                                                        <tr class="text-center fw-bold">
+                                                            <th>Date</th>
+                                                            <th>Drug</th>
+                                                            <th>Type of Change</th>
+                                                            <th>Reason for Change</th>
+                                                            <th>Specify (if Other)</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="treatmentChangesTable"></tbody>
+                                                </table>
+
+                                                <button type="button" class="btn btn-primary" onclick="addRow()">Add
+                                                    Row</button>
+                                                <!-- <button type="button" class="btn btn-success"
+                                                    onclick="saveTreatmentChanges()">Save Changes</button> -->
+                                            </div>
                                             <!-- <script src="treatmentChanges.js"></script> -->
                                             <div id="tb_otcome_section">
                                                 <hr>
@@ -8286,7 +8289,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9127,7 +9130,7 @@ if ($user->isLoggedIn()) {
                                                                         placeholder="Type reasons here...">                                                                                                                                                                                                                                                                                              <?php if ($clients['sputum_reasons']) {
                                                                             print_r($clients['sputum_reasons']);
                                                                         } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -10925,7 +10928,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
