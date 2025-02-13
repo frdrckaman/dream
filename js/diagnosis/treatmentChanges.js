@@ -3,7 +3,7 @@
 // ?>
 
 // ✅ Add Row to Table (Helper function for adding rows to the table)
-function addRow(id = 'new', date = '', drug = '', changes = '', reason = '', specify = '', diagnosis_id = '', enrollment_id = '') {
+function addRow(id = 'new', date = '', drug = '', changes = '', reason = '', specify = '', diagnosis_id = '', enrollment_id = '', facility_id = '', staff_id = '') {
     let table = document.getElementById("treatmentChangesTable");
     let row = table.insertRow();
     row.dataset.id = id; // Store row ID for updates
@@ -23,6 +23,8 @@ function addRow(id = 'new', date = '', drug = '', changes = '', reason = '', spe
         <td>
                     <input type="hidden" name="diagnosis_id" value="${diagnosis_id}">
             <input type="hidden" name="enrollment_id" value="${enrollment_id}">
+                                <input type="hidden" name="facility_id" value="${facility_id}">
+            <input type="hidden" name="staff_id" value="${staff_id}">
             <button type="button" class="btn btn-success" onclick="saveRow(this)">Save</button>
             <button type="button" class="btn btn-danger" onclick="deleteRow(this, '${id}')">Delete</button>
         </td>
@@ -41,18 +43,20 @@ function saveRow(button) {
     let changes = row.querySelector("[name='changes[]']").value;
     let reason = row.querySelector("[name='reason[]']").value;
     let specify = row.querySelector("[name='specify[]']").value;
+    let facility_id = row.querySelector("[name='facility_id']").value;
+    let staff_id = row.querySelector("[name='staff_id']").value;
 
     // Add or update the treatment change
     if (id) {
-        updateTreatmentChange(id, diagnosis_id, enrollment_id,date, drug, changes, reason, specify);
+        updateTreatmentChange(id, diagnosis_id, enrollment_id, date, drug, changes, reason, specify, facility_id, staff_id);
     } else {
-        addTreatmentChange(diagnosis_id, enrollment_id, date, drug, changes, reason, specify);
+        addTreatmentChange(diagnosis_id, enrollment_id, date, drug, changes, reason, specify, facility_id, staff_id);
     }
 }
 
 
 // ✅ Add a Single Treatment Change Record (New Entry)
-function addTreatmentChange(diagnosis_id, enrollment_id, date, drug, changes, reason, specify) {
+function addTreatmentChange(diagnosis_id, enrollment_id, date, drug, changes, reason, specify, facility_id, staff_id) {
     let formData = new FormData();
     formData.append("diagnosis_id", diagnosis_id);
     formData.append("enrollment_id", enrollment_id);
@@ -61,6 +65,8 @@ function addTreatmentChange(diagnosis_id, enrollment_id, date, drug, changes, re
     formData.append("changes", changes);
     formData.append("reason", reason);
     formData.append("specify", specify);
+    formData.append("facility_id", facility_id);
+    formData.append("staff_id", staff_id);
 
     fetch("save_treatment_change.php", {
         method: "POST",

@@ -16,6 +16,8 @@ $drug = $_POST['drug'] ?? '';
 $changes = $_POST['changes'] ?? '';
 $reason = $_POST['reason'] ?? '';
 $specify = $_POST['specify'] ?? '';
+$facility_id = $_POST['facility_id'] ?? '';
+$staff_id = $_POST['staff_id'] ?? '';
 
 if (empty($date) || empty($drug) || empty($changes) || empty($reason)) {
     echo json_encode(["status" => "error", "message" => "All fields except 'Specify' are required!"]);
@@ -33,7 +35,9 @@ if ($id) {
         'reason' => $reason,
         'specify' => $specify,
         'status' => 1,
-        'facility_id' => 1,  // You can replace this with a dynamic value
+        'facility_id' => $facility_id,  // You can replace this with a dynamic value
+        'update_id' => $staff_id,  // You can replace this with a dynamic value
+        'update_on' => date('Y-m-d H:i:s'),  // You can replace this with a dynamic value
     ), $id);
 
     echo json_encode(["status" => "success", "message" => "Updated successfully!"]);
@@ -48,11 +52,11 @@ if ($id) {
         'reason' => $reason,
         'specify' => $specify,
         'status' => 1,
-        'facility_id' => 1,  // You can replace this with a dynamic value
-        'staff_id' => 1,  // You can replace this with a dynamic value
-        'update_id' => 1,  // You can replace this with a dynamic value
-        'create_on' => 1,  // You can replace this with a dynamic value
-        'update_on' => 1,  // You can replace this with a dynamic value
+        'facility_id' => $facility_id,  // You can replace this with a dynamic value
+        'staff_id' => $staff_id,  // You can replace this with a dynamic value
+        'update_id' => $staff_id,  // You can replace this with a dynamic value
+        'create_on' => date('Y-m-d H:i:s'),  // You can replace this with a dynamic value
+        'update_on' => date('Y-m-d H:i:s'),  // You can replace this with a dynamic value
     ));
 
     $insert_id = $override->getlastRow('treatment_changes', 'status', 1, 'id');

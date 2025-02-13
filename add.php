@@ -8140,7 +8140,7 @@ if ($user->isLoggedIn()) {
                                                     <tbody id="treatmentChangesTable"></tbody>
                                                 </table>
 
-                                                <button type="button" class="btn btn-primary" onclick="addRow('new', '', '', '', '', '', <?= $diagnosis_id ?>,<?= $_GET['sid'] ?>)">Add
+                                                <button type="button" class="btn btn-primary" onclick="addRow('new', '', '', '', '', '', <?= $diagnosis_id ?>,<?= $_GET['sid'] ?>,<?= $screening['facility_id'] ?>,<?= $user->data()->id ?>)">Add
                                                     Row</button>
                                                 <!-- <button type="button" class="btn btn-success"
                                                     onclick="saveTreatmentChanges()">Save Changes</button> -->
