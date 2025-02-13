@@ -8117,28 +8117,27 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row" id="table_section">
-                                                <hr>
-                                                <label class="fw-bold text-center d-block">10(b). List all treatment changes
-                                                    below.</label>
-                                                <table class="table table-bordered rounded">
-                                                    <thead>
-                                                        <tr class="text-center fw-bold">
-                                                            <th>Date</th>
-                                                            <th>Drug</th>
-                                                            <th>Type of Change</th>
-                                                            <th>Reason for Change</th>
-                                                            <th>Specify (if Other)</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="treatmentChangesTable"></tbody>
-                                                </table>
-                                                <button type="button" class="btn btn-primary" onclick="addRow()">Add
-                                                    Row</button>
-                                                <button type="button" class="btn btn-success"
-                                                    onclick="saveTreatmentChanges()">Save Changes</button>
-                                            </div>
+<div class="row" id="table_section">
+    <hr>
+    <label class="fw-bold text-center d-block">10(b). List all treatment changes below.</label>
+    
+    <table class="table table-bordered rounded">
+        <thead>
+            <tr class="text-center fw-bold">
+                <th>Date</th>
+                <th>Drug</th>
+                <th>Type of Change</th>
+                <th>Reason for Change</th>
+                <th>Specify (if Other)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="treatmentChangesTable"></tbody>
+    </table>
+
+    <button type="button" class="btn btn-primary" onclick="addRow()">Add Row</button>
+    <button type="button" class="btn btn-success" onclick="saveTreatmentChanges()">Save Changes</button>
+</div>
                                             <!-- <script src="treatmentChanges.js"></script> -->
                                             <div id="tb_otcome_section">
                                                 <hr>
