@@ -8575,7 +8575,7 @@ if ($user->isLoggedIn()) {
                                                                         <!-- <label for="tx_month" class="form-label"></label> -->
                                                                         <input class="form-control" type="number"
                                                                             name="ltf_months" id="ltf_months"
-                                                                            placeholder="Type Month..." min="1" max="10000"
+                                                                            placeholder="Type number of months…" min="1" max="10000"
                                                                             value="<?php if ($clients['ltf_months']) {
                                                                                 print_r($clients['ltf_months']);
                                                                             } ?>" />
@@ -8642,7 +8642,7 @@ if ($user->isLoggedIn()) {
                                                                         <!-- <label for="regimen_months" class="form-label"></label> -->
                                                                         <input class="form-control" type="number"
                                                                             name="regimen_months" id="regimen_months"
-                                                                            placeholder="Type Month..." min="1" max="10000"
+                                                                            placeholder="Type number of months…" min="1" max="10000"
                                                                             value="<?php if ($clients['regimen_months']) {
                                                                                 print_r($clients['regimen_months']);
                                                                             } ?>" />
