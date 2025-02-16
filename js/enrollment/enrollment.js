@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function toggleTbCategorySpecify() {
-        let isTbCategorySpecify = Array.from(tbCategoryRadios).some(radio => radio.checked && radio.value === "92");
+        let isTbCategorySpecify = Array.from(tbCategoryRadios).some(radio => radio.checked && radio.value === "96");
 
         tbCategorySpecify.style.display = isTbCategorySpecify ? "block" : "none";
     }
