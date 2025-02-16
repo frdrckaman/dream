@@ -5,7 +5,7 @@ $user = new User();
 header('Content-Type: application/json');
 
 // Receive POST data
-$id = $_POST['id'] ?? '';
+$id = $_POST['id'] ?? '';  // If this is empty, we're adding a new record.
 
 if ($id) {
     // Delete record

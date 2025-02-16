@@ -9,7 +9,7 @@ $validate = new validate();
 $successMessage = null;
 $pageError = null;
 $errorMessage = null;
-$numRec = 10;
+$numRec = 5;
 if ($user->isLoggedIn()) {
     if (Input::exists('post')) {
         if (Input::get('add_user')) {
@@ -8133,7 +8133,7 @@ if ($user->isLoggedIn()) {
                                                             <th>Drug</th>
                                                             <th>Type of Change</th>
                                                             <th>Reason for Change</th>
-                                                            <th>Specify (if Other)</th>
+                                                            <!-- <th>Specify (if Other)</th> -->
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>

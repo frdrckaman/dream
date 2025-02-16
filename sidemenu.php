@@ -103,7 +103,7 @@ if ($user->isLoggedIn()) {
             $Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
         }
     } else {
-        $screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $user->data()->site_id);
+        $screened = $override->countData('screening', 'status', 1,  'facility_id', $user->data()->site_id);
         $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
         $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
         // $end = $override->countData('termination', 'status', 1, 'facility_id', $user->data()->site_id);

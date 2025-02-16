@@ -10,7 +10,7 @@ $validate = new validate();
 $successMessage = null;
 $pageError = null;
 $errorMessage = null;
-$numRec = 10;
+$numRec = 5;
 if ($user->isLoggedIn()) {
     if (Input::exists('post')) {
         $validate = new validate();
