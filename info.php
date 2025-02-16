@@ -1215,7 +1215,7 @@ if ($user->isLoggedIn()) {
                                                             <td class="table-user">
                                                                 <?= $value['update_on']; ?>
                                                             </td>
-                                                        <?php } ?>
+                                                        <?php  } ?>
                                                         <td class="table-user">
                                                             <?php
                                                             // print_r (date("h:i:s A"));
@@ -1277,9 +1277,11 @@ if ($user->isLoggedIn()) {
                                                                         role=" button" class="btn btn-warning"> Add Screening
                                                                         Data</a>&nbsp;&nbsp; <br><br>
                                                                 <?php } ?>
+                                                                <hr>
                                                                 <a href="#delete_record<?= $sid ?>" role="button" class="btn btn-primary" data-toggle="modal">Delete Record</a>
                                                                 <!-- <a href="#restore_record<?= $sid ?>" role="button" class="btn btn-warning" data-toggle="modal">Restore -->
                                                                     <!-- Record</a> -->
+                                                                                                                                     <hr>
                                                             <?php } ?>
                                                             <?php
                                                             if ($override->get3('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'], 'other_samples', 1)) {
