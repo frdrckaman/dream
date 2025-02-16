@@ -103,7 +103,7 @@ if ($user->isLoggedIn()) {
             // $Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
         }
     } else {
-        $screened = $override->countData('screening', 'status', 1,  'facility_id', $user->data()->site_id);
+        $screened = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
         $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
         $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
         // $end = $override->countData('termination', 'status', 1, 'facility_id', $user->data()->site_id);
@@ -382,6 +382,7 @@ if ($user->isLoggedIn()) {
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-circle"></i>
+                            <!-- <span class="badge badge-info right"><?= $override->countRowsWithStatus($form_status['id']); ?></span> -->
                             <p>
                                 <?= $form_status['name']; ?>
                                 <i class="right fas fa-angle-left"></i>
@@ -411,9 +412,9 @@ if ($user->isLoggedIn()) {
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <span class="badge badge-danger right">
-                                                <?= $override->countData2($table_name['Tables_in_dream'], 'status', 1, 'form_status', $form_status['id'],'facility_id', $user->data()->site_id); ?>
-                                            </span>
+                                            <!-- <span class="badge badge-info right"> -->
+                                                <!-- <?= $override->countData2($table_name['Tables_in_dream'], 'status', 1, 'form_status', $form_status['id'], 'facility_id', $user->data()->site_id); ?> -->
+                                            <!-- </span> -->
                                             <p><?= $table; ?></p>
                                         </a>
                                     </li>
