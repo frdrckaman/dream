@@ -5713,7 +5713,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="row">
 
-                                                    <div class="col-sm-6" id="culture_isolate_section">
+                                                    <div class="col-sm-6" id="culture_isolate_section1">
                                                         <label for="culture_isolate_section" class="form-label">11. Was the
                                                             culture
                                                             isolate submitted to CTRL for phenotypic DST testing?
