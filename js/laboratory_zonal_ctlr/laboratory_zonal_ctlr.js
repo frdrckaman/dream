@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const secondLineLpaRadios = document.getElementsByName('second_line_lpa'); // Radio buttons for second_line_lpa
     const nanoporeDoneRadios = document.getElementsByName('nanopore_done'); // Radio buttons for nanopore_done
     const epi2meRadios = document.getElementsByName('EPI2ME'); // Radio buttons for EPI2ME
-    const cultureIsolateRadios = document.getElementsByName('culture_isolate'); // Radio buttons for culture_isolate
 
     const cultureMethodSection = document.getElementById('culture_method_section');
     const microscopyTypeSection = document.getElementById('microscopy_type_section');
