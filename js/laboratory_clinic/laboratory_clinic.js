@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const sampleReceivedRadios = document.querySelectorAll("input[name='sample_received']"); // sample_received radio group
-    const newSampleRadios = document.querySelectorAll("input[name='new_sample']"); // new_sample radio group
-    const sampleReasonRadios = document.querySelectorAll("input[name='sample_reason']"); // sample_reason radio group
-    const numberReceivedRadios = document.querySelectorAll("input[name='number_received']"); // number_received radio group
-    const afbMicroscopyRadios = document.querySelectorAll("input[name='afb_microscopy_conducted']"); // afb_microscopy radio group
-    const xpertMtbRifRadios = document.querySelectorAll("input[name='xpert_mtb_rif_conducted']"); // xpert_mtb_rif radio group
+    const sampleReceivedRadios = document.querySelectorAll("input[name='sample_received']");
+    const newSampleRadios = document.querySelectorAll("input[name='new_sample']");
+    const sampleReasonRadios = document.querySelectorAll("input[name='sample_reason']");
+    const numberReceivedRadios = document.querySelectorAll("input[name='number_received']");
+    const afbMicroscopyRadios = document.querySelectorAll("input[name='afb_microscopy_conducted']");
+    const xpertMtbRifRadios = document.querySelectorAll("input[name='xpert_mtb_rif_conducted']");
+    const xpertMtbRadios = document.querySelectorAll("input[name='xpert_mtb']");
+    const xpertRifOptions = document.querySelectorAll("#xpert_rif option");
 
     // Sections
     const sampleReceivedSection = document.getElementById("sample_received_section");
@@ -17,12 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const sample2Section = document.getElementById("sample2_section");
     const afbMicroscopySection = document.getElementById("afb_microscopy_section");
     const xpertMtbRifSection = document.getElementById("xpert_mtb_rif_section");
+    const errorCodeSection = document.getElementById("error_code");
+    const xpertRifSection = document.getElementById("xpert_rif_section");
 
     function toggleSampleSections() {
-        let sampleReceivedValue = Array.from(sampleReceivedRadios).find(radio => radio.checked)?.value;
-        let newSampleValue = Array.from(newSampleRadios).find(radio => radio.checked)?.value;
+        let sampleReceivedValue = getCheckedValue(sampleReceivedRadios);
 
-        // Show sample_reason_section and new_sample_section if sample_received is "2"
         if (sampleReceivedValue === "2") {
             sampleReasonSection.style.display = "block";
             newSampleSection.style.display = "block";
@@ -36,9 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function toggleOtherNewReasonSection() {
-        let newSampleValue = Array.from(newSampleRadios).find(radio => radio.checked)?.value;
+        let newSampleValue = getCheckedValue(newSampleRadios);
 
-        // Show other_new_reason_section ONLY if new_sample is "2", otherwise hide it
         otherNewReasonSection.style.display = newSampleValue === "2" ? "block" : "none";
 
         toggleNumberReceivedSection();
@@ -47,10 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function toggleNumberReceivedSection() {
-        let sampleReceivedValue = Array.from(sampleReceivedRadios).find(radio => radio.checked)?.value;
-        let newSampleValue = Array.from(newSampleRadios).find(radio => radio.checked)?.value;
+        let sampleReceivedValue = getCheckedValue(sampleReceivedRadios);
+        let newSampleValue = getCheckedValue(newSampleRadios);
 
-        // Show only when sample_received=1 OR (sample_received=2 AND new_sample=1)
         numberReceivedSection.style.display =
             sampleReceivedValue === "1" || (sampleReceivedValue === "2" && newSampleValue === "1")
                 ? "block"
@@ -60,10 +60,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function toggleSampleReceivedSection() {
-        let sampleReceivedValue = Array.from(sampleReceivedRadios).find(radio => radio.checked)?.value;
-        let newSampleValue = Array.from(newSampleRadios).find(radio => radio.checked)?.value;
+        let sampleReceivedValue = getCheckedValue(sampleReceivedRadios);
+        let newSampleValue = getCheckedValue(newSampleRadios);
 
-        // Show only when sample_received=1 OR (sample_received=2 AND new_sample=1)
         sampleReceivedSection.style.display =
             sampleReceivedValue === "1" || (sampleReceivedValue === "2" && newSampleValue === "1")
                 ? "block"
@@ -71,59 +70,76 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function toggleSampleNumberSections() {
-        let numberReceivedValue = Array.from(numberReceivedRadios).find(radio => radio.checked)?.value;
+        let numberReceivedValue = getCheckedValue(numberReceivedRadios);
 
-        // Show only relevant sections based on number_received
-        sample1Section.style.display = (numberReceivedValue === "1" || numberReceivedValue === "2") ? "block" : "none";
+        sample1Section.style.display = ["1", "2"].includes(numberReceivedValue) ? "block" : "none";
         sample2Section.style.display = numberReceivedValue === "2" ? "block" : "none";
     }
 
     function toggleOtherReasonSection() {
         let isSampleReason96 = Array.from(sampleReasonRadios).some(radio => radio.checked && radio.value === "96");
 
-        // Show other_reason if sample_reason is "96"
         otherReasonSection.style.display = isSampleReason96 ? "block" : "none";
     }
 
     function toggleAfbMicroscopySection() {
-        let afbMicroscopyValue = Array.from(afbMicroscopyRadios).find(radio => radio.checked)?.value;
+        let afbMicroscopyValue = getCheckedValue(afbMicroscopyRadios);
 
-        // Show afb_microscopy_section only if afb_microscopy=1
         afbMicroscopySection.style.display = afbMicroscopyValue === "1" ? "block" : "none";
     }
 
     function toggleXpertMtbRifSection() {
-        let xpertMtbRifValue = Array.from(xpertMtbRifRadios).find(radio => radio.checked)?.value;
+        let xpertMtbRifValue = getCheckedValue(xpertMtbRifRadios);
 
-        // Show xpert_mtb_rif_section only if xpert_mtb_rif_conducted=1
         xpertMtbRifSection.style.display = xpertMtbRifValue === "1" ? "block" : "none";
     }
 
-    // Attach event listeners
-    sampleReceivedRadios.forEach(radio => radio.addEventListener("change", () => {
-        toggleSampleSections();
-        toggleOtherReasonSection();
-        toggleNumberReceivedSection();
-        toggleSampleReceivedSection();
-        toggleSampleNumberSections();
-    }));
+    function toggleErrorCodeSection() {
+        let xpertMtbValue = getCheckedValue(xpertMtbRadios);
 
-    newSampleRadios.forEach(radio => radio.addEventListener("change", () => {
-        toggleOtherNewReasonSection();
-        toggleNumberReceivedSection();
-        toggleSampleReceivedSection();
-        toggleSampleNumberSections();
-    }));
+        errorCodeSection.style.display = xpertMtbValue === "8" ? "block" : "none";
+        xpertRifSection.style.display = ["2", "3", "4", "5", "6"].includes(xpertMtbValue) ? "block" : "none";
 
+        filterXpertRifOptions(xpertMtbValue);
+    }
+
+    function filterXpertRifOptions() {
+        const xpertMtbValue = getCheckedValue(xpertMtbRadios);
+        console.log("xpertMtbValue:", xpertMtbValue); // Log the selected value
+
+        xpertMtbRifRadios.forEach(radio => radio.closest('label').style.display = "block"); // Show all radios
+
+        // If selected value is in the range of "3", "4", "5", "6", hide radio "4"
+        if (["3", "4", "5", "6"].includes(xpertMtbValue)) {
+            hideOption("4");
+        }
+
+        // If selected value is "2", hide radios "1", "2", and "3"
+        if (xpertMtbValue === "2") {
+            ["1", "2", "3"].forEach(hideOption);
+        }
+    }
+
+    function hideOption(value) {
+        const radio = Array.from(xpertMtbRifRadios).find(radio => radio.value === value);
+        if (radio) {
+            radio.closest('label').style.display = "none"; // Hide the label (which includes the radio button)
+        }
+    }
+
+
+    function getCheckedValue(radioNodeList) {
+        return Array.from(radioNodeList).find(radio => radio.checked)?.value;
+    }
+
+    sampleReceivedRadios.forEach(radio => radio.addEventListener("change", toggleSampleSections));
+    newSampleRadios.forEach(radio => radio.addEventListener("change", toggleOtherNewReasonSection));
     numberReceivedRadios.forEach(radio => radio.addEventListener("change", toggleSampleNumberSections));
-
     sampleReasonRadios.forEach(radio => radio.addEventListener("change", toggleOtherReasonSection));
-
     afbMicroscopyRadios.forEach(radio => radio.addEventListener("change", toggleAfbMicroscopySection));
-
     xpertMtbRifRadios.forEach(radio => radio.addEventListener("change", toggleXpertMtbRifSection));
+    xpertMtbRadios.forEach(radio => radio.addEventListener("change", toggleErrorCodeSection));
 
-    // Run on page load to initialize the correct visibility
     toggleSampleSections();
     toggleOtherNewReasonSection();
     toggleNumberReceivedSection();
@@ -132,4 +148,5 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleOtherReasonSection();
     toggleAfbMicroscopySection();
     toggleXpertMtbRifSection();
+    toggleErrorCodeSection();
 });

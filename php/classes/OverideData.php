@@ -751,6 +751,29 @@ class OverideData
         return $num;
     }
 
+
+    public function countRowsWithStatus($form_status_value)
+    {
+        $totalCount = 0;
+        $allowedTables = ['screening', 'enrollment_form', 'respiratory', 'diagnosis', 'diagnosis_test'];
+
+        // Get all table names
+        $tablesQuery = $this->_pdo->query("SHOW TABLES");
+        $tables = $tablesQuery->fetchAll(PDO::FETCH_COLUMN);
+
+        // Iterate through allowed tables and count rows where form_statu = 1
+        foreach ($tables as $table) {
+            if (in_array($table, $allowedTables)) {
+                $countQuery = $this->_pdo->query("SELECT COUNT(*) FROM `$table` WHERE form_status = '$form_status_value'");
+                $count = $countQuery->fetchColumn();
+                $totalCount += $count;
+            }
+        }
+
+        return $totalCount;
+    }
+
+
     public function AllColmuns($table)
     {
         $query = $this->_pdo->query("SHOW COLUMNS FROM $table");

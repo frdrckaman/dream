@@ -6,9 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const xpertXdrPerformedRadios = document.getElementsByName('xpert_xdr_performed'); // Radio buttons for xpert_xdr_performed
     const firstLineLpaRadios = document.getElementsByName('first_line_lpa'); // Radio buttons for first_line_lpa
     const secondLineLpaRadios = document.getElementsByName('second_line_lpa'); // Radio buttons for second_line_lpa
+    const nanoporeDoneRadios = document.getElementsByName('nanopore_done'); // Radio buttons for nanopore_done
 
     const cultureMethodSection = document.getElementById('culture_method_section');
-    const cultureTypeSection = document.getElementById('culture_type_section');
+    const microscopyTypeSection = document.getElementById('microscopy_type_section');
     const culturePerformedSection = document.getElementById('culture_performed_section');
     const cultureIsolateSection = document.getElementById('culture_isolate_section');
 
@@ -23,16 +24,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const firstLineSection = document.getElementById('first_line_section');
     const secondLineSection = document.getElementById('second_line_section');
 
+    const sequencingResultsSection = document.getElementById('sequencing_results_section'); // Sequencing results section
+
     function toggleCultureSections() {
         const culturePerformedValue = Array.from(culturePerformedRadios).find(radio => radio.checked)?.value;
 
         if (culturePerformedValue === '1') {
             cultureMethodSection.style.display = 'block';
-            cultureTypeSection.style.display = 'block';
+            microscopyTypeSection.style.display = 'block';
             culturePerformedSection.style.display = 'block';
         } else {
             cultureMethodSection.style.display = 'none';
-            cultureTypeSection.style.display = 'none';
+            microscopyTypeSection.style.display = 'none';
             culturePerformedSection.style.display = 'none';
         }
     }
@@ -114,6 +117,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function toggleSequencingResultsSection() {
+        const nanoporeDoneValue = Array.from(nanoporeDoneRadios).find(radio => radio.checked)?.value;
+
+        if (nanoporeDoneValue === '1') {
+            sequencingResultsSection.style.display = 'block';
+        } else {
+            sequencingResultsSection.style.display = 'none';
+        }
+    }
+
     // Run toggle functions on page load
     toggleCultureSections();
     togglePhenotypicSections();
@@ -122,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
     toggleXpertXdrSections();
     toggleFirstLineLpaSection();
     toggleSecondLineLpaSection();
+    toggleSequencingResultsSection(); // Call the new function on page load
 
     // Check the initial value of phenotypic_performed and show/hide the phenotypic_performed_results_section accordingly
     const phenotypicPerformedValueOnLoad = Array.from(phenotypicPerformedRadios).find(radio => radio.checked)?.value;
@@ -168,5 +182,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     secondLineLpaRadios.forEach(radio => {
         radio.addEventListener('change', toggleSecondLineLpaSection);
+    });
+
+    nanoporeDoneRadios.forEach(radio => {
+        radio.addEventListener('change', toggleSequencingResultsSection); // Add event listener for nanopore_done
     });
 });

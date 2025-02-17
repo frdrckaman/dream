@@ -10,7 +10,7 @@ $validate = new validate();
 $successMessage = null;
 $pageError = null;
 $errorMessage = null;
-$numRec = 10;
+$numRec = 5;
 if ($user->isLoggedIn()) {
     if (Input::exists('post')) {
         $validate = new validate();
@@ -187,12 +187,12 @@ if ($user->isLoggedIn()) {
             } catch (Exception $e) {
                 $e->getMessage();
             }
-        }else if (Input::get('delete_record')) {
+        } else if (Input::get('delete_record')) {
             $user->updateRecord('screening', array(
                 'status' => 0,
             ), Input::get('id'));
             $successMessage = 'Recored Deleted Successful';
-        }else if (Input::get('restore_record')) {
+        } else if (Input::get('restore_record')) {
             $user->updateRecord('screening', array(
                 'status' => 1,
             ), Input::get('id'));
@@ -1170,20 +1170,23 @@ if ($user->isLoggedIn()) {
                                             <thead>
                                                 <tr>
                                                     <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
-                                                        <th>Termination Date</th>
+                                                        <th>Screening Date /
+                                                            <hr> Time
+                                                        </th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 3) { ?>
-                                                        <th>Termination Date</th>
+                                                        <th>Enrollment Date /
+                                                            <hr> Time
+                                                        </th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 4) { ?>
-                                                        <th>Termination Date</th>
+                                                        <th>Termination Date /
+                                                            <hr> Time
+                                                        </th>
                                                     <?php } ?>
-                                                    <th>Time</th>
                                                     <th>PID</th>
-                                                    <th>Site</th>
-                                                    <th>Staff</th>
-                                                    <th>Status</th>
-                                                    <th class="text-center">Action</th>
+                                                    <th>Site / Staff</th>
+                                                    <th class="text-center">Status/ <hr> Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -1204,68 +1207,143 @@ if ($user->isLoggedIn()) {
                                                         <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
                                                             <td class="table-user">
                                                                 <?= $value['screening_date']; ?>
+                                                                /
+                                                                <hr>
+                                                                <?php
+                                                                // print_r (date("h:i:s A"));
+                                                                print_r(date('H:i', strtotime($value['create_on'])));
+                                                                ?>
                                                             </td>
                                                         <?php } ?>
                                                         <?php if ($_GET['status'] == 3) { ?>
                                                             <td class="table-user">
                                                                 <?= $value['enrollment_date']; ?>
+                                                                /
+                                                                <hr>
+                                                                <?php
+                                                                // print_r (date("h:i:s A"));
+                                                                print_r(date('H:i', strtotime($value['create_on'])));
+                                                                ?>
                                                             </td>
                                                         <?php } ?>
                                                         <?php if ($_GET['status'] == 4) { ?>
                                                             <td class="table-user">
-                                                                <?= $value['update_on']; ?>
+                                                                <?= $value['update_on']; ?> /
+                                                                <hr>
+                                                                <?php
+                                                                // print_r (date("h:i:s A"));
+                                                                print_r(date('H:i', strtotime($value['create_on'])));
+                                                                ?>
                                                             </td>
                                                         <?php } ?>
-                                                        <td class="table-user">
-                                                            <?php
-                                                            // print_r (date("h:i:s A"));
-                                                            print_r(date('H:i', strtotime($value['create_on'])));
-                                                            ?>
-                                                        </td>
                                                         <td class="table-user">
                                                             <?= $value['pid']; ?>
                                                         </td>
                                                         <td class="table-user">
                                                             <?= $sites['name']; ?>
-                                                        </td>
-                                                        <td class="table-user">
+                                                            /
+                                                            <hr>
                                                             <?= $staff['firstname'] . '-' . $staff['lastname']; ?>
                                                         </td>
-                                                        <?php if ($_GET['status'] == 1) { ?>
-                                                            <?php if ($value['eligible'] == 1) { ?>
-                                                                <td class="text-center">
+                                                        <td class="text-center">
+                                                            <?php if ($_GET['status'] == 1) { ?>
+                                                                <?php if ($value['eligible'] == 1) { ?>
+                                                                    <!-- <td class="text-center"> -->
                                                                     <a href="#" class="btn btn-success">
                                                                         <i class="ri-edit-box-line">
                                                                         </i> Eligible
                                                                     </a>
-                                                                </td>
-                                                            <?php } else { ?>
-                                                                <td class="text-center">
+                                                                    <!-- </td> -->
+                                                                <?php } else { ?>
+                                                                    <!-- <td class="text-center"> -->
                                                                     <a href="#" class="btn btn-danger"> <i
                                                                             class="ri-edit-box-line"></i>Not
                                                                         Eligible</a>
-                                                                </td>
-                                                            <?php } ?>
-                                                        <?php } else { ?>
-                                                            <?php if ($value['status'] == 1) { ?>
-                                                                <td class="text-center">
+                                                                    <!-- </td> -->
+                                                                <?php } ?>
+                                                                <hr>
+                                                                <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
+                                                                    <?php if ($override->get('screening', 'status', 1)) { ?>
+                                                                        <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                            role=" button" class="btn btn-info"> Update Screening
+                                                                            Data</a>&nbsp;&nbsp; <br><br>
+
+                                                                    <?php } else { ?>
+                                                                        <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                            role=" button" class="btn btn-warning"> Add Screening
+                                                                            Data</a>&nbsp;&nbsp; <br><br>
+                                                                    <?php } ?>
+                                                                    <hr>
+                                                                    <a href="#delete_record<?= $sid ?>" role="button"
+                                                                        class="btn btn-primary" data-toggle="modal">Delete Record</a>
+                                                                    <!-- <a href="#restore_record<?= $sid ?>" role="button" class="btn btn-warning" data-toggle="modal">Restore -->
+                                                                    <!-- Record</a> -->
+                                                                    <hr>
+                                                                <?php } ?>
+                                                                <?php
+                                                                if ($override->get3('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'], 'other_samples', 1)) {
+                                                                    ?>
+                                                                    <?php if (
+                                                                        $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('respiratory', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $sid)
+                                                                    ) { ?>
+
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                            <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                                role=" button" class="btn btn-info"> View Enrollment Forms
+                                                                            </a>&nbsp;&nbsp; <br><br>
+                                                                        <?php } ?>
+
+                                                                    <?php } else { ?>
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                            <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                                role=" button" class="btn btn-warning"> Add Enrollment Forms
+                                                                            </a>&nbsp;&nbsp; <br><br>
+                                                                        <?php } ?>
+                                                                    <?php } ?>
+                                                                <?php } else { ?>
+                                                                    <?php if (
+                                                                        $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('respiratory', 'status', 1, 'enrollment_id', $sid)
+                                                                    ) { ?>
+
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                            <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                                role=" button" class="btn btn-info"> View Enrollment Forms
+                                                                            </a>&nbsp;&nbsp; <br><br>
+                                                                        <?php } ?>
+
+                                                                    <?php } else { ?>
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                            <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                                role=" button" class="btn btn-warning"> Add Enrollment Forms
+                                                                            </a>&nbsp;&nbsp; <br><br>
+                                                                        <?php } ?>
+                                                                    <?php } ?>
+                                                                <?php } ?>
+
+                                                            <?php } else { ?>
+                                                                <?php if ($value['status'] == 1) { ?>
+                                                                    <!-- <td class="text-center"> -->
                                                                     <a href="#" class="btn btn-success">
                                                                         <i class="ri-edit-box-line">
                                                                         </i> Enrolled
                                                                     </a>
-                                                                </td>
-                                                            <?php } else { ?>
-                                                                <td class="text-center">
+                                                                    <!-- </td> -->
+                                                                <?php } else { ?>
+                                                                    <!-- <td class="text-center"> -->
                                                                     <a href="#" class="btn btn-danger"> <i
                                                                             class="ri-edit-box-line"></i>Not
                                                                         Enrolled</a>
                                                                 </td>
                                                             <?php } ?>
-                                                        <?php } ?>
 
-
-                                                        <!-- <td class="text-center"> -->
-                                                        <td>
+                                                            <hr>
                                                             <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
                                                                 <?php if ($override->get('screening', 'status', 1)) { ?>
                                                                     <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
@@ -1277,9 +1355,12 @@ if ($user->isLoggedIn()) {
                                                                         role=" button" class="btn btn-warning"> Add Screening
                                                                         Data</a>&nbsp;&nbsp; <br><br>
                                                                 <?php } ?>
-                                                                <a href="#delete_record<?= $sid ?>" role="button" class="btn btn-primary" data-toggle="modal">Delete Record</a>
+                                                                <hr>
+                                                                <a href="#delete_record<?= $sid ?>" role="button"
+                                                                    class="btn btn-primary" data-toggle="modal">Delete Record</a>
                                                                 <!-- <a href="#restore_record<?= $sid ?>" role="button" class="btn btn-warning" data-toggle="modal">Restore -->
-                                                                    <!-- Record</a> -->
+                                                                <!-- Record</a> -->
+                                                                <hr>
                                                             <?php } ?>
                                                             <?php
                                                             if ($override->get3('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'], 'other_samples', 1)) {
@@ -1327,18 +1408,23 @@ if ($user->isLoggedIn()) {
                                                                     <?php } ?>
                                                                 <?php } ?>
                                                             <?php } ?>
+                                                        <?php } ?>
                                                         </td>
+
+                                                        <!-- <td class="text-center"> -->
                                                         <br>
                                                         <!-- </td> -->
                                                     </tr>
-                                                    <div class="modal fade" id="delete_record<?= $sid ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                                        aria-hidden="true">
+                                                    <div class="modal fade" id="delete_record<?= $sid ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <form method="post">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal"><span
-                                                                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
                                                                         <h4>Delete Record</h4>
                                                                     </div>
                                                                     <div class="modal-body">
@@ -1350,42 +1436,50 @@ if ($user->isLoggedIn()) {
                                                                         <input type="hidden" name="id" value="<?= $sid ?>">
                                                                         <?php
                                                                         //  if ($user->data()->accessLevel == 1) { 
-                                                                            ?>
-                                                                            <input type="submit" name="delete_record" value="Delete" class="btn btn-danger">
+                                                                        ?>
+                                                                        <input type="submit" name="delete_record" value="Delete"
+                                                                            class="btn btn-danger">
                                                                         <?php
-                                                                    //  } 
-                                                                     ?>
-                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                        //  } 
+                                                                        ?>
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="restore_record<?= $sid ?>" tabindex="-1" role="dialog"
-                                                        aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="restore_record<?= $sid ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <form method="post">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal"><span
-                                                                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
                                                                         <h4>Restore Record</h4>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <strong style="font-weight: bold;color: green">
-                                                                            <p>Are you sure you want to Restore this Record ?</p>
+                                                                            <p>Are you sure you want to Restore this Record ?
+                                                                            </p>
                                                                         </strong>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $value['id'] ?>">
                                                                         <?php
                                                                         //  if ($user->data()->accessLevel == 1) { 
-                                                                            ?>
-                                                                            <input type="submit" name="restore_record" value="Restore" class="btn btn-warning">
+                                                                        ?>
+                                                                        <input type="submit" name="restore_record"
+                                                                            value="Restore" class="btn btn-warning">
                                                                         <?php
-                                                                    //  } 
-                                                                     ?>
-                                                                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                        //  } 
+                                                                        ?>
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -1397,20 +1491,23 @@ if ($user->isLoggedIn()) {
                                             <tfoot>
                                                 <tr>
                                                     <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
-                                                        <th>Screened</th>
+                                                        <th>Screening Date /
+                                                            <hr> Time
+                                                        </th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 3) { ?>
-                                                        <th>Enrollment</th>
+                                                        <th>Enrollment Date /
+                                                            <hr> Time
+                                                        </th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 4) { ?>
-                                                        <th>Termination</th>
+                                                        <th>Termination Date /
+                                                            <hr> Time
+                                                        </th>
                                                     <?php } ?>
-                                                    <th>Time</th>
                                                     <th>PID</th>
-                                                    <th>Site</th>
-                                                    <th>Staff</th>
-                                                    <th>Status</th>
-                                                    <th class="text-center">Action</th>
+                                                    <th>Site / Staff</th>
+                                                    <th class="text-center">Status/ <hr> Action</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -1660,10 +1757,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $enrollment['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($enrollment['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $enrollment['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -2020,7 +2117,7 @@ if ($user->isLoggedIn()) {
                                                                 </a>&nbsp;&nbsp; <br><br>
 
                                                             <?php } ?>
-                                                        <?php
+                                                            <?php
                                                         }
                                                         ?>
 
@@ -3233,10 +3330,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($visit['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $visit['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($visit['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $visit['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

@@ -1,18 +1,17 @@
 <?php
 require_once 'php/core/init.php';
 $user = new User();
-$override = new OverideData();
-$email = new Email();
-$random = new Random();
 
-$data = json_decode(file_get_contents("php://input"), true);
-$response = ['message' => 'No record deleted.'];
+header('Content-Type: application/json');
 
-if (!empty($data['id'])) {
-    $user->deleteRecord('treatment_changes','id',$data['id']);
-    $successMessage = 'Position Successful Updated';
-    $response['message'] = 'Record deleted successfully!';
+// Receive POST data
+$id = $_POST['id'] ?? '';  // If this is empty, we're adding a new record.
+
+if ($id) {
+    // Delete record
+    $user->deleteRecord('treatment_changes','id', $id);
+    echo json_encode(["status" => "success", "message" => "Record deleted successfully!"]);
+} else {
+    echo json_encode(["status" => "error", "message" => "No ID provided!"]);
 }
-
-echo json_encode($response);
 ?>
