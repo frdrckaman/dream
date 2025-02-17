@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Event listener for nanopore_done
     const nanoporeRadios = document.querySelectorAll('input[name="nanopore_done"]');
     const sequencingResultsSection = document.getElementById("sequencing_results_section");
+    const nanoPoreResultsSection = document.getElementById("nano_pore_results");
 
     function toggleCultureSections() {
         const isCulturePerformed = document.querySelector('input[name="culture_performed"]:checked')?.value === "1";
@@ -84,6 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function toggleSequencingResults() {
         const isNanoporeDone = document.querySelector('input[name="nanopore_done"]:checked')?.value === "1";
         sequencingResultsSection.style.display = isNanoporeDone ? "block" : "none";
+        nanoPoreResultsSection.style.display = isNanoporeDone ? "block" : "none"; // Added for nano_pore_results
     }
 
     // Initialize on page load
