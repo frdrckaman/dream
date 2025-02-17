@@ -8,6 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const mgitResultsRadios = document.querySelectorAll('input[name="mgit_results"]');
     const cultureIsolateRadios = document.querySelectorAll('input[name="culture_isolate"]');
     const phenotypicPerformedRadios = document.querySelectorAll('input[name="phenotypic_performed"]');
+    const xpertXdrPerformedRadios = document.querySelectorAll('input[name="xpert_xdr_performed"]');
+
+    const firstLineLpaRadios = document.querySelectorAll('input[name="first_line_lpa"]');
+    const secondLineLpaRadios = document.querySelectorAll('input[name="second_line_lpa"]');
 
     const cultureIsolateSection = document.getElementById("culture_isolate_section");
     const isolateDateSection = document.getElementById("isolate_date_section");
@@ -16,6 +20,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const phenotypicDatePerformedSection = document.getElementById("phenotypic_date_performed_section");
     const phenotypicDateResultsSection = document.getElementById("phenotypic_date_results_section");
     const phenotypicPerformedResultsSection = document.getElementById("phenotypic_performed_results_section");
+
+    const xpertXdrDatePerformedSection = document.getElementById("xpert_xdr_date_performed_section");
+    const xpertXdrResultsSection = document.getElementById("xpert_xdr_results_section");
+
+    const firstLineSection = document.getElementById("first_line_section");
+    const secondLineSection = document.getElementById("second_line_section");
+
+    // Event listener for nanopore_done
+    const nanoporeRadios = document.querySelectorAll('input[name="nanopore_done"]');
+    const sequencingResultsSection = document.getElementById("sequencing_results_section");
 
     function toggleCultureSections() {
         const isCulturePerformed = document.querySelector('input[name="culture_performed"]:checked')?.value === "1";
@@ -51,11 +65,35 @@ document.addEventListener("DOMContentLoaded", function () {
         phenotypicPerformedResultsSection.style.display = displayStyle;
     }
 
+    function toggleXpertXdrSections() {
+        const isXpertXdrPerformed = document.querySelector('input[name="xpert_xdr_performed"]:checked')?.value === "1";
+
+        const displayStyle = isXpertXdrPerformed ? "block" : "none";
+        xpertXdrDatePerformedSection.style.display = displayStyle;
+        xpertXdrResultsSection.style.display = displayStyle;
+    }
+
+    function toggleLpaSections() {
+        const isFirstLineLpa = document.querySelector('input[name="first_line_lpa"]:checked')?.value === "1";
+        const isSecondLineLpa = document.querySelector('input[name="second_line_lpa"]:checked')?.value === "1";
+
+        firstLineSection.style.display = isFirstLineLpa ? "block" : "none";
+        secondLineSection.style.display = isSecondLineLpa ? "block" : "none";
+    }
+
+    function toggleSequencingResults() {
+        const isNanoporeDone = document.querySelector('input[name="nanopore_done"]:checked')?.value === "1";
+        sequencingResultsSection.style.display = isNanoporeDone ? "block" : "none";
+    }
+
     // Initialize on page load
     toggleCultureSections();
     toggleCultureIsolateSection();
     toggleIsolateDetails();
     togglePhenotypicSections();
+    toggleXpertXdrSections();
+    toggleLpaSections();
+    toggleSequencingResults(); // Added this line to handle nanopore_done logic
 
     // Add event listeners
     culturePerformedRadios.forEach(radio => {
@@ -76,5 +114,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     phenotypicPerformedRadios.forEach(radio => {
         radio.addEventListener("change", togglePhenotypicSections);
+    });
+
+    xpertXdrPerformedRadios.forEach(radio => {
+        radio.addEventListener("change", toggleXpertXdrSections);
+    });
+
+    firstLineLpaRadios.forEach(radio => {
+        radio.addEventListener("change", toggleLpaSections);
+    });
+
+    secondLineLpaRadios.forEach(radio => {
+        radio.addEventListener("change", toggleLpaSections);
+    });
+
+    nanoporeRadios.forEach(radio => {
+        radio.addEventListener("change", toggleSequencingResults);
     });
 });
