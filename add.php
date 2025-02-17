@@ -785,10 +785,12 @@ if ($user->isLoggedIn()) {
                             'microscopy_date' => Input::get('microscopy_date'),
                             'lj_inoculation_date' => Input::get('lj_inoculation_date'),
                             'lj_results_date' => Input::get('lj_results_date'),
+                                                        'lj_results' => Input::get('lj_results'),
                             'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
                             'mgit_results_date' => Input::get('mgit_results_date'),
                             'mgit_results' => Input::get('mgit_results'),
                             'culture_isolate' => Input::get('culture_isolate'),
+                                                        'isolate_date' => Input::get('isolate_date'),
                             'rifampicin' => Input::get('rifampicin'),
                             'isoniazid' => Input::get('isoniazid'),
                             'levofloxacin' => Input::get('levofloxacin'),
@@ -889,10 +891,12 @@ if ($user->isLoggedIn()) {
                             'microscopy_date' => Input::get('microscopy_date'),
                             'lj_inoculation_date' => Input::get('lj_inoculation_date'),
                             'lj_results_date' => Input::get('lj_results_date'),
+                                                        'lj_results' => Input::get('lj_results'),
                             'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
                             'mgit_results_date' => Input::get('mgit_results_date'),
                             'mgit_results' => Input::get('mgit_results'),
                             'culture_isolate' => Input::get('culture_isolate'),
+                                                                                    'isolate_date' => Input::get('isolate_date'),
                             'rifampicin' => Input::get('rifampicin'),
                             'isoniazid' => Input::get('isoniazid'),
                             'levofloxacin' => Input::get('levofloxacin'),
@@ -998,10 +1002,12 @@ if ($user->isLoggedIn()) {
                             'microscopy_date' => Input::get('microscopy_date'),
                             'lj_inoculation_date' => Input::get('lj_inoculation_date'),
                             'lj_results_date' => Input::get('lj_results_date'),
+                                                        'lj_results' => Input::get('lj_results'),
                             'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
                             'mgit_results_date' => Input::get('mgit_results_date'),
                             'mgit_results' => Input::get('mgit_results'),
                             'culture_isolate' => Input::get('culture_isolate'),
+                                                                                    'isolate_date' => Input::get('isolate_date'),
                             'rifampicin' => Input::get('rifampicin'),
                             'isoniazid' => Input::get('isoniazid'),
                             'levofloxacin' => Input::get('levofloxacin'),
@@ -1108,10 +1114,12 @@ if ($user->isLoggedIn()) {
                             'microscopy_date' => Input::get('microscopy_date'),
                             'lj_inoculation_date' => Input::get('lj_inoculation_date'),
                             'lj_results_date' => Input::get('lj_results_date'),
+                            'lj_results' => Input::get('lj_results'),
                             'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
                             'mgit_results_date' => Input::get('mgit_results_date'),
                             'mgit_results' => Input::get('mgit_results'),
                             'culture_isolate' => Input::get('culture_isolate'),
+                                                                                    'isolate_date' => Input::get('isolate_date'),
                             'rifampicin' => Input::get('rifampicin'),
                             'isoniazid' => Input::get('isoniazid'),
                             'levofloxacin' => Input::get('levofloxacin'),
@@ -5705,7 +5713,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="row">
 
-                                                    <div class="col-sm-12" id="culture_isolate_section">
+                                                    <div class="col-sm-6" id="culture_isolate_section">
                                                         <label for="culture_isolate_section" class="form-label">11. Was the
                                                             culture
                                                             isolate submitted to CTRL for phenotypic DST testing?
@@ -5736,6 +5744,13 @@ if ($user->isLoggedIn()) {
                                                                 onclick="unsetRadio('culture_isolate')">Unset</button>
 
                                                         </div>
+                                                    </div>
+                                                    <div class="col-sm-6" id="isolate_date_section">
+                                                        <label for="isolate_date" class="form-label">If yes, date submitted</label>
+                                                        <input type="date"
+                                                            value="<?= $costing['isolate_date'] ?? ''; ?>"
+                                                            id="isolate_date" name="isolate_date"
+                                                            class="form-control" <?= $disabled; ?> />
                                                     </div>
                                                 </div>
                                                 <hr>
