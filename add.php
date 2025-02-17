@@ -5488,7 +5488,8 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-sm-4" id="culture_method_section">
                                                     <label for="culture_method" class="form-label">6(b). Culture Method ?
-                                                    </label>
+                                                    </label><br>
+                                                                                                                <span>(tick any that apply)</span><br><br>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -5497,8 +5498,10 @@ if ($user->isLoggedIn()) {
                                                                     <input class="form-check-input" type="checkbox"
                                                                         name="culture_method[]"
                                                                         id="culture_method<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['culture_method'] == $value['id']) {
-                                                                              echo 'checked';
+                                                                        value="<?= $value['id']; ?>" <?php foreach (explode(',', $costing['culture_method']) as $values) {
+                                                                              if ($values == $value['id']) {
+                                                                                  echo 'checked';
+                                                                              }
                                                                           } ?>>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
@@ -5506,8 +5509,6 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </div>
                                                     </div>
-                                                    <button type="button"
-                                                        onclick="unsetRadio('culture_method')">Unset</button>
                                                 </div>
 
                                                 <div class="col-sm-4" id="culture_type_section">
