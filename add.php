@@ -5560,7 +5560,6 @@ if ($user->isLoggedIn()) {
 
                                             <div id="culture_performed_section">
                                                 <hr>
-
                                                 <div class="row">
                                                     <div class="col-sm-6" id="microscopy_date_section">
                                                         <label for="microscopy_date" class="form-label">7(b). Date
@@ -5712,9 +5711,8 @@ if ($user->isLoggedIn()) {
                                                 <hr>
 
                                                 <div class="row">
-
-                                                    <div class="col-sm-6" id="culture_isolate_section1">
-                                                        <label for="culture_isolate_section" class="form-label">11. Was the
+                                                    <div class="col-sm-6" id="culture_isolate_section">
+                                                        <label for="culture_isolate" class="form-label">11. Was the
                                                             culture
                                                             isolate submitted to CTRL for phenotypic DST testing?
                                                         </label>
