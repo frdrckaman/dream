@@ -1170,12 +1170,12 @@ if ($user->isLoggedIn()) {
                                             <thead>
                                                 <tr>
                                                     <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
-                                                        <th>Termination Date /
+                                                        <th>Screening Date /
                                                             <hr> Time
                                                         </th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 3) { ?>
-                                                        <th>Termination Date /
+                                                        <th>Enrollment Date /
                                                             <hr> Time
                                                         </th>
                                                     <?php } ?>
@@ -1425,12 +1425,12 @@ if ($user->isLoggedIn()) {
                                             <tfoot>
                                                 <tr>
                                                     <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
-                                                        <th>Termination Date /
+                                                        <th>Screening Date /
                                                             <hr> Time
                                                         </th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 3) { ?>
-                                                        <th>Termination Date /
+                                                        <th>Enrollment Date /
                                                             <hr> Time
                                                         </th>
                                                     <?php } ?>
