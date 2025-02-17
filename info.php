@@ -1180,8 +1180,7 @@ if ($user->isLoggedIn()) {
                                                     <?php } ?>
                                                     <th>Time</th>
                                                     <th>PID</th>
-                                                    <th>Site</th>
-                                                    <th>Staff</th>
+                                                    <th>Site / Staff</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
@@ -1227,8 +1226,7 @@ if ($user->isLoggedIn()) {
                                                         </td>
                                                         <td class="table-user">
                                                             <?= $sites['name']; ?>
-                                                        </td>
-                                                        <td class="table-user">
+                                                            /<hr>
                                                             <?= $staff['firstname'] . '-' . $staff['lastname']; ?>
                                                         </td>
                                                         <?php if ($_GET['status'] == 1) { ?>
@@ -1409,8 +1407,7 @@ if ($user->isLoggedIn()) {
                                                     <?php } ?>
                                                     <th>Time</th>
                                                     <th>PID</th>
-                                                    <th>Site</th>
-                                                    <th>Staff</th>
+                                                    <th>Site / Staff</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
