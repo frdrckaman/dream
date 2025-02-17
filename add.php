@@ -4799,10 +4799,10 @@ if ($user->isLoggedIn()) {
                                                             about the patient or sample</strong></label>
                                                     <textarea id="remarks" name="remarks" class="form-control" rows="3"
                                                         placeholder="Enter any additional remarks here...">
-                                                                                    <?php if ($remarks['remarks']) {
-                                                                                        print_r($remarks['remarks']);
-                                                                                    } ?>
-                                                                                                                                        </textarea>
+                                                                                        <?php if ($remarks['remarks']) {
+                                                                                            print_r($remarks['remarks']);
+                                                                                        } ?>
+                                                                                                                                            </textarea>
                                                 </div>
                                             </div>
 
@@ -5205,7 +5205,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($screening['remarks']) {
                                                                     print_r($screening['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5586,80 +5586,108 @@ if ($user->isLoggedIn()) {
 
                                                 <hr>
 
-                                            <div class="row">
-    <!-- LJ Section -->
-    <div class="col-sm-6 rounded border p-3" id="lj_culture_inoculation_date_section">
-        <h5 class="text-center"><strong>LJ</strong></h5> <!-- Centered Title for LJ column -->
-        <hr>
-        <label for="lj_culture_inoculation_date" class="form-label">8. LJ Date of culture inoculation</label>
-        <input type="date" value="<?php if ($costing['lj_culture_inoculation_date']) {
-            print_r($costing['lj_culture_inoculation_date']);
-        } ?>" id="lj_culture_inoculation_date" name="lj_culture_inoculation_date" class="form-control" />
-    </div>
+                                                <div class="row">
+                                                    <!-- LJ Section -->
+                                                    <div class="col-sm-6 rounded border p-3"
+                                                        id="lj_culture_inoculation_date_section">
+                                                        <h5 class="text-center"><strong>LJ</strong></h5>
+                                                        <!-- Centered Title for LJ column -->
+                                                        <hr>
+                                                        <label for="lj_culture_inoculation_date" class="form-label">8. LJ
+                                                            Date of culture inoculation</label>
+                                                        <input type="date" value="<?php if ($costing['lj_culture_inoculation_date']) {
+                                                            print_r($costing['lj_culture_inoculation_date']);
+                                                        } ?>" id="lj_culture_inoculation_date" name="lj_culture_inoculation_date" class="form-control" />
+                                                    </div>
 
-    <!-- MGIT Section -->
-    <div class="col-sm-6 rounded border p-3" id="mgit_culture_inoculation_date_section">
-        <h5 class="text-center"><strong>MGIT</strong></h5> <!-- Centered Title for MGIT column -->
-        <hr>
-        <label for="mgit_culture_inoculation_date" class="form-label">8. MGIT Date of culture inoculation</label>
-        <input type="date" value="<?php if ($costing['mgit_culture_inoculation_date']) {
-            print_r($costing['mgit_culture_inoculation_date']);
-        } ?>" id="mgit_culture_inoculation_date" name="mgit_culture_inoculation_date" class="form-control" />
-    </div>
-</div>
+                                                    <!-- MGIT Section -->
+                                                    <div class="col-sm-6 rounded border p-3"
+                                                        id="mgit_culture_inoculation_date_section">
+                                                        <h5 class="text-center"><strong>MGIT</strong></h5>
+                                                        <!-- Centered Title for MGIT column -->
+                                                        <hr>
+                                                        <label for="mgit_culture_inoculation_date" class="form-label">8.
+                                                            MGIT Date of culture inoculation</label>
+                                                        <input type="date" value="<?php if ($costing['mgit_culture_inoculation_date']) {
+                                                            print_r($costing['mgit_culture_inoculation_date']);
+                                                        } ?>" id="mgit_culture_inoculation_date" name="mgit_culture_inoculation_date" class="form-control" />
+                                                    </div>
+                                                </div>
 
-<div class="row mt-3">
-    <!-- LJ Culture Results Date -->
-    <div class="col-sm-6 rounded border p-3" id="lj_culture_results_date_section">
-        <label for="lj_culture_results_date" class="form-label">9. LJ Date of culture results</label>
-        <hr>
-        <input type="date" value="<?php if ($costing['lj_culture_results_date']) {
-            print_r($costing['lj_culture_results_date']);
-        } ?>" id="lj_culture_results_date" name="lj_culture_results_date" class="form-control" />
-    </div>
+                                                <div class="row mt-3">
+                                                    <!-- LJ Culture Results Date -->
+                                                    <div class="col-sm-6 rounded border p-3"
+                                                        id="lj_culture_results_date_section">
+                                                        <label for="lj_culture_results_date" class="form-label">9. LJ Date
+                                                            of culture results</label>
+                                                        <hr>
+                                                        <input type="date" value="<?php if ($costing['lj_culture_results_date']) {
+                                                            print_r($costing['lj_culture_results_date']);
+                                                        } ?>" id="lj_culture_results_date" name="lj_culture_results_date" class="form-control" />
+                                                    </div>
 
-    <!-- MGIT Culture Results Date -->
-    <div class="col-sm-6 rounded border p-3" id="mgit_culture_results_date_section">
-        <label for="mgit_culture_results_date" class="form-label">9. MGIT Date of culture results</label>
-        <input type="date" value="<?php if ($costing['mgit_culture_results_date']) {
-            print_r($costing['mgit_culture_results_date']);
-        } ?>" id="mgit_culture_results_date" name="mgit_culture_results_date" class="form-control" />
-    </div>
-</div>
+                                                    <!-- MGIT Culture Results Date -->
+                                                    <div class="col-sm-6 rounded border p-3"
+                                                        id="mgit_culture_results_date_section">
+                                                        <label for="mgit_culture_results_date" class="form-label">9. MGIT
+                                                            Date of culture results</label>
+                                                        <input type="date" value="<?php if ($costing['mgit_culture_results_date']) {
+                                                            print_r($costing['mgit_culture_results_date']);
+                                                        } ?>" id="mgit_culture_results_date" name="mgit_culture_results_date" class="form-control" />
+                                                    </div>
+                                                </div>
 
-<div class="row mt-3">
-    <!-- LJ Culture Result -->
-    <div class="col-sm-6 rounded border p-3" id="lj_culture_results_section">
-        <label for="lj_culture_results" class="form-label">10. LJ Culture result</label>
-        <div class="row-form clearfix">
-            <div class="form-group">
-                <?php foreach ($override->get('culture_results', 'status', 1) as $value) { ?>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="lj_culture_results" id="lj_culture_results<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['lj_culture_results'] == $value['id']) { echo 'checked'; } ?>>
-                        <label class="form-check-label" for="lj_culture_results<?= $value['id']; ?>"><?= $value['name']; ?></label>
-                    </div>
-                <?php } ?>
-            </div>
-        </div>
-        <button type="button" onclick="unsetRadio('lj_culture_results')">Unset</button>
-    </div>
+                                                <div class="row mt-3">
+                                                    <!-- LJ Culture Result -->
+                                                    <div class="col-sm-6 rounded border p-3"
+                                                        id="lj_culture_results_section">
+                                                        <label for="lj_culture_results" class="form-label">10. LJ Culture
+                                                            result</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('culture_results', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="lj_culture_results"
+                                                                            id="lj_culture_results<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lj_culture_results'] == $value['id']) {
+                                                                                  echo 'checked';
+                                                                              } ?>>
+                                                                        <label class="form-check-label"
+                                                                            for="lj_culture_results<?= $value['id']; ?>"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('lj_culture_results')">Unset</button>
+                                                    </div>
 
-    <!-- MGIT Culture Result -->
-    <div class="col-sm-6 rounded border p-3" id="mgit_culture_results_section">
-        <label for="mgit_culture_results" class="form-label">10. MGIT Culture result</label>
-        <div class="row-form clearfix">
-            <div class="form-group">
-                <?php foreach ($override->get('culture_results', 'status', 1) as $value) { ?>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="mgit_culture_results" id="mgit_culture_results<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['mgit_culture_results'] == $value['id']) { echo 'checked'; } ?>>
-                        <label class="form-check-label" for="mgit_culture_results<?= $value['id']; ?>"><?= $value['name']; ?></label>
-                    </div>
-                <?php } ?>
-            </div>
-        </div>
-        <button type="button" onclick="unsetRadio('mgit_culture_results')">Unset</button>
-    </div>
-</div>
+                                                    <!-- MGIT Culture Result -->
+                                                    <div class="col-sm-6 rounded border p-3"
+                                                        id="mgit_culture_results_section">
+                                                        <label for="mgit_culture_results" class="form-label">10. MGIT
+                                                            Culture result</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('culture_results', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="mgit_culture_results"
+                                                                            id="mgit_culture_results<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['mgit_culture_results'] == $value['id']) {
+                                                                                  echo 'checked';
+                                                                              } ?>>
+                                                                        <label class="form-check-label"
+                                                                            for="mgit_culture_results<?= $value['id']; ?>"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('mgit_culture_results')">Unset</button>
+                                                    </div>
+                                                </div>
 
                                                 <hr>
 
@@ -7421,7 +7449,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8042,7 +8070,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8888,7 +8916,7 @@ if ($user->isLoggedIn()) {
                                                                         placeholder="Type reasons here...">                                                                                                                                                                                                                                                                                              <?php if ($clients['sputum_reasons']) {
                                                                             print_r($clients['sputum_reasons']);
                                                                         } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -10691,7 +10719,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
