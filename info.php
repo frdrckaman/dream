@@ -1170,13 +1170,13 @@ if ($user->isLoggedIn()) {
                                             <thead>
                                                 <tr>
                                                     <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
-                                                        <th>Termination Date</th>
+                                                        <th>Termination Date / Time</th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 3) { ?>
-                                                        <th>Termination Date</th>
+                                                        <th>Termination Date / Time</th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 4) { ?>
-                                                        <th>Termination Date</th>
+                                                        <th>Termination Date / Time</th>
                                                     <?php } ?>
                                                     <th>Time</th>
                                                     <th>PID</th>
@@ -1397,13 +1397,13 @@ if ($user->isLoggedIn()) {
                                             <tfoot>
                                                 <tr>
                                                     <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
-                                                        <th>Screened</th>
+                                                        <th>Termination Date / Time</th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 3) { ?>
-                                                        <th>Enrollment</th>
+                                                        <th>Termination Date / Time</th>
                                                     <?php } ?>
                                                     <?php if ($_GET['status'] == 4) { ?>
-                                                        <th>Termination</th>
+                                                        <th>Termination Date / Time</th>
                                                     <?php } ?>
                                                     <th>Time</th>
                                                     <th>PID</th>
