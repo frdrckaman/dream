@@ -5589,7 +5589,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row">
     <!-- LJ Section -->
     <div class="col-sm-6 rounded border p-3" id="lj_culture_inoculation_date_section">
-        <h5><strong>LJ</strong></h5> <!-- Title for LJ column -->
+        <h5 class="text-center"><strong>LJ</strong></h5> <!-- Centered Title for LJ column -->
         <hr>
         <label for="lj_culture_inoculation_date" class="form-label">8. LJ Date of culture inoculation</label>
         <input type="date" value="<?php if ($costing['lj_culture_inoculation_date']) {
@@ -5599,7 +5599,7 @@ if ($user->isLoggedIn()) {
 
     <!-- MGIT Section -->
     <div class="col-sm-6 rounded border p-3" id="mgit_culture_inoculation_date_section">
-        <h5><strong>MGIT</strong></h5> <!-- Title for MGIT column -->
+        <h5 class="text-center"><strong>MGIT</strong></h5> <!-- Centered Title for MGIT column -->
         <hr>
         <label for="mgit_culture_inoculation_date" class="form-label">8. MGIT Date of culture inoculation</label>
         <input type="date" value="<?php if ($costing['mgit_culture_inoculation_date']) {
