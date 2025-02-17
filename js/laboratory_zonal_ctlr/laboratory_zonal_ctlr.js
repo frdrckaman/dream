@@ -1,190 +1,136 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const culturePerformedRadios = document.getElementsByName('culture_performed'); // Radio buttons for culture_performed
-    const phenotypicPerformedRadios = document.getElementsByName('phenotypic_performed'); // Radio buttons for phenotypic_performed
-    const cultureIsolateRadios = document.getElementsByName('culture_isolate'); // Radio buttons for culture_isolate
-    const cultureResultsRadios = document.getElementsByName('culture_results'); // Radio buttons for culture_results
-    const xpertXdrPerformedRadios = document.getElementsByName('xpert_xdr_performed'); // Radio buttons for xpert_xdr_performed
-    const firstLineLpaRadios = document.getElementsByName('first_line_lpa'); // Radio buttons for first_line_lpa
-    const secondLineLpaRadios = document.getElementsByName('second_line_lpa'); // Radio buttons for second_line_lpa
-    const nanoporeDoneRadios = document.getElementsByName('nanopore_done'); // Radio buttons for nanopore_done
+document.addEventListener("DOMContentLoaded", function () {
+    const culturePerformedRadios = document.querySelectorAll('input[name="culture_performed"]');
+    const cultureMethodSection = document.getElementById("culture_method_section");
+    const microscopyTypeSection = document.getElementById("microscopy_type_section");
+    const culturePerformedSection = document.getElementById("culture_performed_section");
 
-    const cultureMethodSection = document.getElementById('culture_method_section');
-    const microscopyTypeSection = document.getElementById('microscopy_type_section');
-    const culturePerformedSection = document.getElementById('culture_performed_section');
-    const cultureIsolateSection = document.getElementById('culture_isolate_section');
+    const ljResultsRadios = document.querySelectorAll('input[name="lj_results"]');
+    const mgitResultsRadios = document.querySelectorAll('input[name="mgit_results"]');
+    const cultureIsolateRadios = document.querySelectorAll('input[name="culture_isolate"]');
+    const phenotypicPerformedRadios = document.querySelectorAll('input[name="phenotypic_performed"]');
+    const xpertXdrPerformedRadios = document.querySelectorAll('input[name="xpert_xdr_performed"]');
 
-    const phenotypicDatePerformedSection = document.getElementById('phenotypic_date_performed_section');
-    const phenotypicDateResultsSection = document.getElementById('phenotypic_date_results_section');
-    const phenotypicPerformedResultsSection = document.getElementById('phenotypic_performed_results_section');
-    const phenotypicDstSection = document.getElementById('phenotypic_dst_section');
+    const firstLineLpaRadios = document.querySelectorAll('input[name="first_line_lpa"]');
+    const secondLineLpaRadios = document.querySelectorAll('input[name="second_line_lpa"]');
 
-    const xpertXdrDatePerformedSection = document.getElementById('xpert_xdr_date_performed_section');
-    const xpertXdrResultsSection = document.getElementById('xpert_xdr_results_section');
+    const cultureIsolateSection = document.getElementById("culture_isolate_section");
+    const isolateDateSection = document.getElementById("isolate_date_section");
+    const phenotypicDstSection = document.getElementById("phenotypic_dst_section");
 
-    const firstLineSection = document.getElementById('first_line_section');
-    const secondLineSection = document.getElementById('second_line_section');
+    const phenotypicDatePerformedSection = document.getElementById("phenotypic_date_performed_section");
+    const phenotypicDateResultsSection = document.getElementById("phenotypic_date_results_section");
+    const phenotypicPerformedResultsSection = document.getElementById("phenotypic_performed_results_section");
 
-    const sequencingResultsSection = document.getElementById('sequencing_results_section'); // Sequencing results section
+    const xpertXdrDatePerformedSection = document.getElementById("xpert_xdr_date_performed_section");
+    const xpertXdrResultsSection = document.getElementById("xpert_xdr_results_section");
+
+    const firstLineSection = document.getElementById("first_line_section");
+    const secondLineSection = document.getElementById("second_line_section");
+
+    // Event listener for nanopore_done
+    const nanoporeRadios = document.querySelectorAll('input[name="nanopore_done"]');
+    const sequencingResultsSection = document.getElementById("sequencing_results_section");
+    const nanoPoreResultsSection = document.getElementById("nano_pore_results");
 
     function toggleCultureSections() {
-        const culturePerformedValue = Array.from(culturePerformedRadios).find(radio => radio.checked)?.value;
+        const isCulturePerformed = document.querySelector('input[name="culture_performed"]:checked')?.value === "1";
 
-        if (culturePerformedValue === '1') {
-            cultureMethodSection.style.display = 'block';
-            microscopyTypeSection.style.display = 'block';
-            culturePerformedSection.style.display = 'block';
-        } else {
-            cultureMethodSection.style.display = 'none';
-            microscopyTypeSection.style.display = 'none';
-            culturePerformedSection.style.display = 'none';
-        }
-    }
-
-    function togglePhenotypicSections() {
-        const phenotypicPerformedValue = Array.from(phenotypicPerformedRadios).find(radio => radio.checked)?.value;
-
-        if (phenotypicPerformedValue === '1') {
-            phenotypicDatePerformedSection.style.display = 'block';
-            phenotypicDateResultsSection.style.display = 'block';
-            phenotypicPerformedResultsSection.style.display = 'block'; // Show when phenotypic_performed = 1
-        } else {
-            phenotypicDatePerformedSection.style.display = 'none';
-            phenotypicDateResultsSection.style.display = 'none';
-            phenotypicPerformedResultsSection.style.display = 'none'; // Hide when phenotypic_performed is not 1
-        }
+        const displayStyle = isCulturePerformed ? "block" : "none";
+        cultureMethodSection.style.display = displayStyle;
+        microscopyTypeSection.style.display = displayStyle;
+        culturePerformedSection.style.display = displayStyle;
     }
 
     function toggleCultureIsolateSection() {
-        const cultureResultsValue = Array.from(cultureResultsRadios).find(radio => radio.checked)?.value;
-        const cultureIsolateValue = Array.from(cultureIsolateRadios).find(radio => radio.checked)?.value;
+        const ljResults = document.querySelector('input[name="lj_results"]:checked')?.value;
+        const mgitResults = document.querySelector('input[name="mgit_results"]:checked')?.value;
+        const showIsolate = ["1", "2", "3", "4"].includes(ljResults) || mgitResults === "1";
 
-        // Handle culture_isolate section visibility based on culture_results
-        if (cultureResultsValue === '1') {
-            cultureIsolateSection.style.display = 'block';
-        } else {
-            cultureIsolateSection.style.display = 'none';
-        }
-
-        // Handle phenotypic sections based on culture_isolate value
-        if (cultureIsolateValue === '1') {
-            phenotypicDstSection.style.display = 'block';
-            phenotypicPerformedResultsSection.style.display = 'block';
-        } else {
-            phenotypicDstSection.style.display = 'none';
-            phenotypicPerformedResultsSection.style.display = 'none';
-        }
+        cultureIsolateSection.style.display = showIsolate ? "block" : "none";
     }
 
-    function toggleCultureResultsSection() {
-        const cultureResultsValue = Array.from(cultureResultsRadios).find(radio => radio.checked)?.value;
+    function toggleIsolateDetails() {
+        const isCultureIsolate = document.querySelector('input[name="culture_isolate"]:checked')?.value === "1";
 
-        if (cultureResultsValue === '1') {
-            cultureIsolateSection.style.display = 'block';
-        } else {
-            cultureIsolateSection.style.display = 'none';
-        }
+        const displayStyle = isCultureIsolate ? "block" : "none";
+        isolateDateSection.style.display = displayStyle;
+        phenotypicDstSection.style.display = displayStyle;
+    }
+
+    function togglePhenotypicSections() {
+        const isPhenotypicPerformed = document.querySelector('input[name="phenotypic_performed"]:checked')?.value === "1";
+
+        const displayStyle = isPhenotypicPerformed ? "block" : "none";
+        phenotypicDatePerformedSection.style.display = displayStyle;
+        phenotypicDateResultsSection.style.display = displayStyle;
+        phenotypicPerformedResultsSection.style.display = displayStyle;
     }
 
     function toggleXpertXdrSections() {
-        const xpertXdrPerformedValue = Array.from(xpertXdrPerformedRadios).find(radio => radio.checked)?.value;
+        const isXpertXdrPerformed = document.querySelector('input[name="xpert_xdr_performed"]:checked')?.value === "1";
 
-        if (xpertXdrPerformedValue === '1') {
-            xpertXdrDatePerformedSection.style.display = 'block';
-            xpertXdrResultsSection.style.display = 'block';
-        } else {
-            xpertXdrDatePerformedSection.style.display = 'none';
-            xpertXdrResultsSection.style.display = 'none';
-        }
+        const displayStyle = isXpertXdrPerformed ? "block" : "none";
+        xpertXdrDatePerformedSection.style.display = displayStyle;
+        xpertXdrResultsSection.style.display = displayStyle;
     }
 
-    function toggleFirstLineLpaSection() {
-        const firstLineLpaValue = Array.from(firstLineLpaRadios).find(radio => radio.checked)?.value;
+    function toggleLpaSections() {
+        const isFirstLineLpa = document.querySelector('input[name="first_line_lpa"]:checked')?.value === "1";
+        const isSecondLineLpa = document.querySelector('input[name="second_line_lpa"]:checked')?.value === "1";
 
-        if (firstLineLpaValue === '1') {
-            firstLineSection.style.display = 'block';
-        } else {
-            firstLineSection.style.display = 'none';
-        }
+        firstLineSection.style.display = isFirstLineLpa ? "block" : "none";
+        secondLineSection.style.display = isSecondLineLpa ? "block" : "none";
     }
 
-    function toggleSecondLineLpaSection() {
-        const secondLineLpaValue = Array.from(secondLineLpaRadios).find(radio => radio.checked)?.value;
-
-        if (secondLineLpaValue === '1') {
-            secondLineSection.style.display = 'block';
-        } else {
-            secondLineSection.style.display = 'none';
-        }
+    function toggleSequencingResults() {
+        const isNanoporeDone = document.querySelector('input[name="nanopore_done"]:checked')?.value === "1";
+        sequencingResultsSection.style.display = isNanoporeDone ? "block" : "none";
+        nanoPoreResultsSection.style.display = isNanoporeDone ? "block" : "none"; // Added for nano_pore_results
     }
 
-    function toggleSequencingResultsSection() {
-        const nanoporeDoneValue = Array.from(nanoporeDoneRadios).find(radio => radio.checked)?.value;
-
-        if (nanoporeDoneValue === '1') {
-            sequencingResultsSection.style.display = 'block';
-        } else {
-            sequencingResultsSection.style.display = 'none';
-        }
-    }
-
-    // Run toggle functions on page load
+    // Initialize on page load
     toggleCultureSections();
-    togglePhenotypicSections();
     toggleCultureIsolateSection();
-    toggleCultureResultsSection();
+    toggleIsolateDetails();
+    togglePhenotypicSections();
     toggleXpertXdrSections();
-    toggleFirstLineLpaSection();
-    toggleSecondLineLpaSection();
-    toggleSequencingResultsSection(); // Call the new function on page load
+    toggleLpaSections();
+    toggleSequencingResults(); // Added this line to handle nanopore_done logic
 
-    // Check the initial value of phenotypic_performed and show/hide the phenotypic_performed_results_section accordingly
-    const phenotypicPerformedValueOnLoad = Array.from(phenotypicPerformedRadios).find(radio => radio.checked)?.value;
-    if (phenotypicPerformedValueOnLoad === '1') {
-        phenotypicPerformedResultsSection.style.display = 'block';
-    } else {
-        phenotypicPerformedResultsSection.style.display = 'none';
-    }
-
-    // Check the initial value of xpert_xdr_performed and show/hide the related sections accordingly
-    const xpertXdrPerformedValueOnLoad = Array.from(xpertXdrPerformedRadios).find(radio => radio.checked)?.value;
-    if (xpertXdrPerformedValueOnLoad === '1') {
-        xpertXdrDatePerformedSection.style.display = 'block';
-        xpertXdrResultsSection.style.display = 'block';
-    } else {
-        xpertXdrDatePerformedSection.style.display = 'none';
-        xpertXdrResultsSection.style.display = 'none';
-    }
-
-    // Add event listeners to update visibility when any radio button changes
+    // Add event listeners
     culturePerformedRadios.forEach(radio => {
-        radio.addEventListener('change', toggleCultureSections);
+        radio.addEventListener("change", toggleCultureSections);
     });
 
-    phenotypicPerformedRadios.forEach(radio => {
-        radio.addEventListener('change', togglePhenotypicSections);
+    ljResultsRadios.forEach(radio => {
+        radio.addEventListener("change", toggleCultureIsolateSection);
+    });
+
+    mgitResultsRadios.forEach(radio => {
+        radio.addEventListener("change", toggleCultureIsolateSection);
     });
 
     cultureIsolateRadios.forEach(radio => {
-        radio.addEventListener('change', toggleCultureIsolateSection);
+        radio.addEventListener("change", toggleIsolateDetails);
     });
 
-    cultureResultsRadios.forEach(radio => {
-        radio.addEventListener('change', toggleCultureResultsSection);
+    phenotypicPerformedRadios.forEach(radio => {
+        radio.addEventListener("change", togglePhenotypicSections);
     });
 
     xpertXdrPerformedRadios.forEach(radio => {
-        radio.addEventListener('change', toggleXpertXdrSections);
+        radio.addEventListener("change", toggleXpertXdrSections);
     });
 
     firstLineLpaRadios.forEach(radio => {
-        radio.addEventListener('change', toggleFirstLineLpaSection);
+        radio.addEventListener("change", toggleLpaSections);
     });
 
     secondLineLpaRadios.forEach(radio => {
-        radio.addEventListener('change', toggleSecondLineLpaSection);
+        radio.addEventListener("change", toggleLpaSections);
     });
 
-    nanoporeDoneRadios.forEach(radio => {
-        radio.addEventListener('change', toggleSequencingResultsSection); // Add event listener for nanopore_done
+    nanoporeRadios.forEach(radio => {
+        radio.addEventListener("change", toggleSequencingResults);
     });
 });
