@@ -780,11 +780,14 @@ if ($user->isLoggedIn()) {
                             'appearance' => Input::get('appearance'),
                             'sample_volume' => Input::get('sample_volume'),
                             'unique_lab_no' => Input::get('unique_lab_no'),
-                            'culture_type' => Input::get('culture_type'),
-                            'culture_performed_date' => Input::get('culture_performed_date'),
-                            'culture_inoculation_date' => Input::get('culture_inoculation_date'),
-                            'sediments_results' => Input::get('sediments_results'),
-                            'culture_results_date' => Input::get('culture_results_date'),
+                            'microscopy_type' => Input::get('microscopy_type'),
+                            'microscopy_results' => Input::get('microscopy_results'),
+                            'microscopy_date' => Input::get('microscopy_date'),
+                            'lj_inoculation_date' => Input::get('lj_inoculation_date'),
+                            'lj_results_date' => Input::get('lj_results_date'),
+                            'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
+                            'mgit_results_date' => Input::get('mgit_results_date'),
+                            'mgit_results' => Input::get('mgit_results'),
                             'culture_isolate' => Input::get('culture_isolate'),
                             'rifampicin' => Input::get('rifampicin'),
                             'isoniazid' => Input::get('isoniazid'),
@@ -881,11 +884,14 @@ if ($user->isLoggedIn()) {
                             'appearance' => Input::get('appearance'),
                             'sample_volume' => Input::get('sample_volume'),
                             'unique_lab_no' => Input::get('unique_lab_no'),
-                            'culture_type' => Input::get('culture_type'),
-                            'culture_performed_date' => Input::get('culture_performed_date'),
-                            'culture_inoculation_date' => Input::get('culture_inoculation_date'),
-                            'sediments_results' => Input::get('sediments_results'),
-                            'culture_results_date' => Input::get('culture_results_date'),
+                            'microscopy_type' => Input::get('microscopy_type'),
+                            'microscopy_results' => Input::get('microscopy_results'),
+                            'microscopy_date' => Input::get('microscopy_date'),
+                            'lj_inoculation_date' => Input::get('lj_inoculation_date'),
+                            'lj_results_date' => Input::get('lj_results_date'),
+                            'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
+                            'mgit_results_date' => Input::get('mgit_results_date'),
+                            'mgit_results' => Input::get('mgit_results'),
                             'culture_isolate' => Input::get('culture_isolate'),
                             'rifampicin' => Input::get('rifampicin'),
                             'isoniazid' => Input::get('isoniazid'),
@@ -977,7 +983,7 @@ if ($user->isLoggedIn()) {
                     } else {
                         $user->createRecord('diagnosis_test', array(
                             'pid' => $screening['pid'],
-                            'culture_performed' => Input::get('culture_performed'),
+                           'culture_performed' => Input::get('culture_performed'),
                             'culture_method' => $culture_method,
                             'culture_results' => Input::get('culture_results'),
                             'phenotypic_performed' => Input::get('phenotypic_performed'),
@@ -987,11 +993,14 @@ if ($user->isLoggedIn()) {
                             'appearance' => Input::get('appearance'),
                             'sample_volume' => Input::get('sample_volume'),
                             'unique_lab_no' => Input::get('unique_lab_no'),
-                            'culture_type' => Input::get('culture_type'),
-                            'culture_performed_date' => Input::get('culture_performed_date'),
-                            'culture_inoculation_date' => Input::get('culture_inoculation_date'),
-                            'sediments_results' => Input::get('sediments_results'),
-                            'culture_results_date' => Input::get('culture_results_date'),
+                            'microscopy_type' => Input::get('microscopy_type'),
+                            'microscopy_results' => Input::get('microscopy_results'),
+                            'microscopy_date' => Input::get('microscopy_date'),
+                            'lj_inoculation_date' => Input::get('lj_inoculation_date'),
+                            'lj_results_date' => Input::get('lj_results_date'),
+                            'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
+                            'mgit_results_date' => Input::get('mgit_results_date'),
+                            'mgit_results' => Input::get('mgit_results'),
                             'culture_isolate' => Input::get('culture_isolate'),
                             'rifampicin' => Input::get('rifampicin'),
                             'isoniazid' => Input::get('isoniazid'),
@@ -1094,11 +1103,14 @@ if ($user->isLoggedIn()) {
                             'appearance' => Input::get('appearance'),
                             'sample_volume' => Input::get('sample_volume'),
                             'unique_lab_no' => Input::get('unique_lab_no'),
-                            'culture_type' => Input::get('culture_type'),
-                            'culture_performed_date' => Input::get('culture_performed_date'),
-                            'culture_inoculation_date' => Input::get('culture_inoculation_date'),
-                            'sediments_results' => Input::get('sediments_results'),
-                            'culture_results_date' => Input::get('culture_results_date'),
+                            'microscopy_type' => Input::get('microscopy_type'),
+                            'microscopy_results' => Input::get('microscopy_results'),
+                            'microscopy_date' => Input::get('microscopy_date'),
+                            'lj_inoculation_date' => Input::get('lj_inoculation_date'),
+                            'lj_results_date' => Input::get('lj_results_date'),
+                            'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
+                            'mgit_results_date' => Input::get('mgit_results_date'),
+                            'mgit_results' => Input::get('mgit_results'),
                             'culture_isolate' => Input::get('culture_isolate'),
                             'rifampicin' => Input::get('rifampicin'),
                             'isoniazid' => Input::get('isoniazid'),
@@ -5444,7 +5456,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3" id="unique_lab_no_section">
                                                     <div class="mb-3">
-                                                        <label for="sample_volume" class="form-label">5. Unique laboratory
+                                                        <label for="unique_lab_no" class="form-label">5. Unique laboratory
                                                             number assigned to sample</label>
                                                         <input type="text" value="<?php if ($costing['unique_lab_no']) {
                                                             print_r($costing['unique_lab_no']);
@@ -5511,8 +5523,8 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4" id="culture_type_section">
-                                                    <label for="culture_method" class="form-label">7(a). Type
+                                                <div class="col-sm-4" id="microscopy_type_section">
+                                                    <label for="microscopy_type" class="form-label">7(a). Type
                                                         Microscopy conducted ?
                                                     </label>
                                                     <!-- radio -->
@@ -5521,9 +5533,9 @@ if ($user->isLoggedIn()) {
                                                             <?php foreach ($override->get('culture_type', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="culture_type"
-                                                                        id="culture_type<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['culture_type'] == $value['id']) {
+                                                                        name="microscopy_type"
+                                                                        id="microscopy_type<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['microscopy_type'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
                                                                     <label
@@ -5533,7 +5545,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                     <button type="button"
-                                                        onclick="unsetRadio('culture_type')">Unset</button>
+                                                        onclick="unsetRadio('microscopy_type')">Unset</button>
                                                 </div>
 
                                             </div>
@@ -5542,32 +5554,32 @@ if ($user->isLoggedIn()) {
                                                 <hr>
 
                                                 <div class="row">
-                                                    <div class="col-sm-6" id="culture_performed_date_section">
-                                                        <label for="culture_results" class="form-label">7(b). Date
+                                                    <div class="col-sm-6" id="microscopy_date_section">
+                                                        <label for="microscopy_date" class="form-label">7(b). Date
                                                             Microscopy conducted
                                                         </label>
                                                         <!-- radio -->
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <input type="date" value="<?php if ($costing['culture_performed_date']) {
-                                                                    print_r($costing['phenotypic_date_performed']);
-                                                                } ?>" id="culture_performed_date"
-                                                                    name="culture_performed_date" class="form-control" />
+                                                                <input type="date" value="<?php if ($costing['microscopy_date']) {
+                                                                    print_r($costing['microscopy_date']);
+                                                                } ?>" id="microscopy_date"
+                                                                    name="microscopy_date" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6" id="sediments_results_section">
-                                                        <label for="sediments_results" class="form-label">7(c).
-                                                            Microscopy results</sediments_results>
+                                                    <div class="col-sm-6" id="microscopy_results_section">
+                                                        <label for="microscopy_results" class="form-label">7(c).
+                                                            Microscopy results</label>
                                                             <!-- radio -->
                                                             <div class="row-form clearfix">
                                                                 <div class="form-group">
                                                                     <?php foreach ($override->get('sediments_results', 'status', 1) as $value) { ?>
                                                                         <div class="form-check">
                                                                             <input class="form-check-input" type="radio"
-                                                                                name="sediments_results"
-                                                                                id="sediments_results<?= $value['id']; ?>"
-                                                                                value="<?= $value['id']; ?>" <?php if ($costing['sediments_results'] == $value['id']) {
+                                                                                name="microscopy_results"
+                                                                                id="microscopy_results<?= $value['id']; ?>"
+                                                                                value="<?= $value['id']; ?>" <?php if ($costing['microscopy_results'] == $value['id']) {
                                                                                       echo 'checked';
                                                                                   } ?>>
                                                                             <label
@@ -5577,7 +5589,7 @@ if ($user->isLoggedIn()) {
 
                                                                 </div>
                                                                 <button type="button"
-                                                                    onclick="unsetRadio('sediments_results')">Unset</button>
+                                                                    onclick="unsetRadio('microscopy_results')">Unset</button>
 
                                                             </div>
                                                     </div>
@@ -5589,103 +5601,103 @@ if ($user->isLoggedIn()) {
                                                 <div class="row">
                                                     <!-- LJ Section -->
                                                     <div class="col-sm-6 rounded border p-3"
-                                                        id="lj_culture_inoculation_date_section">
+                                                        id="lj_inoculation_date_section">
                                                         <h5 class="text-center"><strong>LJ</strong></h5>
                                                         <!-- Centered Title for LJ column -->
                                                         <hr>
-                                                        <label for="lj_culture_inoculation_date" class="form-label">8. LJ
+                                                        <label for="lj_inoculation_date" class="form-label">8. LJ
                                                             Date of culture inoculation</label>
-                                                        <input type="date" value="<?php if ($costing['lj_culture_inoculation_date']) {
-                                                            print_r($costing['lj_culture_inoculation_date']);
-                                                        } ?>" id="lj_culture_inoculation_date" name="lj_culture_inoculation_date" class="form-control" />
+                                                        <input type="date" value="<?php if ($costing['lj_inoculation_date']) {
+                                                            print_r($costing['lj_inoculation_date']);
+                                                        } ?>" id="lj_inoculation_date" name="lj_inoculation_date" class="form-control" />
                                                     </div>
 
                                                     <!-- MGIT Section -->
                                                     <div class="col-sm-6 rounded border p-3"
-                                                        id="mgit_culture_inoculation_date_section">
+                                                        id="mgit_inoculation_date_section">
                                                         <h5 class="text-center"><strong>MGIT</strong></h5>
                                                         <!-- Centered Title for MGIT column -->
                                                         <hr>
-                                                        <label for="mgit_culture_inoculation_date" class="form-label">8.
+                                                        <label for="mgit_inoculation_date" class="form-label">8.
                                                             MGIT Date of culture inoculation</label>
-                                                        <input type="date" value="<?php if ($costing['mgit_culture_inoculation_date']) {
-                                                            print_r($costing['mgit_culture_inoculation_date']);
-                                                        } ?>" id="mgit_culture_inoculation_date" name="mgit_culture_inoculation_date" class="form-control" />
+                                                        <input type="date" value="<?php if ($costing['mgit_inoculation_date']) {
+                                                            print_r($costing['mgit_inoculation_date']);
+                                                        } ?>" id="mgit_inoculation_date" name="mgit_inoculation_date" class="form-control" />
                                                     </div>
                                                 </div>
 
                                                 <div class="row mt-3">
                                                     <!-- LJ Culture Results Date -->
                                                     <div class="col-sm-6 rounded border p-3"
-                                                        id="lj_culture_results_date_section">
-                                                        <label for="lj_culture_results_date" class="form-label">9. LJ Date
+                                                        id="lj_results_date_section">
+                                                        <label for="lj_results_date" class="form-label">9. LJ Date
                                                             of culture results</label>
                                                         <hr>
-                                                        <input type="date" value="<?php if ($costing['lj_culture_results_date']) {
-                                                            print_r($costing['lj_culture_results_date']);
-                                                        } ?>" id="lj_culture_results_date" name="lj_culture_results_date" class="form-control" />
+                                                        <input type="date" value="<?php if ($costing['lj_results_date']) {
+                                                            print_r($costing['lj_results_date']);
+                                                        } ?>" id="lj_results_date" name="lj_results_date" class="form-control" />
                                                     </div>
 
                                                     <!-- MGIT Culture Results Date -->
                                                     <div class="col-sm-6 rounded border p-3"
-                                                        id="mgit_culture_results_date_section">
-                                                        <label for="mgit_culture_results_date" class="form-label">9. MGIT
+                                                        id="mgit_results_date_section">
+                                                        <label for="mgit_results_date" class="form-label">9. MGIT
                                                             Date of culture results</label>
-                                                        <input type="date" value="<?php if ($costing['mgit_culture_results_date']) {
-                                                            print_r($costing['mgit_culture_results_date']);
-                                                        } ?>" id="mgit_culture_results_date" name="mgit_culture_results_date" class="form-control" />
+                                                        <input type="date" value="<?php if ($costing['mgit_results_date']) {
+                                                            print_r($costing['mgit_results_date']);
+                                                        } ?>" id="mgit_results_date" name="mgit_results_date" class="form-control" />
                                                     </div>
                                                 </div>
 
                                                 <div class="row mt-3">
                                                     <!-- LJ Culture Result -->
                                                     <div class="col-sm-6 rounded border p-3"
-                                                        id="lj_culture_results_section">
-                                                        <label for="lj_culture_results" class="form-label">10. LJ Culture
+                                                        id="lj_results_section">
+                                                        <label for="lj_results" class="form-label">10. LJ Culture
                                                             result</label>
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <?php foreach ($override->get('culture_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="lj_culture_results"
-                                                                            id="lj_culture_results<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lj_culture_results'] == $value['id']) {
+                                                                            name="lj_results"
+                                                                            id="lj_results<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['lj_results'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label class="form-check-label"
-                                                                            for="lj_culture_results<?= $value['id']; ?>"><?= $value['name']; ?></label>
+                                                                            for="lj_results<?= $value['id']; ?>"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
                                                         </div>
                                                         <button type="button"
-                                                            onclick="unsetRadio('lj_culture_results')">Unset</button>
+                                                            onclick="unsetRadio('lj_results')">Unset</button>
                                                     </div>
 
                                                     <!-- MGIT Culture Result -->
                                                     <div class="col-sm-6 rounded border p-3"
-                                                        id="mgit_culture_results_section">
-                                                        <label for="mgit_culture_results" class="form-label">10. MGIT
+                                                        id="mgit_results_section">
+                                                        <label for="mgit_results" class="form-label">10. MGIT
                                                             Culture result</label>
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <?php foreach ($override->get('culture_results', 'status', 1) as $value) { ?>
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="mgit_culture_results"
-                                                                            id="mgit_culture_results<?= $value['id']; ?>"
-                                                                            value="<?= $value['id']; ?>" <?php if ($costing['mgit_culture_results'] == $value['id']) {
+                                                                            name="mgit_results"
+                                                                            id="mgit_results<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($costing['mgit_results'] == $value['id']) {
                                                                                   echo 'checked';
                                                                               } ?>>
                                                                         <label class="form-check-label"
-                                                                            for="mgit_culture_results<?= $value['id']; ?>"><?= $value['name']; ?></label>
+                                                                            for="mgit_results<?= $value['id']; ?>"><?= $value['name']; ?></label>
                                                                     </div>
                                                                 <?php } ?>
                                                             </div>
                                                         </div>
                                                         <button type="button"
-                                                            onclick="unsetRadio('mgit_culture_results')">Unset</button>
+                                                            onclick="unsetRadio('mgit_results')">Unset</button>
                                                     </div>
                                                 </div>
 

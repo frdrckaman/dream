@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const secondLineLpaRadios = document.getElementsByName('second_line_lpa'); // Radio buttons for second_line_lpa
 
     const cultureMethodSection = document.getElementById('culture_method_section');
-    const cultureTypeSection = document.getElementById('culture_type_section');
+    const microscopyTypeSection = document.getElementById('microscopy_type_section');
     const culturePerformedSection = document.getElementById('culture_performed_section');
     const cultureIsolateSection = document.getElementById('culture_isolate_section');
 
@@ -28,11 +28,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (culturePerformedValue === '1') {
             cultureMethodSection.style.display = 'block';
-            cultureTypeSection.style.display = 'block';
+            microscopyTypeSection.style.display = 'block';
             culturePerformedSection.style.display = 'block';
         } else {
             cultureMethodSection.style.display = 'none';
-            cultureTypeSection.style.display = 'none';
+            microscopyTypeSection.style.display = 'none';
             culturePerformedSection.style.display = 'none';
         }
     }
