@@ -1186,8 +1186,7 @@ if ($user->isLoggedIn()) {
                                                     <?php } ?>
                                                     <th>PID</th>
                                                     <th>Site / Staff</th>
-                                                    <th>Status</th>
-                                                    <th class="text-center">Action</th>
+                                                    <th class="text-center">Status/ <hr> Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -1208,23 +1207,23 @@ if ($user->isLoggedIn()) {
                                                         <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
                                                             <td class="table-user">
                                                                 <?= $value['screening_date']; ?>
-                                                                 /
+                                                                /
                                                                 <hr>
                                                                 <?php
-                                                                    // print_r (date("h:i:s A"));
-                                                                    print_r(date('H:i', strtotime($value['create_on'])));
-                                                                    ?>
+                                                                // print_r (date("h:i:s A"));
+                                                                print_r(date('H:i', strtotime($value['create_on'])));
+                                                                ?>
                                                             </td>
                                                         <?php } ?>
                                                         <?php if ($_GET['status'] == 3) { ?>
                                                             <td class="table-user">
                                                                 <?= $value['enrollment_date']; ?>
-                                                                 /
+                                                                /
                                                                 <hr>
                                                                 <?php
-                                                                    // print_r (date("h:i:s A"));
-                                                                    print_r(date('H:i', strtotime($value['create_on'])));
-                                                                    ?>
+                                                                // print_r (date("h:i:s A"));
+                                                                print_r(date('H:i', strtotime($value['create_on'])));
+                                                                ?>
                                                             </td>
                                                         <?php } ?>
                                                         <?php if ($_GET['status'] == 4) { ?>
@@ -1246,41 +1245,105 @@ if ($user->isLoggedIn()) {
                                                             <hr>
                                                             <?= $staff['firstname'] . '-' . $staff['lastname']; ?>
                                                         </td>
-                                                        <?php if ($_GET['status'] == 1) { ?>
-                                                            <?php if ($value['eligible'] == 1) { ?>
-                                                                <td class="text-center">
+                                                        <td class="text-center">
+                                                            <?php if ($_GET['status'] == 1) { ?>
+                                                                <?php if ($value['eligible'] == 1) { ?>
+                                                                    <!-- <td class="text-center"> -->
                                                                     <a href="#" class="btn btn-success">
                                                                         <i class="ri-edit-box-line">
                                                                         </i> Eligible
                                                                     </a>
-                                                                </td>
-                                                            <?php } else { ?>
-                                                                <td class="text-center">
+                                                                    <!-- </td> -->
+                                                                <?php } else { ?>
+                                                                    <!-- <td class="text-center"> -->
                                                                     <a href="#" class="btn btn-danger"> <i
                                                                             class="ri-edit-box-line"></i>Not
                                                                         Eligible</a>
-                                                                </td>
-                                                            <?php } ?>
-                                                        <?php } else { ?>
-                                                            <?php if ($value['status'] == 1) { ?>
-                                                                <td class="text-center">
+                                                                    <!-- </td> -->
+                                                                <?php } ?>
+                                                                <hr>
+                                                                <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
+                                                                    <?php if ($override->get('screening', 'status', 1)) { ?>
+                                                                        <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                            role=" button" class="btn btn-info"> Update Screening
+                                                                            Data</a>&nbsp;&nbsp; <br><br>
+
+                                                                    <?php } else { ?>
+                                                                        <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                            role=" button" class="btn btn-warning"> Add Screening
+                                                                            Data</a>&nbsp;&nbsp; <br><br>
+                                                                    <?php } ?>
+                                                                    <hr>
+                                                                    <a href="#delete_record<?= $sid ?>" role="button"
+                                                                        class="btn btn-primary" data-toggle="modal">Delete Record</a>
+                                                                    <!-- <a href="#restore_record<?= $sid ?>" role="button" class="btn btn-warning" data-toggle="modal">Restore -->
+                                                                    <!-- Record</a> -->
+                                                                    <hr>
+                                                                <?php } ?>
+                                                                <?php
+                                                                if ($override->get3('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'], 'other_samples', 1)) {
+                                                                    ?>
+                                                                    <?php if (
+                                                                        $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('respiratory', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $sid)
+                                                                    ) { ?>
+
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                            <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                                role=" button" class="btn btn-info"> View Enrollment Forms
+                                                                            </a>&nbsp;&nbsp; <br><br>
+                                                                        <?php } ?>
+
+                                                                    <?php } else { ?>
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                            <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                                role=" button" class="btn btn-warning"> Add Enrollment Forms
+                                                                            </a>&nbsp;&nbsp; <br><br>
+                                                                        <?php } ?>
+                                                                    <?php } ?>
+                                                                <?php } else { ?>
+                                                                    <?php if (
+                                                                        $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('diagnosis', 'status', 1, 'enrollment_id', $sid) &&
+                                                                        $override->getNews('respiratory', 'status', 1, 'enrollment_id', $sid)
+                                                                    ) { ?>
+
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                            <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                                role=" button" class="btn btn-info"> View Enrollment Forms
+                                                                            </a>&nbsp;&nbsp; <br><br>
+                                                                        <?php } ?>
+
+                                                                    <?php } else { ?>
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                            <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
+                                                                                role=" button" class="btn btn-warning"> Add Enrollment Forms
+                                                                            </a>&nbsp;&nbsp; <br><br>
+                                                                        <?php } ?>
+                                                                    <?php } ?>
+                                                                <?php } ?>
+
+                                                            <?php } else { ?>
+                                                                <?php if ($value['status'] == 1) { ?>
+                                                                    <!-- <td class="text-center"> -->
                                                                     <a href="#" class="btn btn-success">
                                                                         <i class="ri-edit-box-line">
                                                                         </i> Enrolled
                                                                     </a>
-                                                                </td>
-                                                            <?php } else { ?>
-                                                                <td class="text-center">
+                                                                    <!-- </td> -->
+                                                                <?php } else { ?>
+                                                                    <!-- <td class="text-center"> -->
                                                                     <a href="#" class="btn btn-danger"> <i
                                                                             class="ri-edit-box-line"></i>Not
                                                                         Enrolled</a>
                                                                 </td>
                                                             <?php } ?>
-                                                        <?php } ?>
 
-
-                                                        <!-- <td class="text-center"> -->
-                                                        <td>
+                                                            <hr>
                                                             <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
                                                                 <?php if ($override->get('screening', 'status', 1)) { ?>
                                                                     <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
@@ -1345,7 +1408,10 @@ if ($user->isLoggedIn()) {
                                                                     <?php } ?>
                                                                 <?php } ?>
                                                             <?php } ?>
+                                                        <?php } ?>
                                                         </td>
+
+                                                        <!-- <td class="text-center"> -->
                                                         <br>
                                                         <!-- </td> -->
                                                     </tr>
@@ -1441,8 +1507,7 @@ if ($user->isLoggedIn()) {
                                                     <?php } ?>
                                                     <th>PID</th>
                                                     <th>Site / Staff</th>
-                                                    <th>Status</th>
-                                                    <th class="text-center">Action</th>
+                                                    <th class="text-center">Status/ <hr> Action</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -1692,10 +1757,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $enrollment['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($enrollment['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $enrollment['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3265,10 +3330,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($visit['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $visit['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($visit['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $visit['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
