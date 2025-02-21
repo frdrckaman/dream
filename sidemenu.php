@@ -413,7 +413,7 @@ if ($user->isLoggedIn()) {
                                         <a href="#" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <!-- <span class="badge badge-info right"> -->
-                                                <!-- <?= $override->countData2($table_name['Tables_in_dream'], 'status', 1, 'form_status', $form_status['id'], 'facility_id', $user->data()->site_id); ?> -->
+                                            <!-- <?= $override->countData2($table_name['Tables_in_dream'], 'status', 1, 'form_status', $form_status['id'], 'facility_id', $user->data()->site_id); ?> -->
                                             <!-- </span> -->
                                             <p><?= $table; ?></p>
                                         </a>
