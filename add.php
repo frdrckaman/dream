@@ -8058,7 +8058,7 @@ if ($user->isLoggedIn()) {
                                                             <th>Drug</th>
                                                             <th>Type of Change</th>
                                                             <th>Reason for Change</th>
-                                                            <!-- <th>Specify (if Other)</th> -->
+                                                            <th>Specify (if Other)</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -8074,8 +8074,7 @@ if ($user->isLoggedIn()) {
                                                                 <td><?= $x; ?> /
                                                                     <hr> <?= $treatment['date'] ?>
                                                                 </td>
-                                                                <td><?= $treatment['drug'] ?> /
-                                                                    <hr> <?= $treatment['drug'] ?>
+                                                                <td><?= $treatment['drug'] ?>
                                                                 </td>
                                                                 <td><?= $medications[0]['name']; ?></td>
                                                                 <td><?= $medication_actions[0]['name']; ?></td>
@@ -8142,13 +8141,13 @@ if ($user->isLoggedIn()) {
                                                                                     <div class="col-sm-6">
                                                                                         <div class="form-group">
                                                                                             <label>Type of Change</label>
-                                                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                                            <?php foreach ($override->get('regimen_changes', 'status', 1) as $value) { ?>
                                                                                                 <div class="form-check">
                                                                                                     <input class="form-check-input"
                                                                                                         type="radio" name="changes"
                                                                                                         id="changes<?= $value['id']; ?>"
                                                                                                         value="<?= $value['id']; ?>"
-                                                                                                        <?php if ($costing['regimen_changes'] == $value['id']) {
+                                                                                                        <?php if ($treatment['changes'] == $value['id']) {
                                                                                                             echo 'checked';
                                                                                                         } ?>
                                                                                                         required>
@@ -8168,7 +8167,7 @@ if ($user->isLoggedIn()) {
                                                                                                         type="radio" name="reason"
                                                                                                         id="reason<?= $value['id']; ?>"
                                                                                                         value="<?= $value['id']; ?>"
-                                                                                                        <?php if ($costing['reason'] == $value['id']) {
+                                                                                                        <?php if ($treatment['reason'] == $value['id']) {
                                                                                                             echo 'checked';
                                                                                                         } ?>
                                                                                                         required>
@@ -8182,11 +8181,11 @@ if ($user->isLoggedIn()) {
 
                                                                                 <!-- Third Row: 3 Inputs (Including Textarea) -->
                                                                                 <div class="row">
-                                                                                    <div class="col-sm-9">
+                                                                                    <div class="col-sm-12">
                                                                                         <div class="form-group">
                                                                                             <label>Specify</label>
                                                                                             <textarea class="form-control"
-                                                                                                name="specify" rows="3">
+                                                                                                name="specify" rows="2">
                                                                                                                             <?php if ($treatment['specify']) {
                                                                                                                                 print_r($treatment['specify']);
                                                                                                                             } ?>
