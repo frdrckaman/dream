@@ -7635,17 +7635,13 @@ if ($user->isLoggedIn()) {
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label> Date</label>
-                                                <input type="date" class="form-control" name="date" value="<?php if ($treatment['date']) {
-                                                    print_r($treatment['date']);
-                                                } ?>" required>
+                                                <input type="date" class="form-control" name="date" value="" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Drug</label>
-                                                <input type="text" class="form-control" name="drug" value="<?php if ($treatment['drug']) {
-                                                    print_r($treatment['drug']);
-                                                } ?>">
+                                                <input type="text" class="form-control" name="drug" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -7658,11 +7654,6 @@ if ($user->isLoggedIn()) {
                                                     Name</label>
                                                 <select name="changes" id="changes" class="form-control select2"
                                                     style="width: 100%;" required>
-                                                    <?php if ($medications[0]['name']) { ?>
-                                                        <option value="<?= $medications[0]['id'] ?>">
-                                                            <?= $medications[0]['name']; ?>
-                                                        </option>
-                                                    <?php } ?>
                                                     <?php foreach ($override->get('regimen_changes', 'status', 1) as $medication) { ?>
                                                         <option value="<?= $medication['id'] ?>">
                                                             <?= $medication['name']; ?>
@@ -7674,13 +7665,7 @@ if ($user->isLoggedIn()) {
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Action</label>
-                                                <select name="medication_action" id="medication_action"
-                                                    class="form-control select2" style="width: 100%;" required>
-                                                    <?php if ($medication_actions[0]['name']) { ?>
-                                                        <option value="<?= $medication_actions[0]['id'] ?>">
-                                                            <?= $medication_actions[0]['name']; ?>
-                                                        </option>
-                                                    <?php } ?>
+                                                <select name="medication_action" id="medication_action">
                                                     <?php foreach ($override->get('regimen_changes_reasons', 'status', 1) as $medication_action) { ?>
                                                         <option value="<?= $medication_action['id'] ?>">
                                                             <?= $medication_action['name']; ?>
@@ -7698,9 +7683,7 @@ if ($user->isLoggedIn()) {
                                                 <label>Dose
                                                     Description</label>
                                                 <textarea class="form-control" name="specify" rows="3">
-                                                                <?php if ($treatment['specify']) {
-                                                                    print_r($treatment['specify']);
-                                                                } ?>
+
                                                             </textarea>
                                             </div>
                                         </div>
