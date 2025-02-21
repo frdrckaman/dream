@@ -2205,11 +2205,11 @@ if ($user->isLoggedIn()) {
             $user->createRecord('treatment_changes', array(
                 'diagnosis_id' => "",  // You can replace this with a dynamic value
                 'enrollment_id' => $_GET['sid'],  // You can replace this with a dynamic value
-                'date' => Input::get('dose_description'),
-                'drug' => Input::get('dose_description'),
-                'changes' => Input::get('dose_description'),
-                'reason' => Input::get('dose_description'),
-                'specify' => Input::get('dose_description'),
+                'date' => Input::get('date'),
+                'drug' => Input::get('drug'),
+                'changes' => Input::get('changes'),
+                'reason' => Input::get('reason'),
+                'specify' => Input::get('specify'),
                 'status' => 1,
                 'facility_id' => $_GET['facility_id'],  // You can replace this with a dynamic value
                 'staff_id' => $user->data()->site_id,  // You can replace this with a dynamic value
@@ -2224,11 +2224,11 @@ if ($user->isLoggedIn()) {
 
             $user->updateRecord('treatment_changes', array(
                 'enrollment_id' => $_GET['sid'],  // You can replace this with a dynamic value
-                'date' => Input::get('dose_description'),
-                'drug' => Input::get('dose_description'),
-                'changes' => Input::get('dose_description'),
-                'reason' => Input::get('dose_description'),
-                'specify' => Input::get('dose_description'),
+                'date' => Input::get('date'),
+                'drug' => Input::get('drug'),
+                'changes' => Input::get('changes'),
+                'reason' => Input::get('reason'),
+                'specify' => Input::get('specify'),
                 'status' => 1,
                 'facility_id' => $_GET['facility_id'],  // You can replace this with a dynamic value
                 'update_id' => $user->data()->site_id,  // You can replace this with a dynamic value
@@ -7682,7 +7682,7 @@ if ($user->isLoggedIn()) {
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Drug</label>
-                                                <input type="text" class="form-control" name="drug" value="">
+                                                <input type="text" class="form-control" name="drug" value="" required>
                                             </div>
                                         </div>
                                     </div>
