@@ -2200,7 +2200,48 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        }
+        } elseif (Input::get('add_drug_changes')) {
+
+            $user->createRecord('treatment_changes', array(
+                'diagnosis_id' => "",  // You can replace this with a dynamic value
+                'enrollment_id' => $_GET['sid'],  // You can replace this with a dynamic value
+                'date' => Input::get('dose_description'),
+                'drug' => Input::get('dose_description'),
+                'changes' => Input::get('dose_description'),
+                'reason' => Input::get('dose_description'),
+                'specify' => Input::get('dose_description'),
+                'status' => 1,
+                'facility_id' => $_GET['facility_id'],  // You can replace this with a dynamic value
+                'staff_id' => $user->data()->site_id,  // You can replace this with a dynamic value
+                'update_id' => $user->data()->site_id,  // You can replace this with a dynamic value
+                'create_on' => date('Y-m-d H:i:s'),  // You can replace this with a dynamic value
+                'update_on' => date('Y-m-d H:i:s'),  // You can replace this with a dynamic value
+            ));
+
+            $successMessage = 'Regimen Changes Added Successful';
+
+        } elseif (Input::get('update_drug_changes')) {
+
+            $user->updateRecord('treatment_changes', array(
+                'enrollment_id' => $_GET['sid'],  // You can replace this with a dynamic value
+                'date' => Input::get('dose_description'),
+                'drug' => Input::get('dose_description'),
+                'changes' => Input::get('dose_description'),
+                'reason' => Input::get('dose_description'),
+                'specify' => Input::get('dose_description'),
+                'status' => 1,
+                'facility_id' => $_GET['facility_id'],  // You can replace this with a dynamic value
+                'update_id' => $user->data()->site_id,  // You can replace this with a dynamic value
+                'update_on' => date('Y-m-d H:i:s'),  // You can replace this with a dynamic value
+            ), Input::get('id'));
+
+            $successMessage = 'Regimen Changes Updated Successful';
+        } elseif (Input::get('delete_drug_changes')) {
+                $user->updateRecord('treatment_changes', array(
+                    'status' => 0,
+                ), Input::get('id'));
+            $successMessage = 'Regimen Changes Deleted Successful';
+            }
     }
 } else {
     Redirect::to('index.php');
@@ -4819,10 +4860,10 @@ if ($user->isLoggedIn()) {
                                                             about the patient or sample</strong></label>
                                                     <textarea id="remarks" name="remarks" class="form-control" rows="3"
                                                         placeholder="Enter any additional remarks here...">
-                                                                                                        <?php if ($remarks['remarks']) {
-                                                                                                            print_r($remarks['remarks']);
-                                                                                                        } ?>
-                                                                                                                                                            </textarea>
+                                                                                                                            <?php if ($remarks['remarks']) {
+                                                                                                                                print_r($remarks['remarks']);
+                                                                                                                            } ?>
+                                                                                                                                                                                </textarea>
                                                 </div>
                                             </div>
 
@@ -5225,7 +5266,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($screening['remarks']) {
                                                                     print_r($screening['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7470,7 +7511,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7621,7 +7662,7 @@ if ($user->isLoggedIn()) {
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">Add new
-                                        Regimen Changes- <strong class="visit-day-highlight"><?= $_GET['pid']; ?>
+                                        Regimen Changes- <strong class="visit-day-highlight"><?= $_GET['sid']; ?>
                                             - (
                                             <?= $sites['name'] ?>)
                                         </strong></h4> <button type="button" class="close" data-dismiss="modal"
@@ -7650,54 +7691,47 @@ if ($user->isLoggedIn()) {
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Medication
-                                                    Name</label>
-                                                <select name="changes" id="changes" class="form-control select2"
-                                                    style="width: 100%;" required>
-                                                    <?php foreach ($override->get('regimen_changes', 'status', 1) as $medication) { ?>
-                                                        <option value="<?= $medication['id'] ?>">
-                                                            <?= $medication['name']; ?>
-                                                        </option>
-                                                    <?php } ?>
-                                                </select>
+                                                <label>Type of Change</label>
+                                                <?php foreach ($override->get('regimen_changes', 'status', 1) as $value) { ?>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="changes"
+                                                            id="changes<?= $value['id']; ?>" value="" required>
+                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                    </div>
+                                                <?php } ?>
+
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Action</label>
-                                                <select name="medication_action" id="medication_action">
-                                                    <?php foreach ($override->get('regimen_changes_reasons', 'status', 1) as $medication_action) { ?>
-                                                        <option value="<?= $medication_action['id'] ?>">
-                                                            <?= $medication_action['name']; ?>
-                                                        </option>
-                                                    <?php } ?>
-                                                </select>
+                                                <label>Reason for Change</label>
+                                                <?php foreach ($override->get('regimen_changes_reasons', 'status', 1) as $value) { ?>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="reason"
+                                                            id="reason<?= $value['id']; ?>" value="" required>
+                                                        <label class="form-check-label"><?= $value['name']; ?></label>
+                                                    </div>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- Third Row: 3 Inputs (Including Textarea) -->
                                     <div class="row">
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label>Dose
-                                                    Description</label>
-                                                <textarea class="form-control" name="specify" rows="3">
-
+                                                <label>Specify</label>
+                                                <textarea class="form-control" name="specify" rows="2">
                                                             </textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer justify-content-between">
-                                    <input type="hidden" name="diagnosis_id" id="diagnosis_id"
-                                        value="<?= $treatment['diagnosis_id'] ?>">
                                     <input type="hidden" name="enrollment_id" id="enrollment_id"
-                                        value="<?= $treatment['enrollment_id'] ?>">
-                                    <input type="hidden" name="id" value="<?= $treatment['id'] ?>">
+                                        value="<?= $_GET['sid'] ?>">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <input type="submit" name="update_medication" class="btn btn-primary"
-                                        value="Save Medication">
+                                    <input type="submit" name="add_drug_changes" class="btn btn-primary" value="Save Drud">
                                 </div>
                             </div>
                         </form>
@@ -7778,9 +7812,8 @@ if ($user->isLoggedIn()) {
                                                                 Specify ?</label>
                                                             <input type="text" value="<?php if ($costing['diagnosis_made_other']) {
                                                                 print_r($costing['diagnosis_made_other']);
-                                                            } ?>" id="diagnosis_made_other"
-                                                                name="diagnosis_made_other" class="form-control"
-                                                                placeholder="If Other Specify here" />
+                                                            } ?>" id="diagnosis_made_other" name="diagnosis_made_other"
+                                                                class="form-control" placeholder="If Other Specify here" />
                                                         </div>
 
                                                     </div>
@@ -7938,9 +7971,8 @@ if ($user->isLoggedIn()) {
                                                             <div class="form-check">
                                                                 <input type="text" value="<?php if ($costing['tb_register_number']) {
                                                                     print_r($costing['tb_register_number']);
-                                                                } ?>" id="tb_register_number"
-                                                                    name="tb_register_number" class="form-control"
-                                                                    placeholder="Enter here" />
+                                                                } ?>" id="tb_register_number" name="tb_register_number"
+                                                                    class="form-control" placeholder="Enter here" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -8003,12 +8035,13 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="button" class="btn btn-info mb-3" data-toggle="modal"
-                                                data-target="#addMedModal">
-                                                <ion-icon name='add-circle-outline'></ion-icon> Add New
-                                                Medication
-                                            </button>
+
                                             <div class="row" id="table_section">
+                                                <button type="button" class="btn btn-info mb-3" data-toggle="modal"
+                                                    data-target="#addMedModal">
+                                                    <ion-icon name='add-circle-outline'></ion-icon> Add New
+                                                    Regimen Changed
+                                                </button>
                                                 <hr>
                                                 <label class="fw-bold text-center d-block">10(b). List all treatment changes
                                                     below.</label>
@@ -8089,8 +8122,7 @@ if ($user->isLoggedIn()) {
                                                                                                 class="form-control" name="date"
                                                                                                 value="<?php if ($treatment['date']) {
                                                                                                     print_r($treatment['date']);
-                                                                                                } ?>"
-                                                                                                required>
+                                                                                                } ?>" required>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-sm-6">
@@ -8109,46 +8141,41 @@ if ($user->isLoggedIn()) {
                                                                                 <div class="row">
                                                                                     <div class="col-sm-6">
                                                                                         <div class="form-group">
-                                                                                            <label>Medication
-                                                                                                Name</label>
-                                                                                            <select name="changes" id="changes"
-                                                                                                class="form-control select2"
-                                                                                                style="width: 100%;" required>
-                                                                                                <?php if ($medications[0]['name']) { ?>
-                                                                                                    <option
-                                                                                                        value="<?= $medications[0]['id'] ?>">
-                                                                                                        <?= $medications[0]['name']; ?>
-                                                                                                    </option>
-                                                                                                <?php } ?>
-                                                                                                <?php foreach ($override->get('regimen_changes', 'status', 1) as $medication) { ?>
-                                                                                                    <option
-                                                                                                        value="<?= $medication['id'] ?>">
-                                                                                                        <?= $medication['name']; ?>
-                                                                                                    </option>
-                                                                                                <?php } ?>
-                                                                                            </select>
+                                                                                            <label>Type of Change</label>
+                                                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                                                <div class="form-check">
+                                                                                                    <input class="form-check-input"
+                                                                                                        type="radio" name="changes"
+                                                                                                        id="changes<?= $value['id']; ?>"
+                                                                                                        value="<?= $value['id']; ?>"
+                                                                                                        <?php if ($costing['regimen_changes'] == $value['id']) {
+                                                                                                            echo 'checked';
+                                                                                                        } ?>
+                                                                                                        required>
+                                                                                                    <label
+                                                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                                                </div>
+                                                                                            <?php } ?>
+
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-sm-6">
                                                                                         <div class="form-group">
-                                                                                            <label>Action</label>
-                                                                                            <select name="medication_action"
-                                                                                                id="medication_action"
-                                                                                                class="form-control select2"
-                                                                                                style="width: 100%;" required>
-                                                                                                <?php if ($medication_actions[0]['name']) { ?>
-                                                                                                    <option
-                                                                                                        value="<?= $medication_actions[0]['id'] ?>">
-                                                                                                        <?= $medication_actions[0]['name']; ?>
-                                                                                                    </option>
-                                                                                                <?php } ?>
-                                                                                                <?php foreach ($override->get('regimen_changes_reasons', 'status', 1) as $medication_action) { ?>
-                                                                                                    <option
-                                                                                                        value="<?= $medication_action['id'] ?>">
-                                                                                                        <?= $medication_action['name']; ?>
-                                                                                                    </option>
-                                                                                                <?php } ?>
-                                                                                            </select>
+                                                                                            <label>Reason for Change</label>
+                                                                                            <?php foreach ($override->get('regimen_changes_reasons', 'status', 1) as $value) { ?>
+                                                                                                <div class="form-check">
+                                                                                                    <input class="form-check-input"
+                                                                                                        type="radio" name="reason"
+                                                                                                        id="reason<?= $value['id']; ?>"
+                                                                                                        value="<?= $value['id']; ?>"
+                                                                                                        <?php if ($costing['reason'] == $value['id']) {
+                                                                                                            echo 'checked';
+                                                                                                        } ?>
+                                                                                                        required>
+                                                                                                    <label
+                                                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                                                </div>
+                                                                                            <?php } ?>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -8157,32 +8184,27 @@ if ($user->isLoggedIn()) {
                                                                                 <div class="row">
                                                                                     <div class="col-sm-9">
                                                                                         <div class="form-group">
-                                                                                            <label>Dose
-                                                                                                Description</label>
+                                                                                            <label>Specify</label>
                                                                                             <textarea class="form-control"
                                                                                                 name="specify" rows="3">
-                                                                                                                                                            <?php if ($treatment['specify']) {
-                                                                                                                                                                print_r($treatment['specify']);
-                                                                                                                                                            } ?>
-                                                                                                                                                        </textarea>
+                                                                                                                            <?php if ($treatment['specify']) {
+                                                                                                                                print_r($treatment['specify']);
+                                                                                                                            } ?>
+                                                                                                                        </textarea>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer justify-content-between">
-                                                                                <input type="hidden" name="diagnosis_id"
-                                                                                    id="diagnosis_id"
-                                                                                    value="<?= $treatment['diagnosis_id'] ?>">
                                                                                 <input type="hidden" name="enrollment_id"
                                                                                     id="enrollment_id"
-                                                                                    value="<?= $treatment['enrollment_id'] ?>">
+                                                                                    value="<?= $_GET['sid'] ?>">
                                                                                 <input type="hidden" name="id"
                                                                                     value="<?= $treatment['id'] ?>">
                                                                                 <button type="button" class="btn btn-default"
                                                                                     data-dismiss="modal">Close</button>
-                                                                                <input type="submit" name="update_medication"
-                                                                                    class="btn btn-primary"
-                                                                                    value="Save Medication">
+                                                                                <input type="submit" name="update_drug_changes"
+                                                                                    class="btn btn-primary" value="Save Drug">
                                                                             </div>
                                                                         </div>
                                                                     </form>
@@ -8210,15 +8232,9 @@ if ($user->isLoggedIn()) {
                                                                                 </strong>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <input type="hidden" name="diagnosis_id"
-                                                                                    id="diagnosis_id"
-                                                                                    value="<?= $treatment['diagnosis_id'] ?>">
-                                                                                <input type="hidden" name="enrollment_id"
-                                                                                    id="enrollment_id"
-                                                                                    value="<?= $treatment['enrollment_id'] ?>">
                                                                                 <input type="hidden" name="id"
                                                                                     value="<?= $treatment['id'] ?>">
-                                                                                <input type="submit" name="delete_medication"
+                                                                                <input type="submit" name="delete_drug_changes"
                                                                                     value="Delete" class="btn btn-danger">
                                                                                 <button class="btn btn-default"
                                                                                     data-dismiss="modal"
@@ -8282,8 +8298,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-check">
                                                                     <input type="date" value="<?php if ($costing['tb_otcome2_date']) {
                                                                         print_r($costing['tb_otcome2_date']);
-                                                                    } ?>" id="tb_otcome2_date"
-                                                                        name="tb_otcome2_date" class="form-control" />
+                                                                    } ?>" id="tb_otcome2_date" name="tb_otcome2_date"
+                                                                        class="form-control" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -8387,7 +8403,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9233,7 +9249,7 @@ if ($user->isLoggedIn()) {
                                                                         placeholder="Type reasons here...">                                                                                                                                                                                                                                                                                              <?php if ($clients['sputum_reasons']) {
                                                                             print_r($clients['sputum_reasons']);
                                                                         } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -9430,9 +9446,8 @@ if ($user->isLoggedIn()) {
                                                             Put '99')</label>
                                                         <input type="number" value="<?php if ($costing['transit_time']) {
                                                             print_r($costing['transit_time']);
-                                                        } ?>" id="transit_time" name="transit_time" min="0"
-                                                            max="100" class="form-control" placeholder="Enter here"
-                                                            required />
+                                                        } ?>" id="transit_time" name="transit_time" min="0" max="100"
+                                                            class="form-control" placeholder="Enter here" required />
                                                     </div>
                                                 </div>
 
@@ -9446,8 +9461,8 @@ if ($user->isLoggedIn()) {
                                                         <label for="date_collect" class="form-label">5. resid_distr</label>
                                                         <input type="text" value="<?php if ($costing['resid_distr']) {
                                                             print_r($costing['resid_distr']);
-                                                        } ?>" id="resid_distr" name="resid_distr"
-                                                            class="form-control" placeholder="Enter date" required />
+                                                        } ?>" id="resid_distr" name="resid_distr" class="form-control"
+                                                            placeholder="Enter date" required />
                                                     </div>
                                                 </div>
 
@@ -9478,8 +9493,8 @@ if ($user->isLoggedIn()) {
                                                         <label for="hf_district" class="form-label">7. hf_district</label>
                                                         <input type="text" value="<?php if ($costing['hf_district']) {
                                                             print_r($costing['hf_district']);
-                                                        } ?>" id="hf_district" name="hf_district"
-                                                            class="form-control" placeholder="Enter here" required />
+                                                        } ?>" id="hf_district" name="hf_district" class="form-control"
+                                                            placeholder="Enter here" required />
                                                     </div>
                                                 </div>
 
@@ -9488,8 +9503,8 @@ if ($user->isLoggedIn()) {
                                                         <label for="tb_region" class="form-label">8. tb_region</label>
                                                         <input type="text" value="<?php if ($costing['tb_region']) {
                                                             print_r($costing['tb_region']);
-                                                        } ?>" id="tb_region" name="tb_region"
-                                                            class="form-control" placeholder="Enter here" required />
+                                                        } ?>" id="tb_region" name="tb_region" class="form-control"
+                                                            placeholder="Enter here" required />
                                                     </div>
                                                 </div>
 
@@ -9577,9 +9592,8 @@ if ($user->isLoggedIn()) {
                                                             ?</label>
                                                         <input type="number" value="<?php if ($costing['follow_up_months']) {
                                                             print_r($costing['follow_up_months']);
-                                                        } ?>" id="follow_up_months" name="follow_up_months"
-                                                            min="1" max="20" class="form-control"
-                                                            placeholder="Enter here" />
+                                                        } ?>" id="follow_up_months" name="follow_up_months" min="1"
+                                                            max="20" class="form-control" placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -9595,9 +9609,8 @@ if ($user->isLoggedIn()) {
                                                                 (If N/A put '99' ,If Not provided put '98')</label>
                                                             <input type="number" value="<?php if ($costing['treatment_month']) {
                                                                 print_r($costing['treatment_month']);
-                                                            } ?>" id="treatment_month" name="treatment_month"
-                                                                min="1" max="20" class="form-control"
-                                                                placeholder="Enter here" />
+                                                            } ?>" id="treatment_month" name="treatment_month" min="1"
+                                                                max="20" class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3" id="hiv_status">
@@ -9653,8 +9666,8 @@ if ($user->isLoggedIn()) {
                                                             <label for="gxmtb_ct" class="form-label">16. gxmtb_ct</label>
                                                             <input type="text" value="<?php if ($costing['gxmtb_ct']) {
                                                                 print_r($costing['gxmtb_ct']);
-                                                            } ?>" id="gxmtb_ct" name="gxmtb_ct" min="0"
-                                                                max="40" class="form-control" placeholder="Enter here" />
+                                                            } ?>" id="gxmtb_ct" name="gxmtb_ct" min="0" max="40"
+                                                                class="form-control" placeholder="Enter here" />
                                                         </div>
                                                     </div>
 
@@ -9715,8 +9728,8 @@ if ($user->isLoggedIn()) {
                                                             <label for="fm_date" class="form-label">19. Fm date</label>
                                                             <input type="date" value="<?php if ($costing['fm_date']) {
                                                                 print_r($costing['fm_date']);
-                                                            } ?>" id="fm_date" name="fm_date"
-                                                                class="form-control" placeholder="Enter here" />
+                                                            } ?>" id="fm_date" name="fm_date" class="form-control"
+                                                                placeholder="Enter here" />
                                                         </div>
                                                     </div>
 
@@ -9736,8 +9749,8 @@ if ($user->isLoggedIn()) {
                                                             <label for="dec_date" class="form-label">21. dec_date</label>
                                                             <input type="date" value="<?php if ($costing['dec_date']) {
                                                                 print_r($costing['dec_date']);
-                                                            } ?>" id="dec_date" name="dec_date"
-                                                                class="form-control" placeholder="Enter here" />
+                                                            } ?>" id="dec_date" name="dec_date" class="form-control"
+                                                                placeholder="Enter here" />
                                                         </div>
                                                     </div>
 
@@ -9775,8 +9788,8 @@ if ($user->isLoggedIn()) {
                                                         <label for="inno_date" class="form-label">23. inno_date</label>
                                                         <input type="date" value="<?php if ($costing['inno_date']) {
                                                             print_r($costing['inno_date']);
-                                                        } ?>" id="inno_date" name="inno_date"
-                                                            class="form-control" placeholder="Enter here" />
+                                                        } ?>" id="inno_date" name="inno_date" class="form-control"
+                                                            placeholder="Enter here" />
                                                     </div>
                                                 </div>
 
@@ -10193,8 +10206,8 @@ if ($user->isLoggedIn()) {
                                                             lpa1_date</label>
                                                         <input type="date" value="<?php if ($costing['lpa1_date1']) {
                                                             print_r($costing['lpa1_date1']);
-                                                        } ?>" id="lpa1_date1" name="lpa1_date1"
-                                                            class="form-control" placeholder="Enter here" />
+                                                        } ?>" id="lpa1_date1" name="lpa1_date1" class="form-control"
+                                                            placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2" id="lpa1_mtbdetected">
@@ -10299,8 +10312,8 @@ if ($user->isLoggedIn()) {
                                                             lpa2_date</label>
                                                         <input type="date" value="<?php if ($costing['lpa2_date']) {
                                                             print_r($costing['lpa2_date']);
-                                                        } ?>" id="lpa2_date" name="lpa2_date"
-                                                            class="form-control" placeholder="Enter here" />
+                                                        } ?>" id="lpa2_date" name="lpa2_date" class="form-control"
+                                                            placeholder="Enter here" />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4" id="lpa2_mtbdetected">
@@ -11039,7 +11052,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
