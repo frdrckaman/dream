@@ -4819,10 +4819,10 @@ if ($user->isLoggedIn()) {
                                                             about the patient or sample</strong></label>
                                                     <textarea id="remarks" name="remarks" class="form-control" rows="3"
                                                         placeholder="Enter any additional remarks here...">
-                                                                                                <?php if ($remarks['remarks']) {
-                                                                                                    print_r($remarks['remarks']);
-                                                                                                } ?>
-                                                                                                                                                    </textarea>
+                                                                                                    <?php if ($remarks['remarks']) {
+                                                                                                        print_r($remarks['remarks']);
+                                                                                                    } ?>
+                                                                                                                                                        </textarea>
                                                 </div>
                                             </div>
 
@@ -5225,7 +5225,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($screening['remarks']) {
                                                                     print_r($screening['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6778,7 +6778,8 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-3" id="nanopore_done_section">
-                                                    <label for="nanopore_done" class="form-label">20. Was nanopore sequencing done for this patient?</label>
+                                                    <label for="nanopore_done" class="form-label">20. Was nanopore
+                                                        sequencing done for this patient?</label>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -7451,7 +7452,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div> -->
-                                                                                       <hr>
+                                                <hr>
                                             </div>
                                             <div class="card card-warning">
                                                 <div class="card-header">
@@ -7469,7 +7470,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7613,7 +7614,113 @@ if ($user->isLoggedIn()) {
                         </div>
                     </div><!-- /.container-fluid -->
                 </section>
+                <div class="modal fade" id="addMedModal">
+                    <div class="modal-dialog modal-lg">
+                        <form method="post">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add new
+                                        Regimen Changes- <strong class="visit-day-highlight"><?= $_GET['pid']; ?>
+                                            - (
+                                            <?= $sites['name'] ?>)
+                                        </strong></h4> <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- First Row: 3 Inputs -->
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label> Date</label>
+                                                <input type="date" class="form-control" name="date"
+                                                    value="<?php if ($treatment['date']) {
+                                                        print_r($treatment['date']);
+                                                    } ?>" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Drug</label>
+                                                <input type="text" class="form-control" name="drug"
+                                                    value="<?php if ($treatment['drug']) {
+                                                        print_r($treatment['drug']);
+                                                    } ?>">
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <!-- Second Row: 2 Inputs -->
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Medication
+                                                    Name</label>
+                                                <select name="changes" id="changes" class="form-control select2"
+                                                    style="width: 100%;" required>
+                                                    <?php if ($medications[0]['name']) { ?>
+                                                        <option value="<?= $medications[0]['id'] ?>">
+                                                            <?= $medications[0]['name']; ?>
+                                                        </option>
+                                                    <?php } ?>
+                                                    <?php foreach ($override->get('regimen_changes', 'status', 1) as $medication) { ?>
+                                                        <option value="<?= $medication['id'] ?>">
+                                                            <?= $medication['name']; ?>
+                                                        </option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Action</label>
+                                                <select name="medication_action" id="medication_action"
+                                                    class="form-control select2" style="width: 100%;" required>
+                                                    <?php if ($medication_actions[0]['name']) { ?>
+                                                        <option value="<?= $medication_actions[0]['id'] ?>">
+                                                            <?= $medication_actions[0]['name']; ?>
+                                                        </option>
+                                                    <?php } ?>
+                                                    <?php foreach ($override->get('regimen_changes_reasons', 'status', 1) as $medication_action) { ?>
+                                                        <option value="<?= $medication_action['id'] ?>">
+                                                            <?= $medication_action['name']; ?>
+                                                        </option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Third Row: 3 Inputs (Including Textarea) -->
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <div class="form-group">
+                                                <label>Dose
+                                                    Description</label>
+                                                <textarea class="form-control" name="specify" rows="3">
+                                                    <?php if ($treatment['specify']) {
+                                                        print_r($treatment['specify']);
+                                                    } ?>
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <input type="hidden" name="diagnosis_id" id="diagnosis_id"
+                                        value="<?= $treatment['diagnosis_id'] ?>">
+                                    <input type="hidden" name="enrollment_id" id="enrollment_id"
+                                        value="<?= $treatment['enrollment_id'] ?>">
+                                    <input type="hidden" name="id" value="<?= $treatment['id'] ?>">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <input type="submit" name="update_medication" class="btn btn-primary"
+                                        value="Save Medication">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <!-- Main content -->
                 <section class="content">
                     <div class="container-fluid">
@@ -7912,6 +8019,11 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <button type="button" class="btn btn-info mb-3" data-toggle="modal"
+                                                data-target="#addMedModal">
+                                                <ion-icon name='add-circle-outline'></ion-icon> Add New
+                                                Medication
+                                            </button>
                                             <div class="row" id="table_section">
                                                 <hr>
                                                 <label class="fw-bold text-center d-block">10(b). List all treatment changes
@@ -7933,12 +8045,213 @@ if ($user->isLoggedIn()) {
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="treatmentChangesTable"></tbody>
+                                                    <tbody id="tbody">
+                                                        <!-- Existing table body content remains the same -->
+                                                        <?php $x = 1;
+                                                        foreach ($override->getNewsAs2('treatment_changes', 'enrollment_id', $_GET['sid'], 'status', 1) as $treatment) {
+                                                            $medications = $override->getNews('regimen_changes', 'status', 1, 'id', $treatment['changes']);
+                                                            $medication_actions = $override->getNews('regimen_changes_reasons', 'status', 1, 'id', $treatment['reason']);
+                                                            $sites = $override->getNews('sites', 'status', 1, 'id', $treatment['facility_id'])[0];
+                                                            ?>
+                                                            <tr>
+                                                                <td><?= $x; ?> /
+                                                                    <hr> <?= $treatment['date'] ?>
+                                                                </td>
+                                                                <td><?= $treatment['drug'] ?> /
+                                                                    <hr> <?= $treatment['drug'] ?>
+                                                                </td>
+                                                                <td><?= $medications[0]['name']; ?></td>
+                                                                <td><?= $medication_actions[0]['name']; ?></td>
+                                                                <td><?= $treatment['specify'] ?></td>
+                                                                <td>
+
+                                                                    <span class="badge bg-info">
+                                                                        <a href="#update_med<?= $treatment['id'] ?>"
+                                                                            role="button" data-toggle="modal">Update</a>
+                                                                    </span>
+                                                                    <br>
+                                                                    <hr>
+                                                                    <span class="badge bg-danger">
+                                                                        <a href="#delete_med<?= $treatment['id'] ?>"
+                                                                            role="button" data-toggle="modal">Delete</a>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                            <!-- Existing table rows and modals -->
+                                                            <!-- Add Medication Modal -->
+                                                            <div class="modal fade" id="update_med<?= $treatment['id'] ?>">
+                                                                <div class="modal-dialog modal-lg">
+                                                                    <form method="post">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title">Update
+                                                                                    Regimen - <strong
+                                                                                        class="visit-day-highlight"><?= $_GET['sid']; ?>
+                                                                                        - (
+                                                                                        <?= $sites['name'] ?>)
+                                                                                    </strong></h4> <button type="button"
+                                                                                    class="close" data-dismiss="modal"
+                                                                                    aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <!-- First Row: 3 Inputs -->
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-6">
+                                                                                        <div class="form-group">
+                                                                                            <label> Date</label>
+                                                                                            <input type="date"
+                                                                                                class="form-control" name="date"
+                                                                                                value="<?php if ($treatment['date']) {
+                                                                                                    print_r($treatment['date']);
+                                                                                                } ?>"
+                                                                                                required>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-sm-6">
+                                                                                        <div class="form-group">
+                                                                                            <label>Drug</label>
+                                                                                            <input type="text"
+                                                                                                class="form-control" name="drug"
+                                                                                                value="<?php if ($treatment['drug']) {
+                                                                                                    print_r($treatment['drug']);
+                                                                                                } ?>">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <!-- Second Row: 2 Inputs -->
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-6">
+                                                                                        <div class="form-group">
+                                                                                            <label>Medication
+                                                                                                Name</label>
+                                                                                            <select name="changes" id="changes"
+                                                                                                class="form-control select2"
+                                                                                                style="width: 100%;" required>
+                                                                                                <?php if ($medications[0]['name']) { ?>
+                                                                                                    <option
+                                                                                                        value="<?= $medications[0]['id'] ?>">
+                                                                                                        <?= $medications[0]['name']; ?>
+                                                                                                    </option>
+                                                                                                <?php } ?>
+                                                                                                <?php foreach ($override->get('regimen_changes', 'status', 1) as $medication) { ?>
+                                                                                                    <option
+                                                                                                        value="<?= $medication['id'] ?>">
+                                                                                                        <?= $medication['name']; ?>
+                                                                                                    </option>
+                                                                                                <?php } ?>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-sm-6">
+                                                                                        <div class="form-group">
+                                                                                            <label>Action</label>
+                                                                                            <select name="medication_action"
+                                                                                                id="medication_action"
+                                                                                                class="form-control select2"
+                                                                                                style="width: 100%;" required>
+                                                                                                <?php if ($medication_actions[0]['name']) { ?>
+                                                                                                    <option
+                                                                                                        value="<?= $medication_actions[0]['id'] ?>">
+                                                                                                        <?= $medication_actions[0]['name']; ?>
+                                                                                                    </option>
+                                                                                                <?php } ?>
+                                                                                                <?php foreach ($override->get('regimen_changes_reasons', 'status', 1) as $medication_action) { ?>
+                                                                                                    <option
+                                                                                                        value="<?= $medication_action['id'] ?>">
+                                                                                                        <?= $medication_action['name']; ?>
+                                                                                                    </option>
+                                                                                                <?php } ?>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <!-- Third Row: 3 Inputs (Including Textarea) -->
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-9">
+                                                                                        <div class="form-group">
+                                                                                            <label>Dose
+                                                                                                Description</label>
+                                                                                            <textarea class="form-control"
+                                                                                                name="specify" rows="3">
+                                                                                                                                    <?php if ($treatment['specify']) {
+                                                                                                                                        print_r($treatment['specify']);
+                                                                                                                                    } ?>
+                                                                                                                                </textarea>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer justify-content-between">
+                                                                                <input type="hidden" name="diagnosis_id"
+                                                                                    id="diagnosis_id"
+                                                                                    value="<?= $treatment['diagnosis_id'] ?>">
+                                                                                <input type="hidden" name="enrollment_id"
+                                                                                    id="enrollment_id"
+                                                                                    value="<?= $treatment['enrollment_id'] ?>">
+                                                                                <input type="hidden" name="id"
+                                                                                    value="<?= $treatment['id'] ?>">
+                                                                                <button type="button" class="btn btn-default"
+                                                                                    data-dismiss="modal">Close</button>
+                                                                                <input type="submit" name="update_medication"
+                                                                                    class="btn btn-primary"
+                                                                                    value="Save Medication">
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="modal fade" id="delete_med<?= $treatment['id'] ?>"
+                                                                tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <form method="post">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal"><span
+                                                                                        aria-hidden="true">&times;</span><span
+                                                                                        class="sr-only">Close</span></button>
+                                                                                <h4>Delete this Regimen</h4>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <strong style="font-weight: bold;color: red">
+                                                                                    <p>Are you sure you want to
+                                                                                        delete this Regimen ?
+                                                                                    </p>
+                                                                                </strong>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <input type="hidden" name="diagnosis_id"
+                                                                                    id="diagnosis_id"
+                                                                                    value="<?= $treatment['diagnosis_id'] ?>">
+                                                                                <input type="hidden" name="enrollment_id"
+                                                                                    id="enrollment_id"
+                                                                                    value="<?= $treatment['enrollment_id'] ?>">
+                                                                                <input type="hidden" name="id"
+                                                                                    value="<?= $treatment['id'] ?>">
+                                                                                <input type="submit" name="delete_medication"
+                                                                                    value="Delete" class="btn btn-danger">
+                                                                                <button class="btn btn-default"
+                                                                                    data-dismiss="modal"
+                                                                                    aria-hidden="true">Close</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <?php $x++;
+                                                        } ?>
+                                                    </tbody>
                                                 </table>
 
-                                                <button type="button" class="btn btn-primary"
+                                                <!-- <button type="button" class="btn btn-primary"
                                                     onclick="addRow('new', '', '', '', '', '', <?= $diagnosis_id ?>,<?= $_GET['sid'] ?>,<?= $screening['facility_id'] ?>,<?= $user->data()->id ?>)">Add
-                                                    Row</button>
+                                                    Row</button> -->
                                                 <!-- <button type="button" class="btn btn-success"
                                                     onclick="saveTreatmentChanges()">Save Changes</button> -->
                                             </div>
@@ -8090,7 +8403,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8936,7 +9249,7 @@ if ($user->isLoggedIn()) {
                                                                         placeholder="Type reasons here...">                                                                                                                                                                                                                                                                                              <?php if ($clients['sputum_reasons']) {
                                                                             print_r($clients['sputum_reasons']);
                                                                         } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -10739,7 +11052,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
