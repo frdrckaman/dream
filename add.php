@@ -722,20 +722,6 @@ if ($user->isLoggedIn()) {
                 $visit_code = '';
                 $visit_name = '';
 
-                if (Input::get('first_line')) {
-                    $first_line = Input::get('first_line');
-                }
-
-                if (Input::get('second_line')) {
-                    $second_line = Input::get('second_line');
-                }
-
-                if (Input::get('third_line')) {
-                    $third_line = Input::get('third_line');
-                }
-                $enrolled = 0;
-                $end_study = 0;
-
                 $first_line_drugs = implode(',', Input::get('first_line_drugs'));
                 $second_line_drugs = implode(',', Input::get('second_line_drugs'));
                 $culture_method = implode(',', Input::get('culture_method'));
@@ -765,9 +751,6 @@ if ($user->isLoggedIn()) {
                     $verified_by = $user->data()->id;
                 }
 
-                if (Input::get('form_completness') == 3 && Input::get('diagnosis_test_verified_date') == "") {
-                    $errorMessage = 'You do not have Permissions to Verify this form pleae you can only "Complete Form "';
-                } else {
                     if ($individual) {
                         $user->updateRecord('diagnosis_test', array(
                             'culture_performed' => Input::get('culture_performed'),
@@ -1209,7 +1192,6 @@ if ($user->isLoggedIn()) {
                         $successMessage = 'Diagnosis test  Successful Added';
                     }
                     Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
-                }
             } else {
                 $pageError = $validate->errors();
             }
