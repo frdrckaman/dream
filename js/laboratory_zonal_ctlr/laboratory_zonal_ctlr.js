@@ -103,16 +103,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const isLJChecked = document.querySelector('input[name="culture_method"][value="1"]')?.checked;
         const isMGITChecked = document.querySelector('input[name="culture_method"][value="2"]')?.checked;
 
-        // Show/Hide LJ Sections
         ljInoculationDateSection.style.display = isLJChecked ? "block" : "none";
         ljResultsDateSection.style.display = isLJChecked ? "block" : "none";
         ljResultsSection.style.display = isLJChecked ? "block" : "none";
 
-        // Show/Hide MGIT Sections
         mgitInoculationDateSection.style.display = isMGITChecked ? "block" : "none";
         mgitResultsDateSection.style.display = isMGITChecked ? "block" : "none";
         mgitResultsSection.style.display = isMGITChecked ? "block" : "none";
     }
+
 
     // Initialize on page load
     toggleCultureSections();
@@ -123,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleLpaSections();
     toggleSequencingResults();
     toggleCultureMethodSections();
+
 
     // Add event listeners
     culturePerformedRadios.forEach(radio => {

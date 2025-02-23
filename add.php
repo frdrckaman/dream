@@ -2182,7 +2182,7 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        } elseif (Input::get('add_drug_changes1')) {
+        } elseif (Input::get('add_drug_changes')) {
 
             $user->createRecord('treatment_changes', array(
                 'diagnosis_id' => "",  // You can replace this with a dynamic value
@@ -2202,7 +2202,7 @@ if ($user->isLoggedIn()) {
 
             $successMessage = 'Regimen Changes Added Successful';
 
-        } elseif (Input::get('update_drug_changes1')) {
+        } elseif (Input::get('update_drug_changes')) {
 
             $user->updateRecord('treatment_changes', array(
                 'enrollment_id' => $_GET['sid'],  // You can replace this with a dynamic value
@@ -2218,7 +2218,7 @@ if ($user->isLoggedIn()) {
             ), Input::get('id'));
 
             $successMessage = 'Regimen Changes Updated Successful';
-        } elseif (Input::get('delete_drug_changes1')) {
+        } elseif (Input::get('delete_drug_changes')) {
             $user->updateRecord('treatment_changes', array(
                 'status' => 0,
             ), Input::get('id'));
