@@ -285,28 +285,28 @@ if ($user->isLoggedIn()) {
     <style>
         /* Parent container */
         .container {
-            display: flex;
-            justify-content: center;
+            /* display: flex; */
+            /* justify-content: center; */
             /* Centers the button horizontally */
-            align-items: center;
+            /* align-items: center; */
             /* Centers the button vertically */
-            height: 100vh;
+            /* height: 100vh; */
             /* Full viewport height */
         }
 
         /* Button styles */
         .btn-custom {
-            width: 150px;
+            /* width: 150px; */
             /* Fixed width */
-            height: 40px;
+            /* height: 40px; */
             /* Fixed height */
-            display: flex;
+            /* display: flex; */
             /* Enables flexbox */
-            justify-content: center;
+            /* justify-content: center; */
             /* Centers text horizontally */
-            align-items: center;
+            /* align-items: center; */
             /* Centers text vertically */
-            text-align: center;
+            /* text-align: center; */
             /* Ensures text alignment */
         }
     </style>
