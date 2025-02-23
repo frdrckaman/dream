@@ -1,81 +1,58 @@
-// Handle Add Medication Form
-document.getElementById('addMedForm_Ajax').addEventListener('submit', function (e) {
-    e.preventDefault();
-    let formData = new FormData(this);
-    fetch('handle_diagnosis.php', {
-        method: 'POST',
-        headers: { 'X-Requested-With': 'XMLHttpRequest' },
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                $('#addMedModal').modal('hide');
-                refreshTable();
-            } else {
-                alert('Error: ' + data.message);
+$(document).ready(function () {
+    // Submit Add Form
+    $("#addMedForm_Ajax").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: "regimes_changes/save_med.php", // Backend PHP file to process form
+            type: "POST",
+            data: $(this).serialize(),
+            success: function (response) {
+                alert("Regimen added successfully!");
+                location.reload(); // Reload the page to update table
+            },
+            error: function () {
+                alert("Error adding regimen.");
             }
-        })
-        .catch(error => console.error('Error:', error));
-});
+        });
+    });
 
-// Handle Update Forms using Event Delegation
-document.addEventListener('submit', function (e) {
-    if (e.target.matches('.update-form')) {
+    // Submit Update Form
+    $(".update-form").submit(function (e) {
         e.preventDefault();
-        let formData = new FormData(e.target);
-        formData.append('update_drug_changes', '1');
-        fetch('handle_diagnosis.php', {
-            method: 'POST',
-            headers: { 'X-Requested-With': 'XMLHttpRequest' },
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    $(e.target).closest('.modal').modal('hide');
-                    refreshTable();
-                } else {
-                    alert('Error: ' + data.message);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    }
-});
+        let form = $(this);
+        $.ajax({
+            url: "update_med.php", // Backend PHP file to process update
+            type: "POST",
+            data: form.serialize(),
+            success: function (response) {
+                alert("Regimen updated successfully!");
+                location.reload();
+            },
+            error: function () {
+                alert("Error updating regimen.");
+            }
+        });
+    });
 
-// Handle Delete Forms
-document.addEventListener('submit', function (e) {
-    if (e.target.matches('.delete-form')) {
+    // Delete Regimen (Without Page Reload)
+    $(".delete-form").submit(function (e) {
         e.preventDefault();
-        if (!confirm('Are you sure you want to delete this entry?')) return;
-        let formData = new FormData(e.target);
-        formData.append('delete_drug_changes', '1');
-        fetch('handle_diagnosis.php', {
-            method: 'POST',
-            headers: { 'X-Requested-With': 'XMLHttpRequest' },
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    $(e.target).closest('.modal').modal('hide');
-                    refreshTable();
-                } else {
-                    alert('Error: ' + data.message);
+        let form = $(this);
+        let confirmed = confirm("Are you sure you want to delete this regimen?");
+        if (confirmed) {
+            $.ajax({
+                url: "delete_med.php", // Backend PHP file for deletion
+                type: "POST",
+                data: form.serialize(),
+                success: function (response) {
+                    alert("Regimen deleted successfully!");
+                    form.closest(".modal").modal("hide"); // Close modal
+                    location.reload(); // Refresh data
+                },
+                error: function () {
+                    alert("Error deleting regimen.");
                 }
-            })
-            .catch(error => console.error('Error:', error));
-    }
+            });
+        }
+    });
 });
-
-// Refresh Table Function
-function refreshTable() {
-    fetch('get_treatment_changes.php?sid=<?= $_GET['sid'] ?>', {
-        headers: { 'X-Requested-With': 'XMLHttpRequest' }
-    })
-        .then(response => response.text())
-        .then(html => {
-            document.getElementById('tbody').innerHTML = html;
-        })
-        .catch(error => console.error('Error:', error));
-}

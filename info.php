@@ -224,6 +224,29 @@ if ($user->isLoggedIn()) {
     <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+    <style>
+/* Parent container */
+.container {
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+    align-items: center; /* Centers the button vertically */
+    height: 100vh; /* Full viewport height */
+}
+
+/* Button styles */
+.btn-custom {
+    width: 150px; /* Fixed width */
+    height: 40px; /* Fixed height */
+    display: flex; /* Enables flexbox */
+    justify-content: center; /* Centers text horizontally */
+    align-items: center; /* Centers text vertically */
+    text-align: center; /* Ensures text alignment */
+}
+
+
+    </style>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -1248,17 +1271,19 @@ if ($user->isLoggedIn()) {
                                                             <?= $staff['firstname'] . '-' . $staff['lastname']; ?>
                                                         </td>
                                                         <td class="text-center">
+                                                            <!-- <div class="container"> -->
+
                                                             <?php if ($_GET['status'] == 1) { ?>
                                                                 <?php if ($value['eligible'] == 1) { ?>
                                                                     <!-- <td class="text-center"> -->
-                                                                    <a href="#" class="btn btn-success">
+                                                                    <a href="#" class="btn btn-success btn-custom">
                                                                         <i class="ri-edit-box-line">
                                                                         </i> Eligible
                                                                     </a>
                                                                     <!-- </td> -->
                                                                 <?php } else { ?>
                                                                     <!-- <td class="text-center"> -->
-                                                                    <a href="#" class="btn btn-danger"> <i
+                                                                    <a href="#" class="btn btn-danger btn-custom"> <i
                                                                             class="ri-edit-box-line"></i>Not
                                                                         Eligible</a>
                                                                     <!-- </td> -->
@@ -1267,12 +1292,12 @@ if ($user->isLoggedIn()) {
                                                                 <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
                                                                     <?php if ($override->get('screening', 'status', 1)) { ?>
                                                                         <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                            role=" button" class="btn btn-info"> Update Screening
+                                                                            role=" button" class="btn btn-info btn-custom"> Update Screening
                                                                             Data</a>&nbsp;&nbsp; <br><br>
 
                                                                     <?php } else { ?>
                                                                         <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                            role=" button" class="btn btn-warning"> Add Screening
+                                                                            role=" button" class="btn btn-warning btn-custom"> Add Screening
                                                                             Data</a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
                                                                     <hr>
@@ -1290,14 +1315,14 @@ if ($user->isLoggedIn()) {
 
                                                                         <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
                                                                             <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                                role=" button" class="btn btn-info"> View Enrollment Forms
+                                                                                role=" button" class="btn btn-info btn-custom"> View Enrollment Forms
                                                                             </a>&nbsp;&nbsp; <br><br>
                                                                         <?php } ?>
 
                                                                     <?php } else { ?>
                                                                         <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
                                                                             <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                                role=" button" class="btn btn-warning"> Add Enrollment Forms
+                                                                                role=" button" class="btn btn-warning btn-custom"> Add Enrollment Forms
                                                                             </a>&nbsp;&nbsp; <br><br>
                                                                         <?php } ?>
                                                                     <?php } ?>
@@ -1311,14 +1336,14 @@ if ($user->isLoggedIn()) {
 
                                                                         <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
                                                                             <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                                role=" button" class="btn btn-info"> View Enrollment Forms
+                                                                                role=" button" class="btn btn-info btn-custom"> View Enrollment Forms
                                                                             </a>&nbsp;&nbsp; <br><br>
                                                                         <?php } ?>
 
                                                                     <?php } else { ?>
                                                                         <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
                                                                             <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                                role=" button" class="btn btn-warning"> Add Enrollment Forms
+                                                                                role=" button" class="btn btn-warning btn-custom"> Add Enrollment Forms
                                                                             </a>&nbsp;&nbsp; <br><br>
                                                                         <?php } ?>
                                                                     <?php } ?>
@@ -1327,14 +1352,14 @@ if ($user->isLoggedIn()) {
                                                             <?php } else { ?>
                                                                 <?php if ($value['status'] == 1) { ?>
                                                                     <!-- <td class="text-center"> -->
-                                                                    <a href="#" class="btn btn-success">
+                                                                    <a href="#" class="btn btn-success btn-custom">
                                                                         <i class="ri-edit-box-line">
                                                                         </i> Enrolled
                                                                     </a>
                                                                     <!-- </td> -->
                                                                 <?php } else { ?>
                                                                     <!-- <td class="text-center"> -->
-                                                                    <a href="#" class="btn btn-danger"> <i
+                                                                    <a href="#" class="btn btn-danger btn-custom"> <i
                                                                             class="ri-edit-box-line"></i>Not
                                                                         Enrolled</a>
                                                                 </td>
@@ -1345,12 +1370,12 @@ if ($user->isLoggedIn()) {
                                                             <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
                                                                 <?php if ($override->get('screening', 'status', 1)) { ?>
                                                                     <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                        role=" button" class="btn btn-info"> Update Screening
+                                                                        role=" button" class="btn btn-info btn-custom"> Update Screening
                                                                         Data</a>&nbsp;&nbsp; <br><br>
 
                                                                 <?php } else { ?>
                                                                     <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                        role=" button" class="btn btn-warning"> Add Screening
+                                                                        role=" button" class="btn btn-warning btn-custom"> Add Screening
                                                                         Data</a>&nbsp;&nbsp; <br><br>
                                                                 <?php } ?>
                                                                 <hr>
@@ -1368,14 +1393,14 @@ if ($user->isLoggedIn()) {
 
                                                                     <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
                                                                         <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                            role=" button" class="btn btn-info"> View Enrollment Forms
+                                                                            role=" button" class="btn btn-info btn-custom"> View Enrollment Forms
                                                                         </a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
 
                                                                 <?php } else { ?>
                                                                     <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
                                                                         <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                            role=" button" class="btn btn-warning"> Add Enrollment Forms
+                                                                            role=" button" class="btn btn-warning btn-custom"> Add Enrollment Forms
                                                                         </a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
                                                                 <?php } ?>
@@ -1389,14 +1414,14 @@ if ($user->isLoggedIn()) {
 
                                                                     <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
                                                                         <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                            role=" button" class="btn btn-info"> View Enrollment Forms
+                                                                            role=" button" class="btn btn-info btn-custom"> View Enrollment Forms
                                                                         </a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
 
                                                                 <?php } else { ?>
                                                                     <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
                                                                         <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
-                                                                            role=" button" class="btn btn-warning"> Add Enrollment Forms
+                                                                            role=" button" class="btn btn-warning btn-custom"> Add Enrollment Forms
                                                                         </a>&nbsp;&nbsp; <br><br>
                                                                     <?php } ?>
                                                                 <?php } ?>
@@ -1404,9 +1429,10 @@ if ($user->isLoggedIn()) {
                                                                                                                                                                                     <hr>
                                                         <?php } ?>
                                                                 <a href="#delete_record<?= $sid ?>" role="button"
-                                                                    class="btn btn-orrange" data-toggle="modal">Delete Record</a>
+                                                                    class="btn btn-orrange btn-custom" data-toggle="modal">Delete Record</a>
                                                                 <!-- <a href="#restore_record<?= $sid ?>" role="button" class="btn btn-warning" data-toggle="modal">Restore -->
                                                                 <!-- Record</a> -->
+                                                                    <!-- </div> -->
                                                         </td>
 
                                                         <!-- <td class="text-center"> -->

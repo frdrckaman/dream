@@ -2200,7 +2200,7 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        } elseif (Input::get('add_drug_changes')) {
+        } elseif (Input::get('add_drug_changes1')) {
 
             $user->createRecord('treatment_changes', array(
                 'diagnosis_id' => "",  // You can replace this with a dynamic value
@@ -2220,7 +2220,7 @@ if ($user->isLoggedIn()) {
 
             $successMessage = 'Regimen Changes Added Successful';
 
-        } elseif (Input::get('update_drug_changes')) {
+        } elseif (Input::get('update_drug_changes1')) {
 
             $user->updateRecord('treatment_changes', array(
                 'enrollment_id' => $_GET['sid'],  // You can replace this with a dynamic value
@@ -2236,7 +2236,7 @@ if ($user->isLoggedIn()) {
             ), Input::get('id'));
 
             $successMessage = 'Regimen Changes Updated Successful';
-        } elseif (Input::get('delete_drug_changes')) {
+        } elseif (Input::get('delete_drug_changes1')) {
             $user->updateRecord('treatment_changes', array(
                 'status' => 0,
             ), Input::get('id'));
@@ -7659,8 +7659,8 @@ if ($user->isLoggedIn()) {
 
                 <div class="modal fade" id="addMedModal">
                     <div class="modal-dialog modal-lg">
-                        <form method="post">
-                            <!-- <form method="post" id="addMedForm_Ajax"> -->
+                        <!-- <form method="post"> -->
+                            <form method="post" id="addMedForm">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">Add new
@@ -8098,11 +8098,10 @@ if ($user->isLoggedIn()) {
                                                                 </td>
                                                             </tr>
                                                             <!-- Existing table rows and modals -->
-                                                            <!-- Add Medication Modal -->
                                                             <div class="modal fade" id="update_med<?= $treatment['id'] ?>">
                                                                 <div class="modal-dialog modal-lg">
                                                                     <form method="post" class="update-form"
-                                                                        data-id="<?= $treatment['id'] ?>">
+                                                                        data-id="<?= $treatment['id'] ?>" id="updateMedForm">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <h4 class="modal-title">Update
@@ -8220,7 +8219,7 @@ if ($user->isLoggedIn()) {
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <form method="post" class="delete-form"
-                                                                        data-id="<?= $treatment['id'] ?>">
+                                                                        data-id="<?= $treatment['id'] ?>" id="deleteMedForm">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <button type="button" class="close"
