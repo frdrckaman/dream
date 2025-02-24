@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const culturePerformedRadios = document.querySelectorAll('input[name="culture_performed"]');
-    const cultureMethodCheckboxes = document.querySelectorAll('input[name="culture_method"]');
+    const cultureMethodCheckboxes = document.querySelectorAll('input[name="culture_method[]"]');
 
     const cultureMethodSection = document.getElementById("culture_method_section");
     const microscopyTypeSection = document.getElementById("microscopy_type_section");
@@ -100,15 +100,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const isNanoporeDone = document.querySelector('input[name="nanopore_done"]:checked')?.value === "1";
         sequencingResultsSection.style.display = isNanoporeDone ? "block" : "none";
         nanoPoreResultsSection.style.display = isNanoporeDone ? "block" : "none"; // Added for nano_pore_results
-        EPI2ME_section.style.display = isNanoporeDone ? "block" : "none"; // Added for nano_pore_results
-        EPI2ME_vesrion_section.style.display = isNanoporeDone ? "block" : "none"; // Added for nano_pore_results
+        EPI2ME_section.style.display = isNanoporeDone ? "block" : "none"; // Added for EPI2ME_section
+        EPI2ME_vesrion_section.style.display = isNanoporeDone ? "block" : "none"; // Added for EPI2ME_vesrion_section
 
     }
 
     function toggleCultureMethodSections() {
-        const isLJChecked = document.querySelector('input[name="culture_method"][value="1"]')?.checked;
-        const isMGITChecked = document.querySelector('input[name="culture_method"][value="2"]')?.checked;
 
+        const isLJChecked = Array.from(cultureMethodCheckboxes).some(checkbox => checkbox.checked && checkbox.value === "1");
+        const isMGITChecked = Array.from(cultureMethodCheckboxes).some(checkbox => checkbox.checked && checkbox.value === "2");
 
         ljInoculationDateSection.style.display = isLJChecked ? "block" : "none";
         ljResultsDateSection.style.display = isLJChecked ? "block" : "none";
@@ -117,8 +117,6 @@ document.addEventListener("DOMContentLoaded", function () {
         mgitInoculationDateSection.style.display = isMGITChecked ? "block" : "none";
         mgitResultsDateSection.style.display = isMGITChecked ? "block" : "none";
         mgitResultsSection.style.display = isMGITChecked ? "block" : "none";
-
-        alert(cultureMethodCheckboxes);
 
     }
 
