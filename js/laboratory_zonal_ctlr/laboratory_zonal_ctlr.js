@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const culturePerformedRadios = document.querySelectorAll('input[name="culture_performed"]');
+    const cultureMethodCheckboxes = document.querySelectorAll('input[name="culture_method[]"]');
+
     const cultureMethodSection = document.getElementById("culture_method_section");
     const microscopyTypeSection = document.getElementById("microscopy_type_section");
     const culturePerformedSection = document.getElementById("culture_performed_section");
@@ -27,10 +29,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const firstLineSection = document.getElementById("first_line_section");
     const secondLineSection = document.getElementById("second_line_section");
 
+    // LJ and MGIT Sections
+    const ljInoculationDateSection = document.getElementById("lj_inoculation_date_section");
+    const ljResultsDateSection = document.getElementById("lj_results_date_section");
+    const ljResultsSection = document.getElementById("lj_results_section");
+
+    const mgitInoculationDateSection = document.getElementById("mgit_inoculation_date_section");
+    const mgitResultsDateSection = document.getElementById("mgit_results_date_section");
+    const mgitResultsSection = document.getElementById("mgit_results_section");
+
     // Event listener for nanopore_done
     const nanoporeRadios = document.querySelectorAll('input[name="nanopore_done"]');
     const sequencingResultsSection = document.getElementById("sequencing_results_section");
     const nanoPoreResultsSection = document.getElementById("nano_pore_results");
+    const EPI2ME_section = document.getElementById("EPI2ME_section");
+    const EPI2ME_vesrion_section = document.getElementById("EPI2ME_vesrion_section");
+
 
     function toggleCultureSections() {
         const isCulturePerformed = document.querySelector('input[name="culture_performed"]:checked')?.value === "1";
@@ -86,7 +100,26 @@ document.addEventListener("DOMContentLoaded", function () {
         const isNanoporeDone = document.querySelector('input[name="nanopore_done"]:checked')?.value === "1";
         sequencingResultsSection.style.display = isNanoporeDone ? "block" : "none";
         nanoPoreResultsSection.style.display = isNanoporeDone ? "block" : "none"; // Added for nano_pore_results
+        EPI2ME_section.style.display = isNanoporeDone ? "block" : "none"; // Added for EPI2ME_section
+        EPI2ME_vesrion_section.style.display = isNanoporeDone ? "block" : "none"; // Added for EPI2ME_vesrion_section
+
     }
+
+    function toggleCultureMethodSections() {
+
+        const isLJChecked = Array.from(cultureMethodCheckboxes).some(checkbox => checkbox.checked && checkbox.value === "1");
+        const isMGITChecked = Array.from(cultureMethodCheckboxes).some(checkbox => checkbox.checked && checkbox.value === "2");
+
+        ljInoculationDateSection.style.display = isLJChecked ? "block" : "none";
+        ljResultsDateSection.style.display = isLJChecked ? "block" : "none";
+        ljResultsSection.style.display = isLJChecked ? "block" : "none";
+
+        mgitInoculationDateSection.style.display = isMGITChecked ? "block" : "none";
+        mgitResultsDateSection.style.display = isMGITChecked ? "block" : "none";
+        mgitResultsSection.style.display = isMGITChecked ? "block" : "none";
+
+    }
+
 
     // Initialize on page load
     toggleCultureSections();
@@ -95,7 +128,9 @@ document.addEventListener("DOMContentLoaded", function () {
     togglePhenotypicSections();
     toggleXpertXdrSections();
     toggleLpaSections();
-    toggleSequencingResults(); // Added this line to handle nanopore_done logic
+    toggleSequencingResults();
+    toggleCultureMethodSections();
+
 
     // Add event listeners
     culturePerformedRadios.forEach(radio => {
@@ -132,5 +167,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     nanoporeRadios.forEach(radio => {
         radio.addEventListener("change", toggleSequencingResults);
+    });
+
+    cultureMethodCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", toggleCultureMethodSections);
     });
 });
