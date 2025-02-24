@@ -42,6 +42,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const nanoporeRadios = document.querySelectorAll('input[name="nanopore_done"]');
     const sequencingResultsSection = document.getElementById("sequencing_results_section");
     const nanoPoreResultsSection = document.getElementById("nano_pore_results");
+    const EPI2ME_section = document.getElementById("EPI2ME_section");
+    const EPI2ME_vesrion_section = document.getElementById("EPI2ME_vesrion_section");
+
 
     function toggleCultureSections() {
         const isCulturePerformed = document.querySelector('input[name="culture_performed"]:checked')?.value === "1";
@@ -97,11 +100,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const isNanoporeDone = document.querySelector('input[name="nanopore_done"]:checked')?.value === "1";
         sequencingResultsSection.style.display = isNanoporeDone ? "block" : "none";
         nanoPoreResultsSection.style.display = isNanoporeDone ? "block" : "none"; // Added for nano_pore_results
+        EPI2ME_section.style.display = isNanoporeDone ? "block" : "none"; // Added for nano_pore_results
+        EPI2ME_vesrion_section.style.display = isNanoporeDone ? "block" : "none"; // Added for nano_pore_results
+
     }
 
     function toggleCultureMethodSections() {
         const isLJChecked = document.querySelector('input[name="culture_method"][value="1"]')?.checked;
         const isMGITChecked = document.querySelector('input[name="culture_method"][value="2"]')?.checked;
+
 
         ljInoculationDateSection.style.display = isLJChecked ? "block" : "none";
         ljResultsDateSection.style.display = isLJChecked ? "block" : "none";
@@ -110,6 +117,9 @@ document.addEventListener("DOMContentLoaded", function () {
         mgitInoculationDateSection.style.display = isMGITChecked ? "block" : "none";
         mgitResultsDateSection.style.display = isMGITChecked ? "block" : "none";
         mgitResultsSection.style.display = isMGITChecked ? "block" : "none";
+
+        alert(cultureMethodCheckboxes);
+
     }
 
 

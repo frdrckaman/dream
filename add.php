@@ -5532,7 +5532,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-4" id="culture_method_section">
                                                     <label for="culture_method" class="form-label">6(b). Culture Method ?
                                                     </label><br>
-                                                    <span>(tick any that apply)</span><br><br>
+                                                    <span><small>(tick any that apply)</small></span><br><br>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
