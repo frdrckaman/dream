@@ -986,22 +986,83 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <h1>
                                     <?php
+                                    // if ($_GET['search_name']) {
+                                    //     $searchTerm = $_GET['search_name'];
+                                    //     if ($_GET['status'] == 1) {
+                                    //         $pagNum = $override->getWithLimitSearchNewsCount1('screening', 'status', 1, $searchTerm, 'pid');
+                                    //     } else if ($_GET['status'] == 2) {
+                                    //         $pagNum = $override->getWithLimitSearchNewsCount2('screening', 'status', 1, 'eligible', 1, $searchTerm, 'pid');
+                                    //     } else if ($_GET['status'] == 3) {
+                                    //         // $pagNum = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
+                                
+                                    //         $pagNum = $override->getWithLimitSearchNewsCount1('enrollment_form', 'status', 1, 'pid', $searchTerm);
+                                    //     } else if ($_GET['status'] == 4) {
+                                    //         $pagNum = $override->getWithLimitSearchNewsCount1('termination', 'status', 1, $searchTerm, 'pid');
+                                    //     } else if ($_GET['status'] == 5) {
+                                    //         $pagNum = $override->getWithLimitSearchNewsCount1('screening', 'status', 0, $searchTerm, 'pid');
+                                    //     } else {
+                                    //         $pagNum = $override->getWithLimitSearchNewsCount('screening', $searchTerm, 'pid');
+                                    //     }
+                                
+                                    //     $pages = ceil($pagNum / $numRec);
+                                    //     if (!$_GET['page'] || $_GET['page'] == 1) {
+                                    //         $page = 0;
+                                    //     } else {
+                                    //         $page = ($_GET['page'] * $numRec) - $numRec;
+                                    //     }
+                                
+                                    //     if ($_GET['status'] == 1) {
+                                    //         $data = $override->getWithLimitSearchNews1('screening', 'status', 1, $page, $numRec, $searchTerm, 'pid');
+                                    //     } else if ($_GET['status'] == 2) {
+                                    //         $data = $override->getWithLimitSearchNews2('screening', 'status', 1, 'eligible', 1, $page, $numRec, $searchTerm, 'pid');
+                                    //     } else if ($_GET['status'] == 3) {
+                                    //         // $data = $override->getWithLimit1Desc('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                
+                                    //         $data = $override->getWithLimitSearchNews1('enrollment_form', 'status', 1, 'pid', $searchTerm);
+                                    //     } else if ($_GET['status'] == 4) {
+                                    //         $data = $override->getWithLimitSearchNews1('termination', 'status', 1, $page, $numRec, $searchTerm, 'pid');
+                                    //     } else if ($_GET['status'] == 5) {
+                                    //         $data = $override->getWithLimitSearchNews1('screening', 'status', 0, $page, $numRec, $searchTerm, 'pid');
+                                    //     } else {
+                                    //         $data = $override->getWithLimitSearchNews('screening', $page, $numRec, $searchTerm, 'pid');
+                                    //     }
+                                
+                                    // } else {
+                                    //     $clients = $override->getWithLimit3('clients', 'status', 1, 'eligible', 1, 'site_id', $_GET['site_id'], $page, $numRec);
+                                    // if ($_GET['facility_id'] != null) {
+                                    //     if ($_GET['status'] == 1) {
+                                    //         $pagNum = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
+                                    //     } else if ($_GET['status'] == 2) {
+                                    //         $pagNum = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id']);
+                                    //     } else if ($_GET['status'] == 3) {
+                                    //         $pagNum = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+                                    //     } else if ($_GET['status'] == 4) {
+                                    //         $pagNum = $override->countData('termination', 'status', 1, 'facility_id', $_GET['facility_id']);
+                                    //     } else if ($_GET['status'] == 5) {
+                                    //         $pagNum = $override->countData('screening', 'status', 0, 'facility_id', $_GET['facility_id']);
+                                    //     } else {
+                                    //         $pagNum = $override->getCount('screening', 'facility_id', $_GET['facility_id']);
+                                    //     }
+                                    // } else {
+                                
                                     $pagNum = 0;
-                                    if ($_GET['search_name']) {
-                                        $searchTerm = $_GET['search_name'];
+
+                                    if ($user->data()->accessLevel == 1) {
+
                                         if ($_GET['status'] == 1) {
-                                            $pagNum = $override->getWithLimitSearchNewsCount1('screening', 'status', 1, $searchTerm, 'pid');
+                                            $pagNum = $override->getCount('screening', 'status', 1);
                                         } else if ($_GET['status'] == 2) {
-                                            $pagNum = $override->getWithLimitSearchNewsCount2('screening', 'status', 1, 'eligible', 1, $searchTerm, 'pid');
+                                            $pagNum = $override->countData('screening', 'status', 1, 'eligible', 1);
                                         } else if ($_GET['status'] == 3) {
-                                            // $pagNum = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
-                                
-                                            $pagNum = $override->getWithLimitSearchNewsCount1('enrollment_form', 'status', 1, 'pid', $searchTerm);
+                                            $pagNum = $override->getCount('enrollment_form', 'status', 1);
                                         } else if ($_GET['status'] == 4) {
-                                            $pagNum = $override->getWithLimitSearchNewsCount1('termination', 'status', 1, $searchTerm, 'pid');
-                                        } else {
-                                            $pagNum = $override->getWithLimitSearchNewsCount('screening', $searchTerm, 'pid');
+                                            $pagNum = $override->getCount('termination', 'status', 1);
+                                        } else if ($_GET['status'] == 5) {
+                                            $pagNum = $override->getCount('screening', 'status', 0);
+                                        } else if ($_GET['status'] == 6) {
+                                            $pagNum = $override->getNo('screening');
                                         }
+
 
                                         $pages = ceil($pagNum / $numRec);
                                         if (!$_GET['page'] || $_GET['page'] == 1) {
@@ -1010,60 +1071,35 @@ if ($user->isLoggedIn()) {
                                             $page = ($_GET['page'] * $numRec) - $numRec;
                                         }
 
+
                                         if ($_GET['status'] == 1) {
-                                            $data = $override->getWithLimitSearchNews1('screening', 'status', 1, $page, $numRec, $searchTerm, 'pid');
+                                            $data = $override->getWithLimitDesc('screening', 'status', 1, $page, $numRec);
                                         } else if ($_GET['status'] == 2) {
-                                            $data = $override->getWithLimitSearchNews2('screening', 'status', 1, 'eligible', 1, $page, $numRec, $searchTerm, 'pid');
+                                            $data = $override->getWithLimit1Desc('screening', 'status', 1, 'eligible', 1, $page, $numRec);
                                         } else if ($_GET['status'] == 3) {
-                                            // $data = $override->getWithLimit1Desc('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
-                                
-                                            $data = $override->getWithLimitSearchNews1('enrollment_form', 'status', 1, 'pid', $searchTerm);
+                                            $data = $override->getWithLimitDesc('enrollment_form', 'status', 1, $page, $numRec);
                                         } else if ($_GET['status'] == 4) {
-                                            $data = $override->getWithLimitSearchNews1('termination', 'status', 1, $page, $numRec, $searchTerm, 'pid');
-                                        } else {
-                                            $data = $override->getWithLimitSearchNews('screening', $page, $numRec, $searchTerm, 'pid');
+                                            $data = $override->getWithLimitDesc('termination', 'status', 1, $page, $numRec);
+                                        } else if ($_GET['status'] == 5) {
+                                            $data = $override->getWithLimitDesc('screening', 'status', 0, $page, $numRec);
+                                        } else if ($_GET['status'] == 6) {
+                                            $data = $override->getWithLimit0Desc('screening', $page, $numRec);
                                         }
 
+                                        // }
                                     } else {
-                                        //     $clients = $override->getWithLimit3('clients', 'status', 1, 'eligible', 1, 'site_id', $_GET['site_id'], $page, $numRec);
-                                        if ($user->data()->accessLevel == 1) {
-                                            if ($_GET['facility_id'] != null) {
-                                                if ($_GET['status'] == 1) {
-                                                    $pagNum = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
-                                                } else if ($_GET['status'] == 2) {
-                                                    $pagNum = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id']);
-                                                } else if ($_GET['status'] == 3) {
-                                                    $pagNum = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
-                                                } else if ($_GET['status'] == 4) {
-                                                    $pagNum = $override->countData('termination', 'status', 1, 'facility_id', $_GET['facility_id']);
-                                                } else {
-                                                    $pagNum = $override->getCount('screening', 'facility_id', $_GET['facility_id']);
-                                                }
-                                            } else {
-                                                if ($_GET['status'] == 1) {
-                                                    $pagNum = $override->getCount('screening', 'status', 1);
-                                                } else if ($_GET['status'] == 2) {
-                                                    $pagNum = $override->countData('screening', 'status', 1, 'eligible', 1);
-                                                } else if ($_GET['status'] == 3) {
-                                                    $pagNum = $override->getCount('enrollment_form', 'status', 1);
-                                                } else if ($_GET['status'] == 4) {
-                                                    $pagNum = $override->getCount('termination', 'status', 1);
-                                                } else {
-                                                    $pagNum = $override->getNo('screening');
-                                                }
-                                            }
-                                        } else {
-                                            if ($_GET['status'] == 1) {
-                                                $pagNum = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
-                                            } else if ($_GET['status'] == 2) {
-                                                $pagNum = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
-                                            } else if ($_GET['status'] == 3) {
-                                                $pagNum = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
-                                            } else if ($_GET['status'] == 4) {
-                                                $pagNum = $override->countData('termination', 'status', 1, 'facility_id', $user->data()->site_id);
-                                            } else {
-                                                $pagNum = $override->getData('screening');
-                                            }
+                                        if ($_GET['status'] == 1) {
+                                            $pagNum = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
+                                        } else if ($_GET['status'] == 2) {
+                                            $pagNum = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
+                                        } else if ($_GET['status'] == 3) {
+                                            $pagNum = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
+                                        } else if ($_GET['status'] == 4) {
+                                            $pagNum = $override->countData('termination', 'status', 1, 'facility_id', $user->data()->site_id);
+                                        } else if ($_GET['status'] == 5) {
+                                            $pagNum = $override->countData('screening', 'status', 0, 'facility_id', $user->data()->site_id);
+                                        } else if ($_GET['status'] == 6) {
+                                            $pagNum = $override->getData('screening');
                                         }
 
 
@@ -1074,47 +1110,67 @@ if ($user->isLoggedIn()) {
                                             $page = ($_GET['page'] * $numRec) - $numRec;
                                         }
 
-
-                                        if ($user->data()->accessLevel == 1) {
-                                            if ($_GET['facility_id'] != null) {
-                                                if ($_GET['status'] == 1) {
-                                                    $data = $override->getWithLimit1Desc('screening', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
-                                                } else if ($_GET['status'] == 2) {
-                                                    $data = $override->getWithLimit2Desc('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
-                                                } else if ($_GET['status'] == 3) {
-                                                    $data = $override->getWithLimit1Desc('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
-                                                } else if ($_GET['status'] == 4) {
-                                                    $data = $override->getWithLimit1Desc('termination', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
-                                                } else {
-                                                    $data = $override->getWithLimitDesc('screening', 'facility_id', $_GET['facility_id'], $page, $numRec);
-                                                }
-                                            } else {
-                                                if ($_GET['status'] == 1) {
-                                                    $data = $override->getWithLimitDesc('screening', 'status', 1, $page, $numRec);
-                                                } else if ($_GET['status'] == 2) {
-                                                    $data = $override->getWithLimit1Desc('screening', 'status', 1, 'eligible', 1, $page, $numRec);
-                                                } else if ($_GET['status'] == 3) {
-                                                    $data = $override->getWithLimitDesc('enrollment_form', 'status', 1, $page, $numRec);
-                                                } else if ($_GET['status'] == 4) {
-                                                    $data = $override->getWithLimitDesc('termination', 'status', 1, $page, $numRec);
-                                                } else {
-                                                    $data = $override->getWithLimit0Desc('screening', $page, $numRec);
-                                                }
-                                            }
-                                        } else {
-                                            if ($_GET['status'] == 1) {
-                                                $data = $override->getWithLimit1Desc('screening', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
-                                            } else if ($_GET['status'] == 2) {
-                                                $data = $override->getWithLimit2Desc('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
-                                            } else if ($_GET['status'] == 3) {
-                                                $data = $override->getWithLimit1Desc('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
-                                            } else if ($_GET['status'] == 4) {
-                                                $data = $override->getWithLimit1Desc('termination', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
-                                            } else {
-                                                $data = $override->getWithLimit0Desc('screening', $page, $numRec);
-                                            }
+                                        if ($_GET['status'] == 1) {
+                                            $data = $override->getWithLimit1Desc('screening', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                        } else if ($_GET['status'] == 2) {
+                                            $data = $override->getWithLimit2Desc('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                        } else if ($_GET['status'] == 3) {
+                                            $data = $override->getWithLimit1Desc('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                        } else if ($_GET['status'] == 4) {
+                                            $data = $override->getWithLimit1Desc('termination', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                        } else if ($_GET['status'] == 5) {
+                                            $data = $override->getWithLimit1Desc('screening', 'status', 0, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                        } else if ($_GET['status'] == 6) {
+                                            $data = $override->getWithLimit0Desc('screening', $page, $numRec);
                                         }
                                     }
+
+                                    // if ($user->data()->accessLevel == 1) {
+                                    //     // if ($_GET['facility_id'] != null) {
+                                    //     //     if ($_GET['status'] == 1) {
+                                    //     //         $data = $override->getWithLimit1Desc('screening', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                    //     //     } else if ($_GET['status'] == 2) {
+                                    //     //         $data = $override->getWithLimit2Desc('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                    //     //     } else if ($_GET['status'] == 3) {
+                                    //     //         $data = $override->getWithLimit1Desc('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                    //     //     } else if ($_GET['status'] == 4) {
+                                    //     //         $data = $override->getWithLimit1Desc('termination', 'status', 1, 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                    //     //     } else if ($_GET['status'] == 5) {
+                                    //     //         $data = $override->getWithLimit1Desc('screening', 'status', 0, 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                    //     //     } else {
+                                    //     //         $data = $override->getWithLimitDesc('screening', 'facility_id', $_GET['facility_id'], $page, $numRec);
+                                    //     //     }
+                                    //     // } else {
+                                    //         if ($_GET['status'] == 1) {
+                                    //             $data = $override->getWithLimitDesc('screening', 'status', 1, $page, $numRec);
+                                    //         } else if ($_GET['status'] == 2) {
+                                    //             $data = $override->getWithLimit1Desc('screening', 'status', 1, 'eligible', 1, $page, $numRec);
+                                    //         } else if ($_GET['status'] == 3) {
+                                    //             $data = $override->getWithLimitDesc('enrollment_form', 'status', 1, $page, $numRec);
+                                    //         } else if ($_GET['status'] == 4) {
+                                    //             $data = $override->getWithLimitDesc('termination', 'status', 1, $page, $numRec);
+                                    //         } else if ($_GET['status'] == 5) {
+                                    //             $data = $override->getWithLimitDesc('screening', 'status', 0, $page, $numRec);
+                                    //         } else {
+                                    //             $data = $override->getWithLimit0Desc('screening', $page, $numRec);
+                                    //         }
+                                    //     // }
+                                    // } else {
+                                    //     if ($_GET['status'] == 1) {
+                                    //         $data = $override->getWithLimit1Desc('screening', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                    //     } else if ($_GET['status'] == 2) {
+                                    //         $data = $override->getWithLimit2Desc('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                    //     } else if ($_GET['status'] == 3) {
+                                    //         $data = $override->getWithLimit1Desc('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                    //     } else if ($_GET['status'] == 4) {
+                                    //         $data = $override->getWithLimit1Desc('termination', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                    //     } else if ($_GET['status'] == 5) {
+                                    //         $data = $override->getWithLimit1Desc('screening', 'status', 0, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                    //     } else {
+                                    //         $data = $override->getWithLimit0Desc('screening', $page, $numRec);
+                                    //     }
+                                    // }
+                                    // }
                                     ?>
                                     <?php
                                     if ($_GET['status'] == 1) {
@@ -1131,6 +1187,14 @@ if ($user->isLoggedIn()) {
                                         <?php
                                     } elseif ($_GET['status'] == 4) {
                                         echo $title = 'End Study';
+                                        ?>
+                                        <?php
+                                    } elseif ($_GET['status'] == 5) {
+                                        echo $title = 'Deleted';
+                                        ?>
+                                        <?php
+                                    } elseif ($_GET['status'] == 6) {
+                                        echo $title = 'All';
                                         ?>
                                         <?php
                                     } ?>
@@ -1172,6 +1236,14 @@ if ($user->isLoggedIn()) {
                                                             <?php
                                                         } elseif ($_GET['status'] == 4) { ?>
                                                             <h3 class="card-title">List of Terminated Clients</h3> &nbsp;&nbsp;
+                                                            <span class="badge badge-info right"><?= $pagNum; ?></span>
+                                                            <?php
+                                                        } elseif ($_GET['status'] == 5) { ?>
+                                                            <h3 class="card-title">List of Deleted Clients</h3> &nbsp;&nbsp;
+                                                            <span class="badge badge-info right"><?= $pagNum; ?></span>
+                                                            <?php
+                                                        } elseif ($_GET['status'] == 6) { ?>
+                                                            <h3 class="card-title">List of All Clients</h3> &nbsp;&nbsp;
                                                             <span class="badge badge-info right"><?= $pagNum; ?></span>
                                                             <?php
                                                         } ?>
@@ -1256,7 +1328,7 @@ if ($user->isLoggedIn()) {
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
+                                                    <?php if ($_GET['status'] == 1 || $_GET['status'] == 2 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                         <th>Screening Date /
                                                             <hr> Time
                                                         </th>
@@ -1295,7 +1367,7 @@ if ($user->isLoggedIn()) {
                                                     }
                                                     ?>
                                                     <tr>
-                                                        <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
+                                                        <?php if ($_GET['status'] == 1 || $_GET['status'] == 2 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                             <td class="table-user">
                                                                 <?= $value['screening_date']; ?>
                                                                 /
@@ -1339,7 +1411,7 @@ if ($user->isLoggedIn()) {
                                                         <td class="text-center">
                                                             <!-- <div class="container"> -->
 
-                                                            <?php if ($_GET['status'] == 1) { ?>
+                                                            <?php if ($_GET['status'] == 1 || $_GET['status'] == 2 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                 <?php if ($value['eligible'] == 1) { ?>
                                                                     <!-- <td class="text-center"> -->
                                                                     <a href="#" class="btn btn-success btn-custom">
@@ -1355,7 +1427,7 @@ if ($user->isLoggedIn()) {
                                                                     <!-- </td> -->
                                                                 <?php } ?>
                                                                 <hr>
-                                                                <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
+                                                                <?php if ($_GET['status'] == 1 || $_GET['status'] == 2 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                     <?php if ($override->get('screening', 'status', 1)) { ?>
                                                                         <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                             role=" button" class="btn btn-info btn-custom"> Update Screening
@@ -1379,7 +1451,7 @@ if ($user->isLoggedIn()) {
                                                                         $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $sid)
                                                                     ) { ?>
 
-                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                             <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                                 role=" button" class="btn btn-info btn-custom"> View Enrollment
                                                                                 Forms
@@ -1387,7 +1459,7 @@ if ($user->isLoggedIn()) {
                                                                         <?php } ?>
 
                                                                     <?php } else { ?>
-                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                             <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                                 role=" button" class="btn btn-warning btn-custom"> Add
                                                                                 Enrollment Forms
@@ -1402,7 +1474,7 @@ if ($user->isLoggedIn()) {
                                                                         $override->getNews('respiratory', 'status', 1, 'enrollment_id', $sid)
                                                                     ) { ?>
 
-                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                             <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                                 role=" button" class="btn btn-info btn-custom"> View Enrollment
                                                                                 Forms
@@ -1410,7 +1482,7 @@ if ($user->isLoggedIn()) {
                                                                         <?php } ?>
 
                                                                     <?php } else { ?>
-                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                             <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                                 role=" button" class="btn btn-warning btn-custom"> Add
                                                                                 Enrollment Forms
@@ -1437,7 +1509,7 @@ if ($user->isLoggedIn()) {
 
                                                             <?php } ?>
 
-                                                            <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
+                                                            <?php if ($_GET['status'] == 1 || $_GET['status'] == 2 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                 <?php if ($override->get('screening', 'status', 1)) { ?>
                                                                     <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                         role=" button" class="btn btn-info btn-custom"> Update Screening
@@ -1461,7 +1533,7 @@ if ($user->isLoggedIn()) {
                                                                     $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $sid)
                                                                 ) { ?>
 
-                                                                    <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                    <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                         <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                             role=" button" class="btn btn-info btn-custom"> View Enrollment
                                                                             Forms
@@ -1469,7 +1541,7 @@ if ($user->isLoggedIn()) {
                                                                     <?php } ?>
 
                                                                 <?php } else { ?>
-                                                                    <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                    <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                         <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                             role=" button" class="btn btn-warning btn-custom"> Add Enrollment
                                                                             Forms
@@ -1484,7 +1556,7 @@ if ($user->isLoggedIn()) {
                                                                     $override->getNews('respiratory', 'status', 1, 'enrollment_id', $sid)
                                                                 ) { ?>
 
-                                                                    <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                    <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                         <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                             role=" button" class="btn btn-info btn-custom"> View Enrollment
                                                                             Forms
@@ -1492,7 +1564,7 @@ if ($user->isLoggedIn()) {
                                                                     <?php } ?>
 
                                                                 <?php } else { ?>
-                                                                    <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3) { ?>
+                                                                    <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                         <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                             role=" button" class="btn btn-warning btn-custom"> Add Enrollment
                                                                             Forms
@@ -1589,7 +1661,7 @@ if ($user->isLoggedIn()) {
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <?php if ($_GET['status'] == 1 || $_GET['status'] == 2) { ?>
+                                                    <?php if ($_GET['status'] == 1 || $_GET['status'] == 2 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                         <th>Screening Date /
                                                             <hr> Time
                                                         </th>
@@ -1858,10 +1930,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($enrollment['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $enrollment['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($enrollment['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $enrollment['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3431,10 +3503,10 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks /Comments</label>
                                                                                         <textarea class="form-control"
                                                                                             name="comments" rows="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php if ($visit['comments']) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo $visit['comments'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php if ($visit['comments']) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                echo $visit['comments'];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

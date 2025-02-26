@@ -999,9 +999,15 @@ class OverideData
         return $result;
     }
 
-    public function getWithLimitSearchNews1($table, $where, $id, $pid, $searchTerm)
+    // public function getWithLimitSearchNews1($table, $where, $id, $pid, $searchTerm)
+    // {
+    //     $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND ($pid LIKE '%$searchTerm%')");
+    //     $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    //     return $result;
+    // }
+    public function getWithLimitSearchNews1($table, $searchTerm, $where, $where1, $id1, $where2, $id2, $where3, $id3)
     {
-        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND ($pid LIKE '%$searchTerm%')");
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where1 = '$id1' AND $where2 = '$id2' AND $where3 = '$id3' AND ($where LIKE '%$searchTerm%')");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
