@@ -27,24 +27,53 @@ document.addEventListener('DOMContentLoaded', function () {
         const consentYes = document.querySelector('input[name="consent"]:checked')?.value === '1';
         const consentDate = document.getElementById('consent_date').value;
         const screeningDate = document.getElementById('screening_date').value;
-        const errorElement = document.getElementById('consent_date_error');
+        const consentDateErrorElement = document.getElementById('consent_date_error');
+        const screeningDateErrorElement = document.getElementById('screening_date_error');
 
+        let valid = true;
+
+        // Validate screening date
+        if (screeningDate > '2025-01-20') {
+            e.preventDefault();
+            screeningDateErrorElement.style.display = 'block';
+            screeningDateErrorElement.style.color = 'red';
+            screeningDateErrorElement.style.marginTop = '5px';
+            screeningDateErrorElement.textContent = 'Screening date must be on or before 2025-01-20.';
+            valid = false;
+        } else {
+            screeningDateErrorElement.style.display = 'none';
+            screeningDateErrorElement.textContent = '';
+        }
+
+        // Validate consent date
         if (consentYes && (!consentDate || consentDate < screeningDate)) {
             e.preventDefault();
-            errorElement.style.display = 'block';
-            errorElement.style.color = 'red';
-            errorElement.style.marginTop = '5px';
-            errorElement.textContent = 'Consent date is required and must be on or after the screening date if consent is selected as "Yes".';
+            consentDateErrorElement.style.display = 'block';
+            consentDateErrorElement.style.color = 'red';
+            consentDateErrorElement.style.marginTop = '5px';
+            consentDateErrorElement.textContent = 'Consent date is required and must be on or after the screening date if consent is selected as "Yes".';
+            valid = false;
         } else {
-            errorElement.style.display = 'none';
-            errorElement.textContent = '';
+            consentDateErrorElement.style.display = 'none';
+            consentDateErrorElement.textContent = '';
+        }
+
+        if (!valid) {
+            e.preventDefault();
         }
     });
 
     // Real-time validation for consent date
     document.getElementById('consent_date').addEventListener('input', function () {
-        const errorElement = document.getElementById('consent_date_error');
-        errorElement.style.display = 'none';
-        errorElement.textContent = '';
+        const consentDateErrorElement = document.getElementById('consent_date_error');
+        consentDateErrorElement.style.display = 'none';
+        consentDateErrorElement.textContent = '';
+    });
+
+    // Real-time validation for screening date
+    document.getElementById('screening_date').addEventListener('input', function () {
+        const screeningDateErrorElement = document.getElementById('screening_date_error');
+        screeningDateErrorElement.style.display = 'none';
+        screeningDateErrorElement.textContent = '';
     });
 });
