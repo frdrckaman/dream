@@ -1505,9 +1505,9 @@ if ($user->isLoggedIn()) {
                                                                             class="ri-edit-box-line"></i>Not
                                                                         Enrolled</a>
                                                                 </td>
-                                                                <hr>
 
                                                             <?php } ?>
+                                                                <hr>
 
                                                             <?php if ($_GET['status'] == 1 || $_GET['status'] == 2 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                 <?php if ($override->get('screening', 'status', 1)) { ?>
