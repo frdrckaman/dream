@@ -751,447 +751,447 @@ if ($user->isLoggedIn()) {
                     $verified_by = $user->data()->id;
                 }
 
-                    if ($individual) {
-                        $user->updateRecord('diagnosis_test', array(
-                            'culture_performed' => Input::get('culture_performed'),
-                            'culture_method' => $culture_method,
-                            'culture_results' => Input::get('culture_results'),
-                            'phenotypic_performed' => Input::get('phenotypic_performed'),
-                            'phenotypic_date_performed' => Input::get('phenotypic_date_performed'),
-                            'phenotypic_date_results' => Input::get('phenotypic_date_results'),
-                            'date_sputum_received' => Input::get('date_sputum_received'),
-                            'appearance' => Input::get('appearance'),
-                            'sample_volume' => Input::get('sample_volume'),
-                            'unique_lab_no' => Input::get('unique_lab_no'),
-                            'microscopy_type' => Input::get('microscopy_type'),
-                            'microscopy_results' => Input::get('microscopy_results'),
-                            'microscopy_date' => Input::get('microscopy_date'),
-                            'lj_inoculation_date' => Input::get('lj_inoculation_date'),
-                            'lj_results_date' => Input::get('lj_results_date'),
-                            'lj_results' => Input::get('lj_results'),
-                            'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
-                            'mgit_results_date' => Input::get('mgit_results_date'),
-                            'mgit_results' => Input::get('mgit_results'),
-                            'culture_isolate' => Input::get('culture_isolate'),
-                            'isolate_date' => Input::get('isolate_date'),
-                            'rifampicin' => Input::get('rifampicin'),
-                            'isoniazid' => Input::get('isoniazid'),
-                            'levofloxacin' => Input::get('levofloxacin'),
-                            'moxifloxacin' => Input::get('moxifloxacin'),
-                            'bedaquiline' => Input::get('bedaquiline'),
-                            'linezolid' => Input::get('linezolid'),
-                            'clofazimine' => Input::get('clofazimine'),
-                            'cycloserine' => Input::get('cycloserine'),
-                            'terizidone' => Input::get('terizidone'),
-                            'ethambutol' => Input::get('ethambutol'),
-                            'delamanid' => Input::get('delamanid'),
-                            'pyrazinamide' => Input::get('pyrazinamide'),
-                            'imipenem' => Input::get('imipenem'),
-                            'cilastatin' => Input::get('cilastatin'),
-                            'meropenem' => Input::get('meropenem'),
-                            'amikacin' => Input::get('amikacin'),
-                            'streptomycin' => Input::get('streptomycin'),
-                            'ethionamide' => Input::get('ethionamide'),
-                            'prothionamide' => Input::get('prothionamide'),
-                            'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
-                            'nano_rifampicin' => Input::get('nano_rifampicin'),
-                            'nano_isoniazid' => Input::get('nano_isoniazid'),
-                            'nano_levofloxacin' => Input::get('nano_levofloxacin'),
-                            'nano_moxifloxacin' => Input::get('nano_moxifloxacin'),
-                            'nano_bedaquiline' => Input::get('nano_bedaquiline'),
-                            'nano_linezolid' => Input::get('nano_linezolid'),
-                            'nano_clofazimine' => Input::get('nano_clofazimine'),
-                            'nano_cycloserine' => Input::get('nano_cycloserine'),
-                            'nano_delamanid' => Input::get('nano_delamanid'),
-                            'nano_terizidone' => Input::get('nano_terizidone'),
-                            'nano_ethambutol' => Input::get('nano_ethambutol'),
-                            'nano_pyrazinamide' => Input::get('nano_pyrazinamide'),
-                            'nano_cilastatin' => Input::get('nano_cilastatin'),
-                            'nano_imipenem' => Input::get('nano_imipenem'),
-                            'nano_meropenem' => Input::get('nano_meropenem'),
-                            'nano_amikacin' => Input::get('nano_amikacin'),
-                            'nano_streptomycin' => Input::get('nano_streptomycin'),
-                            'nano_ethionamide' => Input::get('nano_ethionamide'),
-                            'nano_prothionamide' => Input::get('nano_prothionamide'),
-                            'nano_para_aminosalicylic_acid' => Input::get('nano_para_aminosalicylic_acid'),
-                            'nano_capreomycin' => Input::get('nano_capreomycin'),
-                            'nano_kanamycin' => Input::get('nano_kanamycin'),
-                            'nano_pretomanid' => Input::get('nano_pretomanid'),
-                            'xpert_xdr_performed' => Input::get('xpert_xdr_performed'),
-                            'xpert_xdr_date_performed' => Input::get('xpert_xdr_date_performed'),
-                            'isoniazid2' => Input::get('isoniazid2'),
-                            'fluoroquinolones' => Input::get('fluoroquinolones'),
-                            'amikacin2' => Input::get('amikacin2'),
-                            'kanamycin' => Input::get('kanamycin'),
-                            'capreomycin' => Input::get('capreomycin'),
-                            'ethionamide2' => Input::get('ethionamide2'),
-                            'first_line_drugs' => $first_line_drugs,
-                            'second_line_drugs' => $second_line_drugs,
-                            'version_number' => Input::get('version_number'),
-                            'lot_number' => Input::get('lot_number'),
-                            'mutations_detected_list' => Input::get('mutations_detected_list'),
-                            'nanopore_done' => Input::get('nanopore_done'),
-                            'sequencing_results' => Input::get('sequencing_results'),
-                            'EPI2ME' => Input::get('EPI2ME'),
-                            'EPI2ME_vesrion' => Input::get('EPI2ME_vesrion'),
-                            'first_line_lpa' => Input::get('first_line_lpa'),
-                            'first_line_lpa_date' => Input::get('first_line_lpa_date'),
-                            'second_line_lpa' => Input::get('second_line_lpa'),
-                            'second_line_lpa_date' => Input::get('second_line_lpa_date'),
-                            'lpa1_mtb' => Input::get('lpa1_mtb'),
-                            'lpa1_rif' => Input::get('lpa1_rif'),
-                            'lpa1_inh' => Input::get('lpa1_inh'),
-                            'lpa2_mtb' => Input::get('lpa2_mtb'),
-                            'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
-                            'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
-                            'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
-                            'remarks' => Input::get('remarks'),
-                            'form_status' => Input::get('form_status'),
-                            'date_completed' => $date_completed,
-                            'completed_by' => $completed_by,
-                            'date_verified' => $date_verified,
-                            'verified_by' => $verified_by,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $screening['facility_id'],
-                        ), $individual[0]['id']);
+                if ($individual) {
+                    $user->updateRecord('diagnosis_test', array(
+                        'culture_performed' => Input::get('culture_performed'),
+                        'culture_method' => $culture_method,
+                        'culture_results' => Input::get('culture_results'),
+                        'phenotypic_performed' => Input::get('phenotypic_performed'),
+                        'phenotypic_date_performed' => Input::get('phenotypic_date_performed'),
+                        'phenotypic_date_results' => Input::get('phenotypic_date_results'),
+                        'date_sputum_received' => Input::get('date_sputum_received'),
+                        'appearance' => Input::get('appearance'),
+                        'sample_volume' => Input::get('sample_volume'),
+                        'unique_lab_no' => Input::get('unique_lab_no'),
+                        'microscopy_type' => Input::get('microscopy_type'),
+                        'microscopy_results' => Input::get('microscopy_results'),
+                        'microscopy_date' => Input::get('microscopy_date'),
+                        'lj_inoculation_date' => Input::get('lj_inoculation_date'),
+                        'lj_results_date' => Input::get('lj_results_date'),
+                        'lj_results' => Input::get('lj_results'),
+                        'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
+                        'mgit_results_date' => Input::get('mgit_results_date'),
+                        'mgit_results' => Input::get('mgit_results'),
+                        'culture_isolate' => Input::get('culture_isolate'),
+                        'isolate_date' => Input::get('isolate_date'),
+                        'rifampicin' => Input::get('rifampicin'),
+                        'isoniazid' => Input::get('isoniazid'),
+                        'levofloxacin' => Input::get('levofloxacin'),
+                        'moxifloxacin' => Input::get('moxifloxacin'),
+                        'bedaquiline' => Input::get('bedaquiline'),
+                        'linezolid' => Input::get('linezolid'),
+                        'clofazimine' => Input::get('clofazimine'),
+                        'cycloserine' => Input::get('cycloserine'),
+                        'terizidone' => Input::get('terizidone'),
+                        'ethambutol' => Input::get('ethambutol'),
+                        'delamanid' => Input::get('delamanid'),
+                        'pyrazinamide' => Input::get('pyrazinamide'),
+                        'imipenem' => Input::get('imipenem'),
+                        'cilastatin' => Input::get('cilastatin'),
+                        'meropenem' => Input::get('meropenem'),
+                        'amikacin' => Input::get('amikacin'),
+                        'streptomycin' => Input::get('streptomycin'),
+                        'ethionamide' => Input::get('ethionamide'),
+                        'prothionamide' => Input::get('prothionamide'),
+                        'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
+                        'nano_rifampicin' => Input::get('nano_rifampicin'),
+                        'nano_isoniazid' => Input::get('nano_isoniazid'),
+                        'nano_levofloxacin' => Input::get('nano_levofloxacin'),
+                        'nano_moxifloxacin' => Input::get('nano_moxifloxacin'),
+                        'nano_bedaquiline' => Input::get('nano_bedaquiline'),
+                        'nano_linezolid' => Input::get('nano_linezolid'),
+                        'nano_clofazimine' => Input::get('nano_clofazimine'),
+                        'nano_cycloserine' => Input::get('nano_cycloserine'),
+                        'nano_delamanid' => Input::get('nano_delamanid'),
+                        'nano_terizidone' => Input::get('nano_terizidone'),
+                        'nano_ethambutol' => Input::get('nano_ethambutol'),
+                        'nano_pyrazinamide' => Input::get('nano_pyrazinamide'),
+                        'nano_cilastatin' => Input::get('nano_cilastatin'),
+                        'nano_imipenem' => Input::get('nano_imipenem'),
+                        'nano_meropenem' => Input::get('nano_meropenem'),
+                        'nano_amikacin' => Input::get('nano_amikacin'),
+                        'nano_streptomycin' => Input::get('nano_streptomycin'),
+                        'nano_ethionamide' => Input::get('nano_ethionamide'),
+                        'nano_prothionamide' => Input::get('nano_prothionamide'),
+                        'nano_para_aminosalicylic_acid' => Input::get('nano_para_aminosalicylic_acid'),
+                        'nano_capreomycin' => Input::get('nano_capreomycin'),
+                        'nano_kanamycin' => Input::get('nano_kanamycin'),
+                        'nano_pretomanid' => Input::get('nano_pretomanid'),
+                        'xpert_xdr_performed' => Input::get('xpert_xdr_performed'),
+                        'xpert_xdr_date_performed' => Input::get('xpert_xdr_date_performed'),
+                        'isoniazid2' => Input::get('isoniazid2'),
+                        'fluoroquinolones' => Input::get('fluoroquinolones'),
+                        'amikacin2' => Input::get('amikacin2'),
+                        'kanamycin' => Input::get('kanamycin'),
+                        'capreomycin' => Input::get('capreomycin'),
+                        'ethionamide2' => Input::get('ethionamide2'),
+                        'first_line_drugs' => $first_line_drugs,
+                        'second_line_drugs' => $second_line_drugs,
+                        'version_number' => Input::get('version_number'),
+                        'lot_number' => Input::get('lot_number'),
+                        'mutations_detected_list' => Input::get('mutations_detected_list'),
+                        'nanopore_done' => Input::get('nanopore_done'),
+                        'sequencing_results' => Input::get('sequencing_results'),
+                        'EPI2ME' => Input::get('EPI2ME'),
+                        'EPI2ME_vesrion' => Input::get('EPI2ME_vesrion'),
+                        'first_line_lpa' => Input::get('first_line_lpa'),
+                        'first_line_lpa_date' => Input::get('first_line_lpa_date'),
+                        'second_line_lpa' => Input::get('second_line_lpa'),
+                        'second_line_lpa_date' => Input::get('second_line_lpa_date'),
+                        'lpa1_mtb' => Input::get('lpa1_mtb'),
+                        'lpa1_rif' => Input::get('lpa1_rif'),
+                        'lpa1_inh' => Input::get('lpa1_inh'),
+                        'lpa2_mtb' => Input::get('lpa2_mtb'),
+                        'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
+                        'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
+                        'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
+                        'remarks' => Input::get('remarks'),
+                        'form_status' => Input::get('form_status'),
+                        'date_completed' => $date_completed,
+                        'completed_by' => $completed_by,
+                        'date_verified' => $date_verified,
+                        'verified_by' => $verified_by,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'facility_id' => $screening['facility_id'],
+                    ), $individual[0]['id']);
 
-                        $user->createRecord('diagnosis_test_records', array(
-                            'diagnosis_test_id' => $individual[0]['id'],
-                            'pid' => $screening['pid'],
-                            'culture_performed' => Input::get('culture_performed'),
-                            'culture_method' => $culture_method,
-                            'culture_results' => Input::get('culture_results'),
-                            'phenotypic_performed' => Input::get('phenotypic_performed'),
-                            'phenotypic_date_performed' => Input::get('phenotypic_date_performed'),
-                            'phenotypic_date_results' => Input::get('phenotypic_date_results'),
-                            'date_sputum_received' => Input::get('date_sputum_received'),
-                            'appearance' => Input::get('appearance'),
-                            'sample_volume' => Input::get('sample_volume'),
-                            'unique_lab_no' => Input::get('unique_lab_no'),
-                            'microscopy_type' => Input::get('microscopy_type'),
-                            'microscopy_results' => Input::get('microscopy_results'),
-                            'microscopy_date' => Input::get('microscopy_date'),
-                            'lj_inoculation_date' => Input::get('lj_inoculation_date'),
-                            'lj_results_date' => Input::get('lj_results_date'),
-                            'lj_results' => Input::get('lj_results'),
-                            'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
-                            'mgit_results_date' => Input::get('mgit_results_date'),
-                            'mgit_results' => Input::get('mgit_results'),
-                            'culture_isolate' => Input::get('culture_isolate'),
-                            'isolate_date' => Input::get('isolate_date'),
-                            'rifampicin' => Input::get('rifampicin'),
-                            'isoniazid' => Input::get('isoniazid'),
-                            'levofloxacin' => Input::get('levofloxacin'),
-                            'moxifloxacin' => Input::get('moxifloxacin'),
-                            'bedaquiline' => Input::get('bedaquiline'),
-                            'linezolid' => Input::get('linezolid'),
-                            'clofazimine' => Input::get('clofazimine'),
-                            'cycloserine' => Input::get('cycloserine'),
-                            'terizidone' => Input::get('terizidone'),
-                            'ethambutol' => Input::get('ethambutol'),
-                            'delamanid' => Input::get('delamanid'),
-                            'pyrazinamide' => Input::get('pyrazinamide'),
-                            'imipenem' => Input::get('imipenem'),
-                            'cilastatin' => Input::get('cilastatin'),
-                            'meropenem' => Input::get('meropenem'),
-                            'amikacin' => Input::get('amikacin'),
-                            'streptomycin' => Input::get('streptomycin'),
-                            'ethionamide' => Input::get('ethionamide'),
-                            'prothionamide' => Input::get('prothionamide'),
-                            'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
-                            'nano_rifampicin' => Input::get('nano_rifampicin'),
-                            'nano_isoniazid' => Input::get('nano_isoniazid'),
-                            'nano_levofloxacin' => Input::get('nano_levofloxacin'),
-                            'nano_moxifloxacin' => Input::get('nano_moxifloxacin'),
-                            'nano_bedaquiline' => Input::get('nano_bedaquiline'),
-                            'nano_linezolid' => Input::get('nano_linezolid'),
-                            'nano_clofazimine' => Input::get('nano_clofazimine'),
-                            'nano_cycloserine' => Input::get('nano_cycloserine'),
-                            'nano_delamanid' => Input::get('nano_delamanid'),
-                            'nano_terizidone' => Input::get('nano_terizidone'),
-                            'nano_ethambutol' => Input::get('nano_ethambutol'),
-                            'nano_pyrazinamide' => Input::get('nano_pyrazinamide'),
-                            'nano_cilastatin' => Input::get('nano_cilastatin'),
-                            'nano_imipenem' => Input::get('nano_imipenem'),
-                            'nano_meropenem' => Input::get('nano_meropenem'),
-                            'nano_amikacin' => Input::get('nano_amikacin'),
-                            'nano_streptomycin' => Input::get('nano_streptomycin'),
-                            'nano_ethionamide' => Input::get('nano_ethionamide'),
-                            'nano_prothionamide' => Input::get('nano_prothionamide'),
-                            'nano_para_aminosalicylic_acid' => Input::get('nano_para_aminosalicylic_acid'),
-                            'nano_capreomycin' => Input::get('nano_capreomycin'),
-                            'nano_kanamycin' => Input::get('nano_kanamycin'),
-                            'nano_pretomanid' => Input::get('nano_pretomanid'),
-                            'xpert_xdr_performed' => Input::get('xpert_xdr_performed'),
-                            'xpert_xdr_date_performed' => Input::get('xpert_xdr_date_performed'),
-                            'isoniazid2' => Input::get('isoniazid2'),
-                            'fluoroquinolones' => Input::get('fluoroquinolones'),
-                            'amikacin2' => Input::get('amikacin2'),
-                            'kanamycin' => Input::get('kanamycin'),
-                            'capreomycin' => Input::get('capreomycin'),
-                            'ethionamide2' => Input::get('ethionamide2'),
-                            'first_line_drugs' => $first_line_drugs,
-                            'second_line_drugs' => $second_line_drugs,
-                            'version_number' => Input::get('version_number'),
-                            'lot_number' => Input::get('lot_number'),
-                            'mutations_detected_list' => Input::get('mutations_detected_list'),
-                            'nanopore_done' => Input::get('nanopore_done'),
-                            'sequencing_results' => Input::get('sequencing_results'),
-                            'EPI2ME' => Input::get('EPI2ME'),
-                            'EPI2ME_vesrion' => Input::get('EPI2ME_vesrion'),
-                            'first_line_lpa' => Input::get('first_line_lpa'),
-                            'first_line_lpa_date' => Input::get('first_line_lpa_date'),
-                            'second_line_lpa' => Input::get('second_line_lpa'),
-                            'second_line_lpa_date' => Input::get('second_line_lpa_date'),
-                            'lpa1_mtb' => Input::get('lpa1_mtb'),
-                            'lpa1_rif' => Input::get('lpa1_rif'),
-                            'lpa1_inh' => Input::get('lpa1_inh'),
-                            'lpa2_mtb' => Input::get('lpa2_mtb'),
-                            'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
-                            'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
-                            'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
-                            'remarks' => Input::get('remarks'),
-                            'form_status' => Input::get('form_status'),
-                            'date_completed' => $date_completed,
-                            'completed_by' => $completed_by,
-                            'date_verified' => $date_verified,
-                            'verified_by' => $verified_by,
-                            'status' => 1,
-                            'enrollment_id' => $_GET['sid'],
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $screening['facility_id'],
-                        ));
+                    $user->createRecord('diagnosis_test_records', array(
+                        'diagnosis_test_id' => $individual[0]['id'],
+                        'pid' => $screening['pid'],
+                        'culture_performed' => Input::get('culture_performed'),
+                        'culture_method' => $culture_method,
+                        'culture_results' => Input::get('culture_results'),
+                        'phenotypic_performed' => Input::get('phenotypic_performed'),
+                        'phenotypic_date_performed' => Input::get('phenotypic_date_performed'),
+                        'phenotypic_date_results' => Input::get('phenotypic_date_results'),
+                        'date_sputum_received' => Input::get('date_sputum_received'),
+                        'appearance' => Input::get('appearance'),
+                        'sample_volume' => Input::get('sample_volume'),
+                        'unique_lab_no' => Input::get('unique_lab_no'),
+                        'microscopy_type' => Input::get('microscopy_type'),
+                        'microscopy_results' => Input::get('microscopy_results'),
+                        'microscopy_date' => Input::get('microscopy_date'),
+                        'lj_inoculation_date' => Input::get('lj_inoculation_date'),
+                        'lj_results_date' => Input::get('lj_results_date'),
+                        'lj_results' => Input::get('lj_results'),
+                        'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
+                        'mgit_results_date' => Input::get('mgit_results_date'),
+                        'mgit_results' => Input::get('mgit_results'),
+                        'culture_isolate' => Input::get('culture_isolate'),
+                        'isolate_date' => Input::get('isolate_date'),
+                        'rifampicin' => Input::get('rifampicin'),
+                        'isoniazid' => Input::get('isoniazid'),
+                        'levofloxacin' => Input::get('levofloxacin'),
+                        'moxifloxacin' => Input::get('moxifloxacin'),
+                        'bedaquiline' => Input::get('bedaquiline'),
+                        'linezolid' => Input::get('linezolid'),
+                        'clofazimine' => Input::get('clofazimine'),
+                        'cycloserine' => Input::get('cycloserine'),
+                        'terizidone' => Input::get('terizidone'),
+                        'ethambutol' => Input::get('ethambutol'),
+                        'delamanid' => Input::get('delamanid'),
+                        'pyrazinamide' => Input::get('pyrazinamide'),
+                        'imipenem' => Input::get('imipenem'),
+                        'cilastatin' => Input::get('cilastatin'),
+                        'meropenem' => Input::get('meropenem'),
+                        'amikacin' => Input::get('amikacin'),
+                        'streptomycin' => Input::get('streptomycin'),
+                        'ethionamide' => Input::get('ethionamide'),
+                        'prothionamide' => Input::get('prothionamide'),
+                        'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
+                        'nano_rifampicin' => Input::get('nano_rifampicin'),
+                        'nano_isoniazid' => Input::get('nano_isoniazid'),
+                        'nano_levofloxacin' => Input::get('nano_levofloxacin'),
+                        'nano_moxifloxacin' => Input::get('nano_moxifloxacin'),
+                        'nano_bedaquiline' => Input::get('nano_bedaquiline'),
+                        'nano_linezolid' => Input::get('nano_linezolid'),
+                        'nano_clofazimine' => Input::get('nano_clofazimine'),
+                        'nano_cycloserine' => Input::get('nano_cycloserine'),
+                        'nano_delamanid' => Input::get('nano_delamanid'),
+                        'nano_terizidone' => Input::get('nano_terizidone'),
+                        'nano_ethambutol' => Input::get('nano_ethambutol'),
+                        'nano_pyrazinamide' => Input::get('nano_pyrazinamide'),
+                        'nano_cilastatin' => Input::get('nano_cilastatin'),
+                        'nano_imipenem' => Input::get('nano_imipenem'),
+                        'nano_meropenem' => Input::get('nano_meropenem'),
+                        'nano_amikacin' => Input::get('nano_amikacin'),
+                        'nano_streptomycin' => Input::get('nano_streptomycin'),
+                        'nano_ethionamide' => Input::get('nano_ethionamide'),
+                        'nano_prothionamide' => Input::get('nano_prothionamide'),
+                        'nano_para_aminosalicylic_acid' => Input::get('nano_para_aminosalicylic_acid'),
+                        'nano_capreomycin' => Input::get('nano_capreomycin'),
+                        'nano_kanamycin' => Input::get('nano_kanamycin'),
+                        'nano_pretomanid' => Input::get('nano_pretomanid'),
+                        'xpert_xdr_performed' => Input::get('xpert_xdr_performed'),
+                        'xpert_xdr_date_performed' => Input::get('xpert_xdr_date_performed'),
+                        'isoniazid2' => Input::get('isoniazid2'),
+                        'fluoroquinolones' => Input::get('fluoroquinolones'),
+                        'amikacin2' => Input::get('amikacin2'),
+                        'kanamycin' => Input::get('kanamycin'),
+                        'capreomycin' => Input::get('capreomycin'),
+                        'ethionamide2' => Input::get('ethionamide2'),
+                        'first_line_drugs' => $first_line_drugs,
+                        'second_line_drugs' => $second_line_drugs,
+                        'version_number' => Input::get('version_number'),
+                        'lot_number' => Input::get('lot_number'),
+                        'mutations_detected_list' => Input::get('mutations_detected_list'),
+                        'nanopore_done' => Input::get('nanopore_done'),
+                        'sequencing_results' => Input::get('sequencing_results'),
+                        'EPI2ME' => Input::get('EPI2ME'),
+                        'EPI2ME_vesrion' => Input::get('EPI2ME_vesrion'),
+                        'first_line_lpa' => Input::get('first_line_lpa'),
+                        'first_line_lpa_date' => Input::get('first_line_lpa_date'),
+                        'second_line_lpa' => Input::get('second_line_lpa'),
+                        'second_line_lpa_date' => Input::get('second_line_lpa_date'),
+                        'lpa1_mtb' => Input::get('lpa1_mtb'),
+                        'lpa1_rif' => Input::get('lpa1_rif'),
+                        'lpa1_inh' => Input::get('lpa1_inh'),
+                        'lpa2_mtb' => Input::get('lpa2_mtb'),
+                        'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
+                        'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
+                        'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
+                        'remarks' => Input::get('remarks'),
+                        'form_status' => Input::get('form_status'),
+                        'date_completed' => $date_completed,
+                        'completed_by' => $completed_by,
+                        'date_verified' => $date_verified,
+                        'verified_by' => $verified_by,
+                        'status' => 1,
+                        'enrollment_id' => $_GET['sid'],
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'facility_id' => $screening['facility_id'],
+                    ));
 
-                        $successMessage = 'Diagnosis test  Successful Updated';
-                    } else {
-                        $user->createRecord('diagnosis_test', array(
-                            'pid' => $screening['pid'],
-                            'culture_performed' => Input::get('culture_performed'),
-                            'culture_method' => $culture_method,
-                            'culture_results' => Input::get('culture_results'),
-                            'phenotypic_performed' => Input::get('phenotypic_performed'),
-                            'phenotypic_date_performed' => Input::get('phenotypic_date_performed'),
-                            'phenotypic_date_results' => Input::get('phenotypic_date_results'),
-                            'date_sputum_received' => Input::get('date_sputum_received'),
-                            'appearance' => Input::get('appearance'),
-                            'sample_volume' => Input::get('sample_volume'),
-                            'unique_lab_no' => Input::get('unique_lab_no'),
-                            'microscopy_type' => Input::get('microscopy_type'),
-                            'microscopy_results' => Input::get('microscopy_results'),
-                            'microscopy_date' => Input::get('microscopy_date'),
-                            'lj_inoculation_date' => Input::get('lj_inoculation_date'),
-                            'lj_results_date' => Input::get('lj_results_date'),
-                            'lj_results' => Input::get('lj_results'),
-                            'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
-                            'mgit_results_date' => Input::get('mgit_results_date'),
-                            'mgit_results' => Input::get('mgit_results'),
-                            'culture_isolate' => Input::get('culture_isolate'),
-                            'isolate_date' => Input::get('isolate_date'),
-                            'rifampicin' => Input::get('rifampicin'),
-                            'isoniazid' => Input::get('isoniazid'),
-                            'levofloxacin' => Input::get('levofloxacin'),
-                            'moxifloxacin' => Input::get('moxifloxacin'),
-                            'bedaquiline' => Input::get('bedaquiline'),
-                            'linezolid' => Input::get('linezolid'),
-                            'clofazimine' => Input::get('clofazimine'),
-                            'cycloserine' => Input::get('cycloserine'),
-                            'terizidone' => Input::get('terizidone'),
-                            'ethambutol' => Input::get('ethambutol'),
-                            'delamanid' => Input::get('delamanid'),
-                            'pyrazinamide' => Input::get('pyrazinamide'),
-                            'imipenem' => Input::get('imipenem'),
-                            'cilastatin' => Input::get('cilastatin'),
-                            'meropenem' => Input::get('meropenem'),
-                            'amikacin' => Input::get('amikacin'),
-                            'streptomycin' => Input::get('streptomycin'),
-                            'ethionamide' => Input::get('ethionamide'),
-                            'prothionamide' => Input::get('prothionamide'),
-                            'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
-                            'nano_rifampicin' => Input::get('nano_rifampicin'),
-                            'nano_isoniazid' => Input::get('nano_isoniazid'),
-                            'nano_levofloxacin' => Input::get('nano_levofloxacin'),
-                            'nano_moxifloxacin' => Input::get('nano_moxifloxacin'),
-                            'nano_bedaquiline' => Input::get('nano_bedaquiline'),
-                            'nano_linezolid' => Input::get('nano_linezolid'),
-                            'nano_clofazimine' => Input::get('nano_clofazimine'),
-                            'nano_cycloserine' => Input::get('nano_cycloserine'),
-                            'nano_delamanid' => Input::get('nano_delamanid'),
-                            'nano_terizidone' => Input::get('nano_terizidone'),
-                            'nano_ethambutol' => Input::get('nano_ethambutol'),
-                            'nano_pyrazinamide' => Input::get('nano_pyrazinamide'),
-                            'nano_cilastatin' => Input::get('nano_cilastatin'),
-                            'nano_imipenem' => Input::get('nano_imipenem'),
-                            'nano_meropenem' => Input::get('nano_meropenem'),
-                            'nano_amikacin' => Input::get('nano_amikacin'),
-                            'nano_streptomycin' => Input::get('nano_streptomycin'),
-                            'nano_ethionamide' => Input::get('nano_ethionamide'),
-                            'nano_prothionamide' => Input::get('nano_prothionamide'),
-                            'nano_para_aminosalicylic_acid' => Input::get('nano_para_aminosalicylic_acid'),
-                            'nano_capreomycin' => Input::get('nano_capreomycin'),
-                            'nano_kanamycin' => Input::get('nano_kanamycin'),
-                            'nano_pretomanid' => Input::get('nano_pretomanid'),
-                            'xpert_xdr_performed' => Input::get('xpert_xdr_performed'),
-                            'xpert_xdr_date_performed' => Input::get('xpert_xdr_date_performed'),
-                            'isoniazid2' => Input::get('isoniazid2'),
-                            'fluoroquinolones' => Input::get('fluoroquinolones'),
-                            'amikacin2' => Input::get('amikacin2'),
-                            'kanamycin' => Input::get('kanamycin'),
-                            'capreomycin' => Input::get('capreomycin'),
-                            'ethionamide2' => Input::get('ethionamide2'),
-                            'first_line_drugs' => $first_line_drugs,
-                            'second_line_drugs' => $second_line_drugs,
-                            'version_number' => Input::get('version_number'),
-                            'lot_number' => Input::get('lot_number'),
-                            'mutations_detected_list' => Input::get('mutations_detected_list'),
-                            'nanopore_done' => Input::get('nanopore_done'),
-                            'sequencing_results' => Input::get('sequencing_results'),
-                            'EPI2ME' => Input::get('EPI2ME'),
-                            'EPI2ME_vesrion' => Input::get('EPI2ME_vesrion'),
-                            'first_line_lpa' => Input::get('first_line_lpa'),
-                            'first_line_lpa_date' => Input::get('first_line_lpa_date'),
-                            'second_line_lpa' => Input::get('second_line_lpa'),
-                            'second_line_lpa_date' => Input::get('second_line_lpa_date'),
-                            'lpa1_mtb' => Input::get('lpa1_mtb'),
-                            'lpa1_rif' => Input::get('lpa1_rif'),
-                            'lpa1_inh' => Input::get('lpa1_inh'),
-                            'lpa2_mtb' => Input::get('lpa2_mtb'),
-                            'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
-                            'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
-                            'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
-                            'remarks' => Input::get('remarks'),
-                            'form_status' => Input::get('form_status'),
-                            'date_completed' => $date_completed,
-                            'completed_by' => $completed_by,
-                            'date_verified' => $date_verified,
-                            'verified_by' => $verified_by,
-                            'status' => 1,
-                            'enrollment_id' => $_GET['sid'],
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $screening['facility_id'],
-                        ));
+                    $successMessage = 'Diagnosis test  Successful Updated';
+                } else {
+                    $user->createRecord('diagnosis_test', array(
+                        'pid' => $screening['pid'],
+                        'culture_performed' => Input::get('culture_performed'),
+                        'culture_method' => $culture_method,
+                        'culture_results' => Input::get('culture_results'),
+                        'phenotypic_performed' => Input::get('phenotypic_performed'),
+                        'phenotypic_date_performed' => Input::get('phenotypic_date_performed'),
+                        'phenotypic_date_results' => Input::get('phenotypic_date_results'),
+                        'date_sputum_received' => Input::get('date_sputum_received'),
+                        'appearance' => Input::get('appearance'),
+                        'sample_volume' => Input::get('sample_volume'),
+                        'unique_lab_no' => Input::get('unique_lab_no'),
+                        'microscopy_type' => Input::get('microscopy_type'),
+                        'microscopy_results' => Input::get('microscopy_results'),
+                        'microscopy_date' => Input::get('microscopy_date'),
+                        'lj_inoculation_date' => Input::get('lj_inoculation_date'),
+                        'lj_results_date' => Input::get('lj_results_date'),
+                        'lj_results' => Input::get('lj_results'),
+                        'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
+                        'mgit_results_date' => Input::get('mgit_results_date'),
+                        'mgit_results' => Input::get('mgit_results'),
+                        'culture_isolate' => Input::get('culture_isolate'),
+                        'isolate_date' => Input::get('isolate_date'),
+                        'rifampicin' => Input::get('rifampicin'),
+                        'isoniazid' => Input::get('isoniazid'),
+                        'levofloxacin' => Input::get('levofloxacin'),
+                        'moxifloxacin' => Input::get('moxifloxacin'),
+                        'bedaquiline' => Input::get('bedaquiline'),
+                        'linezolid' => Input::get('linezolid'),
+                        'clofazimine' => Input::get('clofazimine'),
+                        'cycloserine' => Input::get('cycloserine'),
+                        'terizidone' => Input::get('terizidone'),
+                        'ethambutol' => Input::get('ethambutol'),
+                        'delamanid' => Input::get('delamanid'),
+                        'pyrazinamide' => Input::get('pyrazinamide'),
+                        'imipenem' => Input::get('imipenem'),
+                        'cilastatin' => Input::get('cilastatin'),
+                        'meropenem' => Input::get('meropenem'),
+                        'amikacin' => Input::get('amikacin'),
+                        'streptomycin' => Input::get('streptomycin'),
+                        'ethionamide' => Input::get('ethionamide'),
+                        'prothionamide' => Input::get('prothionamide'),
+                        'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
+                        'nano_rifampicin' => Input::get('nano_rifampicin'),
+                        'nano_isoniazid' => Input::get('nano_isoniazid'),
+                        'nano_levofloxacin' => Input::get('nano_levofloxacin'),
+                        'nano_moxifloxacin' => Input::get('nano_moxifloxacin'),
+                        'nano_bedaquiline' => Input::get('nano_bedaquiline'),
+                        'nano_linezolid' => Input::get('nano_linezolid'),
+                        'nano_clofazimine' => Input::get('nano_clofazimine'),
+                        'nano_cycloserine' => Input::get('nano_cycloserine'),
+                        'nano_delamanid' => Input::get('nano_delamanid'),
+                        'nano_terizidone' => Input::get('nano_terizidone'),
+                        'nano_ethambutol' => Input::get('nano_ethambutol'),
+                        'nano_pyrazinamide' => Input::get('nano_pyrazinamide'),
+                        'nano_cilastatin' => Input::get('nano_cilastatin'),
+                        'nano_imipenem' => Input::get('nano_imipenem'),
+                        'nano_meropenem' => Input::get('nano_meropenem'),
+                        'nano_amikacin' => Input::get('nano_amikacin'),
+                        'nano_streptomycin' => Input::get('nano_streptomycin'),
+                        'nano_ethionamide' => Input::get('nano_ethionamide'),
+                        'nano_prothionamide' => Input::get('nano_prothionamide'),
+                        'nano_para_aminosalicylic_acid' => Input::get('nano_para_aminosalicylic_acid'),
+                        'nano_capreomycin' => Input::get('nano_capreomycin'),
+                        'nano_kanamycin' => Input::get('nano_kanamycin'),
+                        'nano_pretomanid' => Input::get('nano_pretomanid'),
+                        'xpert_xdr_performed' => Input::get('xpert_xdr_performed'),
+                        'xpert_xdr_date_performed' => Input::get('xpert_xdr_date_performed'),
+                        'isoniazid2' => Input::get('isoniazid2'),
+                        'fluoroquinolones' => Input::get('fluoroquinolones'),
+                        'amikacin2' => Input::get('amikacin2'),
+                        'kanamycin' => Input::get('kanamycin'),
+                        'capreomycin' => Input::get('capreomycin'),
+                        'ethionamide2' => Input::get('ethionamide2'),
+                        'first_line_drugs' => $first_line_drugs,
+                        'second_line_drugs' => $second_line_drugs,
+                        'version_number' => Input::get('version_number'),
+                        'lot_number' => Input::get('lot_number'),
+                        'mutations_detected_list' => Input::get('mutations_detected_list'),
+                        'nanopore_done' => Input::get('nanopore_done'),
+                        'sequencing_results' => Input::get('sequencing_results'),
+                        'EPI2ME' => Input::get('EPI2ME'),
+                        'EPI2ME_vesrion' => Input::get('EPI2ME_vesrion'),
+                        'first_line_lpa' => Input::get('first_line_lpa'),
+                        'first_line_lpa_date' => Input::get('first_line_lpa_date'),
+                        'second_line_lpa' => Input::get('second_line_lpa'),
+                        'second_line_lpa_date' => Input::get('second_line_lpa_date'),
+                        'lpa1_mtb' => Input::get('lpa1_mtb'),
+                        'lpa1_rif' => Input::get('lpa1_rif'),
+                        'lpa1_inh' => Input::get('lpa1_inh'),
+                        'lpa2_mtb' => Input::get('lpa2_mtb'),
+                        'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
+                        'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
+                        'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
+                        'remarks' => Input::get('remarks'),
+                        'form_status' => Input::get('form_status'),
+                        'date_completed' => $date_completed,
+                        'completed_by' => $completed_by,
+                        'date_verified' => $date_verified,
+                        'verified_by' => $verified_by,
+                        'status' => 1,
+                        'enrollment_id' => $_GET['sid'],
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'facility_id' => $screening['facility_id'],
+                    ));
 
-                        $last_row = $override->lastRow('diagnosis_test', 'id')[0];
+                    $last_row = $override->lastRow('diagnosis_test', 'id')[0];
 
-                        $user->createRecord('diagnosis_test_records', array(
-                            'diagnosis_test_id' => $last_row['id'],
-                            'pid' => $screening['pid'],
-                            'culture_performed' => Input::get('culture_performed'),
-                            'culture_method' => $culture_method,
-                            'culture_results' => Input::get('culture_results'),
-                            'phenotypic_performed' => Input::get('phenotypic_performed'),
-                            'phenotypic_date_performed' => Input::get('phenotypic_date_performed'),
-                            'phenotypic_date_results' => Input::get('phenotypic_date_results'),
-                            'date_sputum_received' => Input::get('date_sputum_received'),
-                            'appearance' => Input::get('appearance'),
-                            'sample_volume' => Input::get('sample_volume'),
-                            'unique_lab_no' => Input::get('unique_lab_no'),
-                            'microscopy_type' => Input::get('microscopy_type'),
-                            'microscopy_results' => Input::get('microscopy_results'),
-                            'microscopy_date' => Input::get('microscopy_date'),
-                            'lj_inoculation_date' => Input::get('lj_inoculation_date'),
-                            'lj_results_date' => Input::get('lj_results_date'),
-                            'lj_results' => Input::get('lj_results'),
-                            'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
-                            'mgit_results_date' => Input::get('mgit_results_date'),
-                            'mgit_results' => Input::get('mgit_results'),
-                            'culture_isolate' => Input::get('culture_isolate'),
-                            'isolate_date' => Input::get('isolate_date'),
-                            'rifampicin' => Input::get('rifampicin'),
-                            'isoniazid' => Input::get('isoniazid'),
-                            'levofloxacin' => Input::get('levofloxacin'),
-                            'moxifloxacin' => Input::get('moxifloxacin'),
-                            'bedaquiline' => Input::get('bedaquiline'),
-                            'linezolid' => Input::get('linezolid'),
-                            'clofazimine' => Input::get('clofazimine'),
-                            'cycloserine' => Input::get('cycloserine'),
-                            'terizidone' => Input::get('terizidone'),
-                            'ethambutol' => Input::get('ethambutol'),
-                            'delamanid' => Input::get('delamanid'),
-                            'pyrazinamide' => Input::get('pyrazinamide'),
-                            'imipenem' => Input::get('imipenem'),
-                            'cilastatin' => Input::get('cilastatin'),
-                            'meropenem' => Input::get('meropenem'),
-                            'amikacin' => Input::get('amikacin'),
-                            'streptomycin' => Input::get('streptomycin'),
-                            'ethionamide' => Input::get('ethionamide'),
-                            'prothionamide' => Input::get('prothionamide'),
-                            'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
-                            'nano_rifampicin' => Input::get('nano_rifampicin'),
-                            'nano_isoniazid' => Input::get('nano_isoniazid'),
-                            'nano_levofloxacin' => Input::get('nano_levofloxacin'),
-                            'nano_moxifloxacin' => Input::get('nano_moxifloxacin'),
-                            'nano_bedaquiline' => Input::get('nano_bedaquiline'),
-                            'nano_linezolid' => Input::get('nano_linezolid'),
-                            'nano_clofazimine' => Input::get('nano_clofazimine'),
-                            'nano_cycloserine' => Input::get('nano_cycloserine'),
-                            'nano_delamanid' => Input::get('nano_delamanid'),
-                            'nano_terizidone' => Input::get('nano_terizidone'),
-                            'nano_ethambutol' => Input::get('nano_ethambutol'),
-                            'nano_pyrazinamide' => Input::get('nano_pyrazinamide'),
-                            'nano_cilastatin' => Input::get('nano_cilastatin'),
-                            'nano_imipenem' => Input::get('nano_imipenem'),
-                            'nano_meropenem' => Input::get('nano_meropenem'),
-                            'nano_amikacin' => Input::get('nano_amikacin'),
-                            'nano_streptomycin' => Input::get('nano_streptomycin'),
-                            'nano_ethionamide' => Input::get('nano_ethionamide'),
-                            'nano_prothionamide' => Input::get('nano_prothionamide'),
-                            'nano_para_aminosalicylic_acid' => Input::get('nano_para_aminosalicylic_acid'),
-                            'nano_capreomycin' => Input::get('nano_capreomycin'),
-                            'nano_kanamycin' => Input::get('nano_kanamycin'),
-                            'nano_pretomanid' => Input::get('nano_pretomanid'),
-                            'xpert_xdr_performed' => Input::get('xpert_xdr_performed'),
-                            'xpert_xdr_date_performed' => Input::get('xpert_xdr_date_performed'),
-                            'isoniazid2' => Input::get('isoniazid2'),
-                            'fluoroquinolones' => Input::get('fluoroquinolones'),
-                            'amikacin2' => Input::get('amikacin2'),
-                            'kanamycin' => Input::get('kanamycin'),
-                            'capreomycin' => Input::get('capreomycin'),
-                            'ethionamide2' => Input::get('ethionamide2'),
-                            'first_line_drugs' => $first_line_drugs,
-                            'second_line_drugs' => $second_line_drugs,
-                            'version_number' => Input::get('version_number'),
-                            'lot_number' => Input::get('lot_number'),
-                            'mutations_detected_list' => Input::get('mutations_detected_list'),
-                            'nanopore_done' => Input::get('nanopore_done'),
-                            'sequencing_results' => Input::get('sequencing_results'),
-                            'EPI2ME' => Input::get('EPI2ME'),
-                            'EPI2ME_vesrion' => Input::get('EPI2ME_vesrion'),
-                            'first_line_lpa' => Input::get('first_line_lpa'),
-                            'first_line_lpa_date' => Input::get('first_line_lpa_date'),
-                            'second_line_lpa' => Input::get('second_line_lpa'),
-                            'second_line_lpa_date' => Input::get('second_line_lpa_date'),
-                            'lpa1_mtb' => Input::get('lpa1_mtb'),
-                            'lpa1_rif' => Input::get('lpa1_rif'),
-                            'lpa1_inh' => Input::get('lpa1_inh'),
-                            'lpa2_mtb' => Input::get('lpa2_mtb'),
-                            'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
-                            'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
-                            'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
-                            'remarks' => Input::get('remarks'),
-                            'form_status' => Input::get('form_status'),
-                            'date_completed' => $date_completed,
-                            'completed_by' => $completed_by,
-                            'date_verified' => $date_verified,
-                            'verified_by' => $verified_by,
-                            'status' => 1,
-                            'enrollment_id' => $_GET['sid'],
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'staff_id' => $user->data()->id,
-                            'update_on' => date('Y-m-d H:i:s'),
-                            'update_id' => $user->data()->id,
-                            'facility_id' => $screening['facility_id'],
-                        ));
+                    $user->createRecord('diagnosis_test_records', array(
+                        'diagnosis_test_id' => $last_row['id'],
+                        'pid' => $screening['pid'],
+                        'culture_performed' => Input::get('culture_performed'),
+                        'culture_method' => $culture_method,
+                        'culture_results' => Input::get('culture_results'),
+                        'phenotypic_performed' => Input::get('phenotypic_performed'),
+                        'phenotypic_date_performed' => Input::get('phenotypic_date_performed'),
+                        'phenotypic_date_results' => Input::get('phenotypic_date_results'),
+                        'date_sputum_received' => Input::get('date_sputum_received'),
+                        'appearance' => Input::get('appearance'),
+                        'sample_volume' => Input::get('sample_volume'),
+                        'unique_lab_no' => Input::get('unique_lab_no'),
+                        'microscopy_type' => Input::get('microscopy_type'),
+                        'microscopy_results' => Input::get('microscopy_results'),
+                        'microscopy_date' => Input::get('microscopy_date'),
+                        'lj_inoculation_date' => Input::get('lj_inoculation_date'),
+                        'lj_results_date' => Input::get('lj_results_date'),
+                        'lj_results' => Input::get('lj_results'),
+                        'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
+                        'mgit_results_date' => Input::get('mgit_results_date'),
+                        'mgit_results' => Input::get('mgit_results'),
+                        'culture_isolate' => Input::get('culture_isolate'),
+                        'isolate_date' => Input::get('isolate_date'),
+                        'rifampicin' => Input::get('rifampicin'),
+                        'isoniazid' => Input::get('isoniazid'),
+                        'levofloxacin' => Input::get('levofloxacin'),
+                        'moxifloxacin' => Input::get('moxifloxacin'),
+                        'bedaquiline' => Input::get('bedaquiline'),
+                        'linezolid' => Input::get('linezolid'),
+                        'clofazimine' => Input::get('clofazimine'),
+                        'cycloserine' => Input::get('cycloserine'),
+                        'terizidone' => Input::get('terizidone'),
+                        'ethambutol' => Input::get('ethambutol'),
+                        'delamanid' => Input::get('delamanid'),
+                        'pyrazinamide' => Input::get('pyrazinamide'),
+                        'imipenem' => Input::get('imipenem'),
+                        'cilastatin' => Input::get('cilastatin'),
+                        'meropenem' => Input::get('meropenem'),
+                        'amikacin' => Input::get('amikacin'),
+                        'streptomycin' => Input::get('streptomycin'),
+                        'ethionamide' => Input::get('ethionamide'),
+                        'prothionamide' => Input::get('prothionamide'),
+                        'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
+                        'nano_rifampicin' => Input::get('nano_rifampicin'),
+                        'nano_isoniazid' => Input::get('nano_isoniazid'),
+                        'nano_levofloxacin' => Input::get('nano_levofloxacin'),
+                        'nano_moxifloxacin' => Input::get('nano_moxifloxacin'),
+                        'nano_bedaquiline' => Input::get('nano_bedaquiline'),
+                        'nano_linezolid' => Input::get('nano_linezolid'),
+                        'nano_clofazimine' => Input::get('nano_clofazimine'),
+                        'nano_cycloserine' => Input::get('nano_cycloserine'),
+                        'nano_delamanid' => Input::get('nano_delamanid'),
+                        'nano_terizidone' => Input::get('nano_terizidone'),
+                        'nano_ethambutol' => Input::get('nano_ethambutol'),
+                        'nano_pyrazinamide' => Input::get('nano_pyrazinamide'),
+                        'nano_cilastatin' => Input::get('nano_cilastatin'),
+                        'nano_imipenem' => Input::get('nano_imipenem'),
+                        'nano_meropenem' => Input::get('nano_meropenem'),
+                        'nano_amikacin' => Input::get('nano_amikacin'),
+                        'nano_streptomycin' => Input::get('nano_streptomycin'),
+                        'nano_ethionamide' => Input::get('nano_ethionamide'),
+                        'nano_prothionamide' => Input::get('nano_prothionamide'),
+                        'nano_para_aminosalicylic_acid' => Input::get('nano_para_aminosalicylic_acid'),
+                        'nano_capreomycin' => Input::get('nano_capreomycin'),
+                        'nano_kanamycin' => Input::get('nano_kanamycin'),
+                        'nano_pretomanid' => Input::get('nano_pretomanid'),
+                        'xpert_xdr_performed' => Input::get('xpert_xdr_performed'),
+                        'xpert_xdr_date_performed' => Input::get('xpert_xdr_date_performed'),
+                        'isoniazid2' => Input::get('isoniazid2'),
+                        'fluoroquinolones' => Input::get('fluoroquinolones'),
+                        'amikacin2' => Input::get('amikacin2'),
+                        'kanamycin' => Input::get('kanamycin'),
+                        'capreomycin' => Input::get('capreomycin'),
+                        'ethionamide2' => Input::get('ethionamide2'),
+                        'first_line_drugs' => $first_line_drugs,
+                        'second_line_drugs' => $second_line_drugs,
+                        'version_number' => Input::get('version_number'),
+                        'lot_number' => Input::get('lot_number'),
+                        'mutations_detected_list' => Input::get('mutations_detected_list'),
+                        'nanopore_done' => Input::get('nanopore_done'),
+                        'sequencing_results' => Input::get('sequencing_results'),
+                        'EPI2ME' => Input::get('EPI2ME'),
+                        'EPI2ME_vesrion' => Input::get('EPI2ME_vesrion'),
+                        'first_line_lpa' => Input::get('first_line_lpa'),
+                        'first_line_lpa_date' => Input::get('first_line_lpa_date'),
+                        'second_line_lpa' => Input::get('second_line_lpa'),
+                        'second_line_lpa_date' => Input::get('second_line_lpa_date'),
+                        'lpa1_mtb' => Input::get('lpa1_mtb'),
+                        'lpa1_rif' => Input::get('lpa1_rif'),
+                        'lpa1_inh' => Input::get('lpa1_inh'),
+                        'lpa2_mtb' => Input::get('lpa2_mtb'),
+                        'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
+                        'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
+                        'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
+                        'remarks' => Input::get('remarks'),
+                        'form_status' => Input::get('form_status'),
+                        'date_completed' => $date_completed,
+                        'completed_by' => $completed_by,
+                        'date_verified' => $date_verified,
+                        'verified_by' => $verified_by,
+                        'status' => 1,
+                        'enrollment_id' => $_GET['sid'],
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'facility_id' => $screening['facility_id'],
+                    ));
 
-                        $successMessage = 'Diagnosis test  Successful Added';
-                    }
-                    Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
+                    $successMessage = 'Diagnosis test  Successful Added';
+                }
+                Redirect::to('info.php?id=6&status=' . $_GET['status'] . '&sid=' . $_GET['sid'] . '&facility_id=' . $_GET['facility_id'] . '&page=' . $_GET['page'] . '&msg=' . $successMessage);
             } else {
                 $pageError = $validate->errors();
             }
@@ -4461,10 +4461,12 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                         <div class="mb-3">
                                                             <label class="form-label">7. Sample Volume (mL)</label>
-                                                            <input type="number"
+                                                            <input type="text"
                                                                 value="<?php echo $costing['sample1_volume'] ?? ''; ?>"
-                                                                id="sample1_volume" name="sample1_volume" steps="0.1"
-                                                                min="0" max="99" class="form-control" />
+                                                                id="sample1_volume" name="sample1_volume" step="0.1"
+                                                                min="0.1" max="99" class="form-control"
+                                                                pattern="^\d{1,2}(\.\d)?$"
+                                                                oninput="this.value = this.value.match(/^\d{0,2}(\.\d{0,1})?/)?.[0] || '';" />
                                                         </div>
                                                     </div>
 
@@ -4503,10 +4505,12 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                         <div class="mb-3">
                                                             <label class="form-label">7. Sample Volume (mL)</label>
-                                                            <input type="number"
+                                                            <input type="text"
                                                                 value="<?php echo $costing['sample2_volume'] ?? ''; ?>"
-                                                                id="sample2_volume" name="sample2_volume" steps="0.1"
-                                                                min="0" max="99" class="form-control" />
+                                                                id="sample2_volume" name="sample2_volume" step="0.1"
+                                                                min="0.1" max="99" class="form-control"
+                                                                pattern="^\d{1,2}(\.\d)?$"
+                                                                oninput="this.value = this.value.match(/^\d{0,2}(\.\d{0,1})?/)?.[0] || '';" />
                                                         </div>
                                                     </div>
 
@@ -4843,10 +4847,10 @@ if ($user->isLoggedIn()) {
                                                             about the patient or sample</strong></label>
                                                     <textarea id="remarks" name="remarks" class="form-control" rows="3"
                                                         placeholder="Enter any additional remarks here...">
-                                                                                                                                <?php if ($remarks['remarks']) {
-                                                                                                                                    print_r($remarks['remarks']);
-                                                                                                                                } ?>
-                                                                                                                                                                                    </textarea>
+                                                                                                                                    <?php if ($remarks['remarks']) {
+                                                                                                                                        print_r($remarks['remarks']);
+                                                                                                                                    } ?>
+                                                                                                                                                                                        </textarea>
                                                 </div>
                                             </div>
 
@@ -5249,7 +5253,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($screening['remarks']) {
                                                                     print_r($screening['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -5478,10 +5482,11 @@ if ($user->isLoggedIn()) {
                                                     <div class="mb-3">
                                                         <label for="sample_volume" class="form-label">4. Approximate
                                                             volume</label>
-                                                        <input type="number" value="<?php if ($costing['sample_volume']) {
-                                                            print_r($costing['sample_volume']);
-                                                        } ?>" id="sample_volume" name="sample_volume" step="0.1" min="0.1" max="5"
-                                                            class="form-control" placeholder="Enter here" required />
+                                                        <input type="text"
+                                                            value="<?php echo $costing['sample_volume'] ?? ''; ?>"
+                                                            id="sample_volume" name="sample_volume" step="0.1" min="0.1"
+                                                            max="5" class="form-control" pattern="^\d{1,2}(\.\d)?$"
+                                                            oninput="this.value = this.value.match(/^\d{0,2}(\.\d{0,1})?/)?.[0] || '';" />
                                                     </div>
                                                     <span>mL</span>
                                                 </div>
@@ -7494,7 +7499,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7643,7 +7648,7 @@ if ($user->isLoggedIn()) {
                 <div class="modal fade" id="addMedModal">
                     <div class="modal-dialog modal-lg">
                         <!-- <form method="post"> -->
-                            <form method="post" id="addMedForm">
+                        <form method="post" id="addMedForm">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">Add new
@@ -7662,13 +7667,13 @@ if ($user->isLoggedIn()) {
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label> Date</label>
-                                                <input type="date" class="form-control" name="date" value="" >
+                                                <input type="date" class="form-control" name="date" value="">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Drug</label>
-                                                <input type="text" class="form-control" name="drug" value="" >
+                                                <input type="text" class="form-control" name="drug" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -7681,7 +7686,7 @@ if ($user->isLoggedIn()) {
                                                 <?php foreach ($override->get('regimen_changes', 'status', 1) as $value) { ?>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio" name="changes"
-                                                            id="changes<?= $value['id']; ?>" value="<?= $value['id']; ?>" >
+                                                            id="changes<?= $value['id']; ?>" value="<?= $value['id']; ?>">
                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                     </div>
                                                 <?php } ?>
@@ -7694,7 +7699,7 @@ if ($user->isLoggedIn()) {
                                                 <?php foreach ($override->get('regimen_changes_reasons', 'status', 1) as $value) { ?>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio" name="reason"
-                                                            id="reason<?= $value['id']; ?>" value="<?= $value['id']; ?>" >
+                                                            id="reason<?= $value['id']; ?>" value="<?= $value['id']; ?>">
                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                     </div>
                                                 <?php } ?>
@@ -7708,7 +7713,7 @@ if ($user->isLoggedIn()) {
                                             <div class="form-group">
                                                 <label>Specify</label>
                                                 <textarea class="form-control" name="specify" rows="2">
-                                                                </textarea>
+                                                                    </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -8108,7 +8113,7 @@ if ($user->isLoggedIn()) {
                                                                                                 class="form-control" name="date"
                                                                                                 value="<?php if ($treatment['date']) {
                                                                                                     print_r($treatment['date']);
-                                                                                                } ?>" >
+                                                                                                } ?>">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-sm-6">
@@ -8136,8 +8141,7 @@ if ($user->isLoggedIn()) {
                                                                                                         value="<?= $value['id']; ?>"
                                                                                                         <?php if ($treatment['changes'] == $value['id']) {
                                                                                                             echo 'checked';
-                                                                                                        } ?>
-                                                                                                        >
+                                                                                                        } ?>>
                                                                                                     <label
                                                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                                                 </div>
@@ -8156,8 +8160,7 @@ if ($user->isLoggedIn()) {
                                                                                                         value="<?= $value['id']; ?>"
                                                                                                         <?php if ($treatment['reason'] == $value['id']) {
                                                                                                             echo 'checked';
-                                                                                                        } ?>
-                                                                                                        >
+                                                                                                        } ?>>
                                                                                                     <label
                                                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                                                 </div>
@@ -8173,10 +8176,10 @@ if ($user->isLoggedIn()) {
                                                                                             <label>Specify</label>
                                                                                             <textarea class="form-control"
                                                                                                 name="specify" rows="2">
-                                                                                                                                    <?php if ($treatment['specify']) {
-                                                                                                                                        print_r($treatment['specify']);
-                                                                                                                                    } ?>
-                                                                                                                                </textarea>
+                                                                                                                                            <?php if ($treatment['specify']) {
+                                                                                                                                                print_r($treatment['specify']);
+                                                                                                                                            } ?>
+                                                                                                                                        </textarea>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -8390,7 +8393,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9236,7 +9239,7 @@ if ($user->isLoggedIn()) {
                                                                         placeholder="Type reasons here...">                                                                                                                                                                                                                                                                                              <?php if ($clients['sputum_reasons']) {
                                                                             print_r($clients['sputum_reasons']);
                                                                         } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -11039,7 +11042,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
