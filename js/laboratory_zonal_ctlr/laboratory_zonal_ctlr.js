@@ -63,12 +63,18 @@ document.addEventListener("DOMContentLoaded", function () {
         cultureIsolateSection.style.display = showIsolate ? "block" : "none";
     }
 
-    function toggleIsolateDetails() {
-        const isCultureIsolate = document.querySelector('input[name="culture_isolate"]:checked')?.value === "1";
+    // function toggleIsolateDetails() {
+    //     const isCultureIsolate = document.querySelector('input[name="culture_isolate"]:checked')?.value === "1";
 
-        const displayStyle = isCultureIsolate ? "block" : "none";
-        isolateDateSection.style.display = displayStyle;
-        phenotypicDstSection.style.display = displayStyle;
+    //     const displayStyle = isCultureIsolate ? "block" : "none";
+    //     isolateDateSection.style.display = displayStyle;
+    //     phenotypicDstSection.style.display = displayStyle;
+    // }
+    
+    function toggleIsolateDetails() {
+        const isCultureIsolate = document.querySelector('input[name="culture_isolate"]:checked')?.value;
+        isolateDateSection.style.display = isCultureIsolate === "1" ? "block" : "none";
+        phenotypicDstSection.style.display = (isCultureIsolate === "1" || isCultureIsolate === "98") ? "block" : "none";
     }
 
     function togglePhenotypicSections() {
