@@ -29,16 +29,17 @@ document.addEventListener('DOMContentLoaded', function () {
         const screeningDate = document.getElementById('screening_date').value;
         const consentDateErrorElement = document.getElementById('consent_date_error');
         const screeningDateErrorElement = document.getElementById('screening_date_error');
+        const today = new Date().toISOString().split('T')[0];
 
         let valid = true;
 
         // Validate screening date
-        if (screeningDate <= '2025-01-20') {
+        if (screeningDate < '2025-01-20' || screeningDate > today) {
             e.preventDefault();
             screeningDateErrorElement.style.display = 'block';
             screeningDateErrorElement.style.color = 'red';
             screeningDateErrorElement.style.marginTop = '5px';
-            screeningDateErrorElement.textContent = 'Screening date must be on or After 2025-01-20.';
+            screeningDateErrorElement.textContent = 'Screening date must be between 2025-01-20 and today.';
             valid = false;
         } else {
             screeningDateErrorElement.style.display = 'none';
@@ -46,12 +47,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Validate consent date
-        if (consentYes && (!consentDate || consentDate < screeningDate)) {
+        if (consentYes && (!consentDate || consentDate < screeningDate || consentDate > today)) {
             e.preventDefault();
             consentDateErrorElement.style.display = 'block';
             consentDateErrorElement.style.color = 'red';
             consentDateErrorElement.style.marginTop = '5px';
-            consentDateErrorElement.textContent = 'Consent date is required and must be on or after the screening date if consent is selected as "Yes".';
+            consentDateErrorElement.textContent = 'Consent date is required, must be on or after the screening date, and not in the future if consent is selected as "Yes".';
             valid = false;
         } else {
             consentDateErrorElement.style.display = 'none';
