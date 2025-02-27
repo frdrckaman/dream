@@ -5480,7 +5480,7 @@ if ($user->isLoggedIn()) {
                                                             volume</label>
                                                         <input type="number" value="<?php if ($costing['sample_volume']) {
                                                             print_r($costing['sample_volume']);
-                                                        } ?>" id="sample_volume" name="sample_volume" min="1" max="5"
+                                                        } ?>" id="sample_volume" name="sample_volume" step="0.1" min="0.1" max="5"
                                                             class="form-control" placeholder="Enter here" required />
                                                     </div>
                                                     <span>mL</span>
