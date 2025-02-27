@@ -8556,8 +8556,9 @@ if ($user->isLoggedIn()) {
                                         <h3 class="card-title">Details of enrolment and patient demographics</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <form id="enrollment" enctype="multipart/form-data" method="post" autocomplete="off"
-                                        style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                    <!-- <form id="enrollment" enctype="multipart/form-data" method="post" autocomplete="off"
+                                        style="display: flex; flex-wrap: wrap; gap: 10px;"> -->
+                                                                            <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">
