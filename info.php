@@ -1577,8 +1577,8 @@ if ($user->isLoggedIn()) {
                                                         <a href="#delete_record<?= $sid ?>" role="button"
                                                             class="btn btn-orrange btn-custom" data-toggle="modal">Delete
                                                             Record</a>
-                                                        <!-- <a href="#restore_record<?= $sid ?>" role="button" class="btn btn-warning" data-toggle="modal">Restore -->
-                                                        <!-- Record</a> -->
+                                                        <a href="#restore_record<?= $sid ?>" role="button" class="btn btn-danger btn-custom" data-toggle="modal">Delete
+                                                            Record</a>
                                                         <!-- </div> -->
                                                         </td>
 
