@@ -33,12 +33,12 @@ document.addEventListener('DOMContentLoaded', function () {
         let valid = true;
 
         // Validate screening date
-        if (screeningDate > '2025-01-20') {
+        if (screeningDate <= '2025-01-20') {
             e.preventDefault();
             screeningDateErrorElement.style.display = 'block';
             screeningDateErrorElement.style.color = 'red';
             screeningDateErrorElement.style.marginTop = '5px';
-            screeningDateErrorElement.textContent = 'Screening date must be on or before 2025-01-20.';
+            screeningDateErrorElement.textContent = 'Screening date must be on or After 2025-01-20.';
             valid = false;
         } else {
             screeningDateErrorElement.style.display = 'none';
