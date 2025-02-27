@@ -4774,16 +4774,14 @@ if ($user->isLoggedIn()) {
                                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                                 </div>
                                                                             <?php } ?>
-                                                                            <input type="text"
-                                                                                value="<?php echo $costing['error_code'] ?? ''; ?>"
+                                                                            <input type="text" value="<?php echo $costing['error_code'] ?? ''; ?>"
                                                                                 id="error_code" name="error_code"
                                                                                 class="form-control"
                                                                                 placeholder="Enter error code here"
                                                                                 pattern="^\d{4}$"
                                                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,4);" />
-
+                                                                            <span id="error_code_format">( XXXX )</span>
                                                                         </div>
-                                                                        <span>XXXX</span>
                                                                     </div>
                                                                     <button type="button"
                                                                         onclick="unsetRadio('xpert_mtb')">Unset</button>
