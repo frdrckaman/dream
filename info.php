@@ -1575,9 +1575,9 @@ if ($user->isLoggedIn()) {
                                                             <hr>
                                                         <?php } ?>
                                                         <a href="#delete_record<?= $sid ?>" role="button"
-                                                            class="btn btn-orrange btn-custom" data-toggle="modal">Delete
+                                                            class="btn btn-secondary btn-custom" data-toggle="modal">Delete
                                                             Record</a>
-                                                        <a href="#restore_record<?= $sid ?>" role="button" class="btn btn-danger btn-custom" data-toggle="modal">Delete
+                                                        <a href="#restore_record<?= $sid ?>" role="button" class="btn btn-primary btn-custom" data-toggle="modal">Restore
                                                             Record</a>
                                                         <!-- </div> -->
                                                         </td>
