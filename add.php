@@ -1696,6 +1696,7 @@ if ($user->isLoggedIn()) {
                         ));
                         $successMessage = 'Diagnosis Data  Successful Updated';
                     } else {
+                        // print_r($_GET['sid']);
                         $user->createRecord('diagnosis', array(
                             'pid' => $screening['pid'],
                             'entry_date' => Input::get('entry_date'),
@@ -7661,13 +7662,13 @@ if ($user->isLoggedIn()) {
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label> Date</label>
-                                                <input type="date" class="form-control" name="date" value="" required>
+                                                <input type="date" class="form-control" name="date" value="" >
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Drug</label>
-                                                <input type="text" class="form-control" name="drug" value="" required>
+                                                <input type="text" class="form-control" name="drug" value="" >
                                             </div>
                                         </div>
                                     </div>
@@ -7680,7 +7681,7 @@ if ($user->isLoggedIn()) {
                                                 <?php foreach ($override->get('regimen_changes', 'status', 1) as $value) { ?>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio" name="changes"
-                                                            id="changes<?= $value['id']; ?>" value="<?= $value['id']; ?>" required>
+                                                            id="changes<?= $value['id']; ?>" value="<?= $value['id']; ?>" >
                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                     </div>
                                                 <?php } ?>
@@ -7693,7 +7694,7 @@ if ($user->isLoggedIn()) {
                                                 <?php foreach ($override->get('regimen_changes_reasons', 'status', 1) as $value) { ?>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio" name="reason"
-                                                            id="reason<?= $value['id']; ?>" value="<?= $value['id']; ?>" required>
+                                                            id="reason<?= $value['id']; ?>" value="<?= $value['id']; ?>" >
                                                         <label class="form-check-label"><?= $value['name']; ?></label>
                                                     </div>
                                                 <?php } ?>
@@ -8107,7 +8108,7 @@ if ($user->isLoggedIn()) {
                                                                                                 class="form-control" name="date"
                                                                                                 value="<?php if ($treatment['date']) {
                                                                                                     print_r($treatment['date']);
-                                                                                                } ?>" required>
+                                                                                                } ?>" >
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-sm-6">
@@ -8136,7 +8137,7 @@ if ($user->isLoggedIn()) {
                                                                                                         <?php if ($treatment['changes'] == $value['id']) {
                                                                                                             echo 'checked';
                                                                                                         } ?>
-                                                                                                        required>
+                                                                                                        >
                                                                                                     <label
                                                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                                                 </div>
@@ -8156,7 +8157,7 @@ if ($user->isLoggedIn()) {
                                                                                                         <?php if ($treatment['reason'] == $value['id']) {
                                                                                                             echo 'checked';
                                                                                                         } ?>
-                                                                                                        required>
+                                                                                                        >
                                                                                                     <label
                                                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                                                 </div>
