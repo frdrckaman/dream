@@ -1577,8 +1577,10 @@ if ($user->isLoggedIn()) {
                                                         <a href="#delete_record<?= $sid ?>" role="button"
                                                             class="btn btn-secondary btn-custom" data-toggle="modal">Delete
                                                             Record</a>
+                                                            <?php if($user->data()->power==1){ ?>
                                                         <a href="#restore_record<?= $sid ?>" role="button" class="btn btn-primary btn-custom" data-toggle="modal">Restore
                                                             Record</a>
+                                                            <?php } ?>
                                                         <!-- </div> -->
                                                         </td>
 

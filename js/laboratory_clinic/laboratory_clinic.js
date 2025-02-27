@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const numberReceivedRadios = document.querySelectorAll("input[name='number_received']");
     const afbMicroscopyRadios = document.querySelectorAll("input[name='afb_microscopy_conducted']");
     const xpertMtbRifRadios = document.querySelectorAll("input[name='xpert_mtb_rif_conducted']");
+    const errorCodeFormat = document.getElementById("error_code_format");
     const xpertMtbRadios = document.querySelectorAll("input[name='xpert_mtb']");
     const xpertRifOptions = document.querySelectorAll("#xpert_rif option");
 
@@ -98,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let xpertMtbValue = getCheckedValue(xpertMtbRadios);
 
         errorCodeSection.style.display = xpertMtbValue === "8" ? "block" : "none";
+        errorCodeFormat.style.display = xpertMtbValue === "8" ? "block" : "none";
         xpertRifSection.style.display = ["2", "3", "4", "5", "6"].includes(xpertMtbValue) ? "block" : "none";
 
         filterXpertRifOptions(xpertMtbValue);
