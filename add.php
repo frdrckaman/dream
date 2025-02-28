@@ -715,12 +715,6 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $individual = $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid']);
-                $first_line = 0;
-                $second_line = 0;
-                $third_line = 0;
-                $sequence = '';
-                $visit_code = '';
-                $visit_name = '';
 
                 $first_line_drugs = implode(',', Input::get('first_line_drugs'));
                 $second_line_drugs = implode(',', Input::get('second_line_drugs'));
