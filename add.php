@@ -8785,21 +8785,15 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-3" style="flex: 1;">
-                                                    <div class="row-form clearfix">
-                                                        <!-- select -->
-                                                        <div class="form-group">
-                                                            <label>9h. Date information collected</label>
-                                                            <input class="form-control" type="date"
-                                                                max="<?= date('Y-m-d'); ?>"
-                                                                name="date_information_collected"
-                                                                id="date_information_collected" value="<?php if ($clients['date_information_collected']) {
-                                                                    print_r($clients['date_information_collected']);
-                                                                } ?>" required />
-                                                            <span id="information_date_error" style="color: red;"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+<div class="col-sm-3" style="flex: 1;">
+    <div class="row-form clearfix">
+        <div class="form-group">
+            <label>9h. Date information collected</label>
+            <input class="form-control" type="date" max="<?= date('Y-m-d'); ?>" name="date_information_collected" id="date_information_collected" value="<?php if ($clients['date_information_collected']) { print_r($clients['date_information_collected']); } ?>" required />
+            <span id="information_date_error" style="color: red;"></span>
+        </div>
+    </div>
+</div>
                                             </div>
                                             <hr>
                                             <div class="card card-warning">

@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const dobInput = document.getElementById("dob");
     const ageInput = document.getElementById("age");
     const ageErrorElement = document.getElementById("age_error");
+    const informationDateInput = document.getElementById("date_information_collected");
+    const informationDateErrorElement = document.getElementById("information_date_error");
     const form = document.getElementById("validation");
 
     function toggleTxSections() {
@@ -128,6 +130,23 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function validateInformationDate() {
+        const informationDate = new Date(informationDateInput.value);
+        const screeningDate = new Date(screeningDateInput.value);
+        const threeDaysBeforeScreening = new Date(screeningDate);
+        threeDaysBeforeScreening.setDate(screeningDate.getDate() - 3);
+
+        if (informationDate > screeningDate || informationDate < threeDaysBeforeScreening) {
+            informationDateErrorElement.style.display = 'block';
+            informationDateErrorElement.textContent = 'Date information collected must be within 3 days before the screening date.';
+            return false;
+        } else {
+            informationDateErrorElement.style.display = 'none';
+            informationDateErrorElement.textContent = '';
+            return true;
+        }
+    }
+
     // Attach event listeners
     txPreviousRadios.forEach(radio => radio.addEventListener("change", toggleTxSections));
     tbCategoryRadios.forEach(radio => {
@@ -148,10 +167,11 @@ document.addEventListener("DOMContentLoaded", function () {
         dobInput.value = calculateDob(age, screeningDate);
         validateAge();
     });
+    informationDateInput.addEventListener("input", validateInformationDate);
 
     // Prevent form submission if there is an error
     form.addEventListener("submit", function (event) {
-        if (!validateEnrollmentDate() || !validateAge()) {
+        if (!validateEnrollmentDate() || !validateAge() || !validateInformationDate()) {
             event.preventDefault();
         }
     });
@@ -166,4 +186,5 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleTbRegimenSpecify();
     validateEnrollmentDate(); // Initial validation
     validateAge(); // Initial validation
+    validateInformationDate(); // Initial validation
 });
