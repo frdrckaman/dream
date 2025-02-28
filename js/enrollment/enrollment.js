@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             txUnknownMonth.disabled = false;
             txYearInput.disabled = false;
-            txMonthInput.disabled = false;
+            txMonthInput.disabled = txUnknownMonth.checked; // Keep txMonthInput disabled if txUnknownMonth is checked
         }
     }
 
