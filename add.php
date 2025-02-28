@@ -9019,32 +9019,20 @@ if ($user->isLoggedIn()) {
                                                     <div class="col-sm-6" id="regimen_section">
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <label>10g. How long was the treatment regimen( Months)
-                                                                </label>
+                                                                <label>10g. How long was the treatment regimen( Months)</label>
 
                                                                 <!-- Row for Month and Year -->
                                                                 <div class="row">
                                                                     <!-- Month Input -->
                                                                     <div class="col-sm-12">
-                                                                        <!-- <label for="regimen_months" class="form-label"></label> -->
-                                                                        <input class="form-control" type="number"
-                                                                            name="regimen_months" id="regimen_months"
-                                                                            placeholder="Type number of months…" min="1"
-                                                                            max="10000" value="<?php if ($clients['regimen_months']) {
-                                                                                print_r($clients['regimen_months']);
-                                                                            } ?>" />
+                                                                        <input class="form-control" type="number" name="regimen_months" id="regimen_months" placeholder="Type number of months…" min="1" max="10000" value="<?php if ($clients['regimen_months']) { print_r($clients['regimen_months']); } ?>" />
                                                                     </div>
                                                                 </div>
 
                                                                 <!-- Unknown Checkbox -->
                                                                 <div class="form-check mt-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        id="regimen_months_unknown"
-                                                                        name="regimen_months_unknown" value="1" <?php if ($clients['regimen_months_unknown'] ?? false) {
-                                                                            echo 'checked';
-                                                                        } ?>>
-                                                                    <label class="form-check-label"
-                                                                        for="regimen_months_unknown">Unknown</label>
+                                                                    <input class="form-check-input" type="checkbox" id="regimen_months_unknown" name="regimen_months_unknown" value="1" <?php if ($clients['regimen_months_unknown'] ?? false) { echo 'checked'; } ?>>
+                                                                    <label class="form-check-label" for="regimen_months_unknown">Unknown</label>
                                                                 </div>
                                                             </div>
                                                         </div>

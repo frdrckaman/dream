@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const sputumDateErrorElement = document.getElementById("sputum_date_error");
     const txUnknownMonth = document.getElementById("tx_unknown_month");
     const txUnknownYear = document.getElementById("tx_unknown_year");
+    const regimenMonthsInput = document.getElementById("regimen_months");
+    const regimenMonthsUnknown = document.getElementById("regimen_months_unknown");
     const form = document.getElementById("validation");
 
     function toggleTxSections() {
@@ -214,6 +216,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function toggleRegimenMonths() {
+        if (regimenMonthsUnknown.checked) {
+            regimenMonthsInput.value = '';
+            regimenMonthsInput.disabled = true;
+        } else {
+            regimenMonthsInput.disabled = false;
+        }
+    }
+
     // Attach event listeners
     txPreviousRadios.forEach(radio => radio.addEventListener("change", toggleTxSections));
     tbCategoryRadios.forEach(radio => {
@@ -239,6 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
     txUnknownMonth.addEventListener("change", toggleTxMonth);
     txUnknownYear.addEventListener("change", toggleTxYear);
     sputumDateInput.addEventListener("input", validateSputumDate);
+    regimenMonthsUnknown.addEventListener("change", toggleRegimenMonths);
 
     // Prevent form submission if there is an error
     form.addEventListener("submit", function (event) {
@@ -273,4 +285,5 @@ document.addEventListener("DOMContentLoaded", function () {
     validateSputumDate(); // Initial validation
     toggleTxMonth(); // Initial toggle state
     toggleTxYear(); // Initial toggle state
+    toggleRegimenMonths(); // Initial toggle state
 });
