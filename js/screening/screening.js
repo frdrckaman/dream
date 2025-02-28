@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to update form status visibility
     function updateScreeningFormStatus() {
-        const formStatus = document.querySelector('input[id="screening_status"]:checked')?.value;
+        const screeningFormStatus = document.querySelector('input[id="screening_status"]:checked')?.value;
         const screeningCompleted = document.getElementById('screening_completed');
         const screeningDateCompleted = document.getElementById('screening_date_completed');
         const screeningVerified = document.getElementById('screening_verified');
@@ -25,19 +25,19 @@ document.addEventListener('DOMContentLoaded', function () {
         const screeningDate = document.getElementById('screening_date').value;
         const today = new Date().toISOString().split('T')[0];
 
-        if (formStatus == '1') {
+        if (screeningFormStatus == '1') {
             screeningCompleted.style.display = 'none';
             screeningDateCompleted.required = false;
             screeningVerified.style.display = 'none';
             screeningDateVerified.required = false;
-        } else if (formStatus == '2') {
+        } else if (screeningFormStatus == '2') {
             screeningCompleted.style.display = 'block';
             screeningDateCompleted.required = true;
             screeningDateCompleted.min = consentDate ? consentDate : screeningDate;
             screeningDateCompleted.max = today;
             screeningVerified.style.display = 'none';
             screeningDateVerified.required = false;
-        } else if (formStatus == '3') {
+        } else if (screeningFormStatus == '3') {
             screeningCompleted.style.display = 'block';
             screeningDateCompleted.required = true;
             screeningDateCompleted.min = consentDate ? consentDate : screeningDate;
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const screeningDateVerified = document.getElementById('screening_date_verified').value;
         const consentDateErrorElement = document.getElementById('consent_date_error');
         const screeningDateErrorElement = document.getElementById('screening_date_error');
-        const dateCompletedErrorElement = document.getElementById('date_completed_error');
+        const dateCompletedErrorElement = document.getElementById('screening_date_completed_error');
         const dateVerifiedErrorElement = document.getElementById('screening_date_verified_error');
         const today = new Date().toISOString().split('T')[0];
 
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Ensure form status 3 is only checked if screening date completed has value
-        if (formStatus == '3' && !screeningDateCompleted) {
+        if (screeningFormStatus == '3' && !screeningDateCompleted) {
             e.preventDefault();
             dateCompletedErrorElement.style.display = 'block';
             dateCompletedErrorElement.style.color = 'red';
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Real-time validation for completed date
     document.getElementById('screening_date_completed').addEventListener('input', function () {
-        const dateCompletedErrorElement = document.getElementById('date_completed_error');
+        const dateCompletedErrorElement = document.getElementById('screening_date_completed_error');
         dateCompletedErrorElement.style.display = 'none';
         dateCompletedErrorElement.textContent = '';
     });

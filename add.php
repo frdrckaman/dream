@@ -5279,61 +5279,46 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        id="screening_status" name="form_status"
-                                                                        value="<?= $value['id']; ?>"
-                                                                        <?= ($screening['form_status'] == $value['id']) ? 'checked' : ''; ?> required
-                                                                        onchange="updateScreeningFormStatus()">
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                    <input class="form-check-input" type="radio" id="screening_status" name="form_status" value="<?= $value['id']; ?>" <?= ($screening['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateScreeningFormStatus()">
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('form_status')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('form_status')">Unset</button>
                                                     </div>
                                                 </div>
-
+                                            
                                                 <div class="col-sm-4" id="screening_completed" style="display: none;">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Completed Date</label>
-                                                            <input class="form-control" type="date" name="date_completed"
-                                                                id="screening_date_completed"
-                                                                value="<?= ($screening['date_completed']) ? $screening['date_completed'] : ''; ?>" />
-                                                            <span id="date_completed_error" class="text-danger"></span>
+                                                            <input class="form-control" type="date" name="date_completed" id="screening_date_completed" value="<?= ($screening['date_completed']) ? $screening['date_completed'] : ''; ?>" />
+                                                            <span id="screening_date_completed_error" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <?php if ($screening['form_status'] >= 2) { ?>
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <label>Completed By</label>
-                                                                <input class="form-control" type="text"
-                                                                    value="<?= $override->get('user', 'id', $screening['completed_by'])[0]['username']; ?>"
-                                                                    readonly />
+                                                                <input class="form-control" type="text" value="<?= $override->get('user', 'id', $screening['completed_by'])[0]['username']; ?>" readonly />
                                                             </div>
                                                         </div>
                                                     <?php } ?>
                                                 </div>
-
+                                            
                                                 <div class="col-sm-4" id="screening_verified" style="display: none;">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Verified Date</label>
-                                                            <input class="form-control" type="date" name="date_verified"
-                                                                id="screening_date_verified"
-                                                                value="<?= ($screening['date_verified']) ? $screening['date_verified'] : ''; ?>" />
-                                                            <span id="screening_date_verified_error"
-                                                                class="text-danger"></span>
+                                                            <input class="form-control" type="date" name="date_verified" id="screening_date_verified" value="<?= ($screening['date_verified']) ? $screening['date_verified'] : ''; ?>" />
+                                                            <span id="screening_date_verified_error" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <?php if ($screening['form_status'] >= 3) { ?>
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <label>Verified By</label>
-                                                                <input class="form-control" type="text"
-                                                                    value="<?= $override->get('user', 'id', $screening['verified_by'])[0]['username']; ?>"
-                                                                    readonly />
+                                                                <input class="form-control" type="text" value="<?= $override->get('user', 'id', $screening['verified_by'])[0]['username']; ?>" readonly />
                                                             </div>
                                                         </div>
                                                     <?php } ?>
@@ -8570,6 +8555,9 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>2. Date of enrolment</label>
+                                                            <input type="hidden" name="screening_date_enrollment"
+                                                                id="screening_date_enrollment"
+                                                                value="<?= $screening['screening_date'] ?>" />
                                                             <input class="form-control" type="date" name="enrollment_date"
                                                                 id="enrollment_date"
                                                                 value="<?= $clients['enrollment_date'] ?>" required />

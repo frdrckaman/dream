@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const ltfMonthsSection = document.getElementById("ltf_months_section"); // Assuming the section ID
     const tbRegimenSpecify = document.getElementById("tb_regimen_specify"); // The section to toggle based on tb_regimen
 
+    const enrollmentDateInput = document.getElementById("enrollment_date");
+    const enrollmentDateErrorElement = document.getElementById("enrollment_date_error");
+    const screeningDateInput = document.getElementById("screening_date_enrollment");
+
     function toggleTxSections() {
         let isTxPreviousYes = Array.from(txPreviousRadios).some(radio => radio.checked && radio.value === "1");
 
@@ -62,6 +66,26 @@ document.addEventListener("DOMContentLoaded", function () {
         tbRegimenSpecify.style.display = isTbRegimen7 ? "block" : "none";
     }
 
+    function validateEnrollmentDate() {
+        const enrollmentDate = enrollmentDateInput.value;
+        const screeningDate = screeningDateInput.value;
+        const today = new Date().toISOString().split('T')[0];
+
+        console.log("Validating enrollment date:", enrollmentDate, "against screening date:", screeningDate, "and today's date:", today);
+
+        if (enrollmentDate < screeningDate || enrollmentDate > today) {
+            enrollmentDateErrorElement.style.display = 'block';
+            enrollmentDateErrorElement.style.color = 'red';
+            enrollmentDateErrorElement.style.marginTop = '5px';
+            enrollmentDateErrorElement.textContent = 'Enrollment date must be on or after the screening date and not in the future.';
+            return false;
+        } else {
+            enrollmentDateErrorElement.style.display = 'none';
+            enrollmentDateErrorElement.textContent = '';
+            return true;
+        }
+    }
+
     // Attach event listeners
     txPreviousRadios.forEach(radio => radio.addEventListener("change", toggleTxSections));
     tbCategoryRadios.forEach(radio => {
@@ -74,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sputumCollectedRadios.forEach(radio => radio.addEventListener("change", toggleSputumSection));
     diseasesMedicalCheckboxes.forEach(checkbox => checkbox.addEventListener("change", toggleDiseasesSpecify));
     tbRegimenRadios.forEach(radio => radio.addEventListener("change", toggleTbRegimenSpecify));
+    enrollmentDateInput.addEventListener("input", validateEnrollmentDate);
 
     // Run on page load to initialize the correct visibility
     toggleTxSections();
@@ -83,4 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleSputumSection();
     toggleDiseasesSpecify();
     toggleTbRegimenSpecify();
+    validateEnrollmentDate(); // Initial validation
 });
+
