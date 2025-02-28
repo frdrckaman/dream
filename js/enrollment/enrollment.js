@@ -26,7 +26,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const ageErrorElement = document.getElementById("age_error");
     const informationDateInput = document.getElementById("date_information_collected");
     const informationDateErrorElement = document.getElementById("information_date_error");
-    const form = document.getElementById("validation");
+    const txYearInput = document.getElementById("tx_year");
+    const txYearErrorElement = document.getElementById("tx_year_error");
+    const txMonthInput = document.getElementById("tx_month");
+    const sputumDateInput = document.getElementById("sputum_date");
+    const sputumDateErrorElement = document.getElementById("sputum_date_error");
+    const txUnknownMonth = document.getElementById("tx_unknown_month");
+    const txUnknownYear = document.getElementById("tx_unknown_year");
+    const regimenMonthsInput = document.getElementById("regimen_months");
+    const regimenMonthsUnknown = document.getElementById("regimen_months_unknown");
+    const form = document.getElementById("enrollment");
+
+    const enrollmentCompletedSection = document.getElementById("enrollment_completed");
+    const enrollmentVerifiedSection = document.getElementById("enrollment_verified");
+    const enrollmentDateCompletedInput = document.getElementById("enrollment_date_completed");
+    const enrollmentDateVerifiedInput = document.getElementById("enrollment_date_verified");
+    const enrollmentDateCompletedError = document.getElementById("enrollment_date_completed_error");
+    const enrollmentDateVerifiedError = document.getElementById("enrollment_date_verified_error");
 
     function toggleTxSections() {
         let isTxPreviousYes = Array.from(txPreviousRadios).some(radio => radio.checked && radio.value === "1");
@@ -148,6 +164,128 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function validateTxYear() {
+        const dob = new Date(dobInput.value);
+        const dobYear = dob.getFullYear(); // Extract only the year from dob
+        const txYear = parseInt(txYearInput.value, 10); // Ensure txYear is treated as an integer
+        const currentYear = new Date().getFullYear();
+
+        // Check if txYear is a valid four-digit year
+        if (txYear && txYear.toString().length === 4 && !txUnknownYear.checked && (txYear <= dobYear || txYear > currentYear)) {
+            txYearErrorElement.textContent = 'Year must be greater than year of birth and not in the future.';
+            txYearInput.value = '';
+            return false;
+        } else {
+            txYearErrorElement.textContent = '';
+            return true;
+        }
+    }
+
+    function toggleTxMonth() {
+        if (txUnknownMonth.checked) {
+            txMonthInput.value = '';
+            txMonthInput.disabled = true;
+        } else {
+            txMonthInput.disabled = false;
+        }
+    }
+
+    function toggleTxYear() {
+        if (txUnknownYear.checked) {
+            txUnknownMonth.checked = true;
+            txUnknownMonth.disabled = true;
+            txYearInput.value = '';
+            txMonthInput.value = '';
+            txYearInput.disabled = true;
+            txMonthInput.disabled = true;
+        } else {
+            txUnknownMonth.disabled = false;
+            txYearInput.disabled = false;
+            txMonthInput.disabled = txUnknownMonth.checked; // Keep txMonthInput disabled if txUnknownMonth is checked
+        }
+    }
+
+    function validateSputumDate() {
+        const sputumDate = new Date(sputumDateInput.value);
+        const screeningDate = new Date(screeningDateInput.value);
+        const threeDaysBeforeScreening = new Date(screeningDate);
+        threeDaysBeforeScreening.setDate(screeningDate.getDate() - 3);
+        const today = new Date();
+
+        if (sputumDate > screeningDate || sputumDate < threeDaysBeforeScreening || sputumDate > today) {
+            sputumDateErrorElement.style.display = 'block';
+            sputumDateErrorElement.textContent = 'Date of sputum collection must be within 3 days before the screening date and not in the future.';
+            return false;
+        } else {
+            sputumDateErrorElement.style.display = 'none';
+            sputumDateErrorElement.textContent = '';
+            return true;
+        }
+    }
+
+    function toggleRegimenMonths() {
+        if (regimenMonthsUnknown.checked) {
+            regimenMonthsInput.value = '';
+            regimenMonthsInput.disabled = true;
+        } else {
+            regimenMonthsInput.disabled = false;
+        }
+    }
+
+    function updateFormStatus() {
+        const selectedStatus = document.querySelector("input[name='form_status']:checked").value;
+
+        if (selectedStatus == "1") {
+            enrollmentCompletedSection.style.display = "none";
+            enrollmentVerifiedSection.style.display = "none";
+            enrollmentDateCompletedInput.required = false;
+            enrollmentDateVerifiedInput.required = false;
+        } else if (selectedStatus == "2") {
+            enrollmentCompletedSection.style.display = "block";
+            enrollmentVerifiedSection.style.display = "none";
+            enrollmentDateCompletedInput.required = true;
+            enrollmentDateVerifiedInput.required = false;
+        } else if (selectedStatus == "3") {
+            if (enrollmentDateCompletedInput.value) {
+                enrollmentCompletedSection.style.display = "block";
+                enrollmentVerifiedSection.style.display = "block";
+                enrollmentDateCompletedInput.required = true;
+                enrollmentDateVerifiedInput.required = true;
+            } else {
+                alert("Please complete the enrollment date before selecting this status.");
+                document.querySelector("input[name='form_status'][value='2']").checked = true;
+                updateFormStatus();
+            }
+        }
+    }
+
+    function validateForm() {
+        let isValid = true;
+        const today = new Date().toISOString().split('T')[0];
+
+        if (enrollmentDateCompletedInput.required && !enrollmentDateCompletedInput.value) {
+            enrollmentDateCompletedError.textContent = "Completed date is required.";
+            isValid = false;
+        } else if (enrollmentDateCompletedInput.value < enrollmentDateInput.value || enrollmentDateCompletedInput.value > today) {
+            enrollmentDateCompletedError.textContent = "Completed date must be on or after the enrollment date and not in the future.";
+            isValid = false;
+        } else {
+            enrollmentDateCompletedError.textContent = "";
+        }
+
+        if (enrollmentVerifiedSection.style.display !== "none" && enrollmentDateCompletedInput.value && !enrollmentDateVerifiedInput.value) {
+            enrollmentDateVerifiedError.textContent = "Verified date is required.";
+            isValid = false;
+        } else if (enrollmentDateVerifiedInput.value < enrollmentDateCompletedInput.value || enrollmentDateVerifiedInput.value > today) {
+            enrollmentDateVerifiedError.textContent = "Verified date must be on or after the completed date and not in the future.";
+            isValid = false;
+        } else {
+            enrollmentDateVerifiedError.textContent = "";
+        }
+
+        return isValid;
+    }
+
     // Attach event listeners
     txPreviousRadios.forEach(radio => radio.addEventListener("change", toggleTxSections));
     tbCategoryRadios.forEach(radio => {
@@ -169,10 +307,34 @@ document.addEventListener("DOMContentLoaded", function () {
         validateAge();
     });
     informationDateInput.addEventListener("input", validateInformationDate);
+    txYearInput.addEventListener("input", validateTxYear);
+    txUnknownMonth.addEventListener("change", toggleTxMonth);
+    txUnknownYear.addEventListener("change", toggleTxYear);
+    sputumDateInput.addEventListener("input", validateSputumDate);
+    regimenMonthsUnknown.addEventListener("change", toggleRegimenMonths);
+    document.querySelectorAll("input[name='form_status']").forEach(radio => radio.addEventListener("change", updateFormStatus));
+
+    // Validate dates on input
+    enrollmentDateCompletedInput.addEventListener("input", validateForm);
+    enrollmentDateVerifiedInput.addEventListener("input", validateForm);
 
     // Prevent form submission if there is an error
     form.addEventListener("submit", function (event) {
-        if (!validateEnrollmentDate() || !validateAge() || !validateInformationDate()) {
+        const isEnrollmentDateValid = validateEnrollmentDate();
+        const isAgeValid = validateAge();
+        const isInformationDateValid = validateInformationDate();
+        const isTxYearValid = validateTxYear();
+        const isSputumDateValid = validateSputumDate();
+        const isFormValid = validateForm();
+
+        console.log("Enrollment Date Valid:", isEnrollmentDateValid);
+        console.log("Age Valid:", isAgeValid);
+        console.log("Information Date Valid:", isInformationDateValid);
+        console.log("Tx Year Valid:", isTxYearValid);
+        console.log("Sputum Date Valid:", isSputumDateValid);
+        console.log("Form Valid:", isFormValid);
+
+        if (!isEnrollmentDateValid || !isAgeValid || !isInformationDateValid || !isTxYearValid || !isSputumDateValid || !isFormValid) {
             event.preventDefault();
         }
     });
@@ -188,4 +350,9 @@ document.addEventListener("DOMContentLoaded", function () {
     validateEnrollmentDate(); // Initial validation
     validateAge(); // Initial validation
     validateInformationDate(); // Initial validation
+    validateSputumDate(); // Initial validation
+    toggleTxMonth(); // Initial toggle state
+    toggleTxYear(); // Initial toggle state
+    toggleRegimenMonths(); // Initial toggle state
+    updateFormStatus(); // Initial form status update
 });

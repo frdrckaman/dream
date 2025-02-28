@@ -715,12 +715,6 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $individual = $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid']);
-                $first_line = 0;
-                $second_line = 0;
-                $third_line = 0;
-                $sequence = '';
-                $visit_code = '';
-                $visit_name = '';
 
                 $first_line_drugs = implode(',', Input::get('first_line_drugs'));
                 $second_line_drugs = implode(',', Input::get('second_line_drugs'));
@@ -8562,7 +8556,7 @@ if ($user->isLoggedIn()) {
                                     <!-- /.card-header -->
                                     <!-- <form id="enrollment" enctype="multipart/form-data" method="post" autocomplete="off"
                                         style="display: flex; flex-wrap: wrap; gap: 10px;"> -->
-                                    <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                    <form id="enrollment" enctype="multipart/form-data" method="post" autocomplete="off">
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">
@@ -8884,55 +8878,36 @@ if ($user->isLoggedIn()) {
                                                         } ?>" />
                                                 </div>
 
+                                                <!-- filepath: /var/www/html/dream/add.php -->
                                                 <div class="col-sm-4" id="tx_number_section">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label for="tx_month">10c. When did the patient’s last treatment
-                                                                episode end?</label>
+                                                            <label for="tx_month">10c. When did the patient’s last treatment episode end?</label>
 
                                                             <!-- Row for Month and Year -->
                                                             <div class="row">
                                                                 <!-- Month Input -->
                                                                 <div class="col-sm-6">
                                                                     <label for="tx_month" class="form-label">Month</label>
-                                                                    <input class="form-control" type="number"
-                                                                        name="tx_month" id="tx_month"
-                                                                        placeholder="Type Month..." min="1" max="12" value="<?php if ($clients['tx_month']) {
-                                                                            print_r($clients['tx_month']);
-                                                                        } ?>" />
+                                                                    <input class="form-control" type="number" name="tx_month" id="tx_month" placeholder="Type Month..." min="1" max="12" value="<?php if ($clients['tx_month']) { print_r($clients['tx_month']); } ?>" />
 
                                                                     <!-- Unknown Month Checkbox -->
                                                                     <div class="form-check mt-2">
-                                                                        <input class="form-check-input" type="checkbox"
-                                                                            id="tx_unknown_month" name="tx_unknown_month"
-                                                                            value="1" <?php if ($clients['tx_unknown_month'] ?? false) {
-                                                                                echo 'checked';
-                                                                            } ?>>
-                                                                        <label class="form-check-label"
-                                                                            for="tx_unknown_month">if month unknown Check
-                                                                            Unknown, fill 99 for month on paper</label>
+                                                                        <input class="form-check-input" type="checkbox" id="tx_unknown_month" name="tx_unknown_month" value="1" <?php if ($clients['tx_unknown_month'] ?? false) { echo 'checked'; } ?>>
+                                                                        <label class="form-check-label" for="tx_unknown_month">if month unknown Check Unknown, fill 99 for month on paper</label>
                                                                     </div>
                                                                 </div>
 
                                                                 <!-- Year Input -->
                                                                 <div class="col-sm-6">
                                                                     <label for="tx_year" class="form-label">Year</label>
-                                                                    <input class="form-control" type="number" name="tx_year"
-                                                                        id="tx_year" placeholder="Type Year..." min="1970"
-                                                                        max="2025" value="<?php if ($clients['tx_year']) {
-                                                                            print_r($clients['tx_year']);
-                                                                        } ?>" />
+                                                                    <input class="form-control" type="number" name="tx_year" id="tx_year" placeholder="Type Year..." value="<?php if ($clients['tx_year']) { print_r($clients['tx_year']); } ?>">
+                                                                    <small id="tx_year_error" class="text-danger"></small>
 
                                                                     <!-- Unknown Year Checkbox -->
                                                                     <div class="form-check mt-2">
-                                                                        <input class="form-check-input" type="checkbox"
-                                                                            id="tx_unknown_year" name="tx_unknown_year"
-                                                                            value="1" <?php if ($clients['tx_unknown_year'] ?? false) {
-                                                                                echo 'checked';
-                                                                            } ?>>
-                                                                        <label class="form-check-label"
-                                                                            for="tx_unknown_year">Month and year
-                                                                            unknown</label>
+                                                                        <input class="form-check-input" type="checkbox" id="tx_unknown_year" name="tx_unknown_year" value="1" <?php if ($clients['tx_unknown_year'] ?? false) { echo 'checked'; } ?>>
+                                                                        <label class="form-check-label" for="tx_unknown_year">Month and year unknown</label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -9038,32 +9013,20 @@ if ($user->isLoggedIn()) {
                                                     <div class="col-sm-6" id="regimen_section">
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <label>10g. How long was the treatment regimen( Months)
-                                                                </label>
+                                                                <label>10g. How long was the treatment regimen( Months)</label>
 
                                                                 <!-- Row for Month and Year -->
                                                                 <div class="row">
                                                                     <!-- Month Input -->
                                                                     <div class="col-sm-12">
-                                                                        <!-- <label for="regimen_months" class="form-label"></label> -->
-                                                                        <input class="form-control" type="number"
-                                                                            name="regimen_months" id="regimen_months"
-                                                                            placeholder="Type number of months…" min="1"
-                                                                            max="10000" value="<?php if ($clients['regimen_months']) {
-                                                                                print_r($clients['regimen_months']);
-                                                                            } ?>" />
+                                                                        <input class="form-control" type="number" name="regimen_months" id="regimen_months" placeholder="Type number of months…" min="1" max="10000" value="<?php if ($clients['regimen_months']) { print_r($clients['regimen_months']); } ?>" />
                                                                     </div>
                                                                 </div>
 
                                                                 <!-- Unknown Checkbox -->
                                                                 <div class="form-check mt-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        id="regimen_months_unknown"
-                                                                        name="regimen_months_unknown" value="1" <?php if ($clients['regimen_months_unknown'] ?? false) {
-                                                                            echo 'checked';
-                                                                        } ?>>
-                                                                    <label class="form-check-label"
-                                                                        for="regimen_months_unknown">Unknown</label>
+                                                                    <input class="form-check-input" type="checkbox" id="regimen_months_unknown" name="regimen_months_unknown" value="1" <?php if ($clients['regimen_months_unknown'] ?? false) { echo 'checked'; } ?>>
+                                                                    <label class="form-check-label" for="regimen_months_unknown">Unknown</label>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -9223,23 +9186,15 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>13(b). Date of sputum collection</label>
-                                                            <!-- Row for Date and Sample Type Inputs -->
                                                             <div class="row">
-                                                                <!-- DST Sample Date Input -->
                                                                 <div class="col-sm-6">
-                                                                    <!-- <label for="dst_sample_date" class="form-label">DST
-                                                                        Sample Date</label> -->
-                                                                    <input class="form-control" type="date" min="2025-01-17"
-                                                                        max="<?= date('Y-m-d'); ?>" name="sputum_date"
-                                                                        id="sputum_date" value="<?php if ($clients['sputum_date']) {
-                                                                            print_r($clients['sputum_date']);
-                                                                        } ?>" />
+                                                                    <input class="form-control" type="date" min="2025-01-17" max="<?= date('Y-m-d'); ?>" name="sputum_date" id="sputum_date" value="<?php if ($clients['sputum_date']) { print_r($clients['sputum_date']); } ?>" />
+                                                                    <span id="sputum_date_error" style="color: red;"></span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <div class="col-sm-6" id="sputum_reasons_section">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
@@ -9275,51 +9230,43 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="form_status" id="form_status<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>"
-                                                                        <?= ($clients['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                    <input class="form-check-input" type="radio" name="form_status" id="enrollment_status"
+                                                                        value="<?= $value['id']; ?>" <?= ($clients['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('form_status')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('form_status')">Unset</button>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-4" id="enrollment_completed">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Completed Date</label>
-                                                            <input class="form-control" type="date" name="date_completed"
-                                                                id="date_completed"
+                                                            <input class="form-control" type="date" name="date_completed" id="enrollment_date_completed"
                                                                 value="<?= ($clients['date_completed']) ? $clients['date_completed'] : ''; ?>" />
-                                                            <span id="date_completed_error" class="text-danger"></span>
+                                                            <span id="enrollment_date_completed_error" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <?php if ($clients['form_status'] >= 2) { ?>
-
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <label>Completed By</label>
                                                                 <input class="form-control" type="text"
-                                                                    value="<?= $override->get('user', 'id', $clients['completed_by'])[0]['username']; ?>"
-                                                                    readonly />
+                                                                    value="<?= $override->get('user', 'id', $clients['completed_by'])[0]['username']; ?>" readonly />
                                                             </div>
                                                         </div>
                                                     <?php } ?>
                                                 </div>
 
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-4" id="enrollment_verified">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Verified Date</label>
-                                                            <input class="form-control" type="date" name="date_verified"
-                                                                id="date_verified"
+                                                            <input class="form-control" type="date" name="date_verified" id="enrollment_date_verified"
                                                                 value="<?= ($clients['date_verified']) ? $clients['date_verified'] : ''; ?>" />
-                                                            <span id="date_verified_error" class="text-danger"></span>
+                                                            <span id="enrollment_date_verified_error" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <?php if ($clients['form_status'] >= 3) { ?>
@@ -9327,8 +9274,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="form-group">
                                                                 <label>Verified By</label>
                                                                 <input class="form-control" type="text"
-                                                                    value="<?= $override->get('user', 'id', $clients['verified_by'])[0]['username']; ?>"
-                                                                    readonly />
+                                                                    value="<?= $override->get('user', 'id', $clients['verified_by'])[0]['username']; ?>" readonly />
                                                             </div>
                                                         </div>
                                                     <?php } ?>
