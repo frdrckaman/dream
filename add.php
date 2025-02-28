@@ -8555,37 +8555,28 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>2. Date of enrolment</label>
-                                                            <input type="hidden" name="screening_date_enrollment"
-                                                                id="screening_date_enrollment"
-                                                                value="<?= $screening['screening_date'] ?>" />
-                                                            <input class="form-control" type="date" name="enrollment_date"
-                                                                id="enrollment_date"
-                                                                value="<?= $clients['enrollment_date'] ?>" required />
+                                                            <input type="hidden" name="consent_date_enrollment" id="consent_date_enrollment" value="<?= $screening['consent_date'] ?>" />
+                                                            <input class="form-control" type="date" name="enrollment_date" id="enrollment_date" value="<?= $clients['enrollment_date'] ?>" required />
                                                             <small id="enrollment_date_error" class="text-danger"></small>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <!-- Date of Birth -->
                                                 <div class="col-sm-3" style="flex: 1;">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>4. Date of birth:</label>
-                                                            <input class="form-control" type="date" name="dob" id="dob"
-                                                                value="<?= $clients['dob'] ?>" style="width: 100%;"
-                                                                onchange="validateAge()" />
+                                                            <input class="form-control" type="date" name="dob" id="dob" value="<?= $clients['dob'] ?>" style="width: 100%;" required />
                                                             <small id="dob_error" class="text-danger"></small>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <!-- Age -->
                                                 <div class="col-sm-3" style="flex: 1;">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>5. Age (years)</label>
-                                                            <input class="form-control" type="number" name="age" id="age"
-                                                                value="<?= $clients['age'] ?>" oninput="validateAge()" />
+                                                            <input class="form-control" type="number" name="age" id="age" value="<?= $clients['age'] ?>" required />
                                                             <small id="age_error" class="text-danger"></small>
                                                         </div>
                                                     </div>

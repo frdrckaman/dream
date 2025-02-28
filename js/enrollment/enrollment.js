@@ -19,7 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const enrollmentDateInput = document.getElementById("enrollment_date");
     const enrollmentDateErrorElement = document.getElementById("enrollment_date_error");
-    const screeningDateInput = document.getElementById("screening_date_enrollment");
+    const consentDateInput = document.getElementById("consent_date_enrollment");
+    const dobInput = document.getElementById("dob");
+    const ageInput = document.getElementById("age");
+    const ageErrorElement = document.getElementById("age_error");
+    const form = document.getElementById("validation");
 
     function toggleTxSections() {
         let isTxPreviousYes = Array.from(txPreviousRadios).some(radio => radio.checked && radio.value === "1");
@@ -68,20 +72,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validateEnrollmentDate() {
         const enrollmentDate = enrollmentDateInput.value;
-        const screeningDate = screeningDateInput.value;
+        const consentDate = consentDateInput.value;
         const today = new Date().toISOString().split('T')[0];
 
-        console.log("Validating enrollment date:", enrollmentDate, "against screening date:", screeningDate, "and today's date:", today);
+        console.log("Validating enrollment date:", enrollmentDate, "against consent date:", consentDate, "and today's date:", today);
 
-        if (enrollmentDate < screeningDate || enrollmentDate > today) {
+        if (enrollmentDate < consentDate || enrollmentDate > today) {
             enrollmentDateErrorElement.style.display = 'block';
             enrollmentDateErrorElement.style.color = 'red';
             enrollmentDateErrorElement.style.marginTop = '5px';
-            enrollmentDateErrorElement.textContent = 'Enrollment date must be on or after the screening date and not in the future.';
+            enrollmentDateErrorElement.textContent = `Enrollment date must be on or after the consent date (${consentDate}) and not in the future.`;
             return false;
         } else {
             enrollmentDateErrorElement.style.display = 'none';
             enrollmentDateErrorElement.textContent = '';
+            return true;
+        }
+    }
+
+    function calculateAge(dob) {
+        const today = new Date();
+        const birthDate = new Date(dob);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+    function validateAge() {
+        const dob = dobInput.value;
+        const age = calculateAge(dob);
+        ageInput.value = age;
+
+        if (age < 18) {
+            ageErrorElement.style.display = 'block';
+            ageErrorElement.style.color = 'red';
+            ageErrorElement.style.marginTop = '5px';
+            ageErrorElement.textContent = 'Age must be 18 or older.';
+            return false;
+        } else {
+            ageErrorElement.style.display = 'none';
+            ageErrorElement.textContent = '';
             return true;
         }
     }
@@ -99,6 +132,14 @@ document.addEventListener("DOMContentLoaded", function () {
     diseasesMedicalCheckboxes.forEach(checkbox => checkbox.addEventListener("change", toggleDiseasesSpecify));
     tbRegimenRadios.forEach(radio => radio.addEventListener("change", toggleTbRegimenSpecify));
     enrollmentDateInput.addEventListener("input", validateEnrollmentDate);
+    dobInput.addEventListener("input", validateAge);
+
+    // Prevent form submission if there is an error
+    form.addEventListener("submit", function (event) {
+        if (!validateEnrollmentDate() || !validateAge()) {
+            event.preventDefault();
+        }
+    });
 
     // Run on page load to initialize the correct visibility
     toggleTxSections();
@@ -109,5 +150,5 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleDiseasesSpecify();
     toggleTbRegimenSpecify();
     validateEnrollmentDate(); // Initial validation
+    validateAge(); // Initial validation
 });
-
