@@ -8562,7 +8562,7 @@ if ($user->isLoggedIn()) {
                                     <!-- /.card-header -->
                                     <!-- <form id="enrollment" enctype="multipart/form-data" method="post" autocomplete="off"
                                         style="display: flex; flex-wrap: wrap; gap: 10px;"> -->
-                                    <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                    <form id="enrollment" enctype="multipart/form-data" method="post" autocomplete="off">
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">
@@ -9236,51 +9236,43 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="form_status" id="form_status<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>"
-                                                                        <?= ($clients['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                    <input class="form-check-input" type="radio" name="form_status" id="enrollment_status"
+                                                                        value="<?= $value['id']; ?>" <?= ($clients['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('form_status')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('form_status')">Unset</button>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-4" id="enrollment_completed">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Completed Date</label>
-                                                            <input class="form-control" type="date" name="date_completed"
-                                                                id="date_completed"
+                                                            <input class="form-control" type="date" name="date_completed" id="enrollment_date_completed"
                                                                 value="<?= ($clients['date_completed']) ? $clients['date_completed'] : ''; ?>" />
-                                                            <span id="date_completed_error" class="text-danger"></span>
+                                                            <span id="enrollment_date_completed_error" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <?php if ($clients['form_status'] >= 2) { ?>
-
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <label>Completed By</label>
                                                                 <input class="form-control" type="text"
-                                                                    value="<?= $override->get('user', 'id', $clients['completed_by'])[0]['username']; ?>"
-                                                                    readonly />
+                                                                    value="<?= $override->get('user', 'id', $clients['completed_by'])[0]['username']; ?>" readonly />
                                                             </div>
                                                         </div>
                                                     <?php } ?>
                                                 </div>
 
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-4" id="enrollment_verified">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Verified Date</label>
-                                                            <input class="form-control" type="date" name="date_verified"
-                                                                id="date_verified"
+                                                            <input class="form-control" type="date" name="date_verified" id="enrollment_date_verified"
                                                                 value="<?= ($clients['date_verified']) ? $clients['date_verified'] : ''; ?>" />
-                                                            <span id="date_verified_error" class="text-danger"></span>
+                                                            <span id="enrollment_date_verified_error" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <?php if ($clients['form_status'] >= 3) { ?>
@@ -9288,8 +9280,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="form-group">
                                                                 <label>Verified By</label>
                                                                 <input class="form-control" type="text"
-                                                                    value="<?= $override->get('user', 'id', $clients['verified_by'])[0]['username']; ?>"
-                                                                    readonly />
+                                                                    value="<?= $override->get('user', 'id', $clients['verified_by'])[0]['username']; ?>" readonly />
                                                             </div>
                                                         </div>
                                                     <?php } ?>
