@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const enrollmentDateInput = document.getElementById("enrollment_date");
     const enrollmentDateErrorElement = document.getElementById("enrollment_date_error");
     const consentDateInput = document.getElementById("consent_date_enrollment");
+    const screeningDateInput = document.getElementById("screening_date_enrollment");
     const dobInput = document.getElementById("dob");
     const ageInput = document.getElementById("age");
     const ageErrorElement = document.getElementById("age_error");
@@ -90,20 +91,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function calculateAge(dob) {
-        const today = new Date();
+    function calculateAge(dob, referenceDate) {
         const birthDate = new Date(dob);
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDifference = today.getMonth() - birthDate.getMonth();
-        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        const refDate = new Date(referenceDate);
+        let age = refDate.getFullYear() - birthDate.getFullYear();
+        const monthDifference = refDate.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && refDate.getDate() < birthDate.getDate())) {
             age--;
         }
         return age;
     }
 
+    function calculateDob(age, referenceDate) {
+        const refDate = new Date(referenceDate);
+        const birthYear = refDate.getFullYear() - age;
+        const birthDate = new Date(birthYear, refDate.getMonth(), refDate.getDate());
+        return birthDate.toISOString().split('T')[0];
+    }
+
     function validateAge() {
         const dob = dobInput.value;
-        const age = calculateAge(dob);
+        const screeningDate = screeningDateInput.value;
+        const age = calculateAge(dob, screeningDate);
         ageInput.value = age;
 
         if (age < 18) {
@@ -133,6 +142,12 @@ document.addEventListener("DOMContentLoaded", function () {
     tbRegimenRadios.forEach(radio => radio.addEventListener("change", toggleTbRegimenSpecify));
     enrollmentDateInput.addEventListener("input", validateEnrollmentDate);
     dobInput.addEventListener("input", validateAge);
+    ageInput.addEventListener("input", function () {
+        const age = ageInput.value;
+        const screeningDate = screeningDateInput.value;
+        dobInput.value = calculateDob(age, screeningDate);
+        validateAge();
+    });
 
     // Prevent form submission if there is an error
     form.addEventListener("submit", function (event) {
