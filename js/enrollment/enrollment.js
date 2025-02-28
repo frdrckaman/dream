@@ -260,6 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validateForm() {
         let isValid = true;
+        const today = new Date().toISOString().split('T')[0];
         const enrollmentDateCompletedInput = document.getElementById("enrollment_date_completed");
         const enrollmentDateVerifiedInput = document.getElementById("enrollment_date_verified");
         const enrollmentDateCompletedError = document.getElementById("enrollment_date_completed_error");
@@ -268,12 +269,18 @@ document.addEventListener("DOMContentLoaded", function () {
         if (enrollmentDateCompletedInput.required && !enrollmentDateCompletedInput.value) {
             enrollmentDateCompletedError.textContent = "Completed date is required.";
             isValid = false;
+        } else if (enrollmentDateCompletedInput.value < enrollmentDateInput.value || enrollmentDateCompletedInput.value > today) {
+            enrollmentDateCompletedError.textContent = "Completed date must be on or after the enrollment date and not in the future.";
+            isValid = false;
         } else {
             enrollmentDateCompletedError.textContent = "";
         }
 
-        if (enrollmentDateVerifiedInput.required && !enrollmentDateVerifiedInput.value) {
+        if (enrollmentVerifiedSection.style.display !== "none" && enrollmentDateCompletedInput.value && !enrollmentDateVerifiedInput.value) {
             enrollmentDateVerifiedError.textContent = "Verified date is required.";
+            isValid = false;
+        } else if (enrollmentDateVerifiedInput.value < enrollmentDateCompletedInput.value || enrollmentDateVerifiedInput.value > today) {
+            enrollmentDateVerifiedError.textContent = "Verified date must be on or after the completed date and not in the future.";
             isValid = false;
         } else {
             enrollmentDateVerifiedError.textContent = "";
