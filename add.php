@@ -8884,61 +8884,41 @@ if ($user->isLoggedIn()) {
                                                         } ?>" />
                                                 </div>
 
-                                                <div class="col-sm-4" id="tx_number_section">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label for="tx_month">10c. When did the patient’s last treatment
-                                                                episode end?</label>
+                                                <!-- filepath: /var/www/html/dream/add.php -->
+<div class="col-sm-4" id="tx_number_section">
+    <div class="row-form clearfix">
+        <div class="form-group">
+            <label for="tx_month">10c. When did the patient’s last treatment episode end?</label>
 
-                                                            <!-- Row for Month and Year -->
-                                                            <div class="row">
-                                                                <!-- Month Input -->
-                                                                <div class="col-sm-6">
-                                                                    <label for="tx_month" class="form-label">Month</label>
-                                                                    <input class="form-control" type="number"
-                                                                        name="tx_month" id="tx_month"
-                                                                        placeholder="Type Month..." min="1" max="12" value="<?php if ($clients['tx_month']) {
-                                                                            print_r($clients['tx_month']);
-                                                                        } ?>" />
+            <!-- Row for Month and Year -->
+            <div class="row">
+                <!-- Month Input -->
+                <div class="col-sm-6">
+                    <label for="tx_month" class="form-label">Month</label>
+                    <input class="form-control" type="number" name="tx_month" id="tx_month" placeholder="Type Month..." min="1" max="12" value="<?php if ($clients['tx_month']) { print_r($clients['tx_month']); } ?>" />
 
-                                                                    <!-- Unknown Month Checkbox -->
-                                                                    <div class="form-check mt-2">
-                                                                        <input class="form-check-input" type="checkbox"
-                                                                            id="tx_unknown_month" name="tx_unknown_month"
-                                                                            value="1" <?php if ($clients['tx_unknown_month'] ?? false) {
-                                                                                echo 'checked';
-                                                                            } ?>>
-                                                                        <label class="form-check-label"
-                                                                            for="tx_unknown_month">if month unknown Check
-                                                                            Unknown, fill 99 for month on paper</label>
-                                                                    </div>
-                                                                </div>
+                    <!-- Unknown Month Checkbox -->
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" id="tx_unknown_month" name="tx_unknown_month" value="1" <?php if ($clients['tx_unknown_month'] ?? false) { echo 'checked'; } ?> onchange="toggleTxMonth()">
+                        <label class="form-check-label" for="tx_unknown_month">if month unknown Check Unknown, fill 99 for month on paper</label>
+                    </div>
+                </div>
 
-                                                                <!-- Year Input -->
-                                                                <div class="col-sm-6">
-                                                                    <label for="tx_year" class="form-label">Year</label>
-                                                                    <input class="form-control" type="number" name="tx_year"
-                                                                        id="tx_year" placeholder="Type Year..." min="1970"
-                                                                        max="2025" value="<?php if ($clients['tx_year']) {
-                                                                            print_r($clients['tx_year']);
-                                                                        } ?>" />
+                <!-- Year Input -->
+                <div class="col-sm-6">
+                    <label for="tx_year" class="form-label">Year</label>
+                    <input class="form-control" type="number" name="tx_year" id="tx_year" placeholder="Type Year..." min="1970" max="<?= date('Y'); ?>" value="<?php if ($clients['tx_year']) { print_r($clients['tx_year']); } ?>" onchange="validateTxYear()" />
 
-                                                                    <!-- Unknown Year Checkbox -->
-                                                                    <div class="form-check mt-2">
-                                                                        <input class="form-check-input" type="checkbox"
-                                                                            id="tx_unknown_year" name="tx_unknown_year"
-                                                                            value="1" <?php if ($clients['tx_unknown_year'] ?? false) {
-                                                                                echo 'checked';
-                                                                            } ?>>
-                                                                        <label class="form-check-label"
-                                                                            for="tx_unknown_year">Month and year
-                                                                            unknown</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                    <!-- Unknown Year Checkbox -->
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" id="tx_unknown_year" name="tx_unknown_year" value="1" <?php if ($clients['tx_unknown_year'] ?? false) { echo 'checked'; } ?> onchange="toggleTxYear()">
+                        <label class="form-check-label" for="tx_unknown_year">Month and year unknown</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
                                             </div>
 
                                             <div id="tx_previous_section">
@@ -9219,27 +9199,19 @@ if ($user->isLoggedIn()) {
                                                     <br>
                                                 </div>
 
-                                                <div class="col-sm-6" id="sputum_date_section">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>13(b). Date of sputum collection</label>
-                                                            <!-- Row for Date and Sample Type Inputs -->
-                                                            <div class="row">
-                                                                <!-- DST Sample Date Input -->
-                                                                <div class="col-sm-6">
-                                                                    <!-- <label for="dst_sample_date" class="form-label">DST
-                                                                        Sample Date</label> -->
-                                                                    <input class="form-control" type="date" min="2025-01-17"
-                                                                        max="<?= date('Y-m-d'); ?>" name="sputum_date"
-                                                                        id="sputum_date" value="<?php if ($clients['sputum_date']) {
-                                                                            print_r($clients['sputum_date']);
-                                                                        } ?>" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
+                                             <div class="col-sm-6" id="sputum_date_section">
+    <div class="row-form clearfix">
+        <div class="form-group">
+            <label>13(b). Date of sputum collection</label>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input class="form-control" type="date" min="2025-01-17" max="<?= date('Y-m-d'); ?>" name="sputum_date" id="sputum_date" value="<?php if ($clients['sputum_date']) { print_r($clients['sputum_date']); } ?>" />
+                    <span id="sputum_date_error" style="color: red;"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
                                                 <div class="col-sm-6" id="sputum_reasons_section">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">

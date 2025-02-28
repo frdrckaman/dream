@@ -26,6 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const ageErrorElement = document.getElementById("age_error");
     const informationDateInput = document.getElementById("date_information_collected");
     const informationDateErrorElement = document.getElementById("information_date_error");
+    const txYearInput = document.getElementById("tx_year");
+    const txMonthInput = document.getElementById("tx_month");
+    const sputumDateInput = document.getElementById("sputum_date");
+    const sputumDateErrorElement = document.getElementById("sputum_date_error");
     const form = document.getElementById("validation");
 
     function toggleTxSections() {
@@ -148,6 +152,63 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function validateTxYear() {
+        const dob = new Date(dobInput.value);
+        const txYear = txYearInput.value;
+        const currentYear = new Date().getFullYear();
+
+        if (txYear <= dob.getFullYear() || txYear > currentYear) {
+            alert('Year must be greater than year of birth and not in the future.');
+            txYearInput.value = '';
+        }
+    }
+
+    function toggleTxMonth() {
+        const txMonth = document.getElementById('tx_month');
+        const txUnknownMonth = document.getElementById('tx_unknown_month');
+
+        if (txUnknownMonth.checked) {
+            txMonth.value = '';
+            txMonth.disabled = true;
+        } else {
+            txMonth.disabled = false;
+        }
+    }
+
+    function toggleTxYear() {
+        const txYear = document.getElementById('tx_year');
+        const txMonth = document.getElementById('tx_month');
+        const txUnknownYear = document.getElementById('tx_unknown_year');
+
+        if (txUnknownYear.checked) {
+            txYear.value = '';
+            txMonth.value = '';
+            txYear.disabled = true;
+            txMonth.disabled = true;
+        } else {
+            txYear.disabled = false;
+            txMonth.disabled = false;
+        }
+    }
+
+    function validateSputumDate() {
+        const sputumDate = new Date(sputumDateInput.value);
+        const screeningDate = new Date(screeningDateInput.value);
+        const threeDaysBeforeScreening = new Date(screeningDate);
+        threeDaysBeforeScreening.setDate(screeningDate.getDate() - 3);
+        const today = new Date();
+
+        if (sputumDate > screeningDate || sputumDate < threeDaysBeforeScreening || sputumDate > today) {
+            sputumDateErrorElement.style.display = 'block';
+            sputumDateErrorElement.textContent = 'Date of sputum collection must be within 3 days before the screening date and not in the future.';
+            return false;
+        } else {
+            sputumDateErrorElement.style.display = 'none';
+            sputumDateErrorElement.textContent = '';
+            return true;
+        }
+    }
+
     // Attach event listeners
     txPreviousRadios.forEach(radio => radio.addEventListener("change", toggleTxSections));
     tbCategoryRadios.forEach(radio => {
@@ -169,10 +230,12 @@ document.addEventListener("DOMContentLoaded", function () {
         validateAge();
     });
     informationDateInput.addEventListener("input", validateInformationDate);
+    txYearInput.addEventListener("input", validateTxYear);
+    sputumDateInput.addEventListener("input", validateSputumDate);
 
     // Prevent form submission if there is an error
     form.addEventListener("submit", function (event) {
-        if (!validateEnrollmentDate() || !validateAge() || !validateInformationDate()) {
+        if (!validateEnrollmentDate() || !validateAge() || !validateInformationDate() || !validateTxYear() || !validateSputumDate()) {
             event.preventDefault();
         }
     });
@@ -188,4 +251,5 @@ document.addEventListener("DOMContentLoaded", function () {
     validateEnrollmentDate(); // Initial validation
     validateAge(); // Initial validation
     validateInformationDate(); // Initial validation
+    validateSputumDate(); // Initial validation
 });
