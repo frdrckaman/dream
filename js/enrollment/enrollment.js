@@ -27,9 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const informationDateInput = document.getElementById("date_information_collected");
     const informationDateErrorElement = document.getElementById("information_date_error");
     const txYearInput = document.getElementById("tx_year");
+    const txYearErrorElement = document.getElementById("tx_year_error");
     const txMonthInput = document.getElementById("tx_month");
     const sputumDateInput = document.getElementById("sputum_date");
     const sputumDateErrorElement = document.getElementById("sputum_date_error");
+    const txUnknownMonth = document.getElementById("tx_unknown_month");
+    const txUnknownYear = document.getElementById("tx_unknown_year");
     const form = document.getElementById("validation");
 
     function toggleTxSections() {
@@ -157,37 +160,37 @@ document.addEventListener("DOMContentLoaded", function () {
         const txYear = txYearInput.value;
         const currentYear = new Date().getFullYear();
 
-        if (txYear <= dob.getFullYear() || txYear > currentYear) {
-            alert('Year must be greater than year of birth and not in the future.');
+        if (txYear && !txUnknownYear.checked && (txYear <= dob.getFullYear() || txYear > currentYear)) {
+            txYearErrorElement.textContent = 'Year must be greater than year of birth and not in the future.';
             txYearInput.value = '';
+            return false;
+        } else {
+            txYearErrorElement.textContent = '';
+            return true;
         }
     }
 
     function toggleTxMonth() {
-        const txMonth = document.getElementById('tx_month');
-        const txUnknownMonth = document.getElementById('tx_unknown_month');
-
         if (txUnknownMonth.checked) {
-            txMonth.value = '';
-            txMonth.disabled = true;
+            txMonthInput.value = '';
+            txMonthInput.disabled = true;
         } else {
-            txMonth.disabled = false;
+            txMonthInput.disabled = false;
         }
     }
 
     function toggleTxYear() {
-        const txYear = document.getElementById('tx_year');
-        const txMonth = document.getElementById('tx_month');
-        const txUnknownYear = document.getElementById('tx_unknown_year');
-
         if (txUnknownYear.checked) {
-            txYear.value = '';
-            txMonth.value = '';
-            txYear.disabled = true;
-            txMonth.disabled = true;
+            txUnknownMonth.checked = true;
+            txUnknownMonth.disabled = true;
+            txYearInput.value = '';
+            txMonthInput.value = '';
+            txYearInput.disabled = true;
+            txMonthInput.disabled = true;
         } else {
-            txYear.disabled = false;
-            txMonth.disabled = false;
+            txUnknownMonth.disabled = false;
+            txYearInput.disabled = false;
+            txMonthInput.disabled = false;
         }
     }
 
@@ -231,11 +234,25 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     informationDateInput.addEventListener("input", validateInformationDate);
     txYearInput.addEventListener("input", validateTxYear);
+    txUnknownMonth.addEventListener("change", toggleTxMonth);
+    txUnknownYear.addEventListener("change", toggleTxYear);
     sputumDateInput.addEventListener("input", validateSputumDate);
 
     // Prevent form submission if there is an error
     form.addEventListener("submit", function (event) {
-        if (!validateEnrollmentDate() || !validateAge() || !validateInformationDate() || !validateTxYear() || !validateSputumDate()) {
+        const isEnrollmentDateValid = validateEnrollmentDate();
+        const isAgeValid = validateAge();
+        const isInformationDateValid = validateInformationDate();
+        const isTxYearValid = validateTxYear();
+        const isSputumDateValid = validateSputumDate();
+
+        console.log("Enrollment Date Valid:", isEnrollmentDateValid);
+        console.log("Age Valid:", isAgeValid);
+        console.log("Information Date Valid:", isInformationDateValid);
+        console.log("Tx Year Valid:", isTxYearValid);
+        console.log("Sputum Date Valid:", isSputumDateValid);
+
+        if (!isEnrollmentDateValid || !isAgeValid || !isInformationDateValid || !isTxYearValid || !isSputumDateValid) {
             event.preventDefault();
         }
     });
@@ -252,4 +269,6 @@ document.addEventListener("DOMContentLoaded", function () {
     validateAge(); // Initial validation
     validateInformationDate(); // Initial validation
     validateSputumDate(); // Initial validation
+    toggleTxMonth(); // Initial toggle state
+    toggleTxYear(); // Initial toggle state
 });
