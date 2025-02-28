@@ -37,6 +37,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const regimenMonthsUnknown = document.getElementById("regimen_months_unknown");
     const form = document.getElementById("enrollment");
 
+    const enrollmentCompletedSection = document.getElementById("enrollment_completed");
+    const enrollmentVerifiedSection = document.getElementById("enrollment_verified");
+    const enrollmentDateCompletedInput = document.getElementById("enrollment_date_completed");
+    const enrollmentDateVerifiedInput = document.getElementById("enrollment_date_verified");
+    const enrollmentDateCompletedError = document.getElementById("enrollment_date_completed_error");
+    const enrollmentDateVerifiedError = document.getElementById("enrollment_date_verified_error");
+
     function toggleTxSections() {
         let isTxPreviousYes = Array.from(txPreviousRadios).some(radio => radio.checked && radio.value === "1");
 
@@ -227,12 +234,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateFormStatus() {
         const selectedStatus = document.querySelector("input[name='form_status']:checked").value;
-        const enrollmentCompletedSection = document.getElementById("enrollment_completed");
-        const enrollmentVerifiedSection = document.getElementById("enrollment_verified");
-        const enrollmentDateCompletedInput = document.getElementById("enrollment_date_completed");
-        const enrollmentDateVerifiedInput = document.getElementById("enrollment_date_verified");
-        const enrollmentDateCompletedError = document.getElementById("enrollment_date_completed_error");
-        const enrollmentDateVerifiedError = document.getElementById("enrollment_date_verified_error");
 
         if (selectedStatus == "1") {
             enrollmentCompletedSection.style.display = "none";
@@ -261,10 +262,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function validateForm() {
         let isValid = true;
         const today = new Date().toISOString().split('T')[0];
-        const enrollmentDateCompletedInput = document.getElementById("enrollment_date_completed");
-        const enrollmentDateVerifiedInput = document.getElementById("enrollment_date_verified");
-        const enrollmentDateCompletedError = document.getElementById("enrollment_date_completed_error");
-        const enrollmentDateVerifiedError = document.getElementById("enrollment_date_verified_error");
 
         if (enrollmentDateCompletedInput.required && !enrollmentDateCompletedInput.value) {
             enrollmentDateCompletedError.textContent = "Completed date is required.";
@@ -316,6 +313,10 @@ document.addEventListener("DOMContentLoaded", function () {
     sputumDateInput.addEventListener("input", validateSputumDate);
     regimenMonthsUnknown.addEventListener("change", toggleRegimenMonths);
     document.querySelectorAll("input[name='form_status']").forEach(radio => radio.addEventListener("change", updateFormStatus));
+
+    // Validate dates on input
+    enrollmentDateCompletedInput.addEventListener("input", validateForm);
+    enrollmentDateVerifiedInput.addEventListener("input", validateForm);
 
     // Prevent form submission if there is an error
     form.addEventListener("submit", function (event) {
