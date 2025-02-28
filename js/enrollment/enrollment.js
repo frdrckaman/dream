@@ -135,10 +135,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const screeningDate = new Date(screeningDateInput.value);
         const threeDaysBeforeScreening = new Date(screeningDate);
         threeDaysBeforeScreening.setDate(screeningDate.getDate() - 3);
+        const today = new Date();
 
-        if (informationDate > screeningDate || informationDate < threeDaysBeforeScreening) {
+        if (informationDate > screeningDate || informationDate < threeDaysBeforeScreening || informationDate > today) {
             informationDateErrorElement.style.display = 'block';
-            informationDateErrorElement.textContent = 'Date information collected must be within 3 days before the screening date.';
+            informationDateErrorElement.textContent = 'Date information collected must be within 3 days before the screening date and not in the future.';
             return false;
         } else {
             informationDateErrorElement.style.display = 'none';
