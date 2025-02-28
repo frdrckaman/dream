@@ -14,12 +14,58 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Function to update form status visibility
+    function updateScreeningFormStatus() {
+        const formStatus = document.querySelector('input[id="screening_status"]:checked')?.value;
+        const screeningCompleted = document.getElementById('screening_completed');
+        const screeningDateCompleted = document.getElementById('screening_date_completed');
+        const screeningVerified = document.getElementById('screening_verified');
+        const screeningDateVerified = document.getElementById('screening_date_verified');
+        const consentDate = document.getElementById('consent_date').value;
+        const screeningDate = document.getElementById('screening_date').value;
+        const today = new Date().toISOString().split('T')[0];
+
+        if (formStatus == '1') {
+            screeningCompleted.style.display = 'none';
+            screeningDateCompleted.required = false;
+            screeningVerified.style.display = 'none';
+            screeningDateVerified.required = false;
+        } else if (formStatus == '2') {
+            screeningCompleted.style.display = 'block';
+            screeningDateCompleted.required = true;
+            screeningDateCompleted.min = consentDate ? consentDate : screeningDate;
+            screeningDateCompleted.max = today;
+            screeningVerified.style.display = 'none';
+            screeningDateVerified.required = false;
+        } else if (formStatus == '3') {
+            screeningCompleted.style.display = 'block';
+            screeningDateCompleted.required = true;
+            screeningDateCompleted.min = consentDate ? consentDate : screeningDate;
+            screeningDateCompleted.max = today;
+            screeningVerified.style.display = 'block';
+            screeningDateVerified.required = true;
+            screeningDateVerified.min = consentDate ? consentDate : screeningDate;
+            screeningDateVerified.max = today;
+        } else {
+            screeningCompleted.style.display = 'none';
+            screeningDateCompleted.required = false;
+            screeningVerified.style.display = 'none';
+            screeningDateVerified.required = false;
+        }
+    }
+
     // Initial check on page load
     toggleConsentDate();
+    updateScreeningFormStatus();
 
     // Add event listeners to consent radios
     document.querySelectorAll('input[name="consent"]').forEach(radio => {
         radio.addEventListener('change', toggleConsentDate);
+    });
+
+    // Add event listeners to form status radios
+    document.querySelectorAll('input[id="screening_status"]').forEach(radio => {
+        radio.addEventListener('change', updateScreeningFormStatus);
     });
 
     // Form validation
@@ -27,8 +73,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const consentYes = document.querySelector('input[name="consent"]:checked')?.value === '1';
         const consentDate = document.getElementById('consent_date').value;
         const screeningDate = document.getElementById('screening_date').value;
+        const screeningDateCompleted = document.getElementById('screening_date_completed').value;
+        const screeningDateVerified = document.getElementById('screening_date_verified').value;
         const consentDateErrorElement = document.getElementById('consent_date_error');
         const screeningDateErrorElement = document.getElementById('screening_date_error');
+        const dateCompletedErrorElement = document.getElementById('date_completed_error');
+        const dateVerifiedErrorElement = document.getElementById('screening_date_verified_error');
         const today = new Date().toISOString().split('T')[0];
 
         let valid = true;
@@ -59,6 +109,42 @@ document.addEventListener('DOMContentLoaded', function () {
             consentDateErrorElement.textContent = '';
         }
 
+        // Validate completed date
+        if (screeningDateCompleted && (screeningDateCompleted < (consentDate || screeningDate) || screeningDateCompleted > today)) {
+            e.preventDefault();
+            dateCompletedErrorElement.style.display = 'block';
+            dateCompletedErrorElement.style.color = 'red';
+            dateCompletedErrorElement.style.marginTop = '5px';
+            dateCompletedErrorElement.textContent = 'Completed date must be on or after the screening date and not in the future.';
+            valid = false;
+        } else {
+            dateCompletedErrorElement.style.display = 'none';
+            dateCompletedErrorElement.textContent = '';
+        }
+
+        // Validate verified date
+        if (screeningDateVerified && (screeningDateVerified < screeningDateCompleted || screeningDateVerified > today)) {
+            e.preventDefault();
+            dateVerifiedErrorElement.style.display = 'block';
+            dateVerifiedErrorElement.style.color = 'red';
+            dateVerifiedErrorElement.style.marginTop = '5px';
+            dateVerifiedErrorElement.textContent = 'Verified date must be on or after the completed date and not in the future.';
+            valid = false;
+        } else {
+            dateVerifiedErrorElement.style.display = 'none';
+            dateVerifiedErrorElement.textContent = '';
+        }
+
+        // Ensure form status 3 is only checked if screening date completed has value
+        if (formStatus == '3' && !screeningDateCompleted) {
+            e.preventDefault();
+            dateCompletedErrorElement.style.display = 'block';
+            dateCompletedErrorElement.style.color = 'red';
+            dateCompletedErrorElement.style.marginTop = '5px';
+            dateCompletedErrorElement.textContent = 'Completed date is required for form status 3.';
+            valid = false;
+        }
+
         if (!valid) {
             e.preventDefault();
         }
@@ -76,5 +162,19 @@ document.addEventListener('DOMContentLoaded', function () {
         const screeningDateErrorElement = document.getElementById('screening_date_error');
         screeningDateErrorElement.style.display = 'none';
         screeningDateErrorElement.textContent = '';
+    });
+
+    // Real-time validation for completed date
+    document.getElementById('screening_date_completed').addEventListener('input', function () {
+        const dateCompletedErrorElement = document.getElementById('date_completed_error');
+        dateCompletedErrorElement.style.display = 'none';
+        dateCompletedErrorElement.textContent = '';
+    });
+
+    // Real-time validation for verified date
+    document.getElementById('screening_date_verified').addEventListener('input', function () {
+        const dateVerifiedErrorElement = document.getElementById('screening_date_verified_error');
+        dateVerifiedErrorElement.style.display = 'none';
+        dateVerifiedErrorElement.textContent = '';
     });
 });
