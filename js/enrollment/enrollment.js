@@ -157,10 +157,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validateTxYear() {
         const dob = new Date(dobInput.value);
-        const txYear = txYearInput.value;
+        const dobYear = dob.getFullYear(); // Extract only the year from dob
+        const txYear = parseInt(txYearInput.value, 10); // Ensure txYear is treated as an integer
         const currentYear = new Date().getFullYear();
 
-        if (txYear && !txUnknownYear.checked && (txYear <= dob.getFullYear() || txYear > currentYear)) {
+        // Check if txYear is a valid four-digit year
+        if (txYear && txYear.toString().length === 4 && !txUnknownYear.checked && (txYear <= dobYear || txYear > currentYear)) {
             txYearErrorElement.textContent = 'Year must be greater than year of birth and not in the future.';
             txYearInput.value = '';
             return false;
