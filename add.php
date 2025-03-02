@@ -1071,117 +1071,117 @@ if ($user->isLoggedIn()) {
                         'facility_id' => $screening['facility_id'],
                     ));
 
-                    // $last_row = $override->lastRow('diagnosis_test', 'id')[0];
+                    $last_row = $override->lastRow('diagnosis_test', 'id')[0];
 
-                    // $user->createRecord('diagnosis_test_records', array(
-                    //     'diagnosis_test_id' => $last_row['id'],
-                    //     'pid' => $screening['pid'],
-                    //     'culture_performed' => Input::get('culture_performed'),
-                    //     'culture_method' => $culture_method,
-                    //     'culture_results' => Input::get('culture_results'),
-                    //     'phenotypic_performed' => Input::get('phenotypic_performed'),
-                    //     'phenotypic_date_performed' => Input::get('phenotypic_date_performed'),
-                    //     'phenotypic_date_results' => Input::get('phenotypic_date_results'),
-                    //     'date_sputum_received' => Input::get('date_sputum_received'),
-                    //     'appearance' => Input::get('appearance'),
-                    //     'sample_volume' => Input::get('sample_volume'),
-                    //     'unique_lab_no' => Input::get('unique_lab_no'),
-                    //     'microscopy_type' => Input::get('microscopy_type'),
-                    //     'microscopy_results' => Input::get('microscopy_results'),
-                    //     'microscopy_date' => Input::get('microscopy_date'),
-                    //     'lj_inoculation_date' => Input::get('lj_inoculation_date'),
-                    //     'lj_results_date' => Input::get('lj_results_date'),
-                    //     'lj_results' => Input::get('lj_results'),
-                    //     'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
-                    //     'mgit_results_date' => Input::get('mgit_results_date'),
-                    //     'mgit_results' => Input::get('mgit_results'),
-                    //     'culture_isolate' => Input::get('culture_isolate'),
-                    //     'isolate_date' => Input::get('isolate_date'),
-                    //     'rifampicin' => Input::get('rifampicin'),
-                    //     'isoniazid' => Input::get('isoniazid'),
-                    //     'levofloxacin' => Input::get('levofloxacin'),
-                    //     'moxifloxacin' => Input::get('moxifloxacin'),
-                    //     'bedaquiline' => Input::get('bedaquiline'),
-                    //     'linezolid' => Input::get('linezolid'),
-                    //     'clofazimine' => Input::get('clofazimine'),
-                    //     'cycloserine' => Input::get('cycloserine'),
-                    //     'terizidone' => Input::get('terizidone'),
-                    //     'ethambutol' => Input::get('ethambutol'),
-                    //     'delamanid' => Input::get('delamanid'),
-                    //     'pyrazinamide' => Input::get('pyrazinamide'),
-                    //     'imipenem' => Input::get('imipenem'),
-                    //     'cilastatin' => Input::get('cilastatin'),
-                    //     'meropenem' => Input::get('meropenem'),
-                    //     'amikacin' => Input::get('amikacin'),
-                    //     'streptomycin' => Input::get('streptomycin'),
-                    //     'ethionamide' => Input::get('ethionamide'),
-                    //     'prothionamide' => Input::get('prothionamide'),
-                    //     'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
-                    //     'nano_rifampicin' => Input::get('nano_rifampicin'),
-                    //     'nano_isoniazid' => Input::get('nano_isoniazid'),
-                    //     'nano_levofloxacin' => Input::get('nano_levofloxacin'),
-                    //     'nano_moxifloxacin' => Input::get('nano_moxifloxacin'),
-                    //     'nano_bedaquiline' => Input::get('nano_bedaquiline'),
-                    //     'nano_linezolid' => Input::get('nano_linezolid'),
-                    //     'nano_clofazimine' => Input::get('nano_clofazimine'),
-                    //     'nano_cycloserine' => Input::get('nano_cycloserine'),
-                    //     'nano_delamanid' => Input::get('nano_delamanid'),
-                    //     'nano_terizidone' => Input::get('nano_terizidone'),
-                    //     'nano_ethambutol' => Input::get('nano_ethambutol'),
-                    //     'nano_pyrazinamide' => Input::get('nano_pyrazinamide'),
-                    //     'nano_cilastatin' => Input::get('nano_cilastatin'),
-                    //     'nano_imipenem' => Input::get('nano_imipenem'),
-                    //     'nano_meropenem' => Input::get('nano_meropenem'),
-                    //     'nano_amikacin' => Input::get('nano_amikacin'),
-                    //     'nano_streptomycin' => Input::get('nano_streptomycin'),
-                    //     'nano_ethionamide' => Input::get('nano_ethionamide'),
-                    //     'nano_prothionamide' => Input::get('nano_prothionamide'),
-                    //     'nano_para_aminosalicylic_acid' => Input::get('nano_para_aminosalicylic_acid'),
-                    //     'nano_capreomycin' => Input::get('nano_capreomycin'),
-                    //     'nano_kanamycin' => Input::get('nano_kanamycin'),
-                    //     'nano_pretomanid' => Input::get('nano_pretomanid'),
-                    //     'xpert_xdr_performed' => Input::get('xpert_xdr_performed'),
-                    //     'xpert_xdr_date_performed' => Input::get('xpert_xdr_date_performed'),
-                    //     'isoniazid2' => Input::get('isoniazid2'),
-                    //     'fluoroquinolones' => Input::get('fluoroquinolones'),
-                    //     'amikacin2' => Input::get('amikacin2'),
-                    //     'kanamycin' => Input::get('kanamycin'),
-                    //     'capreomycin' => Input::get('capreomycin'),
-                    //     'ethionamide2' => Input::get('ethionamide2'),
-                    //     'first_line_drugs' => $first_line_drugs,
-                    //     'second_line_drugs' => $second_line_drugs,
-                    //     'version_number' => Input::get('version_number'),
-                    //     'lot_number' => Input::get('lot_number'),
-                    //     'mutations_detected_list' => Input::get('mutations_detected_list'),
-                    //     'nanopore_done' => Input::get('nanopore_done'),
-                    //     'sequencing_results' => Input::get('sequencing_results'),
-                    //     'epi_to_me' => Input::get('epi_to_me'),
-                    //     'epi_to_me_version' => Input::get('epi_to_me_version'),
-                    //     'first_line_lpa' => Input::get('first_line_lpa'),
-                    //     'first_line_lpa_date' => Input::get('first_line_lpa_date'),
-                    //     'second_line_lpa' => Input::get('second_line_lpa'),
-                    //     'second_line_lpa_date' => Input::get('second_line_lpa_date'),
-                    //     'lpa1_mtb' => Input::get('lpa1_mtb'),
-                    //     'lpa1_rif' => Input::get('lpa1_rif'),
-                    //     'lpa1_inh' => Input::get('lpa1_inh'),
-                    //     'lpa2_mtb' => Input::get('lpa2_mtb'),
-                    //     'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
-                    //     'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
-                    //     'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
-                    //     'remarks' => Input::get('remarks'),
-                    //     'form_status' => Input::get('form_status'),
-                    //     'date_completed' => $date_completed,
-                    //     'completed_by' => $completed_by,
-                    //     'date_verified' => $date_verified,
-                    //     'verified_by' => $verified_by,
-                    //     'status' => 1,
-                    //     'enrollment_id' => $_GET['sid'],
-                    //     'create_on' => date('Y-m-d H:i:s'),
-                    //     'staff_id' => $user->data()->id,
-                    //     'update_on' => date('Y-m-d H:i:s'),
-                    //     'update_id' => $user->data()->id,
-                    //     'facility_id' => $screening['facility_id'],
-                    // ));
+                    $user->createRecord('diagnosis_test_records', array(
+                        'diagnosis_test_id' => $last_row['id'],
+                        'pid' => $screening['pid'],
+                        'culture_performed' => Input::get('culture_performed'),
+                        'culture_method' => $culture_method,
+                        'culture_results' => Input::get('culture_results'),
+                        'phenotypic_performed' => Input::get('phenotypic_performed'),
+                        'phenotypic_date_performed' => Input::get('phenotypic_date_performed'),
+                        'phenotypic_date_results' => Input::get('phenotypic_date_results'),
+                        'date_sputum_received' => Input::get('date_sputum_received'),
+                        'appearance' => Input::get('appearance'),
+                        'sample_volume' => Input::get('sample_volume'),
+                        'unique_lab_no' => Input::get('unique_lab_no'),
+                        'microscopy_type' => Input::get('microscopy_type'),
+                        'microscopy_results' => Input::get('microscopy_results'),
+                        'microscopy_date' => Input::get('microscopy_date'),
+                        'lj_inoculation_date' => Input::get('lj_inoculation_date'),
+                        'lj_results_date' => Input::get('lj_results_date'),
+                        'lj_results' => Input::get('lj_results'),
+                        'mgit_inoculation_date' => Input::get('mgit_inoculation_date'),
+                        'mgit_results_date' => Input::get('mgit_results_date'),
+                        'mgit_results' => Input::get('mgit_results'),
+                        'culture_isolate' => Input::get('culture_isolate'),
+                        'isolate_date' => Input::get('isolate_date'),
+                        'rifampicin' => Input::get('rifampicin'),
+                        'isoniazid' => Input::get('isoniazid'),
+                        'levofloxacin' => Input::get('levofloxacin'),
+                        'moxifloxacin' => Input::get('moxifloxacin'),
+                        'bedaquiline' => Input::get('bedaquiline'),
+                        'linezolid' => Input::get('linezolid'),
+                        'clofazimine' => Input::get('clofazimine'),
+                        'cycloserine' => Input::get('cycloserine'),
+                        'terizidone' => Input::get('terizidone'),
+                        'ethambutol' => Input::get('ethambutol'),
+                        'delamanid' => Input::get('delamanid'),
+                        'pyrazinamide' => Input::get('pyrazinamide'),
+                        'imipenem' => Input::get('imipenem'),
+                        'cilastatin' => Input::get('cilastatin'),
+                        'meropenem' => Input::get('meropenem'),
+                        'amikacin' => Input::get('amikacin'),
+                        'streptomycin' => Input::get('streptomycin'),
+                        'ethionamide' => Input::get('ethionamide'),
+                        'prothionamide' => Input::get('prothionamide'),
+                        'para_aminosalicylic_acid' => Input::get('para_aminosalicylic_acid'),
+                        'nano_rifampicin' => Input::get('nano_rifampicin'),
+                        'nano_isoniazid' => Input::get('nano_isoniazid'),
+                        'nano_levofloxacin' => Input::get('nano_levofloxacin'),
+                        'nano_moxifloxacin' => Input::get('nano_moxifloxacin'),
+                        'nano_bedaquiline' => Input::get('nano_bedaquiline'),
+                        'nano_linezolid' => Input::get('nano_linezolid'),
+                        'nano_clofazimine' => Input::get('nano_clofazimine'),
+                        'nano_cycloserine' => Input::get('nano_cycloserine'),
+                        'nano_delamanid' => Input::get('nano_delamanid'),
+                        'nano_terizidone' => Input::get('nano_terizidone'),
+                        'nano_ethambutol' => Input::get('nano_ethambutol'),
+                        'nano_pyrazinamide' => Input::get('nano_pyrazinamide'),
+                        'nano_cilastatin' => Input::get('nano_cilastatin'),
+                        'nano_imipenem' => Input::get('nano_imipenem'),
+                        'nano_meropenem' => Input::get('nano_meropenem'),
+                        'nano_amikacin' => Input::get('nano_amikacin'),
+                        'nano_streptomycin' => Input::get('nano_streptomycin'),
+                        'nano_ethionamide' => Input::get('nano_ethionamide'),
+                        'nano_prothionamide' => Input::get('nano_prothionamide'),
+                        'nano_para_aminosalicylic_acid' => Input::get('nano_para_aminosalicylic_acid'),
+                        'nano_capreomycin' => Input::get('nano_capreomycin'),
+                        'nano_kanamycin' => Input::get('nano_kanamycin'),
+                        'nano_pretomanid' => Input::get('nano_pretomanid'),
+                        'xpert_xdr_performed' => Input::get('xpert_xdr_performed'),
+                        'xpert_xdr_date_performed' => Input::get('xpert_xdr_date_performed'),
+                        'isoniazid2' => Input::get('isoniazid2'),
+                        'fluoroquinolones' => Input::get('fluoroquinolones'),
+                        'amikacin2' => Input::get('amikacin2'),
+                        'kanamycin' => Input::get('kanamycin'),
+                        'capreomycin' => Input::get('capreomycin'),
+                        'ethionamide2' => Input::get('ethionamide2'),
+                        'first_line_drugs' => $first_line_drugs,
+                        'second_line_drugs' => $second_line_drugs,
+                        'version_number' => Input::get('version_number'),
+                        'lot_number' => Input::get('lot_number'),
+                        'mutations_detected_list' => Input::get('mutations_detected_list'),
+                        'nanopore_done' => Input::get('nanopore_done'),
+                        'sequencing_results' => Input::get('sequencing_results'),
+                        'epi_to_me' => Input::get('epi_to_me'),
+                        'epi_to_me_version' => Input::get('epi_to_me_version'),
+                        'first_line_lpa' => Input::get('first_line_lpa'),
+                        'first_line_lpa_date' => Input::get('first_line_lpa_date'),
+                        'second_line_lpa' => Input::get('second_line_lpa'),
+                        'second_line_lpa_date' => Input::get('second_line_lpa_date'),
+                        'lpa1_mtb' => Input::get('lpa1_mtb'),
+                        'lpa1_rif' => Input::get('lpa1_rif'),
+                        'lpa1_inh' => Input::get('lpa1_inh'),
+                        'lpa2_mtb' => Input::get('lpa2_mtb'),
+                        'lpa2_rfluoroquinolones' => Input::get('lpa2_rfluoroquinolones'),
+                        'lpa2_aminoglycosides' => Input::get('lpa2_aminoglycosides'),
+                        'lpa2_kanamycin' => Input::get('lpa2_kanamycin'),
+                        'remarks' => Input::get('remarks'),
+                        'form_status' => Input::get('form_status'),
+                        'date_completed' => $date_completed,
+                        'completed_by' => $completed_by,
+                        'date_verified' => $date_verified,
+                        'verified_by' => $verified_by,
+                        'status' => 1,
+                        'enrollment_id' => $_GET['sid'],
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'facility_id' => $screening['facility_id'],
+                    ));
 
                     $successMessage = 'Diagnosis test  Successful Added';
                 }
@@ -1690,7 +1690,6 @@ if ($user->isLoggedIn()) {
                         ));
                         $successMessage = 'Diagnosis Data  Successful Updated';
                     } else {
-                        // print_r($_GET['sid']);
                         $user->createRecord('diagnosis', array(
                             'pid' => $screening['pid'],
                             'entry_date' => Input::get('entry_date'),
@@ -1748,7 +1747,7 @@ if ($user->isLoggedIn()) {
 
                         $user->createRecord('diagnosis_records', array(
                             'diagnosis_id' => $last_row['id'],
-                            'pid' => $screening['pid'],
+                             'pid' => $screening['pid'],
                             'entry_date' => Input::get('entry_date'),
                             'tb_diagnosis' => Input::get('tb_diagnosis'),
                             'tb_diagnosis_date' => Input::get('tb_diagnosis_date'),
@@ -4846,10 +4845,10 @@ if ($user->isLoggedIn()) {
                                                             about the patient or sample</strong></label>
                                                     <textarea id="remarks" name="remarks" class="form-control" rows="3"
                                                         placeholder="Enter any additional remarks here...">
-                                                                            <?php if ($remarks['remarks']) {
-                                                                                print_r($remarks['remarks']);
-                                                                            } ?>
-                                                                                                                                                                                                            </textarea>
+                                                                                <?php if ($remarks['remarks']) {
+                                                                                    print_r($remarks['remarks']);
+                                                                                } ?>
+                                                                                                                                                                                                                </textarea>
                                                 </div>
                                             </div>
 
@@ -5252,7 +5251,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($screening['remarks']) {
                                                                     print_r($screening['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -6866,8 +6865,8 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="epi_to_me"
-                                                                        id="epi_to_me<?= $value['id']; ?>"
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="epi_to_me" id="epi_to_me<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($costing['epi_to_me'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
@@ -7501,7 +7500,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['remarks']) {
                                                                     print_r($costing['remarks']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7715,7 +7714,7 @@ if ($user->isLoggedIn()) {
                                             <div class="form-group">
                                                 <label>Specify</label>
                                                 <textarea class="form-control" name="specify" rows="2">
-                                                                                        </textarea>
+                                                                                            </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -8178,10 +8177,10 @@ if ($user->isLoggedIn()) {
                                                                                             <label>Specify</label>
                                                                                             <textarea class="form-control"
                                                                                                 name="specify" rows="2">
-                                                                                                                                                                                    <?php if ($treatment['specify']) {
-                                                                                                                                                                                        print_r($treatment['specify']);
-                                                                                                                                                                                    } ?>
-                                                                                                                                                                                </textarea>
+                                                                                                                                                                                            <?php if ($treatment['specify']) {
+                                                                                                                                                                                                print_r($treatment['specify']);
+                                                                                                                                                                                            } ?>
+                                                                                                                                                                                        </textarea>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -8395,7 +8394,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8811,11 +8810,9 @@ if ($user->isLoggedIn()) {
                                                             <input class="form-control" type="date"
                                                                 max="<?= date('Y-m-d'); ?>"
                                                                 name="date_information_collected"
-                                                                id="date_information_collected"
-                                                                value="<?php if ($clients['date_information_collected']) {
+                                                                id="date_information_collected" value="<?php if ($clients['date_information_collected']) {
                                                                     print_r($clients['date_information_collected']);
-                                                                } ?>"
-                                                                required />
+                                                                } ?>" required />
                                                             <span id="information_date_error" style="color: red;"></span>
                                                         </div>
                                                     </div>
@@ -8882,32 +8879,54 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-4" id="tx_number_section">
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
-                                                            <label for="tx_month">10c. When did the patient’s last treatment episode end?</label>
+                                                            <label for="tx_month">10c. When did the patient’s last treatment
+                                                                episode end?</label>
 
                                                             <!-- Row for Month and Year -->
                                                             <div class="row">
                                                                 <!-- Month Input -->
                                                                 <div class="col-sm-6">
                                                                     <label for="tx_month" class="form-label">Month</label>
-                                                                    <input class="form-control" type="number" name="tx_month" id="tx_month" placeholder="Type Month..." min="1" max="12" value="<?php if ($clients['tx_month']) { print_r($clients['tx_month']); } ?>" />
+                                                                    <input class="form-control" type="number"
+                                                                        name="tx_month" id="tx_month"
+                                                                        placeholder="Type Month..." min="1" max="12"
+                                                                        value="<?php if ($clients['tx_month']) {
+                                                                            print_r($clients['tx_month']);
+                                                                        } ?>" />
 
                                                                     <!-- Unknown Month Checkbox -->
                                                                     <div class="form-check mt-2">
-                                                                        <input class="form-check-input" type="checkbox" id="tx_unknown_month" name="tx_unknown_month" value="1" <?php if ($clients['tx_unknown_month'] ?? false) { echo 'checked'; } ?>>
-                                                                        <label class="form-check-label" for="tx_unknown_month">if month unknown Check Unknown, fill 99 for month on paper</label>
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            id="tx_unknown_month" name="tx_unknown_month"
+                                                                            value="1" <?php if ($clients['tx_unknown_month'] ?? false) {
+                                                                                echo 'checked';
+                                                                            } ?>>
+                                                                        <label class="form-check-label"
+                                                                            for="tx_unknown_month">if month unknown Check
+                                                                            Unknown, fill 99 for month on paper</label>
                                                                     </div>
                                                                 </div>
 
                                                                 <!-- Year Input -->
                                                                 <div class="col-sm-6">
                                                                     <label for="tx_year" class="form-label">Year</label>
-                                                                    <input class="form-control" type="number" name="tx_year" id="tx_year" placeholder="Type Year..." value="<?php if ($clients['tx_year']) { print_r($clients['tx_year']); } ?>">
+                                                                    <input class="form-control" type="number" name="tx_year"
+                                                                        id="tx_year" placeholder="Type Year..."
+                                                                        value="<?php if ($clients['tx_year']) {
+                                                                            print_r($clients['tx_year']);
+                                                                        } ?>">
                                                                     <small id="tx_year_error" class="text-danger"></small>
 
                                                                     <!-- Unknown Year Checkbox -->
                                                                     <div class="form-check mt-2">
-                                                                        <input class="form-check-input" type="checkbox" id="tx_unknown_year" name="tx_unknown_year" value="1" <?php if ($clients['tx_unknown_year'] ?? false) { echo 'checked'; } ?>>
-                                                                        <label class="form-check-label" for="tx_unknown_year">Month and year unknown</label>
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            id="tx_unknown_year" name="tx_unknown_year"
+                                                                            value="1" <?php if ($clients['tx_unknown_year'] ?? false) {
+                                                                                echo 'checked';
+                                                                            } ?>>
+                                                                        <label class="form-check-label"
+                                                                            for="tx_unknown_year">Month and year
+                                                                            unknown</label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -9013,20 +9032,32 @@ if ($user->isLoggedIn()) {
                                                     <div class="col-sm-6" id="regimen_section">
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <label>10g. How long was the treatment regimen( Months)</label>
+                                                                <label>10g. How long was the treatment regimen(
+                                                                    Months)</label>
 
                                                                 <!-- Row for Month and Year -->
                                                                 <div class="row">
                                                                     <!-- Month Input -->
                                                                     <div class="col-sm-12">
-                                                                        <input class="form-control" type="number" name="regimen_months" id="regimen_months" placeholder="Type number of months…" min="1" max="10000" value="<?php if ($clients['regimen_months']) { print_r($clients['regimen_months']); } ?>" />
+                                                                        <input class="form-control" type="number"
+                                                                            name="regimen_months" id="regimen_months"
+                                                                            placeholder="Type number of months…" min="1"
+                                                                            max="10000"
+                                                                            value="<?php if ($clients['regimen_months']) {
+                                                                                print_r($clients['regimen_months']);
+                                                                            } ?>" />
                                                                     </div>
                                                                 </div>
 
                                                                 <!-- Unknown Checkbox -->
                                                                 <div class="form-check mt-3">
-                                                                    <input class="form-check-input" type="checkbox" id="regimen_months_unknown" name="regimen_months_unknown" value="1" <?php if ($clients['regimen_months_unknown'] ?? false) { echo 'checked'; } ?>>
-                                                                    <label class="form-check-label" for="regimen_months_unknown">Unknown</label>
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="regimen_months_unknown"
+                                                                        name="regimen_months_unknown" value="1" <?php if ($clients['regimen_months_unknown'] ?? false) {
+                                                                            echo 'checked';
+                                                                        } ?>>
+                                                                    <label class="form-check-label"
+                                                                        for="regimen_months_unknown">Unknown</label>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -9188,7 +9219,12 @@ if ($user->isLoggedIn()) {
                                                             <label>13(b). Date of sputum collection</label>
                                                             <div class="row">
                                                                 <div class="col-sm-6">
-                                                                    <input class="form-control" type="date" min="2025-01-17" max="<?= date('Y-m-d'); ?>" name="sputum_date" id="sputum_date" value="<?php if ($clients['sputum_date']) { print_r($clients['sputum_date']); } ?>" />
+                                                                    <input class="form-control" type="date" min="2025-01-17"
+                                                                        max="<?= date('Y-m-d'); ?>" name="sputum_date"
+                                                                        id="sputum_date"
+                                                                        value="<?php if ($clients['sputum_date']) {
+                                                                            print_r($clients['sputum_date']);
+                                                                        } ?>" />
                                                                     <span id="sputum_date_error" style="color: red;"></span>
                                                                 </div>
                                                             </div>
@@ -9208,7 +9244,7 @@ if ($user->isLoggedIn()) {
                                                                         placeholder="Type reasons here...">                                                                                                                                                                                                                                                                                              <?php if ($clients['sputum_reasons']) {
                                                                             print_r($clients['sputum_reasons']);
                                                                         } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -9230,13 +9266,17 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="form_status" id="enrollment_status"
-                                                                        value="<?= $value['id']; ?>" <?= ($clients['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
-                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="form_status" id="enrollment_status"
+                                                                        value="<?= $value['id']; ?>"
+                                                                        <?= ($clients['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button type="button" onclick="unsetRadio('form_status')">Unset</button>
+                                                        <button type="button"
+                                                            onclick="unsetRadio('form_status')">Unset</button>
                                                     </div>
                                                 </div>
 
@@ -9244,9 +9284,11 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Completed Date</label>
-                                                            <input class="form-control" type="date" name="date_completed" id="enrollment_date_completed"
+                                                            <input class="form-control" type="date" name="date_completed"
+                                                                id="enrollment_date_completed"
                                                                 value="<?= ($clients['date_completed']) ? $clients['date_completed'] : ''; ?>" />
-                                                            <span id="enrollment_date_completed_error" class="text-danger"></span>
+                                                            <span id="enrollment_date_completed_error"
+                                                                class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <?php if ($clients['form_status'] >= 2) { ?>
@@ -9254,7 +9296,8 @@ if ($user->isLoggedIn()) {
                                                             <div class="form-group">
                                                                 <label>Completed By</label>
                                                                 <input class="form-control" type="text"
-                                                                    value="<?= $override->get('user', 'id', $clients['completed_by'])[0]['username']; ?>" readonly />
+                                                                    value="<?= $override->get('user', 'id', $clients['completed_by'])[0]['username']; ?>"
+                                                                    readonly />
                                                             </div>
                                                         </div>
                                                     <?php } ?>
@@ -9264,9 +9307,11 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Verified Date</label>
-                                                            <input class="form-control" type="date" name="date_verified" id="enrollment_date_verified"
+                                                            <input class="form-control" type="date" name="date_verified"
+                                                                id="enrollment_date_verified"
                                                                 value="<?= ($clients['date_verified']) ? $clients['date_verified'] : ''; ?>" />
-                                                            <span id="enrollment_date_verified_error" class="text-danger"></span>
+                                                            <span id="enrollment_date_verified_error"
+                                                                class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <?php if ($clients['form_status'] >= 3) { ?>
@@ -9274,7 +9319,8 @@ if ($user->isLoggedIn()) {
                                                             <div class="form-group">
                                                                 <label>Verified By</label>
                                                                 <input class="form-control" type="text"
-                                                                    value="<?= $override->get('user', 'id', $clients['verified_by'])[0]['username']; ?>" readonly />
+                                                                    value="<?= $override->get('user', 'id', $clients['verified_by'])[0]['username']; ?>"
+                                                                    readonly />
                                                             </div>
                                                         </div>
                                                     <?php } ?>
@@ -11002,7 +11048,7 @@ if ($user->isLoggedIn()) {
                                                                 placeholder="Type comments here..."><?php if ($costing['comments']) {
                                                                     print_r($costing['comments']);
                                                                 } ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                         </div>
                                                     </div>
                                                 </div>

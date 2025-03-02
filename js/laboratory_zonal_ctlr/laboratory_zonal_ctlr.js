@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const nanoporeRadios = document.querySelectorAll('input[name="nanopore_done"]');
     const sequencingResultsSection = document.getElementById("sequencing_results_section");
     const nanoPoreResultsSection = document.getElementById("nano_pore_results");
-    const EPI2ME_section = document.getElementById("EPI2ME_section");
-    const EPI2ME_vesrion_section = document.getElementById("EPI2ME_vesrion_section");
+    const epiToMeSection = document.getElementById("epi_to_me_section");
+    const epiToMeSectionVesrionSection = document.getElementById("epi_to_me_version_section");
 
 
     function toggleCultureSections() {
@@ -106,8 +106,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const isNanoporeDone = document.querySelector('input[name="nanopore_done"]:checked')?.value === "1";
         sequencingResultsSection.style.display = isNanoporeDone ? "block" : "none";
         nanoPoreResultsSection.style.display = isNanoporeDone ? "block" : "none"; // Added for nano_pore_results
-        EPI2ME_section.style.display = isNanoporeDone ? "block" : "none"; // Added for EPI2ME_section
-        EPI2ME_vesrion_section.style.display = isNanoporeDone ? "block" : "none"; // Added for EPI2ME_vesrion_section
+        epiToMeSection.style.display = isNanoporeDone ? "block" : "none"; // Added for epiToMeSection
+        epiToMeSectionVesrionSection.style.display = isNanoporeDone ? "block" : "none"; // Added for epiToMeSectionVesrionSection
 
     }
 
