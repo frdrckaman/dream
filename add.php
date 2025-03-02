@@ -826,8 +826,8 @@ if ($user->isLoggedIn()) {
                         'mutations_detected_list' => Input::get('mutations_detected_list'),
                         'nanopore_done' => Input::get('nanopore_done'),
                         'sequencing_results' => Input::get('sequencing_results'),
-                        'EPI2ME' => Input::get('EPI2ME'),
-                        'EPI2ME_vesrion' => Input::get('EPI2ME_vesrion'),
+                        'epi_to_me' => Input::get('epi_to_me'),
+                        'epi_to_me_version' => Input::get('epi_to_me_version'),
                         'first_line_lpa' => Input::get('first_line_lpa'),
                         'first_line_lpa_date' => Input::get('first_line_lpa_date'),
                         'second_line_lpa' => Input::get('second_line_lpa'),
@@ -932,8 +932,8 @@ if ($user->isLoggedIn()) {
                         'mutations_detected_list' => Input::get('mutations_detected_list'),
                         'nanopore_done' => Input::get('nanopore_done'),
                         'sequencing_results' => Input::get('sequencing_results'),
-                        'EPI2ME' => Input::get('EPI2ME'),
-                        'EPI2ME_vesrion' => Input::get('EPI2ME_vesrion'),
+                        'epi_to_me' => Input::get('epi_to_me'),
+                        'epi_to_me_version' => Input::get('epi_to_me_version'),
                         'first_line_lpa' => Input::get('first_line_lpa'),
                         'first_line_lpa_date' => Input::get('first_line_lpa_date'),
                         'second_line_lpa' => Input::get('second_line_lpa'),
@@ -1043,8 +1043,8 @@ if ($user->isLoggedIn()) {
                         'mutations_detected_list' => Input::get('mutations_detected_list'),
                         'nanopore_done' => Input::get('nanopore_done'),
                         'sequencing_results' => Input::get('sequencing_results'),
-                        'EPI2ME' => Input::get('EPI2ME'),
-                        'EPI2ME_vesrion' => Input::get('EPI2ME_vesrion'),
+                        'epi_to_me' => Input::get('epi_to_me'),
+                        'epi_to_me_version' => Input::get('epi_to_me_version'),
                         'first_line_lpa' => Input::get('first_line_lpa'),
                         'first_line_lpa_date' => Input::get('first_line_lpa_date'),
                         'second_line_lpa' => Input::get('second_line_lpa'),
@@ -1155,8 +1155,8 @@ if ($user->isLoggedIn()) {
                         'mutations_detected_list' => Input::get('mutations_detected_list'),
                         'nanopore_done' => Input::get('nanopore_done'),
                         'sequencing_results' => Input::get('sequencing_results'),
-                        'EPI2ME' => Input::get('EPI2ME'),
-                        'EPI2ME_vesrion' => Input::get('EPI2ME_vesrion'),
+                        'epi_to_me' => Input::get('epi_to_me'),
+                        'epi_to_me_version' => Input::get('epi_to_me_version'),
                         'first_line_lpa' => Input::get('first_line_lpa'),
                         'first_line_lpa_date' => Input::get('first_line_lpa_date'),
                         'second_line_lpa' => Input::get('second_line_lpa'),
@@ -6857,8 +6857,8 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3" id="EPI2ME_section">
-                                                    <label for="EPI2ME" class="form-label">21(b). Did you analyse your
+                                                <div class="col-sm-3" id="epi_to_me_section">
+                                                    <label for="epi_to_me" class="form-label">21(b). Did you analyse your
                                                         data
                                                         using the EPI2ME workflow?</label>
                                                     <!-- radio -->
@@ -6866,9 +6866,9 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="EPI2ME"
-                                                                        id="EPI2ME<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($costing['EPI2ME'] == $value['id']) {
+                                                                    <input class="form-check-input" type="radio" name="epi_to_me"
+                                                                        id="epi_to_me<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($costing['epi_to_me'] == $value['id']) {
                                                                               echo 'checked';
                                                                           } ?>>
                                                                     <label
@@ -6876,19 +6876,19 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             <?php } ?>
                                                             <button type="button"
-                                                                onclick="unsetRadio('EPI2ME')">Unset</button>
+                                                                onclick="unsetRadio('epi_to_me')">Unset</button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3" id="EPI2ME_vesrion_section">
+                                                <div class="col-sm-3" id="epi_to_me_version_section">
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>21(c). EPI2ME software version used
                                                                 for the analysis (free text):</label>
-                                                            <input class="form-control" type="text" name="EPI2ME_vesrion"
-                                                                id="EPI2ME_vesrion" value="<?php if ($costing['EPI2ME_vesrion']) {
-                                                                    print_r($costing['EPI2ME_vesrion']);
+                                                            <input class="form-control" type="text" name="epi_to_me_version"
+                                                                id="epi_to_me_version" value="<?php if ($costing['epi_to_me_version']) {
+                                                                    print_r($costing['epi_to_me_version']);
                                                                 } ?>" />
                                                         </div>
                                                     </div>
