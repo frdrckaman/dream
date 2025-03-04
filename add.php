@@ -5360,6 +5360,7 @@ if ($user->isLoggedIn()) {
         <?php } elseif ($_GET['id'] == 14) { ?>
             <?php
             $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
+            $enrollment = $override->getNews('enrollment_form', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             $costing = $override->getNews('diagnosis_test', 'status', 1, 'enrollment_id', $_GET['sid'])[0];
             $lab_name = $override->getNews('sites', 'status', 1, 'id', $user->data()->site_id)[0];
             ?>
@@ -11264,9 +11265,6 @@ if ($user->isLoggedIn()) {
 
     <!-- SCREENING Js -->
     <script src="js/screening/screening.js?v={{ timestamp }}"></script>
-    <!-- <script src="app.js?v=1.0.1"></script>
-    <script src="app.js?v={{ timestamp }}"></script> -->
-
 
     <!-- Enrollment Js -->
     <script src="js/enrollment/enrollment.js?v={{ timestamp }}"></script>
