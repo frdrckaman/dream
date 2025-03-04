@@ -9,8 +9,9 @@ $random = new Random();
 if ($user->isLoggedIn()) {
     try {
         $site_data = $override->getData('sites');
-        $Total = $override->getCount('clients', 'status', 1);
-        $data_enrolled = $override->getCount1('clients', 'status', 1, 'enrolled', 1);
+        $screening = $override->getCount('screening', 'status', 1);
+        $eligible = $override->getCount1('screening', 'status', 1, 'eligible', 1);
+        $enrollment = $override->getCount('enrollment_form', 'status', 1);
 
         $successMessage = 'Report Successfully Created';
     } catch (Exception $e) {
@@ -40,7 +41,7 @@ if ($site_data) {
             </tr>
             <tr>
                 <td colspan="18" align="center" style="font-size: 18px">
-                    <b>Total Registered (' . $Total . '): Total Enrolled (' . $data_enrolled . ')</b>
+                    <b>Total Screening (' . $screening . '): Total Enrolled (' . $data_enrolled . ')</b>
                 </td>
             </tr>
             <tr>
@@ -67,22 +68,19 @@ if ($site_data) {
 
     $x = 1;
     foreach ($site_data as $row) {
-        $registered = $override->countData('clients', 'status', 1, 'site_id', $row['id']);
-        $registered_Total = $override->getCount('clients', 'status', 1);
-        $screened = $override->countData2('clients', 'status', 1, 'screened', 1, 'site_id', $row['id']);
-        $screened_Total = $override->countData('clients', 'status', 1, 'screened', 1);
-        $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $row['id']);
-        $eligible_Total = $override->countData('clients', 'status', 1, 'eligible', 1);
-        $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $row['id']);
-        $enrolled_Total = $override->countData('clients', 'status', 1, 'enrolled', 1);
-        $end_study = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $row['id']);
-        $end_study_Total = $override->countData('clients', 'status', 1, 'end_study', 1);
+        $screened = $override->countData('screening', 'status', 1, 'facility_id', $row['id']);
+        $screened_Total = $override->getCount('screening', 'status', 1);
+        $eligible = $override->countData2('screening', 'status', 1, 'eligible', 1, 'facility_id', $row['id']);
+        $eligible_Total = $override->countData('screening', 'status', 1, 'eligible', 1);
+        $enrolled = $override->countData2('screening', 'status', 1, 'enrolled', 1, 'facility_id', $row['id']);
+        $enrolled_Total = $override->countData('screening', 'status', 1, 'enrolled', 1);
+        $end_study = $override->countData2('screening', 'status', 1, 'end_study', 1, 'facility_id', $row['id']);
+        $end_study_Total = $override->countData('screening', 'status', 1, 'end_study', 1);
 
         $output .= '
             <tr>
                 <td>' . $x . '</td>
                 <td>' . $row['name'] . '</td>
-                <td>' . $registered . '</td>
                 <td align="right">' . $screened . '</td>
                 <td align="right">' . $eligible . '</td>
                 <td align="right">' . $enrolled . '</td>
@@ -99,7 +97,6 @@ if ($site_data) {
     $output .= '
             <tr>
                 <td align="right" colspan="2"><b>Total</b></td>
-                <td align="right"><b>' . $registered_Total . '</b></td>
                 <td align="right"><b>' . $screened_Total . '</b></td>
                 <td align="right"><b>' . $eligible_Total . '</b></td>
                 <td align="right"><b>' . $enrolled_Total . '</b></td>
