@@ -30,6 +30,35 @@ document.addEventListener("DOMContentLoaded", function () {
     const regimenChangedSection = document.getElementById("regimen_changed_section");
     const tableSection = document.getElementById("table_section");
 
+    const tbDiagnosisDateInput = document.getElementById("tb_diagnosis_date");
+    const screeningDateDiagnosisInput = document.getElementById("screening_date_diagnosis");
+    const tbDiagnosisDateError = document.createElement("span");
+    tbDiagnosisDateError.className = "text-danger";
+    tbDiagnosisDateInput.parentNode.appendChild(tbDiagnosisDateError);
+
+    const finalDiagnosisForm = document.getElementById("Final_Diagnosis");
+
+    finalDiagnosisForm.addEventListener("submit", function (event) {
+        const screeningDateDiagnosis = new Date(screeningDateDiagnosisInput.value);
+        const today = new Date();
+        let isValid = true;
+
+        const tbDiagnosisDate = new Date(tbDiagnosisDateInput.value);
+        if (tbDiagnosisDate < screeningDateDiagnosis) {
+            tbDiagnosisDateError.textContent = `TB diagnosis date must be greater than or equal to the screening date (${screeningDateDiagnosisInput.value}).`;
+            isValid = false;
+        } else if (tbDiagnosisDate > today) {
+            tbDiagnosisDateError.textContent = "TB diagnosis date cannot be in the future.";
+            isValid = false;
+        } else {
+            tbDiagnosisDateError.textContent = "";
+        }
+
+        if (!isValid) {
+            event.preventDefault(); // Prevent form submission if there are errors
+        }
+    });
+
     function toggleTbDiagnosisSection() {
         const selectedValue = document.querySelector('input[name="tb_diagnosis"]:checked')?.value;
 
