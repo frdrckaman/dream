@@ -168,18 +168,6 @@ document.addEventListener("DOMContentLoaded", function () {
         radio.addEventListener("change", toggleIsolateDetails);
     });
 
-    ljResultsRadios.forEach(radio => {
-        radio.addEventListener("change", toggleCultureIsolateSection);
-    });
-
-    mgitResultsRadios.forEach(radio => {
-        radio.addEventListener("change", toggleCultureIsolateSection);
-    });
-
-    cultureIsolateRadios.forEach(radio => {
-        radio.addEventListener("change", toggleIsolateDetails);
-    });
-
     phenotypicPerformedRadios.forEach(radio => {
         radio.addEventListener("change", togglePhenotypicSections);
     });
