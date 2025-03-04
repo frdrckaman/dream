@@ -116,11 +116,17 @@ document.addEventListener("DOMContentLoaded", function () {
             if (ljInoculationDate < screeningDateCtrlZonal) {
                 ljInoculationDateError.textContent = `LJ inoculation date must be greater than or equal to the screening date (${screeningDateCtrlZonalInput.value}).`;
                 isValid = false;
+            } else if (ljInoculationDate > today) {
+                ljInoculationDateError.textContent = "LJ inoculation date cannot be in the future.";
+                isValid = false;
             } else {
                 ljInoculationDateError.textContent = "";
             }
             if (ljResultsDate < ljInoculationDate) {
                 ljResultsDateError.textContent = "LJ results date must be greater than or equal to the LJ inoculation date.";
+                isValid = false;
+            } else if (ljResultsDate > today) {
+                ljResultsDateError.textContent = "LJ results date cannot be in the future.";
                 isValid = false;
             } else {
                 ljResultsDateError.textContent = "";
@@ -134,11 +140,17 @@ document.addEventListener("DOMContentLoaded", function () {
             if (mgitInoculationDate < screeningDateCtrlZonal) {
                 mgitInoculationDateError.textContent = `MGIT inoculation date must be greater than or equal to the screening date (${screeningDateCtrlZonalInput.value}).`;
                 isValid = false;
+            } else if (mgitInoculationDate > today) {
+                mgitInoculationDateError.textContent = "MGIT inoculation date cannot be in the future.";
+                isValid = false;
             } else {
                 mgitInoculationDateError.textContent = "";
             }
             if (mgitResultsDate < mgitInoculationDate) {
                 mgitResultsDateError.textContent = "MGIT results date must be greater than or equal to the MGIT inoculation date.";
+                isValid = false;
+            } else if (mgitResultsDate > today) {
+                mgitResultsDateError.textContent = "MGIT results date cannot be in the future.";
                 isValid = false;
             } else {
                 mgitResultsDateError.textContent = "";
