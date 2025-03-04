@@ -5598,6 +5598,7 @@ if ($user->isLoggedIn()) {
                                                                     print_r($costing['microscopy_date']);
                                                                 } ?>" id="microscopy_date" name="microscopy_date"
                                                                     class="form-control" />
+                                                            <span class="text-danger" id="microscopy_date_error"></span>
                                                             </div>
                                                         </div>
                                                     </div>

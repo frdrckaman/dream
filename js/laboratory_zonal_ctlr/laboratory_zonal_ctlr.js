@@ -50,6 +50,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const dateSputumReceivedError = document.getElementById("date_sputum_received_error");
     const sampleVolumeInput = document.getElementById("sample_volume");
     const sampleVolumeError = document.getElementById("sample_volume_error");
+    const microscopyDateInput = document.getElementById("microscopy_date");
+    const microscopyDateError = document.getElementById("microscopy_date_error");
     const laboratoryZonalCtlrForm = document.getElementById("laboratory_zonal_ctlr");
 
     laboratoryZonalCtlrForm.addEventListener("submit", function (event) {
@@ -70,11 +72,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const sampleVolumePattern = /^\d{1,2}(\.\d)?$/;
         const sampleVolumeValue = parseFloat(sampleVolumeInput.value);
-        if (!sampleVolumePattern.test(sampleVolumeInput.value) || sampleVolumeValue > 5 || sampleVolumeValue < 0.0) {
+        if (!sampleVolumePattern.test(sampleVolumeInput.value) || sampleVolumeValue > 5 || sampleVolumeValue < 0.1) {
             sampleVolumeError.textContent = "Sample volume must be a number between 0.1 and 5 with up to one decimal place.";
             isValid = false;
         } else {
             sampleVolumeError.textContent = "";
+        }
+
+        const culturePerformed = document.querySelector('input[name="culture_performed"]:checked')?.value === "1";
+        if (culturePerformed) {
+            const microscopyDate = new Date(microscopyDateInput.value);
+            if (microscopyDate < screeningDateCtrlZonal) {
+                microscopyDateError.textContent = `Microscopy date must be greater than or equal to the screening date (${screeningDateCtrlZonalInput.value}).`;
+                isValid = false;
+            } else if (microscopyDate > today) {
+                microscopyDateError.textContent = "Microscopy date cannot be in the future.";
+                isValid = false;
+            } else {
+                microscopyDateError.textContent = "";
+            }
         }
 
         if (!isValid) {
