@@ -45,6 +45,31 @@ document.addEventListener("DOMContentLoaded", function () {
     const epiToMeSection = document.getElementById("epi_to_me_section");
     const epiToMeSectionVesrionSection = document.getElementById("epi_to_me_version_section");
 
+    const dateSputumReceivedInput = document.getElementById("date_sputum_received");
+    const screeningDateCtrlZonalInput = document.getElementById("screening_date_ctrl_zonal");
+    const dateSputumReceivedError = document.getElementById("date_sputum_received_error");
+    const laboratoryZonalCtlrForm = document.getElementById("laboratory_zonal_ctlr");
+
+    laboratoryZonalCtlrForm.addEventListener("submit", function (event) {
+        const dateSputumReceived = new Date(dateSputumReceivedInput.value);
+        const screeningDateCtrlZonal = new Date(screeningDateCtrlZonalInput.value);
+        const today = new Date();
+        let isValid = true;
+
+        if (dateSputumReceived < screeningDateCtrlZonal) {
+            dateSputumReceivedError.textContent = "Date sputum received must be greater than or equal to the screening date.";
+            isValid = false;
+        } else if (dateSputumReceived > today) {
+            dateSputumReceivedError.textContent = "Date sputum received cannot be in the future.";
+            isValid = false;
+        } else {
+            dateSputumReceivedError.textContent = "";
+        }
+
+        if (!isValid) {
+            event.preventDefault(); // Prevent form submission if there are errors
+        }
+    });
 
     function toggleCultureSections() {
         const isCulturePerformed = document.querySelector('input[name="culture_performed"]:checked')?.value === "1";
@@ -70,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //     isolateDateSection.style.display = displayStyle;
     //     phenotypicDstSection.style.display = displayStyle;
     // }
-    
+
     function toggleIsolateDetails() {
         const isCultureIsolate = document.querySelector('input[name="culture_isolate"]:checked')?.value;
         isolateDateSection.style.display = isCultureIsolate === "1" ? "block" : "none";

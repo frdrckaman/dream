@@ -5411,7 +5411,7 @@ if ($user->isLoggedIn()) {
                                         <h3 class="card-title">Administration</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
+                                    <form id="laboratory_zonal_ctlr" enctype="multipart/form-data" method="post" autocomplete="off">
                                         <div class="card-body">
                                             <hr>
                                             <div class="row">
