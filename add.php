@@ -5463,7 +5463,7 @@ if ($user->isLoggedIn()) {
                                                                         name="appearance" id="appearance<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($costing['appearance'] == $value['id']) {
                                                                               echo 'checked';
-                                                                          } ?>>
+                                                                          } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
@@ -5477,13 +5477,13 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="col-3" id="sample_volume_section">
                                                     <div class="mb-3">
-                                                        <label for="sample_volume" class="form-label">4. Approximate
-                                                            volume</label>
+                                                        <label for="sample_volume" class="form-label">4. Approximate volume</label>
                                                         <input type="text"
                                                             value="<?php echo $costing['sample_volume'] ?? ''; ?>"
                                                             id="sample_volume" name="sample_volume" step="0.1" min="0.1"
                                                             max="5" class="form-control" pattern="^\d{1,2}(\.\d)?$"
-                                                            oninput="this.value = this.value.match(/^\d{0,2}(\.\d{0,1})?/)?.[0] || '';" />
+                                                            oninput="this.value = this.value.match(/^\d{0,2}(\.\d{0,1})?/)?.[0] || '';" required />
+                                                        <span class="text-danger" id="sample_volume_error"></span>
                                                     </div>
                                                     <span>mL</span>
                                                 </div>

@@ -48,6 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const dateSputumReceivedInput = document.getElementById("date_sputum_received");
     const screeningDateCtrlZonalInput = document.getElementById("screening_date_ctrl_zonal");
     const dateSputumReceivedError = document.getElementById("date_sputum_received_error");
+    const sampleVolumeInput = document.getElementById("sample_volume");
+    const sampleVolumeError = document.getElementById("sample_volume_error");
     const laboratoryZonalCtlrForm = document.getElementById("laboratory_zonal_ctlr");
 
     laboratoryZonalCtlrForm.addEventListener("submit", function (event) {
@@ -64,6 +66,15 @@ document.addEventListener("DOMContentLoaded", function () {
             isValid = false;
         } else {
             dateSputumReceivedError.textContent = "";
+        }
+
+        const sampleVolumePattern = /^\d{1,2}(\.\d)?$/;
+        const sampleVolumeValue = parseFloat(sampleVolumeInput.value);
+        if (!sampleVolumePattern.test(sampleVolumeInput.value) || sampleVolumeValue > 5 || sampleVolumeValue < 0.0) {
+            sampleVolumeError.textContent = "Sample volume must be a number between 0.1 and 5 with up to one decimal place.";
+            isValid = false;
+        } else {
+            sampleVolumeError.textContent = "";
         }
 
         if (!isValid) {
