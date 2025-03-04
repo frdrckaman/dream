@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let isValid = true;
 
         if (dateSputumReceived < screeningDateCtrlZonal) {
-            dateSputumReceivedError.textContent = "Date sputum received must be greater than or equal to the screening date.";
+            dateSputumReceivedError.textContent = `Date sputum received must be greater than or equal to the screening date (${screeningDateCtrlZonalInput.value}).`;
             isValid = false;
         } else if (dateSputumReceived > today) {
             dateSputumReceivedError.textContent = "Date sputum received cannot be in the future.";
@@ -87,14 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         cultureIsolateSection.style.display = showIsolate ? "block" : "none";
     }
-
-    // function toggleIsolateDetails() {
-    //     const isCultureIsolate = document.querySelector('input[name="culture_isolate"]:checked')?.value === "1";
-
-    //     const displayStyle = isCultureIsolate ? "block" : "none";
-    //     isolateDateSection.style.display = displayStyle;
-    //     phenotypicDstSection.style.display = displayStyle;
-    // }
 
     function toggleIsolateDetails() {
         const isCultureIsolate = document.querySelector('input[name="culture_isolate"]:checked')?.value;
@@ -137,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function toggleCultureMethodSections() {
-
         const isLJChecked = Array.from(cultureMethodCheckboxes).some(checkbox => checkbox.checked && checkbox.value === "1");
         const isMGITChecked = Array.from(cultureMethodCheckboxes).some(checkbox => checkbox.checked && checkbox.value === "2");
 
@@ -148,9 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mgitInoculationDateSection.style.display = isMGITChecked ? "block" : "none";
         mgitResultsDateSection.style.display = isMGITChecked ? "block" : "none";
         mgitResultsSection.style.display = isMGITChecked ? "block" : "none";
-
     }
-
 
     // Initialize on page load
     toggleCultureSections();
@@ -162,10 +151,21 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleSequencingResults();
     toggleCultureMethodSections();
 
-
     // Add event listeners
     culturePerformedRadios.forEach(radio => {
         radio.addEventListener("change", toggleCultureSections);
+    });
+
+    ljResultsRadios.forEach(radio => {
+        radio.addEventListener("change", toggleCultureIsolateSection);
+    });
+
+    mgitResultsRadios.forEach(radio => {
+        radio.addEventListener("change", toggleCultureIsolateSection);
+    });
+
+    cultureIsolateRadios.forEach(radio => {
+        radio.addEventListener("change", toggleIsolateDetails);
     });
 
     ljResultsRadios.forEach(radio => {
