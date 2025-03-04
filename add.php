@@ -5634,55 +5634,46 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="row">
                                                     <!-- LJ Section -->
-                                                    <div class="col-sm-6 rounded border p-3"
-                                                        id="lj_inoculation_date_section">
-                                                        <h5 class="text-center"><strong>LJ</strong></h5>
-                                                        <!-- Centered Title for LJ column -->
-                                                        <hr>
-                                                        <label for="lj_inoculation_date" class="form-label">8. LJ
-                                                            Date of culture inoculation</label>
-                                                        <input type="date" value="<?php if ($costing['lj_inoculation_date']) {
-                                                            print_r($costing['lj_inoculation_date']);
-                                                        } ?>" id="lj_inoculation_date" name="lj_inoculation_date"
-                                                            class="form-control" />
-                                                    </div>
+                                                  <div class="col-sm-6 rounded border p-3" id="lj_inoculation_date_section">
+    <h5 class="text-center"><strong>LJ</strong></h5>
+    <hr>
+    <label for="lj_inoculation_date" class="form-label">8. LJ Date of culture inoculation</label>
+    <input type="date" value="<?php if ($costing['lj_inoculation_date']) {
+        print_r($costing['lj_inoculation_date']);
+    } ?>" id="lj_inoculation_date" name="lj_inoculation_date" class="form-control" />
+    <span class="text-danger" id="lj_inoculation_date_error"></span>
+</div>
 
                                                     <!-- MGIT Section -->
-                                                    <div class="col-sm-6 rounded border p-3"
-                                                        id="mgit_inoculation_date_section">
-                                                        <h5 class="text-center"><strong>MGIT</strong></h5>
-                                                        <!-- Centered Title for MGIT column -->
-                                                        <hr>
-                                                        <label for="mgit_inoculation_date" class="form-label">8.
-                                                            MGIT Date of culture inoculation</label>
-                                                        <input type="date" value="<?php if ($costing['mgit_inoculation_date']) {
-                                                            print_r($costing['mgit_inoculation_date']);
-                                                        } ?>" id="mgit_inoculation_date" name="mgit_inoculation_date"
-                                                            class="form-control" />
-                                                    </div>
+                                              <div class="col-sm-6 rounded border p-3" id="mgit_inoculation_date_section">
+    <h5 class="text-center"><strong>MGIT</strong></h5>
+    <hr>
+    <label for="mgit_inoculation_date" class="form-label">8. MGIT Date of culture inoculation</label>
+    <input type="date" value="<?php if ($costing['mgit_inoculation_date']) {
+        print_r($costing['mgit_inoculation_date']);
+    } ?>" id="mgit_inoculation_date" name="mgit_inoculation_date" class="form-control" />
+    <span class="text-danger" id="mgit_inoculation_date_error"></span>
+</div>
                                                 </div>
 
                                                 <div class="row mt-3">
                                                     <!-- LJ Culture Results Date -->
-                                                    <div class="col-sm-6 rounded border p-3" id="lj_results_date_section">
-                                                        <label for="lj_results_date" class="form-label">9. LJ Date
-                                                            of culture results</label>
-                                                        <hr>
-                                                        <input type="date" value="<?php if ($costing['lj_results_date']) {
-                                                            print_r($costing['lj_results_date']);
-                                                        } ?>" id="lj_results_date" name="lj_results_date"
-                                                            class="form-control" />
-                                                    </div>
-
+                                              <div class="col-sm-6 rounded border p-3" id="lj_results_date_section">
+    <label for="lj_results_date" class="form-label">9. LJ Date of culture results</label>
+    <hr>
+    <input type="date" value="<?php if ($costing['lj_results_date']) {
+        print_r($costing['lj_results_date']);
+    } ?>" id="lj_results_date" name="lj_results_date" class="form-control" />
+    <span class="text-danger" id="lj_results_date_error"></span>
+</div>
                                                     <!-- MGIT Culture Results Date -->
-                                                    <div class="col-sm-6 rounded border p-3" id="mgit_results_date_section">
-                                                        <label for="mgit_results_date" class="form-label">9. MGIT
-                                                            Date of culture results</label>
-                                                        <input type="date" value="<?php if ($costing['mgit_results_date']) {
-                                                            print_r($costing['mgit_results_date']);
-                                                        } ?>" id="mgit_results_date" name="mgit_results_date"
-                                                            class="form-control" />
-                                                    </div>
+                                         <div class="col-sm-6 rounded border p-3" id="mgit_results_date_section">
+    <label for="mgit_results_date" class="form-label">9. MGIT Date of culture results</label>
+    <input type="date" value="<?php if ($costing['mgit_results_date']) {
+                                                print_r($costing['mgit_results_date']);
+                                            } ?>" id="mgit_results_date" name="mgit_results_date" class="form-control" />
+                                            <span class="text-danger" id="mgit_results_date_error"></span>
+                                        </div>
                                                 </div>
 
                                                 <div class="row mt-3">

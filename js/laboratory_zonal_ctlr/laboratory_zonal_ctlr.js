@@ -52,6 +52,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const sampleVolumeError = document.getElementById("sample_volume_error");
     const microscopyDateInput = document.getElementById("microscopy_date");
     const microscopyDateError = document.getElementById("microscopy_date_error");
+    const ljInoculationDateInput = document.getElementById("lj_inoculation_date");
+    const ljResultsDateInput = document.getElementById("lj_results_date");
+    const mgitInoculationDateInput = document.getElementById("mgit_inoculation_date");
+    const mgitResultsDateInput = document.getElementById("mgit_results_date");
+    const ljInoculationDateError = document.createElement("span");
+    const ljResultsDateError = document.createElement("span");
+    const mgitInoculationDateError = document.createElement("span");
+    const mgitResultsDateError = document.createElement("span");
+    ljInoculationDateError.className = "text-danger";
+    ljResultsDateError.className = "text-danger";
+    mgitInoculationDateError.className = "text-danger";
+    mgitResultsDateError.className = "text-danger";
+    ljInoculationDateInput.parentNode.appendChild(ljInoculationDateError);
+    ljResultsDateInput.parentNode.appendChild(ljResultsDateError);
+    mgitInoculationDateInput.parentNode.appendChild(mgitInoculationDateError);
+    mgitResultsDateInput.parentNode.appendChild(mgitResultsDateError);
     const laboratoryZonalCtlrForm = document.getElementById("laboratory_zonal_ctlr");
 
     laboratoryZonalCtlrForm.addEventListener("submit", function (event) {
@@ -90,6 +106,42 @@ document.addEventListener("DOMContentLoaded", function () {
                 isValid = false;
             } else {
                 microscopyDateError.textContent = "";
+            }
+        }
+
+        const isLJChecked = Array.from(cultureMethodCheckboxes).some(checkbox => checkbox.checked && checkbox.value === "1");
+        if (isLJChecked) {
+            const ljInoculationDate = new Date(ljInoculationDateInput.value);
+            const ljResultsDate = new Date(ljResultsDateInput.value);
+            if (ljInoculationDate < screeningDateCtrlZonal) {
+                ljInoculationDateError.textContent = `LJ inoculation date must be greater than or equal to the screening date (${screeningDateCtrlZonalInput.value}).`;
+                isValid = false;
+            } else {
+                ljInoculationDateError.textContent = "";
+            }
+            if (ljResultsDate < ljInoculationDate) {
+                ljResultsDateError.textContent = "LJ results date must be greater than or equal to the LJ inoculation date.";
+                isValid = false;
+            } else {
+                ljResultsDateError.textContent = "";
+            }
+        }
+
+        const isMGITChecked = Array.from(cultureMethodCheckboxes).some(checkbox => checkbox.checked && checkbox.value === "2");
+        if (isMGITChecked) {
+            const mgitInoculationDate = new Date(mgitInoculationDateInput.value);
+            const mgitResultsDate = new Date(mgitResultsDateInput.value);
+            if (mgitInoculationDate < screeningDateCtrlZonal) {
+                mgitInoculationDateError.textContent = `MGIT inoculation date must be greater than or equal to the screening date (${screeningDateCtrlZonalInput.value}).`;
+                isValid = false;
+            } else {
+                mgitInoculationDateError.textContent = "";
+            }
+            if (mgitResultsDate < mgitInoculationDate) {
+                mgitResultsDateError.textContent = "MGIT results date must be greater than or equal to the MGIT inoculation date.";
+                isValid = false;
+            } else {
+                mgitResultsDateError.textContent = "";
             }
         }
 
