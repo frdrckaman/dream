@@ -8418,71 +8418,57 @@ if ($user->isLoggedIn()) {
                                             </div>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-4">
-                                                    <label>Complete?</label>
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="form_status" id="form_status<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>"
-                                                                        <?= ($costing['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('form_status')">Unset</button>
-                                                    </div>
-                                                </div>
+    <div class="col-sm-4">
+        <label>Complete?</label>
+        <div class="row-form clearfix">
+            <div class="form-group">
+                <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="form_status" id="diagnosis_status" value="<?= $value['id']; ?>" <?= ($costing['form_status'] == $value['id']) ? 'checked' : ''; ?> required>
+                        <label class="form-check-label"><?= $value['name']; ?></label>
+                    </div>
+                <?php } ?>
+            </div>
+            <button type="button" onclick="unsetRadio('form_status')">Unset</button>
+        </div>
+    </div>
 
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>Completed Date</label>
-                                                            <input class="form-control" type="date" name="date_completed"
-                                                                id="date_completed"
-                                                                value="<?= ($costing['date_completed']) ? $costing['date_completed'] : ''; ?>" />
-                                                            <span id="date_completed_error" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-                                                    <?php if ($costing['form_status'] >= 2) { ?>
+    <div class="col-sm-4">
+        <div class="row-form clearfix">
+            <div class="form-group">
+                <label>Completed Date</label>
+                <input class="form-control" type="date" name="date_completed" id="diagnosis_date_completed" value="<?= ($costing['date_completed']) ? $costing['date_completed'] : ''; ?>" />
+                <span id="date_completed_error" class="text-danger"></span>
+            </div>
+        </div>
+        <?php if ($costing['form_status'] >= 2) { ?>
+            <div class="row-form clearfix">
+                <div class="form-group">
+                    <label>Completed By</label>
+                    <input class="form-control" type="text" value="<?= $override->get('user', 'id', $costing['completed_by'])[0]['username']; ?>" readonly />
+                </div>
+            </div>
+        <?php } ?>
+    </div>
 
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>Completed By</label>
-                                                                <input class="form-control" type="text"
-                                                                    value="<?= $override->get('user', 'id', $costing['completed_by'])[0]['username']; ?>"
-                                                                    readonly />
-                                                            </div>
-                                                        </div>
-                                                    <?php } ?>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <label>Verified Date</label>
-                                                            <input class="form-control" type="date" name="date_verified"
-                                                                id="date_verified"
-                                                                value="<?= ($costing['date_verified']) ? $costing['date_verified'] : ''; ?>" />
-                                                            <span id="date_verified_error" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-                                                    <?php if ($costing['form_status'] >= 3) { ?>
-                                                        <div class="row-form clearfix">
-                                                            <div class="form-group">
-                                                                <label>Verified By</label>
-                                                                <input class="form-control" type="text"
-                                                                    value="<?= $override->get('user', 'id', $costing['verified_by'])[0]['username']; ?>"
-                                                                    readonly />
-                                                            </div>
-                                                        </div>
-                                                    <?php } ?>
-                                                </div>
-                                            </div>
+    <div class="col-sm-4">
+        <div class="row-form clearfix">
+            <div class="form-group">
+                <label>Verified Date</label>
+                <input class="form-control" type="date" name="date_verified" id="diagnosis_date_verified" value="<?= ($costing['date_verified']) ? $costing['date_verified'] : ''; ?>" />
+                <span id="date_verified_error" class="text-danger"></span>
+            </div>
+        </div>
+        <?php if ($costing['form_status'] >= 3) { ?>
+            <div class="row-form clearfix">
+                <div class="form-group">
+                    <label>Verified By</label>
+                    <input class="form-control" type="text" value="<?= $override->get('user', 'id', $costing['verified_by'])[0]['username']; ?>" readonly />
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>
                                             <hr>
                                         </div>
                                         <!-- /.card-body -->

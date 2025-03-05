@@ -145,4 +145,86 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleTbRegimenOtherSection();
     toggleTbTreatmentSections();
     toggleTableSection();
+
+    const diagnosisStatusRadios = document.querySelectorAll('input[name="form_status"]');
+    const diagnosisDateCompletedInput = document.getElementById("diagnosis_date_completed");
+    const diagnosisDateVerifiedInput = document.getElementById("diagnosis_date_verified");
+    const enrollmentDateDiagnosisInput = document.getElementById("enrollment_date_diagnosis");
+    const dateCompletedError = document.getElementById("date_completed_error");
+    const dateVerifiedError = document.getElementById("date_verified_error");
+
+    function updateFormStatus() {
+        const selectedStatus = document.querySelector('input[name="form_status"]:checked')?.value;
+        const enrollmentDateDiagnosis = new Date(enrollmentDateDiagnosisInput.value);
+        const today = new Date();
+
+        if (selectedStatus === "1") {
+            diagnosisDateCompletedInput.value = "";
+            diagnosisDateVerifiedInput.value = "";
+            diagnosisDateCompletedInput.required = false;
+            diagnosisDateVerifiedInput.required = false;
+            diagnosisDateCompletedInput.parentElement.style.display = "none";
+            diagnosisDateVerifiedInput.parentElement.style.display = "none";
+        } else if (selectedStatus === "2") {
+            diagnosisDateCompletedInput.required = true;
+            diagnosisDateVerifiedInput.value = "";
+            diagnosisDateVerifiedInput.required = false;
+            diagnosisDateCompletedInput.parentElement.style.display = "block";
+            diagnosisDateVerifiedInput.parentElement.style.display = "none";
+        } else if (selectedStatus === "3") {
+            diagnosisDateCompletedInput.required = true;
+            diagnosisDateVerifiedInput.required = true;
+            diagnosisDateCompletedInput.parentElement.style.display = "block";
+            diagnosisDateVerifiedInput.parentElement.style.display = "block";
+        } else {
+            diagnosisDateCompletedInput.required = false;
+            diagnosisDateVerifiedInput.required = false;
+            diagnosisDateCompletedInput.parentElement.style.display = "none";
+            diagnosisDateVerifiedInput.parentElement.style.display = "none";
+        }
+    }
+
+    function validateDates(event) {
+        const selectedStatus = document.querySelector('input[name="form_status"]:checked')?.value;
+        const enrollmentDateDiagnosis = new Date(enrollmentDateDiagnosisInput.value);
+        const today = new Date();
+        let isValid = true;
+
+        if (selectedStatus === "2" || selectedStatus === "3") {
+            const diagnosisDateCompleted = new Date(diagnosisDateCompletedInput.value);
+            if (diagnosisDateCompleted < enrollmentDateDiagnosis) {
+                dateCompletedError.textContent = `Completed date must be greater than or equal to the enrollment date (${enrollmentDateDiagnosisInput.value}).`;
+                isValid = false;
+            } else if (diagnosisDateCompleted > today) {
+                dateCompletedError.textContent = "Completed date cannot be in the future.";
+                isValid = false;
+            } else {
+                dateCompletedError.textContent = "";
+            }
+        }
+
+        if (selectedStatus === "3") {
+            const diagnosisDateCompleted = new Date(diagnosisDateCompletedInput.value);
+            const diagnosisDateVerified = new Date(diagnosisDateVerifiedInput.value);
+            if (diagnosisDateVerified < diagnosisDateCompleted) {
+                dateVerifiedError.textContent = "Verified date must be greater than or equal to the completed date.";
+                isValid = false;
+            } else if (diagnosisDateVerified > today) {
+                dateVerifiedError.textContent = "Verified date cannot be in the future.";
+                isValid = false;
+            } else {
+                dateVerifiedError.textContent = "";
+            }
+        }
+
+        if (!isValid) {
+            event.preventDefault(); // Prevent form submission if there are errors
+        }
+    }
+
+    diagnosisStatusRadios.forEach(radio => radio.addEventListener("change", updateFormStatus));
+    document.getElementById("Final_Diagnosis").addEventListener("submit", validateDates);
+
+    // Initialize section visibility on page load
+    updateFormStatus();
 });
