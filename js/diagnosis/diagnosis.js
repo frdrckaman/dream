@@ -149,38 +149,44 @@ document.addEventListener("DOMContentLoaded", function () {
     const diagnosisStatusRadios = document.querySelectorAll('input[name="form_status"]');
     const diagnosisDateCompletedInput = document.getElementById("diagnosis_date_completed");
     const diagnosisDateVerifiedInput = document.getElementById("diagnosis_date_verified");
+    const diagnosisDateCompletedByInput = document.getElementById("diagnosis_date_completed_by");
+    const diagnosisDateVerifiedByInput = document.getElementById("diagnosis_date_verified_by");
     const enrollmentDateDiagnosisInput = document.getElementById("enrollment_date_diagnosis");
     const dateCompletedError = document.getElementById("date_completed_error");
     const dateVerifiedError = document.getElementById("date_verified_error");
 
     function updateFormStatus() {
         const selectedStatus = document.querySelector('input[name="form_status"]:checked')?.value;
-        const enrollmentDateDiagnosis = new Date(enrollmentDateDiagnosisInput.value);
-        const today = new Date();
 
         if (selectedStatus === "1") {
             diagnosisDateCompletedInput.value = "";
             diagnosisDateVerifiedInput.value = "";
             diagnosisDateCompletedInput.required = false;
             diagnosisDateVerifiedInput.required = false;
-            diagnosisDateCompletedInput.parentElement.style.display = "none";
-            diagnosisDateVerifiedInput.parentElement.style.display = "none";
+            document.getElementById("diagnosis_date_completed_status").style.display = "none";
+            document.getElementById("diagnosis_date_verified_status").style.display = "none";
         } else if (selectedStatus === "2") {
             diagnosisDateCompletedInput.required = true;
             diagnosisDateVerifiedInput.value = "";
             diagnosisDateVerifiedInput.required = false;
-            diagnosisDateCompletedInput.parentElement.style.display = "block";
-            diagnosisDateVerifiedInput.parentElement.style.display = "none";
+            document.getElementById("diagnosis_date_completed_status").style.display = "block";
+            document.getElementById("diagnosis_date_verified_status").style.display = "none";
         } else if (selectedStatus === "3") {
+            if (!diagnosisDateCompletedInput.value) {
+                alert("Please enter a completed date before selecting this status.");
+                document.querySelector('input[name="form_status"][value="2"]').checked = true;
+                updateFormStatus();
+                return;
+            }
             diagnosisDateCompletedInput.required = true;
             diagnosisDateVerifiedInput.required = true;
-            diagnosisDateCompletedInput.parentElement.style.display = "block";
-            diagnosisDateVerifiedInput.parentElement.style.display = "block";
+            document.getElementById("diagnosis_date_completed_status").style.display = "block";
+            document.getElementById("diagnosis_date_verified_status").style.display = "block";
         } else {
             diagnosisDateCompletedInput.required = false;
             diagnosisDateVerifiedInput.required = false;
-            diagnosisDateCompletedInput.parentElement.style.display = "none";
-            diagnosisDateVerifiedInput.parentElement.style.display = "none";
+            document.getElementById("diagnosis_date_completed_status").style.display = "none";
+            document.getElementById("diagnosis_date_verified_status").style.display = "none";
         }
     }
 
@@ -214,6 +220,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 isValid = false;
             } else {
                 dateVerifiedError.textContent = "";
+            }
+
+            if (diagnosisDateCompletedByInput.value === diagnosisDateVerifiedByInput.value) {
+                dateVerifiedError.textContent = "Completed by and Verified by cannot be the same person.";
+                isValid = false;
             }
         }
 
