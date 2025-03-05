@@ -40,40 +40,40 @@ if ($user->isLoggedIn()) {
 
     if ($user->data()->accessLevel == 1) {
         // if (!Input::get('facility_id')) {
-            $all = $override->getNo('screening');
-            $screened = $override->getCount('screening', 'status', 1);
-            $eligible = $override->getCount1('screening', 'status', 1, 'eligible', 1);
-            $enrolled = $override->getCount('enrollment_form', 'status', 1);
-            // $end = $override->getCount('termination', 'status', 1);
-            $deleted = $override->getCount('screening', 'status', 0);
+        $all = $override->getNo('screening');
+        $screened = $override->getCount('screening', 'status', 1);
+        $eligible = $override->getCount1('screening', 'status', 1, 'eligible', 1);
+        $enrolled = $override->getCount('enrollment_form', 'status', 1);
+        // $end = $override->getCount('termination', 'status', 1);
+        $deleted = $override->getCount('screening', 'status', 0);
 
-            // $Incompletes = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
-            // $Incompletes_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
-            // $Incompletes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Incompletes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Incompletes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Incompletes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Incompletes = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+        // $Incompletes_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+        // $Incompletes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Incompletes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Incompletes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Incompletes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
 
-            // $Completes = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
-            // $Completes_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
-            // $Completes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Completes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Completes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Completes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Completes = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+        // $Completes_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+        // $Completes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Completes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Completes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Completes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
 
-            // $Un_Verified = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
-            // $Un_Verified_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
-            // $Un_Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Un_Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Un_Verified_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Un_Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Un_Verified = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+        // $Un_Verified_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+        // $Un_Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Un_Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Un_Verified_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Un_Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
 
-            // $Verified = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
-            // $Verified_Screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Verified_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Verified = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+        // $Verified_Screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Verified_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
         // } else {
         //     $all = $override->getCount('screening', 'facility_id', $_GET['facility_id']);
         //     $screened = $override->countData('screening', 'status', 1, 'facility_id', $_GET['facility_id']);
@@ -82,29 +82,29 @@ if ($user->isLoggedIn()) {
         //     // $end = $override->countData('termination', 'status', 1, 'facility_id', $_GET['facility_id']);
         //     $deleted = $override->countData('screening', 'status', 0, 'facility_id', $_GET['facility_id']);
 
-            // $Incompletes_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
-            // $Incompletes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Incompletes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Incompletes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Incompletes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Incompletes_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+        // $Incompletes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Incompletes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Incompletes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Incompletes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
 
-            // $Completes_Screened = $override->countData1('screening', 'status', 1, 'facility_id', 'form_status', 1, $_GET['facility_id']);
-            // $Completes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Completes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Completes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Completes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Completes_Screened = $override->countData1('screening', 'status', 1, 'facility_id', 'form_status', 1, $_GET['facility_id']);
+        // $Completes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Completes_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Completes_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Completes_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
 
-            // $Un_Verified_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
-            // $Un_Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Un_Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Un_Verified_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Un_Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Un_Verified_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+        // $Un_Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Un_Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Un_Verified_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Un_Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
 
-            // $Verified_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
-            // $Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Verified_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
-            // $Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Verified_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
+        // $Verified_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Verified_Respiratory = $override->countData('respiratory', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Verified_Diagnosis = $override->countData('diagnosis_test', 'status', 1, 'facility_id', $_GET['facility_id']);
+        // $Verified_Diagnosis = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
         // }
     } else {
         $all = $override->getCount('screening', 'facility_id', $user->data()->site_id);
@@ -390,7 +390,7 @@ if ($user->isLoggedIn()) {
                                     <p>Deleted Patients</p>
                                 </a>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="info.php?id=3&status=6&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
                                     class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -531,6 +531,26 @@ if ($user->isLoggedIn()) {
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"></span>
                                 <p>List of Facilities</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Reports <i class="fas fa-angle-left right"></i>
+
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="summary.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <!-- <span class="badge badge-info right"> -->
+                                <!-- <?= $all; ?> -->
+                                <!-- </span> -->
+                                <p>Summary</p>
                             </a>
                         </li>
                     </ul>
