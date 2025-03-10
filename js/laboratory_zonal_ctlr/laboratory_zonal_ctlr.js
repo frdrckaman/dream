@@ -273,32 +273,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        const labCtrlZoneStatus = document.querySelector('input[name="form_status"]:checked')?.value;
-        if (labCtrlZoneStatus === "1" || labCtrlZoneStatus === "2") {
-            const labCtrlZoneDateCompleted = new Date(labCtrlZoneDateCompletedInput.value);
-            const labCtrlZoneDateVerified = new Date(labCtrlZoneDateVerifiedInput.value);
-
-            if (labCtrlZoneDateCompleted < screeningDateCtrlZonal) {
-                labCtrlZoneDateCompletedError.textContent = `Completed date must be greater than or equal to the screening date (${screeningDateCtrlZonalInput.value}).`;
-                isValid = false;
-            } else if (labCtrlZoneDateCompleted > today) {
-                labCtrlZoneDateCompletedError.textContent = "Completed date cannot be in the future.";
-                isValid = false;
-            } else {
-                labCtrlZoneDateCompletedError.textContent = "";
-            }
-
-            if (labCtrlZoneDateVerified < labCtrlZoneDateCompleted) {
-                labCtrlZoneDateVerifiedError.textContent = "Verified date must be greater than or equal to the completed date.";
-                isValid = false;
-            } else if (labCtrlZoneDateVerified > today) {
-                labCtrlZoneDateVerifiedError.textContent = "Verified date cannot be in the future.";
-                isValid = false;
-            } else {
-                labCtrlZoneDateVerifiedError.textContent = "";
-            }
-        }
-
         if (!isValid) {
             event.preventDefault(); // Prevent form submission if there are errors
         }
@@ -446,4 +420,97 @@ document.addEventListener("DOMContentLoaded", function () {
     cultureMethodCheckboxes.forEach(checkbox => {
         checkbox.addEventListener("change", toggleCultureMethodSections);
     });
+
+
+
+    const laboratoryZonalCtlrStatusRadios = document.querySelectorAll('input[name="laboratory_zonal_ctlr_status"]');
+    const laboratoryZonalCtlrDateCompletedInput = document.getElementById("laboratory_zonal_ctlr_date_completed");
+    const laboratoryZonalCtlrDateVerifiedInput = document.getElementById("laboratory_zonal_ctlr_date_verified");
+    const laboratoryZonalCtlrDateCompletedByInput = document.getElementById("laboratory_zonal_ctlr_date_completed_by");
+    const laboratoryZonalCtlrDateVerifiedByInput = document.getElementById("laboratory_zonal_ctlr_date_verified_by");
+    const enrollmentDateLaboratoryZonalCtlrInput = document.querySelector('input[name="enrollment_date_laboratory_zonal_ctlr"]');
+    const dateCompletedError = document.getElementById("date_completed_error");
+    const dateVerifiedError = document.getElementById("date_verified_error");
+    const laboratoryZonalCtlrStatusError = document.getElementById("laboratory_zonal_ctlr_status_error");
+
+    function updateLaboratoryZonalCtlrFormStatus() {
+        const selectedStatus = document.querySelector('input[name="laboratory_zonal_ctlr_status"]:checked')?.value;
+
+        if (selectedStatus === "1") {
+            laboratoryZonalCtlrDateCompletedInput.value = "";
+            laboratoryZonalCtlrDateVerifiedInput.value = "";
+            laboratoryZonalCtlrDateCompletedInput.required = false;
+            laboratoryZonalCtlrDateVerifiedInput.required = false;
+            document.getElementById("laboratory_zonal_ctlr_date_completed_status").style.display = "none";
+            document.getElementById("laboratory_zonal_ctlr_date_verified_status").style.display = "none";
+        } else if (selectedStatus === "2") {
+            laboratoryZonalCtlrDateCompletedInput.required = true;
+            laboratoryZonalCtlrDateVerifiedInput.value = "";
+            laboratoryZonalCtlrDateVerifiedInput.required = false;
+            document.getElementById("laboratory_zonal_ctlr_date_completed_status").style.display = "block";
+            document.getElementById("laboratory_zonal_ctlr_date_verified_status").style.display = "none";
+        } else if (selectedStatus === "3") {
+            laboratoryZonalCtlrDateCompletedInput.required = true;
+            laboratoryZonalCtlrDateVerifiedInput.required = true;
+            document.getElementById("laboratory_zonal_ctlr_date_completed_status").style.display = "block";
+            document.getElementById("laboratory_zonal_ctlr_date_verified_status").style.display = "block";
+            laboratoryZonalCtlrStatusError.textContent = "";
+        } else {
+            laboratoryZonalCtlrDateCompletedInput.required = false;
+            laboratoryZonalCtlrDateVerifiedInput.required = false;
+            document.getElementById("laboratory_zonal_ctlr_date_completed_status").style.display = "none";
+            document.getElementById("laboratory_zonal_ctlr_date_verified_status").style.display = "none";
+        }
+    }
+
+    function validateDates(event) {
+        const selectedStatus = document.querySelector('input[name="laboratory_zonal_ctlr_status"]:checked')?.value;
+        const enrollmentDateLaboratoryZonalCtlr = new Date(enrollmentDateLaboratoryZonalCtlrInput.value);
+        const today = new Date();
+        let isValid = true;
+
+        if (selectedStatus === "2" || selectedStatus === "3") {
+            const laboratoryZonalCtlrDateCompleted = new Date(laboratoryZonalCtlrDateCompletedInput.value);
+            if (laboratoryZonalCtlrDateCompleted < enrollmentDateLaboratoryZonalCtlr) {
+                dateCompletedError.textContent = `Completed date must be greater than or equal to the enrollment date (${enrollmentDateLaboratoryZonalCtlrInput.value}).`;
+                isValid = false;
+            } else if (laboratoryZonalCtlrDateCompleted > today) {
+                dateCompletedError.textContent = "Completed date cannot be in the future.";
+                isValid = false;
+            } else {
+                dateCompletedError.textContent = "";
+            }
+        }
+
+        if (selectedStatus === "3") {
+            const laboratoryZonalCtlrDateCompleted = new Date(laboratoryZonalCtlrDateCompletedInput.value);
+            const laboratoryZonalCtlrDateVerified = new Date(laboratoryZonalCtlrDateVerifiedInput.value);
+            if (laboratoryZonalCtlrDateVerified < laboratoryZonalCtlrDateCompleted) {
+                dateVerifiedError.textContent = "Verified date must be greater than or equal to the completed date.";
+                isValid = false;
+            } else if (laboratoryZonalCtlrDateVerified > today) {
+                dateVerifiedError.textContent = "Verified date cannot be in the future.";
+                isValid = false;
+            } else {
+                dateVerifiedError.textContent = "";
+            }
+
+            if (laboratoryZonalCtlrDateCompletedByInput.value === laboratoryZonalCtlrDateVerifiedByInput.value) {
+                laboratoryZonalCtlrStatusError.textContent = "Completed by and Verified by cannot be the same person.";
+                isValid = false;
+            } else {
+                laboratoryZonalCtlrStatusError.textContent = "";
+            }
+        }
+
+        if (!isValid) {
+            event.preventDefault(); // Prevent form submission if there are errors
+        }
+    }
+
+    laboratoryZonalCtlrStatusRadios.forEach(radio => radio.addEventListener("change", updateLaboratoryZonalCtlrFormStatus));
+    document.getElementById("Final_Laboratory_Zonal_Ctlr").addEventListener("submit", validateDates);
+
+    // Initialize section visibility on page load
+    updateLaboratoryZonalCtlrFormStatus();
 });
