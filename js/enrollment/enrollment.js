@@ -35,14 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const txUnknownYear = document.getElementById("tx_unknown_year");
     const regimenMonthsInput = document.getElementById("regimen_months");
     const regimenMonthsUnknown = document.getElementById("regimen_months_unknown");
-    const form = document.getElementById("enrollment");
-
-    const enrollmentCompletedSection = document.getElementById("enrollment_completed");
-    const enrollmentVerifiedSection = document.getElementById("enrollment_verified");
-    const enrollmentDateCompletedInput = document.getElementById("enrollment_date_completed");
-    const enrollmentDateVerifiedInput = document.getElementById("enrollment_date_verified");
-    const enrollmentDateCompletedError = document.getElementById("enrollment_date_completed_error");
-    const enrollmentDateVerifiedError = document.getElementById("enrollment_date_verified_error");
+    const enrollment = document.getElementById("enrollment");
 
     function toggleTxSections() {
         let isTxPreviousYes = Array.from(txPreviousRadios).some(radio => radio.checked && radio.value === "1");
@@ -232,58 +225,103 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function updateFormStatus() {
-        const selectedStatus = document.querySelector("input[name='form_status']:checked").value;
 
-        if (selectedStatus == "1") {
-            enrollmentCompletedSection.style.display = "none";
-            enrollmentVerifiedSection.style.display = "none";
+
+    const enrollmentDateCompletedSection = document.getElementById("enrollment_date_completed_status");
+    const enrollmentDateVerifiedSection = document.getElementById("enrollment_date_verified_status");
+    const enrollmentDateCompletedInput = document.getElementById("enrollment_date_completed");
+    const enrollmentDateVerifiedInput = document.getElementById("enrollment_date_verified");
+    const enrollmentDateCompletedError = document.getElementById("enrollment_date_completed_error");
+    const enrollmentDateVerifiedError = document.getElementById("enrollment_date_verified_error");
+
+    const enrollmentStatusRadios = document.querySelectorAll('input[name="enrollment_status"]');
+    const enrollmentDateCompletedByInput = document.getElementById("enrollment_date_completed_by");
+    const enrollmentDateVerifiedByInput = document.getElementById("enrollment_date_verified_by");
+    const enrollmentStatusError = document.getElementById("enrollment_status_error");
+
+
+    function updateEnrollmentFormStatus() {
+        const selectedStatus = document.querySelector('input[name="enrollment_status"]:checked')?.value;
+
+        if (selectedStatus === "1") {
+            enrollmentDateCompletedInput.value = "";
+            enrollmentDateVerifiedInput.value = "";
             enrollmentDateCompletedInput.required = false;
             enrollmentDateVerifiedInput.required = false;
-        } else if (selectedStatus == "2") {
-            enrollmentCompletedSection.style.display = "block";
-            enrollmentVerifiedSection.style.display = "none";
+            document.getElementById("enrollment_date_completed_status").style.display = "none";
+            document.getElementById("enrollment_date_verified_status").style.display = "none";
+        } else if (selectedStatus === "2") {
             enrollmentDateCompletedInput.required = true;
+            enrollmentDateVerifiedInput.value = "";
             enrollmentDateVerifiedInput.required = false;
-        } else if (selectedStatus == "3") {
-            if (enrollmentDateCompletedInput.value) {
-                enrollmentCompletedSection.style.display = "block";
-                enrollmentVerifiedSection.style.display = "block";
-                enrollmentDateCompletedInput.required = true;
-                enrollmentDateVerifiedInput.required = true;
-            } else {
-                alert("Please complete the enrollment date before selecting this status.");
-                document.querySelector("input[name='form_status'][value='2']").checked = true;
-                updateFormStatus();
+            document.getElementById("enrollment_date_completed_status").style.display = "block";
+            document.getElementById("enrollment_date_verified_status").style.display = "none";
+        } else if (selectedStatus === "3") {
+            if (!enrollmentDateCompletedInput.value || !enrollmentDateCompletedByInput.value) {
+                enrollmentStatusError.textContent = "Please enter a completed date and completed by before selecting this status.";
+                document.querySelector('input[name="enrollment_status"][value="2"]').checked = true;
+                updateEnrollmentFormStatus();
+                return;
             }
+            enrollmentDateCompletedInput.required = true;
+            enrollmentDateVerifiedInput.required = true;
+            document.getElementById("enrollment_date_completed_status").style.display = "block";
+            document.getElementById("enrollment_date_verified_status").style.display = "block";
+            enrollmentStatusError.textContent = "";
+        } else {
+            enrollmentDateCompletedInput.required = false;
+            enrollmentDateVerifiedInput.required = false;
+            document.getElementById("enrollment_date_completed_status").style.display = "none";
+            document.getElementById("enrollment_date_verified_status").style.display = "none";
         }
     }
 
-    function validateForm() {
+    function validateDates(event) {
+        const selectedStatus = document.querySelector('input[name="enrollment_status"]:checked')?.value;
+        const enrollmentDate = new Date(enrollmentDateInput.value);
+        const today = new Date();
         let isValid = true;
-        const today = new Date().toISOString().split('T')[0];
 
-        if (enrollmentDateCompletedInput.required && !enrollmentDateCompletedInput.value) {
-            enrollmentDateCompletedError.textContent = "Completed date is required.";
-            isValid = false;
-        } else if (enrollmentDateCompletedInput.value < enrollmentDateInput.value || enrollmentDateCompletedInput.value > today) {
-            enrollmentDateCompletedError.textContent = "Completed date must be on or after the enrollment date and not in the future.";
-            isValid = false;
-        } else {
-            enrollmentDateCompletedError.textContent = "";
+        if (selectedStatus === "2" || selectedStatus === "3") {
+            const enrollmentDateCompleted = new Date(enrollmentDateCompletedInput.value);
+            if (enrollmentDateCompleted < enrollmentDate) {
+                dateCompletedError.textContent = `Completed date must be greater than or equal to the enrollment date (${enrollmentDateInput.value}).`;
+                isValid = false;
+            } else if (enrollmentDateCompleted > today) {
+                dateCompletedError.textContent = "Completed date cannot be in the future.";
+                isValid = false;
+            } else {
+                dateCompletedError.textContent = "";
+            }
         }
 
-        if (enrollmentVerifiedSection.style.display !== "none" && enrollmentDateCompletedInput.value && !enrollmentDateVerifiedInput.value) {
-            enrollmentDateVerifiedError.textContent = "Verified date is required.";
-            isValid = false;
-        } else if (enrollmentDateVerifiedInput.value < enrollmentDateCompletedInput.value || enrollmentDateVerifiedInput.value > today) {
-            enrollmentDateVerifiedError.textContent = "Verified date must be on or after the completed date and not in the future.";
-            isValid = false;
-        } else {
-            enrollmentDateVerifiedError.textContent = "";
+        if (selectedStatus === "3") {
+            const enrollmentDateCompleted = new Date(enrollmentDateCompletedInput.value);
+            const enrollmentDateVerified = new Date(enrollmentDateVerifiedInput.value);
+            if (enrollmentDateCompleted < enrollmentDate) {
+                dateCompletedError.textContent = `Completed date must be greater than or equal to the enrollment date (${enrollmentDateInput.value}).`;
+                isValid = false;
+            } else if (enrollmentDateVerified < enrollmentDateCompleted) {
+                dateVerifiedError.textContent = "Verified date must be greater than or equal to the completed date.";
+                isValid = false;
+            } else if (enrollmentDateVerified > today) {
+                dateVerifiedError.textContent = "Verified date cannot be in the future.";
+                isValid = false;
+            } else {
+                dateVerifiedError.textContent = "";
+            }
+
+            if (enrollmentDateCompletedByInput.value === enrollmentDateVerifiedByInput.value) {
+                enrollmentStatusError.textContent = "Completed by and Verified by cannot be the same person.";
+                isValid = false;
+            } else {
+                enrollmentStatusError.textContent = "";
+            }
         }
 
-        return isValid;
+        if (!isValid) {
+            event.preventDefault(); // Prevent form submission if there are errors
+        }
     }
 
     // Attach event listeners
@@ -313,13 +351,15 @@ document.addEventListener("DOMContentLoaded", function () {
     sputumDateInput.addEventListener("input", validateSputumDate);
     regimenMonthsUnknown.addEventListener("change", toggleRegimenMonths);
     document.querySelectorAll("input[name='form_status']").forEach(radio => radio.addEventListener("change", updateFormStatus));
+    enrollmentStatusRadios.forEach(radio => radio.addEventListener("change", updateEnrollmentFormStatus));
+    document.getElementById("enrollment").addEventListener("submit", validateDates);
 
     // Validate dates on input
     enrollmentDateCompletedInput.addEventListener("input", validateForm);
     enrollmentDateVerifiedInput.addEventListener("input", validateForm);
 
     // Prevent form submission if there is an error
-    form.addEventListener("submit", function (event) {
+    enrollment.addEventListener("submit", function (event) {
         const isEnrollmentDateValid = validateEnrollmentDate();
         const isAgeValid = validateAge();
         const isInformationDateValid = validateInformationDate();
@@ -355,4 +395,5 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleTxYear(); // Initial toggle state
     toggleRegimenMonths(); // Initial toggle state
     updateFormStatus(); // Initial form status update
+    updateEnrollmentFormStatus(); // Initial enrollment form status update
 });

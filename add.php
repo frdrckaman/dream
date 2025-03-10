@@ -455,20 +455,20 @@ if ($user->isLoggedIn()) {
                     $verified_by = "";
 
                     if (
-                        (Input::get('form_status') == 1)
+                        (Input::get('enrollment_status') == 1)
                     ) {
                         $date_completed = "";
                         $completed_by = "";
                         $date_verified = "";
                         $verified_by = "";
-                    } elseif (Input::get('form_status') == 2) {
+                    } elseif (Input::get('enrollment_status') == 2) {
                         $date_completed = Input::get('date_completed');
                         $completed_by = $user->data()->id;
                         $date_verified = "";
                         $verified_by = "";
-                    } elseif (Input::get('form_status') == 3) {
-                        $date_completed = $screening['date_completed'];
-                        $completed_by = $screening['completed_by'];
+                    } elseif (Input::get('enrollment_status') == 3) {
+                        $date_completed = $enrollment_form['date_completed'];
+                        $completed_by = $enrollment_form['completed_by'];
                         $date_verified = Input::get('date_completed');
                         $verified_by = $user->data()->id;
                     }
@@ -519,7 +519,7 @@ if ($user->isLoggedIn()) {
                                 'sputum_date' => Input::get('sputum_date'),
                                 'sputum_reasons' => Input::get('sputum_reasons'),
                                 'remarks' => Input::get('remarks'),
-                                'form_status' => Input::get('form_status'),
+                                'form_status' => Input::get('enrollment_status'),
                                 'date_completed' => $date_completed,
                                 'completed_by' => $completed_by,
                                 'date_verified' => $date_verified,
@@ -570,7 +570,7 @@ if ($user->isLoggedIn()) {
                                 'sputum_date' => Input::get('sputum_date'),
                                 'sputum_reasons' => Input::get('sputum_reasons'),
                                 'remarks' => Input::get('remarks'),
-                                'form_status' => Input::get('form_status'),
+                                'form_status' => Input::get('enrollment_status'),
                                 'date_completed' => $date_completed,
                                 'completed_by' => $completed_by,
                                 'date_verified' => $date_verified,
@@ -627,7 +627,7 @@ if ($user->isLoggedIn()) {
                                 'sputum_date' => Input::get('sputum_date'),
                                 'sputum_reasons' => Input::get('sputum_reasons'),
                                 'remarks' => Input::get('remarks'),
-                                'form_status' => Input::get('form_status'),
+                                'form_status' => Input::get('enrollment_status'),
                                 'date_completed' => $date_completed,
                                 'completed_by' => $completed_by,
                                 'date_verified' => $date_verified,
@@ -684,7 +684,7 @@ if ($user->isLoggedIn()) {
                                 'sputum_date' => Input::get('sputum_date'),
                                 'sputum_reasons' => Input::get('sputum_reasons'),
                                 'remarks' => Input::get('remarks'),
-                                'form_status' => Input::get('form_status'),
+                                'form_status' => Input::get('enrollment_status'),
                                 'date_completed' => $date_completed,
                                 'completed_by' => $completed_by,
                                 'date_verified' => $date_verified,
