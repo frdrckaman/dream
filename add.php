@@ -4550,65 +4550,42 @@ if ($user->isLoggedIn()) {
                                                         <!-- Column A -->
                                                         <div class="col-md-6">
                                                             <div class="afb-section">
-                                                                <h4 class="afb-subheader-A" id="afb-subheader-A">Slide A:
-                                                                </h4>
+                                                                <h4 class="afb-subheader-A" id="afb-subheader-A">Slide A:</h4>
                                                                 <hr>
                                                                 <div id="afb_a_date_section">
-                                                                    <label class="form-label"><strong>8(a). Date of AFB
-                                                                            microscopy
-                                                                        </strong></label>
-                                                                    <input type="date" value="<?php if ($costing['afb_a_date']) {
-                                                                        print_r($costing['afb_a_date']);
-                                                                    } ?>" id="afb_a_date" name="afb_a_date"
-                                                                        class="form-control" />
+                                                                    <label class="form-label"><strong>8(a). Date of AFB microscopy</strong></label>
+                                                                    <input type="date" value="<?php if ($costing['afb_a_date']) { print_r($costing['afb_a_date']); } ?>" id="afb_a_date" name="afb_a_date" class="form-control" />
+                                                                    <span id="afb_a_date_error" class="text-danger"></span>
                                                                 </div>
                                                                 <hr>
                                                                 <div id="afb_technique_a_section">
-                                                                    <label class="form-label"><strong>8(b). AFB technique
-                                                                            used
-                                                                        </strong></label>
+                                                                    <label class="form-label"><strong>8(b). AFB technique used</strong></label>
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
                                                                             <?php foreach ($override->get('afb_microscopy', 'status', 1) as $value) { ?>
                                                                                 <div class="form-check">
-                                                                                    <input class="form-check-input" type="radio"
-                                                                                        name="technique_a"
-                                                                                        id="technique_a<?= $value['id']; ?>"
-                                                                                        value="<?= $value['id']; ?>" <?php if ($costing['technique_a'] == $value['id']) {
-                                                                                              echo 'checked';
-                                                                                          } ?>>
-                                                                                    <label
-                                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                                    <input class="form-check-input" type="radio" name="technique_a" id="technique_a<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['technique_a'] == $value['id']) { echo 'checked'; } ?>>
+                                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
                                                                                 </div>
                                                                             <?php } ?>
                                                                         </div>
                                                                     </div>
-                                                                    <button type="button"
-                                                                        onclick="unsetRadio('technique_a')">Unset</button>
+                                                                    <button type="button" onclick="unsetRadio('technique_a')">Unset</button>
                                                                 </div>
                                                                 <hr>
                                                                 <div id="afb_results_a_section">
-                                                                    <label class="form-label"><strong>8(c). AFB microscopy
-                                                                            result
-                                                                        </strong></label>
+                                                                    <label class="form-label"><strong>8(c). AFB microscopy result</strong></label>
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
                                                                             <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
                                                                                 <div class="form-check">
-                                                                                    <input class="form-check-input" type="radio"
-                                                                                        name="afb_a_results"
-                                                                                        id="afb_a_results<?= $value['id']; ?>"
-                                                                                        value="<?= $value['id']; ?>" <?php if ($costing['afb_a_results'] == $value['id']) {
-                                                                                              echo 'checked';
-                                                                                          } ?>>
-                                                                                    <label
-                                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                                    <input class="form-check-input" type="radio" name="afb_a_results" id="afb_a_results<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['afb_a_results'] == $value['id']) { echo 'checked'; } ?>>
+                                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
                                                                                 </div>
                                                                             <?php } ?>
                                                                         </div>
                                                                     </div>
-                                                                    <button type="button"
-                                                                        onclick="unsetRadio('afb_a_results')">Unset</button>
+                                                                    <button type="button" onclick="unsetRadio('afb_a_results')">Unset</button>
                                                                 </div>
                                                             </div>
                                                             <hr>
@@ -4617,65 +4594,42 @@ if ($user->isLoggedIn()) {
                                                         <!-- Column B -->
                                                         <div class="col-md-6">
                                                             <div class="afb-section">
-                                                                <h4 class="afb-subheader-B" id="afb-subheader-B">Slide B:
-                                                                </h4>
+                                                                <h4 class="afb-subheader-B" id="afb-subheader-B">Slide B:</h4>
                                                                 <hr>
                                                                 <div id="afb_b_date_section">
-                                                                    <label class="form-label"><strong>8(a). Date of AFB
-                                                                            microscopy
-                                                                        </strong></label>
-                                                                    <input type="date" value="<?php if ($costing['afb_b_date']) {
-                                                                        print_r($costing['afb_b_date']);
-                                                                    } ?>" id="afb_date_b" name="afb_b_date"
-                                                                        class="form-control" />
+                                                                    <label class="form-label"><strong>8(a). Date of AFB microscopy</strong></label>
+                                                                    <input type="date" value="<?php if ($costing['afb_b_date']) { print_r($costing['afb_b_date']); } ?>" id="afb_b_date" name="afb_b_date" class="form-control" />
+                                                                    <span id="afb_b_date_error" class="text-danger"></span>
                                                                 </div>
                                                                 <hr>
                                                                 <div id="afb_technique_b_section">
-                                                                    <label class="form-label"><strong>8(b). AFB technique
-                                                                            used
-                                                                        </strong></label>
+                                                                    <label class="form-label"><strong>8(b). AFB technique used</strong></label>
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
                                                                             <?php foreach ($override->get('afb_microscopy', 'status', 1) as $value) { ?>
                                                                                 <div class="form-check">
-                                                                                    <input class="form-check-input" type="radio"
-                                                                                        name="technique_b"
-                                                                                        id="technique_b<?= $value['id']; ?>"
-                                                                                        value="<?= $value['id']; ?>" <?php if ($costing['technique_b'] == $value['id']) {
-                                                                                              echo 'checked';
-                                                                                          } ?>>
-                                                                                    <label
-                                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                                    <input class="form-check-input" type="radio" name="technique_b" id="technique_b<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['technique_b'] == $value['id']) { echo 'checked'; } ?>>
+                                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
                                                                                 </div>
                                                                             <?php } ?>
                                                                         </div>
                                                                     </div>
-                                                                    <button type="button"
-                                                                        onclick="unsetRadio('technique_b')">Unset</button>
+                                                                    <button type="button" onclick="unsetRadio('technique_b')">Unset</button>
                                                                 </div>
                                                                 <hr>
                                                                 <div id="afb_results_b_section">
-                                                                    <label class="form-label"><strong>8(c). AFB microscopy
-                                                                            result
-                                                                        </strong></label>
+                                                                    <label class="form-label"><strong>8(c). AFB microscopy result</strong></label>
                                                                     <div class="row-form clearfix">
                                                                         <div class="form-group">
                                                                             <?php foreach ($override->get('afb_results', 'status', 1) as $value) { ?>
                                                                                 <div class="form-check">
-                                                                                    <input class="form-check-input" type="radio"
-                                                                                        name="afb_b_results"
-                                                                                        id="afb_results_b<?= $value['id']; ?>"
-                                                                                        value="<?= $value['id']; ?>" <?php if ($costing['afb_b_results'] == $value['id']) {
-                                                                                              echo 'checked';
-                                                                                          } ?>>
-                                                                                    <label
-                                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                                    <input class="form-check-input" type="radio" name="afb_b_results" id="afb_results_b<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?php if ($costing['afb_b_results'] == $value['id']) { echo 'checked'; } ?>>
+                                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
                                                                                 </div>
                                                                             <?php } ?>
                                                                         </div>
                                                                     </div>
-                                                                    <button type="button"
-                                                                        onclick="unsetRadio('afb_b_results')">Unset</button>
+                                                                    <button type="button" onclick="unsetRadio('afb_b_results')">Unset</button>
                                                                 </div>
                                                             </div>
                                                             <hr>

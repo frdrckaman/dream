@@ -8,6 +8,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const errorCodeFormat = document.getElementById("error_code_format");
     const xpertMtbRadios = document.querySelectorAll("input[name='xpert_mtb']");
     const xpertRifOptions = document.querySelectorAll("#xpert_rif option");
+    const afbADateInput = document.getElementById("afb_a_date");
+    const afbBDateInput = document.getElementById("afb_b_date");
+    const enrollmentDateHiddenInput = document.getElementById("enrollment_date_hidden");
+    const afbADateError = document.getElementById("afb_a_date_error");
+    const afbBDateError = document.getElementById("afb_b_date_error");
 
     // Sections
     const sampleReceivedSection = document.getElementById("sample_received_section");
@@ -129,6 +134,37 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function validateAfbDates(event) {
+        const enrollmentDate = new Date(enrollmentDateHiddenInput.value);
+        const today = new Date();
+        let isValid = true;
+
+        const afbADate = new Date(afbADateInput.value);
+        if (afbADate < enrollmentDate) {
+            afbADateError.textContent = `AFB A date must be greater than or equal to the enrollment date (${enrollmentDateHiddenInput.value}).`;
+            isValid = false;
+        } else if (afbADate > today) {
+            afbADateError.textContent = "AFB A date cannot be in the future.";
+            isValid = false;
+        } else {
+            afbADateError.textContent = "";
+        }
+
+        const afbBDate = new Date(afbBDateInput.value);
+        if (afbBDate < enrollmentDate) {
+            afbBDateError.textContent = `AFB B date must be greater than or equal to the enrollment date (${enrollmentDateHiddenInput.value}).`;
+            isValid = false;
+        } else if (afbBDate > today) {
+            afbBDateError.textContent = "AFB B date cannot be in the future.";
+            isValid = false;
+        } else {
+            afbBDateError.textContent = "";
+        }
+
+        if (!isValid) {
+            event.preventDefault(); // Prevent form submission if there are errors
+        }
+    }
 
     function getCheckedValue(radioNodeList) {
         return Array.from(radioNodeList).find(radio => radio.checked)?.value;
@@ -141,6 +177,8 @@ document.addEventListener("DOMContentLoaded", function () {
     afbMicroscopyRadios.forEach(radio => radio.addEventListener("change", toggleAfbMicroscopySection));
     xpertMtbRifRadios.forEach(radio => radio.addEventListener("change", toggleXpertMtbRifSection));
     xpertMtbRadios.forEach(radio => radio.addEventListener("change", toggleErrorCodeSection));
+
+    document.getElementById("labForm_clinic").addEventListener("submit", validateAfbDates);
 
     toggleSampleSections();
     toggleOtherNewReasonSection();
