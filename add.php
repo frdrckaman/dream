@@ -1562,21 +1562,21 @@ if ($user->isLoggedIn()) {
                 $verified_by = "";
 
                 if (
-                    (Input::get('form_status') == 1)
+                    (Input::get('diagnosis_status') == 1)
                 ) {
                     $date_completed = "";
                     $completed_by = "";
                     $date_verified = "";
                     $verified_by = "";
-                } elseif (Input::get('form_status') == 2) {
+                } elseif (Input::get('diagnosis_status') == 2) {
                     $date_completed = Input::get('date_completed');
                     $completed_by = $user->data()->id;
                     $date_verified = "";
                     $verified_by = "";
-                } elseif (Input::get('form_status') == 3) {
-                    $date_completed = $screening['date_completed'];
-                    $completed_by = $screening['completed_by'];
-                    $date_verified = Input::get('date_completed');
+                } elseif (Input::get('diagnosis_status') == 3) {
+                    $date_completed = $costing[0]['date_completed'];
+                    $completed_by = $costing[0]['completed_by'];
+                    $date_verified = Input::get('date_verified');
                     $verified_by = $user->data()->id;
                 }
 
@@ -1625,7 +1625,7 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
                             'remarks' => Input::get('remarks'),
-                            'form_status' => Input::get('form_status'),
+                            'form_status' => Input::get('diagnosis_status'),
                             'date_completed' => $date_completed,
                             'completed_by' => $completed_by,
                             'date_verified' => $date_verified,
@@ -1675,7 +1675,7 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
                             'remarks' => Input::get('remarks'),
-                            'form_status' => Input::get('form_status'),
+                            'form_status' => Input::get('diagnosis_status'),
                             'date_completed' => $date_completed,
                             'completed_by' => $completed_by,
                             'date_verified' => $date_verified,
@@ -1729,7 +1729,7 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
                             'remarks' => Input::get('remarks'),
-                            'form_status' => Input::get('form_status'),
+                            'form_status' => Input::get('diagnosis_status'),
                             'date_completed' => $date_completed,
                             'completed_by' => $completed_by,
                             'date_verified' => $date_verified,
@@ -1785,7 +1785,7 @@ if ($user->isLoggedIn()) {
                             'laboratory_test_used2' => $laboratory_test_used2,
                             'laboratory_test_used_date' => Input::get('laboratory_test_used_date'),
                             'remarks' => Input::get('remarks'),
-                            'form_status' => Input::get('form_status'),
+                            'form_status' => Input::get('diagnosis_status'),
                             'date_completed' => $date_completed,
                             'completed_by' => $completed_by,
                             'date_verified' => $date_verified,
@@ -8432,18 +8432,13 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="form_status" id="diagnosis_status"
-                                                                        value="<?= $value['id']; ?>"
-                                                                        <?= ($costing['form_status'] == $value['id']) ? 'checked' : ''; ?> required>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                    <input class="form-check-input" type="radio" name="diagnosis_status" id="diagnosis_status_<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?= ($costing['form_status'] == $value['id']) ? 'checked' : ''; ?> required>
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                             <span id="diagnosis_status_error" class="text-danger"></span>
                                                         </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('form_status')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('diagnosis_status')">Unset</button>
                                                     </div>
                                                 </div>
 
@@ -8451,22 +8446,14 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Completed Date</label>
-                                                            <input class="form-control" type="date" name="date_completed"
-                                                                id="diagnosis_date_completed"
-                                                                name="diagnosis_date_completed"
-                                                                value="<?= ($costing['date_completed']) ? $costing['date_completed'] : ''; ?>" />
+                                                            <input class="form-control" type="date" name="date_completed" id="diagnosis_date_completed" value="<?= ($costing['date_completed']) ? $costing['date_completed'] : ''; ?>" />
                                                             <span id="date_completed_error" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Completed By</label>
-                                                            <input class="form-control" type="text"
-                                                                id="diagnosis_date_completed_by"
-                                                                value="<?= $override->get('user', 'id', $costing['completed_by'])[0]['username']; ?>"
-                                                                readonly />
-                                                            <span id="diagnosis_date_completed_by_error"
-                                                                class="text-danger"></span>
+                                                            <input class="form-control" type="text" id="diagnosis_date_completed_by" value="<?= $override->get('user', 'id', $costing['completed_by'])[0]['username']; ?>" readonly />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -8475,22 +8462,16 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Verified Date</label>
-                                                            <input class="form-control" type="date" name="date_verified"
-                                                                id="diagnosis_date_verified"
-                                                                value="<?= ($costing['date_verified']) ? $costing['date_verified'] : ''; ?>" />
+                                                            <input class="form-control" type="date" name="date_verified" id="diagnosis_date_verified" value="<?= ($costing['date_verified']) ? $costing['date_verified'] : ''; ?>" />
                                                             <span id="date_verified_error" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Verified By</label>
-                                                            <input class="form-control" type="text"
-                                                                id="diagnosis_date_verified_by"
-                                                                name="diagnosis_date_verified_by"
-                                                                value="<?= $override->get('user', 'id', $costing['verified_by'])[0]['username']; ?>"
-                                                                readonly />
-                                                            <span id="diagnosis_date_verified_by_error"
-                                                                class="text-danger"></span>
+                                                            <input class="form-control" type="hidden" id="diagnosis_date_verified_by" value="<?= $user->data()->username; ?>" readonly />
+                                                            <input class="form-control" type="text" name="diagnosis_date_verified_by" value="<?= $override->get('user', 'id', $costing['verified_by'])[0]['username']; ?>" readonly />
+                                                            <span id="diagnosis_date_verified_by_error" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                 </div>
