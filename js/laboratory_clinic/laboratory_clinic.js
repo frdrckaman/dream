@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const dateSample1ReceivedError = document.getElementById("date_sample1_received_error");
     const dateSample2CollectedError = document.getElementById("date_sample2_collected_error");
     const dateSample2ReceivedError = document.getElementById("date_sample2_received_error");
+    const xpertDateInput = document.getElementById("xpert_date");
+    const xpertDateError = document.getElementById("xpert_date_error");
 
     // Sections
     const sampleReceivedSection = document.getElementById("sample_received_section");
@@ -144,27 +146,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function validateAfbDates(event) {
-        const enrollmentDate = new Date(enrollmentDateHiddenInput.value);
+        const afbMicroscopyValue = getCheckedValue(afbMicroscopyRadios);
+        if (afbMicroscopyValue !== "1") {
+            return;
+        }
+
+        const screeningDate = new Date(screeningDateClinicInput.value);
+        const threeDaysBeforeScreening = new Date(screeningDate);
+        threeDaysBeforeScreening.setDate(screeningDate.getDate() - 3);
         const today = new Date();
         let isValid = true;
 
         const afbADate = new Date(afbADateInput.value);
-        if (afbADate < enrollmentDate) {
-            afbADateError.textContent = `AFB A date must be greater than or equal to the enrollment date (${enrollmentDateHiddenInput.value}).`;
-            isValid = false;
-        } else if (afbADate > today) {
-            afbADateError.textContent = "AFB A date cannot be in the future.";
+        if (afbADate < threeDaysBeforeScreening || afbADate > screeningDate || afbADate > today) {
+            afbADateError.textContent = `AFB A date must be within 3 days from the screening date (${screeningDateClinicInput.value}), not after the screening date, and not in the future.`;
             isValid = false;
         } else {
             afbADateError.textContent = "";
         }
 
         const afbBDate = new Date(afbBDateInput.value);
-        if (afbBDate < enrollmentDate) {
-            afbBDateError.textContent = `AFB B date must be greater than or equal to the enrollment date (${enrollmentDateHiddenInput.value}).`;
-            isValid = false;
-        } else if (afbBDate > today) {
-            afbBDateError.textContent = "AFB B date cannot be in the future.";
+        if (afbBDate < threeDaysBeforeScreening || afbBDate > screeningDate || afbBDate > today) {
+            afbBDateError.textContent = `AFB B date must be within 3 days from the screening date (${screeningDateClinicInput.value}), not after the screening date, and not in the future.`;
             isValid = false;
         } else {
             afbBDateError.textContent = "";
@@ -177,22 +180,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validateSampleDates(event) {
         const screeningDate = new Date(screeningDateClinicInput.value);
+        const threeDaysBeforeScreening = new Date(screeningDate);
+        threeDaysBeforeScreening.setDate(screeningDate.getDate() - 3);
         const today = new Date();
         let isValid = true;
 
         const numberReceivedValue = getCheckedValue(numberReceivedRadios);
 
         const dateSample1Collected = new Date(dateSample1CollectedInput.value);
-        if (dateSample1Collected < screeningDate || dateSample1Collected > today) {
-            dateSample1CollectedError.textContent = `Sample 1 collected date must be within 3 days from the screening date (${screeningDateClinicInput.value}) and not in the future.`;
+        if (dateSample1Collected < threeDaysBeforeScreening || dateSample1Collected > screeningDate || dateSample1Collected > today) {
+            dateSample1CollectedError.textContent = `Sample 1 collected date must be within 3 days from the screening date (${screeningDateClinicInput.value}), not after the screening date, and not in the future.`;
             isValid = false;
         } else {
             dateSample1CollectedError.textContent = "";
         }
 
         const dateSample1Received = new Date(dateSample1ReceivedInput.value);
-        if (dateSample1Received < dateSample1Collected || dateSample1Received > today) {
-            dateSample1ReceivedError.textContent = `Sample 1 received date must be greater than or equal to the collected date (${dateSample1CollectedInput.value}) and not in the future.`;
+        if (dateSample1Received < dateSample1Collected || dateSample1Received > screeningDate || dateSample1Received > today) {
+            dateSample1ReceivedError.textContent = `Sample 1 received date must be greater than or equal to the collected date (${dateSample1CollectedInput.value}), not after the screening date, and not in the future.`;
             isValid = false;
         } else {
             dateSample1ReceivedError.textContent = "";
@@ -200,20 +205,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (numberReceivedValue === "2") {
             const dateSample2Collected = new Date(dateSample2CollectedInput.value);
-            if (dateSample2Collected < screeningDate || dateSample2Collected > today) {
-                dateSample2CollectedError.textContent = `Sample 2 collected date must be within 3 days from the screening date (${screeningDateClinicInput.value}) and not in the future.`;
+            if (dateSample2Collected < threeDaysBeforeScreening || dateSample2Collected > screeningDate || dateSample2Collected > today) {
+                dateSample2CollectedError.textContent = `Sample 2 collected date must be within 3 days from the screening date (${screeningDateClinicInput.value}), not after the screening date, and not in the future.`;
                 isValid = false;
             } else {
                 dateSample2CollectedError.textContent = "";
             }
 
             const dateSample2Received = new Date(dateSample2ReceivedInput.value);
-            if (dateSample2Received < dateSample2Collected || dateSample2Received > today) {
-                dateSample2ReceivedError.textContent = `Sample 2 received date must be greater than or equal to the collected date (${dateSample2CollectedInput.value}) and not in the future.`;
+            if (dateSample2Received < dateSample2Collected || dateSample2Received > screeningDate || dateSample2Received > today) {
+                dateSample2ReceivedError.textContent = `Sample 2 received date must be greater than or equal to the collected date (${dateSample2CollectedInput.value}), not after the screening date, and not in the future.`;
                 isValid = false;
             } else {
                 dateSample2ReceivedError.textContent = "";
             }
+        }
+
+        if (!isValid) {
+            event.preventDefault(); // Prevent form submission if there are errors
+        }
+    }
+
+    function validateXpertDate(event) {
+        const xpertMtbRifValue = getCheckedValue(xpertMtbRifRadios);
+        if (xpertMtbRifValue !== "1") {
+            return;
+        }
+
+        const screeningDate = new Date(screeningDateClinicInput.value);
+        const threeDaysBeforeScreening = new Date(screeningDate);
+        threeDaysBeforeScreening.setDate(screeningDate.getDate() - 3);
+        const today = new Date();
+        let isValid = true;
+
+        const xpertDate = new Date(xpertDateInput.value);
+        if (xpertDate < threeDaysBeforeScreening || xpertDate > screeningDate || xpertDate > today) {
+            xpertDateError.textContent = `Xpert date must be within 3 days from the screening date (${screeningDateClinicInput.value}), not after the screening date, and not in the future.`;
+            isValid = false;
+        } else {
+            xpertDateError.textContent = "";
         }
 
         if (!isValid) {
@@ -236,6 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("labForm_clinic").addEventListener("submit", function (event) {
         validateAfbDates(event);
         validateSampleDates(event);
+        validateXpertDate(event);
     });
 
     toggleSampleSections();
