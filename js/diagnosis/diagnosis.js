@@ -146,51 +146,53 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleTbTreatmentSections();
     toggleTableSection();
 
-    const diagnosisStatusRadios = document.querySelectorAll('input[name="form_status"]');
+    const diagnosisStatusRadios = document.querySelectorAll('input[name="diagnosis_status"]');
     const diagnosisDateCompletedInput = document.getElementById("diagnosis_date_completed");
     const diagnosisDateVerifiedInput = document.getElementById("diagnosis_date_verified");
-    const enrollmentDateDiagnosisInput = document.getElementById("enrollment_date_diagnosis");
+    const diagnosisDateCompletedByInput = document.getElementById("diagnosis_date_completed_by");
+    const diagnosisDateVerifiedByInput = document.getElementById("diagnosis_date_verified_by");
+    const enrollmentDateDiagnosisInput = document.querySelector('input[name="enrollment_date_diagnosis"]');
     const dateCompletedError = document.getElementById("date_completed_error");
     const dateVerifiedError = document.getElementById("date_verified_error");
+    const diagnosisStatusError = document.getElementById("diagnosis_status_error");
 
-    function updateFormStatus() {
-        const selectedStatus = document.querySelector('input[name="form_status"]:checked')?.value;
-        const enrollmentDateDiagnosis = new Date(enrollmentDateDiagnosisInput.value);
-        const today = new Date();
+    function updateDiagnosisFormStatus() {
+        const selectedStatus = document.querySelector('input[name="diagnosis_status"]:checked')?.value;
 
         if (selectedStatus === "1") {
             diagnosisDateCompletedInput.value = "";
             diagnosisDateVerifiedInput.value = "";
             diagnosisDateCompletedInput.required = false;
             diagnosisDateVerifiedInput.required = false;
-            diagnosisDateCompletedInput.parentElement.style.display = "none";
-            diagnosisDateVerifiedInput.parentElement.style.display = "none";
+            document.getElementById("diagnosis_date_completed_status").style.display = "none";
+            document.getElementById("diagnosis_date_verified_status").style.display = "none";
         } else if (selectedStatus === "2") {
             diagnosisDateCompletedInput.required = true;
             diagnosisDateVerifiedInput.value = "";
             diagnosisDateVerifiedInput.required = false;
-            diagnosisDateCompletedInput.parentElement.style.display = "block";
-            diagnosisDateVerifiedInput.parentElement.style.display = "none";
+            document.getElementById("diagnosis_date_completed_status").style.display = "block";
+            document.getElementById("diagnosis_date_verified_status").style.display = "none";
         } else if (selectedStatus === "3") {
             diagnosisDateCompletedInput.required = true;
             diagnosisDateVerifiedInput.required = true;
-            diagnosisDateCompletedInput.parentElement.style.display = "block";
-            diagnosisDateVerifiedInput.parentElement.style.display = "block";
+            document.getElementById("diagnosis_date_completed_status").style.display = "block";
+            document.getElementById("diagnosis_date_verified_status").style.display = "block";
+            diagnosisStatusError.textContent = "";
         } else {
             diagnosisDateCompletedInput.required = false;
             diagnosisDateVerifiedInput.required = false;
-            diagnosisDateCompletedInput.parentElement.style.display = "none";
-            diagnosisDateVerifiedInput.parentElement.style.display = "none";
+            document.getElementById("diagnosis_date_completed_status").style.display = "none";
+            document.getElementById("diagnosis_date_verified_status").style.display = "none";
         }
     }
 
     function validateDates(event) {
-        const selectedStatus = document.querySelector('input[name="form_status"]:checked')?.value;
+        const selectedStatus = document.querySelector('input[name="diagnosis_status"]:checked')?.value;
         const enrollmentDateDiagnosis = new Date(enrollmentDateDiagnosisInput.value);
         const today = new Date();
         let isValid = true;
 
-        if (selectedStatus === "2" || selectedStatus === "3") {
+        if (selectedStatus === "2") {
             const diagnosisDateCompleted = new Date(diagnosisDateCompletedInput.value);
             if (diagnosisDateCompleted < enrollmentDateDiagnosis) {
                 dateCompletedError.textContent = `Completed date must be greater than or equal to the enrollment date (${enrollmentDateDiagnosisInput.value}).`;
@@ -206,7 +208,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (selectedStatus === "3") {
             const diagnosisDateCompleted = new Date(diagnosisDateCompletedInput.value);
             const diagnosisDateVerified = new Date(diagnosisDateVerifiedInput.value);
-            if (diagnosisDateVerified < diagnosisDateCompleted) {
+            if (diagnosisDateCompleted < enrollmentDateDiagnosis) {
+                dateCompletedError.textContent = `Completed date must be greater than or equal to the enrollment date (${enrollmentDateDiagnosisInput.value}).`;
+                isValid = false;
+            } else if (diagnosisDateVerified < diagnosisDateCompleted) {
                 dateVerifiedError.textContent = "Verified date must be greater than or equal to the completed date.";
                 isValid = false;
             } else if (diagnosisDateVerified > today) {
@@ -215,6 +220,13 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 dateVerifiedError.textContent = "";
             }
+
+            if (diagnosisDateCompletedByInput.value === diagnosisDateVerifiedByInput.value) {
+                diagnosisStatusError.textContent = "Completed by and Verified by cannot be the same person.";
+                isValid = false;
+            } else {
+                diagnosisStatusError.textContent = "";
+            }
         }
 
         if (!isValid) {
@@ -222,9 +234,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    diagnosisStatusRadios.forEach(radio => radio.addEventListener("change", updateFormStatus));
+    diagnosisStatusRadios.forEach(radio => radio.addEventListener("change", updateDiagnosisFormStatus));
     document.getElementById("Final_Diagnosis").addEventListener("submit", validateDates);
 
     // Initialize section visibility on page load
-    updateFormStatus();
+    updateDiagnosisFormStatus();
 });
