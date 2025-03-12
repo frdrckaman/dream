@@ -4874,17 +4874,12 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <?php foreach ($override->get('form_completness', 'status', 1) as $value) { ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="clinic_status" id="form_status<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>"
-                                                                        <?= ($costing['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                    <input class="form-check-input" type="radio" name="clinic_status" id="form_status<?= $value['id']; ?>" value="<?= $value['id']; ?>" <?= ($costing['form_status'] == $value['id']) ? 'checked' : ''; ?> required onchange="updateFormStatus()">
+                                                                    <label class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                        <button type="button"
-                                                            onclick="unsetRadio('form_status')">Unset</button>
+                                                        <button type="button" onclick="unsetRadio('form_status')">Unset</button>
                                                     </div>
                                                 </div>
 
@@ -4892,21 +4887,16 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Completed Date</label>
-                                                            <input class="form-control" type="date" name="clinic_date_completed"
-                                                                id="clinic_date_completed"
-                                                                value="<?= ($costing['clinic_date_completed']) ? $costing['clinic_date_completed'] : ''; ?>" />
+                                                            <input class="form-control" type="date" name="clinic_date_completed" id="clinic_date_completed" value="<?= ($costing['clinic_date_completed']) ? $costing['clinic_date_completed'] : ''; ?>" />
                                                             <span id="clinic_date_completed_error" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <?php if ($costing['form_status'] >= 2) { ?>
-
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <label>Completed By</label>
-                                                                <input class="form-control" type="text" id="clinic_date_completed_by"
-                                                                    value="<?= $override->get('user', 'id', $costing['completed_by'])[0]['username']; ?>"
-                                                                    readonly />
-                                                                                                                                <span id="clinic_date_completed_by_error" class="text-danger"></span>
+                                                                <input class="form-control" type="text" id="clinic_date_completed_by" value="<?= $override->get('user', 'id', $costing['completed_by'])[0]['username']; ?>" readonly />
+                                                                <span id="clinic_date_completed_by_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                     <?php } ?>
@@ -4916,9 +4906,7 @@ if ($user->isLoggedIn()) {
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
                                                             <label>Verified Date</label>
-                                                            <input class="form-control" type="date" name="clinic_date_verified"
-                                                                id="clinic_date_verified"
-                                                                value="<?= ($costing['clinic_date_verified']) ? $costing['clinic_date_verified'] : ''; ?>" />
+                                                            <input class="form-control" type="date" name="clinic_date_verified" id="clinic_date_verified" value="<?= ($costing['clinic_date_verified']) ? $costing['clinic_date_verified'] : ''; ?>" />
                                                             <span id="clinic_date_verified_error" class="text-danger"></span>
                                                         </div>
                                                     </div>
@@ -4926,13 +4914,9 @@ if ($user->isLoggedIn()) {
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <label>Verified By</label>
-                                                                 <input type="hidded" id="clinic_date_verified_by"
-                                                                    value="<?= $user->data()->username; ?>"
-                                                                    />
-                                                                <input class="form-control" type="text"
-                                                                    value="<?= $override->get('user', 'id', $costing['verified_by'])[0]['username']; ?>"
-                                                                    readonly />
-                                                                                                                                                                                                    <span id="clinic_date_verified_by_error" class="text-danger"></span>
+                                                                <input type="hidden" id="clinic_date_verified_by" value="<?= $user->data()->username; ?>" />
+                                                                <input class="form-control" type="text" value="<?= $override->get('user', 'id', $costing['verified_by'])[0]['username']; ?>" readonly />
+                                                                <span id="clinic_date_verified_by_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                     <?php } ?>
