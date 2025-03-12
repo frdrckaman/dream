@@ -15,9 +15,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const afbBDateError = document.getElementById("afb_b_date_error");
     const dateSample1CollectedInput = document.getElementById("date_sample1_collected");
     const dateSample1ReceivedInput = document.getElementById("date_sample1_received");
+    const dateSample2CollectedInput = document.getElementById("date_sample2_collected");
+    const dateSample2ReceivedInput = document.getElementById("date_sample2_received");
     const screeningDateClinicInput = document.getElementById("screening_date_clinic");
     const dateSample1CollectedError = document.getElementById("date_sample1_collected_error");
     const dateSample1ReceivedError = document.getElementById("date_sample1_received_error");
+    const dateSample2CollectedError = document.getElementById("date_sample2_collected_error");
+    const dateSample2ReceivedError = document.getElementById("date_sample2_received_error");
 
     // Sections
     const sampleReceivedSection = document.getElementById("sample_received_section");
@@ -190,6 +194,22 @@ document.addEventListener("DOMContentLoaded", function () {
             isValid = false;
         } else {
             dateSample1ReceivedError.textContent = "";
+        }
+
+        const dateSample2Collected = new Date(dateSample2CollectedInput.value);
+        if (dateSample2Collected < screeningDate || dateSample2Collected > today) {
+            dateSample2CollectedError.textContent = `Sample 2 collected date must be within 3 days from the screening date (${screeningDateClinicInput.value}) and not in the future.`;
+            isValid = false;
+        } else {
+            dateSample2CollectedError.textContent = "";
+        }
+
+        const dateSample2Received = new Date(dateSample2ReceivedInput.value);
+        if (dateSample2Received < dateSample2Collected || dateSample2Received > today) {
+            dateSample2ReceivedError.textContent = `Sample 2 received date must be greater than or equal to the collected date (${dateSample2CollectedInput.value}) and not in the future.`;
+            isValid = false;
+        } else {
+            dateSample2ReceivedError.textContent = "";
         }
 
         if (!isValid) {
