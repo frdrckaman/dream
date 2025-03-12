@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const dateSample2ReceivedError = document.getElementById("date_sample2_received_error");
     const xpertDateInput = document.getElementById("xpert_date");
     const xpertDateError = document.getElementById("xpert_date_error");
+    const errorCodeInput = document.getElementById("error_code");
 
     // Sections
     const sampleReceivedSection = document.getElementById("sample_received_section");
@@ -114,8 +115,16 @@ document.addEventListener("DOMContentLoaded", function () {
     function toggleErrorCodeSection() {
         let xpertMtbValue = getCheckedValue(xpertMtbRadios);
 
-        errorCodeSection.style.display = xpertMtbValue === "8" ? "block" : "none";
-        errorCodeFormat.style.display = xpertMtbValue === "8" ? "block" : "none";
+        if (xpertMtbValue === "11") {
+            errorCodeSection.style.display = "block";
+            errorCodeFormat.style.display = "block";
+            errorCodeInput.setAttribute("required", "required");
+        } else {
+            errorCodeSection.style.display = "none";
+            errorCodeFormat.style.display = "none";
+            errorCodeInput.removeAttribute("required");
+        }
+
         xpertRifSection.style.display = ["2", "3", "4", "5", "6"].includes(xpertMtbValue) ? "block" : "none";
 
         filterXpertRifOptions(xpertMtbValue);
