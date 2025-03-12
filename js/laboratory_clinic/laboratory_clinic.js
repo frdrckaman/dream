@@ -276,6 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
         validateAfbDates(event);
         validateSampleDates(event);
         validateXpertDate(event);
+        validateFormStatusDates(event);
     });
 
     toggleSampleSections();
@@ -287,4 +288,76 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleAfbMicroscopySection();
     toggleXpertMtbRifSection();
     toggleErrorCodeSection();
+    updateFormStatus();
+});
+
+function updateFormStatus() {
+    let clinicStatusValue = getCheckedValue(clinicStatusRadios);
+
+    if (clinicStatusValue === "1") {
+        clinicDateCompletedSection.style.display = "none";
+        clinicDateVerifiedSection.style.display = "none";
+        clinicDateCompletedInput.removeAttribute("required");
+        clinicDateVerifiedInput.removeAttribute("required");
+    } else if (clinicStatusValue === "2") {
+        clinicDateCompletedSection.style.display = "block";
+        clinicDateVerifiedSection.style.display = "none";
+        clinicDateCompletedInput.setAttribute("required", "required");
+        clinicDateVerifiedInput.removeAttribute("required");
+    } else if (clinicStatusValue === "3") {
+        clinicDateCompletedSection.style.display = "block";
+        clinicDateVerifiedSection.style.display = "block";
+        clinicDateCompletedInput.setAttribute("required", "required");
+        clinicDateVerifiedInput.setAttribute("required", "required");
+    }
+}
+
+function validateFormStatusDates(event) {
+    let clinicStatusValue = getCheckedValue(clinicStatusRadios);
+    const screeningDate = new Date(screeningDateClinicInput.value);
+    const today = new Date();
+    let isValid = true;
+
+    if (clinicStatusValue === "2" || clinicStatusValue === "3") {
+        const clinicDateCompleted = new Date(clinicDateCompletedInput.value);
+        if (clinicDateCompleted < screeningDate || clinicDateCompleted > today) {
+            clinicDateCompletedError.textContent = `Completed date must be greater than or equal to the screening date (${screeningDateClinicInput.value}) and not in the future.`;
+            isValid = false;
+        } else {
+            clinicDateCompletedError.textContent = "";
+        }
+
+        if (clinicStatusValue === "3") {
+            const clinicDateVerified = new Date(clinicDateVerifiedInput.value);
+            if (clinicDateVerified < clinicDateCompleted || clinicDateVerified > today) {
+                clinicDateVerifiedError.textContent = `Verified date must be greater than or equal to the completed date (${clinicDateCompletedInput.value}) and not in the future.`;
+                isValid = false;
+            } else {
+                clinicDateVerifiedError.textContent = "";
+            }
+        }
+    }
+
+    if (!isValid) {
+        event.preventDefault(); // Prevent form submission if there are errors
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const clinicStatusRadios = document.querySelectorAll("input[name='clinic_status']");
+    const clinicDateCompletedSection = document.getElementById("clinic_date_completed_section");
+    const clinicDateVerifiedSection = document.getElementById("clinic_date_verified_section");
+    const clinicDateCompletedInput = document.getElementById("clinic_date_completed");
+    const clinicDateVerifiedInput = document.getElementById("clinic_date_verified");
+    const clinicDateCompletedError = document.getElementById("clinic_date_completed_error");
+    const clinicDateVerifiedError = document.getElementById("clinic_date_verified_error");
+    const screeningDateClinicInput = document.getElementById("screening_date_clinic");
+
+    clinicStatusRadios.forEach(radio => radio.addEventListener("change", updateFormStatus));
+
+    document.getElementById("labForm_clinic").addEventListener("submit", function (event) {
+        validateFormStatusDates(event);
+    });
+
+    updateFormStatus(); // Initial call to set the correct visibility based on the current status
 });

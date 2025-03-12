@@ -4926,9 +4926,9 @@ if ($user->isLoggedIn()) {
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
                                                                 <label>Verified By</label>
-                                                                 <input class="form-control" type="hidded" id="clinic_date_verified_by"
-                                                                    value="<?= $user->data('user', 'id', $costing['verified_by'])[0]['username']; ?>"
-                                                                    readonly />
+                                                                 <input type="hidded" id="clinic_date_verified_by"
+                                                                    value="<?= $user->data()->username; ?>"
+                                                                    />
                                                                 <input class="form-control" type="text"
                                                                     value="<?= $override->get('user', 'id', $costing['verified_by'])[0]['username']; ?>"
                                                                     readonly />
