@@ -553,13 +553,22 @@ if ($user->isLoggedIn()) {
                                 <p>Summary</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="report.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <!-- <span class="badge badge-info right"> -->
+                                <!-- <?= $all; ?> -->
+                                <!-- </span> -->
+                                <p>Full Report</p>
+                            </a>
+                        </li>
                          <li class="nav-item">
                             <a href="summary_dar_zone.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <!-- <span class="badge badge-info right"> -->
                                 <!-- <?= $all; ?> -->
                                 <!-- </span> -->
-                                <p>Dar Zone Summary</p>
+                                <p>Zone Summary</p>
                             </a>
                         </li>
                     </ul>

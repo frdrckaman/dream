@@ -318,7 +318,7 @@ class OverideData
 
     public function getSumD1($table, $variable, $field, $value)
     {
-        $query = $this->_pdo->query("SELECT SUM($variable) FROM $table WHERE $field = '$value' ");
+        $query = $this->_pdo->query("SELECT SUM($variable) FROM $table WHERE $field = '$value'");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
