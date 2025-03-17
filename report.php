@@ -13,7 +13,8 @@ if ($user->isLoggedIn()) {
         $eligible = $override->getCount1('screening', 'status', 1, 'eligible', 1);
         $enrollment = $override->getCount('enrollment_form', 'status', 1);
         $Total_Sample_collected = $override->getSumD1('respiratory','number_received', 'status', 1);
-        $Total_Sample_received = $override->getCount('diagnosis_test', 'status', 1);
+        $Total_Sample_received = $override->getSumD1('respiratory','number_received', 'status', 1);
+        // $Total_Sample_received = $override->getCount('diagnosis_test', 'status', 1);
 
         $successMessage = 'Report Successfully Created';
     } catch (Exception $e) {
@@ -85,14 +86,14 @@ if ($site_data) {
     </table>
     </td>
     </tr>
-     <tr>
+     <tr></b></b></b></b>
             <td colspan="6" align="center" style="font-size: 18px">
-                <b> Samples Summary </b>
+               </b></b></b></b></b> <b> Samples Summary </b></b></b></b></b></b>
             </td>
-        </tr>
+        </tr></b></b></b></b>
      <tr>
             <td colspan="6" align="center" style="font-size: 18px">
-                <b>Total Samples Collected (' . $Total_Sample_collected . '): Total Samples Received  (' . $Total_Sample_received . ')</b>
+                <b>Total Samples Collected (' . $Total_Sample_collected[0]['SUM(number_received)'] . '): Total Samples Received  (' . $Total_Sample_received[0]['SUM(number_received)'] . ')</b>
             </td>
         </tr>
     </table>';
