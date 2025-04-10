@@ -34,17 +34,18 @@ if ($user->isLoggedIn()) {
       $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
       $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id']);
       $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
-      $completed = $override->countData1('diagnosis', 'status', 1, 'outcome2', 1, 'facility_id', $_GET['facility_id']);
+      $completed = $override->countData1('diagnosis', 'status', 1, 'tb_outcome2', 1, 'facility_id', $_GET['facility_id']);
     } else {
       $screening = $override->getCount('screening', 'status', 1);
-      $eligible = $override->getCount1('screening', 'status', 1, 'eligible', 1);
+      $eligible = $override->countData('screening', 'status', 1, 'eligible', 1);
       $enrolled = $override->getCount('enrollment_form', 'status', 1);
-      $completed = $override->countData('diagnosis', 'status', 1, 'facility_id', $_GET['facility_id']);
+      // $completed = $override->countData('diagnosis', 'status', 1, 'tb_outcome2', 1);
     }
   } else {
     $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
     $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
     $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
+    // $completed = $override->countData1('diagnosis', 'status', 1, 'tb_outcome2', 1, 'facility_id', $user->data()->site_id);
   }
 } else {
   Redirect::to('index.php');
@@ -124,7 +125,7 @@ if ($user->isLoggedIn()) {
 
               <?php
               if ($user->data()->accessLevel == 1) {
-                ?>
+              ?>
                 <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
                   <div class="row">
                     <div class="col-sm-6">
@@ -173,7 +174,7 @@ if ($user->isLoggedIn()) {
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-                <h3><?= $screened ?></h3>
+                <h3><?= $screening ?></h3>
 
                 <p>Screening</p>
               </div>
@@ -221,7 +222,7 @@ if ($user->isLoggedIn()) {
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>0</h3>
+                <h3><?= $completed ?></h3>
 
                 <p>Completed</p>
               </div>

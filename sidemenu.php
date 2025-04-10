@@ -41,11 +41,10 @@ if ($user->isLoggedIn()) {
     if ($user->data()->accessLevel == 1) {
         // if (!Input::get('facility_id')) {
         $all = $override->getNo('screening');
-        $screened = $override->getCount('screening', 'status', 1);
-        $eligible = $override->getCount1('screening', 'status', 1, 'eligible', 1);
+        $screening = $override->getCount('screening', 'status', 1);
+        $eligible = $override->countData('screening', 'status', 1, 'eligible', 1);
         $enrolled = $override->getCount('enrollment_form', 'status', 1);
-        // $end = $override->getCount('termination', 'status', 1);
-        $deleted = $override->getCount('screening', 'status', 0);
+        // $completed = $override->countData('diagnosis', 'status', 1, 'tb_outcome2', 1);
 
         // $Incompletes = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
         // $Incompletes_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
@@ -108,11 +107,10 @@ if ($user->isLoggedIn()) {
         // }
     } else {
         $all = $override->getCount('screening', 'facility_id', $user->data()->site_id);
-        $screened = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
+        $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
         $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);
         $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
-        // $end = $override->countData('termination', 'status', 1, 'facility_id', $user->data()->site_id);
-        $deleted = $override->countData('screening', 'status', 0, 'facility_id', $user->data()->site_id);
+        // $completed = $override->countData1('diagnosis', 'status', 1, 'tb_outcome2', 1, 'facility_id', $user->data()->site_id);
 
         // $Incompletes_Screened = $override->countData1('screening', 'status', 1, 'form_status', 1, 'facility_id', $_GET['facility_id']);
         // $Incompletes_Enrollment = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
@@ -214,7 +212,7 @@ if ($user->isLoggedIn()) {
                         </li> -->
                     </ul>
                 </li>
-                <?php if ($user->data()->power == 1) {
+                <?php if ($user->data()->power == 1 || $user->data()->position == 1) {
                     ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -437,7 +435,7 @@ if ($user->isLoggedIn()) {
                                         <a href="#" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <!-- <span class="badge badge-info right"> -->
-                                            <!-- <?= $override->countData2($table_name['Tables_in_dream'], 'status', 1, 'form_status', $form_status['id'], 'facility_id', $user->data()->site_id); ?> -->
+                                            <!-- <?= $override->countData1($table_name['Tables_in_dream'], 'status', 1, 'form_status', $form_status['id'], 'facility_id', $user->data()->site_id); ?> -->
                                             <!-- </span> -->
                                             <p><?= $table; ?></p>
                                         </a>
@@ -553,26 +551,32 @@ if ($user->isLoggedIn()) {
                                 <p>Summary</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="report.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <!-- <span class="badge badge-info right"> -->
+                                <!-- <?= $all; ?> -->
+                                <!-- </span> -->
+                                <p>Full Report</p>
+                            </a>
+                        </li>
                          <li class="nav-item">
                             <a href="summary_dar_zone.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <!-- <span class="badge badge-info right"> -->
                                 <!-- <?= $all; ?> -->
                                 <!-- </span> -->
-                                <p>Dar Zone Summary</p>
+                                <p>Zone Summary</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <?php
-                if ($user->data()->power == 1) {
-                    ?>
+                <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) {?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
                                 Data <i class="fas fa-angle-left right"></i>
-
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -590,7 +594,6 @@ if ($user->isLoggedIn()) {
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
                                 Clear Data <i class="fas fa-angle-left right"></i>
-
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -607,7 +610,6 @@ if ($user->isLoggedIn()) {
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
                                 Unset Study ID <i class="fas fa-angle-left right"></i>
-
                             </p>
                         </a>
                         <!-- <ul class="nav nav-treeview">
