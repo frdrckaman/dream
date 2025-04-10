@@ -269,7 +269,7 @@ if ($user->isLoggedIn()) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dream Nanopore | Summary</title>
+    <title>AdminLTE 3 | Simple Tables</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -295,12 +295,12 @@ if ($user->isLoggedIn()) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Summary</h1>
+                            <h1>Simple Tables</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Summary</li>
+                                <li class="breadcrumb-item active">Simple Tables</li>
                             </ol>
                         </div>
                     </div>
@@ -314,7 +314,7 @@ if ($user->isLoggedIn()) {
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Summary Total For Nanopore Study on <?= date('Y-m-d') ?></h3>
+                                    <h3 class="card-title">Striped Full Width Table</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body p-0">
@@ -327,6 +327,7 @@ if ($user->isLoggedIn()) {
                                                 <th>ELIGIBLE</th>
                                                 <th>ENROLLED</th>
                                                 <th>COMPLETED</th>
+                                                <th>TOTAL FORMS / SITE</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -355,16 +356,18 @@ if ($user->isLoggedIn()) {
                                                     <td><span class="badge bg-default"><?= $eligible ?></span></td>
                                                     <td><span class="badge bg-default"><?= $enrolled ?></span></td>
                                                     <td><span class="badge bg-default"><?= $end_study ?></span></td>
+                                                    <td><span class="badge bg-default"><?= $site_total ?></span></td>
                                                 </tr>
                                             <?php $x++;
                                             } ?>
                                             <tr>
-                                                <td>Total </td>
+                                                <td>Total</td>
                                                 <td></td>
                                                 <td><span class="badge bg-success"><?= $screened_Total ?></span></td>
                                                 <td><span class="badge bg-success"><?= $eligible_Total ?></span></td>
                                                 <td><span class="badge bg-success"><?= $enrolled_Total ?></span></td>
                                                 <td><span class="badge bg-success"><?= $end_study_Total ?></span></td>
+                                                <td><span class="badge bg-success"><?= $Total ?></span></td>
                                             </tr>
                                         </tbody>
                                     </table>
