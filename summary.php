@@ -55,11 +55,11 @@ if ($site_data) {
     foreach ($site_data as $row) {
         $screened = $override->countData('screening', 'status', 1, 'facility_id', $row['id']);
         $screened_Total = $override->getCount('screening', 'status', 1);
-        $eligible = $override->countData2('screening', 'status', 1, 'eligible', 1, 'facility_id', $row['id']);
+        $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $row['id']);
         $eligible_Total = $override->countData('screening', 'status', 1, 'eligible', 1);
         $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $row['id']);
         $enrolled_Total = $override->getCount('enrollment_form', 'status', 1);
-        $end_study = $override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id']);
+        $end_study = $override->countData1('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id']);
         $end_study_Total = $override->countData('diagnosis', 'status', 1, 'tb_otcome2', 1);
 
         $output .= '<tr>
