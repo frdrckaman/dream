@@ -103,9 +103,9 @@ class OverideData
         return $num;
     }
 
-    public function countData2($table, $field, $value, $field1, $value1, $field2, $value2)
+    public function countData2($table, $field, $value, $field1, $value1, $field2, $value2, $field3, $value3)
     {
-        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $field2 = '$value2'");
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $field2 = '$value2' AND $field3 = '$value3'");
         $num = $query->rowCount();
         return $num;
     }
@@ -208,7 +208,6 @@ class OverideData
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' ORDER BY date ASC");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
-
     }
 
     public function getNewsASC1Count($table, $where, $id, $where2, $id2, $name)
@@ -970,67 +969,59 @@ class OverideData
         return $result;
     }
 
-    public function getWithLimitSearchNewsCount($table, $searchTerm, $where)
+    public function getWithLimitSearchNews($table, $searchTerm, $searchValue, $page, $numRec)
     {
-        $query = $this->_pdo->query("SELECT * FROM $table WHERE ($where LIKE '%$searchTerm%')");
-        $num = $query->rowCount();
-        return $num;
-    }
-
-    public function getWithLimitSearchNewsCount1($table, $where, $id, $pid, $searchTerm)
-    {
-        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND ($pid LIKE '%$searchTerm%')");
-        $num = $query->rowCount();
-        return $num;
-    }
-
-    public function getWithLimitSearchNewsCount2($table, $searchTerm, $where, $where1, $id1, $where2, $id2)
-    {
-        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where1 = '$id1' AND $where2 = '$id2' AND ($where LIKE '%$searchTerm%')");
-        $num = $query->rowCount();
-        return $num;
-    }
-
-
-    public function getWithLimitSearchNews($table, $searchTerm, $where, $where1, $id1)
-    {
-        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where1 = '$id1' AND ($where LIKE '%$searchTerm%')");
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE ($searchTerm LIKE '%$searchValue%') limit $page,$numRec");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    // public function getWithLimitSearchNews1($table, $where, $id, $pid, $searchTerm)
-    // {
-    //     $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND ($pid LIKE '%$searchTerm%')");
-    //     $result = $query->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
-    public function getWithLimitSearchNews1($table, $searchTerm, $where, $where1, $id1, $where2, $id2, $where3, $id3)
+    public function getWithLimitSearchNewsCount($table, $searchTerm, $searchValue)
     {
-        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where1 = '$id1' AND $where2 = '$id2' AND $where3 = '$id3' AND ($where LIKE '%$searchTerm%')");
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE ($searchTerm LIKE '%$searchValue%')");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function getWithLimitSearchNews1($table, $where, $value, $searchTerm, $searchValue, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND ($searchTerm LIKE '%$searchValue%') limit $page,$numRec");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    // public function getWithLimitSearchNews1($table, $searchTerm, $where, $where1, $id1, $where2, $id2)
-    // {
-    //     $sql = "SELECT * FROM $table WHERE $where1 = :id1 AND $where2 = :id2 AND $where LIKE :searchTerm";
-    //     $stmt = $this->_pdo->prepare($sql);
-
-    //     // Bind parameters
-    //     $stmt->bindValue(':id1', $id1, PDO::PARAM_INT);
-    //     $stmt->bindValue(':id2', $id2, PDO::PARAM_INT);
-    //     $stmt->bindValue(':searchTerm', "%$searchTerm%", PDO::PARAM_STR);
-
-    //     $stmt->execute();
-    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // }
-
-
-    public function getWithLimitSearchNews2($table, $searchTerm, $where, $where1, $id1, $where2, $id2, $where3, $id3)
+    public function getWithLimitSearchNewsCount1($table, $where, $value, $searchTerm, $searchValue)
     {
-        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where1 = '$id1' AND $where2 = '$id2' AND $where3 = '$id3' AND ($where LIKE '%$searchTerm%')");
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND ($searchTerm LIKE '%$searchValue%')");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function getWithLimitSearchNews2($table, $where, $value, $where1, $value1, $searchTerm, $searchValue, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1' AND ($searchTerm LIKE '%$searchValue%') limit $page,$numRec");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    }
+
+    public function getWithLimitSearchNewsCount2($table, $where, $value, $where1, $value1, $searchTerm, $searchValue)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1' AND  ($searchTerm LIKE '%$searchValue%')");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function getWithLimitSearchNews3($table, $where, $value, $where1, $value1, $where2, $value2, $searchTerm, $searchValue, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1'  AND $where2 = '$value2' AND ($searchTerm LIKE '%$searchValue%') limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getWithLimitSearchNewsCount3($table, $where, $value, $where1, $value1, $where2, $value2, $searchTerm, $searchValue)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1'  AND $where2 = '$value2' AND  ($searchTerm LIKE '%$searchValue%')");
+        $num = $query->rowCount();
+        return $num;
     }
 }
