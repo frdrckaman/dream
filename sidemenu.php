@@ -212,8 +212,7 @@ if ($user->isLoggedIn()) {
                         </li> -->
                     </ul>
                 </li>
-                <?php if ($user->data()->power == 1 || $user->data()->position == 1) {
-                    ?>
+                <?php if ($user->data()->power == 1 || $user->data()->position == 1) { ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -430,7 +429,7 @@ if ($user->isLoggedIn()) {
                                     } else if ($table_name['Tables_in_dream'] == 'diagnosis') {
                                         $table = 'Diagnosis';
                                     }
-                                    ?>
+                            ?>
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
@@ -440,13 +439,12 @@ if ($user->isLoggedIn()) {
                                             <p><?= $table; ?></p>
                                         </a>
                                     </li>
-                                <?php }
+                            <?php }
                             } ?>
                         </ul>
                     </li>
                 <?php } ?>
                 <?php if ($user->data()->power == 1) { ?>
-
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -512,7 +510,7 @@ if ($user->isLoggedIn()) {
                     </a> -->
                     <ul class="nav nav-treeview">
                         <?php if ($user->data()->power == 1) {
-                            ?>
+                        ?>
                             <li class="nav-item">
                                 <a href="add.php?id=3" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
@@ -552,6 +550,15 @@ if ($user->isLoggedIn()) {
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="summary_reports.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <!-- <span class="badge badge-info right"> -->
+                                <!-- <?= $all; ?> -->
+                                <!-- </span> -->
+                                <p>Summary Report</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="report.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <!-- <span class="badge badge-info right"> -->
@@ -560,7 +567,7 @@ if ($user->isLoggedIn()) {
                                 <p>Full Report</p>
                             </a>
                         </li>
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a href="summary_dar_zone.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <!-- <span class="badge badge-info right"> -->
@@ -571,7 +578,7 @@ if ($user->isLoggedIn()) {
                         </li>
                     </ul>
                 </li>
-                <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) {?>
+                <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) { ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -589,6 +596,8 @@ if ($user->isLoggedIn()) {
                             </li>
                         </ul>
                     </li>
+                <?php } ?>
+                <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) { ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -621,7 +630,9 @@ if ($user->isLoggedIn()) {
                             </li>
                         </ul> -->
                     </li>
-                    <li class="nav-item">
+                <?php } ?>
+                <li class="nav-item">
+                    <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) { ?>
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
@@ -629,7 +640,9 @@ if ($user->isLoggedIn()) {
 
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
+                    <?php } ?>
+                    <ul class="nav nav-treeview">
+                        <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) { ?>
                             <li class="nav-item">
                                 <a href="summary.php" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -637,6 +650,8 @@ if ($user->isLoggedIn()) {
                                     <p>Summary</p>
                                 </a>
                             </li>
+                        <?php } ?>
+                        <?php if ($user->data()->power == 1 || $user->data()->position == 1) { ?>
                             <li class="nav-item">
                                 <a href="pids.php" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -644,11 +659,10 @@ if ($user->isLoggedIn()) {
                                     <p>PID's</p>
                                 </a>
                             </li>
-                        </ul>
-                    </li>
-                <?php } ?>
-                <?php if ($user->data()->power == 1) {
-                    ?>
+                        <?php } ?>
+                    </ul>
+                </li>
+                <?php if ($user->data()->power == 1 || $user->data()->position == 1) { ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -679,7 +693,6 @@ if ($user->isLoggedIn()) {
                         </ul>
                     </li>
                 <?php } ?>
-
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

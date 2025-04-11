@@ -110,6 +110,13 @@ class OverideData
         return $num;
     }
 
+    public function countSiteData($table, $field, $status, $site1, $value1, $site2, $value2, $site3, $value3, $site4, $value4, $site5, $value5, $site6, $value6, $site7, $value7)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$status' AND ($site1 = '$value1' OR $site2 = '$value2' OR $site3 = '$value3' OR $site4 = '$value4' OR $site5 = '$value5' OR $site6 = '$value6' OR $site7 = '$value7')");
+        $num = $query->rowCount();
+        return $num;
+    }
+
     public function getData($table)
     {
         $query = $this->_pdo->query("SELECT * FROM $table");
