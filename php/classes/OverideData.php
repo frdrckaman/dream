@@ -110,6 +110,13 @@ class OverideData
         return $num;
     }
 
+    public function countData3($table, $field, $value, $field1, $value1, $field2, $value2, $field3, $value3, $field4, $value4)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $field2 = '$value2' AND $field3 = '$value3' AND $field4 = '$value4'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
     public function countSiteData($table, $field, $status, $site1, $value1, $site2, $value2, $site3, $value3, $site4, $value4, $site5, $value5, $site6, $value6, $site7, $value7)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$status' AND ($site1 = '$value1' OR $site2 = '$value2' OR $site3 = '$value3' OR $site4 = '$value4' OR $site5 = '$value5' OR $site6 = '$value6' OR $site7 = '$value7')");
@@ -1030,5 +1037,15 @@ class OverideData
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1'  AND $where2 = '$value2' AND  ($searchTerm LIKE '%$searchValue%')");
         $num = $query->rowCount();
         return $num;
+    }
+
+    public function updateScreening()
+    {
+        $query = $this->_pdo->query("UPDATE screening
+                                    JOIN enrollment_form
+                                    ON screening.id = enrollment_form.enrollment_id
+                                    SET screening.sex = enrollment_form.sex");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 }

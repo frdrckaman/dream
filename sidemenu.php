@@ -559,6 +559,15 @@ if ($user->isLoggedIn()) {
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="summary_reports3.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <!-- <span class="badge badge-info right"> -->
+                                <!-- <?= $all; ?> -->
+                                <!-- </span> -->
+                                <p>Summary Report 3</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="report.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <!-- <span class="badge badge-info right"> -->
