@@ -179,30 +179,30 @@ if ($user->isLoggedIn()) {
                                         <tfoot>
                                             <tr>
                                                 <th colspan="2">Total</th>
-                                                <th><?= $override->countData('screening', 'status', 1, 'sex', 1) ?></th>
-                                                <th><?= $override->countData('screening', 'status', 1, 'sex', 2) ?></th>
-                                                <th><?= $override->getCount('screening', 'status', 1) ?></th>
-                                                <th><?= $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 1) ?></th>
-                                                <th><?= $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 2) ?></th>
-                                                <th><?= $override->countData('screening', 'status', 1, 'eligible', 1) ?></th>
-                                                <th><?= $override->countData('enrollment_form', 'status', 1, 'sex', 1) ?></th>
-                                                <th><?= $override->countData('enrollment_form', 'status', 1, 'sex', 2) ?></th>
-                                                <th><?= $override->getCount('enrollment_form', 'status', 1) ?></th>
-                                                <th>
+                                                <th><span class="badge bg-success"><?= $override->countData('screening', 'status', 1, 'sex', 1) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->countData('screening', 'status', 1, 'sex', 2) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->getCount('screening', 'status', 1) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 1) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 2) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->countData('screening', 'status', 1, 'eligible', 1) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->countData('enrollment_form', 'status', 1, 'sex', 1) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->countData('enrollment_form', 'status', 1, 'sex', 2) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->getCount('enrollment_form', 'status', 1) ?></span></th>
+                                                <th><span class="badge bg-success">
                                                     <?php
                                                     //  printf($override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'sex', 1))
                                                     ?>
-                                                </th>
-                                                <th>
+                                                </span></th>
+                                                <th><span class="badge bg-success">
                                                     <?php
                                                     //  printf($override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'sex', 2))
                                                     ?>
-                                                </th>
-                                                <th>
+                                                </span></th>
+                                                <th><span class="badge bg-success">
                                                     <?php
                                                     // print_r($override->countData('diagnosis', 'status', 1, 'tb_otcome2', 1))
                                                     ?>
-                                                </th>
+                                                </span></th>
                                             </tr>
                                         </tfoot>
                                     </table>
