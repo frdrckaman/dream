@@ -317,115 +317,97 @@ if ($user->isLoggedIn()) {
                                     <h3 class="card-title">Summary Total For Nanopore Study on <?= date('Y-m-d') ?></h3>
                                 </div>
                                 <!-- /.card-header -->
+                                <!-- Adjusted Table -->
                                 <div class="card-body p-0">
-                                    <table class="table table-striped">
+                                    <table class="table table-bordered table-striped text-center">
                                         <thead>
                                             <tr>
                                                 <th style="width: 10px">#</th>
                                                 <th>Site</th>
-                                                <th>SCREENED</th>
-                                                <th>ELIGIBLE</th>
-                                                <th>ENROLLED</th>
-                                                <th>COMPLETED</th>
+                                                <th colspan="3">SCREENED</th>
+                                                <th colspan="3">ELIGIBLE</th>
+                                                <th colspan="3">ENROLLED</th>
+                                                <th colspan="3">COMPLETED</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th>Male</th>
+                                                <th>Female</th>
+                                                <th>Total</th>
+                                                <th>Male</th>
+                                                <th>Female</th>
+                                                <th>Total</th>
+                                                <th>Male</th>
+                                                <th>Female</th>
+                                                <th>Total</th>
+                                                <th>Male</th>
+                                                <th>Female</th>
+                                                <th>Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $x = 1;
                                             $site_data = $override->get('sites', 'status', 1);
-                                            $screening = $override->getCount('screening', 'status', 1);
-                                            $eligible = $override->getCount1('screening', 'status', 1, 'eligible', 1);
-                                            $enrollment = $override->getCount('enrollment_form', 'status', 1);
-                                            $enrollment = $override->updateScreening();
                                             foreach ($site_data as $row) {
                                                 $screened_male = $override->countData1('screening', 'status', 1, 'facility_id', $row['id'], 'sex', 1);
                                                 $screened_female = $override->countData1('screening', 'status', 1, 'facility_id', $row['id'], 'sex', 2);
                                                 $screened = $override->countData('screening', 'status', 1, 'facility_id', $row['id']);
-                                                $screened_Total = $override->getCount('screening', 'status', 1);
                                                 $eligible_male = $override->countData2('screening', 'status', 1, 'eligible', 1, 'facility_id', $row['id'], 'sex', 1);
                                                 $eligible_female = $override->countData2('screening', 'status', 1, 'eligible', 1, 'facility_id', $row['id'], 'sex', 2);
                                                 $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $row['id']);
-                                                $eligible_Total = $override->countData('screening', 'status', 1, 'eligible', 1);
                                                 $enrolled_male = $override->countData1('enrollment_form', 'status', 1, 'facility_id', $row['id'], 'sex', 1);
                                                 $enrolled_female = $override->countData1('enrollment_form', 'status', 1, 'facility_id', $row['id'], 'sex', 2);
                                                 $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $row['id']);
-                                                $enrolled_Total = $override->getCount('enrollment_form', 'status', 1);
-                                                // $end_study_male = $override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id'],'sex', 1);
+                                                // $end_study_male = $override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id'], 'sex', 1);
                                                 // $end_study_female = $override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id'], 'sex', 2);
-                                                $end_study = $override->countData1('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id']);
-                                                $end_study_Total = $override->countData('diagnosis', 'status', 1, 'tb_otcome2', 1);
-                                                $site_total = ($screened + $eligible + $enrolled + $end_study);
-                                                $Total = ($screened_Total + $eligible_Total + $enrolled_Total + $end_study_Total);
-                                                // $screened_male = $override->countData2('screening', 'status', 1, 'facility_id', $row['id'], 'gender', 'male');
-                                                // $screened_female = $override->countData2('screening', 'status', 1, 'facility_id', $row['id'], 'gender', 'female');
-                                                // $eligible_male = $override->countData3('screening', 'status', 1, 'eligible', 1, 'facility_id', $row['id'], 'gender', 'male');
-                                                // $eligible_female = $override->countData3('screening', 'status', 1, 'eligible', 1, 'facility_id', $row['id'], 'gender', 'female');
-                                                // $enrolled_male = $override->countData2('enrollment_form', 'status', 1, 'facility_id', $row['id'], 'gender', 'male');
-                                                // $enrolled_female = $override->countData2('enrollment_form', 'status', 1, 'facility_id', $row['id'], 'gender', 'female');
-                                                // $end_study_male = $override->countData3('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id'], 'gender', 'male');
-                                                // $end_study_female = $override->countData3('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id'], 'gender', 'female');
+                                                // $end_study = $override->countData1('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id']);
                                             ?>
                                                 <tr>
                                                     <td><?= $x ?></td>
                                                     <td><?= $row['name'] ?></td>
-                                                    <td>
-                                                        <span class="badge bg-default">M: <?= $screened_male ?></span>
-                                                        <span class="badge bg-default">F: <?= $screened_female ?></span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge bg-default">M: <?= $eligible_male ?></span>
-                                                        <span class="badge bg-default">F: <?= $eligible_female ?></span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge bg-default">M: <?= $enrolled_male ?></span>
-                                                        <span class="badge bg-default">F: <?= $enrolled_female ?></span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge bg-default">M: <?= $end_study_male ?></span>
-                                                        <span class="badge bg-default">F: <?= $end_study_female ?></span>
-                                                    </td>
+                                                    <td><?= $screened_male ?></td>
+                                                    <td><?= $screened_female ?></td>
+                                                    <td><?= $screened ?></td>
+                                                    <td><?= $eligible_male ?></td>
+                                                    <td><?= $eligible_female ?></td>
+                                                    <td><?= $eligible ?></td>
+                                                    <td><?= $enrolled_male ?></td>
+                                                    <td><?= $enrolled_female ?></td>
+                                                    <td><?= $enrolled ?></td>
+                                                    <td><?= $end_study_male ?></td>
+                                                    <td><?= $end_study_female ?></td>
+                                                    <td><?= $end_study ?></td>
                                                 </tr>
                                             <?php $x++;
                                             } ?>
-                                            <?php
-                                            $screened_Total_male = $override->countData('screening', 'status',1, 'sex', 1);
-                                            $screened_Total_female = $override->countData('screening', 'status', 1, 'sex', 2);
-                                            $eligible_Total_male = $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 1);
-                                            $eligible_Total_female = $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 2);
-                                            $enrolled_Total_male = $override->countData('enrollment_form', 'status', 1, 'sex', 1);
-                                            $enrolled_Total_female = $override->countData('enrollment_form', 'status', 1, 'sex', 2);
-                                            // $end_study_Total_male = $override->countData3('diagnosis', 'status', 1, 'tb_otcome2', 1, 'gender', 'male');
-                                            // $end_study_Total_female = $override->countData3('diagnosis', 'status', 1, 'tb_otcome2', 1, 'gender', 'female');
-                                            ?>
-                                            <tr>
-                                                <td> Sub Total</td>
-                                                <td></td>
-                                                <td>
-                                                    <span class="badge bg-success">M: <?= $screened_Total_male ?></span>
-                                                    <span class="badge bg-success">F: <?= $screened_Total_female ?></span>
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-success">M: <?= $eligible_Total_male ?></span>
-                                                    <span class="badge bg-success">F: <?= $eligible_Total_female ?></span>
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-success">M: <?= $enrolled_Total_male ?></span>
-                                                    <span class="badge bg-success">F: <?= $enrolled_Total_female ?></span>
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-success">M: <?= $end_study_Total_male ?></span>
-                                                    <span class="badge bg-success">F: <?= $end_study_Total_female ?></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Total </td>
-                                                <td></td>
-                                                <td><span class="badge bg-success"><?= $screened_Total ?></span></td>
-                                                <td><span class="badge bg-success"><?= $eligible_Total ?></span></td>
-                                                <td><span class="badge bg-success"><?= $enrolled_Total ?></span></td>
-                                                <td><span class="badge bg-success"><?= $end_study_Total ?></span></td>
-                                            </tr>
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="2">Total</th>
+                                                <th><?= $override->countData('screening', 'status', 1, 'sex', 1) ?></th>
+                                                <th><?= $override->countData('screening', 'status', 1, 'sex', 2) ?></th>
+                                                <th><?= $override->getCount('screening', 'status', 1) ?></th>
+                                                <th><?= $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 1) ?></th>
+                                                <th><?= $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 2) ?></th>
+                                                <th><?= $override->countData('screening', 'status', 1, 'eligible', 1) ?></th>
+                                                <th><?= $override->countData('enrollment_form', 'status', 1, 'sex', 1) ?></th>
+                                                <th><?= $override->countData('enrollment_form', 'status', 1, 'sex', 2) ?></th>
+                                                <th><?= $override->getCount('enrollment_form', 'status', 1) ?></th>
+                                                <th>
+                                                    <?php
+                                                    //  printf($override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'sex', 1))
+                                                    ?>
+                                                </th>
+                                                <th>
+                                                    <?php
+                                                    //  printf($override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'sex', 2))
+                                                    ?>
+                                                </th>
+                                                <th><?= $override->countData('diagnosis', 'status', 1, 'tb_otcome2', 1) ?></th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                                 <!-- /.card-body -->
