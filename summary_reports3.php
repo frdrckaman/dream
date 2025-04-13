@@ -390,15 +390,15 @@ if ($user->isLoggedIn()) {
                                             <?php
                                             $screened_Total_male = $override->countData('screening', 'status',1, 'sex', 1);
                                             $screened_Total_female = $override->countData('screening', 'status', 1, 'sex', 2);
-                                            $eligible_Total_male = $override->countData('screening', 'status', 1, 'eligible', 1, 'sex', 1);
-                                            $eligible_Total_female = $override->countData('screening', 'status', 1, 'eligible', 1, 'sex', 2);
+                                            $eligible_Total_male = $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 1);
+                                            $eligible_Total_female = $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 2);
                                             $enrolled_Total_male = $override->countData('enrollment_form', 'status', 1, 'sex', 1);
                                             $enrolled_Total_female = $override->countData('enrollment_form', 'status', 1, 'sex', 2);
                                             // $end_study_Total_male = $override->countData3('diagnosis', 'status', 1, 'tb_otcome2', 1, 'gender', 'male');
                                             // $end_study_Total_female = $override->countData3('diagnosis', 'status', 1, 'tb_otcome2', 1, 'gender', 'female');
                                             ?>
                                             <tr>
-                                                <td>Total</td>
+                                                <td> Sub Total</td>
                                                 <td></td>
                                                 <td>
                                                     <span class="badge bg-success">M: <?= $screened_Total_male ?></span>
@@ -416,6 +416,14 @@ if ($user->isLoggedIn()) {
                                                     <span class="badge bg-success">M: <?= $end_study_Total_male ?></span>
                                                     <span class="badge bg-success">F: <?= $end_study_Total_female ?></span>
                                                 </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total </td>
+                                                <td></td>
+                                                <td><span class="badge bg-success"><?= $screened_Total ?></span></td>
+                                                <td><span class="badge bg-success"><?= $eligible_Total ?></span></td>
+                                                <td><span class="badge bg-success"><?= $enrolled_Total ?></span></td>
+                                                <td><span class="badge bg-success"><?= $end_study_Total ?></span></td>
                                             </tr>
                                         </tbody>
                                     </table>
