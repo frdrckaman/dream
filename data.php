@@ -85,17 +85,17 @@ if ($user->isLoggedIn()) {
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_all_xls'])) {
                 $ext = 'xls';
-                $url = 'downloads.php?&ext=' . $ext;
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
-            }else if (isset($_POST['download_all_xlsx'])) {
+            } else if (isset($_POST['download_all_xlsx'])) {
                 $ext = 'xlsx';
-                $url = 'downloads.php?&ext=' . $ext;
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
-            }else if (isset($_POST['download_all_csv'])) {
+            } else if (isset($_POST['download_all_csv'])) {
                 $ext = 'csv';
-                $url = 'downloads.php?&ext=' . $ext;
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             }
@@ -214,6 +214,8 @@ if ($user->isLoggedIn()) {
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <form method="post">
+                                            <input type="hidden" name="data" value="0">
+                                            <input type="hidden" name="table" value="ALL">
                                             <button type="submit" name="download_all_csv">Download All in Csv</button>&nbsp;&nbsp;&nbsp;
                                             <button type="submit" name="download_all_xls">Download All in xls</button>&nbsp;&nbsp;&nbsp;
                                             <button type="submit" name="download_all_xlsx">Download All in xlsx</button>&nbsp;&nbsp;&nbsp;
