@@ -83,6 +83,21 @@ if ($user->isLoggedIn()) {
                 $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
+            } else if (isset($_POST['download_all_xls'])) {
+                $ext = 'xls';
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                Redirect::to($url);
+                $pageError = $validate->errors();
+            } else if (isset($_POST['download_all_xlsx'])) {
+                $ext = 'xlsx';
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                Redirect::to($url);
+                $pageError = $validate->errors();
+            } else if (isset($_POST['download_all_csv'])) {
+                $ext = 'csv';
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                Redirect::to($url);
+                $pageError = $validate->errors();
             }
         }
         //     }
@@ -198,6 +213,16 @@ if ($user->isLoggedIn()) {
                                     </section>
                                     <!-- /.card-header -->
                                     <div class="card-body">
+                                        <form method="post">
+                                            <input type="hidden" name="data" value="0">
+                                            <input type="hidden" name="table" value="ALL">
+                                            <button type="submit" name="download_all_csv">Download All in Csv</button>&nbsp;&nbsp;&nbsp;
+                                            <button type="submit" name="download_all_xls">Download All in xls</button>&nbsp;&nbsp;&nbsp;
+                                            <button type="submit" name="download_all_xlsx">Download All in xlsx</button>&nbsp;&nbsp;&nbsp;
+                                            <!-- <button type="submit" name="download_stata">Download stata Data</button>&nbsp;&nbsp;&nbsp; -->
+                                            <hr>
+                                            <!-- <a href="data.php?id=2&table=<?= $tables['Tables_in_dream'] ?>" role=" button" class="btn btn-info"> View Recoreds </a> -->
+                                        </form>
                                         <table id="search-results" class="table table-bordered">
                                             <thead>
                                                 <tr>
@@ -262,15 +287,15 @@ if ($user->isLoggedIn()) {
                                     </div>
                                     <!-- /.card-body -->
                                     <?php
-                                        $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-                                        // $currentSite = $_GET['facility_id'];
-                                        // $pages = 10; // Total number of pages (replace with your actual calculation)
-                                        $range = 2; // Number of pages to show before and after the current page
-                                    
-                                        // Calculate start and end for the visible range
-                                        $start = max(1, $currentPage - $range);
-                                        $end = min($pages, $currentPage + $range);
-                                        ?>
+                                    $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+                                    // $currentSite = $_GET['facility_id'];
+                                    // $pages = 10; // Total number of pages (replace with your actual calculation)
+                                    $range = 2; // Number of pages to show before and after the current page
+
+                                    // Calculate start and end for the visible range
+                                    $start = max(1, $currentPage - $range);
+                                    $end = min($pages, $currentPage + $range);
+                                    ?>
                                     <div class="card-footer clearfix">
                                         <ul class="pagination pagination-sm m-0 float-right">
                                             <!-- Previous Page -->
@@ -278,7 +303,7 @@ if ($user->isLoggedIn()) {
                                                 <a class="page-link"
                                                     href="data.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&page=<?php echo max($currentPage - 1, 1); ?>">&laquo;</a>
                                             </li>
-                                    
+
                                             <!-- First Page (if outside the range) -->
                                             <?php if ($start > 1): ?>
                                                 <li class="page-item">
@@ -291,7 +316,7 @@ if ($user->isLoggedIn()) {
                                                     </li>
                                                 <?php endif; ?>
                                             <?php endif; ?>
-                                    
+
                                             <!-- Visible Page Links -->
                                             <?php for ($i = $start; $i <= $end; $i++): ?>
                                                 <li class="page-item <?php echo ($i === $currentPage) ? 'active' : ''; ?>">
@@ -299,7 +324,7 @@ if ($user->isLoggedIn()) {
                                                         href="data.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
                                                 </li>
                                             <?php endfor; ?>
-                                    
+
                                             <!-- Last Page (if outside the range) -->
                                             <?php if ($end < $pages): ?>
                                                 <?php if ($end < $pages - 1): ?>
@@ -333,15 +358,15 @@ if ($user->isLoggedIn()) {
         <?php } elseif ($_GET['id'] == 2) { ?>
             <?php
             $table_name = $_GET['table'];
-                              $pagNum = 0;
-                    $pagNum = $override->getNo($table_name);
-                    $pages = ceil($pagNum / $numRec);
-                    if (!$_GET['page'] || $_GET['page'] == 1) {
-                        $page = 0;
-                    } else {
-                        $page = ($_GET['page'] * $numRec) - $numRec;
-                    }
-                    $data = $override->getWithLimit0($table_name, $page, $numRec);               
+            $pagNum = 0;
+            $pagNum = $override->getNo($table_name);
+            $pages = ceil($pagNum / $numRec);
+            if (!$_GET['page'] || $_GET['page'] == 1) {
+                $page = 0;
+            } else {
+                $page = ($_GET['page'] * $numRec) - $numRec;
+            }
+            $data = $override->getWithLimit0($table_name, $page, $numRec);
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -450,7 +475,7 @@ if ($user->isLoggedIn()) {
                                                 <tr>
                                                     <td class="table-user">
                                                         <?= $value['id']; ?>
-                                                    </td>                                                   
+                                                    </td>
 
                                                     <td class="table-user">
                                                         <?= $value['pid']; ?>
@@ -591,10 +616,10 @@ if ($user->isLoggedIn()) {
                                     <ul class="pagination pagination-sm m-0 float-right">
                                         <li class="page-item">
                                             <a class="page-link" href="data.php?id=2&status=<?= $_GET['status'] ?>&table=<?= $_GET['table'] ?>facility_id=<?= $_GET['facility_id'] ?>&page=<?php if (($_GET['page'] - 1) > 0) {
-                                                                                                                                                                                        echo $_GET['page'] - 1;
-                                                                                                                                                                                    } else {
-                                                                                                                                                                                        echo 1;
-                                                                                                                                                                                    } ?>">&laquo;
+                                                                                                                                                                                                echo $_GET['page'] - 1;
+                                                                                                                                                                                            } else {
+                                                                                                                                                                                                echo 1;
+                                                                                                                                                                                            } ?>">&laquo;
                                             </a>
                                         </li>
                                         <?php for ($i = 1; $i <= $pages; $i++) { ?>
@@ -607,10 +632,10 @@ if ($user->isLoggedIn()) {
                                         <?php } ?>
                                         <li class="page-item">
                                             <a class="page-link" href="data.php?id=2&status=<?= $_GET['status'] ?>&table=<?= $_GET['table'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?php if (($_GET['page'] + 1) <= $pages) {
-                                                                                                                                                                                        echo $_GET['page'] + 1;
-                                                                                                                                                                                    } else {
-                                                                                                                                                                                        echo $i - 1;
-                                                                                                                                                                                    } ?>">&raquo;
+                                                                                                                                                                                                echo $_GET['page'] + 1;
+                                                                                                                                                                                            } else {
+                                                                                                                                                                                                echo $i - 1;
+                                                                                                                                                                                            } ?>">&raquo;
                                             </a>
                                         </li>
                                     </ul>

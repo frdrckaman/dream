@@ -14,247 +14,6 @@ $numRec = 5;
 if ($user->isLoggedIn()) {
     if (Input::exists('post')) {
         $validate = new validate();
-
-        if (Input::get('reset_pass')) {
-            $salt = $random->get_rand_alphanumeric(32);
-            $password = '12345678';
-            $user->updateRecord('user', array(
-                'password' => Hash::make($password, $salt),
-                'salt' => $salt,
-            ), Input::get('id'));
-            $successMessage = 'Password Reset Successful';
-        } elseif (Input::get('change_pass')) {
-            $salt = $random->get_rand_alphanumeric(32);
-            $password = Input::get('password');
-            $user->updateRecord('user', array(
-                'password' => Hash::make($password, $salt),
-                'salt' => $salt,
-            ), Input::get('id'));
-            $successMessage = 'Password Changed Successful';
-        } elseif (Input::get('lock_account')) {
-            $user->updateRecord('user', array(
-                'count' => 4,
-            ), Input::get('id'));
-            $successMessage = 'Account locked Successful';
-        } elseif (Input::get('unlock_account')) {
-            $user->updateRecord('user', array(
-                'count' => 0,
-            ), Input::get('id'));
-            $successMessage = 'Account Unlock Successful';
-        } elseif (Input::get('delete_staff')) {
-            $user->updateRecord('user', array(
-                'status' => 0,
-            ), Input::get('id'));
-            $successMessage = 'User Restored Successful';
-        } elseif (Input::get('delete_sites')) {
-            $user->updateRecord('sites', array(
-                'status' => 0,
-            ), Input::get('id'));
-            $successMessage = 'Site Deleted Successful';
-        } elseif (Input::get('delete_positions')) {
-            $user->updateRecord('position', array(
-                'status' => 0,
-            ), Input::get('id'));
-            $successMessage = 'Position Deleted Successful';
-        } elseif (Input::get('delete_facility')) {
-            $user->updateRecord('sites', array(
-                'status' => 0,
-            ), Input::get('id'));
-            $successMessage = 'Site Deleted Successful';
-        } elseif (Input::get('restore_facility')) {
-            $user->updateRecord('sites', array(
-                'status' => 1,
-            ), Input::get('id'));
-            $successMessage = 'Facility Restored Successful';
-        } elseif (Input::get('restore_staff')) {
-            $user->updateRecord('user', array(
-                'status' => 1,
-            ), Input::get('id'));
-            $successMessage = 'User Deleted Successful';
-        } elseif (Input::get('add_visit')) {
-            $validate = $validate->check($_POST, array(
-                'visit_date' => array(
-                    'required' => true,
-                ),
-                'visit_status' => array(
-                    'required' => true,
-                ),
-            ));
-
-            if ($validate->passed()) {
-                $user->updateRecord('visit', array(
-                    'visit_date' => Input::get('visit_date'),
-                    'visit_status' => Input::get('visit_status'),
-                    'comments' => Input::get('comments'),
-                    'patient_id' => Input::get('cid'),
-                    'update_on' => date('Y-m-d H:i:s'),
-                    'update_id' => $user->data()->id,
-                ), Input::get('id'));
-
-                $successMessage = 'Visit Updates  Successful';
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('search_by_site')) {
-
-            $validate = $validate->check($_POST, array(
-                'facility_id' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                if (Input::get('facility_id')) {
-                    $url = 'info.php?id=' . $_GET['id'] . '&status=' . $_GET['status'] . '&facility_id=' . Input::get('facility_id');
-                } else {
-                    $url = 'info.php?id=' . $_GET['id'] . '&status=' . $_GET['status'];
-                }
-                Redirect::to($url);
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('clear_data')) {
-
-            $validate = $validate->check($_POST, array(
-                'name' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    if (Input::get('name')) {
-                        if (Input::get('name') == 'user' || Input::get('name') == 'sites' || Input::get('name') == 'position' || Input::get('name') == 'district') {
-                            $errorMessage = 'Table ' . '"' . Input::get('name') . '"' . '  can not be Cleared';
-                        } else {
-                            $clearData = $override->clearDataTable(Input::get('name'));
-                            $successMessage = 'Table ' . '"' . Input::get('name') . '"' . ' Cleared Successfull';
-                        }
-                    } else {
-                        $errorMessage = 'Table ' . '"' . Input::get('name') . '"' . '  can not be Found!';
-                    }
-                    // die;
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('setSiteId')) {
-
-            $validate = $validate->check($_POST, array(
-                'name' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    $setSiteId = $override->setSiteId('visit', 'site_id', Input::get('name'), 1);
-                    $successMessage = 'Site ID Successfull';
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('unset_study_id')) {
-            $validate = $validate->check($_POST, array(
-                'name' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    if (Input::get('name') == 'study_id') {
-                        $study_id = $override->getData('study_id');
-                        foreach ($study_id as $row) {
-                            $user->updateRecord('study_id', array(
-                                'client_id' => 0,
-                                'status' => 0,
-                            ), $row['id']);
-                        }
-                    }
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('invite')) {
-            $staff = $override->get('user', 'id', Input::get('id'))[0];
-            $subject = 'Nanopore WhatsApp Invite';
-            $link = 'https://chat.whatsapp.com/KbhgEsRCew40x5ZHbcac3y';
-            try {
-                $email->userInvite($staff['email_address'], $staff['lastname'], $subject, $link);
-                $successMessage = 'Email Sent Successful';
-            } catch (Exception $e) {
-                $e->getMessage();
-            }
-        } else if (Input::get('delete_record')) {
-            $user->updateRecord('screening', array(
-                'status' => 0,
-            ), Input::get('id'));
-
-            $enrollment_form = $override->get('enrollment_form', 'enrollment_id', Input::get('id'));
-            foreach ($enrollment_form as $value) {
-                $user->updateRecord('enrollment_form', array(
-                    'status' => 0,
-                ), $value['id']);
-            }
-
-            $respiratory = $override->get('respiratory', 'enrollment_id', Input::get('id'));
-            foreach ($respiratory as $value) {
-                $user->updateRecord('respiratory', array(
-                    'status' => 0,
-                ), $value['id']);
-            }
-
-            $diagnosis_test = $override->get('diagnosis_test', 'enrollment_id', Input::get('id'));
-            foreach ($diagnosis_test as $value) {
-                $user->updateRecord('diagnosis_test', array(
-                    'status' => 0,
-                ), $value['id']);
-            }
-
-            $diagnosis = $override->get('diagnosis', 'enrollment_id', Input::get('id'));
-            foreach ($diagnosis as $value) {
-                $user->updateRecord('diagnosis', array(
-                    'status' => 0,
-                ), $value['id']);
-            }
-
-            $successMessage = 'Recored Deleted Successful';
-        } else if (Input::get('restore_record')) {
-            $user->updateRecord('screening', array(
-                'status' => 1,
-            ), Input::get('id'));
-
-            $enrollment_form = $override->get('enrollment_form', 'enrollment_id', Input::get('id'));
-            foreach ($enrollment_form as $value) {
-                $user->updateRecord('enrollment_form', array(
-                    'status' => 1,
-                ), $value['id']);
-            }
-
-            $respiratory = $override->get('respiratory', 'enrollment_id', Input::get('id'));
-            foreach ($respiratory as $value) {
-                $user->updateRecord('respiratory', array(
-                    'status' => 1,
-                ), $value['id']);
-            }
-
-            $diagnosis_test = $override->get('diagnosis_test', 'enrollment_id', Input::get('id'));
-            foreach ($diagnosis_test as $value) {
-                $user->updateRecord('diagnosis_test', array(
-                    'status' => 1,
-                ), $value['id']);
-            }
-
-            $diagnosis = $override->get('diagnosis', 'enrollment_id', Input::get('id'));
-            foreach ($diagnosis as $value) {
-                $user->updateRecord('diagnosis', array(
-                    'status' => 1,
-                ), $value['id']);
-            }
-            $successMessage = 'Recored Restored Successful';
-        }
     }
 } else {
     Redirect::to('index.php');
@@ -313,8 +72,23 @@ if ($user->isLoggedIn()) {
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
+                                <!-- Month Filter Form -->
                                 <div class="card-header">
                                     <h3 class="card-title">Summary Total For Nanopore Study on <?= date('Y-m-d') ?></h3>
+                                    <form method="GET" action="" class="form-inline float-right">
+                                        <label for="month" class="mr-2">Filter by Month:</label>
+                                        <select name="month" id="month" class="form-control mr-2">
+                                            <option value="">All Months</option>
+                                            <?php
+                                            for ($m = 1; $m <= 12; $m++) {
+                                                $monthName = date('F', mktime(0, 0, 0, $m, 1));
+                                                $selected = (isset($_GET['month']) && $_GET['month'] == $m) ? 'selected' : '';
+                                                echo "<option value='$m' $selected>$monthName</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary">Filter</button>
+                                    </form>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- Adjusted Table -->
@@ -349,21 +123,39 @@ if ($user->isLoggedIn()) {
                                         <tbody>
                                             <?php
                                             $x = 1;
+                                            $monthFilter = isset($_GET['month']) && !empty($_GET['month']) ? $_GET['month'] : null;
+
                                             $site_data = $override->get('sites', 'status', 1);
                                             $updateScreening = $override->updateScreening();
+
                                             foreach ($site_data as $row) {
-                                                $screened_male = $override->countData1('screening', 'status', 1, 'facility_id', $row['id'], 'sex', 1);
-                                                $screened_female = $override->countData1('screening', 'status', 1, 'facility_id', $row['id'], 'sex', 2);
-                                                $screened = $override->countData('screening', 'status', 1, 'facility_id', $row['id']);
-                                                $eligible_male = $override->countData2('screening', 'status', 1, 'eligible', 1, 'facility_id', $row['id'], 'sex', 1);
-                                                $eligible_female = $override->countData2('screening', 'status', 1, 'eligible', 1, 'facility_id', $row['id'], 'sex', 2);
-                                                $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $row['id']);
-                                                $enrolled_male = $override->countData1('enrollment_form', 'status', 1, 'facility_id', $row['id'], 'sex', 1);
-                                                $enrolled_female = $override->countData1('enrollment_form', 'status', 1, 'facility_id', $row['id'], 'sex', 2);
-                                                $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $row['id']);
-                                                // $end_study_male = $override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id'], 'sex', 1);
-                                                // $end_study_female = $override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id'], 'sex', 2);
-                                                // $end_study = $override->countData1('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id']);
+                                                $conditions = [
+                                                    'status' => 1,
+                                                    'facility_id' => $row['id']
+                                                ];
+
+                                                if ($monthFilter) {
+                                                    $startDate = date('Y-m-01', strtotime("2025-$monthFilter-01"));
+                                                    $endDate = date('Y-m-t', strtotime("2025-$monthFilter-01"));
+                                                    $conditions['create_on[>=]'] = $startDate;
+                                                    $conditions['create_on[<=]'] = $endDate;
+                                                }
+
+                                                $screened_male = $override->countDataWithConditions('screening', array_merge($conditions, ['sex' => 1]));
+                                                $screened_female = $override->countDataWithConditions('screening', array_merge($conditions, ['sex' => 2]));
+                                                $screened = $override->countDataWithConditions('screening', $conditions);
+
+                                                $eligible_male = $override->countDataWithConditions('screening', array_merge($conditions, ['eligible' => 1, 'sex' => 1]));
+                                                $eligible_female = $override->countDataWithConditions('screening', array_merge($conditions, ['eligible' => 1, 'sex' => 2]));
+                                                $eligible = $override->countDataWithConditions('screening', array_merge($conditions, ['eligible' => 1]));
+
+                                                $enrolled_male = $override->countDataWithConditions('enrollment_form', array_merge($conditions, ['sex' => 1]));
+                                                $enrolled_female = $override->countDataWithConditions('enrollment_form', array_merge($conditions, ['sex' => 2]));
+                                                $enrolled = $override->countDataWithConditions('enrollment_form', $conditions);
+
+                                                // $end_study_male = $override->countDataWithConditions('diagnosis', array_merge($conditions, ['tb_otcome2' => 1, 'sex' => 1]));
+                                                // $end_study_female = $override->countDataWithConditions('diagnosis', array_merge($conditions, ['tb_otcome2' => 1, 'sex' => 2]));
+                                                // $end_study = $override->countDataWithConditions('diagnosis', array_merge($conditions, ['tb_otcome2' => 1]));
                                             ?>
                                                 <tr>
                                                     <td><?= $x ?></td>
@@ -387,26 +179,30 @@ if ($user->isLoggedIn()) {
                                         <tfoot>
                                             <tr>
                                                 <th colspan="2">Total</th>
-                                                <th><?= $override->countData('screening', 'status', 1, 'sex', 1) ?></th>
-                                                <th><?= $override->countData('screening', 'status', 1, 'sex', 2) ?></th>
-                                                <th><?= $override->getCount('screening', 'status', 1) ?></th>
-                                                <th><?= $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 1) ?></th>
-                                                <th><?= $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 2) ?></th>
-                                                <th><?= $override->countData('screening', 'status', 1, 'eligible', 1) ?></th>
-                                                <th><?= $override->countData('enrollment_form', 'status', 1, 'sex', 1) ?></th>
-                                                <th><?= $override->countData('enrollment_form', 'status', 1, 'sex', 2) ?></th>
-                                                <th><?= $override->getCount('enrollment_form', 'status', 1) ?></th>
-                                                <th>
+                                                <th><span class="badge bg-success"><?= $override->countData('screening', 'status', 1, 'sex', 1) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->countData('screening', 'status', 1, 'sex', 2) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->getCount('screening', 'status', 1) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 1) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->countData1('screening', 'status', 1, 'eligible', 1, 'sex', 2) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->countData('screening', 'status', 1, 'eligible', 1) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->countData('enrollment_form', 'status', 1, 'sex', 1) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->countData('enrollment_form', 'status', 1, 'sex', 2) ?></span></th>
+                                                <th><span class="badge bg-success"><?= $override->getCount('enrollment_form', 'status', 1) ?></span></th>
+                                                <th><span class="badge bg-success">
                                                     <?php
                                                     //  printf($override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'sex', 1))
                                                     ?>
-                                                </th>
-                                                <th>
+                                                </span></th>
+                                                <th><span class="badge bg-success">
                                                     <?php
                                                     //  printf($override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'sex', 2))
                                                     ?>
-                                                </th>
-                                                <th><?= $override->countData('diagnosis', 'status', 1, 'tb_otcome2', 1) ?></th>
+                                                </span></th>
+                                                <th><span class="badge bg-success">
+                                                    <?php
+                                                    // print_r($override->countData('diagnosis', 'status', 1, 'tb_otcome2', 1))
+                                                    ?>
+                                                </span></th>
                                             </tr>
                                         </tfoot>
                                     </table>
