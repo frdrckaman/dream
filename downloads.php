@@ -61,7 +61,11 @@ $omitColumns = [
 ]; // Example: omit 'email' and 'password' columns
 
 // Fetch results from the database
-$result = $override->get($table, 'status', 1);
+if($table){
+    $result = $override->get($table, 'status', 1);
+}else{
+    $result = $override->download_all();
+}
 
 require 'vendor/autoload.php';
 

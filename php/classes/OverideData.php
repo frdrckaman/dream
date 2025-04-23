@@ -1071,4 +1071,29 @@ class OverideData
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function download_all()
+    {
+        $query = $this->_pdo->query("SELECT 
+            screening.*,
+            enrollment_form.*,
+            respiratory.*,
+            diagnosis_test.*,
+            diagnosis.*
+        FROM 
+            screening
+        LEFT JOIN 
+            enrollment_form ON screening.id = enrollment_form.enrollment_id
+        LEFT JOIN 
+            respiratory ON screening.id = respiratory.enrollment_id
+        LEFT JOIN 
+            diagnosis_test ON screening.id = diagnosis_test.enrollment_id
+        LEFT JOIN 
+            diagnosis ON screening.id = diagnosis.enrollment_id
+        WHERE 
+            screening.status = 1"
+        );
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
 }
