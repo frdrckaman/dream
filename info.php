@@ -996,7 +996,7 @@ if ($user->isLoggedIn()) {
                                             } else if ($_GET['status'] == 3) {
                                                 $pagNum = $override->getWithLimitSearchNewsCount1('enrollment_form', 'status', 1, $searchTerm, $searchValue);
                                             } else if ($_GET['status'] == 4) {
-                                                $pagNum = $override->getWithLimitSearchNewsCount1('termination', 'status', 1, $searchTerm, $searchValue);
+                                                $pagNum = $override->getWithLimitSearchNewsCount2NotNull('diagnosis', 'status', 1, 'tb_otcome2', '', $searchTerm, $searchValue);
                                             } else if ($_GET['status'] == 5) {
                                                 $pagNum = $override->getWithLimitSearchNewsCount1('screening', 'status', 0, $searchTerm, $searchValue);
                                             } else {
@@ -1017,7 +1017,7 @@ if ($user->isLoggedIn()) {
                                             } else if ($_GET['status'] == 3) {
                                                 $data = $override->getWithLimitSearchNews1('enrollment_form', 'status', 1, $searchTerm, $searchValue, $page, $numRec);
                                             } else if ($_GET['status'] == 4) {
-                                                $data = $override->getWithLimitSearchNews1('termination', 'status', 1, $searchTerm, $searchValue, $page, $numRec);
+                                                $data = $override->getWithLimitSearchNews2NotNull('diagnosis', 'status', 1, 'tb_otcome2', '', $searchTerm, $searchValue, $page, $numRec);
                                             } else if ($_GET['status'] == 5) {
                                                 $data = $override->getWithLimitSearchNews1('screening', 'status', 0, $searchTerm, $searchValue, $page, $numRec);
                                             } else {
@@ -1031,7 +1031,7 @@ if ($user->isLoggedIn()) {
                                             } else if ($_GET['status'] == 3) {
                                                 $pagNum = $override->getCount('enrollment_form', 'status', 1);
                                             } else if ($_GET['status'] == 4) {
-                                                $pagNum = $override->getCount('termination', 'status', 1);
+                                                $pagNum = $override->countDataNotNull('diagnosis', 'status', 1, 'tb_otcome2', '');
                                             } else if ($_GET['status'] == 5) {
                                                 $pagNum = $override->getCount('screening', 'status', 0);
                                             } else if ($_GET['status'] == 6) {
@@ -1052,7 +1052,7 @@ if ($user->isLoggedIn()) {
                                             } else if ($_GET['status'] == 3) {
                                                 $data = $override->getWithLimitDesc('enrollment_form', 'status', 1, $page, $numRec);
                                             } else if ($_GET['status'] == 4) {
-                                                $data = $override->getWithLimitDesc('termination', 'status', 1, $page, $numRec);
+                                                $data = $override->getWithLimit1DescNotNull('diagnosis', 'status', 1, 'tb_otcome2', '', $page, $numRec);
                                             } else if ($_GET['status'] == 5) {
                                                 $data = $override->getWithLimitDesc('screening', 'status', 0, $page, $numRec);
                                             } else if ($_GET['status'] == 6) {
@@ -1070,7 +1070,7 @@ if ($user->isLoggedIn()) {
                                             } else if ($_GET['status'] == 3) {
                                                 $pagNum = $override->getWithLimitSearchNewsCount2('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id, $searchTerm, $searchValue);
                                             } else if ($_GET['status'] == 4) {
-                                                $pagNum = $override->getWithLimitSearchNewsCount2('termination', 'status', 1, 'facility_id', $user->data()->site_id, $searchTerm, $searchValue);
+                                                $pagNum = $override->getWithLimitSearchNewsCount3NotNull('diagnosis', 'status', 1, 'tb_otcome2', '', 'facility_id', $user->data()->site_id, $searchTerm, $searchValue);
                                             } else if ($_GET['status'] == 5) {
                                                 $pagNum = $override->getWithLimitSearchNewsCount2('screening', 'status', 0, 'facility_id', $user->data()->site_id, $searchTerm, $searchValue);
                                             } else {
@@ -1091,7 +1091,7 @@ if ($user->isLoggedIn()) {
                                             } else if ($_GET['status'] == 3) {
                                                 $data = $override->getWithLimitSearchNews2('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id, $searchTerm, $searchValue, $page, $numRec);
                                             } else if ($_GET['status'] == 4) {
-                                                $data = $override->getWithLimitSearchNews2('termination', 'status', 1, 'facility_id', $user->data()->site_id, $searchTerm, $searchValue, $page, $numRec);
+                                                $data = $override->getWithLimitSearchNews3NotNull('diagnosis', 'status', 1, 'tb_otcome2', '', 'facility_id', $user->data()->site_id, $searchTerm, $searchValue, $page, $numRec);
                                             } else if ($_GET['status'] == 5) {
                                                 $data = $override->getWithLimitSearchNews2('screening', 'status', 0, 'facility_id', $user->data()->site_id, $searchTerm, $searchValue, $page, $numRec);
                                             } else {
@@ -1105,7 +1105,7 @@ if ($user->isLoggedIn()) {
                                             } else if ($_GET['status'] == 3) {
                                                 $pagNum = $override->countData('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id);
                                             } else if ($_GET['status'] == 4) {
-                                                $pagNum = $override->countData('termination', 'status', 1, 'facility_id', $user->data()->site_id);
+                                                $pagNum = $override->countData1NotNull('diagnosis', 'status', 1, 'tb_otcome2', '', 'facility_id', $user->data()->site_id);
                                             } else if ($_GET['status'] == 5) {
                                                 $pagNum = $override->countData('screening', 'status', 0, 'facility_id', $user->data()->site_id);
                                             } else if ($_GET['status'] == 6) {
@@ -1127,7 +1127,7 @@ if ($user->isLoggedIn()) {
                                             } else if ($_GET['status'] == 3) {
                                                 $data = $override->getWithLimit1Desc('enrollment_form', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
                                             } else if ($_GET['status'] == 4) {
-                                                $data = $override->getWithLimit1Desc('termination', 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
+                                                $data = $override->getWithLimit2DescNotNull('diagnosis', 'status', 1, 'tb_otcome2', '', 'facility_id', $user->data()->site_id, $page, $numRec);
                                             } else if ($_GET['status'] == 5) {
                                                 $data = $override->getWithLimit1Desc('screening', 'status', 0, 'facility_id', $user->data()->site_id, $page, $numRec);
                                             } else if ($_GET['status'] == 6) {
@@ -1415,7 +1415,7 @@ if ($user->isLoggedIn()) {
                                                                         $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $sid)
                                                                     ) { ?>
 
-                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3  || $_GET['status'] == 4 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                             <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                                 role=" button" class="btn btn-info btn-custom"> View Enrollment
                                                                                 Forms
@@ -1423,7 +1423,7 @@ if ($user->isLoggedIn()) {
                                                                         <?php } ?>
 
                                                                     <?php } else { ?>
-                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3  || $_GET['status'] == 4 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                             <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                                 role=" button" class="btn btn-warning btn-custom"> Add
                                                                                 Enrollment Forms
@@ -1438,7 +1438,7 @@ if ($user->isLoggedIn()) {
                                                                         $override->getNews('respiratory', 'status', 1, 'enrollment_id', $sid)
                                                                     ) { ?>
 
-                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3  || $_GET['status'] == 4 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                             <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                                 role=" button" class="btn btn-info btn-custom"> View Enrollment
                                                                                 Forms
@@ -1446,7 +1446,7 @@ if ($user->isLoggedIn()) {
                                                                         <?php } ?>
 
                                                                     <?php } else { ?>
-                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
+                                                                        <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3  || $_GET['status'] == 4 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                             <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                                 role=" button" class="btn btn-warning btn-custom"> Add
                                                                                 Enrollment Forms
@@ -1497,7 +1497,7 @@ if ($user->isLoggedIn()) {
                                                                         $override->getNews('non_respiratory', 'status', 1, 'enrollment_id', $sid)
                                                                     ) { ?>
 
-                                                            <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
+                                                            <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3  || $_GET['status'] == 4 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                 <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                     role=" button" class="btn btn-info btn-custom"> View Enrollment
                                                                     Forms
@@ -1505,7 +1505,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
 
                                                         <?php } else { ?>
-                                                            <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
+                                                            <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3  || $_GET['status'] == 4 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                 <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                     role=" button" class="btn btn-warning btn-custom"> Add Enrollment
                                                                     Forms
@@ -1520,7 +1520,7 @@ if ($user->isLoggedIn()) {
                                                                         $override->getNews('respiratory', 'status', 1, 'enrollment_id', $sid)
                                                                     ) { ?>
 
-                                                            <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
+                                                            <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3  || $_GET['status'] == 4 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                 <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                     role=" button" class="btn btn-info btn-custom"> View Enrollment
                                                                     Forms
@@ -1528,7 +1528,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
 
                                                         <?php } else { ?>
-                                                            <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
+                                                            <?php if ($value['eligible'] || $_GET['status'] == 2 || $_GET['status'] == 3  || $_GET['status'] == 4 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
                                                                 <a href="info.php?id=6&status=<?= $_GET['status'] ?>&sid=<?= $sid ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                                     role=" button" class="btn btn-warning btn-custom"> Add Enrollment
                                                                     Forms

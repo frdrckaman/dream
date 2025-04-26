@@ -96,12 +96,27 @@ class OverideData
         return $num;
     }
 
+    public function countDataNotNull($table, $field, $value, $field1, $value1)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 != '$value1'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
     public function countData1($table, $field, $value, $field1, $value1, $field2, $value2)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $field2 = '$value2'");
         $num = $query->rowCount();
         return $num;
     }
+
+    public function countData1NotNull($table, $field, $value, $field1, $value1, $field2, $value2)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 != '$value1' AND $field2 = '$value2'");
+        $num = $query->rowCount();
+        return $num;
+    }
+    
 
     public function countData2($table, $field, $value, $field1, $value1, $field2, $value2, $field3, $value3)
     {
@@ -116,6 +131,7 @@ class OverideData
         $num = $query->rowCount();
         return $num;
     }
+
 
     public function countSiteData($table, $field, $status, $site1, $value1, $site2, $value2, $site3, $value3, $site4, $value4, $site5, $value5, $site6, $value6, $site7, $value7)
     {
@@ -474,6 +490,14 @@ class OverideData
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function getWithLimit2DescNotNull($table, $field, $value, $field1, $value1, $value2, $field2, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 != '$value1' AND $value2 = '$field2' ORDER BY 'id' DESC LIMIT $page, $numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getWithLimit0Desc($table, $page, $numRec)
     {
         $query = $this->_pdo->query("SELECT * FROM $table ORDER BY 'id' DESC LIMIT $page, $numRec");
@@ -498,6 +522,13 @@ class OverideData
     public function getWithLimit1Desc($table, $where, $id, $where2, $id2, $page, $numRec)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' ORDER BY 'id' DESC LIMIT $page, $numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getWithLimit1DescNotNull($table, $where, $id, $where2, $id2, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 != '$id2' ORDER BY 'id' DESC LIMIT $page, $numRec");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
@@ -1018,9 +1049,23 @@ class OverideData
         return $result;
     }
 
+    public function getWithLimitSearchNews2NotNull($table, $where, $value, $where1, $value1, $searchTerm, $searchValue, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 != '$value1' AND ($searchTerm LIKE '%$searchValue%') limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getWithLimitSearchNewsCount2($table, $where, $value, $where1, $value1, $searchTerm, $searchValue)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1' AND  ($searchTerm LIKE '%$searchValue%')");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function getWithLimitSearchNewsCount2NotNull($table, $where, $value, $where1, $value1, $searchTerm, $searchValue)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 != '$value1' AND  ($searchTerm LIKE '%$searchValue%')");
         $num = $query->rowCount();
         return $num;
     }
@@ -1032,9 +1077,23 @@ class OverideData
         return $result;
     }
 
+    public function getWithLimitSearchNews3NotNull($table, $where, $value, $where1, $value1, $where2, $value2, $searchTerm, $searchValue, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 != '$value1'  AND $where2 = '$value2' AND ($searchTerm LIKE '%$searchValue%') limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getWithLimitSearchNewsCount3($table, $where, $value, $where1, $value1, $where2, $value2, $searchTerm, $searchValue)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1'  AND $where2 = '$value2' AND  ($searchTerm LIKE '%$searchValue%')");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function getWithLimitSearchNewsCount3NotNull($table, $where, $value, $where1, $value1, $where2, $value2, $searchTerm, $searchValue)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 != '$value1'  AND $where2 = '$value2' AND  ($searchTerm LIKE '%$searchValue%')");
         $num = $query->rowCount();
         return $num;
     }
