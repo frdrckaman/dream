@@ -1091,7 +1091,7 @@ class OverideData
         LEFT JOIN 
             diagnosis ON screening.id = diagnosis.enrollment_id
         WHERE 
-            screening.status = 1"
+            screening.status = 1 AND enrollment_form.status = 1 AND respiratory.status = 1 AND diagnosis.status = 1"
         );
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
             return $result;
