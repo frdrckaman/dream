@@ -63,6 +63,8 @@ $omitColumns = [
 // Fetch results from the database
 if($table == 'ALL'){
     $result = $override->download_all();
+}else if($table == 'TREATMENT'){
+    $result = $override->get('treatment_changes', 'status', 1);
 }else{
     $result = $override->get($table, 'status', 1);
 }

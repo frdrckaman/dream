@@ -98,6 +98,21 @@ if ($user->isLoggedIn()) {
                 $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
+            } else if (isset($_POST['download_treatement_xls'])) {
+                $ext = 'xls';
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                Redirect::to($url);
+                $pageError = $validate->errors();
+            } else if (isset($_POST['download_treatement_xlsx'])) {
+                $ext = 'xlsx';
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                Redirect::to($url);
+                $pageError = $validate->errors();
+            } else if (isset($_POST['download_treatement_csv'])) {
+                $ext = 'csv';
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                Redirect::to($url);
+                $pageError = $validate->errors();
             }
         }
         //     }
@@ -115,7 +130,7 @@ if ($user->isLoggedIn()) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Penplus Database | Data</title>
+    <title>DReam Database | Data</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -219,6 +234,16 @@ if ($user->isLoggedIn()) {
                                             <button type="submit" name="download_all_csv">Download All in Csv</button>&nbsp;&nbsp;&nbsp;
                                             <button type="submit" name="download_all_xls">Download All in xls</button>&nbsp;&nbsp;&nbsp;
                                             <button type="submit" name="download_all_xlsx">Download All in xlsx</button>&nbsp;&nbsp;&nbsp;
+                                            <!-- <button type="submit" name="download_stata">Download stata Data</button>&nbsp;&nbsp;&nbsp; -->
+                                            <hr>
+                                            <!-- <a href="data.php?id=2&table=<?= $tables['Tables_in_dream'] ?>" role=" button" class="btn btn-info"> View Recoreds </a> -->
+                                        </form>
+                                        <form method="post">
+                                            <input type="hidden" name="data" value="0">
+                                            <input type="hidden" name="table" value="TREATMENT">
+                                            <button type="submit" name="download_treatement_csv">Download treatement Changes in Csv</button>&nbsp;&nbsp;&nbsp;
+                                            <button type="submit" name="download_treatement_xls">Download treatement Changes  in xls</button>&nbsp;&nbsp;&nbsp;
+                                            <button type="submit" name="download_treatement_xlsx">Download treatement Changes  in xlsx</button>&nbsp;&nbsp;&nbsp;
                                             <!-- <button type="submit" name="download_stata">Download stata Data</button>&nbsp;&nbsp;&nbsp; -->
                                             <hr>
                                             <!-- <a href="data.php?id=2&table=<?= $tables['Tables_in_dream'] ?>" role=" button" class="btn btn-info"> View Recoreds </a> -->
