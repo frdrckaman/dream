@@ -1103,7 +1103,11 @@ class OverideData
         $query = $this->_pdo->query("UPDATE screening
                                     JOIN enrollment_form
                                     ON screening.id = enrollment_form.enrollment_id
-                                    SET screening.sex = enrollment_form.sex");
+                                    SET screening.sex = enrollment_form.sex
+                                    -- SET screening.age = enrollment_form.age
+                                    -- SET screening.dob = enrollment_form.dob
+                                    "
+                                    );
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
