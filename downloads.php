@@ -19,9 +19,9 @@ $omitColumns = [
     // 'REGISTRATION'
     'pid1',
     'pid2',
-    // 'sex',
-    // 'dob',
-    // 'age',
+    'sex',
+    'dob',
+    'age',
     'form_status',
     'date_completed',
     'completed_by',
