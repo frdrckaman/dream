@@ -401,9 +401,11 @@ if ($user->isLoggedIn()) {
                 <li class="nav-header">Records</li>
                 <?php foreach ($override->get('form_completness', 'status', 1) as $form_status) { ?>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="data.php?id=2&tables=<?= $tables['Tables_in_dream'] ?>&status=<?= $_GET['status'] ?>" class="nav-link">
                             <i class="nav-icon fas fa-circle"></i>
-                            <!-- <span class="badge badge-info right"><?= $override->countRowsWithStatus($form_status['id']); ?></span> -->
+                            <span class="badge badge-info right">
+                                <?= $override->countData('screening','status',1,'form_status',$form_status['id']) + $override->countData('enrollment_form','status',1,'form_status',$form_status['id']) + $override->countData('respiratory','status',1,'form_status',$form_status['id']) + $override->countData('diagnosis_test','status',1,'form_status',$form_status['id']) + $override->countData('diagnosis','status',1,'form_status',$form_status['id']); ?>
+                            </span>
                             <p>
                                 <?= $form_status['name']; ?>
                                 <i class="right fas fa-angle-left"></i>
@@ -412,7 +414,9 @@ if ($user->isLoggedIn()) {
                         <ul class="nav nav-treeview">
                             <?php foreach ($override->AllTables() as $table_name) {
                                 if (
-                                    $table_name['Tables_in_dream'] == 'screening' || $table_name['Tables_in_dream'] == 'enrollment_form' || $table_name['Tables_in_dream'] == 'respiratory' ||
+                                    $table_name['Tables_in_dream'] == 'screening' ||
+                                    $table_name['Tables_in_dream'] == 'enrollment_form' ||
+                                    $table_name['Tables_in_dream'] == 'respiratory' ||
                                     $table_name['Tables_in_dream'] == 'diagnosis' ||
                                     $table_name['Tables_in_dream'] == 'diagnosis_test'
                                 ) {
@@ -431,11 +435,11 @@ if ($user->isLoggedIn()) {
                                     }
                             ?>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="data.php?id=3&table=<?= $table_name['Tables_in_dream'] ?>&form_status=<?= $form_status['id'] ?>&status=1" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <!-- <span class="badge badge-info right"> -->
-                                            <!-- <?= $override->countData1($table_name['Tables_in_dream'], 'status', 1, 'form_status', $form_status['id'], 'facility_id', $user->data()->site_id); ?> -->
-                                            <!-- </span> -->
+                                            <span class="badge badge-info right">
+                                            <?= $override->countData1($table_name['Tables_in_dream'], 'status', 1, 'form_status', $form_status['id'], 'facility_id', $user->data()->site_id); ?>
+                                            </span>
                                             <p><?= $table; ?></p>
                                         </a>
                                     </li>

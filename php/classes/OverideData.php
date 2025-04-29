@@ -512,6 +512,41 @@ class OverideData
         return $result;
     }
 
+    public function getWithLimit000Count($table, $where, $id)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function getWithLimit000($table, $where, $id, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getWithLimit00Count($table, $where, $id, $where2, $id2)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function getWithLimit00($table, $where, $id, $where2, $id2, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getWithLimit1Count($table, $where, $id, $where2, $id2, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' limit $page,$numRec");
+        $num = $query->rowCount();
+        return $num;
+    }
+
     public function getWithLimit1($table, $where, $id, $where2, $id2, $page, $numRec)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' limit $page,$numRec");
@@ -804,6 +839,27 @@ class OverideData
         return $num;
     }
 
+
+    public function countRowsWithStatusCount($where,$id,$form_status,$form_status_value)
+    {
+        $totalCount = 0;
+        $allowedTables = ['screening', 'enrollment_form', 'respiratory', 'diagnosis', 'diagnosis_test'];
+
+        // Get all table names
+        $tablesQuery = $this->_pdo->query("SHOW TABLES");
+        $tables = $tablesQuery->fetchAll(PDO::FETCH_COLUMN);
+
+        // Iterate through allowed tables and count rows where form_statu = 1
+        foreach ($tables as $table) {
+            if (in_array($table, $allowedTables)) {
+                $query = $this->_pdo->query("SELECT * FROM `$table` WHERE $where = '$id' AND $form_status = '$form_status_value'");
+                $num = $query->rowCount();
+                return $num;
+            }
+        }
+
+        return $totalCount;
+    }
 
     public function countRowsWithStatus($form_status_value)
     {
@@ -1152,13 +1208,13 @@ class OverideData
             diagnosis_test ON screening.id = diagnosis_test.enrollment_id
         LEFT JOIN 
             diagnosis ON screening.id = diagnosis.enrollment_id
-        -- LEFT JOIN 
-        --     treatment_changes ON screening.id = treatment_changes.enrollment_id
+        LEFT JOIN 
+            treatment_changes ON screening.id = treatment_changes.enrollment_id
         WHERE 
             screening.status = 1
-        AND enrollment_form.status = 1
-        AND respiratory.status = 1
-        AND diagnosis.status = 1
+        -- AND enrollment_form.status = 1
+        -- AND respiratory.status = 1
+        -- AND diagnosis.status = 1
         -- AND treatment_changes.status = 1
         "
         );
