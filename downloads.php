@@ -36,6 +36,7 @@ $omitColumns = [
     'district',   
     'ward',   
     'village_street', 
+    'relapse_years',
     'immunosuppressive',   
     'immunosuppressive_diseases',   
     'immunosuppressive_specify',   
