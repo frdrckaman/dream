@@ -350,10 +350,10 @@ if ($user->isLoggedIn()) {
                                             $x = 1;
                                             $site_data = $override->get('sites', 'status', 1);
                                             $updateScreening = $override->updateScreening();
-                                            // $updateEnrollmentFormPID = $override->updateEnrollmentFormPID();
-                                            // $updateRespiratoryFormPID = $override->updateRespiratoryFormPID();
-                                            // $updateDiagnosisTestFormPID = $override->updateDiagnosisTestFormPID();
-                                            // $updateDiagnosisFormPID = $override->updateDiagnosisFormPID();
+                                            $updateEnrollmentFormPID = $override->updateEnrollmentFormPID();
+                                            $updateRespiratoryFormPID = $override->updateRespiratoryFormPID();
+                                            $updateDiagnosisTestFormPID = $override->updateDiagnosisTestFormPID();
+                                            $updateDiagnosisFormPID = $override->updateDiagnosisFormPID();
                                             foreach ($site_data as $row) {
                                                 $screened_male = $override->countData1('screening', 'status', 1, 'facility_id', $row['id'], 'sex', 1);
                                                 $screened_female = $override->countData1('screening', 'status', 1, 'facility_id', $row['id'], 'sex', 2);
