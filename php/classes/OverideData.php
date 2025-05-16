@@ -1161,7 +1161,51 @@ class OverideData
                                     ON screening.id = enrollment_form.enrollment_id
                                     SET screening.sex = enrollment_form.sex,
                                         screening.age = enrollment_form.age,
-                                        screening.dob = enrollment_form.dob
+                                        screening.dob = enrollment_form.dob,
+                                    ");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function updateEnrollmentFormPID()
+    {
+        $query = $this->_pdo->query("UPDATE enrollment_form
+                                    JOIN screening
+                                    ON enrollment_form.enrollment_id = screening.id
+                                    SET enrollment_form.pid = screening.pid
+                                    ");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function updateRespiratoryFormPID()
+    {
+        $query = $this->_pdo->query("UPDATE respiratory
+                                    JOIN screening
+                                    ON respiratory.enrollment_id = screening.id
+                                    SET respiratory.pid = screening.pid
+                                    ");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function updateDiagnosisTestFormPID()
+    {
+        $query = $this->_pdo->query("UPDATE diagnosis_test
+                                    JOIN screening
+                                    ON diagnosis_test.enrollment_id = screening.id
+                                    SET diagnosis_test.pid = screening.pid
+                                    ");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function updateDiagnosisFormPID()
+    {
+        $query = $this->_pdo->query("UPDATE diagnosis
+                                    JOIN screening
+                                    ON diagnosis.enrollment_id = screening.id
+                                    SET diagnosis.pid = screening.pid
                                     ");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;

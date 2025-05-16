@@ -29,7 +29,7 @@ if ($user->isLoggedIn()) {
     }
   }
 
-  if ($user->data()->accessLevel == 1) {
+  if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 1) {
     if ($_GET['facility_id'] != null) {
       $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
       $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id']);
