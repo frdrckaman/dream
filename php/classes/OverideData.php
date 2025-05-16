@@ -1161,7 +1161,7 @@ class OverideData
                                     ON screening.id = enrollment_form.enrollment_id
                                     SET screening.sex = enrollment_form.sex,
                                         screening.age = enrollment_form.age,
-                                        screening.dob = enrollment_form.dob,
+                                        screening.dob = enrollment_form.dob
                                     ");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
