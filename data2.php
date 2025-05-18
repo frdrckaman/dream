@@ -261,26 +261,9 @@ if ($user->isLoggedIn()) {
                                                 <?php
                                                 $x = 1;
                                                 foreach ($override->AllTables() as $tables) {
-
-                                                    
-                                                    if ($tables['Tables_in_dream'] == 'screening') {
-                                                        $table_name = 'Screening Form';
-                                                    } elseif ($tables['Tables_in_dream'] == 'enrollment_form') {
-                                                        $table_name = 'Enrollment Form';
-                                                    } elseif ($tables['Tables_in_dream'] == 'respiratory') {
-                                                        $table_name = 'Clinic Lab Form';
-                                                    } elseif ($tables['Tables_in_dream'] == 'diagnosis_test') {
-                                                        $table_name = 'Zonal Lab Form';
-                                                    } elseif ($tables['Tables_in_dream'] == 'diagnosis') {
-                                                        $table_name = 'Diagnosis Form';
-                                                    }
-
-
                                                     if (
-                                                        $tables['Tables_in_dream'] == 'screening' ||
-                                                        $tables['Tables_in_dream'] == 'enrollment_form' ||
-                                                        $tables['Tables_in_dream'] == 'respiratory' ||
-                                                        $tables['Tables_in_dream'] == 'diagnosis' ||
+                                                        $tables['Tables_in_dream'] == 'screening' ||   $tables['Tables_in_dream'] == 'enrollment_form' || $tables['Tables_in_dream'] == 'respiratory' ||
+                                                        $tables['Tables_in_dream'] == 'non_respiratory' || $tables['Tables_in_dream'] == 'diagnosis' ||
                                                         $tables['Tables_in_dream'] == 'diagnosis_test'
                                                     ) {
                                                 ?>
@@ -294,7 +277,7 @@ if ($user->isLoggedIn()) {
                                                                     <input class="form-check-input" type="checkbox" name="table_name[]" id="table_name[]" value="<?= $tables['Tables_in_dream']; ?>" <?php if ($tables['Tables_in_dream'] != '') {
                                                                                                                                                                                                             echo 'checked';
                                                                                                                                                                                                         } ?>>
-                                                                    <label class="form-check-label"><?= $table_name; ?></label>
+                                                                    <label class="form-check-label"><?= $tables['Tables_in_dream']; ?></label>
                                                                 </div>
                                                             </td>
                                                             <td class="table-user">
