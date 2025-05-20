@@ -29,18 +29,18 @@ if ($user->isLoggedIn()) {
     }
   }
 
-  if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 1) {
-    if ($_GET['facility_id'] != null) {
-      $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
-      $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id']);
-      $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
-      $completed = $override->countData1NotNull('diagnosis', 'status', 1, 'tb_otcome2', '', 'facility_id', $_GET['facility_id']);
-    } else {
+  if ($user->data()->accessLevel == 1 || $user->data()->position == 13) {
+    // if ($_GET['facility_id'] != null) {
+    //   $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
+    //   $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $_GET['facility_id']);
+    //   $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
+    //   $completed = $override->countData1NotNull('diagnosis', 'status', 1, 'tb_otcome2', '', 'facility_id', $_GET['facility_id']);
+    // } else {
       $screening = $override->getCount('screening', 'status', 1);
       $eligible = $override->countData('screening', 'status', 1, 'eligible', 1);
       $enrolled = $override->getCount('enrollment_form', 'status', 1);
       $completed = $override->countDataNotNull('diagnosis', 'status', 1, 'tb_otcome2', '');
-    }
+    // }
   } else {
     $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
     $eligible = $override->countData1('screening', 'status', 1, 'eligible', 1, 'facility_id', $user->data()->site_id);

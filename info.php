@@ -1539,9 +1539,9 @@ if ($user->isLoggedIn()) {
                                                     <hr>
                                                 <?php } ?>
                                                 <?php if ($user->data()->power == 1 || $user->data()->position == 1) { ?>
-                                                <a href="#delete_record<?= $sid ?>" role="button"
-                                                    class="btn btn-secondary btn-custom" data-toggle="modal">Delete
-                                                    Record</a>
+                                                    <a href="#delete_record<?= $sid ?>" role="button"
+                                                        class="btn btn-secondary btn-custom" data-toggle="modal">Delete
+                                                        Record</a>
                                                     <a href="#restore_record<?= $sid ?>" role="button"
                                                         class="btn btn-primary btn-custom" data-toggle="modal">Restore
                                                         Record</a>
@@ -2021,7 +2021,8 @@ if ($user->isLoggedIn()) {
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>N0</th>
+                                                    <th>No</th>
+                                                    <th>Code</th>
                                                     <th>Name</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
@@ -2036,6 +2037,9 @@ if ($user->isLoggedIn()) {
                                                     <tr>
                                                         <td class="table-user">
                                                             <?= $x; ?>
+                                                        </td>
+                                                         <td class="table-user">
+                                                            <?= $value['id']; ?>
                                                         </td>
                                                         <td class="table-user">
                                                             <?= $value['name']; ?>
