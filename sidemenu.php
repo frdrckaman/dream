@@ -335,17 +335,19 @@ if ($user->isLoggedIn()) {
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <!-- <a href="add.php?id=13&status=1&sid=&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+                        <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) { ?>
+                            <li class="nav-item">
+                                <!-- <a href="add.php?id=13&status=1&sid=&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
                                 class="nav-link"> -->
-                            <a href="add.php?id=13&status=1" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Add
-                                    <span class="right badge badge-success">New Patient</span>
-                                </p>
-                            </a>
-                        </li>
+                                <a href="add.php?id=13&status=1" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Add
+                                        <span class="right badge badge-success">New Patient</span>
+                                    </p>
+                                </a>
+                            </li>
+                        <?php } ?>
                         <li class="nav-item">
                             <a href="info.php?id=3&status=1&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
                                 class="nav-link">
@@ -398,209 +400,211 @@ if ($user->isLoggedIn()) {
                         <?php } ?>
                     </ul>
                 </li>
-                <li class="nav-header">Records</li>
-                <?php foreach ($override->get('form_completness', 'status', 1) as $form_status) { ?>
-                    <li class="nav-item">
-                        <a href="data.php?id=2&tables=<?= $tables['Tables_in_dream'] ?>&status=<?= $_GET['status'] ?>" class="nav-link">
-                            <i class="nav-icon fas fa-circle"></i>
-                            <span class="badge badge-info right">
-                                <?= $override->countData('screening','status',1,'form_status',$form_status['id']) + $override->countData('enrollment_form','status',1,'form_status',$form_status['id']) + $override->countData('respiratory','status',1,'form_status',$form_status['id']) + $override->countData('diagnosis_test','status',1,'form_status',$form_status['id']) + $override->countData('diagnosis','status',1,'form_status',$form_status['id']); ?>
-                            </span>
-                            <p>
-                                <?= $form_status['name']; ?>
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <?php foreach ($override->AllTables() as $table_name) {
-                                if (
-                                    $table_name['Tables_in_dream'] == 'screening' ||
-                                    $table_name['Tables_in_dream'] == 'enrollment_form' ||
-                                    $table_name['Tables_in_dream'] == 'respiratory' ||
-                                    $table_name['Tables_in_dream'] == 'diagnosis' ||
-                                    $table_name['Tables_in_dream'] == 'diagnosis_test'
-                                ) {
+                <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) { ?>
+                    <li class="nav-header">Records</li>
+                    <?php foreach ($override->get('form_completness', 'status', 1) as $form_status) { ?>
+                        <li class="nav-item">
+                            <a href="data.php?id=2&tables=<?= $tables['Tables_in_dream'] ?>&status=<?= $_GET['status'] ?>" class="nav-link">
+                                <i class="nav-icon fas fa-circle"></i>
+                                <span class="badge badge-info right">
+                                    <?= $override->countData('screening', 'status', 1, 'form_status', $form_status['id']) + $override->countData('enrollment_form', 'status', 1, 'form_status', $form_status['id']) + $override->countData('respiratory', 'status', 1, 'form_status', $form_status['id']) + $override->countData('diagnosis_test', 'status', 1, 'form_status', $form_status['id']) + $override->countData('diagnosis', 'status', 1, 'form_status', $form_status['id']); ?>
+                                </span>
+                                <p>
+                                    <?= $form_status['name']; ?>
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <?php foreach ($override->AllTables() as $table_name) {
                                     if (
-                                        $table_name['Tables_in_dream'] == 'screening'
+                                        $table_name['Tables_in_dream'] == 'screening' ||
+                                        $table_name['Tables_in_dream'] == 'enrollment_form' ||
+                                        $table_name['Tables_in_dream'] == 'respiratory' ||
+                                        $table_name['Tables_in_dream'] == 'diagnosis' ||
+                                        $table_name['Tables_in_dream'] == 'diagnosis_test'
                                     ) {
-                                        $table = 'Screening';
-                                    } else if ($table_name['Tables_in_dream'] == 'enrollment_form') {
-                                        $table = 'Enrollment';
-                                    } else if ($table_name['Tables_in_dream'] == 'respiratory') {
-                                        $table = 'Laboratory (Clinic)';
-                                    } else if ($table_name['Tables_in_dream'] == 'diagnosis_test') {
-                                        $table = 'Laboratory (Zonal/CTRL)';
-                                    } else if ($table_name['Tables_in_dream'] == 'diagnosis') {
-                                        $table = 'Diagnosis';
-                                    }
-                            ?>
-                                    <li class="nav-item">
-                                        <a href="data.php?id=3&table=<?= $table_name['Tables_in_dream'] ?>&form_status=<?= $form_status['id'] ?>&status=1" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <span class="badge badge-info right">
-                                            <?= $override->countData1($table_name['Tables_in_dream'], 'status', 1, 'form_status', $form_status['id'], 'facility_id', $user->data()->site_id); ?>
-                                            </span>
-                                            <p><?= $table; ?></p>
-                                        </a>
-                                    </li>
-                            <?php }
-                            } ?>
-                        </ul>
-                    </li>
-                <?php } ?>
-                <?php if ($user->data()->power == 1) { ?>
+                                        if (
+                                            $table_name['Tables_in_dream'] == 'screening'
+                                        ) {
+                                            $table = 'Screening';
+                                        } else if ($table_name['Tables_in_dream'] == 'enrollment_form') {
+                                            $table = 'Enrollment';
+                                        } else if ($table_name['Tables_in_dream'] == 'respiratory') {
+                                            $table = 'Laboratory (Clinic)';
+                                        } else if ($table_name['Tables_in_dream'] == 'diagnosis_test') {
+                                            $table = 'Laboratory (Zonal/CTRL)';
+                                        } else if ($table_name['Tables_in_dream'] == 'diagnosis') {
+                                            $table = 'Diagnosis';
+                                        }
+                                ?>
+                                        <li class="nav-item">
+                                            <a href="data.php?id=3&table=<?= $table_name['Tables_in_dream'] ?>&form_status=<?= $form_status['id'] ?>&status=1" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <span class="badge badge-info right">
+                                                    <?= $override->countData1($table_name['Tables_in_dream'], 'status', 1, 'form_status', $form_status['id'], 'facility_id', $user->data()->site_id); ?>
+                                                </span>
+                                                <p><?= $table; ?></p>
+                                            </a>
+                                        </li>
+                                <?php }
+                                } ?>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if ($user->data()->power == 1) { ?>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <span class="badge badge-info right"><?= $validations; ?></span>
+                                <p>
+                                    Validation Tool <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="add.php?id=17&status=1" class="nav-link">
+                                        <i class="nav-icon fas fa-th"></i>
+                                        <p>
+                                            Add
+                                            <span class="right badge badge-danger">New Validation</span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="info.php?id=16&status=1" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <span class="badge badge-info right"><?= $validations; ?></span>
+                                        <p>Total Validations</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <span class="badge badge-info right"><?= $validations; ?></span>
+                                <p>
+                                    Test Offline Mode <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="add.php?id=18" class="nav-link">
+                                        <i class="nav-icon fas fa-th"></i>
+                                        <p>
+                                            Add
+                                            <span class="right badge badge-danger">New User</span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="info.php?id=17" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <span class="badge badge-info right"><?= $Offline_Users; ?></span>
+                                        <p>Total Users</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <span class="badge badge-info right"><?= $validations; ?></span>
-                            <p>
-                                Validation Tool <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="add.php?id=17&status=1" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Add
-                                        <span class="right badge badge-danger">New Validation</span>
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="info.php?id=16&status=1" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <span class="badge badge-info right"><?= $validations; ?></span>
-                                    <p>Total Validations</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <span class="badge badge-info right"><?= $validations; ?></span>
-                            <p>
-                                Test Offline Mode <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="add.php?id=18" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Add
-                                        <span class="right badge badge-danger">New User</span>
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="info.php?id=17" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <span class="badge badge-info right"><?= $Offline_Users; ?></span>
-                                    <p>Total Users</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                <?php } ?>
-                <li class="nav-item">
-                    <!-- <a href="#" class="nav-link">
+                        <!-- <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <span class="badge badge-info right"><?= $override->getCount('sites', 'status', 1); ?></span>
                         <p>
                             Facilities <i class="fas fa-angle-left right"></i>
                         </p>
                     </a> -->
-                    <ul class="nav nav-treeview">
-                        <?php if ($user->data()->power == 1) {
-                        ?>
+                        <ul class="nav nav-treeview">
+                            <?php if ($user->data()->power == 1) {
+                            ?>
+                                <li class="nav-item">
+                                    <a href="add.php?id=3" class="nav-link">
+                                        <i class="nav-icon fas fa-th"></i>
+                                        <p>
+                                            Add
+                                            <span class="right badge badge-danger">New Client</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            <?php } ?>
+
                             <li class="nav-item">
-                                <a href="add.php?id=3" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Add
-                                        <span class="right badge badge-danger">New Client</span>
-                                    </p>
+                                <a href="info.php?id=11" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"></span>
+                                    <p>List of Facilities</p>
                                 </a>
                             </li>
-                        <?php } ?>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Reports <i class="fas fa-angle-left right"></i>
 
-                        <li class="nav-item">
-                            <a href="info.php?id=11" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <span class="badge badge-info right"></span>
-                                <p>List of Facilities</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            Reports <i class="fas fa-angle-left right"></i>
-
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="summary.php" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <!-- <span class="badge badge-info right"> -->
-                                <!-- <?= $all; ?> -->
-                                <!-- </span> -->
-                                <p>Summary</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="summary_reports.php" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <!-- <span class="badge badge-info right"> -->
-                                <!-- <?= $all; ?> -->
-                                <!-- </span> -->
-                                <p>Summary Report</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="summary_reports3.php" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <!-- <span class="badge badge-info right"> -->
-                                <!-- <?= $all; ?> -->
-                                <!-- </span> -->
-                                <p>Summary Report 3</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="summary_reports4.php" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <!-- <span class="badge badge-info right"> -->
-                                <!-- <?= $all; ?> -->
-                                <!-- </span> -->
-                                <p>Summary Report 4</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="report.php" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <!-- <span class="badge badge-info right"> -->
-                                <!-- <?= $all; ?> -->
-                                <!-- </span> -->
-                                <p>Full Report</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="summary_dar_zone.php" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <!-- <span class="badge badge-info right"> -->
-                                <!-- <?= $all; ?> -->
-                                <!-- </span> -->
-                                <p>Zone Summary</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) { ?>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="summary.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <!-- <span class="badge badge-info right"> -->
+                                    <!-- <?= $all; ?> -->
+                                    <!-- </span> -->
+                                    <p>Summary</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="summary_reports.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <!-- <span class="badge badge-info right"> -->
+                                    <!-- <?= $all; ?> -->
+                                    <!-- </span> -->
+                                    <p>Summary Report</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="summary_reports3.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <!-- <span class="badge badge-info right"> -->
+                                    <!-- <?= $all; ?> -->
+                                    <!-- </span> -->
+                                    <p>Summary Report 3</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="summary_reports4.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <!-- <span class="badge badge-info right"> -->
+                                    <!-- <?= $all; ?> -->
+                                    <!-- </span> -->
+                                    <p>Summary Report 4</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="report.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <!-- <span class="badge badge-info right"> -->
+                                    <!-- <?= $all; ?> -->
+                                    <!-- </span> -->
+                                    <p>Full Report</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="summary_dar_zone.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <!-- <span class="badge badge-info right"> -->
+                                    <!-- <?= $all; ?> -->
+                                    <!-- </span> -->
+                                    <p>Zone Summary</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                <?php } ?>
+                <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2 || $user->data()->position == 13) { ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
