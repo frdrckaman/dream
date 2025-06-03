@@ -51,6 +51,11 @@ if ($user->isLoggedIn()) {
                 'status' => 0,
             ), Input::get('id'));
             $successMessage = 'Site Deleted Successful';
+        } elseif (Input::get('restore_sites')) {
+            $user->updateRecord('sites', array(
+                'status' => 1,
+            ), Input::get('id'));
+            $successMessage = 'Site Restored Successful';
         } elseif (Input::get('delete_positions')) {
             $user->updateRecord('position', array(
                 'status' => 0,
@@ -873,6 +878,8 @@ if ($user->isLoggedIn()) {
                                                     </ol>
                                                 </div>
                                             </div>
+                                            <a href="sites.php">
+                                                Download</a>
                                             <hr>
                                         </div><!-- /.container-fluid -->
                                     </section>
@@ -884,6 +891,8 @@ if ($user->isLoggedIn()) {
                                                     <th>No</th>
                                                     <th>Facility Id</th>
                                                     <th>Name</th>
+                                                    <th>Zone ID</th>
+                                                    <th>Zone Name</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
@@ -893,6 +902,7 @@ if ($user->isLoggedIn()) {
                                                 $x = 1;
                                                 foreach ($sites as $value) {
                                                     $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
+                                                    $zones = $override->getNews('zones', 'status', 1, 'id', $sites['zone'])[0];
                                                 ?>
                                                     <tr>
                                                         <td class="table-user">
@@ -905,6 +915,12 @@ if ($user->isLoggedIn()) {
                                                             <?= $value['name']; ?>
                                                         </td>
                                                         <td class="table-user">
+                                                            <?= $value['zone']; ?>
+                                                        </td>
+                                                        <td class="table-user">
+                                                            <?= $zones['name']; ?>
+                                                        </td>
+                                                        <td class="table-user">
                                                             <?php if ($value['status'] == 1) { ?>
                                                                 <a href="#" class="btn btn-success">Active</a>
                                                             <?php } else { ?>
@@ -912,8 +928,10 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </td>
                                                         <td class="table-user">
-                                                            <a href="add.php?id=2&site_id=<?= $value['id'] ?>"
+                                                            <a href="add.php?id=2&zone=<?= $value['zone'] ?>&site_id=<?= $value['id'] ?>"
                                                                 class="btn btn-info">Update</a>
+                                                            <a href="#restore<?= $value['id'] ?>" role="button"
+                                                                class="btn btn-warning" data-toggle="modal">Restore</a>
                                                             <a href="#delete<?= $value['id'] ?>" role="button"
                                                                 class="btn btn-danger" data-toggle="modal">Delete</a>
                                                         </td>
@@ -947,13 +965,45 @@ if ($user->isLoggedIn()) {
                                                             </form>
                                                         </div>
                                                     </div>
+                                                    <div class="modal fade" id="restore<?= $value['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <form method="post">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
+                                                                        <h4>Restore Site</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <strong style="font-weight: bold;color: red">
+                                                                            <p>Are you sure you want to restore this site</p>
+                                                                        </strong>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $value['id'] ?>">
+                                                                        <input type="submit" name="restore_sites" value="Restore"
+                                                                            class="btn btn-warning">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
-                                                <tr>
-                                                    <th>Study Id</th>
-                                                    <th>Site</th>
+                                                  <tr>
+                                                    <th>No</th>
+                                                    <th>Facility Id</th>
+                                                    <th>Name</th>
+                                                    <th>Zone ID</th>
+                                                    <th>Zone Name</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
@@ -2038,7 +2088,7 @@ if ($user->isLoggedIn()) {
                                                         <td class="table-user">
                                                             <?= $x; ?>
                                                         </td>
-                                                         <td class="table-user">
+                                                        <td class="table-user">
                                                             <?= $value['id']; ?>
                                                         </td>
                                                         <td class="table-user">

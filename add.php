@@ -166,6 +166,9 @@ if ($user->isLoggedIn()) {
             }
         } elseif (Input::get('add_sites')) {
             $validate = $validate->check($_POST, array(
+                'zone' => array(
+                    'required' => true,
+                ),
                 'name' => array(
                     'required' => true,
                 ),
@@ -176,12 +179,14 @@ if ($user->isLoggedIn()) {
                     if ($site) {
                         $user->updateRecord('sites', array(
                             'name' => Input::get('name'),
+                            'zone' => Input::get('zone'),
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
                         ), $_GET['site_id']);
                         $successMessage = 'Site Successful Updated';
                     } else {
                         $user->createRecord('sites', array(
+                            'zone' => Input::get('zone'),
                             'name' => Input::get('name'),
                             'entry_date' => date('Y-m-d'),
                             'arm' => 1,
@@ -217,6 +222,7 @@ if ($user->isLoggedIn()) {
                     $site = $override->getNews('sites', 'status', 1, 'id', $_GET['site_id']);
                     if ($site) {
                         $user->updateRecord('sites', array(
+                                                        'zone' => Input::get('zone'),
                             'name' => Input::get('name'),
                             'entry_date' => Input::get('entry_date'),
                             'arm' => Input::get('arm'),
@@ -233,6 +239,7 @@ if ($user->isLoggedIn()) {
                         $successMessage = 'Site Successful Updated';
                     } else {
                         $user->createRecord('sites', array(
+                                                        'zone' => Input::get('zone'),
                             'name' => Input::get('name'),
                             'entry_date' => Input::get('entry_date'),
                             'arm' => Input::get('arm'),
@@ -2574,6 +2581,7 @@ if ($user->isLoggedIn()) {
         <?php } elseif ($_GET['id'] == 2) { ?>
             <?php
             $sites = $override->getNews('sites', 'status', 1, 'id', $_GET['site_id'])[0];
+            $zones = $override->getNews('zones', 'status', 1, 'id', $sites['zone'])[0];
             ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -2628,6 +2636,23 @@ if ($user->isLoggedIn()) {
                                     <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
                                         <div class="card-body">
                                             <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="mb-2">
+                                                        <label for="zone" class="form-label">Zone</label>
+                                                        <select id="zone" name="zone" class="form-control" required>
+                                                            <option value="<?= $sites['zone'] ?>"><?php if ($sites['zone']) {
+                                                                                                    print_r($zones['name']);
+                                                                                                } else {
+                                                                                                    echo 'Select zone';
+                                                                                                } ?>
+                                                            </option>
+                                                            <?php foreach ($override->get('zones', 'status', 1) as $zone) { ?>
+                                                                <option value="<?= $zone['id'] ?>"><?= $zone['name'] ?>
+                                                                </option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <div class="col-sm-6">
                                                     <div class="mb-2">
                                                         <label for="name" class="form-label">Name</label>
