@@ -878,8 +878,12 @@ if ($user->isLoggedIn()) {
                                                     </ol>
                                                 </div>
                                             </div>
-                                            <a href="sites.php">
-                                                Download</a>
+                                            <a href="sites.php">Download All Zone</a>
+                                            <a href="sites.php?zone=1">Download Dar Zone</a>
+                                            <a href="sites.php?zone=2">Download Mwanza Zone</a>
+                                            <a href="sites.php?zone=3">Download Dodoma Zone</a>
+                                            <a href="sites.php?zone=4">Download Mbeya Zone</a>
+                                            <a href="sites.php?zone=5">Download Zanzibar Zone</a>
                                             <hr>
                                         </div><!-- /.container-fluid -->
                                     </section>
@@ -901,7 +905,7 @@ if ($user->isLoggedIn()) {
                                                 <?php
                                                 $x = 1;
                                                 foreach ($sites as $value) {
-                                                    $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
+                                                    $sites = $override->getNews('sites', 'status', 1, 'id', $value['id'])[0];
                                                     $zones = $override->getNews('zones', 'status', 1, 'id', $sites['zone'])[0];
                                                 ?>
                                                     <tr>
@@ -998,7 +1002,7 @@ if ($user->isLoggedIn()) {
                                                 } ?>
                                             </tbody>
                                             <tfoot>
-                                                  <tr>
+                                                <tr>
                                                     <th>No</th>
                                                     <th>Facility Id</th>
                                                     <th>Name</th>

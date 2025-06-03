@@ -318,22 +318,37 @@ if ($user->isLoggedIn()) {
                                 <!-- /.card-header -->
                                 <!-- Adjusted Table -->
                                 <div class="card-body p-0">
-                                     <table class="table table-bordered table-striped text-center">
+                                    <table class="table table-bordered table-striped text-center">
                                         <thead>
                                             <tr>
                                                 <th>Site ID</th>
                                                 <th>Site Name</th>
-                                                <th>Zone</th>
+                                                <th>Zone ID</th>
+                                                <th>Zone Name</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $sites = $override->get('sites', 'status', 1);
+                                            $zone = $_GET['zone'] ?? '';
+                                            // Check if zone is set and not empty
+                                            // If zone is not set or empty, fetch all sites with status 1
+                                            // If zone is set, fetch sites with status 1 and the specified zone
+                                            // $sites = $override->getNews('sites', 'status', 1, 'zone', $_GET['zone']);
+                                            // Fetch all sites with status 1, optionally filtered by zone
+                                            if (empty($zone)) {
+                                                $sites = $override->get('sites', 'status', 1);
+                                            }else{
+                                                $sites = $override->getNews('sites', 'status', 1, 'zone', $_GET['zone']);
+                                            }
+                                            // Fetch all sites with status 1
+                                            // $sites = $override->getNews('sites', 'status', 1, 'id', $value['id'])[0];
                                             foreach ($sites as $site) {
+                                                $zones = $override->getNews('zones', 'status', 1, 'id', $site['zone'])[0];
                                                 echo "<tr>";
                                                 echo "<td>{$site['id']}</td>";
                                                 echo "<td>{$site['name']}</td>";
-                                                echo "<td>{$site['zone']}</td>";
+                                                echo "<td>{$zones['id']}</td>";
+                                                echo "<td>{$zones['name']}</td>";
                                                 echo "</tr>";
                                             }
                                             ?>
