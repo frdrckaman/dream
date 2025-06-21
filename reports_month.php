@@ -214,6 +214,7 @@ if ($user->isLoggedIn()) {
                                                 $screeningWhere = getDateWhereClause('screening_date', $selectedMonth, $selectedYear);
                                                 $screened_male = $override->customCount('screening', 'status', 1, 'facility_id', $row['id'], 'sex', 1, $screeningWhere);
                                                 $screened_female = $override->customCount('screening', 'status', 1, 'facility_id', $row['id'], 'sex', 2, $screeningWhere);
+                                                $screened = $override->customCountSubTotal('screening', 'status', 1, 'facility_id', $row['id'], $screeningWhere);
 
                                                 $eligible_male = $override->customCount1('screening', 'status', 1, 'eligible', 1, 'facility_id', $row['id'], 'sex', 1, $screeningWhere);
                                                 $eligible_female = $override->customCount1('screening', 'status', 1, 'eligible', 1, 'facility_id', $row['id'], 'sex', 2, $screeningWhere);
