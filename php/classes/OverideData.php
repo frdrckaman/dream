@@ -116,7 +116,7 @@ class OverideData
         $num = $query->rowCount();
         return $num;
     }
-    
+
 
     public function countData2($table, $field, $value, $field1, $value1, $field2, $value2, $field3, $value3)
     {
@@ -840,7 +840,7 @@ class OverideData
     }
 
 
-    public function countRowsWithStatusCount($where,$id,$form_status,$form_status_value)
+    public function countRowsWithStatusCount($where, $id, $form_status, $form_status_value)
     {
         $totalCount = 0;
         $allowedTables = ['screening', 'enrollment_form', 'respiratory', 'diagnosis', 'diagnosis_test'];
@@ -1236,7 +1236,8 @@ class OverideData
 
     public function download_all()
     {
-        $query = $this->_pdo->query("SELECT 
+        $query = $this->_pdo->query(
+            "SELECT 
             screening.*,
             enrollment_form.*,
             respiratory.*,
@@ -1262,7 +1263,68 @@ class OverideData
         -- AND treatment_changes.status = 1
         "
         );
-            $result = $query->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
-        }
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    // public function customCount1($sql)
+    // {
+    //     $query = $this->_pdo->query($sql);
+    //     return $query->fetchColumn();
+    // }
+
+    public function customCount2($sql)
+    {
+        $query = $this->_pdo->query($sql);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function customCount($table,$where,$value,$where1,$value1,$where2,$value2,$screeningWhere)
+    {
+        // SELECT COUNT(*) FROM screening WHERE status=1 AND facility_id='{$row['id']}' AND sex=1 $screeningWhere"
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1'  AND $where2 = '$value2' $screeningWhere");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function customCount1($table,$where,$value,$where1,$value1,$where2,$value2,$where3,$value3,$screeningWhere)
+    {
+        // SELECT COUNT(*) FROM screening WHERE status=1 AND facility_id='{$row['id']}' AND sex=1 $screeningWhere"
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1'  AND $where2 = '$value2'  AND $where3 = '$value3' $screeningWhere");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function customCountSubTotal($table,$where,$value,$where1,$value1,$screeningWhere)
+    {
+        // SELECT COUNT(*) FROM screening WHERE status=1 AND facility_id='{$row['id']}' AND sex=1 $screeningWhere"
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1' $screeningWhere");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function customCountTotal($table,$where,$value,$screeningWhere)
+    {
+        // SELECT COUNT(*) FROM screening WHERE status=1 AND facility_id='{$row['id']}' AND sex=1 $screeningWhere"
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' $screeningWhere");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function customCountTotal1($table,$where,$value,$where1,$value1,$where2,$value2,$screeningWhere)
+    {
+        // SELECT COUNT(*) FROM screening WHERE status=1 AND facility_id='{$row['id']}' AND sex=1 $screeningWhere"
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1' AND $where2 = '$value2' $screeningWhere");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+
+    public function getWithLimitSearchNews_1_3($table, $where, $value, $where1, $value1, $where2, $value2, $searchTerm, $searchValue, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1'  AND $where2 = '$value2' AND ($searchTerm LIKE '%$searchValue%') limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }

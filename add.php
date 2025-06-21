@@ -60,6 +60,9 @@ if ($user->isLoggedIn()) {
                     'email_address' => array(
                         'unique' => 'user'
                     ),
+                    'zone' => array(
+                        'required' => true,
+                    ),
                 ));
             }
             if ($validate->passed()) {
@@ -96,6 +99,7 @@ if ($user->isLoggedIn()) {
                             'phone_number2' => Input::get('phone_number2'),
                             'email_address' => Input::get('email_address'),
                             'sex' => Input::get('sex'),
+                            'zone' => Input::get('zone'),
                             'position' => Input::get('position'),
                             'accessLevel' => Input::get('accessLevel'),
                             'power' => Input::get('power'),
@@ -116,6 +120,7 @@ if ($user->isLoggedIn()) {
                             'position' => Input::get('position'),
                             'accessLevel' => $accessLevel,
                             'power' => Input::get('power'),
+                            'zone' => Input::get('zone'),
                             'password' => Hash::make($password, $salt),
                             'salt' => $salt,
                             'create_on' => date('Y-m-d'),
@@ -222,7 +227,7 @@ if ($user->isLoggedIn()) {
                     $site = $override->getNews('sites', 'status', 1, 'id', $_GET['site_id']);
                     if ($site) {
                         $user->updateRecord('sites', array(
-                                                        'zone' => Input::get('zone'),
+                            'zone' => Input::get('zone'),
                             'name' => Input::get('name'),
                             'entry_date' => Input::get('entry_date'),
                             'arm' => Input::get('arm'),
@@ -239,7 +244,7 @@ if ($user->isLoggedIn()) {
                         $successMessage = 'Site Successful Updated';
                     } else {
                         $user->createRecord('sites', array(
-                                                        'zone' => Input::get('zone'),
+                            'zone' => Input::get('zone'),
                             'name' => Input::get('name'),
                             'entry_date' => Input::get('entry_date'),
                             'arm' => Input::get('arm'),
@@ -311,6 +316,11 @@ if ($user->isLoggedIn()) {
                 $pid = $override->getNews('pids', 'facility_id', $user->data()->site_id, 'status', 1)[0];
                 $pid_merged = $pid['pid'] . '_' . Input::get('pid1');
 
+                // if ($pid['pid'] == $pid_merged) {
+                //     $errorMessage = 'Consent Date Can not be less than Screening Date';
+                // } elseif (Input::get('pid1') != Input::get('pid2')) {
+                //     $errorMessage = 'PID"s are not Matching please re-check and Submit again';
+                //     // } elseif (Input::get('consent') == 1) {
                 // if (Input::get('consent') == 1 && (Input::get('consent_date') < $screening['screening_date'])) {
                 //     $errorMessage = 'Consent Date Can not be less than Screening Date';
                 // } elseif (Input::get('consent') == 2 && !empty(trim(Input::get('consent_date')))) {
@@ -2560,6 +2570,36 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-sm-12">
+                                                <div class="row-form clearfix">
+                                                    <div class="form-group">
+                                                        <label>Zone</label>
+                                                        <select class="form-control" name="zone" style="width: 100%;"
+                                                            required>
+                                                            <option value="<?= $staff['zone'] ?>"><?php if ($staff['zone']) {
+                                                                                                        if ($staff['zone'] == 1) {
+                                                                                                            echo 'Dar es salaam';
+                                                                                                        } elseif ($staff['zone'] == 2) {
+                                                                                                            echo 'Mwanza';
+                                                                                                        } elseif ($staff['zone'] == 3) {
+                                                                                                            echo 'Dodoma';
+                                                                                                        } elseif ($staff['zone'] == 4) {
+                                                                                                            echo 'Mbeya';
+                                                                                                        } elseif ($staff['zone'] == 5) {
+                                                                                                            echo 'Zanzibar';
+                                                                                                        }
+                                                                                                    } else {
+                                                                                                        echo 'Select';
+                                                                                                    } ?></option>
+                                                            <option value="1">Dar es salaam</option>
+                                                            <option value="2">Mwanza</option>
+                                                            <option value="3">Dodoma</option>
+                                                            <option value="4">Mbeya</option>
+                                                            <option value="5">Zanzibar</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
@@ -2641,10 +2681,10 @@ if ($user->isLoggedIn()) {
                                                         <label for="zone" class="form-label">Zone</label>
                                                         <select id="zone" name="zone" class="form-control" required>
                                                             <option value="<?= $sites['zone'] ?>"><?php if ($sites['zone']) {
-                                                                                                    print_r($zones['name']);
-                                                                                                } else {
-                                                                                                    echo 'Select zone';
-                                                                                                } ?>
+                                                                                                        print_r($zones['name']);
+                                                                                                    } else {
+                                                                                                        echo 'Select zone';
+                                                                                                    } ?>
                                                             </option>
                                                             <?php foreach ($override->get('zones', 'status', 1) as $zone) { ?>
                                                                 <option value="<?= $zone['id'] ?>"><?= $zone['name'] ?>

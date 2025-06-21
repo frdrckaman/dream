@@ -398,6 +398,7 @@ if ($user->isLoggedIn()) {
                                     List of Staff ( <?= $total_user; ?> )
                                 </h1>
                             </div>
+
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
@@ -422,6 +423,12 @@ if ($user->isLoggedIn()) {
                                                         List of Staff
                                                     </div>
                                                 </div>
+                                                <a href="staff.php">Download All Zone</a>
+                                                <a href="staff.php?zone=1">Download Dar Zone</a>
+                                                <a href="staff.php?zone=2">Download Mwanza Zone</a>
+                                                <a href="staff.php?zone=3">Download Dodoma Zone</a>
+                                                <a href="staff.php?zone=4">Download Mbeya Zone</a>
+                                                <a href="staff.php?zone=5">Download Zanzibar Zone</a>
                                                 <div class="col-sm-6">
                                                     <ol class="breadcrumb float-sm-right">
                                                         <li class="breadcrumb-item">
