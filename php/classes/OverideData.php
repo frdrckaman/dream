@@ -1267,19 +1267,6 @@ class OverideData
         return $result;
     }
 
-    // public function customCount1($sql)
-    // {
-    //     $query = $this->_pdo->query($sql);
-    //     return $query->fetchColumn();
-    // }
-
-    public function customCount2($sql)
-    {
-        $query = $this->_pdo->query($sql);
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
-
     public function customCount($table,$where,$value,$where1,$value1,$where2,$value2,$screeningWhere)
     {
         // SELECT COUNT(*) FROM screening WHERE status=1 AND facility_id='{$row['id']}' AND sex=1 $screeningWhere"
@@ -1306,7 +1293,6 @@ class OverideData
 
     public function customCountTotal($table,$where,$value,$screeningWhere)
     {
-        // SELECT COUNT(*) FROM screening WHERE status=1 AND facility_id='{$row['id']}' AND sex=1 $screeningWhere"
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' $screeningWhere");
         $num = $query->rowCount();
         return $num;
@@ -1314,7 +1300,6 @@ class OverideData
 
     public function customCountTotal1($table,$where,$value,$where1,$value1,$where2,$value2,$screeningWhere)
     {
-        // SELECT COUNT(*) FROM screening WHERE status=1 AND facility_id='{$row['id']}' AND sex=1 $screeningWhere"
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1' AND $where2 = '$value2' $screeningWhere");
         $num = $query->rowCount();
         return $num;
