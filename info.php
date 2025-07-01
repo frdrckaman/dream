@@ -457,6 +457,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Access Level</th>
                                                     <th>Sex</th>
                                                     <th>Site</th>
+                                                    <th>Zone</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
@@ -466,8 +467,9 @@ if ($user->isLoggedIn()) {
                                                 $x = 1;
                                                 foreach ($data as $staff) {
                                                     // $position = $override->getNews('position', 'status', 1, 'id', $staff['accessLevel'])[0];
-                                                    $position = $override->getNews('position', 'status', 1, 'id', $staff['position'])[0];
-                                                    $sites = $override->getNews('sites', 'status', 1, 'id', $staff['site_id'])[0];
+                                                    $position = $override->get('position', 'id', $staff['position'])[0];
+                                                    $site = $override->get('sites', 'id', $staff['site_id'])[0];
+                                                    $zone = $override->get('zones','id', $staff['zone'])[0];
 
                                                 ?>
                                                     <tr>
@@ -498,7 +500,10 @@ if ($user->isLoggedIn()) {
                                                         <?php } ?>
 
                                                         <td class="table-user">
-                                                            <?= $sites['name']; ?>
+                                                            <?= $site['name']; ?>
+                                                        </td>
+                                                        <td class="table-user">
+                                                            <?= $zone['name']; ?>
                                                         </td>
                                                         <?php if ($staff['count'] < 4) { ?>
                                                             <?php if ($staff['status'] == 1) { ?>
@@ -754,6 +759,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Access Level</th>
                                                     <th>Sex</th>
                                                     <th>Site</th>
+                                                    <th>Zone</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
