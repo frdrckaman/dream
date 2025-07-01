@@ -5393,6 +5393,8 @@ if ($user->isLoggedIn()) {
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
+                                                                <button type="button"
+                                                                    onclick="unsetRadio('reasons')">Unset</button>
                                                             <?php } ?>
                                                         </div>
                                                     </div>
