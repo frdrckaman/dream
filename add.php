@@ -7987,6 +7987,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
+                                                <?php if($user->data()->zone != 1 ){ ?>
                                                 <div class="col-sm-3" id="tb_diagnosis_made_section">
                                                     <label for="tb_diagnosis_made" class="form-label">5. How was the TB
                                                         diagnosis made? </label>
@@ -8077,6 +8078,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <?php } ?>
                                             </div>
                                             <hr>
 
