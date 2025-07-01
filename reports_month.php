@@ -93,7 +93,17 @@ if ($user->isLoggedIn()) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Summary Report For Nanopore Study on <?= date('Y-m-d') ?></h1>
+                            <h1>
+                                <?php
+                                if (!empty($selectedMonth) && !empty($selectedYear)) {
+                                    echo "Summary Report For Nanopore Study For " . date('F', mktime(0, 0, 0, $selectedMonth, 10)) . " $selectedYear";
+                                } elseif (!empty($selectedYear)) {
+                                    echo "Summary Report For Nanopore Study For Year $selectedYear";
+                                } else {
+                                    echo "Summary Report For Nanopore Study Up To " . date('Y m d');
+                                }
+                                ?>
+                            </h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -144,11 +154,11 @@ if ($user->isLoggedIn()) {
                                     <h3 class="card-title mt-2">
                                         <?php
                                         if (!empty($selectedMonth) && !empty($selectedYear)) {
-                                            echo "Summary Report For " . date('F', mktime(0, 0, 0, $selectedMonth, 10)) . " $selectedYear";
+                                            echo "Summary Report For Nanopore Study For " . date('F', mktime(0, 0, 0, $selectedMonth, 10)) . " $selectedYear";
                                         } elseif (!empty($selectedYear)) {
-                                            echo "Summary Report For Year $selectedYear";
+                                            echo "Summary Report For Nanopore Study For Year $selectedYear";
                                         } else {
-                                            echo "Summary Report Up To ". date('Y m d');
+                                            echo "Summary Report For Nanopore Study Up To " . date('Y m d');
                                         }
                                         ?>
                                     </h3>
@@ -224,6 +234,7 @@ if ($user->isLoggedIn()) {
                                                 $enrollmentWhere = getDateWhereClause('enrollment_date', $selectedMonth, $selectedYear);
                                                 $enrolled_male = $override->customCount('enrollment_form', 'status', 1, 'facility_id', $row['id'], 'sex', 1, $enrollmentWhere);
                                                 $enrolled_female = $override->customCount('enrollment_form', 'status', 1, 'facility_id', $row['id'], 'sex', 2, $enrollmentWhere);
+                                                $enrolled = $override->customCountSubTotal('enrollment_form', 'status', 1, 'facility_id', $row['id'], $enrollmentWhere);
 
                                                 // $end_study_male = $override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id'], 'sex', 1);
                                                 // $end_study_female = $override->countData2('diagnosis', 'status', 1, 'tb_otcome2', 1, 'facility_id', $row['id'], 'sex', 2);

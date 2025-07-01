@@ -283,10 +283,21 @@ if ($user->isLoggedIn()) {
                 $screening = $override->getNews('screening', 'status', 1, 'id', $_GET['sid'])[0];
                 $eligible = 0;
                 if (
-                    (Input::get('consent') == 1 && Input::get('age18years') == 1 && Input::get('produce_resp_sample') == 1 &&
-                        (Input::get('present_symptoms') == 1) && Input::get('unable_understand') == 2 && Input::get('not_willing') == 2)
+                    $user->data()->zone == 1
                 ) {
-                    $eligible = 1;
+                    if (
+                        (Input::get('consent') == 1 && Input::get('age18years') == 1 && Input::get('produce_resp_sample') == 1 &&
+                            (Input::get('present_symptoms') == 1) && Input::get('unable_understand') == 2 && Input::get('not_willing') == 2)
+                    ) {
+                        $eligible = 1;
+                    }
+                } else {
+                    if (
+                        (Input::get('consent') == 1 && Input::get('age18years') == 1 && Input::get('produce_resp_sample') == 1 &&
+                            (Input::get('genexpert_confirmation') == 1) && Input::get('unable_understand') == 2 && Input::get('not_willing') == 2)
+                    ) {
+                        $eligible = 1;
+                    }
                 }
 
                 $date_completed = "";
@@ -336,11 +347,15 @@ if ($user->isLoggedIn()) {
                         'consent_date' => Input::get('consent_date'),
                         'age18years' => Input::get('age18years'),
                         'present_symptoms' => Input::get('present_symptoms'),
+                        'genexpert_confirmation' => Input::get('genexpert_confirmation'),
                         'produce_resp_sample' => Input::get('produce_resp_sample'),
                         'pid1' => Input::get('pid1'),
                         'pid2' => Input::get('pid2'),
                         'unable_understand' => Input::get('unable_understand'),
                         'not_willing' => Input::get('not_willing'),
+                        'enrolled' => Input::get('enrolled'),
+                        'reasons' => Input::get('reasons'),
+                        'reasons_other' => Input::get('reasons_other'),
                         'remarks' => Input::get('remarks'),
                         'form_status' => Input::get('form_status'),
                         'date_completed' => $date_completed,
@@ -361,11 +376,15 @@ if ($user->isLoggedIn()) {
                         'consent_date' => Input::get('consent_date'),
                         'age18years' => Input::get('age18years'),
                         'present_symptoms' => Input::get('present_symptoms'),
+                        'genexpert_confirmation' => Input::get('genexpert_confirmation'),
                         'produce_resp_sample' => Input::get('produce_resp_sample'),
                         'pid1' => Input::get('pid1'),
                         'pid2' => Input::get('pid2'),
                         'unable_understand' => Input::get('unable_understand'),
                         'not_willing' => Input::get('not_willing'),
+                        'enrolled' => Input::get('enrolled'),
+                        'reasons' => Input::get('reasons'),
+                        'reasons_other' => Input::get('reasons_other'),
                         'remarks' => Input::get('remarks'),
                         'form_status' => Input::get('form_status'),
                         'date_completed' => $date_completed,
@@ -393,11 +412,15 @@ if ($user->isLoggedIn()) {
                             'consent_date' => Input::get('consent_date'),
                             'age18years' => Input::get('age18years'),
                             'present_symptoms' => Input::get('present_symptoms'),
+                            'genexpert_confirmation' => Input::get('genexpert_confirmation'),
                             'produce_resp_sample' => Input::get('produce_resp_sample'),
                             'pid1' => Input::get('pid1'),
                             'pid2' => Input::get('pid2'),
                             'unable_understand' => Input::get('unable_understand'),
                             'not_willing' => Input::get('not_willing'),
+                            'enrolled' => Input::get('enrolled'),
+                            'reasons' => Input::get('reasons'),
+                            'reasons_other' => Input::get('reasons_other'),
                             'remarks' => Input::get('remarks'),
                             'form_status' => Input::get('form_status'),
                             'date_completed' => $date_completed,
@@ -424,10 +447,14 @@ if ($user->isLoggedIn()) {
                             'age18years' => Input::get('age18years'),
                             'present_symptoms' => Input::get('present_symptoms'),
                             'produce_resp_sample' => Input::get('produce_resp_sample'),
+                            'genexpert_confirmation' => Input::get('genexpert_confirmation'),
                             'pid1' => Input::get('pid1'),
                             'pid2' => Input::get('pid2'),
                             'unable_understand' => Input::get('unable_understand'),
                             'not_willing' => Input::get('not_willing'),
+                            'enrolled' => Input::get('enrolled'),
+                            'reasons' => Input::get('reasons'),
+                            'reasons_other' => Input::get('reasons_other'),
                             'remarks' => Input::get('remarks'),
                             'form_status' => Input::get('form_status'),
                             'date_completed' => $date_completed,
@@ -2271,7 +2298,6 @@ if ($user->isLoggedIn()) {
     <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-
     <style>
         .afb-section {
             border: 2px solid #000;
@@ -5131,29 +5157,55 @@ if ($user->isLoggedIn()) {
 
                                             <!-- Present Symptoms -->
                                             <div class="row">
-                                                <div class="col-sm-6">
-                                                    <label for="present_symptoms" class="form-label">4. Does the patient
-                                                        present with signs and symptoms
-                                                        suggestive of pulmonary TB or another pulmonary infection of
-                                                        bacterial, viral, or fungal
-                                                        origin?</label>
-                                                    <div class="row-form clearfix">
-                                                        <div class="form-group">
-                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="present_symptoms"
-                                                                        id="present_symptoms<?= $value['id']; ?>"
-                                                                        value="<?= $value['id']; ?>" <?php if ($screening['present_symptoms'] == $value['id']) {
-                                                                                                            echo 'checked';
-                                                                                                        } ?> required>
-                                                                    <label
-                                                                        class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>
-                                                            <?php } ?>
+                                                <?php if ($user->data()->zone == 1) { ?>
+                                                    <div class="col-sm-6">
+                                                        <label for="present_symptoms" class="form-label">4. Does the patient
+                                                            present with signs and symptoms
+                                                            suggestive of pulmonary TB or another pulmonary infection of
+                                                            bacterial, viral, or fungal
+                                                            origin?</label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="present_symptoms"
+                                                                            id="present_symptoms<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($screening['present_symptoms'] == $value['id']) {
+                                                                                                                echo 'checked';
+                                                                                                            } ?> required>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                <?php } ?>
+                                                <?php if ($user->data()->zone != 1) { ?>
+                                                    <div class="col-sm-6">
+                                                        <label for="genexpert_confirmation" class="form-label">
+                                                            4(a). Is the patient diagnosed with TB as confirmed by
+                                                            MTB detection using GeneXpert MTB/Rif (Ultra)?
+                                                        </label>
+                                                        <div class="row-form clearfix">
+                                                            <div class="form-group">
+                                                                <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="genexpert_confirmation"
+                                                                            id="genexpert_confirmation<?= $value['id']; ?>"
+                                                                            value="<?= $value['id']; ?>" <?php if ($screening['genexpert_confirmation'] == $value['id']) {
+                                                                                                                echo 'checked';
+                                                                                                            } ?> required>
+                                                                        <label
+                                                                            class="form-check-label"><?= $value['name']; ?></label>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php } ?>
 
                                                 <!-- Produce Respiratory Sample -->
                                                 <div class="col-sm-6">
@@ -5299,16 +5351,87 @@ if ($user->isLoggedIn()) {
 
                                             <div class="card card-warning">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Remarks</h3>
+                                                    <h3 class="card-title">Enrolment</h3>
                                                 </div>
                                             </div>
+
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <label for="enrolled" class="form-label">11(a). Was this patient enrolled?</label>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('yes_no', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="enrolled" id="enrolled<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($screening['enrolled'] == $value['id']) {
+                                                                                                            echo 'checked';
+                                                                                                        } ?> required>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Unable to Understand -->
+                                                <div class="col-sm-6">
+                                                    <label for="reasons" class="form-label">11(b).If not, what was the reason? </label>
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <?php foreach ($override->get('enrollment_reasons', 'status', 1) as $value) { ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="reasons"
+                                                                        id="reasons<?= $value['id']; ?>"
+                                                                        value="<?= $value['id']; ?>" <?php if ($screening['reasons'] == $value['id']) {
+                                                                                                            echo 'checked';
+                                                                                                        } ?>>
+                                                                    <label
+                                                                        class="form-check-label"><?= $value['name']; ?></label>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr>
 
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="row-form clearfix">
                                                         <!-- select -->
                                                         <div class="form-group">
-                                                            <label>11. Any remarks or comments on patient:</label>
+                                                            <label>11(b). Other, please explain:</label>
+                                                            <textarea class="form-control" name="reasons_other" rows="3"
+                                                                placeholder="Type comments here..."><?php if ($screening['reasons_other']) {
+                                                                                                        print_r($screening['reasons_other']);
+                                                                                                    } ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="card card-warning">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">General comments</h3>
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>12. Any remarks or comments on patient:</label>
                                                             <textarea class="form-control" name="remarks" rows="3"
                                                                 placeholder="Type comments here..."><?php if ($screening['remarks']) {
                                                                                                         print_r($screening['remarks']);
@@ -5402,7 +5525,7 @@ if ($user->isLoggedIn()) {
                                         <div class="card-footer">
                                             <a href="info.php?id=3&status=<?= $_GET['status'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $_GET['page'] ?>"
                                                 class="btn btn-default">Back</a>
-                                            <input type="hidden" name="cid" value="<?= $_GET['cid'] ?>">
+                                            <input type="hidden" name="sid" value="<?= $_GET['sid'] ?>">
                                             <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) { ?>
                                                 <input type="submit" name="add_screening" value="Submit"
                                                     class="btn btn-primary">
