@@ -5392,10 +5392,10 @@ if ($user->isLoggedIn()) {
                                                                                                         } ?>>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
-                                                                </div>                                                               
+                                                                </div>
                                                             <?php } ?>
-                                                             <button type="button"
-                                                                    onclick="unsetRadio('reasons')">Unset</button>
+                                                            <button type="button"
+                                                                onclick="unsetRadio('reasons')">Unset</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -9244,9 +9244,16 @@ if ($user->isLoggedIn()) {
                                                     <div class="col-sm-6" id="regimen_section">
                                                         <div class="row-form clearfix">
                                                             <div class="form-group">
-                                                                <label>10g. How long was the treatment regimen(
-                                                                    Months)</label>
-
+                                                                <?php if ($user->data()->zone == 1) { ?>
+                                                                    <label>
+                                                                        10g. How long was the treatment regimen(Months)
+                                                                    </label>
+                                                                <?php } ?>
+                                                                <?php if ($user->data()->zone != 1) { ?>
+                                                                    <label>
+                                                                        10g. What was the duration of this treatment regimen in months?
+                                                                    </label>
+                                                                <?php } ?>
                                                                 <!-- Row for Month and Year -->
                                                                 <div class="row">
                                                                     <!-- Month Input -->
@@ -9399,8 +9406,17 @@ if ($user->isLoggedIn()) {
 
                                             <div class="row">
                                                 <div class="col-sm-6" id="sputum_collected_section">
-                                                    <label>13(a).After TB was confirmed by a rapid molecular test, was an
-                                                        additional sputum sample collected?</label>
+                                                    <?php if ($user->data()->zone == 1) { ?>
+                                                        <label>13(a).After TB was confirmed by a rapid molecular test, was an
+                                                            additional sputum sample collected?
+                                                        </label>
+                                                    <?php } ?>
+                                                    <?php if ($user->data()->zone != 1) { ?>
+                                                        <label>13(a).After sputum was collected for testing
+                                                            with a rapid molecular test, was an
+                                                            additional sputum sample collected?
+                                                        </label>
+                                                    <?php } ?>
                                                     <!-- radio -->
                                                     <div class="row-form clearfix">
                                                         <div class="form-group">
