@@ -51,6 +51,11 @@ if ($user->isLoggedIn()) {
                 'status' => 0,
             ), Input::get('id'));
             $successMessage = 'Site Deleted Successful';
+        } elseif (Input::get('restore_sites')) {
+            $user->updateRecord('sites', array(
+                'status' => 1,
+            ), Input::get('id'));
+            $successMessage = 'Site Restored Successful';
         } elseif (Input::get('delete_positions')) {
             $user->updateRecord('position', array(
                 'status' => 0,
@@ -352,47 +357,94 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <h1>
                                     <?php
-                                    $pagNum = 0;
-                                    if ($_GET['status'] == 1) {
-                                        $pagNum = $override->getCount('user', 'status', 1);
-                                    } else if ($_GET['status'] == 2) {
-                                        $pagNum = $override->getCount('user', 'status', 0);
-                                    } else if ($_GET['status'] == 3) {
-                                        $pagNum = $override->getCount1('user', 'status', 1, 'count', 4);
-                                    } else if ($_GET['status'] == 4) {
-                                        $pagNum = $override->getCount1('user', 'status', 0, 'count', 4);
+
+                                    if ($_GET['search_user']) {
+                                        $username = 'username';
+                                        $firstname = 'firstname';
+                                        $middlename = 'middlename';
+                                        $lastname = 'lastname';
+                                        $searchValue = $_GET['search_user'];
+                                        $pagNum = $override->getWithLimitSearchNewsCountUser('user', $searchValue);
+
+                                        // if ($_GET['status'] == 1) {
+                                        //     $pagNum = $override->getWithLimitSearchNewsCount1('screening', 'status', 1, $searchTerm, $searchValue);
+                                        // } else if ($_GET['status'] == 2) {
+                                        //     $pagNum = $override->getWithLimitSearchNewsCount2('screening', 'status', 1, 'eligible', 1, $searchTerm, $searchValue);
+                                        // } else if ($_GET['status'] == 3) {
+                                        //     $pagNum = $override->getWithLimitSearchNewsCount1('enrollment_form', 'status', 1, $searchTerm, $searchValue);
+                                        // } else if ($_GET['status'] == 4) {
+                                        //     $pagNum = $override->getWithLimitSearchNewsCount2NotNull('diagnosis', 'status', 1, 'tb_otcome2', '', $searchTerm, $searchValue);
+                                        // } else if ($_GET['status'] == 5) {
+                                        //     $pagNum = $override->getWithLimitSearchNewsCount1('screening', 'status', 0, $searchTerm, $searchValue);
+                                        // } else {
+                                        //     $pagNum = $override->getWithLimitSearchNewsCount('screening', $searchTerm, $searchValue);
+                                        // }
+
+                                        $pages = ceil($pagNum / $numRec);
+                                        if (!$_GET['page'] || $_GET['page'] == 1) {
+                                            $page = 0;
+                                        } else {
+                                            $page = ($_GET['page'] * $numRec) - $numRec;
+                                        }
+                                        $data = $override->getWithLimitSearchNewsUser('user', $searchValue, $page, $numRec);
+
+                                        // if ($_GET['status'] == 1) {
+                                        //     $data = $override->getWithLimitSearchNews1('screening', 'status', 1, $searchTerm, $searchValue, $page, $numRec);
+                                        // } else if ($_GET['status'] == 2) {
+                                        //     $data = $override->getWithLimitSearchNews2('screening', 'status', 1, 'eligible', 1, $searchTerm, $searchValue, $page, $numRec);
+                                        // } else if ($_GET['status'] == 3) {
+                                        //     $data = $override->getWithLimitSearchNews1('enrollment_form', 'status', 1, $searchTerm, $searchValue, $page, $numRec);
+                                        // } else if ($_GET['status'] == 4) {
+                                        //     $data = $override->getWithLimitSearchNews2NotNull('diagnosis', 'status', 1, 'tb_otcome2', '', $searchTerm, $searchValue, $page, $numRec);
+                                        // } else if ($_GET['status'] == 5) {
+                                        //     $data = $override->getWithLimitSearchNews1('screening', 'status', 0, $searchTerm, $searchValue, $page, $numRec);
+                                        // } else {
+                                        //     $data = $override->getWithLimitSearchNewsCount('screening', $searchTerm, $searchValue, $page, $numRec);
+                                        // }
                                     } else {
-                                        $pagNum = $override->getNo('user');
+
+                                        $pagNum = 0;
+                                        if ($_GET['status'] == 1) {
+                                            $pagNum = $override->getCount('user', 'status', 1);
+                                        } else if ($_GET['status'] == 2) {
+                                            $pagNum = $override->getCount('user', 'status', 0);
+                                        } else if ($_GET['status'] == 3) {
+                                            $pagNum = $override->getCount1('user', 'status', 1, 'count', 4);
+                                        } else if ($_GET['status'] == 4) {
+                                            $pagNum = $override->getCount1('user', 'status', 0, 'count', 4);
+                                        } else {
+                                            $pagNum = $override->getNo('user');
+                                        }
+
+
+                                        $pages = ceil($pagNum / $numRec);
+                                        if (!$_GET['page'] || $_GET['page'] == 1) {
+                                            $page = 0;
+                                        } else {
+                                            $page = ($_GET['page'] * $numRec) - $numRec;
+                                        }
+
+
+                                        if ($_GET['status'] == 1) {
+                                            $data = $override->getWithLimit('user', 'status', 1, $page, $numRec);
+                                        } else if ($_GET['status'] == 2) {
+                                            $data = $override->getWithLimit('user', 'status', 0, $page, $numRec);
+                                        } else if ($_GET['status'] == 3) {
+                                            $data = $override->getWithLimit1('user', 'status', 1, 'count', 4, $page, $numRec);
+                                        } else if ($_GET['status'] == 4) {
+                                            $data = $override->getWithLimit1('user', 'status', 0, 'count', 4, $page, $numRec);
+                                        } else {
+                                            $data = $override->getWithLimit0('user', $page, $numRec);
+                                        }
+
+                                        $total_user = $override->getCount('user', 'status', 1);
                                     }
-
-
-                                    $pages = ceil($pagNum / $numRec);
-                                    if (!$_GET['page'] || $_GET['page'] == 1) {
-                                        $page = 0;
-                                    } else {
-                                        $page = ($_GET['page'] * $numRec) - $numRec;
-                                    }
-
-
-                                    if ($_GET['status'] == 1) {
-                                        $data = $override->getWithLimit('user', 'status', 1, $page, $numRec);
-                                    } else if ($_GET['status'] == 2) {
-                                        $data = $override->getWithLimit('user', 'status', 0, $page, $numRec);
-                                    } else if ($_GET['status'] == 3) {
-                                        $data = $override->getWithLimit1('user', 'status', 1, 'count', 4, $page, $numRec);
-                                    } else if ($_GET['status'] == 4) {
-                                        $data = $override->getWithLimit1('user', 'status', 0, 'count', 4, $page, $numRec);
-                                    } else {
-                                        $data = $override->getWithLimit0('user', $page, $numRec);
-                                    }
-
-                                    $total_user = $override->getCount('user', 'status', 1);
-
 
                                     ?>
                                     List of Staff ( <?= $total_user; ?> )
                                 </h1>
                             </div>
+
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
@@ -415,6 +467,34 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-sm-6">
                                                     <div class="card-header">
                                                         List of Staff
+                                                    </div>
+                                                </div>
+                                                <a href="staff.php">Download All Zone</a>
+                                                <a href="staff.php?zone=1">Download Dar Zone</a>
+                                                <a href="staff.php?zone=2">Download Mwanza Zone</a>
+                                                <a href="staff.php?zone=3">Download Dodoma Zone</a>
+                                                <a href="staff.php?zone=4">Download Mbeya Zone</a>
+                                                <a href="staff.php?zone=5">Download Zanzibar Zone</a>
+                                                <div class="card-tools">
+                                                    <div class="input-group input-group-sm float-right"
+                                                        style="width: 350px;">
+                                                        <form method="get">
+                                                            <div class="form-inline">
+                                                                <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
+                                                                <input type="hidden" name="status"
+                                                                    value="<?= $_GET['status'] ?>">
+                                                                <input type="hidden" name="sid" value="<?= $_GET['sid'] ?>">
+                                                                <input type="hidden" name="facility_id"
+                                                                    value="<?= $_GET['facility_id'] ?>">
+                                                                <input type="hidden" name="page"
+                                                                    value="<?= $_GET['page'] ?>">
+                                                                <input type="text" name="search_user" id="search_user"
+                                                                    class="form-control float-right"
+                                                                    placeholder="Search User">
+                                                                <input type="submit" value="Search User"
+                                                                    class="btn btn-default"><i class="fas fa-search"></i>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -445,6 +525,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Access Level</th>
                                                     <th>Sex</th>
                                                     <th>Site</th>
+                                                    <th>Zone</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
@@ -454,8 +535,9 @@ if ($user->isLoggedIn()) {
                                                 $x = 1;
                                                 foreach ($data as $staff) {
                                                     // $position = $override->getNews('position', 'status', 1, 'id', $staff['accessLevel'])[0];
-                                                    $position = $override->getNews('position', 'status', 1, 'id', $staff['position'])[0];
-                                                    $sites = $override->getNews('sites', 'status', 1, 'id', $staff['site_id'])[0];
+                                                    $position = $override->get('position', 'id', $staff['position'])[0];
+                                                    $site = $override->get('sites', 'id', $staff['site_id'])[0];
+                                                    $zone = $override->get('zones', 'id', $staff['zone'])[0];
 
                                                 ?>
                                                     <tr>
@@ -486,7 +568,10 @@ if ($user->isLoggedIn()) {
                                                         <?php } ?>
 
                                                         <td class="table-user">
-                                                            <?= $sites['name']; ?>
+                                                            <?= $site['name']; ?>
+                                                        </td>
+                                                        <td class="table-user">
+                                                            <?= $zone['name']; ?>
                                                         </td>
                                                         <?php if ($staff['count'] < 4) { ?>
                                                             <?php if ($staff['status'] == 1) { ?>
@@ -742,6 +827,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Access Level</th>
                                                     <th>Sex</th>
                                                     <th>Site</th>
+                                                    <th>Zone</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
@@ -873,6 +959,12 @@ if ($user->isLoggedIn()) {
                                                     </ol>
                                                 </div>
                                             </div>
+                                            <a href="sites.php">Download All Zone</a>
+                                            <a href="sites.php?zone=1">Download Dar Zone</a>
+                                            <a href="sites.php?zone=2">Download Mwanza Zone</a>
+                                            <a href="sites.php?zone=3">Download Dodoma Zone</a>
+                                            <a href="sites.php?zone=4">Download Mbeya Zone</a>
+                                            <a href="sites.php?zone=5">Download Zanzibar Zone</a>
                                             <hr>
                                         </div><!-- /.container-fluid -->
                                     </section>
@@ -884,6 +976,8 @@ if ($user->isLoggedIn()) {
                                                     <th>No</th>
                                                     <th>Facility Id</th>
                                                     <th>Name</th>
+                                                    <th>Zone ID</th>
+                                                    <th>Zone Name</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
@@ -892,7 +986,8 @@ if ($user->isLoggedIn()) {
                                                 <?php
                                                 $x = 1;
                                                 foreach ($sites as $value) {
-                                                    $sites = $override->getNews('sites', 'status', 1, 'id', $value['site_id'])[0];
+                                                    $sites = $override->getNews('sites', 'status', 1, 'id', $value['id'])[0];
+                                                    $zones = $override->getNews('zones', 'status', 1, 'id', $sites['zone'])[0];
                                                 ?>
                                                     <tr>
                                                         <td class="table-user">
@@ -905,6 +1000,12 @@ if ($user->isLoggedIn()) {
                                                             <?= $value['name']; ?>
                                                         </td>
                                                         <td class="table-user">
+                                                            <?= $value['zone']; ?>
+                                                        </td>
+                                                        <td class="table-user">
+                                                            <?= $zones['name']; ?>
+                                                        </td>
+                                                        <td class="table-user">
                                                             <?php if ($value['status'] == 1) { ?>
                                                                 <a href="#" class="btn btn-success">Active</a>
                                                             <?php } else { ?>
@@ -912,8 +1013,10 @@ if ($user->isLoggedIn()) {
                                                             <?php } ?>
                                                         </td>
                                                         <td class="table-user">
-                                                            <a href="add.php?id=2&site_id=<?= $value['id'] ?>"
+                                                            <a href="add.php?id=2&zone=<?= $value['zone'] ?>&site_id=<?= $value['id'] ?>"
                                                                 class="btn btn-info">Update</a>
+                                                            <a href="#restore<?= $value['id'] ?>" role="button"
+                                                                class="btn btn-warning" data-toggle="modal">Restore</a>
                                                             <a href="#delete<?= $value['id'] ?>" role="button"
                                                                 class="btn btn-danger" data-toggle="modal">Delete</a>
                                                         </td>
@@ -947,13 +1050,45 @@ if ($user->isLoggedIn()) {
                                                             </form>
                                                         </div>
                                                     </div>
+                                                    <div class="modal fade" id="restore<?= $value['id'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <form method="post">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"><span
+                                                                                aria-hidden="true">&times;</span><span
+                                                                                class="sr-only">Close</span></button>
+                                                                        <h4>Restore Site</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <strong style="font-weight: bold;color: red">
+                                                                            <p>Are you sure you want to restore this site</p>
+                                                                        </strong>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?= $value['id'] ?>">
+                                                                        <input type="submit" name="restore_sites" value="Restore"
+                                                                            class="btn btn-warning">
+                                                                        <button class="btn btn-default" data-dismiss="modal"
+                                                                            aria-hidden="true">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Study Id</th>
-                                                    <th>Site</th>
+                                                    <th>No</th>
+                                                    <th>Facility Id</th>
+                                                    <th>Name</th>
+                                                    <th>Zone ID</th>
+                                                    <th>Zone Name</th>
                                                     <th>Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
@@ -2038,7 +2173,7 @@ if ($user->isLoggedIn()) {
                                                         <td class="table-user">
                                                             <?= $x; ?>
                                                         </td>
-                                                         <td class="table-user">
+                                                        <td class="table-user">
                                                             <?= $value['id']; ?>
                                                         </td>
                                                         <td class="table-user">
