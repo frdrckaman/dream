@@ -357,42 +357,88 @@ if ($user->isLoggedIn()) {
                             <div class="col-sm-6">
                                 <h1>
                                     <?php
-                                    $pagNum = 0;
-                                    if ($_GET['status'] == 1) {
-                                        $pagNum = $override->getCount('user', 'status', 1);
-                                    } else if ($_GET['status'] == 2) {
-                                        $pagNum = $override->getCount('user', 'status', 0);
-                                    } else if ($_GET['status'] == 3) {
-                                        $pagNum = $override->getCount1('user', 'status', 1, 'count', 4);
-                                    } else if ($_GET['status'] == 4) {
-                                        $pagNum = $override->getCount1('user', 'status', 0, 'count', 4);
+
+                                    if ($_GET['search_user']) {
+                                        $username = 'username';
+                                        $firstname = 'firstname';
+                                        $middlename = 'middlename';
+                                        $lastname = 'lastname';
+                                        $searchValue = $_GET['search_user'];
+                                        $pagNum = $override->getWithLimitSearchNewsCountUser('user', $searchValue);
+
+                                        // if ($_GET['status'] == 1) {
+                                        //     $pagNum = $override->getWithLimitSearchNewsCount1('screening', 'status', 1, $searchTerm, $searchValue);
+                                        // } else if ($_GET['status'] == 2) {
+                                        //     $pagNum = $override->getWithLimitSearchNewsCount2('screening', 'status', 1, 'eligible', 1, $searchTerm, $searchValue);
+                                        // } else if ($_GET['status'] == 3) {
+                                        //     $pagNum = $override->getWithLimitSearchNewsCount1('enrollment_form', 'status', 1, $searchTerm, $searchValue);
+                                        // } else if ($_GET['status'] == 4) {
+                                        //     $pagNum = $override->getWithLimitSearchNewsCount2NotNull('diagnosis', 'status', 1, 'tb_otcome2', '', $searchTerm, $searchValue);
+                                        // } else if ($_GET['status'] == 5) {
+                                        //     $pagNum = $override->getWithLimitSearchNewsCount1('screening', 'status', 0, $searchTerm, $searchValue);
+                                        // } else {
+                                        //     $pagNum = $override->getWithLimitSearchNewsCount('screening', $searchTerm, $searchValue);
+                                        // }
+
+                                        $pages = ceil($pagNum / $numRec);
+                                        if (!$_GET['page'] || $_GET['page'] == 1) {
+                                            $page = 0;
+                                        } else {
+                                            $page = ($_GET['page'] * $numRec) - $numRec;
+                                        }
+                                        $data = $override->getWithLimitSearchNewsUser('user', $searchValue, $page, $numRec);
+
+                                        // if ($_GET['status'] == 1) {
+                                        //     $data = $override->getWithLimitSearchNews1('screening', 'status', 1, $searchTerm, $searchValue, $page, $numRec);
+                                        // } else if ($_GET['status'] == 2) {
+                                        //     $data = $override->getWithLimitSearchNews2('screening', 'status', 1, 'eligible', 1, $searchTerm, $searchValue, $page, $numRec);
+                                        // } else if ($_GET['status'] == 3) {
+                                        //     $data = $override->getWithLimitSearchNews1('enrollment_form', 'status', 1, $searchTerm, $searchValue, $page, $numRec);
+                                        // } else if ($_GET['status'] == 4) {
+                                        //     $data = $override->getWithLimitSearchNews2NotNull('diagnosis', 'status', 1, 'tb_otcome2', '', $searchTerm, $searchValue, $page, $numRec);
+                                        // } else if ($_GET['status'] == 5) {
+                                        //     $data = $override->getWithLimitSearchNews1('screening', 'status', 0, $searchTerm, $searchValue, $page, $numRec);
+                                        // } else {
+                                        //     $data = $override->getWithLimitSearchNewsCount('screening', $searchTerm, $searchValue, $page, $numRec);
+                                        // }
                                     } else {
-                                        $pagNum = $override->getNo('user');
+
+                                        $pagNum = 0;
+                                        if ($_GET['status'] == 1) {
+                                            $pagNum = $override->getCount('user', 'status', 1);
+                                        } else if ($_GET['status'] == 2) {
+                                            $pagNum = $override->getCount('user', 'status', 0);
+                                        } else if ($_GET['status'] == 3) {
+                                            $pagNum = $override->getCount1('user', 'status', 1, 'count', 4);
+                                        } else if ($_GET['status'] == 4) {
+                                            $pagNum = $override->getCount1('user', 'status', 0, 'count', 4);
+                                        } else {
+                                            $pagNum = $override->getNo('user');
+                                        }
+
+
+                                        $pages = ceil($pagNum / $numRec);
+                                        if (!$_GET['page'] || $_GET['page'] == 1) {
+                                            $page = 0;
+                                        } else {
+                                            $page = ($_GET['page'] * $numRec) - $numRec;
+                                        }
+
+
+                                        if ($_GET['status'] == 1) {
+                                            $data = $override->getWithLimit('user', 'status', 1, $page, $numRec);
+                                        } else if ($_GET['status'] == 2) {
+                                            $data = $override->getWithLimit('user', 'status', 0, $page, $numRec);
+                                        } else if ($_GET['status'] == 3) {
+                                            $data = $override->getWithLimit1('user', 'status', 1, 'count', 4, $page, $numRec);
+                                        } else if ($_GET['status'] == 4) {
+                                            $data = $override->getWithLimit1('user', 'status', 0, 'count', 4, $page, $numRec);
+                                        } else {
+                                            $data = $override->getWithLimit0('user', $page, $numRec);
+                                        }
+
+                                        $total_user = $override->getCount('user', 'status', 1);
                                     }
-
-
-                                    $pages = ceil($pagNum / $numRec);
-                                    if (!$_GET['page'] || $_GET['page'] == 1) {
-                                        $page = 0;
-                                    } else {
-                                        $page = ($_GET['page'] * $numRec) - $numRec;
-                                    }
-
-
-                                    if ($_GET['status'] == 1) {
-                                        $data = $override->getWithLimit('user', 'status', 1, $page, $numRec);
-                                    } else if ($_GET['status'] == 2) {
-                                        $data = $override->getWithLimit('user', 'status', 0, $page, $numRec);
-                                    } else if ($_GET['status'] == 3) {
-                                        $data = $override->getWithLimit1('user', 'status', 1, 'count', 4, $page, $numRec);
-                                    } else if ($_GET['status'] == 4) {
-                                        $data = $override->getWithLimit1('user', 'status', 0, 'count', 4, $page, $numRec);
-                                    } else {
-                                        $data = $override->getWithLimit0('user', $page, $numRec);
-                                    }
-
-                                    $total_user = $override->getCount('user', 'status', 1);
-
 
                                     ?>
                                     List of Staff ( <?= $total_user; ?> )
@@ -429,6 +475,28 @@ if ($user->isLoggedIn()) {
                                                 <a href="staff.php?zone=3">Download Dodoma Zone</a>
                                                 <a href="staff.php?zone=4">Download Mbeya Zone</a>
                                                 <a href="staff.php?zone=5">Download Zanzibar Zone</a>
+                                                <div class="card-tools">
+                                                    <div class="input-group input-group-sm float-right"
+                                                        style="width: 350px;">
+                                                        <form method="get">
+                                                            <div class="form-inline">
+                                                                <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
+                                                                <input type="hidden" name="status"
+                                                                    value="<?= $_GET['status'] ?>">
+                                                                <input type="hidden" name="sid" value="<?= $_GET['sid'] ?>">
+                                                                <input type="hidden" name="facility_id"
+                                                                    value="<?= $_GET['facility_id'] ?>">
+                                                                <input type="hidden" name="page"
+                                                                    value="<?= $_GET['page'] ?>">
+                                                                <input type="text" name="search_user" id="search_user"
+                                                                    class="form-control float-right"
+                                                                    placeholder="Search User">
+                                                                <input type="submit" value="Search User"
+                                                                    class="btn btn-default"><i class="fas fa-search"></i>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                                 <div class="col-sm-6">
                                                     <ol class="breadcrumb float-sm-right">
                                                         <li class="breadcrumb-item">
@@ -469,7 +537,7 @@ if ($user->isLoggedIn()) {
                                                     // $position = $override->getNews('position', 'status', 1, 'id', $staff['accessLevel'])[0];
                                                     $position = $override->get('position', 'id', $staff['position'])[0];
                                                     $site = $override->get('sites', 'id', $staff['site_id'])[0];
-                                                    $zone = $override->get('zones','id', $staff['zone'])[0];
+                                                    $zone = $override->get('zones', 'id', $staff['zone'])[0];
 
                                                 ?>
                                                     <tr>

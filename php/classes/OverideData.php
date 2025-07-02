@@ -1070,6 +1070,33 @@ class OverideData
         return $result;
     }
 
+    public function getWithLimitSearchNewsCountUser($table, $searchValue)
+    {
+        $query = $this->_pdo->query(
+            "SELECT * FROM $table 
+         WHERE (firstname LIKE '%$searchValue%' 
+            OR middlename LIKE '%$searchValue%' 
+            OR lastname LIKE '%$searchValue%' 
+            OR username LIKE '%$searchValue%')"
+        );
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function getWithLimitSearchNewsUser($table, $searchValue, $page, $numRec)
+    {
+        $query = $this->_pdo->query(
+            "SELECT * FROM $table 
+            WHERE (firstname LIKE '%$searchValue%' 
+            OR middlename LIKE '%$searchValue%' 
+            OR lastname LIKE '%$searchValue%' 
+            OR username LIKE '%$searchValue%')
+            limit $page,$numRec"
+        );
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getWithLimitSearchNews($table, $searchTerm, $searchValue, $page, $numRec)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE ($searchTerm LIKE '%$searchValue%') limit $page,$numRec");
@@ -1267,7 +1294,7 @@ class OverideData
         return $result;
     }
 
-    public function customCount($table,$where,$value,$where1,$value1,$where2,$value2,$screeningWhere)
+    public function customCount($table, $where, $value, $where1, $value1, $where2, $value2, $screeningWhere)
     {
         // SELECT COUNT(*) FROM screening WHERE status=1 AND facility_id='{$row['id']}' AND sex=1 $screeningWhere"
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1'  AND $where2 = '$value2' $screeningWhere");
@@ -1275,7 +1302,7 @@ class OverideData
         return $num;
     }
 
-    public function customCount1($table,$where,$value,$where1,$value1,$where2,$value2,$where3,$value3,$screeningWhere)
+    public function customCount1($table, $where, $value, $where1, $value1, $where2, $value2, $where3, $value3, $screeningWhere)
     {
         // SELECT COUNT(*) FROM screening WHERE status=1 AND facility_id='{$row['id']}' AND sex=1 $screeningWhere"
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1'  AND $where2 = '$value2'  AND $where3 = '$value3' $screeningWhere");
@@ -1283,7 +1310,7 @@ class OverideData
         return $num;
     }
 
-    public function customCountSubTotal($table,$where,$value,$where1,$value1,$screeningWhere)
+    public function customCountSubTotal($table, $where, $value, $where1, $value1, $screeningWhere)
     {
         // SELECT COUNT(*) FROM screening WHERE status=1 AND facility_id='{$row['id']}' AND sex=1 $screeningWhere"
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1' $screeningWhere");
@@ -1291,14 +1318,14 @@ class OverideData
         return $num;
     }
 
-    public function customCountTotal($table,$where,$value,$screeningWhere)
+    public function customCountTotal($table, $where, $value, $screeningWhere)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' $screeningWhere");
         $num = $query->rowCount();
         return $num;
     }
 
-    public function customCountTotal1($table,$where,$value,$where1,$value1,$where2,$value2,$screeningWhere)
+    public function customCountTotal1($table, $where, $value, $where1, $value1, $where2, $value2, $screeningWhere)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$value' AND $where1 = '$value1' AND $where2 = '$value2' $screeningWhere");
         $num = $query->rowCount();
