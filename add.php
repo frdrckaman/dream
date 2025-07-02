@@ -365,6 +365,7 @@ if ($user->isLoggedIn()) {
                         'eligible' => $eligible,
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
+                        'zone' => $screening['zone'],
                         'facility_id' => $screening['facility_id'],
                     ), $screening['id']);
 
@@ -397,6 +398,7 @@ if ($user->isLoggedIn()) {
                         'staff_id' => $user->data()->id,
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
+                        'zone' => $screening['zone'],
                         'facility_id' => $screening['facility_id'],
                     ));
 
@@ -433,6 +435,7 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'zone' => $user->data()->zone,
                             'facility_id' => $user->data()->site_id,
                         ));
 
@@ -467,6 +470,7 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'zone' => $user->data()->zone,
                             'facility_id' => $screening['facility_id'],
                         ));
 
@@ -570,6 +574,8 @@ if ($user->isLoggedIn()) {
                                 'verified_by' => $verified_by,
                                 'update_on' => date('Y-m-d H:i:s'),
                                 'update_id' => $user->data()->id,
+                                'zone' => $screening['zone'],
+                                'facility_id' => $screening['facility_id'],
                             ), $enrollment_form['id']);
 
                             $user->createRecord('enrollment_form_records', array(
@@ -624,6 +630,7 @@ if ($user->isLoggedIn()) {
                                 'staff_id' => $user->data()->id,
                                 'update_on' => date('Y-m-d H:i:s'),
                                 'update_id' => $user->data()->id,
+                                'zone' => $screening['zone'],
                                 'facility_id' => $screening['facility_id'],
                             ));
 
@@ -681,6 +688,7 @@ if ($user->isLoggedIn()) {
                                 'staff_id' => $user->data()->id,
                                 'update_on' => date('Y-m-d H:i:s'),
                                 'update_id' => $user->data()->id,
+                                'zone' => $screening['zone'],
                                 'facility_id' => $screening['facility_id'],
                             ));
 
@@ -738,6 +746,7 @@ if ($user->isLoggedIn()) {
                                 'staff_id' => $user->data()->id,
                                 'update_on' => date('Y-m-d H:i:s'),
                                 'update_id' => $user->data()->id,
+                                'zone' => $screening['zone'],
                                 'facility_id' => $screening['facility_id'],
                             ));
 
@@ -890,6 +899,7 @@ if ($user->isLoggedIn()) {
                         'verified_by' => $verified_by,
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
+                        'zone' => $screening['zone'],
                         'facility_id' => $screening['facility_id'],
                     ), $individual[0]['id']);
 
@@ -1000,6 +1010,7 @@ if ($user->isLoggedIn()) {
                         'staff_id' => $user->data()->id,
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
+                        'zone' => $screening['zone'],
                         'facility_id' => $screening['facility_id'],
                     ));
 
@@ -1111,6 +1122,7 @@ if ($user->isLoggedIn()) {
                         'staff_id' => $user->data()->id,
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
+                        'zone' => $screening['zone'],
                         'facility_id' => $screening['facility_id'],
                     ));
 
@@ -1223,6 +1235,7 @@ if ($user->isLoggedIn()) {
                         'staff_id' => $user->data()->id,
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
+                        'zone' => $screening['zone'],
                         'facility_id' => $screening['facility_id'],
                     ));
 
@@ -1309,6 +1322,7 @@ if ($user->isLoggedIn()) {
                             'verified_by' => $verified_by,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'zone' => $screening['zone'],
                             'facility_id' => $screening['facility_id'],
                         ), $costing[0]['id']);
 
@@ -1357,6 +1371,7 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'zone' => $screening['zone'],
                             'facility_id' => $screening['facility_id'],
                         ));
                         $successMessage = 'Respiratory Data  Successful Updated';
@@ -1403,6 +1418,7 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'zone' => $screening['zone'],
                             'facility_id' => $screening['facility_id'],
                         ));
 
@@ -1453,6 +1469,7 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'zone' => $screening['zone'],
                             'facility_id' => $screening['facility_id'],
                         ));
 
@@ -1624,9 +1641,9 @@ if ($user->isLoggedIn()) {
                 }
 
                 $clinician_received_date = "";
-                if($user->data()->zone == 1){
+                if ($user->data()->zone == 1) {
                     $clinician_received_date = Input::get('clinician_received_date');
-                }else{
+                } else {
                     $clinician_received_date = Input::get('clinician_received_date_sub2');
                 }
 
@@ -1682,6 +1699,7 @@ if ($user->isLoggedIn()) {
                             'verified_by' => $verified_by,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'zone' => $screening['zone'],
                             'facility_id' => $screening['facility_id'],
                         ), $costing[0]['id']);
 
@@ -1736,6 +1754,7 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'zone' => $screening['zone'],
                             'facility_id' => $screening['facility_id'],
                         ));
                         $successMessage = 'Diagnosis Data  Successful Updated';
@@ -1790,6 +1809,7 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'zone' => $screening['zone'],
                             'facility_id' => $screening['facility_id'],
                         ));
 
@@ -1846,6 +1866,7 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'update_on' => date('Y-m-d H:i:s'),
                             'update_id' => $user->data()->id,
+                            'zone' => $screening['zone'],
                             'facility_id' => $screening['facility_id'],
                         ));
 
