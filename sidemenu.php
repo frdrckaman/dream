@@ -632,7 +632,7 @@ if ($user->isLoggedIn()) {
                         </ul>
                     </li>
                 <?php } ?>
-                <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) { ?>
+                <?php if ($user->data()->power == 1) { ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>

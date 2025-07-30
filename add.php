@@ -340,6 +340,7 @@ if ($user->isLoggedIn()) {
                 //     $errorMessage = 'PID"s are not Matching please re-check and Submit again';
                 // } else {
                 if ($screening) {
+                    print_r($screening['zone']);
                     $user->updateRecord('screening', array(
                         'pid' => $pid_merged,
                         'screening_date' => Input::get('screening_date'),
@@ -365,8 +366,8 @@ if ($user->isLoggedIn()) {
                         'eligible' => $eligible,
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
-                        'zone' => $screening['zone'],
-                        'facility_id' => $screening['facility_id'],
+                        // 'zone' => $screening['zone'],
+                        'facility_id' => $screening['facility_id']
                     ), $screening['id']);
 
                     $user->createRecord('screening_records', array(
@@ -398,8 +399,8 @@ if ($user->isLoggedIn()) {
                         'staff_id' => $user->data()->id,
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
-                        'zone' => $screening['zone'],
-                        'facility_id' => $screening['facility_id'],
+                        // 'zone' => $screening['zone'],
+                        'facility_id' => $screening['facility_id']
                     ));
 
                     $successMessage = 'Screening  Successful Updated';
