@@ -610,6 +610,15 @@ if ($user->isLoggedIn()) {
                                     <p>Zone Summary</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="missing_forms.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <!-- <span class="badge badge-info right"> -->
+                                    <!-- <?= $all; ?> -->
+                                    <!-- </span> -->
+                                    <p>Missing Forms</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 <?php } ?>
