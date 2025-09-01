@@ -1673,7 +1673,7 @@ if ($user->isLoggedIn()) {
                                                     <?php } ?>
                                                     <hr>
                                                 <?php } ?>
-                                                <?php if ($user->data()->power == 1 || $user->data()->position == 1) { ?>
+                                                <?php if ($user->data()->power == 1) { ?>
                                                     <a href="#delete_record<?= $sid ?>" role="button"
                                                         class="btn btn-secondary btn-custom" data-toggle="modal">Delete
                                                         Record</a>
