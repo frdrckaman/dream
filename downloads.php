@@ -28,8 +28,8 @@ $ext = $_GET['ext'];
 // Specify columns to omit (use field names from your database)
 $omitColumns = [
     // 'REGISTRATION'
-    'pid1',
-    'pid2',
+    // 'pid1',
+    // 'pid2',
     // 'sex',
     // 'dob',
     // 'age',

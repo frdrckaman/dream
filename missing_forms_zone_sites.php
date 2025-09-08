@@ -22,6 +22,7 @@ if ($user->isLoggedIn()) {
 
         // Fetch filtered data
         $data = $override->getOrderBy('screening', 'status', 1);
+        // print_r($data[0]); // Debugging line to inspect $data structure
         if ($filter_zone) {
             $data = array_filter($data, fn($v) => $v['zone'] == $filter_zone);
         }

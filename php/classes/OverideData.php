@@ -373,14 +373,15 @@ class OverideData
         return $result;
     }
 
-    public function getOrderBy($table, $where, $id)
+public function getOrderBy($table, $where, $id)
 {
-    $query = $this->_pdo->query("
-        SELECT * 
-        FROM $table 
-        WHERE $where = '$id' 
-        ORDER BY zone ASC, facility_id ASC, pid ASC
-    ");
+    $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' ORDER BY zone ASC, facility_id ASC, pid ASC");
+    // $query = $this->_pdo->query("
+    //     SELECT * 
+    //     FROM $table 
+    //     WHERE $where = '$id' 
+    //     ORDER BY zone ASC, facility_id ASC, pid ASC
+    // ");
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
