@@ -373,16 +373,47 @@ class OverideData
         return $result;
     }
 
-    public function getOrderBy($table, $where, $id)
+public function getOrderBy($table, $where, $id)
 {
+    $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' ORDER BY zone ASC, facility_id ASC, pid ASC");
+    // $query = $this->_pdo->query("
+    //     SELECT * 
+    //     FROM $table 
+    //     WHERE $where = '$id' 
+    //     ORDER BY zone ASC, facility_id ASC, pid ASC
+    // ");
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+public function getOrderByZone($table, $zone_id) {
     $query = $this->_pdo->query("
         SELECT * 
         FROM $table 
-        WHERE $where = '$id' 
-        ORDER BY zone ASC, facility_id ASC, pid ASC
+        WHERE status = 1 AND zone = '$zone_id' 
+        ORDER BY facility_id ASC, pid ASC
     ");
-    $result = $query->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function getOrderBySite($table, $site_id) {
+    $query = $this->_pdo->query("
+        SELECT * 
+        FROM $table 
+        WHERE status = 1 AND facility_id = '$site_id' 
+        ORDER BY zone ASC, pid ASC
+    ");
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function getOrderByCustom($table, $zone_id, $site_id) {
+    $query = $this->_pdo->query("
+        SELECT * 
+        FROM $table 
+        WHERE status = 1 AND zone = '$zone_id' AND facility_id = '$site_id' 
+        ORDER BY pid ASC
+    ");
+    return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
 

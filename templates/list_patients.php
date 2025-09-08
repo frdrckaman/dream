@@ -1,5 +1,13 @@
 <?php
-require_once 'php/core/init.php';
+// require_once __DIR__ . '/../php/core/init.php';  // Adjusted path
+require_once '../php/core/init.php';
+
+// require_once '/../php/core/init.php';
+// Option 1: Using __DIR__ (relative to this file)
+// require_once __DIR__ . '/../php/core/init.php';
+
+// Option 2: Using DOCUMENT_ROOT (absolute path from web root)
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/dream/php/core/init.php';
 
 $user = new User();
 $override = new OverideData();

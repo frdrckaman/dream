@@ -340,7 +340,7 @@ if ($user->isLoggedIn()) {
                 //     $errorMessage = 'PID"s are not Matching please re-check and Submit again';
                 // } else {
                 if ($screening) {
-                    print_r($screening['zone']);
+                    // print_r($screening['zone']);
                     $user->updateRecord('screening', array(
                         'pid' => $pid_merged,
                         'screening_date' => Input::get('screening_date'),

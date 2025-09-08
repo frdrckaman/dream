@@ -123,17 +123,17 @@ if ($user->isLoggedIn()) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DReam Database | Data</title>
+    <title>Dream Database | Data Tables</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables -->
@@ -142,10 +142,21 @@ if ($user->isLoggedIn()) {
     <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+    <style>
+        .alert {
+            margin: 20px;
+        }
+
+        .card-header .badge {
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
+
         <!-- Navbar -->
         <?php include 'navbar.php'; ?>
         <!-- /.navbar -->
@@ -153,36 +164,33 @@ if ($user->isLoggedIn()) {
         <!-- Main Sidebar Container -->
         <?php include 'sidemenu.php'; ?>
 
-        <?php if ($errorMessage) { ?>
+        <!-- Alerts -->
+        <?php if (!empty($errorMessage)) : ?>
             <div class="alert alert-danger text-center">
                 <h4>Error!</h4>
                 <?= $errorMessage ?>
             </div>
-        <?php } elseif ($pageError) { ?>
+        <?php elseif (!empty($pageError)) : ?>
             <div class="alert alert-danger text-center">
                 <h4>Error!</h4>
-                <?php foreach ($pageError as $error) {
-                    echo $error . ' , ';
-                } ?>
+                <?= implode(' , ', $pageError) ?>
             </div>
-        <?php } elseif ($successMessage) { ?>
+        <?php elseif (!empty($successMessage)) : ?>
             <div class="alert alert-success text-center">
                 <h4>Success!</h4>
                 <?= $successMessage ?>
             </div>
-        <?php } ?>
+        <?php endif; ?>
 
-        <?php if ($_GET['id'] == 1) { ?>
-            <!-- Content Wrapper. Contains page content -->
+        <?php if ($_GET['id'] == 1) : ?>
+            <!-- Content Wrapper -->
             <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
+                <!-- Content Header -->
                 <section class="content-header">
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>
-                                    List of Data Tables
-                                </h1>
+                                <h1>List of Data Tables</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -191,64 +199,41 @@ if ($user->isLoggedIn()) {
                                 </ol>
                             </div>
                         </div>
-                    </div><!-- /.container-fluid -->
+                    </div>
                 </section>
 
-                <!-- Main content -->
+                <!-- Main Content -->
                 <section class="content">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
-                                    <section class="content-header">
-                                        <div class="container-fluid">
-                                            <div class="row mb-2">
-                                                <div class="col-sm-12">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">List of Data Tables</h3>&nbsp;&nbsp;
-                                                        <span class="badge badge-info right"><?= $visit; ?></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <ol class="breadcrumb float-sm-right">
-                                                        <li class="breadcrumb-item">
-                                                            <a href="index1.php">
-                                                                < Back</a>
-                                                        </li>
-                                                        &nbsp;
-                                                        <li class="breadcrumb-item">
-                                                            <a href="index1.php">
-                                                                Go Home > </a>
-                                                        </li>
-                                                    </ol>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                        </div><!-- /.container-fluid -->
-                                    </section>
-                                    <!-- /.card-header -->
+                                    <div class="card-header">
+                                        <h3 class="card-title">List of Data Tables</h3>
+                                        <span class="badge badge-info float-right"><?= $visit; ?></span>
+                                    </div>
                                     <div class="card-body">
-                                        <form method="post">
+
+                                        <!-- Download All -->
+                                        <form method="post" class="mb-3">
                                             <input type="hidden" name="data" value="0">
                                             <input type="hidden" name="table" value="ALL">
-                                            <button type="submit" name="download_all_csv">Download All in Csv</button>&nbsp;&nbsp;&nbsp;
-                                            <button type="submit" name="download_all_xls">Download All in xls</button>&nbsp;&nbsp;&nbsp;
-                                            <button type="submit" name="download_all_xlsx">Download All in xlsx</button>&nbsp;&nbsp;&nbsp;
-                                            <!-- <button type="submit" name="download_stata">Download stata Data</button>&nbsp;&nbsp;&nbsp; -->
-                                            <hr>
-                                            <!-- <a href="data.php?id=2&table=<?= $tables['Tables_in_dream'] ?>" role=" button" class="btn btn-info"> View Recoreds </a> -->
+                                            <button type="submit" name="download_all_csv" class="btn btn-primary">Download All CSV</button>
+                                            <button type="submit" name="download_all_xls" class="btn btn-success">Download All XLS</button>
+                                            <button type="submit" name="download_all_xlsx" class="btn btn-info">Download All XLSX</button>
                                         </form>
-                                        <form method="post">
+
+                                        <!-- Download Treatment -->
+                                        <form method="post" class="mb-3">
                                             <input type="hidden" name="data" value="0">
                                             <input type="hidden" name="table" value="TREATMENT">
-                                            <button type="submit" name="download_treatement_csv">Download treatement Changes in Csv</button>&nbsp;&nbsp;&nbsp;
-                                            <button type="submit" name="download_treatement_xls">Download treatement Changes in xls</button>&nbsp;&nbsp;&nbsp;
-                                            <button type="submit" name="download_treatement_xlsx">Download treatement Changes in xlsx</button>&nbsp;&nbsp;&nbsp;
-                                            <!-- <button type="submit" name="download_stata">Download stata Data</button>&nbsp;&nbsp;&nbsp; -->
-                                            <hr>
-                                            <!-- <a href="data.php?id=2&table=<?= $tables['Tables_in_dream'] ?>" role=" button" class="btn btn-info"> View Recoreds </a> -->
+                                            <button type="submit" name="download_treatement_csv" class="btn btn-primary">Treatment CSV</button>
+                                            <button type="submit" name="download_treatement_xls" class="btn btn-success">Treatment XLS</button>
+                                            <button type="submit" name="download_treatement_xlsx" class="btn btn-info">Treatment XLSX</button>
                                         </form>
-                                        <table id="search-results" class="table table-bordered">
+
+                                        <!-- Data Table -->
+                                        <table id="data-tables" class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -260,62 +245,39 @@ if ($user->isLoggedIn()) {
                                             <tbody>
                                                 <?php
                                                 $x = 1;
-                                                foreach ($override->AllTables() as $tables) {
+                                                foreach ($override->AllTables() as $tables) :
+                                                    $table_name = match ($tables['Tables_in_dream']) {
+                                                        'screening' => 'Screening Form',
+                                                        'enrollment_form' => 'Enrollment Form',
+                                                        'respiratory' => 'Clinic Lab Form',
+                                                        'diagnosis_test' => 'Zonal Lab Form',
+                                                        'diagnosis' => 'Diagnosis Form',
+                                                        default => $tables['Tables_in_dream']
+                                                    };
 
-                                                    
-                                                    if ($tables['Tables_in_dream'] == 'screening') {
-                                                        $table_name = 'Screening Form';
-                                                    } elseif ($tables['Tables_in_dream'] == 'enrollment_form') {
-                                                        $table_name = 'Enrollment Form';
-                                                    } elseif ($tables['Tables_in_dream'] == 'respiratory') {
-                                                        $table_name = 'Clinic Lab Form';
-                                                    } elseif ($tables['Tables_in_dream'] == 'diagnosis_test') {
-                                                        $table_name = 'Zonal Lab Form';
-                                                    } elseif ($tables['Tables_in_dream'] == 'diagnosis') {
-                                                        $table_name = 'Diagnosis Form';
-                                                    }
-
-
-                                                    if (
-                                                        $tables['Tables_in_dream'] == 'screening' ||
-                                                        $tables['Tables_in_dream'] == 'enrollment_form' ||
-                                                        $tables['Tables_in_dream'] == 'respiratory' ||
-                                                        $tables['Tables_in_dream'] == 'diagnosis' ||
-                                                        $tables['Tables_in_dream'] == 'diagnosis_test'
-                                                    ) {
+                                                    if (in_array($tables['Tables_in_dream'], ['screening', 'enrollment_form', 'respiratory', 'diagnosis', 'diagnosis_test'])) :
                                                 ?>
                                                         <tr>
-                                                            <td class="table-user">
-                                                                <?= $x; ?>
-                                                            </td>
+                                                            <td><?= $x; ?></td>
                                                             <td>
-                                                                <input type="hidden" name="table_id" value="<?= $tables['Tables_in_dream']; ?>">
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" name="table_name[]" id="table_name[]" value="<?= $tables['Tables_in_dream']; ?>" <?php if ($tables['Tables_in_dream'] != '') {
-                                                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                                                        } ?>>
+                                                                    <input class="form-check-input" type="checkbox" name="table_name[]" value="<?= $tables['Tables_in_dream']; ?>" checked>
                                                                     <label class="form-check-label"><?= $table_name; ?></label>
                                                                 </div>
                                                             </td>
-                                                            <td class="table-user">
-                                                                <?= $override->getCount($tables['Tables_in_dream'], 'status', 1); ?>
-                                                            </td>
-                                                            <td class="table-user text-center">
+                                                            <td><?= $override->getCount($tables['Tables_in_dream'], 'status', 1); ?></td>
+                                                            <td class="text-center">
                                                                 <form method="post">
                                                                     <input type="hidden" name="data" value="<?= $x; ?>">
                                                                     <input type="hidden" name="table" value="<?= $tables['Tables_in_dream']; ?>">
-                                                                    <button type="submit" name="download_xls">Download xls</button>&nbsp;&nbsp;&nbsp;
-                                                                    <button type="submit" name="download_xlsx">Download xlsx</button>&nbsp;&nbsp;&nbsp;
-                                                                    <button type="submit" name="download_csv">Download csv</button>&nbsp;&nbsp;&nbsp;
-                                                                    <!-- <button type="submit" name="download_stata">Download stata Data</button>&nbsp;&nbsp;&nbsp; -->
-                                                                    <hr>
-                                                                    <a href="data.php?id=2&table=<?= $tables['Tables_in_dream'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> View Recoreds </a>
+                                                                    <button type="submit" name="download_xls" class="btn btn-success btn-sm">XLS</button>
+                                                                    <button type="submit" name="download_xlsx" class="btn btn-info btn-sm">XLSX</button>
+                                                                    <button type="submit" name="download_csv" class="btn btn-primary btn-sm">CSV</button>
+                                                                    <a href="data_view.php?id=2&table=<?= $tables['Tables_in_dream'] ?>&status=<?= $_GET['status'] ?>" class="btn btn-warning btn-sm">View Records</a>
                                                                 </form>
                                                             </td>
                                                         </tr>
-                                                <?php $x++;
-                                                    }
-                                                } ?>
+                                                <?php $x++; endif; endforeach; ?>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
@@ -326,633 +288,66 @@ if ($user->isLoggedIn()) {
                                                 </tr>
                                             </tfoot>
                                         </table>
-                                    </div>
-                                    <!-- /.card-body -->
-                                    <?php
-                                    $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-                                    // $currentSite = $_GET['facility_id'];
-                                    // $pages = 10; // Total number of pages (replace with your actual calculation)
-                                    $range = 2; // Number of pages to show before and after the current page
 
-                                    // Calculate start and end for the visible range
-                                    $start = max(1, $currentPage - $range);
-                                    $end = min($pages, $currentPage + $range);
-                                    ?>
-                                    <div class="card-footer clearfix">
-                                        <ul class="pagination pagination-sm m-0 float-right">
-                                            <!-- Previous Page -->
-                                            <li class="page-item <?php echo ($currentPage <= 1) ? 'disabled' : ''; ?>">
-                                                <a class="page-link"
-                                                    href="data.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&page=<?php echo max($currentPage - 1, 1); ?>">&laquo;</a>
-                                            </li>
-
-                                            <!-- First Page (if outside the range) -->
-                                            <?php if ($start > 1): ?>
-                                                <li class="page-item">
-                                                    <a class="page-link"
-                                                        href="data.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&page=1">1</a>
+                                        <!-- Pagination -->
+                                        <div class="card-footer clearfix">
+                                            <ul class="pagination pagination-sm m-0 float-right">
+                                                <?php
+                                                $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+                                                $range = 2;
+                                                $start = max(1, $currentPage - $range);
+                                                $end = min($pages, $currentPage + $range);
+                                                ?>
+                                                <!-- Previous -->
+                                                <li class="page-item <?= ($currentPage <= 1) ? 'disabled' : ''; ?>">
+                                                    <a class="page-link" href="data.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&page=<?= max($currentPage - 1, 1); ?>">&laquo;</a>
                                                 </li>
-                                                <?php if ($start > 2): ?>
-                                                    <li class="page-item disabled">
-                                                        <span class="page-link">...</span>
-                                                    </li>
+
+                                                <?php if ($start > 1) : ?>
+                                                    <li class="page-item"><a class="page-link" href="data.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&page=1">1</a></li>
+                                                    <?php if ($start > 2) : ?>
+                                                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                                                    <?php endif; ?>
                                                 <?php endif; ?>
-                                            <?php endif; ?>
 
-                                            <!-- Visible Page Links -->
-                                            <?php for ($i = $start; $i <= $end; $i++): ?>
-                                                <li class="page-item <?php echo ($i === $currentPage) ? 'active' : ''; ?>">
-                                                    <a class="page-link"
-                                                        href="data.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                                </li>
-                                            <?php endfor; ?>
-
-                                            <!-- Last Page (if outside the range) -->
-                                            <?php if ($end < $pages): ?>
-                                                <?php if ($end < $pages - 1): ?>
-                                                    <li class="page-item disabled">
-                                                        <span class="page-link">...</span>
+                                                <?php for ($i = $start; $i <= $end; $i++) : ?>
+                                                    <li class="page-item <?= ($i === $currentPage) ? 'active' : ''; ?>">
+                                                        <a class="page-link" href="data.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&page=<?= $i; ?>"><?= $i; ?></a>
                                                     </li>
+                                                <?php endfor; ?>
+
+                                                <?php if ($end < $pages) : ?>
+                                                    <?php if ($end < $pages - 1) : ?>
+                                                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                                                    <?php endif; ?>
+                                                    <li class="page-item"><a class="page-link" href="data.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&page=<?= $pages; ?>"><?= $pages; ?></a></li>
                                                 <?php endif; ?>
-                                                <li class="page-item">
-                                                    <a class="page-link"
-                                                        href="data.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&page=<?php echo $pages; ?>"><?php echo $pages; ?></a>
+
+                                                <!-- Next -->
+                                                <li class="page-item <?= ($currentPage >= $pages) ? 'disabled' : ''; ?>">
+                                                    <a class="page-link" href="data.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&page=<?= min($currentPage + 1, $pages); ?>">&raquo;</a>
                                                 </li>
-                                            <?php endif; ?>
-                                            <!-- Next Page -->
-                                            <li class="page-item <?php echo ($currentPage >= $pages) ? 'disabled' : ''; ?>">
-                                                <a class="page-link"
-                                                    href="data.php?id=<?= $_GET['id']; ?>&status=<?= $_GET['status']; ?>&page=<?php echo min($currentPage + 1, $pages); ?>">&raquo;</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- /.card -->
-                            </div>
-                            <!--/.col (right) -->
-                        </div>
-                        <!-- /.row -->
-                    </div><!-- /.container-fluid -->
-                </section>
-                <!-- /.content -->
-            </div>
-            <!-- /.content-wrapper -->
-        <?php } elseif ($_GET['id'] == 2) { ?>
-            <?php
-            $table_name = $_GET['table'];
-            if ($user->data()->accessLevel == 1 || $user->data()->position == 1 || $user->data()->position == 2) {
-                $pagNum = $override->getWithLimit000Count($table_name, 'status', 1);
-            } else {
-                $pagNum = $override->getWithLimit00Count($table_name, 'status', 1, 'facility_id', $user->data()->site_id);
-            }
-
-            $pages = ceil($pagNum / $numRec);
-
-            if (!$_GET['page'] || $_GET['page'] == 1) {
-                $page = 0;
-            } else {
-                $page = ($_GET['page'] * $numRec) - $numRec;
-            }
-
-            if ($user->data()->accessLevel == 1 || $user->data()->position == 1 || $user->data()->position == 2) {
-                $data = $override->getWithLimit000($table_name, 'status', 1, $page, $numRec);
-            } else {
-                $data = $override->getWithLimit00($table_name, 'status', 1, 'facility_id', $user->data()->site_id, $page, $numRec);
-            }
-            ?>
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1>
-                                    <?= $_GET['table']; ?> Data
-                                </h1>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
-                                    <li class="breadcrumb-item active"><?= $_GET['table']; ?></li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div><!-- /.container-fluid -->
-                </section>
-
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="row mb-2">
-                                        <div class="col-sm-12">
-                                            <div class="card-header">
-                                                <h3 class="card-title">List of <?= $_GET['table']; ?> Records</h3>&nbsp;&nbsp;
-                                                <span class="badge badge-info right"><?= $pagNum; ?></span>
-                                                <div class="card-tools">
-                                                    <ul class="pagination pagination-sm float-right">
-                                                        <li class="page-item"><a class="page-link" href="data.php?id=1&status=<?= $_GET['status']; ?>&data=<?= $_GET['data']; ?>">&laquo; Back</a></li>
-                                                        <li class="page-item"><a class="page-link" href="index1.php">&raquo; Home</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-
-                                            <hr>
-
-                                            <?php
-                                            if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 3) {
-                                            ?>
-                                                <div class="card-tools">
-                                                    <div class="input-group input-group-sm float-left" style="width: 350px;">
-                                                        <form method="post">
-                                                            <div class="form-inline">
-                                                                <div class="input-group-append">
-                                                                    <div class="col-sm-12">
-                                                                        <select class="form-control float-right" name="facility_id" style="width: 100%;" autocomplete="off">
-                                                                            <option value="">Select Site</option>
-                                                                            <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
-                                                                            <?php } ?>
-                                                                        </select>
-                                                                    </div>
-                                                                    <input type="submit" name="search_by_site" value="Search by Site" class="btn btn-info"><i class="fas fa-search"></i>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
-                                            <div class="card-tools">
-                                                <div class="input-group input-group-sm float-right" style="width: 350px;">
-                                                    <form method="get" action="">
-                                                        <div class="form-inline">
-                                                            <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
-                                                            <input type="hidden" name="table" value="<?= $_GET['table'] ?>">
-                                                            <input type="text" name="search_item" id="search_item" class="form-control float-right" placeholder="Search Study ID or Patient ID">
-                                                            <input type="submit" value="Search" class="btn btn-default"><i class="fas fa-search"></i>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                            </ul>
                                         </div>
+
                                     </div>
                                 </div>
-                                <!-- /.card -->
-
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <table id="search-results" class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>PID</th>
-                                                <?php if ($_GET['table'] == 'screening' || $_GET['table'] == 'enrollment_form') { ?>
-                                                    <th>age</th>
-                                                    <th>sex</th>
-                                                <?php } ?>
-                                                <th>Site</th>
-                                                <th class="text-center">Status</th>
-                                                <th class="text-center">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $x = 1;
-                                            foreach ($data as $value) {
-                                                $sites = $override->getNews('sites', 'status', 1, 'id', $value['facility_id'])[0];
-                                                $name = $override->get('screening', 'id', $value['id'])[0];
-                                                $name2 = $override->get('screening', 'id', $value['id'])[0];
-                                            ?>
-                                                <tr>
-                                                    <td class="table-user">
-                                                        <?= $value['pid']; ?>
-                                                    </td>
-                                                    <?php if ($_GET['table'] == 'screening' || $_GET['table'] == 'enrollment_form') { ?>
-                                                        <td class="table-user">
-                                                            <?= $value['age']; ?>
-                                                        </td>
-                                                        <?php if ($value['sex'] == 1) { ?>
-                                                            <td class="table-user">
-                                                                Male
-                                                            </td>
-                                                        <?php } elseif ($value['sex'] == 2) { ?>
-                                                            <td class="table-user">
-                                                                Female
-                                                            </td>
-                                                        <?php } ?>
-                                                    <?php } ?>
-                                                    <td class="table-user">
-                                                        <?= $sites['name']; ?>
-                                                    </td>
-                                                    <td class="table-user text-center">
-                                                        <?php if ($value['status'] == 1) { ?>
-                                                            <a href="#" class="btn btn-success">Active</a>
-                                                        <?php } else { ?>
-                                                            <a href="#" class="btn btn-danger">Deleted</a>
-                                                        <?php } ?>
-                                                    </td>
-                                                    <td class="table-user text-center">
-                                                        <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $value['facility_id'] ?>&page=" class="btn btn-info">Update Record</a>
-                                                        <a href="#delete_record<?= $value['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete Record</a>
-                                                        <a href="#restore_record<?= $value['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">Restore Record</a>
-                                                    </td>
-                                                </tr>
-                                                <div class="modal fade" id="delete_record<?= $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <form method="post">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                                    <h4>Delete Record</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <strong style="font-weight: bold;color: red">
-                                                                        <p>Are you sure you want to delete this Record ?</p>
-                                                                    </strong>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                                                    <?php if ($user->data()->accessLevel == 1) { ?>
-                                                                        <input type="submit" name="delete_record" value="Delete" class="btn btn-danger">
-                                                                    <?php } ?>
-                                                                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                <div class="modal fade" id="restore_record<?= $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <form method="post">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                                    <h4>Restore Record</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <strong style="font-weight: bold;color: green">
-                                                                        <p>Are you sure you want to Restore this Record ?</p>
-                                                                    </strong>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                                                    <?php if ($user->data()->accessLevel == 1) { ?>
-                                                                        <input type="submit" name="restore_record" value="Restore" class="btn btn-warning">
-                                                                    <?php } ?>
-                                                                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            <?php $x++;
-                                            } ?>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>PID</th>
-                                                <?php if ($_GET['table'] == 'screening' || $_GET['table'] == 'enrollment_form') { ?>
-                                                    <th>age</th>
-                                                    <th>sex</th>
-                                                <?php } ?>
-                                                <th>Site</th>
-                                                <th class="text-center">Status</th>
-                                                <th class="text-center">Action</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                                <!-- /.card-body -->
-                                <div class="card-footer clearfix">
-                                    <ul class="pagination pagination-sm m-0 float-right">
-                                        <li class="page-item">
-                                            <a class="page-link" href="data.php?id=2&status=<?= $_GET['status'] ?>&table=<?= $_GET['table'] ?>facility_id=<?= $_GET['facility_id'] ?>&page=<?php if (($_GET['page'] - 1) > 0) {
-                                                                                                                                                                                                echo $_GET['page'] - 1;
-                                                                                                                                                                                            } else {
-                                                                                                                                                                                                echo 1;
-                                                                                                                                                                                            } ?>">&laquo;
-                                            </a>
-                                        </li>
-                                        <?php for ($i = 1; $i <= $pages; $i++) { ?>
-                                            <li class="page-item">
-                                                <a class="page-link <?php if ($i == $_GET['page']) {
-                                                                        echo 'active';
-                                                                    } ?>" href="data.php?id=2&status=<?= $_GET['status'] ?>&table=<?= $_GET['table'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $i ?>"><?= $i ?>
-                                                </a>
-                                            </li>
-                                        <?php } ?>
-                                        <li class="page-item">
-                                            <a class="page-link" href="data.php?id=2&status=<?= $_GET['status'] ?>&table=<?= $_GET['table'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?php if (($_GET['page'] + 1) <= $pages) {
-                                                                                                                                                                                                echo $_GET['page'] + 1;
-                                                                                                                                                                                            } else {
-                                                                                                                                                                                                echo $i - 1;
-                                                                                                                                                                                            } ?>">&raquo;
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
-                            <!--/.col (right) -->
                         </div>
-                        <!-- /.row -->
                     </div>
-                    <!-- /.container-fluid -->
                 </section>
-                <!-- /.content -->
             </div>
-            <!-- /.content-wrapper -->
-
-        <?php } elseif ($_GET['id'] == 3) { ?>
-            <?php
-            $table_name = $_GET['table'];
-            $form_status = $_GET['form_status'];
-            if ($user->data()->accessLevel == 1 || $user->data()->position == 1 || $user->data()->position == 2) {
-                $pagNum = $override->countData($table_name, 'status', 1, 'form_status', $form_status);
-            } else {
-                $pagNum = $override->countData1($table_name, 'status', 1, 'form_status', $form_status, 'facility_id', $user->data()->site_id);
-            }
-
-            $pages = ceil($pagNum / $numRec);
-
-            if (!$_GET['page'] || $_GET['page'] == 1) {
-                $page = 0;
-            } else {
-                $page = ($_GET['page'] * $numRec) - $numRec;
-            }
-
-            if ($user->data()->accessLevel == 1 || $user->data()->position == 1 || $user->data()->position == 2) {
-                $data = $override->getWithLimit1($table_name, 'status', 1, 'form_status', $form_status, $page, $numRec);
-            } else {
-                $data = $override->getWithLimit2($table_name, 'status', 1, 'form_status', $form_status, 'facility_id', $user->data()->site_id, $page, $numRec);
-            }
-            ?>
-
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1>
-                                    <?= $_GET['table']; ?> Data
-                                </h1>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="index1.php">Home</a></li>
-                                    <li class="breadcrumb-item active"><?= $_GET['table']; ?></li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div><!-- /.container-fluid -->
-                </section>
-
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="row mb-2">
-                                        <div class="col-sm-12">
-                                            <div class="card-header">
-                                                <h3 class="card-title">List of <?= $_GET['table']; ?> Records</h3>&nbsp;&nbsp;
-                                                <span class="badge badge-info right"><?= $pagNum; ?></span>
-                                                <div class="card-tools">
-                                                    <ul class="pagination pagination-sm float-right">
-                                                        <li class="page-item"><a class="page-link" href="data.php?id=1&status=<?= $_GET['status']; ?>&data=<?= $_GET['data']; ?>">&laquo; Back</a></li>
-                                                        <li class="page-item"><a class="page-link" href="index1.php">&raquo; Home</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-
-                                            <hr>
-
-                                            <?php
-                                            if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 3) {
-                                            ?>
-                                                <div class="card-tools">
-                                                    <div class="input-group input-group-sm float-left" style="width: 350px;">
-                                                        <form method="post">
-                                                            <div class="form-inline">
-                                                                <div class="input-group-append">
-                                                                    <div class="col-sm-12">
-                                                                        <select class="form-control float-right" name="facility_id" style="width: 100%;" autocomplete="off">
-                                                                            <option value="">Select Site</option>
-                                                                            <?php foreach ($override->get('sites', 'status', 1) as $site) { ?>
-                                                                                <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
-                                                                            <?php } ?>
-                                                                        </select>
-                                                                    </div>
-                                                                    <input type="submit" name="search_by_site" value="Search by Site" class="btn btn-info"><i class="fas fa-search"></i>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
-                                            <div class="card-tools">
-                                                <div class="input-group input-group-sm float-right" style="width: 350px;">
-                                                    <form method="get" action="">
-                                                        <div class="form-inline">
-                                                            <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
-                                                            <input type="hidden" name="table" value="<?= $_GET['table'] ?>">
-                                                            <input type="text" name="search_item" id="search_item" class="form-control float-right" placeholder="Search Study ID or Patient ID">
-                                                            <input type="submit" value="Search" class="btn btn-default"><i class="fas fa-search"></i>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.card -->
-
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <table id="search-results" class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>PID</th>
-                                                <?php if ($_GET['table'] == 'screening' || $_GET['table'] == 'enrollment_form') { ?>
-                                                    <th>age</th>
-                                                    <th>sex</th>
-                                                <?php } ?>
-                                                <th>Site</th>
-                                                <th class="text-center">Status</th>
-                                                <th class="text-center">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $x = 1;
-                                            foreach ($data as $value) {
-                                                $sites = $override->getNews('sites', 'status', 1, 'id', $value['facility_id'])[0];
-                                                $name = $override->get('screening', 'id', $value['id'])[0];
-                                                $name2 = $override->get('screening', 'id', $value['id'])[0];
-                                            ?>
-                                                <tr>
-                                                    <td class="table-user">
-                                                        <?= $value['pid']; ?>
-                                                    </td>
-                                                    <?php if ($_GET['table'] == 'screening' || $_GET['table'] == 'enrollment_form') { ?>
-                                                        <td class="table-user">
-                                                            <?= $value['age']; ?>
-                                                        </td>
-                                                        <?php if ($value['sex'] == 1) { ?>
-                                                            <td class="table-user">
-                                                                Male
-                                                            </td>
-                                                        <?php } elseif ($value['sex'] == 2) { ?>
-                                                            <td class="table-user">
-                                                                Female
-                                                            </td>
-                                                        <?php } ?>
-                                                    <?php } ?>
-                                                    <td class="table-user">
-                                                        <?= $sites['name']; ?>
-                                                    </td>
-                                                    <td class="table-user text-center">
-                                                        <?php if ($value['status'] == 1) { ?>
-                                                            <a href="#" class="btn btn-success">Active</a>
-                                                        <?php } else { ?>
-                                                            <a href="#" class="btn btn-danger">Deleted</a>
-                                                        <?php } ?>
-                                                    </td>
-                                                    <td class="table-user text-center">
-                                                        <a href="add.php?id=13&status=<?= $_GET['status'] ?>&sid=<?= $value['id'] ?>&facility_id=<?= $value['facility_id'] ?>&page=" class="btn btn-info">Update Record</a>
-                                                        <a href="#delete_record<?= $value['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete Record</a>
-                                                        <a href="#restore_record<?= $value['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">Restore Record</a>
-                                                    </td>
-                                                </tr>
-                                                <div class="modal fade" id="delete_record<?= $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <form method="post">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                                    <h4>Delete Record</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <strong style="font-weight: bold;color: red">
-                                                                        <p>Are you sure you want to delete this Record ?</p>
-                                                                    </strong>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                                                    <?php if ($user->data()->accessLevel == 1) { ?>
-                                                                        <input type="submit" name="delete_record" value="Delete" class="btn btn-danger">
-                                                                    <?php } ?>
-                                                                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                <div class="modal fade" id="restore_record<?= $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <form method="post">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                                    <h4>Restore Record</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <strong style="font-weight: bold;color: green">
-                                                                        <p>Are you sure you want to Restore this Record ?</p>
-                                                                    </strong>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                                                    <?php if ($user->data()->accessLevel == 1) { ?>
-                                                                        <input type="submit" name="restore_record" value="Restore" class="btn btn-warning">
-                                                                    <?php } ?>
-                                                                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            <?php $x++;
-                                            } ?>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>PID</th>
-                                                <?php if ($_GET['table'] == 'screening' || $_GET['table'] == 'enrollment_form') { ?>
-                                                    <th>age</th>
-                                                    <th>sex</th>
-                                                <?php } ?>
-                                                <th>Site</th>
-                                                <th class="text-center">Status</th>
-                                                <th class="text-center">Action</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                                <!-- /.card-body -->
-                                <div class="card-footer clearfix">
-                                    <ul class="pagination pagination-sm m-0 float-right">
-                                        <li class="page-item">
-                                            <a class="page-link" href="data.php?id=3&status=<?= $_GET['status'] ?>&table=<?= $_GET['table'] ?>facility_id=<?= $_GET['facility_id'] ?>&page=<?php if (($_GET['page'] - 1) > 0) {
-                                                                                                                                                                                                echo $_GET['page'] - 1;
-                                                                                                                                                                                            } else {
-                                                                                                                                                                                                echo 1;
-                                                                                                                                                                                            } ?>">&laquo;
-                                            </a>
-                                        </li>
-                                        <?php for ($i = 1; $i <= $pages; $i++) { ?>
-                                            <li class="page-item">
-                                                <a class="page-link <?php if ($i == $_GET['page']) {
-                                                                        echo 'active';
-                                                                    } ?>" href="data.php?id=3&status=<?= $_GET['status'] ?>&table=<?= $_GET['table'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?= $i ?>"><?= $i ?>
-                                                </a>
-                                            </li>
-                                        <?php } ?>
-                                        <li class="page-item">
-                                            <a class="page-link" href="data.php?id=3&status=<?= $_GET['status'] ?>&table=<?= $_GET['table'] ?>&facility_id=<?= $_GET['facility_id'] ?>&page=<?php if (($_GET['page'] + 1) <= $pages) {
-                                                                                                                                                                                                echo $_GET['page'] + 1;
-                                                                                                                                                                                            } else {
-                                                                                                                                                                                                echo $i - 1;
-                                                                                                                                                                                            } ?>">&raquo;
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!--/.col (right) -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
-                </section>
-                <!-- /.content -->
-            </div>
-            <!-- /.content-wrapper -->
-
-        <?php  } ?>
+        <?php endif; ?>
 
         <?php include 'footer.php'; ?>
 
-
         <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+        <aside class="control-sidebar control-sidebar-dark"></aside>
     </div>
-    <!-- ./wrapper -->
 
-    <!-- jQuery -->
+    <!-- Scripts -->
     <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
     <script src="plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -965,29 +360,16 @@ if ($user->isLoggedIn()) {
     <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <!-- <script src="dist/js/demo.js"></script> -->
-    <!-- Page specific script -->
+
     <script>
-        // $(function() {
-        //     $("#example1").DataTable({
-        //         "responsive": true,
-        //         "lengthChange": false,
-        //         "autoWidth": false,
-        //         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        //     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        //     $('#example2').DataTable({
-        //         "paging": true,
-        //         "lengthChange": false,
-        //         "searching": false,
-        //         "ordering": true,
-        //         "info": true,
-        //         "autoWidth": false,
-        //         "responsive": true,
-        //     });
-        // });
+        $(function() {
+            $("#data-tables").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+            }).buttons().container().appendTo('#data-tables_wrapper .col-md-6:eq(0)');
+        });
     </script>
 </body>
 

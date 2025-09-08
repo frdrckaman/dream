@@ -36,10 +36,10 @@ if ($user->isLoggedIn()) {
     //   $enrolled = $override->countData('enrollment_form', 'status', 1, 'facility_id', $_GET['facility_id']);
     //   $completed = $override->countData1NotNull('diagnosis', 'status', 1, 'tb_otcome2', '', 'facility_id', $_GET['facility_id']);
     // } else {
-      $screening = $override->getCount('screening', 'status', 1);
-      $eligible = $override->countData('screening', 'status', 1, 'eligible', 1);
-      $enrolled = $override->getCount('enrollment_form', 'status', 1);
-      $completed = $override->countDataNotNull('diagnosis', 'status', 1, 'tb_otcome2', '');
+    $screening = $override->getCount('screening', 'status', 1);
+    $eligible = $override->countData('screening', 'status', 1, 'eligible', 1);
+    $enrolled = $override->getCount('enrollment_form', 'status', 1);
+    $completed = $override->countDataNotNull('diagnosis', 'status', 1, 'tb_otcome2', '');
     // }
   } else {
     $screening = $override->countData('screening', 'status', 1, 'facility_id', $user->data()->site_id);
@@ -213,8 +213,14 @@ if ($user->isLoggedIn()) {
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="info.php?id=3&status=3&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
-                class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <!-- <a href="info.php?id=3&status=3&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
+                class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i>
+              </a> -->
+              <a href="templates/list_patients.php?id=3&status=3&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </a>
+
+
             </div>
           </div>
 
