@@ -399,7 +399,7 @@ if ($user->isLoggedIn()) {
                         'staff_id' => $user->data()->id,
                         'update_on' => date('Y-m-d H:i:s'),
                         'update_id' => $user->data()->id,
-                        // 'zone' => $screening['zone'],
+                        'zone' => $user->data()->zone,
                         'facility_id' => $screening['facility_id']
                     ));
 
