@@ -4431,7 +4431,7 @@ if ($user->isLoggedIn()) {
                                                                         id="sample_received<?= $value['id']; ?>"
                                                                         value="<?= $value['id']; ?>" <?php if ($costing['sample_received'] == $value['id']) {
                                                                                                             echo 'checked';
-                                                                                                        } ?>>
+                                                                                                        } ?> required>
                                                                     <label
                                                                         class="form-check-label"><?= $value['name']; ?></label>
                                                                 </div>
@@ -4519,7 +4519,7 @@ if ($user->isLoggedIn()) {
                                                                             id="number_received<?= $value['id']; ?>"
                                                                             value="<?= $value['id']; ?>" <?php if ($costing['number_received'] == $value['id']) {
                                                                                                                 echo 'checked';
-                                                                                                            } ?>>
+                                                                                                            } ?> required>
                                                                         <label
                                                                             class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
@@ -4661,7 +4661,7 @@ if ($user->isLoggedIn()) {
                                                                             id="afb_microscopy_conducted<?= $value['id']; ?>"
                                                                             value="<?= $value['id']; ?>" <?php if ($costing['afb_microscopy_conducted'] == $value['id']) {
                                                                                                                 echo 'checked';
-                                                                                                            } ?>>
+                                                                                                            } ?> required>
                                                                         <label
                                                                             class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
@@ -4830,7 +4830,7 @@ if ($user->isLoggedIn()) {
                                                                             id="xpert_mtb_rif_conducted<?= $value['id']; ?>"
                                                                             value="<?= $value['id']; ?>" <?php if ($costing['xpert_mtb_rif_conducted'] == $value['id']) {
                                                                                                                 echo 'checked';
-                                                                                                            } ?>>
+                                                                                                            } ?> required>
                                                                         <label
                                                                             class="form-check-label"><?= $value['name']; ?></label>
                                                                     </div>
