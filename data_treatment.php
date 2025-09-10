@@ -264,7 +264,7 @@ if ($user->isLoggedIn()) {
                                                     if (
                                                         $tables['Tables_in_dream'] == 'screening' ||   $tables['Tables_in_dream'] == 'enrollment_form' || $tables['Tables_in_dream'] == 'respiratory' ||
                                                         $tables['Tables_in_dream'] == 'non_respiratory' || $tables['Tables_in_dream'] == 'diagnosis' ||
-                                                        $tables['Tables_in_dream'] == 'diagnosis_test'
+                                                        $tables['Tables_in_dream'] == 'diagnosis_test' || $tables['Tables_in_dream'] == 'treatment_changes'
                                                     ) {
                                                 ?>
                                                         <tr>

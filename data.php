@@ -100,17 +100,17 @@ if ($user->isLoggedIn()) {
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_treatement_xls'])) {
                 $ext = 'xls';
-                $url = 'downloads_treatment.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_treatement_xlsx'])) {
                 $ext = 'xlsx';
-                $url = 'downloads_treatment.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_treatement_csv'])) {
                 $ext = 'csv';
-                $url = 'downloads_treatment.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             }
@@ -264,7 +264,7 @@ if ($user->isLoggedIn()) {
                                                     if (
                                                         $tables['Tables_in_dream'] == 'screening' ||   $tables['Tables_in_dream'] == 'enrollment_form' || $tables['Tables_in_dream'] == 'respiratory' ||
                                                         $tables['Tables_in_dream'] == 'non_respiratory' || $tables['Tables_in_dream'] == 'diagnosis' ||
-                                                        $tables['Tables_in_dream'] == 'diagnosis_test'
+                                                        $tables['Tables_in_dream'] == 'diagnosis_test' || $tables['Tables_in_dream'] == 'treatment_changes'
                                                     ) {
                                                 ?>
                                                         <tr>
