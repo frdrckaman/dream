@@ -100,17 +100,17 @@ if ($user->isLoggedIn()) {
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_treatement_xls'])) {
                 $ext = 'xls';
-                $url = 'downloads_treatment.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_treatement_xlsx'])) {
                 $ext = 'xlsx';
-                $url = 'downloads_treatment.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_treatement_csv'])) {
                 $ext = 'csv';
-                $url = 'downloads_treatment.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             }
