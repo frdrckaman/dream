@@ -77,7 +77,8 @@ $omitColumns = [
     'laboratory_test_used2',
     'laboratory_test_used_date',
     'form_status',
-    'zone'
+    'zone',
+    'enrollment_id'
     // 'laboratory_test_used2',   
 ]; // Example: omit 'email' and 'password' columns
 
