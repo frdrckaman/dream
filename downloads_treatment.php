@@ -87,7 +87,7 @@ if ($table == 'ALL') {
     $result = $override->get('treatment_changes', 'status', 1);
 } 
 else {
-    $result = $override->get($table, 'status', 1);
+    $result = $override->get('treatment_changes', 'status', 1);
 }
 
 require 'vendor/autoload.php';
