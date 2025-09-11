@@ -5149,7 +5149,7 @@ if ($user->isLoggedIn()) {
                                                         <label for="pid1" class="form-label">2. PID</label>
                                                         <input type="text" value="<?php if ($screening['pid1']) {
                                                                                         echo $screening['pid1'];
-                                                                                    } ?>" id="pid1" name="pid1" class="form-control"
+                                                                                    } ?>" id="pid1" name="pid1" maxlength="3" pattern="\d{3}" inputmode="numeric" class="form-control"
                                                             placeholder="Enter Last Three Digits" required />
                                                         <small id="pid1_error" class="text-danger"
                                                             style="display: none;">PID1
@@ -5164,7 +5164,7 @@ if ($user->isLoggedIn()) {
                                                         <label for="pid2" class="form-label">3. Re-enter PID</label>
                                                         <input type="text" value="<?php if ($screening['pid2']) {
                                                                                         echo $screening['pid2'];
-                                                                                    } ?>" id="pid2" name="pid2" class="form-control"
+                                                                                    } ?>" id="pid2" name="pid2" maxlength="3" pattern="\d{3}" inputmode="numeric" class="form-control"
                                                             placeholder="Re-Enter Last Three Digits" required />
                                                         <small id="pid2_error" class="text-danger"
                                                             style="display: none;">PID1
