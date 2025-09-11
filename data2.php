@@ -25,11 +25,13 @@ if ($user->isLoggedIn()) {
 
     // enrollment_id
     // treatment_changes
-
-    // $user->updateRecord('treatment_changes', array(
-    //     'pid' => $pid_merged,
-    //     'zone' => $user->data()->zone,
-    // ), $screening['id']);
+    foreach ($override->get('treatment_changes','status',1) as $treatment_change) {
+        $screening = $override->get('screening','id',$treatment_change['enrollment_id']);
+        $user->updateRecord('treatment_changes', array(
+            'pid' => $screening[0]['pid'],
+            'zone' => $screening[0]['zone'],
+        ), $treatment_change['id']);
+    }
 
     if (Input::exists('post')) {
         $validate = new validate();

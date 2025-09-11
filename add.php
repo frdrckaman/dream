@@ -370,10 +370,37 @@ if ($user->isLoggedIn()) {
                         'facility_id' => $screening['facility_id']
                     ), $screening['id']);
 
-                    // $user->updateRecord('diagnosis_test', array(
-                    //     'pid' => $pid_merged,
-                    //     'zone' => $user->data()->zone,
-                    // ), $screening['id']);
+
+
+                    foreach ($override->getNews('enrollment_form', 'status', 1,'enrollment_id',$screening['id']) as $enrollment) {
+                         $user->updateRecord('enrollment_form', array(
+                            'pid' => $pid_merged,
+                            'zone' => $user->data()->zone,
+                        ), $enrollment['id']);
+                    }
+
+
+                    foreach ($override->getNews('respiratory', 'status', 1,'enrollment_id',$screening['id']) as $respiratory) {
+                         $user->updateRecord('respiratory', array(
+                            'pid' => $pid_merged,
+                            'zone' => $user->data()->zone,
+                        ), $respiratory['id']);
+                    }
+
+
+                    foreach ($override->getNews('diagnosis_test', 'status', 1,'enrollment_id',$screening['id']) as $diagnosis_test) {
+                         $user->updateRecord('diagnosis_test', array(
+                            'pid' => $pid_merged,
+                            'zone' => $user->data()->zone,
+                        ), $diagnosis_test['id']);
+                    }
+
+                    foreach ($override->getNews('diagnosis', 'status', 1,'enrollment_id',$screening['id']) as $diagnosis) {
+                         $user->updateRecord('diagnosis', array(
+                            'pid' => $pid_merged,
+                            'zone' => $user->data()->zone,
+                        ), $diagnosis['id']);
+                    }
 
                     $user->createRecord('screening_records', array(
                         'screening_id' => $screening['id'],
