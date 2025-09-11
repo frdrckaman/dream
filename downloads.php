@@ -28,8 +28,8 @@ $ext = $_GET['ext'];
 // Specify columns to omit (use field names from your database)
 $omitColumns = [
     // 'REGISTRATION'
-    // 'pid1',
-    // 'pid2',
+    'pid1',
+    'pid2',
     // 'sex',
     // 'dob',
     // 'age',
@@ -77,14 +77,16 @@ $omitColumns = [
     'laboratory_test_used2',
     'laboratory_test_used_date',
     'form_status',
+    'zone',
+    'enrollment_id'
     // 'laboratory_test_used2',   
 ]; // Example: omit 'email' and 'password' columns
 
 // Fetch results from the database
 if ($table == 'ALL') {
-    $result = $override->download_all();
+    $result = $override->get($table, 'status', 1);
 } else if ($table == 'TREATMENT') {
-    $result = $override->get('treatment_changes', 'status', 1);
+    $result = $override->get($table, 'status', 1);
 } 
 else {
     $result = $override->get($table, 'status', 1);

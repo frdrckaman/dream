@@ -655,14 +655,7 @@ if ($user->isLoggedIn()) {
                                     <span class="badge badge-info right"><?= $registered1; ?></span>
                                     <p>Download</p>
                                 </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="data_treatment.php?id=1&status=1" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <span class="badge badge-info right"><?= $registered1; ?></span>
-                                    <p>Download Regimens</p>
-                                </a>
-                            </li>
+                            </li>                            
                         </ul>
                     </li>
                 <?php } ?>
