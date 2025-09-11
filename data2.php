@@ -26,6 +26,11 @@ if ($user->isLoggedIn()) {
     // enrollment_id
     // treatment_changes
 
+    // $user->updateRecord('treatment_changes', array(
+    //     'pid' => $pid_merged,
+    //     'zone' => $user->data()->zone,
+    // ), $screening['id']);
+
     if (Input::exists('post')) {
         $validate = new validate();
 
