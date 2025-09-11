@@ -34,7 +34,6 @@ if ($user->isLoggedIn()) {
     if (Input::exists('post')) {
         $validate = new validate();
 
-
         if (Input::get('delete_record')) {
             $user->updateRecord($_GET['table'], array(
                 'status' => 0,
