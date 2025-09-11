@@ -22,6 +22,17 @@ $numRec = 10;
 
 
 if ($user->isLoggedIn()) {
+
+    // enrollment_id
+    // treatment_changes
+    foreach ($override->get('treatment_changes','status',1) as $treatment_change) {
+        $screening = $override->get('screening','id',$treatment_change['enrollment_id']);
+        $user->updateRecord('treatment_changes', array(
+            'pid' => $screening[0]['pid'],
+            'zone' => $screening[0]['zone'],
+        ), $treatment_change['id']);
+    }
+
     if (Input::exists('post')) {
         $validate = new validate();
 
@@ -65,22 +76,22 @@ if ($user->isLoggedIn()) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['download_xls'])) {
                 $ext = 'xls';
-                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads2.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_xlsx'])) {
                 $ext = 'xlsx';
-                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads2.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_csv'])) {
                 $ext = 'csv';
-                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads2.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_stata'])) {
                 $ext = 'dta';
-                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads2.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_all_xls'])) {
@@ -90,27 +101,27 @@ if ($user->isLoggedIn()) {
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_all_xlsx'])) {
                 $ext = 'xlsx';
-                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads2.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_all_csv'])) {
                 $ext = 'csv';
-                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads2.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_treatement_xls'])) {
                 $ext = 'xls';
-                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads2.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_treatement_xlsx'])) {
                 $ext = 'xlsx';
-                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads2.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             } else if (isset($_POST['download_treatement_csv'])) {
                 $ext = 'csv';
-                $url = 'downloads.php?table=' . Input::get('table') . '&ext=' . $ext;
+                $url = 'downloads2.php?table=' . Input::get('table') . '&ext=' . $ext;
                 Redirect::to($url);
                 $pageError = $validate->errors();
             }
@@ -130,7 +141,7 @@ if ($user->isLoggedIn()) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DReam Database | Data</title>
+    <title>Dream Database | Data</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -264,7 +275,7 @@ if ($user->isLoggedIn()) {
                                                     if (
                                                         $tables['Tables_in_dream'] == 'screening' ||   $tables['Tables_in_dream'] == 'enrollment_form' || $tables['Tables_in_dream'] == 'respiratory' ||
                                                         $tables['Tables_in_dream'] == 'non_respiratory' || $tables['Tables_in_dream'] == 'diagnosis' ||
-                                                        $tables['Tables_in_dream'] == 'diagnosis_test'
+                                                        $tables['Tables_in_dream'] == 'diagnosis_test' || $tables['Tables_in_dream'] == 'treatment_changes'
                                                     ) {
                                                 ?>
                                                         <tr>

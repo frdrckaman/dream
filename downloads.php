@@ -21,6 +21,8 @@ if ($table == 'screening') {
     $file = 'zonal_lab_form';
 } elseif ($table == 'diagnosis') {
     $file = $table . '_form';
+} elseif ($table == 'treatment_changes') {
+    $file = 'regimen_form';
 } 
 $ext = $_GET['ext'];
 // $file = $table . '_form';
@@ -33,6 +35,7 @@ $omitColumns = [
     // 'sex',
     // 'dob',
     // 'age',
+    'diagnosis_id',
     'form_status',
     'date_completed',
     'completed_by',

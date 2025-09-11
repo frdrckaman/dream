@@ -197,8 +197,8 @@ if ($user->isLoggedIn()) {
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="info.php?id=3&status=2&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
-                class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <!-- <a href="#"
+                class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
             </div>
           </div>
 
@@ -216,9 +216,9 @@ if ($user->isLoggedIn()) {
               <!-- <a href="info.php?id=3&status=3&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
                 class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i>
               </a> -->
-              <a href="templates/list_patients.php?id=3&status=3&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>" class="small-box-footer">
+              <!-- <a href="#" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
+              </a> -->
 
 
             </div>
@@ -235,8 +235,8 @@ if ($user->isLoggedIn()) {
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="info.php?id=3&status=4&sid=<?= $_GET['sid'] ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
-                class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <!-- <a href="#"
+                class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
             </div>
           </div>
         </div>

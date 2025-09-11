@@ -228,26 +228,6 @@ if ($user->isLoggedIn()) {
                                     </section>
                                     <!-- /.card-header -->
                                     <div class="card-body">
-                                        <form method="post">
-                                            <input type="hidden" name="data" value="0">
-                                            <input type="hidden" name="table" value="ALL">
-                                            <button type="submit" name="download_all_csv">Download All in Csv</button>&nbsp;&nbsp;&nbsp;
-                                            <button type="submit" name="download_all_xls">Download All in xls</button>&nbsp;&nbsp;&nbsp;
-                                            <button type="submit" name="download_all_xlsx">Download All in xlsx</button>&nbsp;&nbsp;&nbsp;
-                                            <!-- <button type="submit" name="download_stata">Download stata Data</button>&nbsp;&nbsp;&nbsp; -->
-                                            <hr>
-                                            <!-- <a href="data.php?id=2&table=<?= $tables['Tables_in_dream'] ?>" role=" button" class="btn btn-info"> View Recoreds </a> -->
-                                        </form>
-                                        <form method="post">
-                                            <input type="hidden" name="data" value="0">
-                                            <input type="hidden" name="table" value="TREATMENT">
-                                            <button type="submit" name="download_treatement_csv">Download treatement Changes in Csv</button>&nbsp;&nbsp;&nbsp;
-                                            <button type="submit" name="download_treatement_xls">Download treatement Changes in xls</button>&nbsp;&nbsp;&nbsp;
-                                            <button type="submit" name="download_treatement_xlsx">Download treatement Changes in xlsx</button>&nbsp;&nbsp;&nbsp;
-                                            <!-- <button type="submit" name="download_stata">Download stata Data</button>&nbsp;&nbsp;&nbsp; -->
-                                            <hr>
-                                            <!-- <a href="data.php?id=2&table=<?= $tables['Tables_in_dream'] ?>" role=" button" class="btn btn-info"> View Recoreds </a> -->
-                                        </form>
                                         <table id="search-results" class="table table-bordered">
                                             <thead>
                                                 <tr>
@@ -290,7 +270,6 @@ if ($user->isLoggedIn()) {
                                                                     <button type="submit" name="download_xls">Download xls</button>&nbsp;&nbsp;&nbsp;
                                                                     <button type="submit" name="download_xlsx">Download xlsx</button>&nbsp;&nbsp;&nbsp;
                                                                     <button type="submit" name="download_csv">Download csv</button>&nbsp;&nbsp;&nbsp;
-                                                                    <!-- <button type="submit" name="download_stata">Download stata Data</button>&nbsp;&nbsp;&nbsp; -->
                                                                     <hr>
                                                                     <a href="data.php?id=2&table=<?= $tables['Tables_in_dream'] ?>&status=<?= $_GET['status'] ?>" role=" button" class="btn btn-info"> View Recoreds </a>
                                                                 </form>
