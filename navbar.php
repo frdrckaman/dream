@@ -16,14 +16,14 @@
             <a href="info.php?id=3&status=1&sid=<?= $_GET['sid']; ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page']; ?>"
                class="nav-link">Screened</a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
+        <!-- <li class="nav-item d-none d-sm-inline-block">
             <a href="info.php?id=3&status=2&sid=<?= $_GET['sid']; ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page']; ?>"
                class="nav-link">Eligible</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="info.php?id=3&status=3&sid=<?= $_GET['sid']; ?>&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page']; ?>"
                class="nav-link">Enrolled</a>
-        </li>
+        </li> -->
         <li class="nav-item d-none d-sm-inline-block">
             <a href="logout.php" class="nav-link">Logout</a>
         </li>
