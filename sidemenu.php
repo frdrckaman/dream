@@ -664,6 +664,25 @@ if ($user->isLoggedIn()) {
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
+                                Data 2 <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="data2.php?id=1&status=1" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <span class="badge badge-info right"><?= $registered1; ?></span>
+                                    <p>Download 2</p>
+                                </a>
+                            </li>                            
+                        </ul>
+                    </li>
+                <?php } ?>
+                <?php if ($user->data()->power == 1) { ?>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
                                 Clear Data <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>

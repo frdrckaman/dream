@@ -11,14 +11,27 @@ if (!$user->isLoggedIn()) {
 }
 
 $table = $_GET['table'];
+if ($table == 'screening') {
+    $file = $table . '_form';
+} elseif ($table == 'enrollment_form') {
+    $file = 'enrollment_form';
+} elseif ($table == 'respiratory') {
+    $file = 'clinic_lab_form';
+} elseif ($table == 'diagnosis_test') {
+    $file = 'zonal_lab_form';
+} elseif ($table == 'diagnosis') {
+    $file = $table . '_form';
+} elseif ($table == 'treatment_changes') {
+    $file = 'regimen_form';
+} 
 $ext = $_GET['ext'];
-$file = $table;
+// $file = $table . '_form';
 
 // Specify columns to omit (use field names from your database)
 $omitColumns = [
     // 'REGISTRATION'
-    'pid1',
-    'pid2',
+    // 'pid1',
+    // 'pid2',
     // 'sex',
     // 'dob',
     // 'age',
@@ -27,53 +40,57 @@ $omitColumns = [
     'completed_by',
     'date_verified',
     'verified_by',
-    'status',
-    'create_on',   
-    'staff_id',   
-    'update_on',   
-    'update_id',  
-    'region', 
-    'district',   
-    'ward',   
-    'village_street', 
-    'immunosuppressive',   
-    'immunosuppressive_diseases',   
-    'immunosuppressive_specify',   
-    'sequencing_sample_date',   
-    'sequencing_sample_type',   
-    'other_samples',   
-    'sputum_samples',   
-    'pleural_fluid_date',   
-    'csf_date',   
-    'peritoneal_fluid_date',   
-    'pericardial_fluid_date',   
-    'lymph_node_aspirate_date',   
-    'stool_date',   
-    'sputum_samples_other',   
-    'sputum_samples_date',   
-    'chest_x_ray',   
-    'chest_x_ray_date',   
-    'entry_date',   
-    'tb_regimen_based',   
-    'tb_regimen_based_other',   
-    'regimen_changed_other',   
-    'regimen_changed__date',   
-    'regimen_removed_name',   
-    'regimen_added_name',   
-    'regimen_changed__reason',   
-    'laboratory_test_used',   
-    'laboratory_test_used2',   
-    'laboratory_test_used_date',   
-    'form_status',   
+    // 'status',
+    'create_on',
+    'staff_id',
+    'update_on',
+    'update_id',
+    'region',
+    'district',
+    'ward',
+    'village_street',
+    'relapse_years',
+    'immunosuppressive',
+    'immunosuppressive_diseases',
+    'immunosuppressive_specify',
+    'sequencing_sample_date',
+    'sequencing_sample_type',
+    'other_samples',
+    'sputum_samples',
+    'pleural_fluid_date',
+    'csf_date',
+    'peritoneal_fluid_date',
+    'pericardial_fluid_date',
+    'lymph_node_aspirate_date',
+    'stool_date',
+    'sputum_samples_other',
+    'sputum_samples_date',
+    'chest_x_ray',
+    'chest_x_ray_date',
+    'entry_date',
+    'tb_regimen_based',
+    'tb_regimen_based_other',
+    'regimen_changed_other',
+    'regimen_changed__date',
+    'regimen_removed_name',
+    'regimen_added_name',
+    'regimen_changed__reason',
+    'laboratory_test_used',
+    'laboratory_test_used2',
+    'laboratory_test_used_date',
+    'form_status',
+    // 'zone',
+    // 'enrollment_id'
     // 'laboratory_test_used2',   
 ]; // Example: omit 'email' and 'password' columns
 
 // Fetch results from the database
-if($table == 'ALL'){
-    $result = $override->download_all();
-}else if($table == 'TREATMENT'){
-    $result = $override->get('treatment_changes', 'status', 1);
-}else{
+if ($table == 'ALL') {
+    $result = $override->get($table, 'status', 1);
+} else if ($table == 'TREATMENT') {
+    $result = $override->get($table, 'status', 1);
+} 
+else {
     $result = $override->get($table, 'status', 1);
 }
 

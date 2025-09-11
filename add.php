@@ -370,6 +370,11 @@ if ($user->isLoggedIn()) {
                         'facility_id' => $screening['facility_id']
                     ), $screening['id']);
 
+                    // $user->updateRecord('diagnosis_test', array(
+                    //     'pid' => $pid_merged,
+                    //     'zone' => $user->data()->zone,
+                    // ), $screening['id']);
+
                     $user->createRecord('screening_records', array(
                         'screening_id' => $screening['id'],
                         'pid' => $pid_merged,
