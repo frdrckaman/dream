@@ -212,7 +212,7 @@ if ($user->isLoggedIn()) {
                         </li> -->
                     </ul>
                 </li>
-                <?php if ($user->data()->power == 1 || $user->data()->position == 1) { ?>
+                <?php if ($user->data()->power == 1) { ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -335,7 +335,7 @@ if ($user->isLoggedIn()) {
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) { ?>
+                        <?php if ($user->data()->power == 1 || $user->data()->position == 2) { ?>
                             <li class="nav-item">
                                 <!-- <a href="add.php?id=13&status=1&sid=&facility_id=<?= $user->data()->site_id ?>&page=<?= $_GET['page'] ?>"
                                 class="nav-link"> -->
@@ -400,7 +400,7 @@ if ($user->isLoggedIn()) {
                         <?php } ?>
                     </ul>
                 </li>
-                <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) { ?>
+                <?php if ($user->data()->power == 1) { ?>
                     <li class="nav-header">Records</li>
                     <?php foreach ($override->get('form_completness', 'status', 1) as $form_status) { ?>
                         <li class="nav-item">
@@ -506,18 +506,15 @@ if ($user->isLoggedIn()) {
                                 </li>
                             </ul>
                         </li>
-                    <?php } ?>
-                    <li class="nav-item">
-                        <!-- <a href="#" class="nav-link">
+                        <li class="nav-item">
+                            <!-- <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <span class="badge badge-info right"><?= $override->getCount('sites', 'status', 1); ?></span>
                         <p>
                             Facilities <i class="fas fa-angle-left right"></i>
                         </p>
                     </a> -->
-                        <ul class="nav nav-treeview">
-                            <?php if ($user->data()->power == 1) {
-                            ?>
+                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="add.php?id=3" class="nav-link">
                                         <i class="nav-icon fas fa-th"></i>
@@ -527,120 +524,122 @@ if ($user->isLoggedIn()) {
                                         </p>
                                     </a>
                                 </li>
-                            <?php } ?>
 
-                            <li class="nav-item">
-                                <a href="info.php?id=11" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <span class="badge badge-info right"></span>
-                                    <p>List of Facilities</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <p>
-                                Reports <i class="fas fa-angle-left right"></i>
+                                <li class="nav-item">
+                                    <a href="info.php?id=11" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <span class="badge badge-info right"></span>
+                                        <p>List of Facilities</p>
+                                    </a>
+                                </li>
 
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="summary.php" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <!-- <span class="badge badge-info right"> -->
-                                    <!-- <?= $all; ?> -->
-                                    <!-- </span> -->
-                                    <p>Summary</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="summary_reports.php" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <!-- <span class="badge badge-info right"> -->
-                                    <!-- <?= $all; ?> -->
-                                    <!-- </span> -->
-                                    <p>Summary Report</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="reports_month.php" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <!-- <span class="badge badge-info right"> -->
-                                    <!-- <?= $all; ?> -->
-                                    <!-- </span> -->
-                                    <p>Summary Report 2( By Month )</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="summary_reports3.php" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <!-- <span class="badge badge-info right"> -->
-                                    <!-- <?= $all; ?> -->
-                                    <!-- </span> -->
-                                    <p>Summary Report 3</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="summary_reports4.php" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <!-- <span class="badge badge-info right"> -->
-                                    <!-- <?= $all; ?> -->
-                                    <!-- </span> -->
-                                    <p>Summary Report 4</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="report.php" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <!-- <span class="badge badge-info right"> -->
-                                    <!-- <?= $all; ?> -->
-                                    <!-- </span> -->
-                                    <p>Full Report</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="summary_dar_zone.php" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <!-- <span class="badge badge-info right"> -->
-                                    <!-- <?= $all; ?> -->
-                                    <!-- </span> -->
-                                    <p>Zone Summary</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="missing_forms_og.php" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <!-- <span class="badge badge-info right"> -->
-                                    <!-- <?= $all; ?> -->
-                                    <!-- </span> -->
-                                    <p>Missing Forms Og</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="missing_forms.php" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <!-- <span class="badge badge-info right"> -->
-                                    <!-- <?= $all; ?> -->
-                                    <!-- </span> -->
-                                    <p>Missing Forms</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="missing_forms_zone_sites_form.php" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <!-- <span class="badge badge-info right"> -->
-                                    <!-- <?= $all; ?> -->
-                                    <!-- </span> -->
-                                    <p>Missing Forms By Zone / Site</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Reports <i class="fas fa-angle-left right"></i>
+
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="summary.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <!-- <span class="badge badge-info right"> -->
+                                        <!-- <?= $all; ?> -->
+                                        <!-- </span> -->
+                                        <p>Summary</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="summary_reports.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <!-- <span class="badge badge-info right"> -->
+                                        <!-- <?= $all; ?> -->
+                                        <!-- </span> -->
+                                        <p>Summary Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="reports_month.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <!-- <span class="badge badge-info right"> -->
+                                        <!-- <?= $all; ?> -->
+                                        <!-- </span> -->
+                                        <p>Summary Report 2( By Month )</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="summary_reports3.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <!-- <span class="badge badge-info right"> -->
+                                        <!-- <?= $all; ?> -->
+                                        <!-- </span> -->
+                                        <p>Summary Report 3</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="summary_reports4.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <!-- <span class="badge badge-info right"> -->
+                                        <!-- <?= $all; ?> -->
+                                        <!-- </span> -->
+                                        <p>Summary Report 4</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="report.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <!-- <span class="badge badge-info right"> -->
+                                        <!-- <?= $all; ?> -->
+                                        <!-- </span> -->
+                                        <p>Full Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="summary_dar_zone.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <!-- <span class="badge badge-info right"> -->
+                                        <!-- <?= $all; ?> -->
+                                        <!-- </span> -->
+                                        <p>Zone Summary</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="missing_forms_og.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <!-- <span class="badge badge-info right"> -->
+                                        <!-- <?= $all; ?> -->
+                                        <!-- </span> -->
+                                        <p>Missing Forms Og</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="missing_forms.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <!-- <span class="badge badge-info right"> -->
+                                        <!-- <?= $all; ?> -->
+                                        <!-- </span> -->
+                                        <p>Missing Forms</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="missing_forms_zone_sites_form.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <!-- <span class="badge badge-info right"> -->
+                                        <!-- <?= $all; ?> -->
+                                        <!-- </span> -->
+                                        <p>Missing Forms By Zone / Site</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+
                 <?php } ?>
-                <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2 || $user->data()->position == 13) { ?>
+                <?php if ($user->data()->power == 1 || $user->data()->position == 1) { ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -655,7 +654,7 @@ if ($user->isLoggedIn()) {
                                     <span class="badge badge-info right"><?= $registered1; ?></span>
                                     <p>Download</p>
                                 </a>
-                            </li>                            
+                            </li>
                         </ul>
                     </li>
                 <?php } ?>
@@ -674,7 +673,7 @@ if ($user->isLoggedIn()) {
                                     <span class="badge badge-info right"><?= $registered1; ?></span>
                                     <p>Download 2</p>
                                 </a>
-                            </li>                            
+                            </li>
                         </ul>
                     </li>
                 <?php } ?>
@@ -713,7 +712,7 @@ if ($user->isLoggedIn()) {
                     </li>
                 <?php } ?>
                 <li class="nav-item">
-                    <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) { ?>
+                    <?php if ($user->data()->power == 1) { ?>
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
@@ -723,7 +722,7 @@ if ($user->isLoggedIn()) {
                         </a>
                     <?php } ?>
                     <ul class="nav nav-treeview">
-                        <?php if ($user->data()->power == 1 || $user->data()->position == 1 || $user->data()->position == 2) { ?>
+                        <?php if ($user->data()->power == 1) { ?>
                             <li class="nav-item">
                                 <a href="summary.php" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -732,7 +731,7 @@ if ($user->isLoggedIn()) {
                                 </a>
                             </li>
                         <?php } ?>
-                        <?php if ($user->data()->power == 1 || $user->data()->position == 1) { ?>
+                        <?php if ($user->data()->power == 1) { ?>
                             <li class="nav-item">
                                 <a href="pids.php" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -743,7 +742,7 @@ if ($user->isLoggedIn()) {
                         <?php } ?>
                     </ul>
                 </li>
-                <?php if ($user->data()->power == 1 || $user->data()->position == 1) { ?>
+                <?php if ($user->data()->power == 1) { ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
